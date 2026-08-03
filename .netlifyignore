@@ -1,0 +1,8 @@
+deploy.command
+start.command
+start.bat
+deploy-*.zip
+.netlify
+CLAUDE.md
+README.md
+.netlifyignore

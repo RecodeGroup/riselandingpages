@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Sales Overview</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Overview Page — Sales Layout ─────────────── */
+
+    /* Sales Flow Banner */
+    .sales-flow-banner {
+      background: linear-gradient(135deg, rgba(255,104,62,0.12) 0%, rgba(255,104,62,0.04) 100%);
+      border: 1px solid rgba(255,104,62,0.2);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+    .sales-flow-banner h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ff683e;
+      margin-bottom: 12px;
+    }
+    .sales-flow-banner p {
+      font-size: 0.9rem;
+      color: #b0b0b0;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+    .sales-flow-banner .flow-steps {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sales-flow-banner .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: #b0b0b0;
+      line-height: 1.6;
+    }
+    .sales-flow-banner .flow-step .step-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: #ff683e;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    /* ── Offer Blocks ─────────────────────────────── */
+    .offer-blocks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 768px) {
+      .offer-blocks { grid-template-columns: 1fr; }
+    }
+
+    .offer-block {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .offer-block.primary {
+      border-color: rgba(255,104,62,0.35);
+    }
+    .offer-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .offer-badge.recommended {
+      background: rgba(255,104,62,0.12);
+      color: #ff683e;
+      border: 1px solid rgba(255,104,62,0.2);
+    }
+    .offer-badge.fallback {
+      background: rgba(255,255,255,0.05);
+      color: #707070;
+      border: 1px solid #333;
+    }
+    .offer-block h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .offer-price {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ff683e;
+      margin-bottom: 4px;
+    }
+    .offer-price-note {
+      font-size: 0.78rem;
+      color: #707070;
+      margin-bottom: 16px;
+    }
+    .offer-desc {
+      font-size: 0.9rem;
+      color: #b0b0b0;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .offer-section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ff683e;
+      margin-bottom: 8px;
+      margin-top: 16px;
+    }
+    .offer-section-label:first-of-type { margin-top: 0; }
+    .offer-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 8px;
+    }
+    .offer-list li {
+      font-size: 0.85rem;
+      color: #b0b0b0;
+      padding: 4px 0 4px 18px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .offer-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 5px;
+      height: 5px;
+      background: #ff683e;
+      border-radius: 50%;
+    }
+    .offer-list.check li::before {
+      width: 9px;
+      height: 5px;
+      background: none;
+      border-left: 1.5px solid #ff683e;
+      border-bottom: 1.5px solid #ff683e;
+      transform: rotate(-45deg);
+      border-radius: 0;
+      top: 9px;
+      left: 1px;
+    }
+    .offer-guidance {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.65;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border-left: 2px solid #ff683e;
+      border-radius: 0 6px 6px 0;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+    .offer-cta-area {
+      margin-top: auto;
+      padding-top: 20px;
+    }
+    .offer-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .offer-cta-btn.primary-cta {
+      background: #ff683e;
+      color: #fff;
+    }
+    .offer-cta-btn.primary-cta:hover {
+      background: #e84a20;
+    }
+    .offer-cta-btn.secondary-cta {
+      background: #252525;
+      color: #b0b0b0;
+      border: 1px solid #333;
+    }
+    .offer-cta-btn.secondary-cta:hover {
+      background: #333;
+      color: #fff;
+    }
+    .offer-cta-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ── Instructions Section ─────────────────────── */
+    .instructions-section {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .instructions-section h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .inst-block-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ff683e;
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+    .inst-block-title:first-of-type { margin-top: 0; }
+    .instructions-section p {
+      font-size: 0.88rem;
+      color: #b0b0b0;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .inst-divider {
+      height: 1px;
+      background: #2a2a2a;
+      margin: 20px 0;
+    }
+    .inst-highlight {
+      font-size: 0.88rem;
+      color: #b0b0b0;
+      line-height: 1.65;
+      padding: 12px 16px;
+      background: rgba(255,104,62,0.06);
+      border: 1px solid rgba(255,104,62,0.15);
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+    .inst-highlight.critical {
+      border-color: rgba(255,104,62,0.35);
+      background: rgba(255,104,62,0.1);
+    }
+    .inst-highlight strong {
+      color: #ff683e;
+    }
+
+    /* ── Appointment Setter Section ───────────────── */
+    .setter-section {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .setter-section h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .setter-section .setter-sub {
+      font-size: 0.85rem;
+      color: #707070;
+      margin-bottom: 24px;
+    }
+    .setter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .setter-grid { grid-template-columns: 1fr; }
+    }
+    .setter-card {
+      background: #191919;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .setter-card.highlight {
+      border-color: rgba(255,104,62,0.3);
+      background: rgba(255,104,62,0.04);
+    }
+    .setter-card h4 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ff683e;
+      margin-bottom: 10px;
+    }
+    .setter-card p {
+      font-size: 0.85rem;
+      color: #b0b0b0;
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+    .setter-card p:last-child { margin-bottom: 0; }
+    .setter-card .setter-rule {
+      font-size: 0.82rem;
+      color: #999;
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 6px;
+      margin-top: 8px;
+      font-style: italic;
+    }
+    .setter-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .setter-card ul li {
+      font-size: 0.85rem;
+      color: #b0b0b0;
+      padding: 3px 0 3px 14px;
+      position: relative;
+    }
+    .setter-card ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #555;
+    }
+    .setter-card .commission-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .setter-card .commission-row:last-child { border-bottom: none; }
+    .setter-card .commission-label { font-size: 0.85rem; color: #b0b0b0; }
+    .setter-card .commission-value { font-size: 0.9rem; font-weight: 600; color: #ff683e; }
+
+    /* ── Objection System ─────────────────────────── */
+    .objection-system {
+      margin-bottom: 40px;
+    }
+    .objection-system h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .objection-system .obj-sub {
+      font-size: 0.88rem;
+      color: #707070;
+      margin-bottom: 20px;
+    }
+    .obj-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .obj-filter-btn {
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid #333;
+      background: #1e1e1e;
+      color: #b0b0b0;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .obj-filter-btn:hover {
+      border-color: rgba(255,104,62,0.3);
+      color: #fff;
+    }
+    .obj-filter-btn.active {
+      background: rgba(255,104,62,0.12);
+      border-color: rgba(255,104,62,0.3);
+      color: #ff683e;
+    }
+    .obj-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .obj-card {
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 20px 24px;
+      transition: border-color 0.2s;
+    }
+    .obj-card:hover { border-color: #444; }
+    .obj-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .obj-card .obj-question {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      font-style: italic;
+      flex: 1;
+    }
+    .obj-card .obj-tags {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .obj-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.06);
+      color: #707070;
+    }
+    .obj-tag.community { color: #ff683e; background: rgba(255,104,62,0.1); }
+    .obj-tag.course { color: #b0b0b0; }
+    .obj-card .obj-response {
+      font-size: 0.88rem;
+      color: #b0b0b0;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .obj-copy-btn {
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #252525;
+      color: #b0b0b0;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .obj-copy-btn:hover { background: #333; color: #fff; }
+    .obj-copy-btn.copied {
+      background: rgba(255,104,62,0.12);
+      border-color: rgba(255,104,62,0.3);
+      color: #ff683e;
+    }
+    .obj-copy-btn svg { width: 14px; height: 14px; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Access Gate ─────────────────────────────── -->
+  <div id="access-gate" style="position:fixed;inset:0;z-index:9999;background:#141414;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;">
+    <img src="assets/logo.png" alt="Rise" style="width:80px;height:80px;border-radius:12px;margin-bottom:8px;">
+    <h2 style="color:#fff;font-family:system-ui,sans-serif;font-size:1.4rem;margin:0;">Team Access</h2>
+    <p style="color:#a6a6a6;font-family:system-ui,sans-serif;font-size:0.9rem;margin:0;">Enter your team access code to continue.</p>
+    <input id="gate-code" type="password" placeholder="Access code" autocomplete="off"
+      style="padding:12px 20px;border-radius:8px;border:1px solid #333;background:#1e1e1e;color:#fff;font-size:1rem;width:260px;text-align:center;font-family:system-ui,sans-serif;outline:none;">
+    <button id="gate-submit"
+      style="padding:12px 32px;border-radius:8px;border:none;background:#ff683e;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;font-family:system-ui,sans-serif;">Enter</button>
+    <p id="gate-error" style="color:#ff683e;font-family:system-ui,sans-serif;font-size:0.85rem;margin:0;opacity:0;transition:opacity .3s;">Invalid code. Try again.</p>
+  </div>
+  <script>
+  (function() {
+    var TEAM_CODE = 'Team010#';
+    var gate = document.getElementById('access-gate');
+    var input = document.getElementById('gate-code');
+    var btn = document.getElementById('gate-submit');
+    var err = document.getElementById('gate-error');
+    if (sessionStorage.getItem('rise_team_auth') === 'true') { gate.style.display = 'none'; }
+    function tryCode() {
+      if (input.value === TEAM_CODE) {
+        sessionStorage.setItem('rise_team_auth', 'true');
+        gate.style.display = 'none';
+      } else {
+        err.style.opacity = '1';
+        input.value = '';
+        input.focus();
+        setTimeout(function() { err.style.opacity = '0'; }, 2500);
+      }
+    }
+    btn.addEventListener('click', tryCode);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryCode(); });
+  })();
+  </script>
+
+  <!-- ── Navigation ───────────────────────────────── -->
+  <nav class="site-nav">
+    <a href="/" class="nav-logo">
+      <img src="assets/logo.png" alt="Rise" class="nav-logo-img">
+    </a>
+    <a href="/customers/community/" class="btn btn-customers">Customer Onboarding</a>
+  </nav>
+
+  <!-- ── Header ────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-inner">
+      <img src="assets/logo.png" alt="Rise" class="hero-logo">
+      <h1 class="hero-title">Rise &mdash; Sales Overview</h1>
+      <p class="hero-subtitle">Your complete sales guide. Two offers. One clear flow.</p>
+    </div>
+  </header>
+
+  <!-- ── Photo Gallery ─────────────────────────────── -->
+  <section class="gallery">
+    <div class="gallery-track">
+      <div class="gallery-item"><img src="assets/photos/photo-1.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-12.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-2.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-7.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-13.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-3.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-18.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-8.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-14.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-1.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-12.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-2.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-7.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-13.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-3.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-18.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-8.jpg" alt="Rise" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/photos/photo-14.jpg" alt="Rise" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ── Sales Content ─────────────────────────────── -->
+  <section class="products">
+    <div class="container">
+
+      <!-- Sales Flow Banner -->
+      <div class="sales-flow-banner">
+        <h3>Sales Flow</h3>
+        <p>You are not closing the deal directly. Your role is to introduce the Community Membership and build interest. Once interest is confirmed, move the lead directly to a call with Hendrik. Only fallback to the Course when budget is the clear blocker.</p>
+        <div class="flow-steps">
+          <div class="flow-step"><span class="step-num">1</span><span>Open with the Community Membership: accountability, network, structure, and included Course access.</span></div>
+          <div class="flow-step"><span class="step-num">2</span><span>Warm the lead. Build interest. Do not push for an immediate close.</span></div>
+          <div class="flow-step"><span class="step-num">3</span><span>Once interest is confirmed, move the lead to a closing call with Hendrik.</span></div>
+          <div class="flow-step"><span class="step-num">4</span><span>If budget is the blocker: skip the call and close directly on the Course.</span></div>
+        </div>
+      </div>
+
+      <!-- ── Offer Blocks (hardcoded — no JS rendering) ── -->
+      <div class="offer-blocks">
+
+        <!-- Community Membership (Primary) -->
+        <div class="offer-block primary">
+          <span class="offer-badge recommended">Recommended</span>
+          <h3>Community Membership</h3>
+          <div class="offer-price">&euro; 1.200,-</div>
+          <div class="offer-desc">A structured network built on accountability, execution, and shared momentum. Includes the full Rise Course.</div>
+
+          <div class="offer-section-label">Key Benefits</div>
+          <ul class="offer-list">
+            <li>Weekly group calls focused on accountability and forward progress</li>
+            <li>Monthly deep-dive sessions with expert-led workshops</li>
+            <li>Track feedback and coaching from peers and mentors</li>
+            <li>Direct connection to a network of serious electronic artists</li>
+            <li>Full access to the Rise Course (video modules, sample packs, manual)</li>
+          </ul>
+
+          <div class="offer-section-label">What's Included</div>
+          <ul class="offer-list check">
+            <li>Weekly accountability calls</li>
+            <li>Monthly deep-dive workshop sessions</li>
+            <li>Peer feedback and coaching options</li>
+            <li>Private community network access</li>
+            <li>The Rise Course (10 modules, sample packs, manual)</li>
+          </ul>
+
+          <div class="offer-section-label">Sales Guidance</div>
+          <div class="offer-guidance">You are not closing the deal here. Your role is to introduce the Community Membership and build interest. Once interest is confirmed, move the lead directly to a call with Hendrik.</div>
+
+          <div class="offer-cta-area">
+            <button class="offer-cta-btn primary-cta" id="cta-community-pay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Payment Link
+            </button>
+          </div>
+        </div>
+
+        <!-- Course (Fallback) -->
+        <div class="offer-block">
+          <span class="offer-badge fallback">Alternative</span>
+          <h3>Course</h3>
+          <!-- price removed -->
+          <div class="offer-desc">The foundational training that gives you direction, structure, and a clear creative roadmap. Self-paced entry point.</div>
+
+          <div class="offer-section-label">Key Benefits</div>
+          <ul class="offer-list">
+            <li>10 in-depth video modules covering creative and business fundamentals</li>
+            <li>Hands-on exercises and sample packs for immediate application</li>
+            <li>Action-based learning that builds a concrete artist roadmap</li>
+            <li>Manual (PDF) with insights from key industry players</li>
+            <li>Self-paced with structured milestones to track progress</li>
+          </ul>
+
+          <div class="offer-section-label">What's Included</div>
+          <ul class="offer-list check">
+            <li>10-module video curriculum</li>
+            <li>Downloadable sample packs and exercise templates</li>
+            <li>Industry manual (PDF)</li>
+            <li>Progress tracking dashboard</li>
+          </ul>
+
+          <div class="offer-section-label">Sales Guidance</div>
+          <div class="offer-guidance">Only offer the Course when budget is the clear blocker or the lead is a clear mismatch for the Community. Send the payment link directly and close immediately.</div>
+
+          <div class="offer-cta-area">
+            <button class="offer-cta-btn secondary-cta" id="cta-course-pay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Payment Link
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── Instructions ─────────────────────────── -->
+      <div class="instructions-section">
+        <h3>Instructions</h3>
+
+        <h4 class="inst-block-title">How to Pitch</h4>
+        <p>Always lead with the Community Membership. It is the primary offer. Highlight accountability, the network, and the fact that the Course is included. Build interest and warmth — do not try to close directly.</p>
+        <div class="inst-highlight">
+          <strong>Key message:</strong> Artists who stay accountable inside a structured network make more progress in 3 months than most do in a year alone.
+        </div>
+
+        <div class="inst-divider"></div>
+
+        <h4 class="inst-block-title">How to Handle Objections</h4>
+        <p>When an objection comes up, first try to resolve it within the Community context. Only switch to offering the Course if the objection is fundamentally about budget, commitment level, or readiness.</p>
+
+        <div class="inst-divider"></div>
+
+        <h4 class="inst-block-title">What to Prioritize</h4>
+        <div class="inst-highlight critical">
+          <strong>Priority rule:</strong> Community Membership is ALWAYS priority. Higher value for the user, higher value for the company, higher commission for the setter. Never start with the Course unless the prospect explicitly asks about it first.
+        </div>
+      </div>
+
+      <!-- ── Appointment Setter Instructions ────── -->
+      <div class="setter-section">
+        <h3>Appointment Setter Instructions</h3>
+        <p class="setter-sub">Operational guidelines for lead handling, closing flow, and pipeline management.</p>
+
+        <div class="setter-grid">
+
+          <!-- A: Lead Flow -->
+          <div class="setter-card">
+            <h4>Lead Flow (Boostbricks)</h4>
+            <p>Leads are assigned automatically via Boostbricks.</p>
+            <p>First message is sent automatically when the lead responds.</p>
+            <p>Once the lead replies, you take over the conversation.</p>
+            <div class="setter-rule">Your job starts the moment the lead responds. From there, you guide the conversation toward a close.</div>
+          </div>
+
+          <!-- B: Goal -->
+          <div class="setter-card">
+            <h4>Goal: Move Toward Close</h4>
+            <p>Move toward booking a call as efficiently as possible.</p>
+            <p>Do not rush unnaturally. Do not stall.</p>
+            <div class="setter-rule">Guide the conversation toward a close as soon as there is enough interest and clarity.</div>
+          </div>
+
+          <!-- C: Booking the Call -->
+          <div class="setter-card">
+            <h4>Booking the Call</h4>
+            <p><strong>Tool:</strong> Boostbricks calendar</p>
+            <p><strong>Primary closer:</strong> Hendrik</p>
+            <p><strong>Availability:</strong></p>
+            <ul>
+              <li>Monday, Wednesday, Thursday, Friday</li>
+              <li>08:00 – 16:00</li>
+            </ul>
+          </div>
+
+          <!-- D: Exceptions -->
+          <div class="setter-card">
+            <h4>Exceptions</h4>
+            <p>If Hendrik is not available, only in exceptional cases:</p>
+            <ul>
+              <li>Coordinate with Jim, Maurits, or admin</li>
+              <li>Alternative: Tuesday or evenings</li>
+            </ul>
+            <div class="setter-rule">Only use alternative closers or time slots when absolutely necessary.</div>
+          </div>
+
+          <!-- E: Money Filter -->
+          <div class="setter-card highlight">
+            <h4>Money Filter (Critical)</h4>
+            <p>If it becomes clear early that the lead has no budget:</p>
+            <ul>
+              <li>Do NOT book a closing call</li>
+              <li>Do NOT push membership</li>
+              <li>Downsell to Course immediately</li>
+            </ul>
+            <div class="setter-rule">If budget is the blocker, skip the call and close directly on the Course.</div>
+          </div>
+
+          <!-- F: Course Downsale -->
+          <div class="setter-card">
+            <h4>Course Downsale Flow</h4>
+            <p>When downselling to Course:</p>
+            <ul>
+              <li>Send payment link directly</li>
+              <li>Close immediately — no call needed</li>
+            </ul>
+            <p style="margin-top:8px;"><strong>Course link:</strong></p>
+            <button class="obj-copy-btn" id="copy-course-link" style="margin-top:4px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy Course Payment Link
+            </button>
+          </div>
+
+          <!-- G: Pipeline -->
+          <div class="setter-card">
+            <h4>Pipeline Management</h4>
+            <p>When a lead moves to closing stage or purchases the Course:</p>
+            <ul>
+              <li>Move contact to correct pipeline stage in Boostbricks</li>
+            </ul>
+            <div class="setter-rule">Always keep the pipeline updated. No exceptions.</div>
+          </div>
+
+          <!-- H: Communication -->
+          <div class="setter-card">
+            <h4>Communication Channel</h4>
+            <p><strong>For questions:</strong> Use Slack</p>
+            <p>Slack is also used for:</p>
+            <ul>
+              <li>Tracking closed deals</li>
+              <li>Team visibility</li>
+            </ul>
+          </div>
+
+          <!-- I: Commission -->
+          <div class="setter-card">
+            <h4>Commission Structure</h4>
+            <div class="commission-row">
+              <span class="commission-label">Course sale</span>
+              <span class="commission-value">&euro; 10 per sale</span>
+            </div>
+            <div class="commission-row">
+              <span class="commission-label">Community Membership</span>
+              <span class="commission-value">5% commission</span>
+            </div>
+          </div>
+
+          <!-- J: Priority -->
+          <div class="setter-card highlight">
+            <h4>Priority Rule</h4>
+            <p>Community Membership is ALWAYS priority.</p>
+            <ul>
+              <li>Higher value for the user</li>
+              <li>Higher value for the company</li>
+              <li>Higher commission for the setter</li>
+            </ul>
+            <div class="setter-rule">Always attempt to close on Community first. Only fallback to Course when necessary.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Objection Handling System ─────────────── -->
+      <div class="objection-system">
+        <h3>Objection Responses</h3>
+        <p class="obj-sub">Filter by category. Click to copy any response instantly.</p>
+        <div class="obj-filters" id="obj-filters"></div>
+        <div class="obj-cards" id="obj-cards"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p id="footer-text"></p>
+    </div>
+  </footer>
+
+  <!-- ── Toast ─────────────────────────────────────── -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ── Scripts ───────────────────────────────────── -->
+  <script src="config.js"></script>
+  <script src="assets/logo-data.js"></script>
+  <script src="libs/pdf-generator.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

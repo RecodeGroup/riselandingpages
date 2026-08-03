@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Block Manager</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --bg-3: #222;
+      --fg: #ffffff;
+      --muted: #999;
+      --dim: #666;
+      --line: rgba(255,255,255,0.06);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --accent-glow: rgba(255,104,62,0.15);
+      --green: #22c55e;
+      --red: #ef4444;
+      --blue: #3b82f6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Access Gate ── */
+    .access-gate {
+      position: fixed; inset: 0; z-index: 9999; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 20px;
+    }
+    .access-gate img { width: 80px; height: 80px; border-radius: 12px; margin-bottom: 8px; }
+    .access-gate h2 { color: var(--fg); font-size: 1.4rem; }
+    .access-gate p { color: var(--muted); font-size: 0.9rem; }
+    .access-gate input {
+      padding: 12px 20px; border-radius: 8px; border: 1px solid #333;
+      background: var(--bg-2); color: var(--fg); font-size: 1rem;
+      width: 260px; text-align: center; font-family: inherit; outline: none;
+    }
+    .access-gate input:focus { border-color: var(--accent); }
+    .access-gate button {
+      padding: 12px 32px; border-radius: 8px; border: none;
+      background: var(--accent); color: #fff; font-size: 1rem;
+      font-weight: 600; cursor: pointer; font-family: inherit;
+    }
+    .gate-error { color: var(--accent); font-size: 0.85rem; opacity: 0; transition: opacity 0.3s; }
+
+    /* ── Header ── */
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 32px; max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text { font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .header-links { display: flex; gap: 16px; }
+    .header-links a {
+      font-size: 0.8rem; color: var(--muted); padding: 6px 14px;
+      border: 1px solid var(--line); border-radius: 6px; transition: all 0.2s;
+    }
+    .header-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Main ── */
+    .main {
+      flex: 1; padding: 1rem 2rem 4rem;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+    .page-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
+    .page-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+
+    /* ── Page Tabs ── */
+    .page-tabs {
+      display: flex; gap: 8px; margin-bottom: 2rem;
+      border-bottom: 1px solid var(--line); padding-bottom: 12px;
+    }
+    .page-tab {
+      padding: 10px 20px; border-radius: 8px 8px 0 0;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: var(--muted); border: 1px solid transparent;
+      border-bottom: none; transition: all 0.2s; font-family: inherit;
+    }
+    .page-tab:hover { color: var(--fg); }
+    .page-tab.active {
+      background: var(--bg-2); color: var(--accent);
+      border-color: var(--line);
+    }
+
+    /* ── Block Cards ── */
+    .blocks-list { display: flex; flex-direction: column; gap: 12px; }
+    .block-card {
+      background: var(--bg-2); border: 1px solid var(--line);
+      border-radius: 10px; overflow: hidden; transition: all 0.2s;
+    }
+    .block-card:hover { border-color: rgba(255,255,255,0.1); }
+    .block-card.hidden-block { opacity: 0.5; }
+    .block-card.hidden-block .block-header { background: rgba(239,68,68,0.05); }
+
+    .block-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; cursor: pointer; transition: background 0.2s;
+    }
+    .block-header:hover { background: rgba(255,255,255,0.02); }
+
+    .block-info { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .block-drag {
+      color: var(--dim); cursor: grab; font-size: 1.2rem;
+      padding: 4px; user-select: none;
+    }
+    .block-label { font-weight: 600; font-size: 0.95rem; }
+    .block-key {
+      font-size: 0.7rem; color: var(--dim); font-family: monospace;
+      background: var(--bg); padding: 2px 8px; border-radius: 4px; margin-left: 8px;
+    }
+
+    .block-controls { display: flex; align-items: center; gap: 12px; }
+    .block-status {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+    }
+    .block-status.visible { background: rgba(34,197,94,0.12); color: var(--green); }
+    .block-status.hidden { background: rgba(239,68,68,0.12); color: var(--red); }
+
+    /* A/B badge */
+    .ab-badge {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 3px 8px; border-radius: 4px;
+      background: rgba(59,130,246,0.15); color: var(--blue);
+    }
+
+    /* Toggle switch */
+    .toggle {
+      position: relative; width: 44px; height: 24px; cursor: pointer;
+    }
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track {
+      position: absolute; inset: 0; border-radius: 12px;
+      background: #333; transition: background 0.3s;
+    }
+    .toggle input:checked + .toggle-track { background: var(--green); }
+    .toggle-knob {
+      position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
+      border-radius: 50%; background: #fff; transition: transform 0.3s;
+      pointer-events: none;
+    }
+    .toggle input:checked ~ .toggle-knob { transform: translateX(20px); }
+
+    .expand-arrow {
+      font-size: 1rem; color: var(--dim); transition: transform 0.3s;
+      width: 24px; text-align: center;
+    }
+    .block-card.expanded .expand-arrow { transform: rotate(90deg); color: var(--accent); }
+
+    /* ── Block Body (expanded) ── */
+    .block-body {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s;
+      padding: 0 20px; border-top: 0 solid var(--line);
+    }
+    .block-card.expanded .block-body {
+      max-height: 2000px; padding: 20px;
+      border-top: 1px solid var(--line);
+      overflow-y: auto;
+    }
+
+    .field-group { margin-bottom: 16px; }
+    .field-label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .field-input {
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      border: 1px solid #333; background: var(--bg); color: var(--fg);
+      font-size: 0.9rem; font-family: inherit; outline: none;
+      transition: border-color 0.2s;
+    }
+    .field-input:focus { border-color: var(--accent); }
+    textarea.field-input { min-height: 80px; resize: vertical; line-height: 1.5; }
+
+    .field-actions { display: flex; gap: 10px; margin-top: 16px; align-items: center; }
+    .btn-save {
+      padding: 8px 20px; border-radius: 6px; border: none;
+      background: var(--accent); color: #fff; font-size: 0.8rem;
+      font-weight: 600; cursor: pointer; font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-save:hover { background: var(--accent-hover); }
+    .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-cancel {
+      padding: 8px 20px; border-radius: 6px;
+      border: 1px solid var(--line); background: transparent; color: var(--muted);
+      font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit;
+      transition: all 0.2s;
+    }
+    .btn-cancel:hover { border-color: var(--accent); color: var(--accent); }
+
+    .save-feedback {
+      font-size: 0.8rem; color: var(--green); opacity: 0;
+      transition: opacity 0.3s; margin-left: 12px; line-height: 34px;
+    }
+
+    /* ── A/B Variant Tabs ── */
+    .variant-tabs {
+      display: flex; gap: 0; margin-bottom: 16px;
+      border-bottom: 2px solid var(--line);
+    }
+    .variant-tab {
+      padding: 8px 20px; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+      color: var(--muted); background: transparent;
+      border: none; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; transition: all 0.2s; font-family: inherit;
+    }
+    .variant-tab:hover { color: var(--fg); }
+    .variant-tab.active {
+      color: var(--accent); border-bottom-color: var(--accent);
+    }
+    .variant-tab.tab-stats { color: var(--blue); }
+    .variant-tab.tab-stats.active { border-bottom-color: var(--blue); }
+
+    .variant-panel { display: none; }
+    .variant-panel.active { display: block; }
+
+    /* ── A/B Toggle Row ── */
+    .ab-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0; margin-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .ab-row label {
+      font-size: 0.78rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    /* ── Stats Panel ── */
+    .stats-panel { padding: 8px 0; }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat-box {
+      background: var(--bg); border: 1px solid var(--line);
+      border-radius: 8px; padding: 16px; text-align: center;
+    }
+    .stat-box.variant-a { border-left: 3px solid var(--accent); }
+    .stat-box.variant-b { border-left: 3px solid var(--blue); }
+    .stat-box .stat-label {
+      font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px;
+    }
+    .stat-box .stat-value {
+      font-size: 1.6rem; font-weight: 700;
+    }
+    .stat-box .stat-sub {
+      font-size: 0.7rem; color: var(--dim); margin-top: 4px;
+    }
+    .stat-box.variant-a .stat-value { color: var(--accent); }
+    .stat-box.variant-b .stat-value { color: var(--blue); }
+    .stats-note {
+      font-size: 0.75rem; color: var(--dim); text-align: center;
+      padding: 8px; border-top: 1px solid var(--line);
+    }
+    .winner-badge {
+      display: inline-block; font-size: 0.6rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 3px; margin-left: 6px;
+      background: rgba(34,197,94,0.15); color: var(--green);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+      background: var(--bg-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 20px;
+      font-size: 0.85rem; color: var(--fg);
+      transform: translateY(100px); opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { border-color: rgba(34,197,94,0.3); }
+    .toast.error { border-color: rgba(239,68,68,0.3); }
+
+    /* ── Loading ── */
+    .loading {
+      display: flex; align-items: center; justify-content: center;
+      padding: 4rem; color: var(--muted); gap: 12px;
+    }
+    .spinner {
+      width: 20px; height: 20px; border: 2px solid var(--line);
+      border-top-color: var(--accent); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Preview Links ── */
+    .preview-links {
+      display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .preview-link {
+      font-size: 0.75rem; color: var(--accent); padding: 6px 14px;
+      border: 1px solid rgba(255,104,62,0.3); border-radius: 6px;
+      transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .preview-link:hover { background: rgba(255,104,62,0.08); border-color: var(--accent); }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center; padding: 2rem; color: var(--dim);
+      font-size: 0.8rem; border-top: 1px solid var(--line);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .main { padding: 1rem 1rem 3rem; }
+      .header { padding: 14px 16px; }
+      .block-header { padding: 14px 16px; }
+      .block-key { display: none; }
+      .page-tabs { overflow-x: auto; }
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Access Gate ── -->
+<div class="access-gate" id="access-gate">
+  <img src="../assets/logo.png" alt="Rise">
+  <h2>Block Manager</h2>
+  <p>Enter your team access code to continue.</p>
+  <input id="gate-code" type="password" placeholder="Access code" autocomplete="off">
+  <button id="gate-submit">Enter</button>
+  <p class="gate-error" id="gate-error">Invalid code. Try again.</p>
+</div>
+<script>
+(function() {
+  var TEAM_CODE = 'Team010#';
+  var gate = document.getElementById('access-gate');
+  var input = document.getElementById('gate-code');
+  var btn = document.getElementById('gate-submit');
+  var err = document.getElementById('gate-error');
+  if (sessionStorage.getItem('rise_team_auth') === 'true') { gate.style.display = 'none'; }
+  function tryCode() {
+    if (input.value === TEAM_CODE) {
+      sessionStorage.setItem('rise_team_auth', 'true');
+      gate.style.display = 'none';
+    } else {
+      err.style.opacity = '1';
+      input.value = '';
+      input.focus();
+      setTimeout(function() { err.style.opacity = '0'; }, 2500);
+    }
+  }
+  btn.addEventListener('click', tryCode);
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryCode(); });
+})();
+</script>
+
+<!-- ── Header ── -->
+<header class="header">
+  <a href="/" class="logo-wrap">
+    <img src="../assets/logo.png" alt="Rise">
+    <span class="logo-text">Rise CMS</span>
+  </a>
+  <div class="header-links">
+    <a href="/leads/">Leads</a>
+    <a href="/homepageexample/" target="_blank">Homepage</a>
+    <a href="/customers/community/" target="_blank">Community</a>
+    <a href="/coursevsl-b/" target="_blank">Course</a>
+  </div>
+</header>
+
+<!-- ── Main ── -->
+<main class="main">
+  <h1 class="page-title">Block Manager</h1>
+  <p class="page-sub">Toggle blocks on/off, edit titles and copy per section. A/B test variants and track scroll engagement. Changes go live instantly.</p>
+
+  <div class="preview-links">
+    <a class="preview-link" href="/homepageexample/" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Preview Homepage
+    </a>
+    <a class="preview-link" href="/customers/community/" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Preview Community
+    </a>
+    <a class="preview-link" href="/coursevsl-b/" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Preview Course
+    </a>
+  </div>
+
+  <!-- Page Tabs -->
+  <div class="page-tabs">
+    <button class="page-tab active" data-page="course">Course</button>
+    <button class="page-tab" data-page="community">Community</button>
+    <button class="page-tab" data-page="homepage">Homepage</button>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <span>Loading blocks...</span>
+  </div>
+
+  <!-- Blocks List -->
+  <div class="blocks-list" id="blocks-list" style="display:none;"></div>
+</main>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<footer class="footer">
+  &copy; 2026 Rise &middot; Recode Group B.V. &middot; Block Manager v2.0
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  var SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
+
+  var allBlocks = [];
+  var allStats = {};
+  var currentPage = 'course';
+
+  var loadingEl = document.getElementById('loading');
+  var listEl = document.getElementById('blocks-list');
+  var toastEl = document.getElementById('toast');
+
+  // ── Supabase helpers ──
+  function supaFetch(path, opts) {
+    opts = opts || {};
+    var headers = {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': opts.prefer || 'return=representation'
+    };
+    return fetch(SUPABASE_URL + '/rest/v1/' + path, {
+      method: opts.method || 'GET',
+      headers: headers,
+      body: opts.body ? JSON.stringify(opts.body) : undefined
+    }).then(function(r) { return r.json(); });
+  }
+
+  // ── Toast ──
+  function showToast(msg, type) {
+    toastEl.textContent = msg;
+    toastEl.className = 'toast ' + (type || 'success') + ' show';
+    setTimeout(function() { toastEl.classList.remove('show'); }, 3000);
+  }
+
+  // ── Load A/B stats ──
+  function loadStats() {
+    // Get events from last 30 days
+    var since = new Date(Date.now() - 30 * 86400000).toISOString();
+    return supaFetch('ab_events?select=page,block_key,variant,event_type,device_type&created_at=gte.' + since + '&order=created_at.desc&limit=10000')
+      .then(function(events) {
+        if (!Array.isArray(events)) return;
+        allStats = {};
+        events.forEach(function(ev) {
+          var key = ev.page + ':' + ev.block_key;
+          if (!allStats[key]) {
+            allStats[key] = {
+              a: { impression: 0, scroll_past: 0, mobile_imp: 0, mobile_sp: 0 },
+              b: { impression: 0, scroll_past: 0, mobile_imp: 0, mobile_sp: 0 }
+            };
+          }
+          var s = allStats[key][ev.variant];
+          if (!s) return;
+          s[ev.event_type] = (s[ev.event_type] || 0) + 1;
+          if (ev.device_type === 'mobile') {
+            if (ev.event_type === 'impression') s.mobile_imp++;
+            if (ev.event_type === 'scroll_past') s.mobile_sp++;
+          }
+        });
+      })
+      .catch(function(err) {
+        console.warn('Could not load stats:', err);
+      });
+  }
+
+  // ── Load blocks ──
+  function loadBlocks() {
+    loadingEl.style.display = 'flex';
+    listEl.style.display = 'none';
+
+    // Load blocks and stats in parallel
+    Promise.all([
+      supaFetch('page_blocks?select=*&order=sort_order.asc'),
+      loadStats()
+    ]).then(function(results) {
+      var data = results[0];
+      if (!Array.isArray(data)) {
+        var errMsg = (data && data.message) ? data.message : 'Unexpected response from database';
+        loadingEl.innerHTML = '<span style="color:var(--red);">Error: ' + errMsg + '</span>';
+        console.error('Supabase error:', data);
+        return;
+      }
+      allBlocks = data;
+      loadingEl.style.display = 'none';
+      listEl.style.display = 'flex';
+      renderBlocks();
+    }).catch(function(err) {
+      loadingEl.innerHTML = '<span style="color:var(--red);">Could not connect to database.</span>';
+      console.error('Fetch error:', err);
+    });
+  }
+
+  // ── Render blocks for current page ──
+  function renderBlocks() {
+    var blocks = allBlocks.filter(function(b) { return b.page === currentPage; });
+    listEl.innerHTML = '';
+
+    if (blocks.length === 0) {
+      listEl.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--muted);">No blocks found for this page.</div>';
+      return;
+    }
+
+    blocks.forEach(function(block) {
+      var card = document.createElement('div');
+      card.className = 'block-card' + (block.visible ? '' : ' hidden-block');
+      card.dataset.id = block.id;
+
+      var abActive = !!block.ab_active;
+
+      card.innerHTML = '' +
+        '<div class="block-header">' +
+          '<div class="block-info">' +
+            '<span class="block-drag">&#x2630;</span>' +
+            '<span class="block-label">' + escHtml(block.block_label) + '</span>' +
+            '<span class="block-key">' + escHtml(block.block_key) + '</span>' +
+            (abActive ? '<span class="ab-badge">A/B test</span>' : '') +
+          '</div>' +
+          '<div class="block-controls">' +
+            '<span class="block-status ' + (block.visible ? 'visible' : 'hidden') + '">' +
+              (block.visible ? 'Visible' : 'Hidden') +
+            '</span>' +
+            '<label class="toggle" title="Toggle visibility">' +
+              '<input type="checkbox" ' + (block.visible ? 'checked' : '') + ' data-action="toggle">' +
+              '<span class="toggle-track"></span>' +
+              '<span class="toggle-knob"></span>' +
+            '</label>' +
+            '<span class="expand-arrow">&#9654;</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="block-body">' +
+          buildBlockBody(block) +
+        '</div>';
+
+      // Toggle expand
+      card.querySelector('.block-header').addEventListener('click', function(e) {
+        if (e.target.closest('.toggle')) return;
+        card.classList.toggle('expanded');
+      });
+
+      // Toggle visibility
+      card.querySelector('[data-action="toggle"]').addEventListener('change', function(e) {
+        e.stopPropagation();
+        toggleBlock(block.id, this.checked);
+      });
+
+      // A/B toggle
+      var abToggle = card.querySelector('[data-action="ab-toggle"]');
+      if (abToggle) {
+        abToggle.addEventListener('change', function(e) {
+          e.stopPropagation();
+          toggleAB(block.id, this.checked);
+        });
+      }
+
+      // Variant tabs
+      card.querySelectorAll('.variant-tab').forEach(function(tab) {
+        tab.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var target = tab.dataset.variant;
+          card.querySelectorAll('.variant-tab').forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          card.querySelectorAll('.variant-panel').forEach(function(p) { p.classList.remove('active'); });
+          var panel = card.querySelector('[data-panel="' + target + '"]');
+          if (panel) panel.classList.add('active');
+        });
+      });
+
+      // Save
+      card.querySelector('[data-action="save"]').addEventListener('click', function() {
+        saveBlock(block.id, card);
+      });
+
+      // Cancel
+      card.querySelector('[data-action="cancel"]').addEventListener('click', function() {
+        card.classList.remove('expanded');
+      });
+
+      listEl.appendChild(card);
+    });
+  }
+
+  function buildBlockBody(block) {
+    var content = block.content || {};
+    var contentB = block.content_b || {};
+    var abActive = !!block.ab_active;
+    var statsKey = block.page + ':' + block.block_key;
+    var stats = allStats[statsKey];
+
+    var html = '';
+
+    // A/B toggle row
+    html += '<div class="ab-row">' +
+      '<label>A/B Test</label>' +
+      '<label class="toggle" title="Enable A/B test">' +
+        '<input type="checkbox" ' + (abActive ? 'checked' : '') + ' data-action="ab-toggle">' +
+        '<span class="toggle-track"></span>' +
+        '<span class="toggle-knob"></span>' +
+      '</label>' +
+      '<span style="font-size:0.75rem;color:var(--dim);">' + (abActive ? 'Active: 50% of visitors see variant B' : 'Off: all visitors see variant A') + '</span>' +
+    '</div>';
+
+    // Variant tabs
+    html += '<div class="variant-tabs">' +
+      '<button class="variant-tab active" data-variant="a">Variant A</button>' +
+      '<button class="variant-tab" data-variant="b">Variant B' + (abActive ? '' : ' (inactive)') + '</button>' +
+      '<button class="variant-tab tab-stats" data-variant="stats">Stats</button>' +
+    '</div>';
+
+    // Variant A panel
+    html += '<div class="variant-panel active" data-panel="a">';
+    html += buildFieldsHtml(content, 'a');
+    html += '</div>';
+
+    // Variant B panel
+    html += '<div class="variant-panel" data-panel="b">';
+    if (abActive) {
+      html += buildFieldsHtml(contentB, 'b');
+    } else {
+      html += '<div style="padding:2rem;text-align:center;color:var(--dim);">' +
+        '<p>Enable the A/B test toggle above to create a variant B.</p>' +
+        '<p style="font-size:0.8rem;margin-top:8px;">When active, 50% of visitors will see variant B instead of A.</p>' +
+      '</div>';
+    }
+    html += '</div>';
+
+    // Stats panel
+    html += '<div class="variant-panel" data-panel="stats">';
+    html += buildStatsHtml(stats, abActive);
+    html += '</div>';
+
+    // Save/Cancel
+    html += '<div class="field-actions">' +
+      '<button class="btn-save" data-action="save" data-id="' + block.id + '">Save changes</button>' +
+      '<button class="btn-cancel" data-action="cancel">Cancel</button>' +
+      '<span class="save-feedback" id="feedback-' + block.id + '">Saved!</span>' +
+    '</div>';
+
+    return html;
+  }
+
+  function buildFieldsHtml(content, variant) {
+    var keys = Object.keys(content);
+    var prefix = variant === 'b' ? 'b_' : '';
+
+    if (keys.length === 0 && variant === 'a') {
+      return '<div class="field-group">' +
+        '<label class="field-label">Title</label>' +
+        '<input class="field-input" data-field="title" data-variant="' + variant + '" value="" placeholder="Block title">' +
+        '</div>' +
+        '<div class="field-group">' +
+        '<label class="field-label">Subtitle</label>' +
+        '<textarea class="field-input" data-field="subtitle" data-variant="' + variant + '" placeholder="Optional subtitle"></textarea>' +
+        '</div>';
+    }
+
+    if (keys.length === 0 && variant === 'b') {
+      // For new variant B, pre-fill with empty fields matching variant A
+      return '<div style="padding:1rem 0;color:var(--dim);font-size:0.85rem;">' +
+        '<p>Save the A/B test toggle first. Then variant B fields will appear matching variant A.</p>' +
+      '</div>';
+    }
+
+    var html = '';
+    keys.forEach(function(key) {
+      var val = content[key] || '';
+      var isLong = typeof val === 'string' && val.length > 80;
+      var label = key.replace(/_/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+
+      if (isLong) {
+        html += '<div class="field-group">' +
+          '<label class="field-label">' + escHtml(label) + '</label>' +
+          '<textarea class="field-input" data-field="' + escHtml(key) + '" data-variant="' + variant + '">' + escHtml(val) + '</textarea>' +
+          '</div>';
+      } else {
+        html += '<div class="field-group">' +
+          '<label class="field-label">' + escHtml(label) + '</label>' +
+          '<input class="field-input" data-field="' + escHtml(key) + '" data-variant="' + variant + '" value="' + escAttr(String(val)) + '">' +
+          '</div>';
+      }
+    });
+
+    // Add new field option for variant A
+    if (variant === 'a') {
+      html += '<div class="field-group" style="border-top:1px solid var(--line);padding-top:12px;margin-top:8px;">' +
+        '<label class="field-label" style="color:var(--accent);">+ Add new field</label>' +
+        '<div style="display:flex;gap:8px;">' +
+          '<input class="field-input" data-new-key placeholder="Field name (e.g. body_text)" style="flex:0 0 200px;">' +
+          '<textarea class="field-input" data-new-value placeholder="Field content" style="flex:1;min-height:40px;"></textarea>' +
+        '</div>' +
+      '</div>';
+    }
+
+    return html;
+  }
+
+  function buildStatsHtml(stats, abActive) {
+    if (!stats) {
+      return '<div class="stats-panel">' +
+        '<div style="padding:2rem;text-align:center;color:var(--dim);">' +
+          '<p>No data yet for this block.</p>' +
+          '<p style="font-size:0.8rem;margin-top:8px;">Stats appear once visitors start scrolling past this block on the live page.</p>' +
+        '</div>' +
+      '</div>';
+    }
+
+    var a = stats.a;
+    var b = stats.b;
+    var aRate = a.impression > 0 ? Math.round((a.scroll_past / a.impression) * 100) : 0;
+    var bRate = b.impression > 0 ? Math.round((b.scroll_past / b.impression) * 100) : 0;
+    var aMobileRate = a.mobile_imp > 0 ? Math.round((a.mobile_sp / a.mobile_imp) * 100) : 0;
+    var bMobileRate = b.mobile_imp > 0 ? Math.round((b.mobile_sp / b.mobile_imp) * 100) : 0;
+    var winner = '';
+    if (abActive && a.impression >= 10 && b.impression >= 10) {
+      if (aRate > bRate + 5) winner = 'a';
+      else if (bRate > aRate + 5) winner = 'b';
+    }
+
+    var html = '<div class="stats-panel">';
+
+    // Impressions row
+    html += '<h4 style="font-size:0.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Impressions (block viewed)</h4>';
+    html += '<div class="stats-grid">';
+    html += '<div class="stat-box variant-a">' +
+      '<div class="stat-label">Variant A</div>' +
+      '<div class="stat-value">' + a.impression + '</div>' +
+      '<div class="stat-sub">' + a.mobile_imp + ' mobile</div>' +
+    '</div>';
+    html += '<div class="stat-box variant-b">' +
+      '<div class="stat-label">Variant B</div>' +
+      '<div class="stat-value">' + (abActive ? b.impression : '---') + '</div>' +
+      '<div class="stat-sub">' + (abActive ? b.mobile_imp + ' mobile' : 'A/B not active') + '</div>' +
+    '</div>';
+    html += '</div>';
+
+    // Scroll-through rate row
+    html += '<h4 style="font-size:0.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Scroll-Through Rate (read entire block)</h4>';
+    html += '<div class="stats-grid">';
+    html += '<div class="stat-box variant-a">' +
+      '<div class="stat-label">Variant A' + (winner === 'a' ? '<span class="winner-badge">Winner</span>' : '') + '</div>' +
+      '<div class="stat-value">' + aRate + '%</div>' +
+      '<div class="stat-sub">' + a.scroll_past + '/' + a.impression + ' total &middot; ' + aMobileRate + '% mobile</div>' +
+    '</div>';
+    html += '<div class="stat-box variant-b">' +
+      '<div class="stat-label">Variant B' + (winner === 'b' ? '<span class="winner-badge">Winner</span>' : '') + '</div>' +
+      '<div class="stat-value">' + (abActive ? bRate + '%' : '---') + '</div>' +
+      '<div class="stat-sub">' + (abActive ? b.scroll_past + '/' + b.impression + ' total &middot; ' + bMobileRate + '% mobile' : 'A/B not active') + '</div>' +
+    '</div>';
+    html += '</div>';
+
+    html += '<div class="stats-note">Stats from last 30 days. Mobile-first: mobile scroll-through rate is the primary metric.</div>';
+    html += '</div>';
+
+    return html;
+  }
+
+  // ── Toggle visibility ──
+  function toggleBlock(id, visible) {
+    supaFetch('page_blocks?id=eq.' + id, {
+      method: 'PATCH',
+      body: { visible: visible, updated_at: new Date().toISOString() }
+    }).then(function() {
+      allBlocks.forEach(function(b) {
+        if (b.id === id) b.visible = visible;
+      });
+      renderBlocks();
+      showToast(visible ? 'Block is now visible' : 'Block is now hidden');
+    }).catch(function() {
+      showToast('Failed to update', 'error');
+    });
+  }
+
+  // ── Toggle A/B ──
+  function toggleAB(id, active) {
+    var patch = { ab_active: active, updated_at: new Date().toISOString() };
+
+    // If activating A/B and no content_b exists, clone content_a into content_b
+    if (active) {
+      var block = allBlocks.find(function(b) { return b.id === id; });
+      if (block && (!block.content_b || Object.keys(block.content_b).length === 0)) {
+        patch.content_b = JSON.parse(JSON.stringify(block.content || {}));
+      }
+    }
+
+    supaFetch('page_blocks?id=eq.' + id, {
+      method: 'PATCH',
+      body: patch
+    }).then(function() {
+      allBlocks.forEach(function(b) {
+        if (b.id === id) {
+          b.ab_active = active;
+          if (patch.content_b) b.content_b = patch.content_b;
+        }
+      });
+      renderBlocks();
+      showToast(active ? 'A/B test activated. Variant B cloned from A.' : 'A/B test deactivated.');
+    }).catch(function() {
+      showToast('Failed to toggle A/B', 'error');
+    });
+  }
+
+  // ── Save block content ──
+  function saveBlock(id, card) {
+    // Collect variant A fields
+    var contentA = {};
+    card.querySelectorAll('[data-variant="a"][data-field]').forEach(function(f) {
+      var val = f.value.trim();
+      if (val) contentA[f.dataset.field] = val;
+    });
+
+    // Check for new field (variant A only)
+    var newKey = card.querySelector('[data-new-key]');
+    var newVal = card.querySelector('[data-new-value]');
+    if (newKey && newVal && newKey.value.trim() && newVal.value.trim()) {
+      contentA[newKey.value.trim().toLowerCase().replace(/\s+/g, '_')] = newVal.value.trim();
+    }
+
+    // Collect variant B fields
+    var contentB = {};
+    card.querySelectorAll('[data-variant="b"][data-field]').forEach(function(f) {
+      var val = f.value.trim();
+      if (val) contentB[f.dataset.field] = val;
+    });
+
+    var saveBtn = card.querySelector('[data-action="save"]');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+
+    var patch = {
+      content: contentA,
+      updated_at: new Date().toISOString()
+    };
+
+    // Only update content_b if A/B is active
+    var block = allBlocks.find(function(b) { return b.id === id; });
+    if (block && block.ab_active) {
+      patch.content_b = Object.keys(contentB).length > 0 ? contentB : block.content_b;
+    }
+
+    supaFetch('page_blocks?id=eq.' + id, {
+      method: 'PATCH',
+      body: patch
+    }).then(function() {
+      allBlocks.forEach(function(b) {
+        if (b.id === id) {
+          b.content = contentA;
+          if (patch.content_b) b.content_b = patch.content_b;
+        }
+      });
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save changes';
+      showToast('Block saved. Changes are live now.');
+
+      var feedback = document.getElementById('feedback-' + id);
+      if (feedback) {
+        feedback.style.opacity = '1';
+        setTimeout(function() { feedback.style.opacity = '0'; }, 2000);
+      }
+    }).catch(function() {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save changes';
+      showToast('Failed to save', 'error');
+    });
+  }
+
+  // ── Helpers ──
+  function escHtml(s) {
+    if (!s) return '';
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+  function escAttr(s) {
+    if (!s) return '';
+    return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // ── Page tab switching ──
+  document.querySelectorAll('.page-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.page-tab').forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      currentPage = tab.dataset.page;
+      renderBlocks();
+    });
+  });
+
+  // ── Init (wait for gate) ──
+  var blocksLoaded = false;
+
+  function tryLoadBlocks() {
+    if (blocksLoaded) return;
+    var gateEl = document.getElementById('access-gate');
+    if (gateEl && (gateEl.style.display === 'none' || sessionStorage.getItem('rise_team_auth') === 'true')) {
+      blocksLoaded = true;
+      loadBlocks();
+    }
+  }
+
+  tryLoadBlocks();
+
+  var observer = new MutationObserver(function() {
+    tryLoadBlocks();
+    if (blocksLoaded) observer.disconnect();
+  });
+  observer.observe(document.getElementById('access-gate'), { attributes: true, attributeFilter: ['style'] });
+
+  var gateBtn = document.getElementById('gate-submit');
+  if (gateBtn) {
+    gateBtn.addEventListener('click', function() {
+      setTimeout(tryLoadBlocks, 100);
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>

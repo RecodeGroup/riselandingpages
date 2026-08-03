@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>Rise Community — Join a Crew That's Going All-In</title>
+  <meta name="description" content="Weekly accountability, expert workshops, honest feedback and a network of serious electronic music producers. Apply for the Rise Community." />
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://riseacademy.b-cdn.net">
+  <script>if('scrollRestoration' in history) history.scrollRestoration='manual';window.scrollTo(0,0);</script>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --bg-3: #222;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg); color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6; overflow-x: hidden;
+    }
+    body.modal-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    img { max-width: 100%; }
+
+    /* ── Header ──────────────────────────────────────── */
+    .site-header {
+      position: sticky; top: 0; z-index: 110;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.82);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 2rem;
+    }
+    .header-logo { display: flex; align-items: center; z-index: 112; }
+    .header-logo:hover { opacity: 0.8; }
+    .header-logo img { width: 36px; height: 36px; border-radius: 7px; display: block; }
+    .header-cta-wrap { display: flex; align-items: center; }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh; min-height: 100dvh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 80px 24px 60px; text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.75) 0%, rgba(15,15,15,0.50) 40%, rgba(15,15,15,0.88) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 860px; }
+    .hero-label {
+      display: inline-block;
+      background: rgba(255,104,62,0.12);
+      border: 1px solid rgba(255,104,62,0.3);
+      color: var(--accent);
+      padding: 0.35rem 1rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 700; line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .hero h1 em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .hero-sub {
+      margin-top: 18px; max-width: 56ch;
+      color: var(--muted); font-size: clamp(0.95rem, 1.4vw, 1.12rem);
+      line-height: 1.65; margin-left: auto; margin-right: auto;
+    }
+    .cta-row {
+      margin-top: 32px; display: flex; gap: 12px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0a0a0a;
+      padding: 16px 36px; border-radius: 8px;
+      font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-block; text-align: center;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+
+    /* ── Icon-Stat Badges ────────────────────────────── */
+    .hero-badges {
+      display: flex; justify-content: center; gap: 2rem;
+      flex-wrap: wrap; margin-top: 48px;
+    }
+    .hero-badge {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; padding: 14px 20px;
+      min-width: 200px;
+    }
+    .hero-badge-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(255,104,62,0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-badge-icon svg {
+      width: 20px; height: 20px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .hero-badge-text { text-align: left; }
+    .hero-badge-title {
+      font-size: 0.85rem; font-weight: 700; color: var(--fg);
+      line-height: 1.2;
+    }
+    .hero-badge-sub {
+      font-size: 0.75rem; color: var(--muted); line-height: 1.3;
+    }
+
+    /* ── Shared Section ──────────────────────────────── */
+    .section { padding: 5rem 2rem; max-width: var(--maxw); margin: 0 auto; }
+    .section-full { padding: 5rem 2rem; }
+    .section-eyebrow {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.2em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 0.4rem;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 0.95rem;
+      max-width: 55ch; margin-bottom: 2.5rem; line-height: 1.7;
+    }
+    .text-center { text-align: center; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+
+    /* ── Animated Dividers ────────────────────────────── */
+    .section-divider {
+      position: relative; height: 3px; margin-bottom: 2.5rem;
+      will-change: clip-path, opacity;
+    }
+    .div-line {
+      position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #ff683e 0%, rgba(255,104,62,0.6) 40%, rgba(255,104,62,0) 100%);
+    }
+    @keyframes pulse-a {
+      0%   { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+      8%   { clip-path: inset(0 62% 0 0); opacity: 0.85; }
+      18%  { clip-path: inset(0 72% 0 0); opacity: 0.75; }
+      27%  { clip-path: inset(0 30% 0 0); opacity: 0.95; }
+      46%  { clip-path: inset(0 0%  0 0); opacity: 1; }
+      65%  { clip-path: inset(0 55% 0 0); opacity: 0.8; }
+      78%  { clip-path: inset(0 80% 0 0); opacity: 0.65; }
+      100% { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+    }
+    .div-1 { animation: pulse-a 6s ease-in-out infinite; }
+    .div-2 { animation: pulse-a 6s ease-in-out infinite; animation-delay: -2s; }
+    .div-3 { animation: pulse-a 6s ease-in-out infinite; animation-delay: -4s; }
+
+    /* ── 4 Feature Cards (Reference Style) ────────────── */
+    .features-ref {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .features-ref-inner { max-width: var(--maxw); margin: 0 auto; }
+    .features-ref-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .fr-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 2rem 1.5rem;
+      text-align: center;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .fr-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #ff683e, transparent);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .fr-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .fr-card:hover::before { opacity: 1; }
+    .fr-icon {
+      width: 52px; height: 52px;
+      background: rgba(255,104,62,0.12);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+    .fr-icon svg {
+      width: 24px; height: 24px;
+      stroke: #ff683e; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .fr-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .fr-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── Image Carousel ──────────────────────────────── */
+    .image-carousel {
+      position: relative; overflow: hidden; height: 320px;
+    }
+    .image-carousel::before,
+    .image-carousel::after {
+      content: ''; position: absolute;
+      top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+    }
+    .image-carousel::before { left: 0; background: linear-gradient(90deg, #0f0f0f, transparent); }
+    .image-carousel::after { right: 0; background: linear-gradient(270deg, #0f0f0f, transparent); }
+    .carousel-track {
+      display: flex; gap: 6px; width: max-content;
+      animation: carousel-slide 45s linear infinite;
+    }
+    .carousel-track:hover { animation-play-state: paused; }
+    .carousel-track img {
+      flex-shrink: 0; width: 480px; height: 320px;
+      object-fit: cover; object-position: center 45%;
+      border-radius: 4px; filter: brightness(0.75) saturate(1.1);
+      transition: filter 0.4s ease; display: block;
+    }
+    .carousel-track img:hover { filter: brightness(0.9) saturate(1.2); }
+    .carousel-track video {
+      flex-shrink: 0; width: 480px; height: 320px;
+      object-fit: cover; border-radius: 4px;
+      filter: brightness(0.75) saturate(1.1);
+      transition: filter 0.4s ease; display: block;
+    }
+    .carousel-track video:hover { filter: brightness(0.9) saturate(1.2); }
+    @keyframes carousel-slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Problem Section ─────────────────────────────── */
+    .problem-section {
+      padding: 5rem 2rem; text-align: center;
+      border-top: 1px solid var(--line);
+    }
+    .problem-inner { max-width: 720px; margin: 0 auto; }
+    .problem-inner h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+    .problem-points {
+      list-style: none; text-align: left;
+      display: flex; flex-direction: column; gap: 18px;
+      margin-bottom: 2rem;
+    }
+    .problem-points li {
+      color: var(--muted); font-size: 0.95rem; line-height: 1.7;
+      padding-left: 28px; position: relative;
+    }
+    .problem-points li::before {
+      content: ''; position: absolute; left: 0; top: 10px;
+      width: 10px; height: 2px; background: var(--accent);
+    }
+    .problem-bridge {
+      color: var(--fg); font-size: 1.05rem; font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* ── Steps ───────────────────────────────────────── */
+    .steps-section {
+      padding: 5rem 2rem;
+      background: rgba(20,20,20,0.6);
+      border-top: 1px solid rgba(255,104,62,0.06);
+      border-bottom: 1px solid rgba(255,104,62,0.06);
+    }
+    .steps-inner { max-width: var(--maxw); margin: 0 auto; }
+    .s-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .s-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px; padding: 2rem; text-align: center;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .s-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+    }
+    .s-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, #ff683e, #ff6f3d);
+      color: #fff; border-radius: 50%;
+      font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem;
+    }
+    .s-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .s-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── Coaches ─────────────────────────────────────── */
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px; margin-top: 2rem;
+    }
+    .coach-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px; overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .coach-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .coach-card img {
+      width: 100%; height: 200px;
+      object-fit: cover; object-position: center top;
+      filter: grayscale(1) brightness(0.85);
+      display: block;
+    }
+    .coach-card:hover img { filter: grayscale(0.5) brightness(0.95); }
+    .coach-info { padding: 14px 16px 18px; }
+    .coach-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
+    .coach-role {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 6px;
+    }
+    .coach-info p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── Tiers ───────────────────────────────────────── */
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .tier-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px; padding: 2rem;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .tier-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .tier-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(255,104,62,0.15);
+    }
+    .tier-label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .tier-card h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+    .tier-price {
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--accent); margin: 8px 0 12px;
+    }
+    .tier-price .period {
+      font-size: 0.75rem; font-weight: 400; color: #666;
+    }
+    .tier-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .tier-features {
+      list-style: none; padding: 0; margin: 12px 0 0;
+      font-size: 0.8rem; color: var(--muted);
+    }
+    .tier-features li { margin-bottom: 6px; }
+
+    /* ── Testimonials ────────────────────────────────── */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .testimonial-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px; padding: 2rem;
+    }
+    .testimonial-stars { color: var(--accent); margin-bottom: 8px; }
+    .testimonial-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; font-style: italic; }
+
+    /* ── Done Doing This Alone CTA ────────────────────── */
+    .final-cta-section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    .final-cta-inner { max-width: 680px; margin: 0 auto; }
+    .final-cta-inner h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 2rem;
+    }
+    .final-cta-checklist {
+      list-style: none; text-align: left;
+      display: inline-block; margin-bottom: 2.5rem;
+    }
+    .final-cta-checklist li {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.8; padding-left: 32px; position: relative;
+    }
+    .final-cta-checklist li::before {
+      content: '';
+      position: absolute; left: 0; top: 8px;
+      width: 18px; height: 18px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+    }
+    .final-cta-checklist li::after {
+      content: '';
+      position: absolute; left: 4px; top: 12px;
+      width: 10px; height: 5px;
+      border-left: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      transform: rotate(-45deg);
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    .portal-footer {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255,104,62,0.1);
+      padding: 3rem 2rem; text-align: center;
+      color: #555; font-size: 0.85rem;
+    }
+    .portal-footer-links {
+      display: flex; justify-content: center;
+      gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .portal-footer-links a { color: #888; }
+    .portal-footer-links a:hover { color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════════
+       MODAL / POPUP QUESTIONNAIRE
+       ═══════════════════════════════════════════════════ */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-backdrop.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-backdrop.entering { opacity: 0; }
+
+    .modal-container {
+      background: #1a1a1a;
+      width: 100%; max-width: 640px;
+      max-height: 90vh; overflow-y: auto;
+      border-radius: 16px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .modal-backdrop.active .modal-container {
+      transform: translateY(0);
+    }
+
+    /* Progress bar */
+    .modal-progress {
+      display: flex; gap: 4px;
+      padding: 20px 24px 0;
+    }
+    .modal-progress-seg {
+      flex: 1; height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      transition: background 0.3s ease;
+    }
+    .modal-progress-seg.filled {
+      background: var(--accent);
+    }
+
+    /* Modal header (back + close) */
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px 0;
+    }
+    .modal-back {
+      font-size: 0.85rem; color: var(--muted);
+      cursor: pointer; background: none; border: none;
+      display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s ease;
+    }
+    .modal-back:hover { color: var(--fg); }
+    .modal-back.hidden { visibility: hidden; }
+    .modal-close {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.06);
+      border: none; border-radius: 8px;
+      color: var(--muted); font-size: 1.2rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--fg); }
+
+    /* Modal body */
+    .modal-body {
+      padding: 32px 24px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Step container for transitions */
+    .modal-step {
+      display: none;
+    }
+    .modal-step.active {
+      display: block;
+      animation: stepFadeIn 0.3s ease forwards;
+    }
+    @keyframes stepFadeIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes stepFadeOut {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(-30px); }
+    }
+
+    .modal-step .step-question {
+      font-size: clamp(1.3rem, 3vw, 1.6rem);
+      font-weight: 700; line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .modal-step .step-subtitle {
+      font-size: 0.9rem; color: var(--muted);
+      margin-bottom: 24px; line-height: 1.5;
+    }
+
+    /* Option cards (single & multi select) */
+    .option-cards {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .option-card {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 16px 18px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+    }
+    .option-card:hover {
+      border-color: rgba(255,104,62,0.4);
+      background: rgba(255,104,62,0.05);
+    }
+    .option-card.selected {
+      border-color: var(--accent);
+      background: rgba(255,104,62,0.08);
+    }
+    .option-card:active { transform: scale(0.98); }
+    .option-letter {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: rgba(255,104,62,0.12);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; color: var(--accent);
+    }
+    .option-text { font-size: 0.95rem; font-weight: 500; }
+
+    /* Multi-select checkbox style */
+    .option-card .check-box {
+      width: 22px; height: 22px; flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 5px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .option-card.selected .check-box {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+    .option-card .check-box svg {
+      width: 14px; height: 14px;
+      stroke: #0a0a0a; fill: none;
+      stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+      opacity: 0; transition: opacity 0.15s ease;
+    }
+    .option-card.selected .check-box svg { opacity: 1; }
+
+    /* Text input in modal */
+    .modal-input {
+      width: 100%; padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; color: var(--fg);
+      font-size: 1rem; font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .modal-input:focus { border-color: var(--accent); }
+    .modal-input::placeholder { color: #555; }
+
+    /* Slider */
+    .slider-wrap { margin-top: 16px; }
+    .slider-value {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700; color: var(--accent);
+      text-align: center; margin-bottom: 4px;
+    }
+    .slider-label {
+      text-align: center; font-size: 0.85rem;
+      color: var(--muted); margin-bottom: 24px;
+    }
+    .slider-range {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px; outline: none;
+      cursor: pointer;
+    }
+    .slider-range::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 24px; height: 24px;
+      background: var(--accent);
+      border-radius: 50%; cursor: pointer;
+      border: 3px solid #1a1a1a;
+      box-shadow: 0 2px 8px rgba(255,104,62,0.4);
+    }
+    .slider-range::-moz-range-thumb {
+      width: 24px; height: 24px;
+      background: var(--accent);
+      border-radius: 50%; cursor: pointer;
+      border: 3px solid #1a1a1a;
+      box-shadow: 0 2px 8px rgba(255,104,62,0.4);
+    }
+    .slider-minmax {
+      display: flex; justify-content: space-between;
+      font-size: 0.75rem; color: #555; margin-top: 8px;
+    }
+
+    /* Continue button in modal */
+    .modal-btn-continue {
+      width: 100%;
+      background: var(--accent); color: #0a0a0a;
+      padding: 16px; border-radius: 10px;
+      font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      border: none; cursor: pointer; margin-top: 24px;
+      transition: background 0.25s ease, transform 0.15s ease;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .modal-btn-continue:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+    .modal-btn-continue:disabled {
+      opacity: 0.4; cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Form fields in step 7 */
+    .modal-form-grid {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .modal-form-group label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+
+    /* Success screen */
+    .modal-success {
+      text-align: center; padding: 2rem 0;
+    }
+    .modal-success .success-icon {
+      width: 72px; height: 72px;
+      background: rgba(34,197,94,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .modal-success .success-icon svg {
+      width: 36px; height: 36px;
+      stroke: #22c55e; fill: none;
+      stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .modal-success h3 {
+      font-size: 1.6rem; font-weight: 700; margin-bottom: 12px;
+    }
+    .modal-success p {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.65;
+      max-width: 420px; margin: 0 auto;
+    }
+
+    /* ── Reduced Motion ──────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .modal-step.active { animation: none; }
+    }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .features-ref-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .coaches-grid { grid-template-columns: repeat(3, 1fr); }
+      .tiers-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+    }
+    /* Academy 2-col grid → 1 col on small screens (inline grid in HTML) */
+    @media (max-width: 600px) {
+      .academy-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 768px) {
+      .site-header-inner { padding: 0.6rem 1rem; }
+      .header-logo img { width: 30px; height: 30px; }
+      .hero { padding: 60px 20px 40px; }
+      .hero h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+      .hero-badges { gap: 0.75rem; }
+      .hero-badge { min-width: 0; flex: 1 1 calc(50% - 0.75rem); padding: 12px 14px; }
+      .section { padding: 3rem 1.25rem; }
+      .section-full { padding: 3rem 1.25rem; }
+      .steps-section { padding: 3rem 1.25rem; }
+      .features-ref { padding: 3rem 1.25rem; }
+      .features-ref-grid { grid-template-columns: 1fr 1fr; }
+      .s-grid { grid-template-columns: 1fr; }
+      .coaches-grid { grid-template-columns: repeat(2, 1fr); }
+      .image-carousel { height: 200px; }
+      .carousel-track img { width: 300px; height: 200px; }
+      .carousel-track video { width: 300px; height: 200px; }
+      .final-cta-section { padding: 3rem 1.25rem; }
+      /* Modal mobile */
+      .modal-container {
+        max-width: 100%; max-height: 100vh; height: 100%;
+        border-radius: 0;
+      }
+    }
+    @media (max-width: 480px) {
+      .coaches-grid { grid-template-columns: 1fr; max-width: 320px; margin-left: auto; margin-right: auto; }
+      .hero { padding: 50px 16px 32px; }
+      .hero-badges { flex-direction: column; gap: 10px; }
+      .hero-badge { flex: 1 1 100%; }
+      .features-ref-grid { grid-template-columns: 1fr; }
+      .btn-primary { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────── -->
+<header class="site-header" id="site-header">
+  <div class="site-header-inner">
+    <a class="header-logo" href="/community-vsl-b/" title="Rise"><img src="../assets/logo.png" alt="Rise"></a>
+    <div class="header-cta-wrap">
+      <button class="btn-primary open-modal" style="padding:12px 24px;font-size:0.75rem;">Apply for Membership</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Hero ─────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg">
+    <video src="../assets/videos/video-6.mp4" autoplay muted loop playsinline></video>
+  </div>
+  <div class="hero-content">
+    <div class="hero-label">For electronic music producers and DJs</div>
+    <h1>Weekly live calls, honest feedback on your tracks, and a network of producers who push each other forward.</h1>
+    <p style="font-size:0.95rem;color:var(--accent);font-weight:600;margin-bottom:0.5rem;">Grow as an artist, on your terms.</p>
+    <p class="hero-sub">This is how you go from bedroom producer to working artist. A structured program with real accountability, expert workshops, and a private network of serious electronic music producers and DJs building real careers together.</p>
+
+    <!-- Feature strip -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin:12px 0 4px;font-size:0.82rem;color:var(--muted);">
+      <span>Weekly group call</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>Track feedback</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>Producer network</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>Structured path</span>
+    </div>
+    <div class="cta-row">
+      <button class="btn-primary open-modal">Apply for Membership</button>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge">
+        <div class="hero-badge-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="hero-badge-text">
+          <div class="hero-badge-title">Full Clarity</div>
+          <div class="hero-badge-sub">Know your next move</div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div class="hero-badge-text">
+          <div class="hero-badge-title">By Artists</div>
+          <div class="hero-badge-sub">For artists</div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="hero-badge-text">
+          <div class="hero-badge-title">Real Progress</div>
+          <div class="hero-badge-sub">Every single week</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 4 Feature Cards (Reference Style) ──────────── -->
+<section class="features-ref">
+  <div class="features-ref-inner">
+    <div class="text-center" style="margin-bottom:3rem;">
+      <div class="section-eyebrow">What makes Rise different</div>
+      <h2 class="section-title">Not another Discord server.</h2>
+      <p class="section-sub mx-auto">Most communities are passive forums where nobody posts after the first week. Rise is a structured system with real results.</p>
+    </div>
+    <div class="features-ref-grid">
+      <div class="fr-card">
+        <div class="fr-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 17h20"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+        <h4>Courses</h4>
+        <p>Full access to the Rise Course: 11 video modules, sample packs and the industry manual. Learn production, branding, marketing and release strategy.</p>
+      </div>
+      <div class="fr-card">
+        <div class="fr-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h4>Commitment</h4>
+        <p>Weekly accountability calls, deadlines and mandatory participation. No lurking. Every member shows up and puts in the work.</p>
+      </div>
+      <div class="fr-card">
+        <div class="fr-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h4>Community</h4>
+        <p>A curated group of committed electronic artists. Honest feedback, real connections and collaborations that happen naturally.</p>
+      </div>
+      <div class="fr-card">
+        <div class="fr-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <h4>Accountability</h4>
+        <p>Set goals, share updates, get feedback. Every single week. The structure that makes the difference between dreaming and doing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Image Carousel ──────────────────────────────── -->
+<div class="image-carousel">
+  <div class="carousel-track">
+    <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+    <video src="../assets/videos/video-4.mp4" autoplay muted loop playsinline></video>
+    <img src="../assets/photos/photo-11.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-25.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+    <video src="../assets/videos/video-5.mp4" autoplay muted loop playsinline></video>
+    <img src="../assets/photos/photo-26.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-17.jpg" alt="Rise" loading="lazy">
+    <video src="../assets/videos/video-3.mp4" autoplay muted loop playsinline></video>
+    <!-- duplicate set for seamless loop -->
+    <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+    <video src="../assets/videos/video-4.mp4" autoplay muted loop playsinline></video>
+    <img src="../assets/photos/photo-11.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-25.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+    <video src="../assets/videos/video-5.mp4" autoplay muted loop playsinline></video>
+    <img src="../assets/photos/photo-26.jpg" alt="Rise" loading="lazy">
+    <img src="../assets/photos/photo-17.jpg" alt="Rise" loading="lazy">
+    <video src="../assets/videos/video-3.mp4" autoplay muted loop playsinline></video>
+  </div>
+</div>
+
+<!-- ── Problem ─────────────────────────────────────── -->
+<section class="problem-section">
+  <div class="problem-inner">
+    <h2>Making music is normal.<br>Building a career alone is a <span style="color:var(--accent)">mistake.</span></h2>
+    <ul class="problem-points">
+      <li>You keep starting tracks but never finish them. No deadlines, no one checking in, no momentum.</li>
+      <li>You watch tutorials for hours but nothing sticks. No structure, no feedback, no direction.</li>
+      <li>You have no idea how to go from "producer in your bedroom" to "artist with a real career."</li>
+      <li>You're surrounded by people who don't understand what you're trying to build. It's isolating.</li>
+    </ul>
+    <p class="problem-bridge">The Rise Community changes that. A structured system built on accountability, expert guidance and a crew of producers who are going through the same journey.</p>
+  </div>
+</section>
+
+<!-- ── How It Works ────────────────────────────────── -->
+<section class="steps-section">
+  <div class="steps-inner">
+    <div class="section-divider div-2"><span class="div-line"></span></div>
+    <h2 class="section-title text-center">How it works</h2>
+    <p class="section-sub text-center mx-auto">From your first call to real results. Here's what the journey looks like.</p>
+    <div class="s-grid">
+      <div class="s-card"><div class="s-num">1</div><h4>Apply and get accepted</h4><p>Fill in the application. We review every submission to make sure the community stays focused and committed.</p></div>
+      <div class="s-card"><div class="s-num">2</div><h4>Intro call with the team</h4><p>A short call to understand your goals, your level and what you want to get out of Rise. No pressure, just clarity.</p></div>
+      <div class="s-card"><div class="s-num">3</div><h4>Start your program</h4><p>Get access to the full Rise Academy. Based on your level, we build a structured path for production, career development and artist growth.</p></div>
+      <div class="s-card"><div class="s-num">4</div><h4>Start your first week</h4><p>Get access to the platform, join your first weekly call, introduce yourself to the crew and start building momentum.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Coaches ─────────────────────────────────────── -->
+<section class="section">
+  <div class="section-divider div-3"><span class="div-line"></span></div>
+  <div class="section-eyebrow">Your Mentors</div>
+  <h2 class="section-title">Meet the Coaches</h2>
+  <p class="section-sub">The people behind your growth. Each coach brings specific expertise and years of industry experience.</p>
+  <div class="coaches-grid">
+    <div class="coach-card">
+      <img src="../assets/photos/Photo-20.png" alt="Remy">
+      <div class="coach-info">
+        <h4>Remy</h4>
+        <div class="coach-role">Pop & Dance Production</div>
+        <p>Producer from The Hague. Known for layered textures and emotional depth. Collaborated with Lost Frequencies.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img src="../assets/photos/Photo-22.png" alt="Artcode">
+      <div class="coach-info">
+        <h4>Artcode</h4>
+        <div class="coach-role">Electronic & Audiovisual</div>
+        <p>Based in Rotterdam with 15+ years across electronic genres. Music with TouchDesigner visuals and live modular performance.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img src="../assets/photos/Jim.png" alt="Vannood">
+      <div class="coach-info">
+        <h4>Vannood</h4>
+        <div class="coach-role">Entrepreneur & Artist</div>
+        <p>Over 15 years specializing in techno production. Expert in structuring creative processes into finished work.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img src="../assets/photos/Photo50.png" alt="Paul">
+      <div class="coach-info">
+        <h4>Paul</h4>
+        <div class="coach-role">Mix & Master Engineer</div>
+        <p>Specializes in getting your tracks to sound polished and release-ready. Teaches mixing techniques and mastering workflows.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img src="../assets/photos/Maurits.png" alt="Maurits">
+      <div class="coach-info">
+        <h4>Maurits</h4>
+        <div class="coach-role">Business & Operations</div>
+        <p>Handles the operational and business side of artist development. Builds structures for long-term creative growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── The Rise Academy ────────────────────────────── -->
+<section class="section">
+  <div class="section-divider div-1"><span class="div-line"></span></div>
+  <div class="section-eyebrow">The Rise Academy</div>
+  <h2 class="section-title">One program. Tailored to your level.</h2>
+  <p class="section-sub">Whether you're building your first track or scaling your artist career, Rise adapts to where you are. We build your production foundations, keep you accountable for your growth, and guide you through every stage of your journey as an artist.</p>
+  <div style="max-width:760px;">
+    <div style="background:var(--bg-2);border:1px solid rgba(255,104,62,0.15);border-radius:14px;padding:2.5rem 2rem;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#ff683e,rgba(255,104,62,0.3),transparent);"></div>
+      <p style="font-size:0.95rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;">Based on your experience and goals, we place you at the right level. From learning production fundamentals to building a full artist career with branding, releases and marketing, everything is structured so you know exactly what to do next.</p>
+      <div class="academy-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px 36px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-size:1rem;line-height:1.6;flex-shrink:0;">&#10003;</span>
+          <div>
+            <strong style="font-size:0.92rem;">11 video modules</strong>
+            <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-top:2px;">Production, branding, marketing and release strategy</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-size:1rem;line-height:1.6;flex-shrink:0;">&#10003;</span>
+          <div>
+            <strong style="font-size:0.92rem;">Weekly accountability calls</strong>
+            <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-top:2px;">Show up, share progress, stay on track</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-size:1rem;line-height:1.6;flex-shrink:0;">&#10003;</span>
+          <div>
+            <strong style="font-size:0.92rem;">Production foundations</strong>
+            <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-top:2px;">Sound design, mixing, arrangement and finishing tracks</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-size:1rem;line-height:1.6;flex-shrink:0;">&#10003;</span>
+          <div>
+            <strong style="font-size:0.92rem;">Artist career path</strong>
+            <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-top:2px;">Branding, releasing, royalties and audience growth</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-size:1rem;line-height:1.6;flex-shrink:0;">&#10003;</span>
+          <div>
+            <strong style="font-size:0.92rem;">Expert coaching and feedback</strong>
+            <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-top:2px;">Direct access to coaches with real industry experience</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-size:1rem;line-height:1.6;flex-shrink:0;">&#10003;</span>
+          <div>
+            <strong style="font-size:0.92rem;">Sample packs and presets</strong>
+            <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-top:2px;">Curated resources to kickstart your production</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-size:1rem;line-height:1.6;flex-shrink:0;">&#10003;</span>
+          <div>
+            <strong style="font-size:0.92rem;">Private community</strong>
+            <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-top:2px;">A curated network of serious producers and DJs</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--accent);font-size:1rem;line-height:1.6;flex-shrink:0;">&#10003;</span>
+          <div>
+            <strong style="font-size:0.92rem;">Industry manual</strong>
+            <p style="font-size:0.8rem;color:var(--muted);line-height:1.5;margin-top:2px;">The complete guide to navigating the music industry</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06);">
+        <button class="btn-primary open-modal" style="padding:14px 32px;font-size:0.8rem;">Apply for the Rise Academy</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ────────────────────────────────── -->
+<section class="section">
+  <div class="section-divider div-2"><span class="div-line"></span></div>
+  <div class="section-eyebrow">What Members Say</div>
+  <h2 class="section-title">Real artists. Real progress.</h2>
+  <p class="section-sub">Producers have already joined Rise to improve their music, build confidence and take the next step in their journey.</p>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>"I've bought countless music courses over the years, but this is the first one that truly covers the entire journey. From production and branding to marketing and release strategy, everything is explained in a practical way that you can implement immediately."</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>"The community calls are what really set Rise apart. Having weekly accountability with other producers who are serious about their career keeps me focused and moving forward."</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>"Before Rise I was stuck in a loop of starting projects and never finishing them. The structure and feedback from the community changed everything. I've released more music in 3 months than in the entire year before."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Rise Certificate ─────────────────────────────── -->
+<section class="section" style="padding-bottom:2rem">
+  <div style="max-width:720px;margin:0 auto;background:linear-gradient(135deg,rgba(255,104,62,0.07),rgba(245,158,11,0.05));border:1px solid rgba(255,104,62,0.12);border-radius:14px;padding:2.5rem 2rem;display:flex;gap:20px;align-items:flex-start">
+    <div style="flex-shrink:0;width:52px;height:52px;border-radius:12px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-3 3v4l3-2 3 2v-4l-3-3z"/><circle cx="12" cy="9" r="6"/><path d="M9 9l2 2 4-4"/></svg>
+    </div>
+    <div>
+      <h3 style="font-size:1.15rem;font-weight:700;margin:0 0 6px;color:#fff">Earn the Rise Certificate</h3>
+      <p style="font-size:0.9rem;color:#aaa;line-height:1.65;margin:0">
+        After completing the program, you receive the official Rise Certificate, a credential recognized by agencies and event organizers across the industry. It signals that you've put in the work, built real skills and are ready for opportunities. Rise is actively working with agencies and events that test and verify against it, so your certificate opens doors from day one.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Done Doing This Alone? CTA ─────────────────── -->
+<section class="final-cta-section">
+  <div class="final-cta-inner">
+    <h2>Done doing this alone?</h2>
+    <ul class="final-cta-checklist">
+      <li>You want honest feedback on your music</li>
+      <li>You want a structured path, not random tutorials</li>
+      <li>You want to finish tracks consistently</li>
+      <li>You want a crew that keeps you accountable</li>
+      <li>You're ready to take your music seriously</li>
+    </ul>
+    <br>
+    <button class="btn-primary open-modal">Apply for Membership</button>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────── -->
+<footer class="portal-footer">
+  <div class="portal-footer-links">
+    <a href="/terms/">Terms & Conditions</a>
+    <a href="/privacy/">Privacy Policy</a>
+    <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Rise on Instagram</a>
+  </div>
+  <p>&copy; 2026 Rise Artist Academy &middot; Recode Operations B.V.</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     MODAL / POPUP QUESTIONNAIRE
+     ═══════════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="apply-modal">
+  <div class="modal-container" role="dialog" aria-modal="true" aria-label="Application questionnaire">
+
+    <!-- Progress bar (6 steps) -->
+    <div class="modal-progress" id="modal-progress">
+      <div class="modal-progress-seg"></div>
+      <div class="modal-progress-seg"></div>
+      <div class="modal-progress-seg"></div>
+      <div class="modal-progress-seg"></div>
+      <div class="modal-progress-seg"></div>
+      <div class="modal-progress-seg"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="modal-header">
+      <button class="modal-back hidden" id="modal-back-btn" aria-label="Go back">
+        <span>&larr;</span> Back
+      </button>
+      <button class="modal-close" id="modal-close-btn" aria-label="Close">&times;</button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+
+      <!-- STEP 1: Contact details (FIRST) -->
+      <div class="modal-step active" data-step="1">
+        <div class="step-question">Let's start with your details</div>
+        <div class="step-subtitle">So we can reach you to schedule your intro call.</div>
+        <div class="modal-form-grid">
+          <div class="modal-form-group">
+            <label for="q-name">Your name</label>
+            <input type="text" class="modal-input" id="q-name" placeholder="First and last name" required>
+          </div>
+          <div class="modal-form-group">
+            <label for="q-email">Email address</label>
+            <input type="email" class="modal-input" id="q-email" placeholder="your@email.com" required>
+          </div>
+          <div class="modal-form-group">
+            <label for="q-whatsapp">WhatsApp number</label>
+            <input type="tel" class="modal-input" id="q-whatsapp" placeholder="Incl. country code, e.g. +31 6 12345678" required>
+          </div>
+        </div>
+        <button class="modal-btn-continue" id="btn-step1">Continue &rarr;</button>
+      </div>
+
+      <!-- STEP 2: Years producing (single select, auto-advance) -->
+      <div class="modal-step" data-step="2">
+        <div class="step-question">How many years have you been producing?</div>
+        <div class="step-subtitle">Select the option that best describes your experience.</div>
+        <div class="option-cards" data-type="single" data-field="years_producing">
+          <div class="option-card" data-value="Less than 1 year">
+            <div class="option-letter">A</div>
+            <div class="option-text">Less than 1 year</div>
+          </div>
+          <div class="option-card" data-value="1 – 3 years">
+            <div class="option-letter">B</div>
+            <div class="option-text">1 &ndash; 3 years</div>
+          </div>
+          <div class="option-card" data-value="3 – 5 years">
+            <div class="option-letter">C</div>
+            <div class="option-text">3 &ndash; 5 years</div>
+          </div>
+          <div class="option-card" data-value="5+ years">
+            <div class="option-letter">D</div>
+            <div class="option-text">5+ years</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Genres (multi-select) -->
+      <div class="modal-step" data-step="3">
+        <div class="step-question">What genres do you produce?</div>
+        <div class="step-subtitle">Select all that apply.</div>
+        <div class="option-cards" data-type="multi" data-field="genres" id="genre-cards">
+          <div class="option-card" data-value="House">
+            <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-text">House</div>
+          </div>
+          <div class="option-card" data-value="Techno">
+            <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-text">Techno</div>
+          </div>
+          <div class="option-card" data-value="Drum & Bass">
+            <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-text">Drum &amp; Bass</div>
+          </div>
+          <div class="option-card" data-value="EDM">
+            <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-text">EDM</div>
+          </div>
+          <div class="option-card" data-value="Pop">
+            <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-text">Pop</div>
+          </div>
+          <div class="option-card" data-value="Hip Hop">
+            <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-text">Hip Hop</div>
+          </div>
+          <div class="option-card" data-value="Other">
+            <div class="check-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="option-text">Other</div>
+          </div>
+        </div>
+        <button class="modal-btn-continue" id="btn-step3" disabled>Continue &rarr;</button>
+      </div>
+
+      <!-- STEP 4: Biggest challenges (multi-select) -->
+      <div class="modal-step" data-step="4">
+        <div class="step-question">What are your biggest challenges right now?</div>
+        <div class="step-subtitle">Select all that apply.</div>
+        <div class="option-cards" data-type="multi" data-field="challenges" id="challenge-cards">
+          <div class="option-card" data-value="Finishing tracks consistently">
+            <div class="option-letter">A</div>
+            <div class="option-text">Finishing tracks consistently</div>
+          </div>
+          <div class="option-card" data-value="Getting my music heard / building an audience">
+            <div class="option-letter">B</div>
+            <div class="option-text">Getting my music heard / building an audience</div>
+          </div>
+          <div class="option-card" data-value="Improving my production or mixing skills">
+            <div class="option-letter">C</div>
+            <div class="option-text">Improving my production or mixing skills</div>
+          </div>
+          <div class="option-card" data-value="Staying motivated and accountable">
+            <div class="option-letter">D</div>
+            <div class="option-text">Staying motivated and accountable</div>
+          </div>
+          <div class="option-card" data-value="Turning music into a career or income">
+            <div class="option-letter">E</div>
+            <div class="option-text">Turning music into a career or income</div>
+          </div>
+        </div>
+        <button class="modal-btn-continue" id="btn-step4" disabled>Continue &rarr;</button>
+      </div>
+
+      <!-- STEP 5: Where do you want to be in 12 months? -->
+      <div class="modal-step" data-step="5">
+        <div class="step-question">Where do you want to be in 12 months?</div>
+        <div class="step-subtitle">Describe your goals. What does success look like for you?</div>
+        <textarea class="modal-input" id="q-goals" rows="4" placeholder="E.g. I want to release my first EP, build a following, or start playing live..." style="resize:vertical;min-height:100px;"></textarea>
+        <button class="modal-btn-continue" id="btn-step5" disabled>Continue &rarr;</button>
+      </div>
+
+      <!-- STEP 6: Book your call (GoHighLevel embed) -->
+      <div class="modal-step" data-step="6">
+        <div class="step-question">Book your intro call</div>
+        <div class="step-subtitle">Pick a time that works for you. We'll discuss your goals and see if Rise is the right fit.</div>
+        <div id="booking-container" style="margin-top:16px;min-height:400px;background:rgba(255,255,255,0.02);border-radius:10px;overflow:hidden;">
+          <iframe src="https://api.leadconnectorhq.com/widget/booking/yrQXVllnyK5HWK6pNmuK" style="width:100%;min-height:600px;border:none;overflow:hidden;" scrolling="no" id="yrQXVllnyK5HWK6pNmuK_1783505560231"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── Scripts ─────────────────────────────────────── -->
+<script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+<script>
+(function() {
+  'use strict';
+
+  // ── Scroll: Glass header ────────────────────────
+  var header = document.getElementById('site-header');
+  var lastScrolled = false;
+  function handleScroll() {
+    var scrolled = window.scrollY > 60;
+    if (scrolled !== lastScrolled) {
+      lastScrolled = scrolled;
+      header.classList.toggle('scrolled', scrolled);
+    }
+  }
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+
+  // ── Supabase config ─────────────────────────────
+  var SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
+
+  // ── GoHighLevel webhook (configure your GHL webhook URL here) ──
+  // TODO: Replace with your actual GoHighLevel webhook URL from Settings > Webhooks
+  var GHL_WEBHOOK_URL = '';
+
+  // ── Modal state ─────────────────────────────────
+  var modal = document.getElementById('apply-modal');
+  var backBtn = document.getElementById('modal-back-btn');
+  var closeBtn = document.getElementById('modal-close-btn');
+  var progressSegs = document.querySelectorAll('.modal-progress-seg');
+  var allSteps = document.querySelectorAll('.modal-step[data-step]');
+  var currentStep = 1;
+  var totalSteps = 6;
+
+  // Collected data
+  var formData = {
+    name: '',
+    email: '',
+    whatsapp: '',
+    years_producing: '',
+    genres: [],
+    challenges: [],
+    goals: ''
+  };
+
+  // ── Open / Close modal ──────────────────────────
+  function openModal() {
+    modal.style.display = 'flex';
+    modal.offsetHeight;
+    modal.classList.add('active');
+    document.body.classList.add('modal-open');
+  }
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+    setTimeout(function() {
+      modal.style.display = 'none';
+      resetModal();
+    }, 300);
+  }
+
+  function resetModal() {
+    currentStep = 1;
+    formData = {
+      name: '',
+      email: '',
+      whatsapp: '',
+      years_producing: '',
+      genres: [],
+      challenges: [],
+      goals: ''
+    };
+    document.querySelectorAll('.option-card.selected').forEach(function(c) { c.classList.remove('selected'); });
+    document.getElementById('q-name').value = '';
+    document.getElementById('q-email').value = '';
+    document.getElementById('q-whatsapp').value = '';
+    document.getElementById('q-goals').value = '';
+    document.getElementById('btn-step3').disabled = true;
+    document.getElementById('btn-step4').disabled = true;
+    document.getElementById('btn-step5').disabled = true;
+    showStep(1);
+  }
+
+  // ── Show a specific step ────────────────────────
+  function showStep(n) {
+    currentStep = n;
+    allSteps.forEach(function(s) {
+      s.classList.remove('active');
+      s.style.display = 'none';
+    });
+    var target = document.querySelector('.modal-step[data-step="' + n + '"]');
+    if (target) {
+      target.style.display = 'block';
+      target.offsetHeight;
+      target.classList.add('active');
+    }
+    // Update progress
+    progressSegs.forEach(function(seg, i) {
+      seg.classList.toggle('filled', i < n);
+    });
+    // Update back button (hide on step 1 and on booking step 6)
+    backBtn.classList.toggle('hidden', n <= 1 || n === 6);
+    // On booking step, hide close button styling is less prominent
+    document.getElementById('modal-progress').style.display = n === 6 ? 'none' : 'flex';
+  }
+
+  // ── Send contact data to GoHighLevel ────────────
+  function sendToGoHighLevel(data) {
+    if (!GHL_WEBHOOK_URL) {
+      console.log('GoHighLevel webhook not configured. Contact data:', data);
+      return;
+    }
+    try {
+      navigator.sendBeacon(GHL_WEBHOOK_URL, JSON.stringify({
+        name: data.name,
+        email: data.email,
+        phone: data.whatsapp,
+        source: 'rise-community-application'
+      }));
+    } catch (e) {
+      console.error('GHL webhook error:', e);
+    }
+  }
+
+  // ── Send full data to Supabase ──────────────────
+  function submitToSupabase() {
+    var payload = {
+      name: formData.name,
+      email: formData.email,
+      whatsapp: formData.whatsapp,
+      genre: formData.genres.join(', '),
+      experience: formData.years_producing,
+      goal: formData.challenges.join(', '),
+      years_producing: formData.years_producing,
+      source: 'community-vsl-b',
+      created_at: new Date().toISOString()
+    };
+
+    fetch(SUPABASE_URL + '/rest/v1/community_leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    }).catch(function(err) {
+      console.error('Supabase submit error:', err);
+    });
+  }
+
+  // ── Open modal buttons ──────────────────────────
+  document.querySelectorAll('.open-modal').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  backBtn.addEventListener('click', function() {
+    if (currentStep > 1) showStep(currentStep - 1);
+  });
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
+  // ── Step 1: Contact details ─────────────────────
+  var btnStep1 = document.getElementById('btn-step1');
+  btnStep1.addEventListener('click', function() {
+    var name = document.getElementById('q-name').value.trim();
+    var email = document.getElementById('q-email').value.trim();
+    var whatsapp = document.getElementById('q-whatsapp').value.trim();
+
+    // Validate
+    var valid = true;
+    if (!name) { document.getElementById('q-name').style.borderColor = '#ff4444'; valid = false; }
+    if (!email) { document.getElementById('q-email').style.borderColor = '#ff4444'; valid = false; }
+    if (!whatsapp) { document.getElementById('q-whatsapp').style.borderColor = '#ff4444'; valid = false; }
+    if (!valid) return;
+
+    formData.name = name;
+    formData.email = email;
+    formData.whatsapp = whatsapp;
+
+    // Send contact details to GoHighLevel immediately
+    sendToGoHighLevel(formData);
+
+    // Advance to follow-up questions
+    showStep(2);
+  });
+
+  // Reset border on focus for required fields
+  ['q-name', 'q-email', 'q-whatsapp'].forEach(function(id) {
+    document.getElementById(id).addEventListener('focus', function() {
+      this.style.borderColor = '';
+    });
+  });
+
+  // ── Step 2: Single-select cards (auto-advance) ──
+  document.querySelectorAll('.option-cards[data-type="single"]').forEach(function(group) {
+    var field = group.getAttribute('data-field');
+    group.querySelectorAll('.option-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        group.querySelectorAll('.option-card').forEach(function(c) { c.classList.remove('selected'); });
+        card.classList.add('selected');
+        formData[field] = card.getAttribute('data-value');
+        setTimeout(function() {
+          showStep(currentStep + 1);
+        }, 250);
+      });
+    });
+  });
+
+  // ── Step 3: Genres (multi-select) ───────────────
+  var genreGroup = document.getElementById('genre-cards');
+  var btnStep3 = document.getElementById('btn-step3');
+  genreGroup.querySelectorAll('.option-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      card.classList.toggle('selected');
+      var selected = [];
+      genreGroup.querySelectorAll('.option-card.selected').forEach(function(c) {
+        selected.push(c.getAttribute('data-value'));
+      });
+      formData.genres = selected;
+      btnStep3.disabled = selected.length === 0;
+    });
+  });
+  btnStep3.addEventListener('click', function() {
+    if (formData.genres.length > 0) showStep(4);
+  });
+
+  // ── Step 4: Challenges (multi-select) ───────────
+  var challengeGroup = document.getElementById('challenge-cards');
+  var btnStep4 = document.getElementById('btn-step4');
+  challengeGroup.querySelectorAll('.option-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      card.classList.toggle('selected');
+      var selected = [];
+      challengeGroup.querySelectorAll('.option-card.selected').forEach(function(c) {
+        selected.push(c.getAttribute('data-value'));
+      });
+      formData.challenges = selected;
+      btnStep4.disabled = selected.length === 0;
+    });
+  });
+  btnStep4.addEventListener('click', function() {
+    if (formData.challenges.length > 0) showStep(5);
+  });
+
+  // ── Step 5: Goals (open text) ───────────────────
+  var goalsInput = document.getElementById('q-goals');
+  var btnStep5 = document.getElementById('btn-step5');
+  goalsInput.addEventListener('input', function() {
+    btnStep5.disabled = goalsInput.value.trim().length === 0;
+  });
+  btnStep5.addEventListener('click', function() {
+    formData.goals = goalsInput.value.trim();
+    if (formData.goals) {
+      // Submit all data to Supabase before showing booking
+      submitToSupabase();
+      // Show booking step
+      showStep(6);
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

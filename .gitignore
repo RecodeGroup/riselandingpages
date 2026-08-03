@@ -1,0 +1,25 @@
+# Deploy scripts with tokens
+deploy.command
+start.command
+start.bat
+
+# Netlify local config
+.netlify/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Archives & large media
+*.zip
+*.MOV
+*.mov
+
+# Claude/AI session files
+.claude/
+
+# Editor files
+*.swp
+*~

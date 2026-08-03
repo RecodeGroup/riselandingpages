@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE — Complete Your Payment</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* -- Header -- */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* -- Main -- */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .checkout-header {
+      text-align: center;
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+    .checkout-header .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .checkout-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .checkout-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .checkout-header .deposit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      padding: 8px 18px;
+      background: rgba(255,104,62,0.08);
+      border: 1px solid rgba(255,104,62,0.18);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .deposit-badge svg { flex-shrink: 0; }
+
+    /* -- Info Form -- */
+    .info-form {
+      max-width: 480px;
+      width: 100%;
+      margin-bottom: 2.5rem;
+    }
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 0;
+    }
+    .form-field {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-field label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-field input {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--fg);
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.25s ease;
+    }
+    .form-field input::placeholder { color: rgba(255,255,255,0.25); }
+    .form-field input:focus {
+      border-color: rgba(255,104,62,0.5);
+    }
+
+    /* -- Plan Grid -- */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 940px;
+      width: 100%;
+    }
+    .plan-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .plan-card:hover {
+      border-color: rgba(255,104,62,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .plan-card:hover::before { opacity: 1; }
+    .plan-card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 12px 30px rgba(255,104,62,0.15);
+    }
+    .plan-card.selected::before { opacity: 1; }
+    .plan-card.recommended {
+      border-color: rgba(255,104,62,0.3);
+    }
+    .plan-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .plan-card .installments {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .plan-card .price {
+      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .plan-card .price-sub {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 6px;
+    }
+    .plan-card .total {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* -- Summary + CTA -- */
+    .checkout-summary {
+      max-width: 940px;
+      width: 100%;
+      margin-top: 2.5rem;
+      padding: 2rem;
+      background: rgba(255,104,62,0.04);
+      border: 1px solid rgba(255,104,62,0.12);
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    .summary-left .summary-plan {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .summary-left .summary-detail {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .btn-checkout {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 40px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-checkout:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
+    .btn-checkout:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* -- Security Note -- */
+    .security-note {
+      margin-top: 1.5rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .security-note svg { flex-shrink: 0; }
+
+    /* -- Footer -- */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* -- Loading State -- */
+    .btn-checkout.loading {
+      pointer-events: none;
+      position: relative;
+      color: transparent;
+    }
+    .btn-checkout.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(10,10,10,0.3);
+      border-top-color: #0a0a0a;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* -- Error state -- */
+    .form-field input.error {
+      border-color: #e55a33;
+    }
+    .form-error {
+      color: #e55a33;
+      font-size: 0.72rem;
+      margin-top: 4px;
+      display: none;
+    }
+    .form-error.visible { display: block; }
+
+    /* -- Responsive -- */
+    @media (max-width: 768px) {
+      .plan-grid { grid-template-columns: repeat(2, 1fr); max-width: 480px; }
+      .form-row { flex-direction: column; }
+      .checkout-summary { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .main { padding: 1.5rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="logo-wrap">
+      <img src="../../assets/logo.png" alt="Rise">
+      <span class="logo-text">Rise</span>
+    </a>
+  </header>
+
+  <main class="main">
+    <div class="checkout-header">
+      <div class="eyebrow">Complete your membership</div>
+      <h1>Pay the remaining balance</h1>
+      <p>You've already secured your spot with a deposit. Now choose how you'd like to pay the remaining balance of your Rise Community membership.</p>
+      <div class="deposit-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Deposit of &euro; 375,- received
+      </div>
+    </div>
+
+    <!-- Name / Email form -->
+    <div class="info-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="customer-name">Your name</label>
+          <input type="text" id="customer-name" placeholder="e.g. John Doe" autocomplete="name">
+          <div class="form-error" id="name-error">Please enter your name</div>
+        </div>
+        <div class="form-field">
+          <label for="customer-email">Email address</label>
+          <input type="email" id="customer-email" placeholder="e.g. john@example.com" autocomplete="email">
+          <div class="form-error" id="email-error">Please enter a valid email</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-grid">
+      <div class="plan-card selected" data-plan="remaining_1x" onclick="selectPlan(this)">
+        <div class="installments">Pay in full</div>
+        <div class="price">&euro; 1.125,-</div>
+        <div class="price-sub">One-time payment</div>
+        <div class="total">Remaining balance &middot; ex. VAT</div>
+      </div>
+
+      <div class="plan-card" data-plan="remaining_2x" onclick="selectPlan(this)">
+        <div class="installments">2 payments</div>
+        <div class="price">&euro; 562,50</div>
+        <div class="price-sub">per payment</div>
+        <div class="total">&euro; 1.125,- total &middot; monthly &middot; ex. VAT</div>
+      </div>
+
+      <div class="plan-card" data-plan="remaining_3x" onclick="selectPlan(this)">
+        <div class="installments">3 payments</div>
+        <div class="price">&euro; 375,-</div>
+        <div class="price-sub">per payment</div>
+        <div class="total">&euro; 1.125,- total &middot; monthly &middot; ex. VAT</div>
+      </div>
+
+      <div class="plan-card" data-plan="remaining_11x" onclick="selectPlan(this)">
+        <div class="installments">11 payments</div>
+        <div class="price">&euro; 102,27</div>
+        <div class="price-sub">per payment</div>
+        <div class="total">&euro; 1.125,- total &middot; monthly &middot; ex. VAT</div>
+      </div>
+    </div>
+
+    <div class="checkout-summary">
+      <div class="summary-left">
+        <div class="summary-plan" id="summary-plan">Rise Community — Remaining balance in full</div>
+        <div class="summary-detail" id="summary-detail">One-time payment of &euro; 1.125,-</div>
+      </div>
+      <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
+        Continue to Payment
+      </button>
+    </div>
+
+    <div class="security-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure payment powered by Stripe. Your card details are never stored on our servers.
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 Rise &middot; Recode Group B.V. &middot; All rights reserved
+    <div class="links">
+      <a href="../../privacy/">Privacy</a>
+      <a href="../../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <script>
+    // ====== PLAN DATA ======
+    const plans = {
+      'remaining_1x': {
+        label: 'Remaining balance in full',
+        detail: 'One-time payment of € 1.125,- ex. VAT',
+        amount: 1125,
+        installments: 1
+      },
+      'remaining_2x': {
+        label: '2 payments of € 562,50',
+        detail: 'First payment now, second payment next month · ex. VAT',
+        amount: 562.50,
+        installments: 2
+      },
+      'remaining_3x': {
+        label: '3 payments of € 375,-',
+        detail: 'First payment now, then monthly · ex. VAT',
+        amount: 375,
+        installments: 3
+      },
+      'remaining_11x': {
+        label: '11 payments of € 102,27',
+        detail: 'First payment now, then monthly for 10 more · ex. VAT',
+        amount: 102.27,
+        installments: 11
+      },
+    };
+
+    let selectedPlan = 'remaining_1x';
+
+    function selectPlan(el) {
+      document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedPlan = el.dataset.plan;
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const plan = plans[selectedPlan];
+      document.getElementById('summary-plan').textContent = 'Rise Community — ' + plan.label;
+      document.getElementById('summary-detail').textContent = plan.detail;
+    }
+
+    function validateForm() {
+      let valid = true;
+      const nameInput = document.getElementById('customer-name');
+      const emailInput = document.getElementById('customer-email');
+      const nameError = document.getElementById('name-error');
+      const emailError = document.getElementById('email-error');
+
+      // Reset
+      nameInput.classList.remove('error');
+      emailInput.classList.remove('error');
+      nameError.classList.remove('visible');
+      emailError.classList.remove('visible');
+
+      if (!nameInput.value.trim()) {
+        nameInput.classList.add('error');
+        nameError.classList.add('visible');
+        valid = false;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
+        emailInput.classList.add('error');
+        emailError.classList.add('visible');
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    async function startCheckout() {
+      if (!validateForm()) return;
+
+      const btn = document.getElementById('btn-checkout');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      const customerName = document.getElementById('customer-name').value.trim();
+      const customerEmail = document.getElementById('customer-email').value.trim();
+
+      try {
+        const res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plan: selectedPlan,
+            name: customerName,
+            email: customerEmail,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      } catch (err) {
+        alert('Could not start checkout: ' + err.message);
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+
+    // Init
+    updateSummary();
+  </script>
+</body>
+</html>

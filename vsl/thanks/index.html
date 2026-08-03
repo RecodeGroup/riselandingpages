@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE — Thanks For Your Application</title>
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-wrap img {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+    }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .card {
+      text-align: center;
+      max-width: 520px;
+      width: 100%;
+    }
+    .check {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.12);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      margin: 0 auto 28px;
+    }
+    .card h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .card .sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 44ch;
+      margin: 0 auto;
+    }
+    .card .name {
+      color: var(--fg);
+      font-weight: 600;
+    }
+    .no-wa {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+    .no-wa p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+    }
+    .mail-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      color: var(--fg);
+      transition: all 0.25s ease;
+    }
+    .mail-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="../" class="logo-wrap">
+      <img src="../../assets/logo.png" alt="Rise">
+      <span class="logo-text">Rise</span>
+    </a>
+  </header>
+
+  <main class="main">
+    <div class="card">
+      <div class="check">&#10003;</div>
+      <h1>Thanks for your application</h1>
+      <p class="sub">We'll reach out to you on WhatsApp within 48 hours to schedule the fit call. Talk soon.</p>
+
+      <div class="no-wa">
+        <p>Don't have WhatsApp? No problem. Send us an email and we'll get in touch another way.</p>
+        <a class="mail-btn" id="mail-link" href="mailto:contact@riseartistacademy.com?subject=Rise%20Application%20%E2%80%93%20No%20WhatsApp&body=Hi%20Rise%2C%0A%0AI%20just%20applied%20for%20the%20community%20but%20I%20don%E2%80%99t%20have%20WhatsApp.%20You%20can%20reach%20me%20at%20this%20email%20address.%0A%0AThanks!">Send Email Instead</a>
+      </div>
+
+      <a href="../" class="back-link">&larr; Back to Rise</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 Rise &middot; Recode Group B.V. &middot; All rights reserved
+    <div class="links">
+      <a href="../../privacy/">Privacy</a>
+      <a href="../../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <script>
+    // If name/email were passed via URL params, personalize the page
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const email = params.get('email');
+
+    if (name) {
+      document.querySelector('.sub').textContent =
+        `Thanks ${name}. We'll reach out to you on WhatsApp within 48 hours to schedule the fit call. Talk soon.`;
+    }
+
+    // Update mailto link with applicant info if available
+    if (name || email) {
+      const subject = encodeURIComponent('Rise Application – No WhatsApp');
+      const bodyParts = ['Hi Rise,', '', 'I just applied for the community but I don\'t have WhatsApp.'];
+      if (name) bodyParts.push('Name: ' + name);
+      if (email) bodyParts.push('Email: ' + email);
+      bodyParts.push('', 'You can reach me at this email address.', '', 'Thanks!');
+      const body = encodeURIComponent(bodyParts.join('\n'));
+      document.getElementById('mail-link').href =
+        `mailto:contact@riseartistacademy.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>

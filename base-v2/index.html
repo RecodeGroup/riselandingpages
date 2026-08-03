@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE Base Academy &mdash; Six months. Real coaching. A production foundation that actually holds.</title>
+  <meta name="description" content="Base Academy: six months of hands-on production coaching, cohort-based, with weekly live sessions. Build a production foundation you can rely on.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* ════════════════════════════════════════════════
+       Rise Base Academy — Landing Page v2
+       coursevsl-b design system
+       ════════════════════════════════════════════════ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Accessibility ───────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ── Header ──────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-bottom-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.72);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 7px; }
+    .nav-logo span {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #0a0a0a !important;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .nav-cta:hover {
+      background: var(--accent-hover) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .site-header-inner { padding: 0.75rem 1.25rem; }
+    }
+
+    /* ── Buttons ──────────────────────────────────── */
+    .btn-primary,
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover,
+    .hero-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .hero-cta svg { width: 18px; height: 18px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--fg);
+      padding: 16px 36px;
+      border-radius: 8px;
+      border: 1px solid var(--line-strong);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+      cursor: pointer;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,104,62,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 20% 100%, rgba(255,104,62,0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── Photo strip ─────────────────────────────── */
+    .photo-strip {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .photo-strip-track {
+      display: flex;
+      gap: 4px;
+      width: max-content;
+      animation: scroll-strip 40s linear infinite;
+    }
+    .photo-strip-track img {
+      height: 180px;
+      width: auto;
+      object-fit: cover;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+    @keyframes scroll-strip {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Section defaults ────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 55ch;
+    }
+
+    /* ── Who Base Is For ──────────────────────────── */
+    .who-base { background: var(--bg); }
+    .who-base .section-body p + p { margin-top: 16px; }
+
+    /* ── What You Get — feature cards ─────────────── */
+    .what-you-get { background: var(--bg-2); }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(24px, 3vw, 32px);
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+    .feature-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255,104,62,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-card-icon svg { width: 22px; height: 22px; color: var(--accent); }
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Social Proof ────────────────────────────── */
+    .social-proof { background: var(--bg); }
+    .proof-placeholder {
+      margin-top: 32px;
+      padding: 40px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Coaches ──────────────────────────────────── */
+    .coaches { background: var(--bg-2); }
+    .coach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .coach-card {
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .coach-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .coach-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .coach-card:hover::before {
+      transform: scaleX(1);
+    }
+    .coach-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 18px;
+      border: 2px solid rgba(255,104,62,0.15);
+    }
+    .coach-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .coach-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .coach-bio {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Pricing section ─────────────────────────── */
+    .pricing {
+      background: var(--bg);
+      text-align: center;
+    }
+    .pricing .section-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .price-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,104,62,0.25);
+      border-radius: 12px;
+      padding: clamp(2.5rem, 5vw, 3.5rem);
+      margin-top: 2rem;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: 0 0 60px rgba(255,104,62,0.06);
+    }
+    .price-display {
+      font-size: clamp(3rem, 7vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+      line-height: 1;
+    }
+    .price-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .price-note {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── Closing ──────────────────────────────────── */
+    .closing {
+      background: var(--bg-2);
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .closing-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .closing p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq { background: var(--bg); }
+    .faq .section-eyebrow { text-align: center; }
+    .faq .section-heading { text-align: center; }
+    .faq-list {
+      max-width: 720px;
+      margin: 32px auto 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; padding: 1.25rem 0;
+      font-size: 1rem; font-weight: 600; color: var(--fg);
+      background: none; border: none; cursor: pointer;
+      text-align: left; gap: 1rem; font-family: inherit;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      position: relative; transition: transform 0.3s ease;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute;
+      background: var(--muted); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .faq-icon::before {
+      width: 14px; height: 2px; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-icon::after {
+      width: 2px; height: 14px; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-item.open .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg); opacity: 0;
+    }
+    .faq-a {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 0 20px;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a {
+      color: var(--muted);
+      font-size: 0.75rem;
+      transition: color 0.2s;
+    }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .feature-grid,
+      .coach-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+      .section-heading {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      .closing h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      .hero-cta,
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .section { padding: 3.5rem 1.25rem; }
+      .closing { padding: 3.5rem 1.25rem; }
+      .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 5rem); }
+      .site-header-inner { padding: 0.75rem 1rem; }
+      .footer { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       Navigation
+       ══════════════════════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a href="#" class="nav-logo">
+        <img src="../assets/logo.png" alt="Rise">
+        <span>Rise</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#program">The Program</a>
+        <a href="#coaches">Coaches</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="../checkout/payment-plan/" class="nav-cta">Join Base Academy</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       Hero
+       ══════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Base Academy</div>
+      <h1>Six months. Real coaching. A production foundation that actually&nbsp;holds.</h1>
+      <p class="hero-sub">You're here because your production needs real structure, not more tutorials. This is where you build it.</p>
+      <a href="#pricing" class="hero-cta">
+        Start with Base Academy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Photo Strip
+       ══════════════════════════════════════════════ -->
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       Who Base Is For
+       ══════════════════════════════════════════════ -->
+  <section class="section who-base" id="who-base">
+    <div class="section-inner">
+      <div class="section-eyebrow">Who this is for</div>
+      <h2 class="section-heading">A production foundation you can build the rest of your career&nbsp;on.</h2>
+      <div class="section-body">
+        <p>Your drive isn't the problem, your production is. Base is where you start finishing tracks instead of abandoning them halfway, find a sound that's actually yours, and build a workflow you can rely on every time you sit down to work.</p>
+        <p>You're not doing it alone, you're doing it alongside other producers on the same six-month track. By the end, your sound has matured into something you can build an actual career on.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       What You Get
+       ══════════════════════════════════════════════ -->
+  <section class="section what-you-get" id="program">
+    <div class="section-inner">
+      <div class="section-eyebrow">The program</div>
+      <h2 class="section-heading">What the six months actually include.</h2>
+      <div class="section-body">
+        <p>A new cohort starts every six months, and you can sign up months ahead. Inside, it's 30 sessions: most of them hands-on production work, plus a handful that step outside production entirely to focus on what actually moves your career forward, working on your artist profile so you can get further with it. Everything is built around the same six months, the same group, the same standard.</p>
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h3>30 Sessions</h3>
+          <p>Hands-on production + career fundamentals</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Cohort Model</h3>
+          <p>Same group, same six months, same standard</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <h3>Live Coaching</h3>
+          <p>Weekly sessions with direct feedback</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Full Platform</h3>
+          <p>Video modules, sample packs, Ableton chains</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Social Proof
+       ══════════════════════════════════════════════ -->
+  <section class="section social-proof" id="social-proof">
+    <div class="section-inner">
+      <div class="section-eyebrow">Results</div>
+      <h2 class="section-heading">What our members say</h2>
+      <div class="proof-placeholder">
+        Testimonials and case studies &mdash; in production.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Coaches
+       ══════════════════════════════════════════════ -->
+  <section class="section coaches" id="coaches">
+    <div class="section-inner">
+      <div class="section-eyebrow">Your coaches</div>
+      <h2 class="section-heading">Get in live. Every week, with our&nbsp;coaches.</h2>
+
+      <div class="coach-grid">
+
+        <div class="coach-card">
+          <img src="../assets/photos/photo-1.jpg" alt="Jurriaan (Artcode)" class="coach-avatar">
+          <div class="coach-name">Jurriaan (Artcode)</div>
+          <div class="coach-role">Runs the production curriculum</div>
+          <p class="coach-bio">15+ years across electronic genres, from production to live visuals and modular performance. Runs the full production side of Base, hands-on, start to finish.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/photos/Maurits.png" alt="Maurits" class="coach-avatar">
+          <div class="coach-name">Maurits</div>
+          <div class="coach-role">Runs the accountability sessions</div>
+          <p class="coach-bio">Runs the business and operations side of artist development. Inside Base, he's the one holding you to your own standard and asking the hard questions.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Pricing
+       ══════════════════════════════════════════════ -->
+  <section class="section pricing" id="pricing">
+    <div class="section-inner">
+      <div class="section-eyebrow">Investment</div>
+      <h2 class="section-heading">What Base costs, plainly.</h2>
+      <div class="price-card">
+        <div class="price-display">&euro; 1.200,-</div>
+        <p class="price-sub">For the full six-month program. Installments available.</p>
+        <a href="../checkout/payment-plan/" class="hero-cta">
+          Join Base Academy
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <p class="price-note">Installments available with a down payment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Closing Section
+       ══════════════════════════════════════════════ -->
+  <section class="closing">
+    <div class="closing-inner">
+      <h2>Six months pass either way. Spend them building, not&nbsp;waiting.</h2>
+      <p>You already know your production isn't where it needs to be. Waiting doesn't change that, it just delays it. This cohort is where you close the gap.</p>
+      <a href="../checkout/payment-plan/" class="hero-cta">
+        Join Base Academy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FAQ
+       ══════════════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Frequently asked</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What if I'm not sure Base is right for me?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Base isn't for casual curiosity. If you're ready to put in the six months and actually finish what you start, it's built for you. If you're looking for something you can quietly walk away from, it isn't.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Can I pay in installments?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Yes, as long as a down payment is made first.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What happens after Base?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Everyone gets a strategy call with Hendrik to talk through next steps. For most people that's Core, though it depends on where you land. If you're not ready yet, you can keep your platform access through a subscription.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Is Base the same as Core?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">No. Base is the foundation: six months, focused entirely on your production. Core is a separate, longer program for later.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>When does the next cohort start?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">A new group starts every six months, and you can sign up months in advance.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What does Base cost?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">&euro;&nbsp;1.200,- for the full six-month program, installments available.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Who teaches the lessons?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Jurriaan runs the production curriculum. Maurits runs the sessions on accountability and feedback.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Footer
+       ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    &copy; 2026 Rise &middot; Recode Operations B.V. &middot; All rights reserved
+    <div class="links"><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a></div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+       Scripts
+       ══════════════════════════════════════════════ -->
+  <script>
+    // ── Sticky header scroll effect ──
+    (function() {
+      var header = document.querySelector('.site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 60) { header.classList.add('scrolled'); }
+        else { header.classList.remove('scrolled'); }
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>

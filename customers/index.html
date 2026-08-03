@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Customer Portal</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../customer-styles.css">
+</head>
+<body>
+
+  <!-- ── Access Gate ─────────────────────────────── -->
+  <div id="access-gate" style="position:fixed;inset:0;z-index:9999;background:#141414;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;">
+    <img src="../assets/logo.png" alt="Rise" style="width:80px;height:80px;border-radius:12px;margin-bottom:8px;">
+    <h2 style="color:#fff;font-family:system-ui,sans-serif;font-size:1.4rem;margin:0;">Team Access</h2>
+    <p style="color:#a6a6a6;font-family:system-ui,sans-serif;font-size:0.9rem;margin:0;">Enter your team access code to continue.</p>
+    <input id="gate-code" type="password" placeholder="Access code" autocomplete="off"
+      style="padding:12px 20px;border-radius:8px;border:1px solid #333;background:#1e1e1e;color:#fff;font-size:1rem;width:260px;text-align:center;font-family:system-ui,sans-serif;outline:none;">
+    <button id="gate-submit"
+      style="padding:12px 32px;border-radius:8px;border:none;background:#ff683e;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;font-family:system-ui,sans-serif;">Enter</button>
+    <p id="gate-error" style="color:#ff683e;font-family:system-ui,sans-serif;font-size:0.85rem;margin:0;opacity:0;transition:opacity .3s;">Invalid code. Try again.</p>
+  </div>
+  <script>
+  (function() {
+    var TEAM_CODE = 'Team010#';
+    var gate = document.getElementById('access-gate');
+    var input = document.getElementById('gate-code');
+    var btn = document.getElementById('gate-submit');
+    var err = document.getElementById('gate-error');
+    if (sessionStorage.getItem('rise_team_auth') === 'true') { gate.style.display = 'none'; }
+    function tryCode() {
+      if (input.value === TEAM_CODE) {
+        sessionStorage.setItem('rise_team_auth', 'true');
+        gate.style.display = 'none';
+      } else {
+        err.style.opacity = '1';
+        input.value = '';
+        input.focus();
+        setTimeout(function() { err.style.opacity = '0'; }, 2500);
+      }
+    }
+    btn.addEventListener('click', tryCode);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryCode(); });
+  })();
+  </script>
+
+  <!-- ── Navigation ───────────────────────────────── -->
+  <nav class="site-nav">
+    <a href="/" class="nav-logo">
+      <img src="../assets/logo.png" alt="Rise" class="nav-logo-img">
+    </a>
+    <a href="/" class="btn btn-back">&larr; Back</a>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────── -->
+  <header class="hero hero-customer">
+    <div class="hero-inner">
+      <h1 class="hero-title">Customer Portal</h1>
+      <p class="hero-subtitle">Access your Rise products. Two paths forward.</p>
+    </div>
+  </header>
+
+  <!-- ── Products Grid ─────────────────────────── -->
+  <section class="products">
+    <div class="container">
+      <div class="products-grid" style="grid-template-columns: repeat(2, 1fr);">
+
+        <!-- Card 1: Community (Primary) -->
+        <div class="product-card portal-card" style="border-color: rgba(255,104,62,0.3);">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <div style="display:inline-block;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:rgba(255,104,62,0.12);color:#ff683e;border:1px solid rgba(255,104,62,0.2);padding:3px 10px;border-radius:100px;margin-bottom:12px;">Recommended</div>
+          <h3 class="card-title">Community</h3>
+          <p class="card-subtitle">Your accountability network — includes the full Rise Course</p>
+          <div class="portal-card-actions">
+            <button class="btn btn-copy-link" data-product="community" title="Copy customer link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              Copy Link
+            </button>
+            <a href="/customers/community/access/" class="btn btn-access">Open Access</a>
+          </div>
+        </div>
+
+        <!-- Card 2: Course (Fallback) -->
+        <div class="product-card portal-card">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h20v1H2V3z"/><path d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5"/><path d="M9 10h6M8 14h8"/>
+          </svg>
+          <div style="display:inline-block;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:rgba(255,255,255,0.05);color:#707070;border:1px solid #333;padding:3px 10px;border-radius:100px;margin-bottom:12px;">Alternative</div>
+          <h3 class="card-title">Course</h3>
+          <p class="card-subtitle">Your foundational training program — self-paced entry point</p>
+          <div class="portal-card-actions">
+            <button class="btn btn-copy-link" data-product="course" title="Copy customer link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              Copy Link
+            </button>
+            <a href="/customers/course/access/" class="btn btn-access">Open Access</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Toast ──────────────────────────────────── -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ── Footer ────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        <a href="/privacy/" class="footer-link">Privacy Policy</a> &bull;
+        <a href="/terms/" class="footer-link">Terms &amp; Conditions</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ────────────────────────────────── -->
+  <script src="../config.js"></script>
+  <script>
+  (function() {
+    // Copy link buttons — copies the customer-facing code-entry URL
+    var linkMap = {
+      course: '/customers/course/',
+      community: '/customers/community/'
+    };
+
+    document.querySelectorAll('.btn-copy-link').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var product = this.getAttribute('data-product');
+        var path = linkMap[product];
+        var fullUrl = window.location.origin + path;
+
+        navigator.clipboard.writeText(fullUrl).then(function() {
+          showToast('Link copied: ' + fullUrl);
+        }).catch(function() {
+          // Fallback
+          var tmp = document.createElement('textarea');
+          tmp.value = fullUrl;
+          document.body.appendChild(tmp);
+          tmp.select();
+          document.execCommand('copy');
+          document.body.removeChild(tmp);
+          showToast('Link copied: ' + fullUrl);
+        });
+      });
+    });
+
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('visible');
+      clearTimeout(t._to);
+      t._to = setTimeout(function() { t.classList.remove('visible'); }, 3000);
+    }
+  })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Partnership Opportunities</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    /* ════════════════════════════════════════════════════
+       Rise Partnership — Premium Opportunity Page
+       ════════════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: #ff683e; text-decoration: none; transition: opacity 0.3s ease; }
+    a:hover { opacity: 0.85; }
+
+    /* ── Top Bar ───────────────────────────────────── */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 120;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,104,62,0.1);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .top-bar img {
+      width: 30px; height: 30px; border-radius: 6px;
+    }
+
+    .top-bar span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #999;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ──────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+
+    .hero-bg video {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(15,15,15,0.92) 0%, rgba(15,15,15,0.7) 50%, rgba(15,15,15,0.3) 100%);
+    }
+
+    .hero-body {
+      position: relative; z-index: 2;
+      max-width: 100%; margin: 0 auto;
+      padding: 8rem 3rem 5rem; width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: rgba(255,104,62,0.15);
+      border: 1px solid rgba(255,104,62,0.4);
+      color: #ff683e;
+      padding: 0.35rem 1rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      align-self: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: #b0b0b0;
+      line-height: 1.7;
+      max-width: 680px;
+      text-align: center;
+    }
+
+    /* ── Section Base ──────────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-dark {
+      background: rgba(20,20,20,0.6);
+      border-top: 1px solid rgba(255,104,62,0.06);
+      border-bottom: 1px solid rgba(255,104,62,0.06);
+    }
+
+    .section-dark .section {
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: #777;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    .section-text {
+      font-size: 0.95rem;
+      color: #aaa;
+      line-height: 1.8;
+      max-width: 720px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Cards Grid ────────────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #ff683e, transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,104,62,0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-icon svg {
+      width: 22px; height: 22px;
+      stroke: #ff683e; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .card h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .card p { font-size: 0.88rem; color: #999; line-height: 1.6; }
+
+    /* ── Rate Cards ────────────────────────────────── */
+    .rate-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .rate-card {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .rate-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+    }
+
+    .rate-card.featured {
+      border-color: rgba(255,104,62,0.3);
+      background: linear-gradient(180deg, rgba(255,104,62,0.06) 0%, #1a1a1a 100%);
+    }
+
+    .rate-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ff683e;
+      margin-bottom: 1rem;
+    }
+
+    .rate-value {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .rate-note {
+      font-size: 0.85rem;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    /* ── Spec List ─────────────────────────────────── */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .spec-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+    }
+
+    .spec-dot {
+      flex-shrink: 0;
+      width: 8px; height: 8px;
+      background: #ff683e;
+      border-radius: 50%;
+      margin-top: 6px;
+    }
+
+    .spec-item p {
+      font-size: 0.9rem;
+      color: #bbb;
+      line-height: 1.5;
+    }
+
+    .spec-item strong {
+      color: #fff;
+    }
+
+    /* ── Earning Blocks ────────────────────────────── */
+    .earn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .earn-card {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .earn-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+    }
+
+    .earn-card.highlight {
+      border-color: rgba(255,104,62,0.3);
+      background: linear-gradient(180deg, rgba(255,104,62,0.05) 0%, #1a1a1a 100%);
+    }
+
+    .earn-badge {
+      display: inline-block;
+      background: rgba(255,104,62,0.12);
+      color: #ff683e;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .earn-amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ff683e;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .earn-per {
+      font-size: 0.88rem;
+      color: #777;
+      margin-bottom: 1rem;
+    }
+
+    .earn-card h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .earn-card p {
+      font-size: 0.88rem;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    .earn-example {
+      margin-top: 1.25rem;
+      padding: 12px 16px;
+      background: rgba(255,104,62,0.06);
+      border-left: 3px solid #ff683e;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+
+    .earn-rule {
+      margin-top: 1.5rem;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    .earn-rule strong { color: #ccc; }
+
+    /* ── Visual Showcase ───────────────────────────── */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .showcase-item {
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .showcase-item video,
+    .showcase-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.8) saturate(1.1);
+      transition: filter 0.3s ease;
+    }
+
+    .showcase-item:hover video,
+    .showcase-item:hover img {
+      filter: brightness(0.95) saturate(1.2);
+    }
+
+    .showcase-label {
+      position: absolute;
+      bottom: 12px; left: 12px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      color: #ddd;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+
+    /* ── Membership Block ──────────────────────────── */
+    .membership-block {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,104,62,0.15);
+      border-radius: 12px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .membership-block h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .membership-price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ff683e;
+      margin-bottom: 0.25rem;
+    }
+
+    .membership-old {
+      font-size: 1rem;
+      color: #666;
+      text-decoration: line-through;
+      margin-left: 0.5rem;
+    }
+
+    .membership-note {
+      font-size: 0.85rem;
+      color: #777;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .membership-list {
+      list-style: none;
+    }
+
+    .membership-list li {
+      font-size: 0.9rem;
+      color: #bbb;
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .membership-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 12px;
+      width: 8px; height: 8px;
+      background: #ff683e;
+      border-radius: 50%;
+    }
+
+    /* ── Closing ───────────────────────────────────── */
+    .closing {
+      text-align: center;
+      padding: 6rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .closing h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .closing p {
+      font-size: 1.05rem;
+      color: #999;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .closing-contact {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .closing-contact a {
+      color: #ff683e;
+      font-weight: 600;
+    }
+
+    /* ── Animated Divider ── */
+    .section-divider {
+      position: relative;
+      height: 3px;
+      margin-bottom: 2.5rem;
+      will-change: clip-path, opacity;
+    }
+
+    /* ── Line ── */
+    .div-line {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #ff683e 0%, rgba(255,104,62,0.6) 40%, rgba(255,104,62,0) 100%);
+    }
+
+    /* ── Pulse keyframes ── */
+    @keyframes pulse-a {
+      0%   { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+      5%   { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+      8%   { clip-path: inset(0 62% 0 0); opacity: 0.85; }
+      14%  { clip-path: inset(0 62% 0 0); opacity: 0.85; }
+      18%  { clip-path: inset(0 72% 0 0); opacity: 0.75; }
+      22%  { clip-path: inset(0 72% 0 0); opacity: 0.75; }
+      27%  { clip-path: inset(0 30% 0 0); opacity: 0.95; }
+      33%  { clip-path: inset(0 35% 0 0); opacity: 0.9; }
+      40%  { clip-path: inset(0 35% 0 0); opacity: 0.9; }
+      46%  { clip-path: inset(0 0%  0 0); opacity: 1; }
+      52%  { clip-path: inset(0 10% 0 0); opacity: 0.95; }
+      58%  { clip-path: inset(0 10% 0 0); opacity: 0.95; }
+      65%  { clip-path: inset(0 55% 0 0); opacity: 0.8; }
+      72%  { clip-path: inset(0 55% 0 0); opacity: 0.8; }
+      78%  { clip-path: inset(0 80% 0 0); opacity: 0.65; }
+      90%  { clip-path: inset(0 85% 0 0); opacity: 0.6; }
+      100% { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+    }
+
+    @keyframes pulse-b {
+      0%   { clip-path: inset(0 90% 0 0); opacity: 0.55; }
+      6%   { clip-path: inset(0 90% 0 0); opacity: 0.55; }
+      10%  { clip-path: inset(0 50% 0 0); opacity: 0.9; }
+      15%  { clip-path: inset(0 58% 0 0); opacity: 0.85; }
+      24%  { clip-path: inset(0 58% 0 0); opacity: 0.85; }
+      28%  { clip-path: inset(0 75% 0 0); opacity: 0.7; }
+      32%  { clip-path: inset(0 75% 0 0); opacity: 0.7; }
+      36%  { clip-path: inset(0 20% 0 0); opacity: 1; }
+      42%  { clip-path: inset(0 25% 0 0); opacity: 0.95; }
+      50%  { clip-path: inset(0 25% 0 0); opacity: 0.95; }
+      55%  { clip-path: inset(0 0%  0 0); opacity: 1; }
+      58%  { clip-path: inset(0 15% 0 0); opacity: 0.9; }
+      66%  { clip-path: inset(0 15% 0 0); opacity: 0.9; }
+      72%  { clip-path: inset(0 70% 0 0); opacity: 0.7; }
+      80%  { clip-path: inset(0 82% 0 0); opacity: 0.6; }
+      92%  { clip-path: inset(0 88% 0 0); opacity: 0.55; }
+      100% { clip-path: inset(0 90% 0 0); opacity: 0.55; }
+    }
+
+    @keyframes pulse-c {
+      0%   { clip-path: inset(0 86% 0 0); opacity: 0.6; }
+      10%  { clip-path: inset(0 86% 0 0); opacity: 0.6; }
+      15%  { clip-path: inset(0 78% 0 0); opacity: 0.7; }
+      22%  { clip-path: inset(0 78% 0 0); opacity: 0.7; }
+      26%  { clip-path: inset(0 65% 0 0); opacity: 0.8; }
+      34%  { clip-path: inset(0 65% 0 0); opacity: 0.8; }
+      38%  { clip-path: inset(0 45% 0 0); opacity: 0.88; }
+      42%  { clip-path: inset(0 45% 0 0); opacity: 0.88; }
+      45%  { clip-path: inset(0 0%  0 0); opacity: 1; }
+      48%  { clip-path: inset(0 15% 0 0); opacity: 0.92; }
+      54%  { clip-path: inset(0 15% 0 0); opacity: 0.92; }
+      60%  { clip-path: inset(0 50% 0 0); opacity: 0.82; }
+      68%  { clip-path: inset(0 50% 0 0); opacity: 0.82; }
+      74%  { clip-path: inset(0 75% 0 0); opacity: 0.68; }
+      85%  { clip-path: inset(0 82% 0 0); opacity: 0.6; }
+      100% { clip-path: inset(0 86% 0 0); opacity: 0.6; }
+    }
+
+    .div-1 { animation: pulse-a 4.1s ease-in-out -0.3s infinite; }
+    .div-2 { animation: pulse-b 3.6s ease-in-out -2.1s infinite; }
+    .div-3 { animation: pulse-c 4.5s ease-in-out -1.0s infinite; }
+    .div-4 { animation: pulse-a 3.8s ease-in-out -3.2s infinite; }
+    .div-5 { animation: pulse-c 4.3s ease-in-out -0.7s infinite; }
+    .div-6 { animation: pulse-b 3.9s ease-in-out -2.8s infinite; }
+    .div-7 { animation: pulse-a 4.6s ease-in-out -1.5s infinite; }
+    .div-8 { animation: pulse-c 3.7s ease-in-out -3.5s infinite; }
+    .div-9 { animation: pulse-b 4.2s ease-in-out -0.5s infinite; }
+
+    /* ── Footer ────────────────────────────────────── */
+    .page-footer {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255,104,62,0.1);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a { color: #888; }
+    .footer-links a:hover { color: #ff683e; }
+
+    /* ── Platform Image Grid ──────────────────────── */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+
+    .platform-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .platform-item:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.3);
+    }
+
+    .platform-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: brightness(0.85);
+      transition: filter 0.3s ease;
+      background: #111;
+      padding: 8px;
+    }
+
+    .platform-item:hover img {
+      filter: brightness(0.95);
+    }
+
+    /* Mobile App — narrow, spans both rows */
+    .platform-item.narrow {
+      grid-row: 1 / 2;
+      grid-column: 1;
+    }
+
+    .platform-item.narrow img {
+      height: 320px;
+      object-fit: contain;
+    }
+
+    /* Wide cards — full horizontal display */
+    .platform-item.wide {
+      grid-column: 2;
+    }
+
+    .platform-item.wide img {
+      height: 320px;
+      object-fit: contain;
+    }
+
+    /* Tools — full width bottom row */
+    .platform-item.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .platform-item.full-width img {
+      height: 360px;
+      object-fit: contain;
+    }
+
+    .platform-label {
+      display: block;
+      padding: 12px 16px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ccc;
+      background: #1a1a1a;
+    }
+
+    /* ── Responsive ────────────────────────────────── */
+    @media (max-width: 900px) {
+      .rate-cards { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .membership-block { grid-template-columns: 1fr; }
+      .platform-grid { grid-template-columns: 1fr; }
+      .platform-item.narrow img,
+      .platform-item.wide img,
+      .platform-item.full-width img { height: 280px; }
+    }
+
+    @media (max-width: 768px) {
+      .hero { min-height: 480px; }
+      .hero-body { padding: 6rem 1.5rem 3rem; align-items: flex-start; }
+      .hero h1 { font-size: 2.25rem; }
+      .section { padding: 3.5rem 1.5rem; }
+      .section-title { font-size: 1.75rem; }
+      .showcase-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .earn-grid { grid-template-columns: 1fr; }
+      .membership-block { padding: 2rem; }
+      .closing h2 { font-size: 2rem; }
+      .platform-grid { grid-template-columns: 1fr; }
+      .platform-item.narrow,
+      .platform-item.wide,
+      .platform-item.full-width { grid-column: 1; grid-row: auto; }
+      .platform-item.narrow img,
+      .platform-item.wide img,
+      .platform-item.full-width img { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Top Bar ──────────────────────────────────────── -->
+<div class="top-bar">
+  <a href="../"><img src="../assets/logo.png" alt="Rise"></a>
+  <span>Partnership</span>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     1. HERO
+     ════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <video src="../assets/platform/Vids/4.mov" autoplay muted loop playsinline></video>
+  </div>
+  <div class="hero-body">
+    <div class="hero-label">For Advanced Artists</div>
+    <h1>Partnership Opportunities</h1>
+    <p class="hero-sub">Work with us as a coach, creator, and collaborator. Multiple ways to contribute, earn, and grow within the Recode Group ecosystem.</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     2. WHAT THIS PARTNERSHIP IS
+     ════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-divider div-1"><span class="div-line"></span></div>
+  <h2 class="section-title">What This Partnership Is</h2>
+  <p class="section-sub">A flexible collaboration model built for artists who bring real value.</p>
+
+  <p class="section-text">This is not a standard affiliate deal or a one-off gig. Rise partnerships are designed for more advanced artists who want to contribute their skills and experience while building an additional income stream. Whether through coaching, content production, sample packs, or referrals, every collaboration is structured, compensated, and built to last.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h4>Flexible Commitment</h4>
+      <p>Work on your own schedule. Contribute in ways that match your availability and expertise. No minimum hours.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <h4>Multiple Revenue Streams</h4>
+      <p>Coaching, content, sample packs, referrals. Stack your income across different contribution types.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h4>Skill-Based Positioning</h4>
+      <p>Rates and opportunities are based on your experience, reach, and the value you bring. Stronger artists earn more.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     3. VIDEO SHOWCASE — What We Create Together
+     ════════════════════════════════════════════════════ -->
+<div class="section-dark">
+  <div class="section">
+    <div class="section-divider div-2"><span class="div-line"></span></div>
+    <h2 class="section-title">What We Create Together</h2>
+    <p class="section-sub">The type of content we produce with our partner artists.</p>
+
+    <div class="showcase-grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="showcase-item">
+        <video src="../assets/platform/Vids/1.mp4" autoplay muted loop playsinline></video>
+        <span class="showcase-label">Production</span>
+      </div>
+      <div class="showcase-item">
+        <video src="../assets/platform/Vids/2.mov" autoplay muted loop playsinline></video>
+        <span class="showcase-label">Artist Career</span>
+      </div>
+      <div class="showcase-item">
+        <video src="../assets/platform/Vids/5.mov" autoplay muted loop playsinline></video>
+        <span class="showcase-label">Branding</span>
+      </div>
+      <div class="showcase-item">
+        <video src="../assets/platform/Vids/6.mov" autoplay muted loop playsinline></video>
+        <span class="showcase-label">Mixing & Mastering</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     4. MEMBERSHIP INTEGRATION
+     ════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-divider div-3"><span class="div-line"></span></div>
+  <h2 class="section-title">Membership Integration</h2>
+  <p class="section-sub">Join the community as a partner artist.</p>
+
+  <p class="section-text">We strongly encourage every partner to be part of the Community Membership. It is not mandatory, but it is highly recommended. We are building this together, not individually. If you are going to coach, create content, or refer new members, understanding the course, the community, and the people inside it is essential. You cannot guide others through something you have not experienced yourself.</p>
+
+  <p class="section-text">Being a member also means you can connect with other artists, expand your own network, and increase your chances of being booked for coaching. You stay connected with the people you refer, build long-term relationships, and become part of a core group that grows together. The discounted entry price exists specifically to support this. We aim to build a strong core group that grows together.</p>
+
+  <div class="membership-block">
+    <div>
+      <h3>Community Membership</h3>
+      <div>
+        <span class="membership-price">&euro; 1.200,-</span>
+      </div>
+      <div class="membership-note">First 20 core members &mdash; limited availability</div>
+      <p style="font-size:0.92rem;color:#aaa;line-height:1.7;">As a partner, you become a member of the Rise community. This gives you direct access to the network, calls, and course while contributing your expertise from inside the ecosystem.</p>
+    </div>
+    <div>
+      <ul class="membership-list">
+        <li>Full community access and weekly calls</li>
+        <li>Monthly deep-dive workshops</li>
+        <li>Peer feedback and coaching sessions</li>
+        <li>Complete Rise Course access</li>
+        <li>Direct connection to the artist network</li>
+        <li>Priority for coaching and content opportunities</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     5. PLATFORM IMAGES
+     ════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-divider div-4"><span class="div-line"></span></div>
+  <h2 class="section-title">The Platform</h2>
+  <p class="section-sub">Built for artists. Designed for quality.</p>
+
+  <div class="platform-grid">
+    <div class="platform-item narrow">
+      <img src="../assets/platform/Pics/1.PNG" alt="Mobile App" loading="lazy">
+      <span class="platform-label">Mobile App</span>
+    </div>
+    <div class="platform-item wide">
+      <img src="../assets/platform/Pics/2.png" alt="Online Academy" loading="lazy">
+      <span class="platform-label">Online Academy</span>
+    </div>
+    <div class="platform-item full-width">
+      <img src="../assets/platform/Pics/4.png" alt="Tools" loading="lazy">
+      <span class="platform-label">Tools</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     6. COACHING OPPORTUNITIES
+     ════════════════════════════════════════════════════ -->
+<div class="section-dark">
+  <div class="section">
+    <div class="section-divider div-5"><span class="div-line"></span></div>
+    <h2 class="section-title">Coaching Opportunities</h2>
+    <p class="section-sub">Share your expertise. Get paid for it.</p>
+
+    <p class="section-text">As a Rise coach, you work directly with artists in the community through structured sessions. Rates are assigned based on your experience, production level, and positioning within the industry.</p>
+
+    <div class="rate-cards">
+      <div class="rate-card">
+        <div class="rate-label">Beginner Level</div>
+        <div class="rate-value">~ &euro; 30</div>
+        <div class="rate-note">per hour</div>
+        <p style="font-size:0.84rem;color:#777;margin-top:1rem;">For artists with solid fundamentals who can guide newer producers through core concepts.</p>
+      </div>
+      <div class="rate-card featured">
+        <div class="rate-label">Advanced Level</div>
+        <div class="rate-value">~ &euro; 40</div>
+        <div class="rate-note">per hour</div>
+        <p style="font-size:0.84rem;color:#777;margin-top:1rem;">For experienced artists with a proven track record and deeper industry knowledge.</p>
+      </div>
+      <div class="rate-card">
+        <div class="rate-label">Tailor-Made</div>
+        <div class="rate-value">Custom</div>
+        <div class="rate-note">rate on profile</div>
+        <p style="font-size:0.84rem;color:#777;margin-top:1rem;">For high-profile artists or specialized expertise. Rate negotiated based on your positioning.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     7. CONTENT PRODUCTION (VIDEOS)
+     ════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-divider div-6"><span class="div-line"></span></div>
+  <h2 class="section-title">Content Production</h2>
+  <p class="section-sub">Create video content for the Rise platform and get paid per delivery.</p>
+
+  <p class="section-text">We produce educational and creative video content featuring our partner artists. Each video is a professional production built to a consistent quality standard. You deliver the raw material, we handle the editing.</p>
+
+  <div class="spec-grid" style="margin-bottom:2.5rem;">
+    <div class="spec-item">
+      <div class="spec-dot"></div>
+      <p><strong>2 angles required:</strong> Screen recording (DAW / Ableton) + camera shot of the artist</p>
+    </div>
+    <div class="spec-item">
+      <div class="spec-dot"></div>
+      <p><strong>Minimum quality:</strong> 2K resolution, clean audio, clear visuals</p>
+    </div>
+    <div class="spec-item">
+      <div class="spec-dot"></div>
+      <p><strong>Editing:</strong> Handled entirely by us. You focus on the content.</p>
+    </div>
+    <div class="spec-item">
+      <div class="spec-dot"></div>
+      <p><strong>Payment:</strong> After delivery and approval. No delays.</p>
+    </div>
+    <div class="spec-item">
+      <div class="spec-dot"></div>
+      <p><strong>Camera support:</strong> We can provide a camera crew if needed</p>
+    </div>
+    <div class="spec-item">
+      <div class="spec-dot"></div>
+      <p><strong>Studio costs:</strong> Can be covered if needed on a per-project basis</p>
+    </div>
+  </div>
+
+  <div class="rate-cards" style="max-width:700px;">
+    <div class="rate-card" style="grid-column: span 2;">
+      <div class="rate-label">Video Production Fee</div>
+      <div class="rate-value">&euro; 110</div>
+      <div class="rate-note">per video</div>
+      <p style="font-size:0.84rem;color:#777;margin-top:1rem;">For artists with a significant position in the scene or a large reach, different rates may apply. This is discussed on a case-by-case basis.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     8. SAMPLE PACKS & PRODUCTS
+     ════════════════════════════════════════════════════ -->
+<div class="section-dark">
+  <div class="section">
+    <div class="section-divider div-7"><span class="div-line"></span></div>
+    <h2 class="section-title">Sample Packs & Products</h2>
+    <p class="section-sub">Create branded products within the Rise ecosystem.</p>
+
+    <p class="section-text">Build your own sample packs, kick packs, or artist-branded product lines under the Rise umbrella. Every product carries your name and builds your brand while generating income.</p>
+
+    <div class="cards" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <h4>Full Sample Packs</h4>
+        <p>Complete production packs with loops, one-shots, and presets. Your sound, your brand.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg></div>
+        <h4>Kick Packs</h4>
+        <p>Focused, specialized packs. Example: "Kick Pack by [Your Name]".</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h4>Artist-Branded Products</h4>
+        <p>Custom products tailored to your brand identity. Full creative control with Rise distribution.</p>
+      </div>
+    </div>
+
+    <div class="earn-rule" style="margin-top:2rem; max-width:600px;">
+      <strong>Pricing:</strong> Fully custom. Based on your reach, content quality, and brand value. Every product deal is negotiated individually.
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     9. REFERRAL SYSTEM
+     ════════════════════════════════════════════════════ -->
+<div class="section-dark">
+  <div class="section">
+    <div class="section-divider div-8"><span class="div-line"></span></div>
+    <h2 class="section-title">Referral Earnings</h2>
+    <p class="section-sub">Bring in artists. Earn on every sale.</p>
+
+    <div class="earn-grid">
+
+      <div class="earn-card highlight">
+        <div class="earn-badge">Members</div>
+        <div class="earn-amount">&euro; 150</div>
+        <div class="earn-per">per member you bring in</div>
+        <h4>Community Referral</h4>
+        <p>Paid after the referred member completes payment. Unlimited referrals, ongoing.</p>
+        <div class="earn-example">Example: Bring in 20 members = &euro; 3,000 earned</div>
+      </div>
+
+      <div class="earn-card">
+        <div class="earn-badge">Non-Members</div>
+        <div class="earn-amount">&euro; 100</div>
+        <div class="earn-per">per member you bring in</div>
+        <h4>Member Referral (Non-Member)</h4>
+        <p>If you are not a community member yourself, you still earn for every new member you refer. Paid after their payment is completed.</p>
+      </div>
+
+      <div class="earn-card">
+        <div class="earn-badge">Course Sales</div>
+        <div class="earn-amount">&euro; 20</div>
+        <div class="earn-per">per course sale</div>
+        <h4>Course Referral</h4>
+        <p>Earn on every Rise Course sale you generate. Direct referral, direct payout.</p>
+      </div>
+
+    </div>
+
+    <div class="earn-rule" style="margin-top:2rem;">
+      <strong>Important:</strong> No second-layer commissions. Only direct referrals count. You refer someone, they purchase, you earn. Clean and simple.
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     10. ADDITIONAL COLLABORATION
+     ════════════════════════════════════════════════════ -->
+<div class="section-dark">
+  <div class="section" style="text-align:center; max-width:700px;">
+    <div class="section-divider div-9" style="margin-left:auto; margin-right:auto;"><span class="div-line" style="transform-origin:center center;"></span></div>
+    <h2 class="section-title">Open to Ideas</h2>
+    <p style="font-size:1rem;color:#999;line-height:1.8;margin-top:1rem;">We are always open to new ideas and collaborations. If you see an opportunity that does not fit neatly into the categories above, reach out. The best partnerships often come from unexpected directions.</p>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     11. CLOSING
+     ════════════════════════════════════════════════════ -->
+<div class="closing">
+  <h2>Interested in Working Together?</h2>
+  <p>If you are an advanced artist looking for structured collaboration, real earning potential, and a platform that values quality over quantity, this is your invitation.</p>
+  <div class="closing-contact">
+    Reach out via <a href="https://www.instagram.com/riseartistacademy/" target="_blank">Instagram</a> or contact us directly to start the conversation.
+  </div>
+</div>
+
+
+<!-- ── Footer ──────────────────────────────────────── -->
+<footer class="page-footer">
+  <div class="footer-links">
+    <a href="../terms/">Terms & Conditions</a>
+    <a href="../privacy/">Privacy Policy</a>
+    <a href="https://www.instagram.com/riseartistacademy/" target="_blank">Rise on Instagram</a>
+  </div>
+  <p>&copy; 2026 Rise Artist Academy. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Artist Coaching</title>
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="../../../customer-styles.css">
+  <style>
+    /* Premium coaching page styles */
+    body {
+      background-color: #141414;
+      color: #ffffff;
+    }
+
+    /* Hero section */
+    .customer-hero {
+      margin-top: 0;
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+    }
+
+    .customer-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('../../../assets/photos/photo-4.jpg') center / cover no-repeat;
+      opacity: 0.25;
+      z-index: 1;
+    }
+
+    .customer-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(20, 20, 20, 0.7) 0%, rgba(20, 20, 20, 0.85) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(253, 86, 42, 0.15);
+      border: 1px solid #ff683e;
+      color: #ff683e;
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtext {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #d0d0d0;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: inline-block;
+    }
+
+    /* Feature grid */
+    .customer-section {
+      padding: 5rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #b0b0b0;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: #1e1e1e;
+      border: 1px solid rgba(253, 86, 42, 0.1);
+      padding: 2rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff683e, transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(253, 86, 42, 0.3);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(253, 86, 42, 0.1);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-card-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(253, 86, 42, 0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card-icon svg {
+      width: 24px;
+      height: 24px;
+      color: #ff683e;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #b0b0b0;
+      line-height: 1.6;
+    }
+
+    /* Steps section */
+    .steps-section {
+      padding: 5rem 2rem;
+      background: rgba(30, 30, 30, 0.5);
+      border-top: 1px solid rgba(253, 86, 42, 0.1);
+      border-bottom: 1px solid rgba(253, 86, 42, 0.1);
+    }
+
+    .steps-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #ff683e, #ff6f3d);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .step-content h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-content p {
+      font-size: 0.9rem;
+      color: #a0a0a0;
+      line-height: 1.6;
+    }
+
+    /* What to expect section */
+    .expectations-section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .expectation-card {
+      background: #1e1e1e;
+      border: 1px solid rgba(253, 86, 42, 0.1);
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .expectation-card h3 {
+      color: #ff683e;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .expectation-card h3::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: #ff683e;
+      border-radius: 50%;
+    }
+
+    .expectation-card p {
+      color: #b0b0b0;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    /* Why it matters section */
+    .why-matters-section {
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, rgba(253, 86, 42, 0.05) 0%, rgba(20, 20, 20, 0) 100%);
+      border-top: 1px solid rgba(253, 86, 42, 0.15);
+    }
+
+    .why-matters-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .why-matters-content {
+      background: #1e1e1e;
+      border-left: 4px solid #ff683e;
+      padding: 3rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #d0d0d0;
+    }
+
+    .why-matters-content strong {
+      color: #ff683e;
+    }
+
+    /* CTA section */
+    .cta-section {
+      padding: 5rem 2rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-headline {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-subtext {
+      font-size: 1.15rem;
+      color: #b0b0b0;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff683e, #ff6f3d);
+      color: white;
+      padding: 1rem 3rem;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.05em;
+      box-shadow: 0 10px 30px rgba(253, 86, 42, 0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(253, 86, 42, 0.4);
+      background: linear-gradient(135deg, #ff6f3d, #ff683e);
+    }
+
+    .cta-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .legal-micro {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #808080;
+      line-height: 1.6;
+    }
+
+    .legal-links {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .legal-links a {
+      color: #a0a0a0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .legal-links a:hover {
+      color: #ff683e;
+    }
+
+    /* Footer */
+    .customer-footer {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(253, 86, 42, 0.1);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #808080;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #a0a0a0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ff683e;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-headline {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtext {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .cta-headline {
+        font-size: 2rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .why-matters-content {
+        padding: 2rem;
+        font-size: 1rem;
+      }
+
+      .legal-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Subtle bottom-left logo -->
+  <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener" class="page-logo-watermark">
+    <img src="../../../assets/logo.png" alt="Rise">
+  </a>
+
+<!-- Hero Section -->
+<section class="customer-hero">
+  <div class="hero-content">
+    <div class="hero-badge">Rise Coaching</div>
+    <h1 class="hero-headline">12 Weeks That Change Everything.</h1>
+    <p class="hero-subtext">A high-touch, one-on-one development program designed to transform your artistic direction into measurable, market-ready results. This is not mentorship. This is structured transformation.</p>
+    <div class="hero-cta">
+      <button id="hero-cta-btn" class="cta-btn">Apply for Coaching</button>
+    </div>
+  </div>
+</section>
+
+<!-- Sliding Photo Gallery -->
+<section class="gallery">
+  <div class="gallery-track">
+    <div class="gallery-item"><img src="../../../assets/photos/photo-4.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-10.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-16.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-7.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-13.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-2.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-17.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-5.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-11.jpg" alt="Rise Event" loading="lazy"></div>
+    <!-- Duplicate for seamless infinite scroll -->
+    <div class="gallery-item"><img src="../../../assets/photos/photo-4.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-10.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-16.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-7.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-13.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-2.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-17.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-5.jpg" alt="Rise Event" loading="lazy"></div>
+    <div class="gallery-item"><img src="../../../assets/photos/photo-11.jpg" alt="Rise Event" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- What You Get Section -->
+<section class="customer-section">
+  <h2 class="section-title">What You Get</h2>
+  <p class="section-subtitle">Everything you need to break through, delivered over 12 intensive weeks</p>
+
+  <div class="feature-grid">
+    <!-- 12-Week Program -->
+    <div class="feature-card">
+      <div class="feature-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <path d="M16 2v4M8 2v4M3 10h18"/>
+          <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+        </svg>
+      </div>
+      <h3>12-Week Program Including the Course</h3>
+      <p>Three structured phases from identity to market translation, with full access to the Rise Course. Every week is designed with specific milestones and deliverables.</p>
+    </div>
+
+    <!-- One-on-One Sessions -->
+    <div class="feature-card">
+      <div class="feature-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+          <path d="M16 11h6"/>
+        </svg>
+      </div>
+      <h3>One-on-One Sessions</h3>
+      <p>Direct, personalized sessions with your dedicated coach. Weekly touchpoints ensure consistent momentum and real accountability.</p>
+    </div>
+
+    <!-- Phase 1: Identity & Direction -->
+    <div class="feature-card">
+      <div class="feature-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+      </div>
+      <h3>Phase 1: Identity & Direction</h3>
+      <p>Define your artistic positioning and strategic direction. Clarity here informs everything that follows in your 12-week journey.</p>
+    </div>
+
+    <!-- Phase 2: Skill & Output -->
+    <div class="feature-card">
+      <div class="feature-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M2 12h20"/>
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M8 12a4 4 0 0 0 8 0"/>
+        </svg>
+      </div>
+      <h3>Phase 2: Skill & Output</h3>
+      <p>Accelerate production quality and creative output. Structured feedback and targeted exercises drive measurable improvement.</p>
+    </div>
+
+    <!-- Phase 3: Market Translation -->
+    <div class="feature-card">
+      <div class="feature-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+          <polyline points="13 2 13 9 20 9"/>
+          <path d="M9 13h6M9 17h6"/>
+        </svg>
+      </div>
+      <h3>Phase 3: Market Translation</h3>
+      <p>Build your release strategy and growth roadmap. By week 12, you have a complete, executable plan for the next chapter.</p>
+    </div>
+
+    <!-- Industry Connections -->
+    <div class="feature-card">
+      <div class="feature-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="1"/>
+          <circle cx="19" cy="12" r="1"/>
+          <circle cx="5" cy="12" r="1"/>
+          <circle cx="12" cy="5" r="1"/>
+          <circle cx="12" cy="19" r="1"/>
+          <line x1="12" y1="12" x2="19" y2="12"/>
+          <line x1="12" y1="12" x2="5" y2="12"/>
+          <line x1="12" y1="12" x2="12" y2="5"/>
+          <line x1="12" y1="12" x2="12" y2="19"/>
+        </svg>
+      </div>
+      <h3>Industry Connections</h3>
+      <p>Access to opportunities and introductions through the Rise network. Real relationships that accelerate your growth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- What Happens Next Section -->
+<section class="steps-section">
+  <div class="section-container">
+    <h2 class="section-title">What Happens Next</h2>
+    <div class="steps-grid">
+
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Payment Confirmed</h3>
+        <p class="step-description">Your coaching commitment is secured through Stripe. Immediate confirmation sent to your inbox.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Intake & Assessment</h3>
+        <p class="step-description">Complete a detailed intake form covering your goals, background, and current position in the industry. You must also complete the included Rise Course before receiving your first coaching assignment.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Coach Assignment</h3>
+        <p class="step-description">You are matched with a coach based on your profile, objectives, and musical direction.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3 class="step-title">Kickoff Session</h3>
+        <p class="step-description">Your first session establishes the 12-week framework and Phase 1 priorities. No time wasted.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">5</div>
+        <h3 class="step-title">Weekly Sessions Begin</h3>
+        <p class="step-description">Structured one-on-one sessions drive consistent progress through each phase with clear deliverables.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">6</div>
+        <h3 class="step-title">Transformation Delivered</h3>
+        <p class="step-description">By week 12, you have a complete roadmap, refined output, and a clear path forward for the next year.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Photo Break -->
+  <section class="photo-break">
+    <div class="photo-break-grid">
+      <img src="../../../assets/photos/photo-3.jpg" alt="Rise Event" loading="lazy">
+      <img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy">
+      <img src="../../../assets/photos/photo-9.jpg" alt="Rise Event" loading="lazy">
+    </div>
+  </section>
+
+<!-- What to Expect Section -->
+<section class="customer-section">
+  <h2 class="section-title">What to Expect</h2>
+
+  <div class="expectations-section">
+    <div class="expectation-card">
+      <h3>Full Commitment Required</h3>
+      <p>This program works because both sides invest completely. Expect direct feedback, challenging assignments, and real accountability. Your coach will push you, and you will grow.</p>
+    </div>
+
+    <div class="expectation-card">
+      <h3>Phased Development</h3>
+      <p>Each phase builds on the last. Identity informs skill development. Skill development informs market strategy. Nothing is skipped. The progression is strategic and methodical.</p>
+    </div>
+
+    <div class="expectation-card">
+      <h3>Tangible Deliverables</h3>
+      <p>By the end of 12 weeks, you walk away with a complete artist roadmap, refined creative output, and a strategic growth plan that is ready to execute immediately.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Why This Matters Section -->
+<section class="why-matters-section">
+  <div class="why-matters-container">
+    <h2 class="section-title" style="margin-bottom: 2.5rem;">Why This Matters</h2>
+    <div class="why-matters-content">
+      <p><strong>Talent is not enough.</strong> The music industry is filled with exceptional artists who never break through — not because they lack ability, but because they lack structure, strategy, and expert guidance at the right moment. Rise Artist Coaching exists to close that gap.</p>
+
+      <p style="margin-top: 1.5rem;">Over 12 intensive weeks, you do not just <em>learn</em> what to do. You <em>do</em> it — with a coach who holds you accountable, challenges your assumptions, and pushes you toward the results you have been circling for years. This is the most direct path between where you are and where you want to be.</p>
+
+      <p style="margin-top: 1.5rem;">It is demanding, personal, and designed to produce a measurable transformation. If you are ready to stop circling and start executing, this is where it begins.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <h2 class="cta-headline">Ready for Your Breakthrough?</h2>
+  <p class="cta-subtext">Apply for Rise Artist Coaching and start your 12-week transformation.</p>
+
+  <button id="cta-pay-btn" class="cta-btn">Apply for Coaching</button>
+
+  <div class="legal-micro">
+    <p>Secure checkout via Stripe. Limited spots available.</p>
+  </div>
+
+  <div class="legal-links">
+    <a href="/terms/">Terms of Service</a>
+    <a href="/privacy/">Privacy Policy</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="customer-footer">
+  <div class="footer-links">
+    <a href="https://www.instagram.com/riseartistacademy/" target="_blank">About Rise</a>
+    <a href="/terms/">Terms</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="https://www.instagram.com/riseartistacademy/" target="_blank">Contact</a>
+  </div>
+  <p>&copy; 2026 Rise. All rights reserved. Designed for artists, built for transformation.</p>
+</footer>
+
+<!-- Scripts -->
+<script src="../../../config.js"></script>
+<script>
+(function() {
+  var btn = document.getElementById('cta-pay-btn');
+  var heroBtn = document.getElementById('hero-cta-btn');
+  function pay() {
+    var url = RISE_CONFIG.coachingPaymentUrl;
+    if (url && url.trim() !== '') {
+      window.open(url, '_blank');
+    }
+    else {
+      alert('Payment link not set yet.');
+    }
+  }
+  if (btn) btn.addEventListener('click', pay);
+  if (heroBtn) heroBtn.addEventListener('click', pay);
+})();
+</script>
+
+</body>
+</html>

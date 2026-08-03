@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE — v2 Pages Overview</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --bg-3: #141414;
+      --fg: #ffffff;
+      --muted: #999;
+      --muted-2: #666;
+      --line: rgba(255,255,255,0.06);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --accent-glow: rgba(255,104,62,0.12);
+      --max-w: 900px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .header {
+      text-align: center;
+      padding: 4rem 1.5rem 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .header img {
+      height: 28px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+    }
+    .header h1 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s, transform 0.25s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      border-color: rgba(255,104,62,0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: rgba(255,104,62,0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      align-self: flex-start;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      transition: gap 0.2s;
+    }
+    .card:hover .card-link { gap: 10px; }
+    .card-link svg {
+      width: 14px; height: 14px;
+      stroke: var(--accent);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted-2);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="../assets/logo.png" alt="Rise">
+    <h1>v2 Pages Overview</h1>
+    <p>All redesigned pages in one place. Click any card to view the page.</p>
+  </div>
+
+  <div class="grid">
+
+    <a href="https://rise-onboarding.netlify.app/homepage-v2/" class="card">
+      <span class="card-badge">Homepage</span>
+      <h2>Homepage v2</h2>
+      <p>The main Rise landing page. Overview of the Academy, coaches, webinar sessions, and the Course.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+    <a href="https://rise-onboarding.netlify.app/academy-v2/" class="card">
+      <span class="card-badge">Academy</span>
+      <h2>General Academy v2</h2>
+      <p>The combined Academy page with a single intake CTA. Introduces both Base and Core tracks without selection.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+    <a href="https://rise-onboarding.netlify.app/base-v2/" class="card">
+      <span class="card-badge">Base</span>
+      <h2>Base Academy v2</h2>
+      <p>Six-month production foundation. Cohort model, 30 sessions, pricing at € 1.200,- with installment options.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+    <a href="https://rise-onboarding.netlify.app/core-v2/" class="card">
+      <span class="card-badge">Core</span>
+      <h2>Core Academy v2</h2>
+      <p>12-month career accountability program. Weekly sessions with Maurits, pricing at € 2.650,- per year.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+    <a href="https://rise-onboarding.netlify.app/webinar-v2/" class="card">
+      <span class="card-badge">Webinar</span>
+      <h2>Webinar Sessions v2</h2>
+      <p>Confirmation page for free monthly coaching call signups. Warm welcome tone, introduces the Academies softly.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+    <a href="https://rise-onboarding.netlify.app/partnership/" class="card">
+      <span class="card-badge">Partnership</span>
+      <h2>Partnership</h2>
+      <p>The partnership page with membership options and community details.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+    <a href="https://rise-onboarding.netlify.app/coursevsl-b/" class="card">
+      <span class="card-badge">Course</span>
+      <h2>Course VSL</h2>
+      <p>The standalone Course sales page with video sales letter. One-time € 265,- at your own pace.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+    <a href="https://rise-onboarding.netlify.app/giveaway/" class="card">
+      <span class="card-badge">Giveaway</span>
+      <h2>Giveaway</h2>
+      <p>Free giveaway landing page with outreach tracking. Used in email campaigns for lead acquisition.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+    <a href="https://rise-onboarding.netlify.app/v2-feedback/" class="card">
+      <span class="card-badge" style="background:rgba(34,197,94,0.1);color:#22c55e;">Feedback</span>
+      <h2>Page Feedback</h2>
+      <p>Leave and view feedback on any page. No login required — open comments for the whole team.</p>
+      <span class="card-link">View page <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    &copy; 2026 Rise &middot; Recode Operations B.V. &mdash; Internal overview, not for public use.
+  </div>
+
+</body>
+</html>

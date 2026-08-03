@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f0f0f">
+  <title>RISE — Page Feedback</title>
+  <!--
+    SQL to create the required Supabase table:
+
+    CREATE TABLE page_feedback (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      created_at TIMESTAMPTZ DEFAULT now(),
+      page TEXT NOT NULL,
+      name TEXT NOT NULL,
+      comment TEXT NOT NULL,
+      status TEXT DEFAULT 'open'
+    );
+    ALTER TABLE page_feedback ENABLE ROW LEVEL SECURITY;
+    CREATE POLICY "Allow all" ON page_feedback FOR ALL USING (true) WITH CHECK (true);
+  -->
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --maxw: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg); color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6; overflow-x: hidden;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    img { max-width: 100%; }
+
+    /* ── Site Header ─────────────────────────────────── */
+    .site-header {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+    .site-header-inner {
+      max-width: var(--maxw); margin: 0 auto;
+      display: flex; align-items: center; gap: 14px;
+      padding: 0.75rem 2rem;
+    }
+    .header-logo img { width: 36px; height: 36px; border-radius: 7px; display: block; }
+    .header-title { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; }
+
+    /* ── Footer ──────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem; text-align: center;
+      color: var(--muted); font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      margin-top: auto;
+    }
+
+    /* ── Main Container ──────────────────────────────── */
+    .main {
+      max-width: var(--maxw); margin: 0 auto; width: 100%;
+      padding: 2rem 2rem 3rem;
+    }
+
+    /* ── Page Pills ──────────────────────────────────── */
+    .page-pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 2rem;
+    }
+    .pill {
+      padding: 7px 16px; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 500;
+      background: var(--bg-2); color: var(--muted);
+      border: 1px solid var(--line);
+      transition: all 0.2s ease; cursor: pointer;
+    }
+    .pill:hover { color: var(--fg); border-color: rgba(255,255,255,0.15); }
+    .pill.active {
+      background: var(--accent); color: #fff;
+      border-color: var(--accent);
+    }
+    .pill.active:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+    /* ── Feedback Form ───────────────────────────────── */
+    .feedback-form {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .feedback-form h2 {
+      font-size: 1rem; font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .form-row {
+      display: flex; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .form-group {
+      display: flex; flex-direction: column; gap: 5px;
+      flex: 1;
+    }
+    .form-group label {
+      font-size: 0.78rem; color: var(--muted); font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: inherit;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--fg);
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+    .form-group textarea {
+      resize: vertical; min-height: 80px;
+    }
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--accent); color: #fff;
+      font-weight: 600; font-size: 0.9rem;
+      padding: 10px 24px; border-radius: 8px;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── Feedback Feed ────────────────────────────────── */
+    .feed-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .feed-header h2 {
+      font-size: 1rem; font-weight: 600;
+    }
+    .feed-count {
+      font-size: 0.8rem; color: var(--muted);
+    }
+    .feedback-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+    .feedback-card:hover {
+      border-color: rgba(255,255,255,0.12);
+    }
+    .card-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 6px; flex-wrap: wrap; gap: 8px;
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card-name {
+      font-weight: 600; font-size: 0.92rem;
+    }
+    .card-page-badge {
+      display: inline-block;
+      padding: 2px 10px; border-radius: 100px;
+      font-size: 0.7rem; font-weight: 500;
+      background: rgba(255,104,62,0.12); color: var(--accent);
+    }
+    .card-time {
+      font-size: 0.75rem; color: var(--muted);
+    }
+    .card-comment {
+      font-size: 0.9rem; color: rgba(255,255,255,0.85);
+      line-height: 1.6; margin: 8px 0 10px;
+      white-space: pre-wrap;
+    }
+    .card-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .status-badge.open {
+      background: rgba(255,255,255,0.06); color: var(--muted);
+    }
+    .status-badge.resolved {
+      background: rgba(34,197,94,0.12); color: #22c55e;
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+    }
+    .status-badge.open .status-dot { background: var(--muted); }
+    .status-badge.resolved .status-dot { background: #22c55e; }
+
+    .btn-toggle {
+      font-size: 0.75rem; color: var(--muted);
+      padding: 4px 10px; border-radius: 6px;
+      border: 1px solid var(--line);
+      transition: all 0.2s;
+    }
+    .btn-toggle:hover {
+      color: var(--fg); border-color: rgba(255,255,255,0.2);
+    }
+
+    /* ── Empty State ──────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+    }
+    .empty-state svg {
+      width: 48px; height: 48px; margin-bottom: 12px;
+      stroke: var(--muted); fill: none; stroke-width: 1.5;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .empty-state p { font-size: 0.92rem; }
+
+    /* ── Error Banner ────────────────────────────────── */
+    .error-banner {
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+    .error-banner.visible { display: block; }
+    .error-banner h3 {
+      color: #ef4444; font-size: 0.9rem; margin-bottom: 6px;
+    }
+    .error-banner p {
+      font-size: 0.82rem; color: var(--muted); line-height: 1.5;
+    }
+    .error-banner pre {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+
+    /* ── Toast ────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--bg-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 12px 20px;
+      font-size: 0.85rem; color: var(--fg);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.3s ease; z-index: 500;
+    }
+    .toast.visible { transform: translateY(0); opacity: 1; }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 640px) {
+      .form-row { flex-direction: column; }
+      .site-header-inner { padding: 0.75rem 1rem; }
+      .main { padding: 1.5rem 1rem 2rem; }
+      .card-top { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="header-logo" href="../">
+        <img src="../assets/logo.png" alt="Rise" width="36" height="36">
+      </a>
+      <span class="header-title">Page Feedback</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Error banner (shown if table doesn't exist) -->
+    <div class="error-banner" id="errorBanner">
+      <h3>Table not found</h3>
+      <p>The <code>page_feedback</code> table does not exist yet in Supabase. Create it with the following SQL in the Supabase SQL Editor:</p>
+      <pre>CREATE TABLE page_feedback (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  page TEXT NOT NULL,
+  name TEXT NOT NULL,
+  comment TEXT NOT NULL,
+  status TEXT DEFAULT 'open'
+);
+ALTER TABLE page_feedback ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow all" ON page_feedback FOR ALL USING (true) WITH CHECK (true);</pre>
+    </div>
+
+    <!-- Page pills -->
+    <div class="page-pills" id="pagePills">
+      <button class="pill active" data-page="">All Pages</button>
+      <button class="pill" data-page="Homepage v2">Homepage v2</button>
+      <button class="pill" data-page="Academy v2">Academy v2</button>
+      <button class="pill" data-page="Base Academy v2">Base Academy v2</button>
+      <button class="pill" data-page="Core Academy v2">Core Academy v2</button>
+      <button class="pill" data-page="Webinar Sessions v2">Webinar Sessions v2</button>
+      <button class="pill" data-page="Partnership">Partnership</button>
+      <button class="pill" data-page="Course VSL">Course VSL</button>
+      <button class="pill" data-page="Giveaway">Giveaway</button>
+    </div>
+
+    <!-- Feedback form -->
+    <div class="feedback-form">
+      <h2>Leave Feedback</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nameInput">Your Name</label>
+          <input type="text" id="nameInput" placeholder="e.g. Jim" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="pageSelect">Page</label>
+          <select id="pageSelect">
+            <option value="" disabled>Select a page...</option>
+            <option value="Homepage v2">Homepage v2</option>
+            <option value="Academy v2">Academy v2</option>
+            <option value="Base Academy v2">Base Academy v2</option>
+            <option value="Core Academy v2">Core Academy v2</option>
+            <option value="Webinar Sessions v2">Webinar Sessions v2</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Course VSL">Course VSL</option>
+            <option value="Giveaway">Giveaway</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="commentInput">Comment</label>
+        <textarea id="commentInput" placeholder="What feedback do you have for this page?"></textarea>
+      </div>
+      <button class="btn-primary" id="submitBtn" onclick="handleSubmit()">Submit Feedback</button>
+    </div>
+
+    <!-- Feed -->
+    <div class="feed-header">
+      <h2>Feedback</h2>
+      <span class="feed-count" id="feedCount"></span>
+    </div>
+    <div id="feedContainer"></div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2026 Rise &middot; Recode Operations B.V.
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Supabase REST API (no client library needed) ─
+    const SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
+    const SB_HEADERS = {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json'
+    };
+
+    // ── State ────────────────────────────────────────
+    let activePage = '';
+    let tableExists = true;
+
+    // ── Elements ─────────────────────────────────────
+    const nameInput = document.getElementById('nameInput');
+    const pageSelect = document.getElementById('pageSelect');
+    const commentInput = document.getElementById('commentInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const feedContainer = document.getElementById('feedContainer');
+    const feedCount = document.getElementById('feedCount');
+    const errorBanner = document.getElementById('errorBanner');
+    const toastEl = document.getElementById('toast');
+
+    // ── Restore saved name ───────────────────────────
+    const savedName = localStorage.getItem('rise_feedback_name');
+    if (savedName) nameInput.value = savedName;
+
+    // ── Save name on input ───────────────────────────
+    nameInput.addEventListener('input', () => {
+      localStorage.setItem('rise_feedback_name', nameInput.value.trim());
+    });
+
+    // ── Pill navigation ──────────────────────────────
+    document.getElementById('pagePills').addEventListener('click', (e) => {
+      const pill = e.target.closest('.pill');
+      if (!pill) return;
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activePage = pill.dataset.page;
+      if (activePage) {
+        pageSelect.value = activePage;
+      }
+      loadFeedback();
+    });
+
+    // ── Relative time ────────────────────────────────
+    function relativeTime(dateStr) {
+      const now = Date.now();
+      const then = new Date(dateStr).getTime();
+      const diffSec = Math.floor((now - then) / 1000);
+
+      if (diffSec < 60) return 'just now';
+      const diffMin = Math.floor(diffSec / 60);
+      if (diffMin < 60) return diffMin === 1 ? '1 minute ago' : diffMin + ' minutes ago';
+      const diffHour = Math.floor(diffMin / 60);
+      if (diffHour < 24) return diffHour === 1 ? '1 hour ago' : diffHour + ' hours ago';
+      const diffDay = Math.floor(diffHour / 24);
+      if (diffDay === 1) return 'yesterday';
+      if (diffDay < 30) return diffDay + ' days ago';
+      const diffMonth = Math.floor(diffDay / 30);
+      if (diffMonth === 1) return '1 month ago';
+      return diffMonth + ' months ago';
+    }
+
+    // ── Escape HTML ──────────────────────────────────
+    function esc(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    // ── Render feedback cards ────────────────────────
+    function renderFeed(items) {
+      if (!items.length) {
+        feedCount.textContent = '';
+        feedContainer.innerHTML = `
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <p>No feedback yet. Be the first to leave a comment.</p>
+          </div>`;
+        return;
+      }
+
+      feedCount.textContent = items.length + ' item' + (items.length === 1 ? '' : 's');
+
+      feedContainer.innerHTML = items.map(item => {
+        const isResolved = item.status === 'resolved';
+        const statusClass = isResolved ? 'resolved' : 'open';
+        const statusLabel = isResolved ? 'Resolved' : 'Open';
+        const toggleLabel = isResolved ? 'Reopen' : 'Mark Resolved';
+        const toggleStatus = isResolved ? 'open' : 'resolved';
+
+        return `
+          <div class="feedback-card">
+            <div class="card-top">
+              <div class="card-meta">
+                <span class="card-name">${esc(item.name)}</span>
+                <span class="card-page-badge">${esc(item.page)}</span>
+              </div>
+              <span class="card-time">${relativeTime(item.created_at)}</span>
+            </div>
+            <div class="card-comment">${esc(item.comment)}</div>
+            <div class="card-bottom">
+              <span class="status-badge ${statusClass}">
+                <span class="status-dot"></span>
+                ${statusLabel}
+              </span>
+              <button class="btn-toggle" onclick="toggleStatus('${item.id}', '${toggleStatus}')">${toggleLabel}</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // ── Load feedback (REST API) ─────────────────────
+    async function loadFeedback() {
+      if (!tableExists) return;
+
+      try {
+        let url = SUPABASE_URL + '/rest/v1/page_feedback?select=*&order=created_at.desc';
+        if (activePage) {
+          url += '&page=eq.' + encodeURIComponent(activePage);
+        }
+
+        const res = await fetch(url, { headers: SB_HEADERS });
+
+        if (!res.ok) {
+          const errBody = await res.text();
+          if (errBody.includes('does not exist') || errBody.includes('relation') || res.status === 404) {
+            tableExists = false;
+            errorBanner.classList.add('visible');
+            feedContainer.innerHTML = '';
+            feedCount.textContent = '';
+            return;
+          }
+          console.error('Load error:', res.status, errBody);
+          return;
+        }
+
+        const data = await res.json();
+        renderFeed(data || []);
+      } catch (err) {
+        console.error('Load error:', err);
+      }
+    }
+
+    // ── Submit feedback (REST API) ───────────────────
+    async function handleSubmit() {
+      const name = nameInput.value.trim();
+      const page = pageSelect.value;
+      const comment = commentInput.value.trim();
+
+      if (!name) { nameInput.focus(); showToast('Please enter your name.'); return; }
+      if (!page) { pageSelect.focus(); showToast('Please select a page.'); return; }
+      if (!comment) { commentInput.focus(); showToast('Please enter a comment.'); return; }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/page_feedback', {
+          method: 'POST',
+          headers: SB_HEADERS,
+          body: JSON.stringify({ page, name, comment })
+        });
+
+        if (!res.ok) {
+          const errBody = await res.text();
+          if (errBody.includes('does not exist') || errBody.includes('relation')) {
+            tableExists = false;
+            errorBanner.classList.add('visible');
+            showToast('Table not found. See error message above.');
+          } else {
+            showToast('Error: ' + errBody);
+          }
+          return;
+        }
+
+        commentInput.value = '';
+        showToast('Feedback submitted!');
+        loadFeedback();
+      } catch (err) {
+        showToast('Something went wrong. Please try again.');
+        console.error('Submit error:', err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Feedback';
+      }
+    }
+
+    // ── Toggle status (REST API) ─────────────────────
+    async function toggleStatus(id, newStatus) {
+      try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/page_feedback?id=eq.' + id, {
+          method: 'PATCH',
+          headers: SB_HEADERS,
+          body: JSON.stringify({ status: newStatus })
+        });
+
+        if (!res.ok) {
+          const errBody = await res.text();
+          showToast('Error: ' + errBody);
+          return;
+        }
+
+        loadFeedback();
+      } catch (err) {
+        showToast('Something went wrong.');
+        console.error('Toggle error:', err);
+      }
+    }
+
+    // ── Toast ────────────────────────────────────────
+    let toastTimer;
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('visible'), 3000);
+    }
+
+    // ── Init & auto-refresh ──────────────────────────
+    loadFeedback();
+    setInterval(loadFeedback, 30000);
+  </script>
+</body>
+</html>

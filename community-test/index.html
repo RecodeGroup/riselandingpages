@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Community Membership (Test)</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --maxw: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    /* ── Header ── */
+    .header-outer {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    .header-outer.scrolled {
+      background: rgba(15,15,15,0.65);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    }
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 32px; max-width: var(--maxw); margin: 0 auto;
+      transition: max-width 0.6s cubic-bezier(0.16,1,0.3,1), padding 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .header-outer.scrolled .header { max-width: 100%; padding: 14px 28px; }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text {
+      font-weight: 700; font-size: 1rem; letter-spacing: 0.1em;
+      text-transform: uppercase; transition: opacity 0.5s ease;
+    }
+    .header-outer.scrolled .logo-text { opacity: 0; pointer-events: none; }
+    .nav-cta {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 10px 20px;
+      border: 1px solid var(--line-strong); border-radius: 999px;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 100px 24px 80px; text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg video {
+      width: 100%; height: 100%; object-fit: cover;
+      will-change: transform; transform: translateZ(0);
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.6) 40%, rgba(15,15,15,0.92) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .hero-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 24px;
+      display: inline-block; background: rgba(255,104,62,0.12);
+      border: 1px solid rgba(255,104,62,0.3); padding: 0.35rem 1rem; border-radius: 4px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-price {
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .hero-price-note { color: var(--muted); font-size: 0.88rem; margin-bottom: 28px; }
+    .hero-sub {
+      color: var(--muted); font-size: clamp(0.92rem, 1.3vw, 1.05rem);
+      line-height: 1.7; max-width: 52ch; margin: 0 auto 36px;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0a0a0a; padding: 16px 36px;
+      border-radius: 6px; font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: all 0.25s ease; display: inline-block; border: none; cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
+
+    /* ── Features ── */
+    .block { padding: 5rem 2rem; max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em; max-width: 20ch; margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 0.95rem; max-width: 60ch;
+      margin-bottom: 3rem; line-height: 1.7;
+    }
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .f-card {
+      background: var(--bg-2); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 2rem 1.75rem 2.25rem;
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .f-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .f-card:hover { border-color: rgba(255,104,62,0.2); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+    .f-card:hover::before { opacity: 1; }
+    .f-card .f-icon {
+      width: 44px; height: 44px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,104,62,0.12); margin-bottom: 1.25rem;
+    }
+    .f-card .f-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .f-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .f-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+    /* ── Carousel ── */
+    .carousel-wrap {
+      overflow: hidden; padding: 2rem 0;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .carousel-track {
+      display: flex; gap: 16px;
+      animation: carousel-scroll 60s linear infinite; width: max-content;
+    }
+    .carousel-track img, .carousel-track video {
+      height: 220px; width: auto; border-radius: 10px;
+      object-fit: cover; flex-shrink: 0; opacity: 0.7; transition: opacity 0.3s;
+    }
+    .carousel-track img:hover, .carousel-track video:hover { opacity: 1; }
+    @keyframes carousel-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Steps ── */
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .s-card {
+      background: var(--bg-2); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 1.75rem 1.5rem;
+    }
+    .s-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,104,62,0.12); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.82rem; margin-bottom: 14px;
+    }
+    .s-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .s-card p { color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
+
+    /* ── Coaches ── */
+    .coaches-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    }
+    .coach-card {
+      background: var(--bg-2); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px; overflow: hidden; transition: border-color 0.3s ease;
+    }
+    .coach-card:hover { border-color: rgba(255,104,62,0.2); }
+    .coach-card img {
+      width: 100%; height: 200px; object-fit: cover; object-position: center top;
+      filter: grayscale(1) brightness(0.85);
+    }
+    .coach-card .info { padding: 14px 16px 18px; }
+    .coach-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
+    .coach-card .role {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+    }
+    .coach-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── Bottom CTA ── */
+    .bottom-cta {
+      text-align: center; padding: 4rem 2rem;
+      background: rgba(255,104,62,0.04); border-top: 1px solid var(--line);
+    }
+    .bottom-cta h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .bottom-cta .price { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+    .bottom-cta .sub {
+      color: var(--muted); font-size: 0.9rem; margin-bottom: 28px;
+      max-width: 50ch; margin-left: auto; margin-right: auto; line-height: 1.7;
+    }
+    .cta-legal { margin-top: 20px; color: var(--muted); font-size: 0.72rem; }
+    .cta-legal a { color: var(--muted); transition: color 0.2s; }
+    .cta-legal a:hover { color: var(--accent); }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--line); padding: 2.5rem 2rem;
+      text-align: center; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.06em;
+    }
+    .footer .links { display: flex; justify-content: center; gap: 24px; margin-top: 10px; }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .coaches-grid { grid-template-columns: repeat(3, 1fr); }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .coaches-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding: 80px 18px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header-outer" id="header-outer">
+    <header class="header">
+      <div class="logo-wrap">
+        <img src="../assets/logo.png" alt="Rise">
+        <span class="logo-text">Rise</span>
+      </div>
+      <a class="nav-cta" href="#join">Join Now</a>
+    </header>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="../assets/videos/video-6.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-content">
+      <div class="hero-label">Community Membership</div>
+      <h1>Stop Building Alone. Start Building With <em>Momentum.</em></h1>
+      <div class="hero-price">&euro;1,500</div>
+      <div class="hero-price-note">One-time investment, or split into 2, 3 or 4 payments</div>
+      <p class="hero-sub">A structured network of committed electronic artists built on accountability, execution, and shared progress. Includes full access to the Rise Course.</p>
+      <a class="btn-primary" href="../checkout/payment-plan/">Join the Community Now</a>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="block">
+    <div class="section-eyebrow">What you get</div>
+    <h2 class="section-title">Structure, accountability, and a network that moves.</h2>
+    <p class="section-sub">Everything you need to stop working in isolation and start building with people who are as serious as you are.</p>
+
+    <div class="feature-grid">
+      <div class="f-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path d="M12 1v6m0 6v6"/><path d="M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24"/><path d="M1 12h6m6 0h6"/><path d="M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/></svg></div>
+        <h3>Weekly Accountability Calls</h3>
+        <p>Structured group sessions focused on progress and forward momentum. Focused execution rhythms, not casual hangouts.</p>
+      </div>
+      <div class="f-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 17h20"/></svg></div>
+        <h3>Monthly Deep-Dive Workshops</h3>
+        <p>Expert-led sessions on production, strategy, and industry topics. Ongoing education built into your membership.</p>
+      </div>
+      <div class="f-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h3>Peer Feedback & Coaching</h3>
+        <p>Honest, constructive feedback from artists who understand your craft. Real input that sharpens your output.</p>
+      </div>
+      <div class="f-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Private Artist Network</h3>
+        <p>Direct connection to a curated group of committed electronic artists. Collaborations happen naturally here.</p>
+      </div>
+      <div class="f-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <h3>Full Course Access Included</h3>
+        <p>Every member gets complete access to the Rise Course: 11 video modules, sample packs, and the industry manual.</p>
+      </div>
+      <div class="f-card">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h3>Event Access</h3>
+        <p>Invitations to exclusive Rise events and industry opportunities. Real-world connections that compound over time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAROUSEL -->
+  <div class="carousel-wrap">
+    <div class="carousel-track">
+      <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <video src="../assets/videos/video-4.mp4" autoplay muted loop playsinline></video>
+      <img src="../assets/photos/photo-11.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+      <video src="../assets/videos/video-5.mp4" autoplay muted loop playsinline></video>
+      <img src="../assets/photos/photo-17.jpg" alt="Rise" loading="lazy">
+      <video src="../assets/videos/video-3.mp4" autoplay muted loop playsinline></video>
+      <!-- duplicate for seamless loop -->
+      <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <video src="../assets/videos/video-4.mp4" autoplay muted loop playsinline></video>
+      <img src="../assets/photos/photo-11.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+      <video src="../assets/videos/video-5.mp4" autoplay muted loop playsinline></video>
+      <img src="../assets/photos/photo-17.jpg" alt="Rise" loading="lazy">
+      <video src="../assets/videos/video-3.mp4" autoplay muted loop playsinline></video>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="block">
+    <div class="section-eyebrow">What happens after payment</div>
+    <h2 class="section-title">From payment to full integration.</h2>
+    <p class="section-sub">Your journey into the Rise ecosystem in 6 steps.</p>
+
+    <div class="steps-grid">
+      <div class="s-card"><div class="s-num">1</div><h4>Payment Confirmed</h4><p>Your membership is secured through Stripe. Confirmation delivered immediately.</p></div>
+      <div class="s-card"><div class="s-num">2</div><h4>Welcome & Onboarding</h4><p>Receive your community guide and introduction protocol. Your journey into the ecosystem begins.</p></div>
+      <div class="s-card"><div class="s-num">3</div><h4>Complete the Course</h4><p>Work through the included Rise Course and introduce yourself to the group. Required before your first call.</p></div>
+      <div class="s-card"><div class="s-num">4</div><h4>Join Your First Call</h4><p>Once your course is completed, attend your first weekly accountability session.</p></div>
+      <div class="s-card"><div class="s-num">5</div><h4>Engage Consistently</h4><p>Participate in calls, workshops, and feedback cycles. The rhythm drives results.</p></div>
+      <div class="s-card"><div class="s-num">6</div><h4>Build Real Momentum</h4><p>Watch your consistency compound through structured support and a network that moves with you.</p></div>
+    </div>
+  </section>
+
+  <!-- COACHES -->
+  <section class="block">
+    <div class="section-eyebrow">Meet the coaches</div>
+    <h2 class="section-title">The people behind your growth.</h2>
+    <p class="section-sub">Each coach brings specific expertise and years of industry experience.</p>
+
+    <div class="coaches-grid">
+      <div class="coach-card">
+        <img src="../assets/photos/Photo-20.png" alt="Remy">
+        <div class="info">
+          <h4>Remy</h4>
+          <div class="role">Pop & Dance Production</div>
+          <p>Producer from The Hague. Known for layered textures and emotional depth. Collaborated with Lost Frequencies.</p>
+        </div>
+      </div>
+      <div class="coach-card">
+        <img src="../assets/photos/Photo-22.png" alt="Artcode">
+        <div class="info">
+          <h4>Artcode</h4>
+          <div class="role">Electronic & Audiovisual</div>
+          <p>Based in Rotterdam with 15+ years across electronic genres. Music with TouchDesigner visuals and live modular performance.</p>
+        </div>
+      </div>
+      <div class="coach-card">
+        <img src="../assets/photos/Jim.png" alt="Vannood">
+        <div class="info">
+          <h4>Vannood</h4>
+          <div class="role">Entrepreneur & Artist</div>
+          <p>Over 15 years specializing in techno production. Expert in structuring creative processes into finished work.</p>
+        </div>
+      </div>
+      <div class="coach-card">
+        <img src="../assets/photos/Photo50.png" alt="Paul">
+        <div class="info">
+          <h4>Paul</h4>
+          <div class="role">Mix & Master Engineer</div>
+          <p>Focused on release planning, market translation, and building sustainable audience growth for electronic artists.</p>
+        </div>
+      </div>
+      <div class="coach-card">
+        <img src="../assets/photos/Maurits.png" alt="Maurits">
+        <div class="info">
+          <h4>Maurits</h4>
+          <div class="role">Business & Operations</div>
+          <p>Handles the operational and business side of artist development. Builds structures for long-term creative growth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta" id="join">
+    <h2>Your Network Is Waiting</h2>
+    <div class="price">&euro;1,500</div>
+    <p class="sub">Weekly accountability. Monthly deep-dives. Peer feedback. The Rise Course. And a curated network of artists who are as serious as you are.</p>
+    <a class="btn-primary" href="../checkout/payment-plan/">Join the Community Now</a>
+    <div class="cta-legal">
+      <a href="../terms/">Terms & Conditions</a> &bull; <a href="../privacy/">Privacy Policy</a>
+      <p style="margin-top: 0.75rem;">Secure payment via Stripe.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    &copy; 2026 Rise &middot; Recode Group B.V. &middot; All rights reserved
+    <div class="links">
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <!-- TEST BADGE -->
+  <style>
+    .test-badge {
+      position: fixed; top: 16px; right: 16px; z-index: 9999;
+      background: #ff3b30; color: #fff; font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(255,59,48,0.4);
+      pointer-events: none; animation: badge-pulse 2s ease-in-out infinite;
+    }
+    @keyframes badge-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+  </style>
+  <div class="test-badge">Test Mode</div>
+
+  <script>
+    (function() {
+      const hdr = document.getElementById('header-outer');
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            hdr.classList.toggle('scrolled', window.scrollY > 60);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

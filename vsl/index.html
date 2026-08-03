@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE — You Know You Should Be Further By Now</title>
+  <meta name="description" content="This is not a course. This is about building the artist career you said you wanted. For producers and DJs who are done guessing and ready to go all-in." />
+  <style>
+    /* ════════════════════════════════════════════════════
+       Rise VSL — Landing Page
+       ════════════════════════════════════════════════════ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --card: rgba(255,255,255,0.03);
+      --card-hover: rgba(255,255,255,0.06);
+      --maxw: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    /* ── Header ──────────────────────────────────────── */
+    .header-outer {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    .header-outer.scrolled {
+      background: rgba(15,15,15,0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      transition: max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  padding 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .header-outer.scrolled .header {
+      max-width: 100%;
+      padding: 14px 28px;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-wrap img {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+    }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      transition: opacity 0.5s ease;
+    }
+    .header-outer.scrolled .logo-text {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .nav-cta {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 650px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 24px 100px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg video {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center 30%;
+      will-change: transform;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.12), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.06), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.6) 40%, rgba(15,15,15,0.9) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 860px;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: inline-block;
+      background: rgba(255,104,62,0.12);
+      border: 1px solid rgba(255,104,62,0.3);
+      padding: 0.35rem 1rem;
+      border-radius: 4px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 22ch;
+      margin: 0 auto;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      margin-top: 22px;
+      max-width: 54ch;
+      color: var(--muted);
+      font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+      line-height: 1.65;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-row {
+      margin-top: 40px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 32px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
+    .btn-ghost {
+      padding: 16px 28px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      transition: all 0.25s ease;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-stats {
+      position: relative; z-index: 2;
+      margin-top: 70px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 760px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+    }
+    .stat .num {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    .stat .label {
+      margin-top: 4px;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ── Sections ────────────────────────────────────── */
+    .block {
+      padding: 5rem 2rem;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .block-dark {
+      background: rgba(20,20,20,0.6);
+      border-top: 1px solid rgba(255,104,62,0.06);
+      border-bottom: 1px solid rgba(255,104,62,0.06);
+    }
+    .block-dark .block {
+      padding: 5rem 2rem;
+    }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      max-width: 18ch;
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 60ch;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    /* ── Animated Dividers ────────────────────────────── */
+    .section-divider {
+      position: relative;
+      height: 3px;
+      margin-bottom: 2.5rem;
+      will-change: clip-path, opacity;
+    }
+    .div-line {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #ff683e 0%, rgba(255,104,62,0.6) 40%, rgba(255,104,62,0) 100%);
+    }
+
+    @keyframes pulse-a {
+      0%   { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+      5%   { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+      8%   { clip-path: inset(0 62% 0 0); opacity: 0.85; }
+      14%  { clip-path: inset(0 62% 0 0); opacity: 0.85; }
+      18%  { clip-path: inset(0 72% 0 0); opacity: 0.75; }
+      22%  { clip-path: inset(0 72% 0 0); opacity: 0.75; }
+      27%  { clip-path: inset(0 30% 0 0); opacity: 0.95; }
+      33%  { clip-path: inset(0 35% 0 0); opacity: 0.9; }
+      40%  { clip-path: inset(0 35% 0 0); opacity: 0.9; }
+      46%  { clip-path: inset(0 0%  0 0); opacity: 1; }
+      52%  { clip-path: inset(0 10% 0 0); opacity: 0.95; }
+      58%  { clip-path: inset(0 10% 0 0); opacity: 0.95; }
+      65%  { clip-path: inset(0 55% 0 0); opacity: 0.8; }
+      72%  { clip-path: inset(0 55% 0 0); opacity: 0.8; }
+      78%  { clip-path: inset(0 80% 0 0); opacity: 0.65; }
+      90%  { clip-path: inset(0 85% 0 0); opacity: 0.6; }
+      100% { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+    }
+    @keyframes pulse-c {
+      0%   { clip-path: inset(0 86% 0 0); opacity: 0.6; }
+      10%  { clip-path: inset(0 86% 0 0); opacity: 0.6; }
+      15%  { clip-path: inset(0 78% 0 0); opacity: 0.7; }
+      22%  { clip-path: inset(0 78% 0 0); opacity: 0.7; }
+      26%  { clip-path: inset(0 65% 0 0); opacity: 0.8; }
+      34%  { clip-path: inset(0 65% 0 0); opacity: 0.8; }
+      38%  { clip-path: inset(0 45% 0 0); opacity: 0.88; }
+      42%  { clip-path: inset(0 45% 0 0); opacity: 0.88; }
+      45%  { clip-path: inset(0 0%  0 0); opacity: 1; }
+      48%  { clip-path: inset(0 15% 0 0); opacity: 0.92; }
+      54%  { clip-path: inset(0 15% 0 0); opacity: 0.92; }
+      60%  { clip-path: inset(0 50% 0 0); opacity: 0.82; }
+      68%  { clip-path: inset(0 50% 0 0); opacity: 0.82; }
+      74%  { clip-path: inset(0 75% 0 0); opacity: 0.68; }
+      85%  { clip-path: inset(0 82% 0 0); opacity: 0.6; }
+      100% { clip-path: inset(0 86% 0 0); opacity: 0.6; }
+    }
+
+    .div-1 { animation: pulse-a 4.1s ease-in-out -0.3s infinite; }
+    .div-3 { animation: pulse-c 4.5s ease-in-out -1.0s infinite; }
+
+    /* ── Unlock Grid (Cards) ─────────────────────────── */
+    .unlock-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .unlock-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 2rem 1.75rem 2.25rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .unlock-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #ff683e, transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .unlock-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .unlock-card:hover::before { opacity: 1; }
+    .unlock-card .icon {
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,104,62,0.12);
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+    }
+    .unlock-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .unlock-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* ── Community Block ──────────────────────────────── */
+    .community {
+      background: rgba(255,104,62,0.06);
+      border: 1px solid rgba(255,104,62,0.18);
+      border-radius: 14px;
+      padding: 3.5rem 2.75rem;
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .community .lead h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .community .lead h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .community .lead p {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 52ch;
+      line-height: 1.7;
+    }
+    .community .points {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+    .community .points li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .community .points li::before {
+      content: "→";
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── Photo Carousel ─────────────────────────────────── */
+    .carousel-wrap {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .carousel-track {
+      display: flex;
+      gap: 12px;
+      animation: carousel-scroll 40s linear infinite;
+      width: max-content;
+    }
+    .carousel-track img {
+      height: 140px;
+      width: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .carousel-track img:hover {
+      opacity: 1;
+    }
+    @keyframes carousel-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Modal ────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: stretch;
+      justify-content: stretch;
+      animation: fadeIn 0.25s ease;
+    }
+    .modal-overlay.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+    .modal {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 32px;
+      position: relative;
+      animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes slideUp { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+
+    .modal-top {
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-back {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      transition: color 0.2s;
+    }
+    .modal-back:hover { color: var(--fg); }
+    .modal-back.hidden { visibility: hidden; }
+    .modal-close {
+      font-size: 22px;
+      color: var(--muted);
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { color: var(--fg); background: var(--line); }
+
+    .modal-body {
+      max-width: 720px;
+      width: 100%;
+      margin: 60px auto 0;
+      flex: 1;
+    }
+
+    /* progress */
+    .progress {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .progress span {
+      flex: 1;
+      height: 2px;
+      background: var(--line);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress span.done { background: var(--accent); }
+
+    .step-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      max-width: 18ch;
+      margin-bottom: 36px;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+    .option {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 18px 22px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+    .option:hover {
+      background: var(--card-hover);
+      border-color: var(--line-strong);
+    }
+    .option.selected {
+      border-color: var(--accent);
+      background: rgba(255,104,62,0.08);
+    }
+    .option .letter {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      width: 14px;
+    }
+    .option .text {
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+
+    /* slider step */
+    .slider-step { text-align: center; padding-top: 20px; }
+    .slider-value {
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .slider-label {
+      margin-top: 10px;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .slider-wrap {
+      margin-top: 50px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+    .slider-wrap input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      background: var(--line);
+      border-radius: 4px;
+      outline: none;
+    }
+    .slider-wrap input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      background: var(--fg);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 4px solid var(--bg);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .slider-wrap input[type=range]::-moz-range-thumb {
+      width: 22px; height: 22px;
+      background: var(--fg);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 4px solid var(--bg);
+    }
+    .slider-bounds {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    .btn-continue {
+      background: var(--accent);
+      color: #0a0a0a;
+      width: 100%;
+      max-width: 420px;
+      margin: 36px auto 0;
+      display: block;
+      padding: 18px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .btn-continue:hover { background: var(--accent-hover); }
+    .btn-continue:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* form step */
+    .form-step .form-row {
+      display: grid;
+      gap: 14px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .form-step input {
+      background: var(--card);
+      border: 1px solid var(--line);
+      color: var(--fg);
+      padding: 16px 18px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-step input:focus { border-color: var(--accent); }
+
+    .success {
+      text-align: center;
+      max-width: 480px;
+      margin: 60px auto 0;
+    }
+    .success .check {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.15);
+      color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+    .success h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .success p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      .unlock-grid { grid-template-columns: repeat(2, 1fr); }
+      .community { grid-template-columns: 1fr; padding: 2.5rem 2rem; }
+      .hero-stats { grid-template-columns: 1fr; gap: 18px; padding-top: 24px; margin-top: 50px; }
+    }
+    @media (max-width: 520px) {
+      .unlock-grid { grid-template-columns: 1fr; }
+      .hero { padding: 60px 18px 80px; min-height: auto; }
+      .header { padding: 14px 18px; }
+      .header-outer.scrolled .header { padding: 14px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header-outer" id="header-outer">
+    <header class="header">
+      <div class="logo-wrap">
+        <img src="../assets/logo.png" alt="Rise">
+        <span class="logo-text">Rise</span>
+      </div>
+      <button class="nav-cta" onclick="openModal()">Apply for Membership</button>
+    </header>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <video autoplay muted loop playsinline preload="auto" disablePictureInPicture>
+        <source src="../assets/platform/Vids/4.mov" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Join a community of committed artists</div>
+      <h1>Your next chapter as an artist <em>starts here.</em></h1>
+      <p class="hero-sub">You already know you're capable of more. You feel it every time you open your DAW, every time you hear someone else's track blow up. You just haven't had the system, the people and the structure to actually make it happen. Until now.</p>
+      <div class="cta-row">
+        <button class="btn-primary" onclick="openModal()">Apply for Membership →</button>
+        <a class="btn-ghost" href="#what-you-unlock">See what's inside</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="num">Full Clarity</div>
+        <div class="label">Know your next move</div>
+      </div>
+      <div class="stat">
+        <div class="num">By Artists</div>
+        <div class="label">For artists</div>
+      </div>
+      <div class="stat">
+        <div class="num">Real Progress</div>
+        <div class="label">Every single week</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU UNLOCK -->
+  <section id="what-you-unlock" class="block">
+    <div class="section-divider div-1"><span class="div-line"></span></div>
+    <div class="section-eyebrow">What you get access to</div>
+    <h2 class="section-title">Everything you need to actually move forward as an artist.</h2>
+    <p class="section-sub">A complete system built around your growth. Courses, community, coaching and accountability in one place. This is a different path. One that actually works.</p>
+
+    <div class="unlock-grid">
+      <div class="unlock-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <h3>Courses</h3>
+        <p>A full library of video courses on production, mixing and music business. Built by working artists so you always know exactly what to focus on next.</p>
+      </div>
+      <div class="unlock-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Commitment</h3>
+        <p>Weekly calls, track feedback and structured goals that keep you showing up. Even when motivation fades and life gets in the way.</p>
+      </div>
+      <div class="unlock-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Community</h3>
+        <p>A tight group of producers and DJs who are actually doing the work. Not a Facebook group. Not a Discord server. A real inner circle that pushes you forward.</p>
+      </div>
+      <div class="unlock-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Accountability</h3>
+        <p>Coaches and peers who check in, give you real feedback on your tracks, and make sure you don't slide back into old patterns. People who hold you to your word.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO CAROUSEL -->
+  <div class="carousel-wrap">
+    <div class="carousel-track">
+      <img src="../assets/photos/photo-1.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-3.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-4.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-5.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-7.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-9.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-10.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-11.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="" loading="lazy">
+      <!-- duplicate for seamless loop -->
+      <img src="../assets/photos/photo-1.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-3.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-4.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-5.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-7.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-9.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-10.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-11.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+
+  <!-- COMMUNITY -->
+  <section class="block">
+    <div class="section-divider div-3"><span class="div-line"></span></div>
+    <div class="community">
+      <div class="lead">
+        <h2>Done doing this <em>alone?</em></h2>
+        <p>Success in isolation is a myth. If you want to go fast, go alone. But if you want to go far, you need the right people around you. No noise. No bullshit. Just focus, progression, and people who actually hold you to your word.</p>
+      </div>
+      <ul class="points">
+        <li>A brotherhood of producers who are all-in, not a Facebook group</li>
+        <li>Weekly calls and structure that keep you moving, even when motivation dips</li>
+        <li>Real feedback from people who understand your sound</li>
+        <li>A personal call to make sure this is right for you</li>
+      </ul>
+    </div>
+
+    <div style="text-align:center; margin-top: 3.5rem;">
+      <button class="btn-primary" onclick="openModal()">Apply for Membership →</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    © 2026 Rise · Recode Group B.V. · All rights reserved
+    <div class="links">
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <!-- ============== APPLICATION MODAL ============== -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div class="modal-top">
+        <button class="modal-back" id="back-btn" onclick="prevStep()">← Back</button>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    // ====== STICKY HEADER ======
+    (function() {
+      const hdr = document.getElementById('header-outer');
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            if (window.scrollY > 60) {
+              hdr.classList.add('scrolled');
+            } else {
+              hdr.classList.remove('scrolled');
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+
+    // ====== APPLICATION FLOW ======
+    const state = {
+      step: 0,
+      answers: {
+        years: null,
+        time: null,
+        challenge: null,
+        budget: 2500,
+        name: "",
+        whatsapp: "",
+        email: ""
+      }
+    };
+
+    const STEPS = [
+      {
+        type: "choice",
+        key: "years",
+        title: "How many years have you been producing?",
+        options: [
+          "Less than 1 year",
+          "1 – 3 years",
+          "3 – 5 years",
+          "5+ years"
+        ]
+      },
+      {
+        type: "choice",
+        key: "time",
+        title: "How much time do you spend on your music?",
+        options: [
+          "A few hours a week",
+          "5 – 15 hours a week",
+          "15 – 30 hours a week",
+          "It's my full-time focus"
+        ]
+      },
+      {
+        type: "choice",
+        key: "challenge",
+        title: "What's your biggest challenge right now?",
+        options: [
+          "Finishing tracks consistently",
+          "Getting my music heard / building an audience",
+          "Improving my production or mixing skills",
+          "Staying motivated and accountable",
+          "Turning music into a career or income"
+        ]
+      },
+      {
+        type: "slider",
+        key: "budget",
+        title: "What's your yearly budget for your music career?",
+        min: 0,
+        max: 10000,
+        step: 250,
+        format: (v) => v >= 10000 ? "€10k+" : "€" + v.toLocaleString("en-US")
+      },
+      {
+        type: "form",
+        title: "One last thing.",
+        subtitle: "Where can our community manager reach you to set up the call?"
+      },
+      {
+        type: "success"
+      }
+    ];
+
+    const overlay = document.getElementById("modal");
+    const body = document.getElementById("modal-body");
+    const backBtn = document.getElementById("back-btn");
+
+    function openModal() {
+      state.step = 0;
+      overlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+      render();
+    }
+    function closeModal() {
+      overlay.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    function nextStep() {
+      if (state.step < STEPS.length - 1) {
+        state.step++;
+        render();
+      }
+    }
+    function prevStep() {
+      if (state.step > 0) {
+        state.step--;
+        render();
+      } else {
+        closeModal();
+      }
+    }
+
+    function render() {
+      const step = STEPS[state.step];
+      backBtn.classList.toggle("hidden", state.step === 0 || step.type === "success");
+
+      const totalQuestionSteps = STEPS.filter(s => s.type !== "success").length;
+      const progressBars = step.type === "success"
+        ? ""
+        : `<div class="progress">${
+            Array.from({length: totalQuestionSteps}, (_, i) =>
+              `<span class="${i <= state.step ? 'done' : ''}"></span>`
+            ).join("")
+          }</div>`;
+
+      if (step.type === "choice") {
+        body.innerHTML = `
+          ${progressBars}
+          <h2 class="step-title">${step.title}</h2>
+          <div class="options">
+            ${step.options.map((opt, i) => `
+              <button class="option ${state.answers[step.key] === opt ? 'selected' : ''}"
+                      data-value="${opt}">
+                <span class="letter">${String.fromCharCode(65 + i)}.</span>
+                <span class="text">${opt}</span>
+              </button>
+            `).join("")}
+          </div>
+        `;
+        body.querySelectorAll(".option").forEach(btn => {
+          btn.addEventListener("click", () => {
+            state.answers[step.key] = btn.dataset.value;
+            body.querySelectorAll(".option").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            setTimeout(nextStep, 220);
+          });
+        });
+      }
+      else if (step.type === "slider") {
+        body.innerHTML = `
+          ${progressBars}
+          <h2 class="step-title">${step.title}</h2>
+          <div class="slider-step">
+            <div class="slider-value" id="slider-val">${step.format(state.answers[step.key])}</div>
+            <div class="slider-label">Per year</div>
+            <div class="slider-wrap">
+              <input type="range" min="${step.min}" max="${step.max}" step="${step.step}"
+                     value="${state.answers[step.key]}" id="slider-input"/>
+              <div class="slider-bounds">
+                <span>€0</span>
+                <span>€10k+</span>
+              </div>
+            </div>
+            <button class="btn-continue" id="continue-btn">Continue →</button>
+          </div>
+        `;
+        const input = document.getElementById("slider-input");
+        const valEl = document.getElementById("slider-val");
+        input.addEventListener("input", e => {
+          const v = Number(e.target.value);
+          state.answers[step.key] = v;
+          valEl.textContent = step.format(v);
+        });
+        document.getElementById("continue-btn").addEventListener("click", nextStep);
+      }
+      else if (step.type === "form") {
+        body.innerHTML = `
+          ${progressBars}
+          <h2 class="step-title">${step.title}</h2>
+          <p style="color:var(--muted); margin-bottom:30px; max-width:48ch;">${step.subtitle}</p>
+          <form class="form-step" id="apply-form">
+            <div class="form-row">
+              <input type="text" name="name" placeholder="Your name" required value="${state.answers.name}"/>
+              <input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required value="${state.answers.whatsapp}"/>
+              <input type="email" name="email" placeholder="Email address" required value="${state.answers.email}"/>
+              <button type="submit" class="btn-continue" style="margin-top: 8px;">Submit Application →</button>
+            </div>
+          </form>
+        `;
+        document.getElementById("apply-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const fd = new FormData(e.target);
+          state.answers.name = fd.get("name");
+          state.answers.whatsapp = fd.get("whatsapp");
+          state.answers.email = fd.get("email");
+          console.log("Application submitted:", state.answers);
+          nextStep();
+        });
+      }
+      else if (step.type === "success") {
+        const params = new URLSearchParams();
+        if (state.answers.name) params.set('name', state.answers.name);
+        if (state.answers.email) params.set('email', state.answers.email);
+        window.location.href = 'thanks/' + (params.toString() ? '?' + params.toString() : '');
+        return;
+      }
+    }
+
+    // close on backdrop click
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal();
+    });
+    // close on escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("open")) closeModal();
+    });
+  </script>
+</body>
+</html>

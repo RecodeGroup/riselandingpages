@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank you — Rise Artist Academy</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/assets/favicon.png">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --bg-3: #222;
+      --fg: #ffffff;
+      --muted: #aaa;
+      --dim: #666;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --accent-glow: rgba(255,104,62,0.12);
+      --green: #22c55e;
+      --blue: #3b82f6;
+      --gold: #f59e0b;
+      --line: rgba(255,255,255,0.08);
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-row img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+    .logo-row span {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg);
+    }
+
+    /* ── Hero Banner ── */
+    .hero-banner {
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-banner-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-banner-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.25) saturate(1.2);
+    }
+    .hero-banner-content {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 1.5rem;
+      max-width: 640px;
+    }
+    .check-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      animation: popIn 0.5s ease;
+    }
+    .check-circle svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .hero-banner h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+    .hero-banner p {
+      color: #ccc;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    /* ── Main Content ── */
+    .main {
+      flex: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      width: 100%;
+    }
+
+    /* ── Correction note ── */
+    .correction-note {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .wa-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+    }
+    .correction-note a {
+      color: #25D366;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .correction-note a:hover { color: #20bd5a; }
+
+    /* ── Next Steps ── */
+    .next-steps {
+      margin-bottom: 3.5rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .next-steps h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .next-steps > p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 1.15rem 1.25rem;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: border-color 0.2s;
+    }
+    .step-item:hover { border-color: rgba(255,255,255,0.12); }
+    .step-num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-text h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-text p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Photo strip ── */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 3.5rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .photo-strip img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Tier Explorer ── */
+    .tier-section {
+      margin-bottom: 3.5rem;
+    }
+    .tier-section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .tier-section > p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .tier-section > p strong {
+      color: var(--fg);
+    }
+
+    /* Tier Tabs */
+    .tier-tabs {
+      display: flex;
+      gap: 0;
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-bottom: none;
+    }
+    .tier-tab {
+      flex: 1;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: var(--bg-2);
+      color: var(--dim);
+      border: none;
+      border-right: 1px solid var(--line);
+      transition: background 0.2s, color 0.2s;
+      font-family: inherit;
+    }
+    .tier-tab:last-child { border-right: none; }
+    .tier-tab:hover { color: var(--fg); background: var(--bg-3); }
+    .tier-tab.active { color: var(--accent); background: var(--bg); border-bottom: 2px solid var(--accent); }
+    .tier-tab.active[data-tier="elite"] { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* Tier Panels */
+    .tier-panel {
+      display: none;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      padding: 2rem;
+      animation: fadePanel 0.3s ease;
+    }
+    .tier-panel.active { display: block; }
+    @keyframes fadePanel {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .tier-panel-top {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+    .tier-panel-img {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: none;
+    }
+    .tier-panel-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .tier-panel-meta { flex: 1; }
+    .tier-panel-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tier-panel-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .tier-panel-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .tier-panel-price .period {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--dim);
+    }
+    .tier-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .tier-badge.badge-base { background: rgba(59,130,246,0.12); color: var(--blue); }
+    .tier-badge.badge-core { background: var(--accent-glow); color: var(--accent); }
+    .tier-badge.badge-elite { background: rgba(245,158,11,0.12); color: var(--gold); }
+
+    .tier-panel p.tier-fit {
+      color: var(--fg);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .tier-panel p.tier-desc {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    .tier-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+    }
+    .tier-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .tier-features li .tick {
+      flex-shrink: 0;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-top: 1px;
+    }
+
+    /* ── Certificate teaser ── */
+    .cert-teaser {
+      background: linear-gradient(135deg, rgba(255,104,62,0.08), rgba(245,158,11,0.06));
+      border: 1px solid rgba(255,104,62,0.15);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .cert-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cert-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .cert-teaser h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .cert-teaser p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+
+    /* ── Responsive ── */
+    @media (min-width: 600px) {
+      .tier-panel-img { display: block; }
+    }
+    @media (max-width: 600px) {
+      .main { padding: 2rem 1rem 3rem; }
+      .photo-strip { grid-template-columns: 1fr 1fr; }
+      .photo-strip img:last-child { display: none; }
+      .tier-features { grid-template-columns: 1fr; }
+      .tier-tab { font-size: 0.68rem; padding: 10px 8px; letter-spacing: 0.06em; }
+      .hero-banner { min-height: 260px; }
+      .hero-banner-content { padding: 3rem 1.25rem; }
+      .cert-teaser { flex-direction: column; gap: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .check-circle { animation: none; }
+      .tier-panel { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="header">
+  <a href="/" class="logo-row">
+    <img src="/assets/favicon.png" alt="Rise">
+    <span>Rise</span>
+  </a>
+</header>
+
+<!-- ── Hero Banner with background image ── -->
+<div class="hero-banner">
+  <div class="hero-banner-bg">
+    <img src="/assets/photos/photo-18.jpg" alt="">
+  </div>
+  <div class="hero-banner-content">
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1>Thank you for applying!</h1>
+    <p>We've received your application. Our team will review your demo and reach out to you personally within <strong>48 hours</strong> on working days.</p>
+  </div>
+</div>
+
+<!-- ── Main ── -->
+<main class="main">
+
+  <!-- Correction Note with WhatsApp -->
+  <div class="correction-note">
+    <!-- WhatsApp Logo SVG -->
+    <svg class="wa-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#25D366"/>
+      <path d="M23.3 8.6C21.4 6.7 18.8 5.6 16 5.6c-5.7 0-10.4 4.6-10.4 10.4 0 1.8.5 3.6 1.4 5.2L5.5 26.4l5.4-1.4c1.5.8 3.2 1.3 4.9 1.3h0c5.7 0 10.4-4.7 10.4-10.4.1-2.8-1-5.4-2.9-7.3zm-7.3 16c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.2.8.9-3.1-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.8 3.9-8.6 8.6-8.6 2.3 0 4.5.9 6.1 2.5s2.5 3.8 2.5 6.1c-.1 4.7-4 8.6-8.8 8.6zm4.7-6.5c-.3-.1-1.5-.8-1.8-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.3 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z" fill="white"/>
+    </svg>
+    <div>Entered the wrong number or made a mistake? Send us a quick message with your name via <a href="https://wa.me/31612345678" target="_blank" rel="noopener">WhatsApp</a> and we'll sort it out.</div>
+  </div>
+
+  <!-- What Happens Next -->
+  <div class="next-steps">
+    <div class="section-label">What happens next</div>
+    <h2>We take it from here.</h2>
+    <p>Every application gets personal attention. You'll hear from us <strong>within 48 hours on working days</strong>. Here's exactly what you can expect.</p>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h4>We listen to your demo</h4>
+          <p>Our team listens to the music you submitted, reviews your experience, your goals and where you currently stand as a producer.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h4>We schedule an intro call</h4>
+          <p>Before we decide on a tier, we schedule a short introductory call with you. We want to get to know you, understand your ambitions and see if you have the focus and commitment to get the most out of Rise.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h4>We determine your level</h4>
+          <p>Based on your demo, your experience, the intro call and your goals, we determine whether you're the best fit for BASE, CORE or ELITE. This way, you're always in the right group.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <h4>You get started</h4>
+          <p>Once everything is confirmed, you receive access to Rise and can start your journey as an artist right away.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo Strip -->
+  <div class="photo-strip">
+    <img src="/assets/photos/photo-14.jpg" alt="Rise community session">
+    <img src="/assets/photos/photo-17.jpg" alt="Rise workshop">
+    <img src="/assets/photos/P23.JPG" alt="Rise event">
+  </div>
+
+  <!-- Tier Explorer -->
+  <div class="tier-section">
+    <div class="section-label">Three levels</div>
+    <h2>We match you to the right tier.</h2>
+    <p>Every artist is at a different point in their journey. That's why Rise has three levels. <strong>We decide which level fits you best based on your application</strong>, so you get exactly the guidance you need.</p>
+
+    <div class="tier-tabs">
+      <button class="tier-tab active" data-tier="base">Base</button>
+      <button class="tier-tab" data-tier="core">Core</button>
+      <button class="tier-tab" data-tier="elite">Elite</button>
+    </div>
+
+    <!-- BASE Panel -->
+    <div class="tier-panel active" id="panel-base">
+      <div class="tier-panel-top">
+        <div class="tier-panel-img"><img src="/assets/photos/photo-15.jpg" alt="Production session"></div>
+        <div class="tier-panel-meta">
+          <span class="tier-badge badge-base">6-month program</span>
+          <div class="tier-panel-header">
+            <h3>BASE — Production Foundations</h3>
+            <div class="tier-panel-price">&euro; 1.200,-</div>
+          </div>
+          <p class="tier-fit">For: Producers building their foundation from the ground up</p>
+          <p class="tier-desc">A structured 6-month program focused on music production, sound design, mixing and finishing tracks. Build the skills you need to consistently create professional-sounding music.</p>
+        </div>
+      </div>
+      <ul class="tier-features">
+        <li><span class="tick">&#10003;</span> 7 production modules (beginner to advanced)</li>
+        <li><span class="tick">&#10003;</span> Sample packs and presets included</li>
+        <li><span class="tick">&#10003;</span> 6-month guided program</li>
+        <li><span class="tick">&#10003;</span> Community access</li>
+        <li><span class="tick">&#10003;</span> Learn to finish and mix tracks professionally</li>
+        <li><span class="tick">&#10003;</span> Rise Certificate upon completion</li>
+      </ul>
+    </div>
+
+    <!-- CORE Panel -->
+    <div class="tier-panel" id="panel-core">
+      <div class="tier-panel-top">
+        <div class="tier-panel-img"><img src="/assets/photos/photo-11.jpg" alt="Branding workshop"></div>
+        <div class="tier-panel-meta">
+          <span class="tier-badge badge-core">Annual membership</span>
+          <div class="tier-panel-header">
+            <h3>CORE — Artist Career</h3>
+            <div class="tier-panel-price">&euro; 2.650,- <span class="period">/year</span></div>
+          </div>
+          <p class="tier-fit">For: Producers ready to build a real artist career</p>
+          <p class="tier-desc">Go beyond production. Learn branding, releasing, marketing and how to build a real artist career. For producers who are ready to become complete artists.</p>
+        </div>
+      </div>
+      <ul class="tier-features">
+        <li><span class="tick">&#10003;</span> Everything in BASE</li>
+        <li><span class="tick">&#10003;</span> Branding and identity modules</li>
+        <li><span class="tick">&#10003;</span> Release strategy and royalties</li>
+        <li><span class="tick">&#10003;</span> Marketing and audience growth</li>
+        <li><span class="tick">&#10003;</span> Weekly accountability calls</li>
+        <li><span class="tick">&#10003;</span> Track and release feedback</li>
+        <li><span class="tick">&#10003;</span> Rise Certificate upon completion</li>
+      </ul>
+    </div>
+
+    <!-- ELITE Panel -->
+    <div class="tier-panel" id="panel-elite">
+      <div class="tier-panel-top">
+        <div class="tier-panel-img"><img src="/assets/photos/photo-13.jpg" alt="Elite coaching"></div>
+        <div class="tier-panel-meta">
+          <span class="tier-badge badge-elite">By invitation</span>
+          <div class="tier-panel-header">
+            <h3>ELITE — Scale to the Top</h3>
+            <div class="tier-panel-price">&euro; 5.000,- <span class="period">/year</span></div>
+          </div>
+          <p class="tier-fit">For: Artists already releasing and performing who want to scale</p>
+          <p class="tier-desc">For artists who are already putting out music and performing live. Scale your career to the next level with direct access to industry professionals, personal coaching and a tight crew pushing you forward.</p>
+        </div>
+      </div>
+      <ul class="tier-features">
+        <li><span class="tick">&#10003;</span> Everything in CORE</li>
+        <li><span class="tick">&#10003;</span> Groups of max 8 people for full focus</li>
+        <li><span class="tick">&#10003;</span> 1-on-1 coaching sessions</li>
+        <li><span class="tick">&#10003;</span> Career scaling strategy</li>
+        <li><span class="tick">&#10003;</span> Industry network access</li>
+        <li><span class="tick">&#10003;</span> Event invitations</li>
+        <li><span class="tick">&#10003;</span> Priority feedback on releases</li>
+        <li><span class="tick">&#10003;</span> Weekly accountability and networking</li>
+        <li><span class="tick">&#10003;</span> Direct line with the Rise team</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Certificate Teaser -->
+  <div class="cert-teaser">
+    <div class="cert-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 15l-3 3v4l3-2 3 2v-4l-3-3z"/><circle cx="12" cy="9" r="6"/><path d="M9 9l2 2 4-4"/></svg>
+    </div>
+    <div>
+      <h4>Earn the Rise Certificate</h4>
+      <p>After completing BASE or CORE, you receive the official Rise Certificate. A credential recognized by agencies and event organizers, designed to give your career a head start in the industry.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  &copy; 2026 Rise &middot; Recode Group B.V.
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // Tier tab switching
+  var tabs = document.querySelectorAll('.tier-tab');
+  var panels = document.querySelectorAll('.tier-panel');
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      var panel = document.getElementById('panel-' + tab.dataset.tier);
+      if (panel) panel.classList.add('active');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

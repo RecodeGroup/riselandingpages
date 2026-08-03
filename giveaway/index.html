@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE — Free Artist Guide</title>
+  <meta name="description" content="Download the free Rise Artist Guide — a career checklist, Ableton chains, and insights from 10 industry professionals on production, branding, bookings, marketing and monetisation.">
+  <meta property="og:title" content="Rise — Free Artist Guide">
+  <meta property="og:description" content="Get your free checklist, Ableton chains, and industry insights. Built by 10 working professionals.">
+  <meta property="og:image" content="../assets/photos/photo-7.jpg">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --card: rgba(255,255,255,0.03);
+      --card-hover: rgba(255,255,255,0.06);
+      --maxw: 1100px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    html, body { background: var(--bg); color: var(--fg); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Header ── */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, border-bottom-color 0.4s;
+    }
+    .header.scrolled {
+      background: rgba(15,15,15,0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 10px; }
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .header-cta {
+      padding: 10px 22px;
+      background: var(--accent);
+      color: #0a0a0a;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .header-cta:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 24px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(120% 70% at 50% -10%, rgba(255,104,62,0.18), transparent 55%),
+        linear-gradient(to bottom, rgba(15,15,15,0.7), rgba(15,15,15,0.82) 55%, #0f0f0f);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 800px;
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: inline-block;
+      background: rgba(255,104,62,0.12);
+      border: 1px solid rgba(255,104,62,0.3);
+      padding: 0.3rem 0.9rem;
+      border-radius: 4px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub {
+      margin-top: 20px;
+      max-width: 50ch;
+      color: var(--muted);
+      font-size: clamp(0.92rem, 1.3vw, 1.1rem);
+      line-height: 1.65;
+      margin-left: auto; margin-right: auto;
+    }
+    .hero-cta-row {
+      margin-top: 36px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
+    .btn-ghost {
+      padding: 16px 28px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      transition: all 0.25s ease;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-stats {
+      position: relative; z-index: 2;
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 700px;
+      width: 100%;
+      margin-left: auto; margin-right: auto;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+    .stat .num { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
+    .stat .label { margin-top: 3px; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+
+    /* ── Video Carousel ── */
+    .video-carousel {
+      overflow: hidden;
+      padding: 56px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .video-carousel-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      animation: videoScroll 50s linear infinite;
+    }
+    .video-card {
+      width: 280px;
+      aspect-ratio: 16/10;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--bg-2);
+    }
+    .video-card video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    @keyframes videoScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Sections ── */
+    .block {
+      padding: 5rem 2rem;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      max-width: 20ch;
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 55ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* ── What's Inside Cards ── */
+    .inside-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .inside-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 1.4rem 1.5rem;
+      transition: all 0.3s;
+    }
+    .inside-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(255,104,62,0.15);
+      transform: translateY(-2px);
+    }
+    .inside-card .ic-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,104,62,0.1);
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+    }
+    .inside-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; }
+    .inside-card p { color: var(--muted); font-size: 0.82rem; line-height: 1.55; }
+
+    /* ── Feature Row ── */
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 3rem 0;
+    }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+    .feature-img {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .feature-img img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+    .feature-text .ft-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .feature-text h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .feature-text p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* ── Chapters Grid ── */
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .chapter-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 1.2rem 1.3rem;
+      transition: all 0.3s;
+    }
+    .chapter-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(255,104,62,0.15);
+    }
+    .chapter-card .ch-num {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .chapter-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 3px; }
+    .chapter-card p { font-size: 0.72rem; color: var(--muted); }
+
+    /* ── Form Section ── */
+    .form-section {
+      background: var(--bg-2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 5rem 2rem;
+    }
+    .form-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .form-left .section-eyebrow { margin-bottom: 14px; }
+    .form-left h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .form-left h2 em { font-style: normal; color: var(--accent); }
+    .form-left p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1.5rem; }
+    .form-perks { list-style: none; }
+    .form-perks li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .form-perks li svg { flex-shrink: 0; }
+
+    .form-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 2rem;
+    }
+    .form-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .form-card .sub { color: var(--muted); font-size: 0.78rem; margin-bottom: 1.3rem; }
+    .field { margin-bottom: 0.9rem; }
+    .field label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .field input {
+      width: 100%;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      color: var(--fg);
+      font-size: 0.88rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .field input::placeholder { color: rgba(255,255,255,0.22); }
+    .field input:focus { border-color: var(--accent); }
+    .btn-submit {
+      width: 100%;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-top: 0.4rem;
+      font-family: inherit;
+    }
+    .btn-submit:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-submit.loading { pointer-events: none; position: relative; color: transparent; }
+    .btn-submit.loading::after {
+      content: '';
+      position: absolute; inset: 0; margin: auto;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(10,10,10,0.3);
+      border-top-color: #0a0a0a;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .form-note { margin-top: 0.8rem; color: var(--muted); font-size: 0.68rem; text-align: center; }
+
+    /* ── Success State ── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .success-state .check {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.12);
+      border: 2px solid rgba(255,104,62,0.3);
+      display: grid; place-items: center;
+      margin: 0 auto 1.2rem;
+      animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .success-state .check svg { width: 28px; height: 28px; color: var(--accent); }
+    @keyframes pop { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    .success-state h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .success-state p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+    /* ── CTA Banner ── */
+    .cta-banner {
+      text-align: center;
+      padding: 5rem 2rem;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .cta-banner .section-eyebrow { margin-bottom: 14px; }
+    .cta-banner h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .cta-banner h2 em { font-style: normal; color: var(--accent); }
+    .cta-banner p { color: var(--muted); font-size: 0.92rem; max-width: 50ch; margin: 0 auto 2rem; }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links { display: flex; justify-content: center; gap: 24px; margin-top: 10px; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero { min-height: auto; padding: 80px 18px 60px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+      .inside-grid { grid-template-columns: 1fr; }
+      .feature-row { grid-template-columns: 1fr; gap: 2rem; }
+      .feature-row.reverse { direction: ltr; }
+      .form-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .block { padding: 3rem 1.5rem; }
+      .video-card { width: 220px; }
+      .video-carousel { padding: 36px 0; }
+      .chapters-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .hero-cta-row { flex-direction: column; align-items: stretch; }
+      .hero-cta-row a, .hero-cta-row button { text-align: center; }
+      .chapters-grid { grid-template-columns: 1fr; }
+      .header-cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="site-header">
+    <a href="../" class="logo-wrap">
+      <img src="../assets/logo.png" alt="Rise">
+      <span class="logo-text">Rise</span>
+    </a>
+    <a href="#get-kit" class="header-cta">Get Free Guide</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <video autoplay loop muted playsinline preload="metadata" disablepictureinpicture>
+        <source src="../assets/course-vids/course-6.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Free Artist Guide</div>
+      <h1>Start building your career <em>the right way.</em></h1>
+      <p class="hero-sub">Get the Rise Artist Checklist, Ableton chains, and a condensed preview of insights from 10 industry professionals. Completely free.</p>
+      <div class="hero-cta-row">
+        <a class="btn-primary" href="#get-kit">Download Free Guide</a>
+        <a class="btn-ghost" href="#whats-inside">See what's inside</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="num">10 Experts</div>
+        <div class="label">Industry pros</div>
+      </div>
+      <div class="stat">
+        <div class="num">Checklist</div>
+        <div class="label">Career roadmap</div>
+      </div>
+      <div class="stat">
+        <div class="num">Ableton</div>
+        <div class="label">Chains included</div>
+      </div>
+      <div class="stat">
+        <div class="num">100% Free</div>
+        <div class="label">No strings</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO CAROUSEL -->
+  <div class="video-carousel">
+    <div class="video-carousel-track">
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-1.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-2.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-3.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-4.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-5.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-6.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-7.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-8.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-9.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-10.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-1.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-2.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-3.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-4.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-5.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-6.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-7.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-8.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-9.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><video autoplay loop muted playsinline preload="metadata" disablepictureinpicture><source src="../assets/course-vids/course-10.mp4" type="video/mp4"></video></div>
+    </div>
+  </div>
+
+  <!-- WHAT'S INSIDE -->
+  <section id="whats-inside" class="block">
+    <div class="section-eyebrow">What you get</div>
+    <h2 class="section-title">Your free guide to kickstart your career.</h2>
+    <p class="section-sub">The Artist Guide gives you a clear roadmap and production tools to get started.</p>
+
+    <div class="inside-grid">
+      <div class="inside-card">
+        <div class="ic-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Artist Checklist & Guide</h3>
+        <p>A comprehensive checklist covering everything you need: branding, production workflow, social media setup, release strategy, legal registrations, and more. Plus a condensed guide with key insights from 10 industry professionals.</p>
+      </div>
+      <div class="inside-card">
+        <div class="ic-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Ableton Chains</h3>
+        <p>A set of Ableton effect chains used in real producers. Drop them straight into your projects and hear the difference immediately. Built by working producers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE: CHECKLIST -->
+  <section class="block" style="padding-top: 0;">
+    <div class="feature-row">
+      <div class="feature-img">
+        <img src="../assets/photos/photo-3.jpg" alt="Artist at work">
+      </div>
+      <div class="feature-text">
+        <div class="ft-eyebrow">The Checklist</div>
+        <h3>Know exactly where you stand in your career.</h3>
+        <p>From your brand archetype to your Buma/Stemra registration, from your Instagram bio to your release schedule. The checklist covers every area an artist needs to have sorted. Use it as your personal career dashboard.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE: ABLETON -->
+  <section class="block" style="padding-top: 0;">
+    <div class="feature-row reverse">
+      <div class="feature-img">
+        <img src="../assets/photos/photo-8.jpg" alt="Production setup">
+      </div>
+      <div class="feature-text">
+        <div class="ft-eyebrow">Production Tools</div>
+        <h3>Ableton chains from real producers.</h3>
+        <p>Effect chains that you can drag straight into your Ableton projects. Built by the same producers who teach in the Rise program. No fluff, just tools that work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM SECTION -->
+  <section class="form-section" id="get-kit">
+    <div class="form-inner">
+      <div class="form-left">
+        <div class="section-eyebrow">Get your free guide</div>
+        <h2>Everything you need to <em>get started.</em></h2>
+        <p>Enter your details and we'll send the complete Artist Guide straight to your inbox. The checklist, the Ableton chains, and the guide. All yours.</p>
+        <ul class="form-perks">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Artist Career Checklist & Guide (PDF)
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Ableton Effect Chains (ZIP)
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Instant delivery to your inbox
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="form-card" id="form-card">
+          <h3>Download Artist Guide</h3>
+          <p class="sub">Free, instant delivery. No spam, ever.</p>
+          <form id="giveaway-form" onsubmit="handleSubmit(event)">
+            <div class="field">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="e.g. John Doe" required>
+            </div>
+            <div class="field">
+              <label for="artist_name">Artist Name</label>
+              <input type="text" id="artist_name" name="artist_name" placeholder="e.g. VANNOOD" required>
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number (mobile, for WhatsApp)</label>
+              <input type="tel" id="phone" name="phone" placeholder="+31 6 1234 5678" required>
+              <p id="phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number. From outside the Netherlands, include your country code, e.g. +44 7400 123456.</p>
+            </div>
+            <button type="submit" class="btn-submit" id="btn-submit">Get Free Artist Guide</button>
+          </form>
+          <p class="form-note">We respect your privacy. Unsubscribe any time.</p>
+        </div>
+
+        <div class="success-state" id="success-state">
+          <div class="check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h2>Check your inbox!</h2>
+          <p>We've sent your Artist Guide to your email.<br>The checklist, guide, and Ableton chains are all attached.<br>Can't find it? Check your spam folder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="section-eyebrow">Ready for more?</div>
+    <h2>This kit is just <em>a taste.</em></h2>
+    <p>The full Rise Artist Course includes 11 video lessons, sample packs, Serum presets, the complete Artist Manual, and access to the Rise community. Everything you need to build a real career.</p>
+    <a class="btn-primary" href="https://riseartistacademy.com/the-artist-course">Explore the Full Course</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    &copy; 2026 Rise &middot; Recode Operations B.V. &middot; All rights reserved
+    <div class="links">
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <!-- Phone validation library (libphonenumber): checks valid mobile + normalizes. -->
+  <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.11.4/bundle/libphonenumber-max.js"></script>
+  <script>
+    // Validate a phone number as a real, valid MOBILE number and normalize it
+    // to international +country format. Uses libphonenumber when available,
+    // with a basic length-based fallback so the form never hard-breaks.
+    function validateMobile(raw) {
+      if (!raw || !raw.trim()) return { ok: false };
+      try {
+        var lib = window.libphonenumber;
+        if (lib && lib.parsePhoneNumberFromString) {
+          var pn = lib.parsePhoneNumberFromString(raw.trim(), 'NL'); // NL default if no country code
+          if (pn && pn.isValid()) {
+            var t = pn.getType();
+            // Accept mobile (and the ambiguous "fixed-or-mobile" buckets).
+            if (t === 'MOBILE' || t === 'FIXED_LINE_OR_MOBILE' || t === undefined) {
+              return { ok: true, normalized: pn.number }; // E.164, e.g. +31612345678
+            }
+          }
+          return { ok: false };
+        }
+      } catch (e) { /* fall through to basic check */ }
+      var digits = raw.replace(/\D/g, '');
+      if (digits.length >= 9 && digits.length <= 15) {
+        var norm = raw.trim().charAt(0) === '+' ? '+' + digits
+          : (digits.charAt(0) === '0' ? '+31' + digits.slice(1) : '+' + digits);
+        return { ok: true, normalized: norm };
+      }
+      return { ok: false };
+    }
+  </script>
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Rise outreach tracking: links this visit + signup back to the emailed
+    // lead. The mail adds ?lead=<id> to the URL; we remember it so the signal
+    // still fires if they navigate around first or come back later.
+    const RISE_BASE = 'https://agent-acquisitie-leads.netlify.app';
+    const riseParams = new URLSearchParams(location.search);
+    const riseLead = (() => {
+      try {
+        const q = riseParams.get('lead');
+        if (q) localStorage.setItem('rise_lead', q);
+        return q || localStorage.getItem('rise_lead');
+      } catch (e) { return null; }
+    })();
+    // Which mail step they arrived from (set by the outreach links): step or utm_content.
+    const riseStep = riseParams.get('step') || riseParams.get('utm_content') || null;
+    function riseTrack(event) {
+      if (!riseLead) return;
+      try {
+        navigator.sendBeacon(RISE_BASE + '/api/track', JSON.stringify({ lead: riseLead, event: event, campaign: 'giveaway', variant: riseStep }));
+      } catch (e) { /* tracking must never break the page */ }
+    }
+    riseTrack('page_view');
+
+    // Scroll depth (25/50/75/100%): shows in the dashboard where visitors
+    // drop off on this page. Each milestone fires once per visit.
+    (() => {
+      const fired = {};
+      function onScroll() {
+        try {
+          const doc = document.documentElement;
+          const max = doc.scrollHeight - window.innerHeight;
+          if (max <= 0) return;
+          const pct = (window.scrollY / max) * 100;
+          [25, 50, 75, 100].forEach((m) => {
+            if (pct >= m && !fired[m]) { fired[m] = true; riseTrack('scroll_' + m); }
+          });
+          if (fired[100]) window.removeEventListener('scroll', onScroll);
+        } catch (e) { /* tracking must never break the page */ }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    // Form submission
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-submit');
+
+      // All fields required: name, artist name, a valid email and a valid mobile.
+      const nameV = document.getElementById('name').value.trim();
+      const artistV = document.getElementById('artist_name').value.trim();
+      const emailV = document.getElementById('email').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailV);
+      if (!nameV || !artistV || !emailOk) {
+        if (!emailOk) document.getElementById('email').focus();
+        alert('Please fill in your name, artist name and a valid email address.');
+        return;
+      }
+
+      // Phone validation (level 1): must be a valid MOBILE number. Catches
+      // junk like "12345" or landlines before we ever store the lead. The
+      // number is normalized to +country format so WhatsApp links work.
+      const phoneRaw = document.getElementById('phone').value.trim();
+      const phoneErr = document.getElementById('phone-error');
+      const checked = validateMobile(phoneRaw);
+      if (!checked.ok) {
+        phoneErr.style.display = 'block';
+        document.getElementById('phone').focus();
+        return;
+      }
+      phoneErr.style.display = 'none';
+
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      const formData = {
+        name: nameV,
+        artist_name: artistV,
+        email: emailV,
+        phone: checked.normalized,
+      };
+
+      try {
+        const res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/giveaway-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+          riseTrack('signup'); // giveaway won: lead filled in the form
+          // Central delivery + funnel move from our own system (Rise).
+          try {
+            fetch(RISE_BASE + '/api/giveaway-deliver', {
+              method: 'POST', headers: { 'Content-Type': 'text/plain' }, keepalive: true,
+              body: JSON.stringify({
+                lead: riseLead || undefined, email: formData.email,
+                name: formData.name, artist_name: formData.artist_name, phone: formData.phone,
+                step: riseStep, campaign: 'giveaway',
+              }),
+            });
+          } catch (e) { /* delivery is best-effort; form still succeeds */ }
+          document.getElementById('form-card').style.display = 'none';
+          document.getElementById('success-state').style.display = 'block';
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      } catch (err) {
+        alert('Could not submit: ' + err.message);
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

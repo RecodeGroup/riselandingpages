@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Giveaway Leads</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --line: rgba(255,255,255,0.06);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Access Gate ── */
+    .access-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .access-gate img { width: 80px; height: 80px; border-radius: 12px; margin-bottom: 8px; }
+    .access-gate h2 { color: var(--fg); font-size: 1.4rem; }
+    .access-gate p { color: var(--muted); font-size: 0.9rem; }
+    .access-gate input {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: var(--bg-2);
+      color: var(--fg);
+      font-size: 1rem;
+      width: 260px;
+      text-align: center;
+      font-family: inherit;
+      outline: none;
+    }
+    .access-gate input:focus { border-color: var(--accent); }
+    .access-gate button {
+      padding: 12px 32px;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .gate-error {
+      color: var(--accent);
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      padding: 1rem 2rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .page-header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .page-header .stats {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--fg);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* ── Table ── */
+    .table-wrap {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+    tbody td {
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--line);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+    .muted { color: var(--muted); }
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+    .empty-state h3 { margin-bottom: 0.5rem; color: var(--fg); }
+
+    /* ── Loading ── */
+    .loading-spinner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem;
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid rgba(255,104,62,0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 768px) {
+      .main { padding: 1rem; }
+      .page-header { flex-direction: column; align-items: flex-start; }
+      .table-wrap { overflow-x: auto; }
+      table { min-width: 600px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Access Gate ── -->
+  <div class="access-gate" id="access-gate">
+    <img src="../assets/logo.png" alt="Rise">
+    <h2>Team Access</h2>
+    <p>Enter your team access code to continue.</p>
+    <input id="gate-code" type="password" placeholder="Access code" autocomplete="off">
+    <button id="gate-submit">Enter</button>
+    <p class="gate-error" id="gate-error">Invalid code. Try again.</p>
+  </div>
+  <script>
+  (function() {
+    var TEAM_CODE = 'Team010#';
+    var gate = document.getElementById('access-gate');
+    var input = document.getElementById('gate-code');
+    var btn = document.getElementById('gate-submit');
+    var err = document.getElementById('gate-error');
+    if (sessionStorage.getItem('rise_team_auth') === 'true') { gate.style.display = 'none'; }
+    function tryCode() {
+      if (input.value === TEAM_CODE) {
+        sessionStorage.setItem('rise_team_auth', 'true');
+        gate.style.display = 'none';
+      } else {
+        err.style.opacity = '1';
+        input.value = '';
+        input.focus();
+        setTimeout(function() { err.style.opacity = '0'; }, 2500);
+      }
+    }
+    btn.addEventListener('click', tryCode);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryCode(); });
+  })();
+  </script>
+
+  <header class="header">
+    <a href="../" class="logo-wrap">
+      <img src="../assets/logo.png" alt="Rise">
+      <span class="logo-text">Rise</span>
+    </a>
+  </header>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <h1>Giveaway Leads</h1>
+      </div>
+      <div class="stats" id="stats">
+        <div class="stat">
+          <div class="stat-value" id="total-count">-</div>
+          <div class="stat-label">Total Leads</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="today-count">-</div>
+          <div class="stat-label">Today</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-secondary" onclick="loadLeads()">Refresh</button>
+        <button class="btn btn-primary" onclick="exportCSV()">Export CSV</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <div class="loading-spinner" id="loading">
+        <div class="spinner"></div>
+      </div>
+      <table id="leads-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Artist Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="leads-body"></tbody>
+      </table>
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <h3>No leads yet</h3>
+        <p>Leads will appear here when people download the giveaway guide.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 Rise &middot; Recode Group B.V. &middot; All rights reserved
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
+
+    let allLeads = [];
+
+    async function loadLeads() {
+      const loading = document.getElementById('loading');
+      const table = document.getElementById('leads-table');
+      const empty = document.getElementById('empty-state');
+
+      loading.style.display = 'flex';
+      table.style.display = 'none';
+      empty.style.display = 'none';
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/giveaway_leads?select=*&order=created_at.desc`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+        });
+
+        allLeads = await res.json();
+
+        // Update stats
+        document.getElementById('total-count').textContent = allLeads.length;
+        const today = new Date().toISOString().split('T')[0];
+        const todayCount = allLeads.filter(l => l.created_at && l.created_at.startsWith(today)).length;
+        document.getElementById('today-count').textContent = todayCount;
+
+        loading.style.display = 'none';
+
+        if (allLeads.length === 0) {
+          empty.style.display = 'block';
+          return;
+        }
+
+        table.style.display = 'table';
+        const tbody = document.getElementById('leads-body');
+        tbody.innerHTML = '';
+
+        allLeads.forEach((lead, i) => {
+          const date = new Date(lead.created_at);
+          const dateStr = date.toLocaleDateString('nl-NL', { day: '2-digit', month: 'short', year: 'numeric' });
+          const timeStr = date.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="muted">${allLeads.length - i}</td>
+            <td>${esc(lead.name)}</td>
+            <td>${lead.artist_name ? esc(lead.artist_name) : '<span class="muted">—</span>'}</td>
+            <td><a href="mailto:${esc(lead.email)}" style="color:var(--accent)">${esc(lead.email)}</a></td>
+            <td>${lead.phone ? esc(lead.phone) : '<span class="muted">—</span>'}</td>
+            <td class="muted">${dateStr} ${timeStr}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      } catch (err) {
+        loading.style.display = 'none';
+        empty.style.display = 'block';
+        empty.querySelector('h3').textContent = 'Error loading leads';
+        empty.querySelector('p').textContent = err.message;
+      }
+    }
+
+    function esc(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    function exportCSV() {
+      if (allLeads.length === 0) {
+        alert('No leads to export');
+        return;
+      }
+
+      const headers = ['Name', 'Artist Name', 'Email', 'Phone', 'Date'];
+      const rows = allLeads.map(l => [
+        l.name,
+        l.artist_name || '',
+        l.email,
+        l.phone || '',
+        new Date(l.created_at).toISOString()
+      ]);
+
+      let csv = headers.join(',') + '\n';
+      rows.forEach(row => {
+        csv += row.map(cell => `"${(cell || '').replace(/"/g, '""')}"`).join(',') + '\n';
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `rise-giveaway-leads-${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Load on page ready
+    if (sessionStorage.getItem('rise_team_auth') === 'true') {
+      loadLeads();
+    } else {
+      // Wait for auth
+      const observer = new MutationObserver(() => {
+        if (document.getElementById('access-gate').style.display === 'none') {
+          observer.disconnect();
+          loadLeads();
+        }
+      });
+      observer.observe(document.getElementById('access-gate'), { attributes: true, attributeFilter: ['style'] });
+    }
+  </script>
+</body>
+</html>

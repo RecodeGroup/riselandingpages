@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>RISE — The Complete Course for Electronic Music Producers</title>
+  <meta name="description" content="11 chapters by industry professionals. Sound packs and lifetime access. The complete electronic music production course built by working producers." />
+  <link rel="preconnect" href="https://riseacademy.b-cdn.net">
+  <script>if('scrollRestoration' in history) history.scrollRestoration='manual';window.scrollTo(0,0);</script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-2: #f5f5f5;
+      --fg: #111111;
+      --muted: #666;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(0,0,0,0.08);
+      --line-strong: rgba(0,0,0,0.15);
+      --maxw: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg); color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    img { max-width: 100%; }
+
+    /* ── Site Header ─────────────────────────────────── */
+    .site-header {
+      position: sticky; top: 0; z-index: 110;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .site-header.scrolled {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+    .site-header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 2rem; position: relative;
+    }
+    .header-logo {
+      display: flex; align-items: center;
+      cursor: pointer; z-index: 112;
+    }
+    .header-logo:hover { opacity: 0.8; }
+    .header-logo img { width: 36px; height: 36px; border-radius: 7px; display: block; }
+    .header-cart {
+      display: flex; align-items: center;
+      cursor: pointer; z-index: 112;
+      transition: opacity 0.2s;
+    }
+    .header-cart:hover { opacity: 0.7; }
+    .header-cart svg {
+      width: 24px; height: 24px; stroke: #111; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 80px 24px 60px; text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.08), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.04), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.65) 40%, rgba(255,255,255,0.95) 100%),
+        url('../assets/Coursevsl/hero.jpg') center 30% / cover no-repeat;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 860px; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      font-weight: 700; line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .hero-sub {
+      margin-top: 18px; max-width: 56ch;
+      color: var(--muted); font-size: clamp(0.95rem, 1.4vw, 1.12rem);
+      line-height: 1.65; margin-left: auto; margin-right: auto;
+    }
+    .hero-tagline {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 600; line-height: 1.2;
+      margin-top: 10px; letter-spacing: -0.02em;
+    }
+    .hero-tagline .typewriter-word {
+      color: var(--accent);
+    }
+
+    /* ── Social Proof Strip (hero) ──────────────────── */
+    .social-proof {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; margin-top: 20px; flex-wrap: wrap;
+    }
+    .social-proof-avatars {
+      display: flex; align-items: center;
+    }
+    .social-proof-avatars img {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 2px solid #fff;
+      object-fit: cover; display: block;
+    }
+    .social-proof-avatars img:not(:first-child) {
+      margin-left: -12px;
+    }
+    .social-proof-stars {
+      display: flex; gap: 2px; color: var(--accent); font-size: 1rem;
+    }
+    .social-proof-text {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.88rem;
+    }
+    .social-proof-text strong { color: #111; font-weight: 700; }
+    .social-proof-text span { color: var(--muted); }
+
+    /* ── Reviews Marquee (inside hero) ──────────────── */
+    .hero-marquee {
+      position: relative; z-index: 2;
+      width: 100vw; margin-left: calc(-50vw + 50%);
+      overflow: hidden; padding: 1.5rem 0 0.5rem;
+    }
+    .marquee-row {
+      display: flex; gap: 12px; width: max-content;
+      padding: 5px 0;
+    }
+    .marquee-row.left { animation: marquee-left 45s linear infinite; }
+    .marquee-row.right { animation: marquee-right 50s linear infinite; }
+    @keyframes marquee-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marquee-right {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .review-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(245,245,245,0.9); border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 50px; padding: 8px 16px 8px 8px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .review-chip .avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0; display: block;
+    }
+    .review-chip .quote {
+      font-size: 0.8rem; color: rgba(0,0,0,0.7);
+    }
+
+    .cta-row {
+      margin-top: 32px; display: flex; gap: 12px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      padding: 16px 36px; border-radius: 8px;
+      font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-block; text-align: center;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .btn-ghost {
+      padding: 16px 28px; border-radius: 8px;
+      font-weight: 600; font-size: 0.82rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      transition: border-color 0.25s ease, color 0.25s ease;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Video Carousel ─────────────────────────────── */
+    .carousel-wrap {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .carousel-track {
+      display: flex;
+      gap: 16px;
+      animation: carousel-scroll 60s linear infinite;
+      width: max-content;
+    }
+    .carousel-track video {
+      height: 200px;
+      width: auto;
+      aspect-ratio: 16/9;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      opacity: 0.85;
+      transition: opacity 0.3s;
+    }
+    .carousel-track video:hover {
+      opacity: 1;
+    }
+    @keyframes carousel-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Problem Section ─────────────────────────────── */
+    .problem-section {
+      padding: 5rem 2rem; text-align: center;
+      border-top: 1px solid var(--line);
+    }
+    .problem-inner {
+      max-width: 720px; margin: 0 auto;
+    }
+    .problem-inner h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+    .problem-points {
+      list-style: none; text-align: left;
+      display: flex; flex-direction: column; gap: 18px;
+      margin-bottom: 2rem;
+    }
+    .problem-points li {
+      color: var(--muted); font-size: 0.95rem; line-height: 1.7;
+      padding-left: 28px; position: relative;
+    }
+    .problem-points li::before {
+      content: ''; position: absolute; left: 0; top: 10px;
+      width: 10px; height: 2px; background: var(--accent);
+    }
+    .problem-bridge {
+      color: var(--fg); font-size: 1.05rem; font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* ── Shared Section Styles ────────────────────── */
+    .block {
+      padding: 5rem 2rem; max-width: var(--maxw); margin: 0 auto;
+    }
+    .block-full {
+      padding: 5rem 2rem;
+    }
+    .section-eyebrow {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.2em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 0.4rem;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 0.95rem;
+      max-width: 55ch; margin-bottom: 2.5rem; line-height: 1.7;
+    }
+    .text-center { text-align: center; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+
+    /* ── First CTA Section ───────────────────────────── */
+    .cta-mid {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .cta-mid-inner {
+      max-width: var(--maxw); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+      align-items: center;
+    }
+    .cta-mid-text h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .cta-mid-text .section-sub {
+      margin-bottom: 2rem;
+    }
+    .cta-mid-image {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cta-mid-image img {
+      width: 100%; max-width: 480px; border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    }
+
+    /* ── What You Learn — Modules (horizontal scroll) ── */
+    .modules-scroll {
+      display: flex; gap: 18px; overflow-x: auto;
+      padding: 0 2rem 18px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .modules-scroll::-webkit-scrollbar { display: none; }
+    .module-card {
+      flex: 0 0 320px;
+      background: var(--bg-2);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px; padding: 2rem 1.75rem;
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .module-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #ff683e, transparent);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .module-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .module-card:hover::before { opacity: 1; }
+    .module-card .card-photo {
+      width: 100%; aspect-ratio: 16/10; object-fit: cover;
+      border-radius: 8px; margin-bottom: 14px; display: block;
+    }
+    .module-card h3 {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;
+    }
+    .module-card p {
+      color: var(--muted); font-size: 0.88rem; line-height: 1.65;
+    }
+    .module-topics {
+      list-style: none; margin-top: 14px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .module-topics li {
+      font-size: 0.82rem; color: #555;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .module-topics li::before {
+      content: ''; width: 4px; height: 4px;
+      border-radius: 50%; background: var(--accent); flex-shrink: 0;
+    }
+
+    /* ── VSL Video ───────────────────────────────────── */
+    .vsl-section {
+      padding: 5rem 2rem; text-align: center;
+      border-top: 1px solid var(--line);
+    }
+    .vsl-section h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+    .vsl-video-wrap {
+      max-width: 900px; margin: 0 auto;
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    }
+    .vsl-video-wrap video {
+      width: 100%; display: block;
+    }
+
+    /* ── Stats Banner ────────────────────────────────── */
+    .stats-banner {
+      padding: 5rem 2rem; text-align: center;
+      background: linear-gradient(180deg, rgba(255,104,62,0.04) 0%, var(--bg) 50%, rgba(255,104,62,0.03) 100%);
+      border-top: 1px solid var(--line);
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .stats-banner .big-stat {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; max-width: 22ch;
+      margin: 0 auto 2.5rem; line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .stats-banner .big-stat span { color: var(--accent); }
+    .stats-grid {
+      display: flex; justify-content: center; gap: 3rem;
+      flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .stats-grid .stat-item { text-align: center; }
+    .stats-grid .stat-num {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+    .stats-grid .stat-label {
+      font-size: 0.75rem; color: var(--muted);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── Journey Roadmap (horizontal, static) ─────── */
+    .journey-wrap {
+      margin-top: 3rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0 2rem 12px;
+    }
+    .journey-wrap::-webkit-scrollbar { display: none; }
+    .journey-track {
+      display: flex;
+      gap: 0;
+      min-width: min-content;
+      justify-content: center;
+    }
+    .journey-card {
+      flex: 0 0 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px 12px;
+      position: relative;
+    }
+    /* arrow between cards */
+    .journey-arrow {
+      flex: 0 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+      margin-top: -28px;
+    }
+    .journey-arrow svg { display: block; }
+    .journey-icon {
+      width: 44px; height: 44px;
+      margin-bottom: 12px;
+    }
+    .journey-icon svg { display: block; width: 100%; height: 100%; }
+    .journey-content h4 {
+      font-size: 0.88rem; font-weight: 700;
+      margin-bottom: 4px; line-height: 1.3;
+    }
+    .journey-content p {
+      font-size: 0.8rem; color: var(--muted);
+      margin: 0; line-height: 1.4;
+    }
+    @media (max-width: 768px) {
+      .journey-track { justify-content: flex-start; }
+      .journey-card { flex: 0 0 160px; }
+    }
+
+    /* ── Product Cards (Platform Access) ─────────────── */
+    .products-section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .products-head {
+      max-width: var(--maxw); margin: 0 auto;
+      padding: 0 2rem; margin-bottom: 2rem;
+    }
+    .products-scroll-wrap {
+      overflow: hidden;
+      padding: 0 0 18px;
+    }
+    .products-scroll {
+      display: flex; gap: 18px;
+      width: max-content;
+      animation: products-scroll 50s linear infinite;
+    }
+    .products-scroll:hover { animation-play-state: paused; }
+    @keyframes products-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(var(--products-scroll-dist, -50%)); }
+    }
+    .product-card {
+      flex: 0 0 260px;
+      background: var(--bg-2);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,104,62,0.25);
+    }
+    .product-card .thumb {
+      width: 100%; aspect-ratio: 16/10;
+      object-fit: cover; display: block;
+    }
+    .product-card .info { padding: 14px 16px 18px; }
+    .product-card .info h4 { font-size: 0.9rem; font-weight: 700; }
+    .products-cta {
+      max-width: var(--maxw); margin: 0 auto;
+      padding: 2rem 2rem 0; text-align: center;
+    }
+
+    /* ── Trusted / Social Proof ──────────────────────── */
+    .trusted-section {
+      padding: 5rem 2rem; text-align: center;
+      border-top: 1px solid var(--line);
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .trusted-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    .trusted-section p {
+      color: var(--muted); font-size: 1rem;
+      max-width: 50ch; margin: 0 auto 2rem; line-height: 1.7;
+    }
+    .trust-badges {
+      display: flex; gap: 2rem; justify-content: center;
+      flex-wrap: wrap; margin-top: 2rem;
+    }
+    .trust-badge {
+      background: var(--bg-2); border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px; padding: 1.5rem 2rem;
+      text-align: center; min-width: 160px;
+    }
+    .trust-badge .badge-num {
+      font-size: 1.5rem; font-weight: 700; color: var(--accent);
+    }
+    .trust-badge .badge-label {
+      font-size: 0.75rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+
+    /* ── Community Section (horizontal scroll) ────────── */
+    .community-section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .community-inner {
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .community-head {
+      padding: 0 2rem; margin-bottom: 2rem;
+    }
+    .community-scroll {
+      display: flex; gap: 18px; overflow-x: auto;
+      padding: 0 2rem 18px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .community-scroll::-webkit-scrollbar { display: none; }
+    .community-card {
+      flex: 0 0 300px;
+      background: var(--bg-2); border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .community-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+    }
+    .community-card .card-photo {
+      width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
+    }
+    .community-card .card-body {
+      padding: 1.5rem;
+    }
+    .community-card .card-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: rgba(255,104,62,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .community-card .card-icon svg {
+      width: 22px; height: 22px; stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .community-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .community-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+    .community-cta {
+      padding: 2rem 2rem 0; text-align: center;
+    }
+
+    /* ── About the Team ──────────────────────────────── */
+    .about-section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .about-inner {
+      max-width: var(--maxw); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center;
+    }
+    .about-text .section-sub { margin-bottom: 0; }
+    .about-facts {
+      list-style: none; display: flex; flex-direction: column;
+      gap: 16px; margin-top: 2rem;
+    }
+    .about-facts li {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 0.95rem; font-weight: 500;
+    }
+    .about-facts li .fact-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+    .about-closing { margin-top: 16px; font-style: italic; }
+    .about-photos {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .about-carousel {
+      position: relative; overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.08);
+      aspect-ratio: 1;
+    }
+    .about-carousel img {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity 0.8s ease;
+    }
+    .about-carousel img.active { opacity: 1; }
+    .about-group {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid rgba(255,104,62,0.2);
+    }
+    .about-group img {
+      width: 100%; display: block; object-fit: cover;
+    }
+
+    /* ── Full Review Cards (horizontal scroll) ────────── */
+    .reviews-section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .reviews-inner {
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .reviews-head {
+      padding: 0 2rem; margin-bottom: 2rem;
+    }
+    .reviews-scroll {
+      display: flex; gap: 18px; overflow-x: auto;
+      padding: 0 2rem 18px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .reviews-scroll::-webkit-scrollbar { display: none; }
+    .review-card {
+      flex: 0 0 340px;
+      background: var(--bg-2); border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px; padding: 2rem 1.75rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .review-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+    }
+    .review-screenshot {
+      width: 42px; height: 42px; border-radius: 50%;
+      object-fit: cover; display: block; margin-bottom: 14px;
+      border: 1px solid rgba(0,0,0,0.10);
+    }
+    .review-card .reviewer-photo {
+      width: 48px; height: 48px; border-radius: 50%;
+      object-fit: cover; display: block; margin-bottom: 14px;
+    }
+    .review-stars {
+      color: var(--accent); font-size: 0.9rem;
+      letter-spacing: 2px; margin-bottom: 14px;
+    }
+    .review-card .review-text {
+      font-size: 0.92rem; color: rgba(0,0,0,0.75);
+      line-height: 1.65; margin-bottom: 16px;
+    }
+    .review-card .reviewer {
+      font-size: 0.78rem; color: var(--muted);
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── CTA Banner ──────────────────────────────────── */
+    .cta-banner {
+      padding: 5rem 2rem; text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(255,104,62,0.05) 50%, var(--bg) 100%);
+      border-top: 1px solid var(--line);
+    }
+    .cta-banner h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700; margin-bottom: 8px;
+    }
+    .cta-banner .price {
+      font-size: 2.4rem; font-weight: 700; margin: 14px 0;
+    }
+    .cta-banner .price .old {
+      font-size: 1rem; color: var(--muted);
+      text-decoration: line-through; margin-left: 10px; font-weight: 400;
+    }
+    .cta-banner .lifetime-clarity {
+      color: var(--muted); font-size: 0.92rem; max-width: 480px; margin: 0 auto 20px; line-height: 1.5;
+    }
+    .cta-banner .note {
+      color: var(--muted); font-size: 0.88rem; margin-bottom: 24px;
+    }
+
+    /* ── Brand Marquee ───────────────────────────────── */
+    .brand-marquee {
+      overflow: hidden;
+      padding: 3rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .brand-track {
+      display: flex; width: max-content;
+      animation: brand-scroll 20s linear infinite;
+    }
+    .brand-track span {
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 800; letter-spacing: 0.05em;
+      color: rgba(0,0,0,0.05);
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    @keyframes brand-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq-section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .faq-inner {
+      max-width: 720px; margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; padding: 1.25rem 0;
+      font-size: 1rem; font-weight: 600; color: var(--fg);
+      background: none; border: none; cursor: pointer;
+      text-align: left; gap: 1rem;
+      font-family: inherit;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute;
+      background: var(--muted); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .faq-icon::before {
+      width: 14px; height: 2px; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-icon::after {
+      width: 2px; height: 14px; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-item.open .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+    .faq-answer-inner {
+      padding: 0 0 1.25rem;
+      color: var(--muted); font-size: 0.92rem; line-height: 1.7;
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem; text-align: center;
+      color: var(--muted); font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex; justify-content: center;
+      gap: 24px; margin-top: 10px;
+    }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Popup ─────────────────────────────────────── */
+    .popup-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .popup-overlay.active { opacity: 1; pointer-events: auto; }
+    .popup {
+      background: #fff; color: #111; border-radius: 16px;
+      max-width: 520px; width: 90%; padding: 32px 28px;
+      text-align: center; position: relative;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .popup-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #f0f0f0; border: none; cursor: pointer;
+      font-size: 1.1rem; color: #333;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .popup-close:hover { background: #ddd; }
+    .popup h2 {
+      font-size: 1.5rem; font-weight: 800;
+      line-height: 1.2; margin-bottom: 18px;
+    }
+    .popup h2 .hl { color: var(--accent); font-weight: 800; }
+    .popup input[type="email"] {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 0.95rem; margin-bottom: 12px;
+      outline: none; transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .popup input:focus { border-color: var(--accent); }
+    .popup .popup-btn {
+      width: 100%; padding: 16px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      cursor: pointer; transition: background 0.2s;
+      font-family: inherit;
+    }
+    .popup .popup-btn:hover { background: var(--accent-hover); }
+    .popup .no-thanks {
+      display: block; margin-top: 14px;
+      font-size: 0.78rem; color: #999;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      cursor: pointer; background: none; border: none;
+      font-family: inherit;
+    }
+
+    /* ── Urgency Bar ────────────────────────────────── */
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff;
+      text-align: center; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 40px 8px 16px;
+      letter-spacing: 0.02em;
+      transition: transform 0.3s ease;
+    }
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar s { opacity: 0.85; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: #fff; font-size: 1.2rem;
+      cursor: pointer; line-height: 1; padding: 4px;
+    }
+    body.has-urgency-bar .site-header { top: 36px; }
+    body.has-urgency-bar .hero { padding-top: 120px; }
+    @media (max-width: 520px) {
+      body.has-urgency-bar .hero { padding-top: 130px; }
+    }
+
+    /* ── Sticky Mobile CTA Bar ───────────────────────── */
+    .mobile-cta-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 12px 16px;
+      align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .mobile-cta-bar .mobile-price { display: flex; align-items: baseline; gap: 8px; }
+    .mobile-cta-bar .mobile-price .current { font-size: 1.4rem; font-weight: 700; }
+    .mobile-cta-bar .mobile-price .was { font-size: 0.85rem; color: var(--muted); text-decoration: line-through; }
+    .mobile-cta-bar .btn-primary { padding: 12px 24px; font-size: 0.75rem; white-space: nowrap; }
+
+    /* ── Trust Strip ──────────────────────────────────── */
+    .trust-strip {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; flex-wrap: wrap;
+      margin-top: 18px; font-size: 0.8rem; color: var(--muted);
+    }
+    .trust-badge-small { display: flex; align-items: center; gap: 4px; }
+    .trust-divider { opacity: 0.4; }
+    .trust-icons { letter-spacing: 0.02em; }
+    .hero-trust-checks { flex-direction: column; gap: 6px; align-items: flex-start; }
+    @media (min-width: 769px) { .hero-trust-checks { flex-direction: row; gap: 18px; justify-content: center; } }
+
+    /* ── Typewriter Effect ────────────────────────────── */
+    .typewriter-word {
+      color: var(--accent);
+      font-weight: 700;
+      border-right: 3px solid var(--accent);
+      padding-right: 4px;
+      animation: blink-cursor 0.7s step-end infinite;
+    }
+    @keyframes blink-cursor {
+      0%, 100% { border-color: var(--accent); }
+      50% { border-color: transparent; }
+    }
+
+    /* ── Hero Rating Badge ───────────────────────────── */
+    .hero-rating {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-top: 10px;
+    }
+    .hero-rating .stars { color: var(--accent); font-size: 0.95rem; letter-spacing: 1px; }
+    .hero-rating .rating-text { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── Reviewer Initials ───────────────────────────── */
+    .reviewer-initial {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1.1rem; color: #111;
+      margin-bottom: 14px; flex-shrink: 0;
+    }
+
+    /* ── Teachers Section (infinite marquee) ─────────── */
+    .teachers-marquee-wrap {
+      overflow: hidden;
+      padding: 0 0 18px;
+    }
+    .teachers-grid {
+      display: flex; gap: 24px;
+      animation: teachers-scroll 120s linear infinite;
+      width: max-content;
+    }
+    .teachers-grid:hover { animation-play-state: paused; }
+    @keyframes teachers-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(var(--scroll-dist, -50%)); }
+    }
+    .teacher-card {
+      flex: 0 0 200px;
+      text-align: center;
+    }
+    .teacher-photo {
+      width: 140px; height: 140px; border-radius: 50%;
+      object-fit: cover; display: block;
+      margin: 0 auto 14px;
+      border: 2px solid rgba(0,0,0,0.08);
+    }
+    .teacher-card h4 { font-size: 1rem; margin-bottom: 4px; }
+    .teacher-role { font-size: 0.8rem; color: var(--accent); margin-bottom: 8px; font-weight: 600; }
+    .teacher-bio { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── Case Studies Section ─────────────────────────── */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .case-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .case-photo-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: rgba(0,0,0,0.03);
+    }
+    .case-body { padding: 1.5rem; }
+    .case-stars { color: var(--accent); margin-bottom: 8px; letter-spacing: 2px; }
+    .case-result { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+    .case-name { color: var(--muted); font-size: 0.85rem; }
+
+    /* ── Responsive ──────────────────────────────────── */
+    @media (min-width: 1060px) {
+      .modules-scroll { justify-content: center; }
+      /* products carousel handled by JS marquee */
+    }
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .cta-mid-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .cta-mid-image { order: -1; }
+      .site-header-inner { padding: 0.6rem 1rem; }
+      .header-logo img { width: 30px; height: 30px; }
+      .block { padding: 3.5rem 1.5rem; }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+      .hero-sub { font-size: 0.92rem; }
+      .section-title { font-size: clamp(1.5rem, 5vw, 2rem); }
+      .cta-row { flex-direction: column; align-items: stretch; }
+      .cta-row a { text-align: center; }
+      .product-card { flex: 0 0 220px; }
+      .module-card { flex: 0 0 280px; }
+      .popup { padding: 24px 18px; }
+      .popup h2 { font-size: 1.3rem; }
+      .stats-grid { gap: 1.5rem; }
+      .trust-badges { gap: 10px; flex-wrap: nowrap; }
+      .trust-badge { min-width: 0; flex: 1; padding: 1rem 0.75rem; }
+      .trust-badge .badge-num { font-size: 1.15rem; }
+      .trust-badge .badge-label { font-size: 0.65rem; }
+      .review-card { flex: 0 0 300px; }
+      .community-card { flex: 0 0 260px; }
+      .mobile-cta-bar { display: flex; }
+      body { padding-bottom: 72px; }
+    }
+    @media (max-width: 520px) {
+      .hero { padding: 80px 16px 50px; }
+      .block { padding: 2.5rem 1rem; }
+      .block-full { padding: 2.5rem 1rem; }
+      .products-section { padding: 2.5rem 0; }
+      .products-head { padding: 0 1rem; }
+      .product-card { flex: 0 0 200px; }
+      .module-card { flex: 0 0 260px; }
+      .modules-scroll { padding: 0 1rem 14px; gap: 12px; }
+      .community-card { flex: 0 0 240px; }
+      .community-scroll { padding: 0 1rem 14px; gap: 12px; }
+      .reviews-scroll { padding: 0 1rem 14px; gap: 12px; }
+      .review-card { flex: 0 0 280px; }
+      .stats-grid .stat-num { font-size: 1.6rem; }
+      .review-chip .quote { font-size: 0.78rem; }
+      .review-chip { padding: 8px 14px 8px 8px; gap: 8px; }
+      .review-chip .avatar { width: 30px; height: 30px; }
+      .cta-mid, .stats-banner, .vsl-section, .trusted-section,
+      .community-section, .about-section, .reviews-section,
+      .faq-section, .cta-banner { padding: 2.5rem 1rem; }
+      .carousel-track video { height: 140px; }
+      .social-proof { gap: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-row, .carousel-track, .teachers-grid, .brand-track, .products-scroll { animation: none; }
+      .typewriter-word { border-right: none; animation: none; }
+      .about-carousel img { transition: none; }
+      .btn-primary, .btn-ghost, .module-card, .product-card,
+      .community-card, .review-card { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body class="has-urgency-bar">
+
+  <!-- 0. URGENCY BAR -->
+  <div class="urgency-bar" id="urgency-bar">
+    Launch price: &euro;&nbsp;260,-. Ends <span id="urgency-deadline"></span>
+    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
+  </div>
+
+  <!-- 1. HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a class="header-logo" href="/customers/portal/" title="Rise"><img src="../assets/logo.png" alt="Rise"></a>
+      <a class="header-cart" href="https://riseartistacademy.com/store/bundles/rise-artist-program" title="Cart" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">For electronic music producers and DJs</div>
+      <h1 data-block="hero" data-field="title">11 video lessons from industry professionals, production tools, and sample packs. Everything you need to produce, release and promote your first tracks.</h1>
+      <p class="hero-tagline" style="color:var(--accent);font-weight:600;">Grow as an artist, on your terms.</p>
+      <p class="hero-sub" data-block="hero" data-field="subtitle">In-depth modules covering music production, sound design, branding, releasing, marketing and career development. Built by working producers and engineers for electronic music producers and DJs.</p>
+
+      <!-- Feature strip -->
+      <div style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
+        <span>11 video lessons</span>
+        <span style="color:rgba(0,0,0,0.2);">&middot;</span>
+        <span>8 production tools</span>
+        <span style="color:rgba(0,0,0,0.2);">&middot;</span>
+        <span>Professional sample packs</span>
+        <span style="color:rgba(0,0,0,0.2);">&middot;</span>
+        <span>The Artist Manual</span>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn-primary" href="https://riseartistacademy.com/store/bundles/rise-artist-program">Get Instant Access</a>
+        <a class="btn-ghost" href="#cta-mid">See what's inside</a>
+      </div>
+
+      <div class="trust-strip hero-trust-checks">
+        <span class="trust-badge-small">&#10003; Lifetime access, no subscription</span>
+        <span class="trust-badge-small">&#10003; 14-Day Money Back Guarantee</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. VIDEO CAROUSEL -->
+  <div class="carousel-wrap">
+    <div class="carousel-track">
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-1.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-2.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-3.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-4.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-5.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-6.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-7.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-8.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-9.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-10.mp4" type="video/mp4"></video>
+      <!-- duplicate for seamless loop -->
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-1.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-2.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-3.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-4.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-5.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-6.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-7.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-8.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-9.mp4" type="video/mp4"></video>
+      <video muted loop playsinline preload="none" poster=""><source src="../assets/course-vids/course-10.mp4" type="video/mp4"></video>
+    </div>
+  </div>
+
+  <!-- 3b. COURSE PREVIEW -->
+  <section style="padding:3rem 24px;text-align:center;">
+    <div style="max-width:720px;margin:0 auto;">
+      <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;">Course Preview</div>
+      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:10px;">See what you'll learn inside</h2>
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;margin-bottom:2rem;">Watch a sample lesson and listen to the production tools included with the course. Full video walkthrough and sample packs coming soon.</p>
+      <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:3rem 2rem;color:var(--muted);font-size:0.85rem;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:12px;opacity:0.6;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <p style="margin:0;">Video and sample preview coming soon</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3c. PROBLEM SECTION -->
+  <section class="problem-section">
+    <div class="problem-inner">
+      <h2>Most producers never become artists.</h2>
+      <p>Most producers don't struggle because they lack talent. They struggle because they're trying to figure everything out on their own. One tutorial leads to another, projects stay unfinished and progress starts to slow down.</p>
+      <p>Learning how to make music is only the beginning. Building your own sound, finishing tracks, releasing music and growing as an artist requires a clear path and the right guidance.</p>
+      <p class="problem-bridge"><strong>That's why Rise exists. To give ambitious producers and DJs a clear roadmap, real feedback and a community that helps them become the artists they've always wanted to be.</strong></p>
+    </div>
+  </section>
+
+  <!-- 4. FIRST CTA SECTION -->
+  <section class="cta-mid" id="cta-mid">
+    <div class="cta-mid-inner">
+      <div class="cta-mid-text">
+        <div class="section-eyebrow" data-block="cta_mid" data-field="eyebrow">The complete program</div>
+        <h2 data-block="cta_mid" data-field="title">Everything you need to grow as an artist.</h2>
+        <p class="section-sub" data-block="cta_mid" data-field="subtitle">Rise isn't just another online course. It's a place where ambitious producers and DJs come together to learn, improve and build real careers. Whether you're creating your first track or getting ready for your next release, you'll always know what your next step is.</p>
+        <a class="btn-primary" href="https://riseartistacademy.com/store/bundles/rise-artist-program">Get Instant Access</a>
+      </div>
+      <div class="cta-mid-image">
+        <img src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/hero/3d174879-3f49-4f2f-9f3f-5cb9f25412cf.webp" alt="Rise Artist Course" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. WHAT'S INCLUDED (MODULES) — horizontal scroll -->
+  <section id="modules" style="padding: 5rem 0; border-top: 1px solid var(--line);">
+    <div style="max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; margin-bottom: 2rem;">
+      <div class="section-eyebrow" data-block="journey" data-field="eyebrow">Your journey</div>
+      <h2 class="section-title" data-block="journey" data-field="title">Your journey from producer to artist</h2>
+      <p class="section-sub" data-block="journey" data-field="subtitle">Every successful artist starts somewhere. The difference is having a clear path to follow. We've broken that journey down into simple steps so you always know what to focus on next.</p>
+    </div>
+
+    <div class="modules-scroll">
+      <div class="module-card">
+        <img class="card-photo" src="../assets/Coursevsl/Musicandskill.png" alt="Music & Skill" loading="lazy">
+        <h3>Music &amp; Skill</h3>
+        <p>Stop making loops that go nowhere. Learn to finish tracks that sound like the records you look up to.</p>
+        <ul class="module-topics">
+          <li>Production fundamentals</li>
+          <li>Sound design &amp; synthesis</li>
+          <li>Mixing &amp; mastering</li>
+          <li>Arrangement &amp; structure</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <img class="card-photo" src="../assets/Coursevsl/Industry.jpeg" alt="Industry & Positioning" loading="lazy">
+        <h3>Industry &amp; Positioning</h3>
+        <p>Know what labels look for, how royalties work, and how to get your music in front of the right people.</p>
+        <ul class="module-topics">
+          <li>Releasing &amp; distribution</li>
+          <li>Royalties &amp; sync</li>
+          <li>Branding &amp; identity</li>
+          <li>Working with labels</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <img class="card-photo" src="../assets/Coursevsl/Growth.png" alt="Growth & Monetization" loading="lazy">
+        <h3>Growth &amp; Monetization</h3>
+        <p>Turn your music into a sustainable career. Get booked, build an audience, and create real income.</p>
+        <ul class="module-topics">
+          <li>Marketing &amp; audience growth</li>
+          <li>Social media strategy</li>
+          <li>Revenue streams</li>
+          <li>Performance &amp; booking</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6-STEP JOURNEY ROADMAP (horizontal with icons + arrows) -->
+    <div class="journey-wrap">
+      <div class="journey-track">
+
+        <div class="journey-card">
+          <div class="journey-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="24" width="24" height="4" rx="1" fill="#ff683e"/><rect x="14" y="18" width="16" height="4" rx="1" fill="#ff683e"/><rect x="18" y="12" width="8" height="4" rx="1" fill="#ff683e"/></svg></div>
+          <div class="journey-content">
+            <h4>Build your foundation</h4>
+            <p>Identity, mindset, and confidence</p>
+          </div>
+        </div>
+
+        <div class="journey-arrow"><svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7h16M13 1l5 6-5 6" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="journey-card">
+          <div class="journey-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 8v14M22 22l5-3v-8l-5-3-5 3v8l5 3z" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="30" r="2" fill="#ff683e"/><path d="M14 34c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#ff683e" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="journey-content">
+            <h4>Create music that stands out</h4>
+            <p>Production, sound design, and finishing tracks</p>
+          </div>
+        </div>
+
+        <div class="journey-arrow"><svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7h16M13 1l5 6-5 6" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="journey-card">
+          <div class="journey-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 10l3 6 6.5 1-4.7 4.6 1.1 6.4L22 25l-5.9 3 1.1-6.4L12.5 17l6.5-1 3-6z" stroke="#ff683e" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <div class="journey-content">
+            <h4>Develop your artist brand</h4>
+            <p>Visual identity, positioning, and story</p>
+          </div>
+        </div>
+
+        <div class="journey-arrow"><svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7h16M13 1l5 6-5 6" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="journey-card">
+          <div class="journey-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="18" r="4" stroke="#ff683e" stroke-width="2"/><circle cx="28" cy="18" r="4" stroke="#ff683e" stroke-width="2"/><path d="M10 32c0-3.3 2.7-6 6-6s6 2.7 6 6M22 32c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#ff683e" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="journey-content">
+            <h4>Build your network</h4>
+            <p>Labels, A&amp;Rs, promoters, and collaborators</p>
+          </div>
+        </div>
+
+        <div class="journey-arrow"><svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7h16M13 1l5 6-5 6" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="journey-card">
+          <div class="journey-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 10v18M18 14l4-4 4 4" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 28h20M14 32h16" stroke="#ff683e" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="journey-content">
+            <h4>Release and get booked</h4>
+            <p>Royalties, release strategy, bookings, and growing your audience</p>
+          </div>
+        </div>
+
+        <div class="journey-arrow"><svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7h16M13 1l5 6-5 6" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <div class="journey-card">
+          <div class="journey-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 30l6-8 5 5 4-6 5 9" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="14" r="4" stroke="#ff683e" stroke-width="2"/></svg></div>
+          <div class="journey-content">
+            <h4>Build a sustainable career</h4>
+            <p>Revenue streams, marketing, and long-term growth</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PLATFORM ACCESS (PRODUCT CARDS) -->
+  <section class="products-section">
+    <div class="products-head">
+      <div class="section-eyebrow" data-block="products" data-field="eyebrow">Full program</div>
+      <h2 class="section-title" data-block="products" data-field="title">Everything you need, all in one place</h2>
+      <p class="section-sub" style="margin-bottom: 0;" data-block="products" data-field="subtitle">No more searching for separate courses or random tutorials. Inside Rise you'll find everything you need to keep improving.</p>
+    </div>
+    <div class="products-scroll-wrap">
+    <div class="products-scroll" id="products-marquee">
+      <div class="product-card">
+        <img class="thumb" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/hero/3d174879-3f49-4f2f-9f3f-5cb9f25412cf.webp" alt="Rise Artist Course" loading="lazy">
+        <div class="info"><h4>Rise Artist Course</h4></div>
+      </div>
+      <div class="product-card">
+        <img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/96e7f4d6-0ded-4eee-866e-9ae8c4a6f102/hero/2450e7a7-9a88-4d3d-b279-5cffe3fbefb8.webp" alt="The Manual" loading="lazy">
+        <div class="info"><h4>The Manual</h4></div>
+      </div>
+      <div class="product-card">
+        <img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/018b6581-4bb6-4127-a361-8dcd52fe4e2d/hero/d5f0ff0d-3bc7-4484-84fd-09275e87e73d.jpg" alt="House Sample Pack" loading="lazy">
+        <div class="info"><h4>House Sample Pack</h4></div>
+      </div>
+      <div class="product-card">
+        <img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/7b7bcf13-b6b2-45a2-98b9-07d81138bff0/hero/d25836a3-1936-4461-8ecf-5a172de54660.jpg" alt="EcHooligan Chain" loading="lazy">
+        <div class="info"><h4>EcHooligan Chain</h4></div>
+      </div>
+      <div class="product-card">
+        <img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fbf5e278-3e97-4b17-9f33-2d29ed5894fa/hero/2cb5cb16-6a08-40c1-b7f7-b05cff0be657.jpg" alt="909 Pack" loading="lazy">
+        <div class="info"><h4>909 Pack</h4></div>
+      </div>
+      <div class="product-card">
+        <img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/08048efa-e754-48c2-bc9f-eedb974ea90e/hero/8640f43d-0bed-47cf-8a29-7f0a1b6b0494.jpg" alt="Serum Presets" loading="lazy">
+        <div class="info"><h4>Serum Presets</h4></div>
+      </div>
+      <div class="product-card">
+        <img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/a986bfda-f52b-451d-8bca-08185eb00752/hero/7cfa56c3-5c1c-4254-ab8d-39377937fc80.jpg" alt="Kick Rack House" loading="lazy">
+        <div class="info"><h4>Kick Rack House</h4></div>
+      </div>
+      <div class="product-card">
+        <img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fef71bf3-c89d-497a-9b89-6189178f31f7/hero/63115779-b6c8-41cc-a1ce-94ab71fd20f9.jpg" alt="Kick Rack Techno" loading="lazy">
+        <div class="info"><h4>Kick Rack Techno</h4></div>
+      </div>
+    </div>
+    </div>
+    <div class="products-cta">
+      <a class="btn-primary" href="https://riseartistacademy.com/store/bundles/rise-artist-program">Get Instant Access</a>
+    </div>
+  </section>
+
+  <!-- 11b. TEACHERS / INSTRUCTORS -->
+  <section class="block teachers-section">
+    <div class="section-eyebrow" style="text-align:center;" data-block="coaches" data-field="eyebrow">Your instructors</div>
+    <h2 class="section-title" style="text-align:center;" data-block="coaches" data-field="title">Meet the coaches</h2>
+    <p class="section-sub" style="max-width:640px;margin:0 auto 2.5rem;color:var(--muted);text-align:center;" data-block="coaches" data-field="subtitle">Each module is taught by an active industry professional with credits, releases, and results to show for it.</p>
+    <div class="teachers-marquee-wrap">
+    <div class="teachers-grid" id="teachers-marquee">
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/photos/Photo-20.png" alt="Remy" loading="lazy">
+        <h4>Remy</h4>
+        <p class="teacher-role">Pop &amp; Dance Production</p>
+        <p class="teacher-bio">Producer from The Hague. Known for layered textures and emotional depth. Collaborated with Lost Frequencies.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/photos/Photo-22.png" alt="Artcode" loading="lazy">
+        <h4>Artcode</h4>
+        <p class="teacher-role">Audiovisual &amp; Production</p>
+        <p class="teacher-bio">Based in Rotterdam with 15+ years across electronic genres. Combines music with TouchDesigner visuals and live modular performance.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/photos/Jim.png" alt="Vannood" loading="lazy">
+        <h4>Vannood</h4>
+        <p class="teacher-role">Entrepreneur &amp; Producer</p>
+        <p class="teacher-bio">Over 15 years specializing in production. Expert in structuring creative processes into finished work.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/photos/Photo50.png" alt="Paul" loading="lazy">
+        <h4>Paul</h4>
+        <p class="teacher-role">Mix &amp; Master Engineer</p>
+        <p class="teacher-bio">Specializes in getting your tracks to sound polished and release-ready. Teaches mixing techniques, mastering workflows, and how to bring out the best in every production.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/photos/Maurits.png" alt="Maurits" loading="lazy">
+        <h4>Maurits</h4>
+        <p class="teacher-role">Artist Development</p>
+        <p class="teacher-bio">Guides producers from first release to full career. Focused on building sustainable momentum through strategy and structure.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/9ccd7f52-9f8d-4d9d-9e01-01187bc629ff.webp" alt="Tim Hox" loading="lazy">
+        <h4>Tim Hox</h4>
+        <p class="teacher-role">Music Producer / DJ</p>
+        <p class="teacher-bio">International DJ/producer with releases on major labels. Teaches the art of finishing tracks and building a release strategy.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/0cd7c506-1380-492f-817a-efb0ec7bafcc.webp" alt="Noah Smits" loading="lazy">
+        <h4>Noah Smits</h4>
+        <p class="teacher-role">Media Strategist</p>
+        <p class="teacher-bio">Specializes in content strategy and social media growth for electronic music producers. Turns followers into fans.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/3b46aade-22ba-4034-bcf7-9412e9fd59c9.webp" alt="Milan Fernandes" loading="lazy">
+        <h4>Milan Fernandes</h4>
+        <p class="teacher-role">Music Producer / DJ</p>
+        <p class="teacher-bio">Active techno and house producer with a sharp ear for arrangement. Co-teaches production alongside Vannood and Paul.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/8417ea74-fe03-4498-9e8e-27bcfedfa05b.webp" alt="Yvo Overhoff" loading="lazy">
+        <h4>Yvo Overhoff</h4>
+        <p class="teacher-role">A&amp;R &amp; Producer</p>
+        <p class="teacher-bio">A&amp;R at Recode Records and active DJ/producer. Knows what labels look for and how to get your demos signed.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/82098bd8-0b18-487d-a6e1-3dde0247ccf7.webp" alt="Hendrik Kamminga" loading="lazy">
+        <h4>Hendrik Kamminga</h4>
+        <p class="teacher-role">Manager &amp; Booker</p>
+        <p class="teacher-bio">Artist manager and booker. Teaches how to get gigs, build relationships with promoters, and grow a live career.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/492fed69-185e-4b60-8a2e-61f55401a941.webp" alt="Marco Meeuwsen" loading="lazy">
+        <h4>Marco Meeuwsen</h4>
+        <p class="teacher-role">Performance Marketing</p>
+        <p class="teacher-bio">Content strategist specialized in performance marketing. Teaches how to promote your music and grow your audience effectively.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/896de7ea-2311-4c28-aaf2-68186c3eb160.webp" alt="Maarten Broere" loading="lazy">
+        <h4>Maarten Broere</h4>
+        <p class="teacher-role">Branding Expert</p>
+        <p class="teacher-bio">Builds artist brands from the ground up. Teaches visual identity, positioning, and how to stand out in a crowded scene.</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- 11. ABOUT THE TEAM -->
+  <section class="about-section">
+    <div class="about-inner">
+      <div class="about-text">
+        <div class="section-eyebrow" data-block="about" data-field="eyebrow">About Rise</div>
+        <h2 class="section-title" data-block="about" data-field="title">Built by artists who are still in the game.</h2>
+        <p class="section-sub" data-block="about" data-field="subtitle">Rise wasn't created by people who only teach music. We're a team of active DJ/producers, label owners and industry professionals who work in the scene every day. The strategies, workflows and lessons inside Rise come directly from real-world experience, not theory.</p>
+        <p class="section-sub" style="margin-top: 0;">Everything we teach is something we use ourselves.</p>
+        <ul class="about-facts">
+          <li><span class="fact-dot"></span> We run 5 record labels</li>
+          <li><span class="fact-dot"></span> We operate a full-service producer agency</li>
+          <li><span class="fact-dot"></span> We've hosted events and artist showcases</li>
+          <li><span class="fact-dot"></span> Our artists release music on international labels</li>
+          <li><span class="fact-dot"></span> We play international bookings and live shows</li>
+        </ul>
+        <p class="section-sub about-closing">Rise is the place we wish existed when we started. A place where ambitious producers get real guidance from people who are actively building careers in the music industry.</p>
+      </div>
+      <div class="about-photos">
+        <div class="about-carousel" id="team-carousel">
+          <img class="active" src="../assets/Coursevsl/Team/Scherm%C2%ADafbeelding%202026-06-24%20om%2014.42.12.png" alt="Rise team performing live">
+          <img src="../assets/Coursevsl/Team/Scherm%C2%ADafbeelding%202026-06-24%20om%2014.42.31.png" alt="Rise team in the studio">
+          <img src="../assets/Coursevsl/Team/Scherm%C2%ADafbeelding%202026-06-24%20om%2014.42.33.png" alt="Rise team coaching session">
+          <img src="../assets/Coursevsl/Team/Scherm%C2%ADafbeelding%202026-06-24%20om%2014.42.41.png" alt="Rise team at an event">
+          <img src="../assets/Coursevsl/Team/Scherm%C2%ADafbeelding%202026-06-24%20om%2014.42.52.png" alt="Rise team backstage">
+          <img src="../assets/Coursevsl/Team/Scherm%C2%ADafbeelding%202026-06-24%20om%2014.43.17.png" alt="Rise team together">
+          <img src="../assets/Coursevsl/Team/Theteam.png" alt="The full Rise team">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. JOIN OUR COMMUNITY — horizontal scroll with photos -->
+  <section class="community-section">
+    <div class="community-inner">
+      <div class="community-head">
+        <div class="section-eyebrow" data-block="community" data-field="eyebrow">Community</div>
+        <h2 class="section-title" data-block="community" data-field="title">You don't have to figure it out alone</h2>
+        <p class="section-sub" data-block="community" data-field="subtitle">More than a course. A network of producers sharing feedback, tracks, and opportunities every day.</p>
+      </div>
+
+      <div class="community-scroll">
+        <div class="community-card">
+          <img class="card-photo" src="../assets/Coursevsl/Call.png" alt="Weekly live sessions" loading="lazy">
+          <div class="card-body">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3>Weekly live sessions</h3>
+            <p>Join live masterclasses and Q&amp;A sessions with the Rise team every week. Real-time feedback on your work.</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <img class="card-photo" src="../assets/Coursevsl/247.JPG" alt="24/7 community access" loading="lazy">
+          <div class="card-body">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>24/7 community access</h3>
+            <p>Connect with fellow producers around the clock. Share tracks, get feedback, find collaborators.</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <img class="card-photo" src="../assets/Coursevsl/Direct%20feedback%20team.png" alt="Direct feedback" loading="lazy">
+          <div class="card-body">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Direct feedback from the team</h3>
+            <p>Submit your tracks and get personal feedback from our coaches. No generic advice, only actionable notes.</p>
+          </div>
+        </div>
+        <div class="community-card">
+          <img class="card-photo" src="../assets/Coursevsl/Manuel.png" alt="Resources & templates" loading="lazy">
+          <div class="card-body">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <h3>Exclusive resources &amp; templates</h3>
+            <p>Access templates, checklists, and tools that make the business side of music easier. Updated regularly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="community-cta">
+        <a class="btn-primary" href="https://riseartistacademy.com/store/bundles/rise-artist-program">Get Instant Access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. REVIEWS — horizontal scroll -->
+  <section class="reviews-section">
+    <div class="reviews-inner">
+      <div class="reviews-head">
+        <div class="section-eyebrow" data-block="reviews" data-field="eyebrow">Reviews</div>
+        <h2 class="section-title" data-block="reviews" data-field="title">Real artists. Real progress.</h2>
+        <p class="section-sub" data-block="reviews" data-field="subtitle">Producers have already joined Rise to improve their music, build confidence and take the next step in their journey. Here's what some of them have to say:</p>
+      </div>
+
+      <div class="reviews-scroll">
+        <div class="review-card">
+          <img class="review-screenshot" src="../assets/Coursevsl/Reviews/Scherm%C2%ADafbeelding%202026-06-23%20om%2014.45.13.png" alt="Student review" loading="lazy">
+          <div class="review-body">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">"I've bought countless music courses over the years, but this is the first one that truly covers the entire journey. From production and branding to marketing and release strategy, everything is explained in a practical way that you can implement immediately."</p>
+          </div>
+        </div>
+        <div class="review-card">
+          <img class="review-screenshot" src="../assets/Coursevsl/Reviews/Scherm%C2%ADafbeelding%202026-06-23%20om%2014.45.18.png" alt="Student review" loading="lazy">
+          <div class="review-body">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">"There is a huge amount of content inside. At first it felt slightly overwhelming, but once I followed the roadmap and manual step by step, things started clicking very quickly."</p>
+          </div>
+        </div>
+        <div class="review-card">
+          <img class="review-screenshot" src="../assets/Coursevsl/Reviews/Scherm%C2%ADafbeelding%202026-06-23%20om%2014.45.28.png" alt="Student review" loading="lazy">
+          <div class="review-body">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">"The production modules alone were worth the investment. My arrangements, sound selection, and overall mixes improved dramatically within a few weeks."</p>
+          </div>
+        </div>
+        <div class="review-card">
+          <img class="review-screenshot" src="../assets/Coursevsl/Reviews/Scherm%C2%ADafbeelding%202026-06-23%20om%2014.45.33.png" alt="Student review" loading="lazy">
+          <div class="review-body">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">"What surprised me most was how valuable the branding and marketing sections were. I always focused only on music, but this course showed me how to build an actual producer project."</p>
+          </div>
+        </div>
+        <div class="review-card">
+          <img class="review-screenshot" src="../assets/Coursevsl/Reviews/Scherm%C2%ADafbeelding%202026-06-23%20om%2014.47.21.png" alt="Student review" loading="lazy">
+          <div class="review-body">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">"The sample packs are excellent and fit perfectly with the lessons. Some advanced topics could go even deeper, but overall the value provided is outstanding."</p>
+          </div>
+        </div>
+        <div class="review-card">
+          <img class="review-screenshot" src="../assets/Coursevsl/Reviews/Scherm%C2%ADafbeelding%202026-06-23%20om%2014.45.42.png" alt="Student review" loading="lazy">
+          <div class="review-body">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">"I used to struggle finishing tracks and promoting them effectively. This course gave me a complete system from idea to release, and my workflow has never been better."</p>
+          </div>
+        </div>
+        <div class="review-card">
+          <img class="review-screenshot" src="../assets/Coursevsl/Reviews/Scherm%C2%ADafbeelding%202026-06-23%20om%2014.45.57.png" alt="Student review" loading="lazy">
+          <div class="review-body">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">"The combination of video lessons, detailed manuals, and high-quality sample packs makes this one of the most complete producer courses I've come across. Highly recommended for independent producers who want long-term growth."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. TRUSTED BY THOUSANDS -->
+  <section class="trusted-section">
+    <h2>Your journey starts today.</h2>
+    <p>A year from now you could still be searching for answers on YouTube. Stuck in a sea of plugins and samples. Or you could have finished more tracks, developed your own sound, released new music and become part of a community that's helping you grow every week.</p>
+    <p style="font-weight:700; margin-top: 12px;">The choice is yours.</p>
+    <p style="color: var(--muted); margin-top: 20px;">Producers from over 40 countries chose Rise as their roadmap to go from making tracks to building a real career.</p>
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <div class="badge-num">40+</div>
+        <div class="badge-label">Countries</div>
+      </div>
+      <div class="trust-badge">
+        <div class="badge-num">4.9/5</div>
+        <div class="badge-label">Avg. Rating</div>
+      </div>
+      <div class="trust-badge">
+        <div class="badge-num">90%</div>
+        <div class="badge-label">Completion Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. CTA BANNER -->
+  <section class="cta-banner">
+    <div class="section-eyebrow">Limited offer</div>
+    <h2>One payment. Lifetime access.</h2>
+    <p class="lifetime-clarity">Once you purchase, you keep access forever. Every lesson, tool, and future update included. No subscriptions, no hidden costs.</p>
+    <div class="price">&euro;&nbsp;260,-</div>
+    <p class="note">11 lessons, 8 production tools, The Artist Manual. Yours forever.</p>
+    <a class="btn-primary" href="https://riseartistacademy.com/store/bundles/rise-artist-program">Get Instant Access</a>
+    <div class="trust-strip" style="margin-top:20px;">
+      <span class="trust-badge-small">&#10003; 14-day money-back guarantee</span>
+      <span class="trust-divider">&middot;</span>
+      <span class="trust-icons">iDEAL &middot; Klarna &middot; PayPal &middot; Visa &middot; Mastercard</span>
+    </div>
+  </section>
+
+  <!-- 15. FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="section-eyebrow" style="text-align:center;">FAQ</div>
+      <h2 class="section-title" style="text-align:center; margin-bottom: 2rem;">Frequently asked questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>What's included in the program?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">11 chapters from 11 industry professionals, 8 production tools (sample packs, presets, effect chains), The Artist Manual, and lifetime access to the artist program.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Who is this for?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">For electronic music producers and DJ/producers who want to make better music, understand the industry, and build a sustainable career. Whether you're just starting or have been producing for years.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>How long do I have access?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Lifetime means exactly that: once you purchase, you keep access forever, including any content and updates we add in the future. The 11 video lessons, community, and production tools are available through our online platform (you'll need an internet connection to stream them). The Artist Manual is a downloadable PDF that's yours to keep offline. The sample packs, presets, and effect chains are also downloadable files you can use in your DAW anytime.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Can I get a refund?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes, we offer a 14-day money-back guarantee. If the course isn't right for you, just reach out and we'll refund your purchase.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Is it really worth &euro;&nbsp;260,-?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">At &euro;&nbsp;260,-, you're getting 11 modules, 8 production tools, a complete manual, and lifetime access to the artist program. Most single sample packs cost more.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do I need any specific software?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The course covers techniques applicable to any DAW. Some production tools are designed for Ableton Live, but the knowledge transfers to any setup.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>I'm a beginner. Is this too advanced?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The program is built for producers at every stage. Whether you've been producing for months or years, each module is structured so you can start where you are and grow from there.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>How is this different from free tutorials on YouTube?</span>
+          <span class="faq-icon"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">YouTube teaches you kicks and basslines in isolation. Rise connects the dots: from finishing tracks to releasing them, building a brand, getting booked, and earning royalties. The full picture, structured by people who do this for a living.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY MOBILE CTA BAR -->
+  <div class="mobile-cta-bar">
+    <div class="mobile-price">
+      <span class="current">&euro;&nbsp;260,-</span>
+    </div>
+    <a class="btn-primary" href="https://riseartistacademy.com/store/bundles/rise-artist-program">Get Instant Access</a>
+  </div>
+
+  <!-- 16. FOOTER -->
+  <footer class="footer">
+    &copy; 2026 Rise &middot; Recode Operations B.V. &middot; All rights reserved
+    <div class="links">
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </div>
+  </footer>
+
+
+  <script>
+    // ── Urgency bar dismiss logic ──
+    (function() {
+      var bar = document.getElementById('urgency-bar');
+      var closeBtn = document.getElementById('urgency-bar-close');
+      if (sessionStorage.getItem('rise_urgency_dismissed')) {
+        bar.classList.add('hidden');
+        document.body.classList.remove('has-urgency-bar');
+      }
+      closeBtn.addEventListener('click', function() {
+        bar.classList.add('hidden');
+        document.body.classList.remove('has-urgency-bar');
+        sessionStorage.setItem('rise_urgency_dismissed', '1');
+      });
+    })();
+
+    // Dynamic urgency deadline — 1 month from now
+    (function() {
+      var el = document.getElementById('urgency-deadline');
+      if (!el) return;
+      var d = new Date();
+      d.setMonth(d.getMonth() + 1);
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      el.textContent = months[d.getMonth()] + ' ' + d.getDate();
+    })();
+
+    // ── Sticky header scroll effect ──
+    const header = document.getElementById('site-header');
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          header.classList.toggle('scrolled', window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // ── Lazy video playback (IntersectionObserver) ──
+    (function() {
+      var vids = document.querySelectorAll('.carousel-track video');
+      var vidObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.play().catch(function(){}); }
+          else { e.target.pause(); }
+        });
+      }, { threshold: 0.3 });
+      vids.forEach(function(v) { vidObs.observe(v); });
+    })();
+
+    // ── Typewriter effect ──
+    (function() {
+      var words = ['dream.', 'tracks.', 'fanbase.', 'network.', 'brand.', 'production skills.', 'artist career.'];
+      var el = document.getElementById('typewriter');
+      var wordIdx = 0, charIdx = 0, deleting = false;
+      var typeSpeed = 100, deleteSpeed = 60, pauseBetween = 1800;
+
+      function tick() {
+        var current = words[wordIdx];
+        if (!deleting) {
+          el.textContent = current.substring(0, charIdx + 1);
+          charIdx++;
+          if (charIdx === current.length) {
+            deleting = true;
+            setTimeout(tick, pauseBetween);
+            return;
+          }
+          setTimeout(tick, typeSpeed);
+        } else {
+          el.textContent = current.substring(0, charIdx);
+          charIdx--;
+          if (charIdx < 0) {
+            deleting = false;
+            charIdx = 0;
+            wordIdx = (wordIdx + 1) % words.length;
+            setTimeout(tick, typeSpeed + 80);
+            return;
+          }
+          setTimeout(tick, deleteSpeed);
+        }
+      }
+      tick();
+    })();
+
+    // Teachers infinite marquee — duplicate cards + drag/swipe support
+    (function() {
+      var grid = document.getElementById('teachers-marquee');
+      if (!grid) return;
+      var wrap = grid.parentElement;
+      // Measure original width before duplicating
+      var originalWidth = grid.scrollWidth;
+      var gap = 24; // matches CSS gap
+      var cards = grid.innerHTML;
+      grid.innerHTML = cards + cards;
+      var scrollDist = originalWidth + gap;
+      grid.style.setProperty('--scroll-dist', '-' + scrollDist + 'px');
+
+      // Drag/swipe: pause animation, translate manually, resume on release
+      var dragging = false, startX = 0, currentOffset = 0, dragOffset = 0;
+
+      function getAnimOffset() {
+        var cs = getComputedStyle(grid);
+        var matrix = cs.transform || cs.webkitTransform;
+        if (matrix && matrix !== 'none') {
+          var vals = matrix.match(/matrix.*\((.+)\)/);
+          if (vals) { return parseFloat(vals[1].split(',')[4]); }
+        }
+        return 0;
+      }
+      function clampOffset(v) {
+        // Keep within -scrollDist..0 range for seamless visual
+        v = v % scrollDist;
+        if (v > 0) v -= scrollDist;
+        return v;
+      }
+      function onStart(x) {
+        dragging = true;
+        startX = x;
+        currentOffset = getAnimOffset();
+        grid.style.animation = 'none';
+        grid.style.transform = 'translateX(' + currentOffset + 'px)';
+        grid.style.cursor = 'grabbing';
+      }
+      function onMove(x) {
+        if (!dragging) return;
+        dragOffset = x - startX;
+        var pos = clampOffset(currentOffset + dragOffset);
+        grid.style.transform = 'translateX(' + pos + 'px)';
+      }
+      function onEnd() {
+        if (!dragging) return;
+        dragging = false;
+        grid.style.cursor = '';
+        // Calculate where we are now and set a custom offset to resume animation from
+        var finalPos = clampOffset(currentOffset + dragOffset);
+        // Convert position to a percentage of the animation duration
+        var progress = Math.abs(finalPos) / scrollDist;
+        grid.style.transform = '';
+        grid.style.animation = 'teachers-scroll 120s linear infinite';
+        grid.style.animationDelay = '-' + (progress * 120) + 's';
+        dragOffset = 0;
+      }
+      // Mouse events
+      wrap.addEventListener('mousedown', function(e) { e.preventDefault(); onStart(e.clientX); });
+      window.addEventListener('mousemove', function(e) { if (dragging) { e.preventDefault(); onMove(e.clientX); } });
+      window.addEventListener('mouseup', onEnd);
+      // Touch events
+      wrap.addEventListener('touchstart', function(e) { onStart(e.touches[0].clientX); }, { passive: true });
+      wrap.addEventListener('touchmove', function(e) { if (dragging) onMove(e.touches[0].clientX); }, { passive: true });
+      wrap.addEventListener('touchend', onEnd);
+      // Grab cursor
+      wrap.style.cursor = 'grab';
+    })();
+
+    // Team photo carousel — auto-rotate
+    (function() {
+      var carousel = document.getElementById('team-carousel');
+      if (!carousel) return;
+      var imgs = carousel.querySelectorAll('img');
+      var idx = 0;
+      setInterval(function() {
+        imgs[idx].classList.remove('active');
+        idx = (idx + 1) % imgs.length;
+        imgs[idx].classList.add('active');
+      }, 3000);
+    })();
+
+    // FAQ toggle with aria-expanded
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = this.parentElement;
+        var isOpen = item.classList.toggle('open');
+        this.setAttribute('aria-expanded', isOpen);
+      });
+    });
+
+    // Products infinite marquee — duplicate cards for seamless loop
+    (function() {
+      var grid = document.getElementById('products-marquee');
+      if (!grid) return;
+      var originalWidth = grid.scrollWidth;
+      var gap = 18; // matches CSS gap
+      var cards = grid.innerHTML;
+      grid.innerHTML = cards + cards;
+      var scrollDist = originalWidth + gap;
+      grid.style.setProperty('--products-scroll-dist', '-' + scrollDist + 'px');
+    })();
+
+  </script>
+
+  <!-- Rise A/B Testing + Live Content -->
+  <script>window.RISE_AB_PAGE = 'course-light';</script>
+  <script src="/rise-ab.js"></script>
+
+</body>
+</html>

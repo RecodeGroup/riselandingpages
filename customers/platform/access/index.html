@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Platform Subscription</title>
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="../../../customer-styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #141414;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #ff683e;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    /* Main content */
+    main {
+      margin-top: 0;
+      padding-bottom: 3rem;
+    }
+
+    /* Hero Section */
+    .customer-hero {
+      position: relative;
+      background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.8)), url('../../../assets/photos/photo-1.jpg') center/cover;
+      background-attachment: fixed;
+      padding: 8rem 2rem;
+      text-align: center;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: #1e1e1e;
+      color: #ff683e;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ff683e;
+    }
+
+    .hero-headline {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+    }
+
+    .hero-subtext {
+      font-size: 1.25rem;
+      color: #cccccc;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background-color: #ff683e;
+      color: #141414;
+      padding: 1rem 2.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cta-btn:hover {
+      background-color: #ff6b3f;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(253, 86, 42, 0.3);
+    }
+
+    .cta-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Content sections */
+    .customer-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #999999;
+      margin-bottom: 3.5rem;
+      max-width: 600px;
+    }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .feature-card {
+      background-color: #1e1e1e;
+      padding: 2rem;
+      border-radius: 6px;
+      border: 1px solid #2a2a2a;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      border-color: #ff683e;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(253, 86, 42, 0.15);
+    }
+
+    .feature-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1.5rem;
+      color: #ff683e;
+    }
+
+    .feature-card__title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .feature-card__text {
+      font-size: 0.95rem;
+      color: #999999;
+      line-height: 1.6;
+    }
+
+    /* Steps Section */
+    .steps-section {
+      background-color: #1e1e1e;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .step-item {
+      padding: 2rem;
+      background-color: #141414;
+      border-radius: 6px;
+      border-left: 4px solid #ff683e;
+      position: relative;
+    }
+
+    .step-item__number {
+      position: absolute;
+      top: -12px;
+      left: 2rem;
+      background-color: #ff683e;
+      color: #141414;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .step-item__title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      margin-top: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .step-item__text {
+      font-size: 0.95rem;
+      color: #999999;
+      line-height: 1.6;
+    }
+
+    /* What to Expect */
+    .expectations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .expectation-item {
+      background-color: #1e1e1e;
+      padding: 2rem;
+      border-radius: 6px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .expectation-item__title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #ff683e;
+      letter-spacing: -0.01em;
+    }
+
+    .expectation-item__text {
+      font-size: 0.95rem;
+      color: #999999;
+      line-height: 1.7;
+    }
+
+    /* Why This Matters */
+    .why-matters {
+      background-color: #1e1e1e;
+      padding: 3rem;
+      border-radius: 6px;
+      border-left: 4px solid #ff683e;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #cccccc;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #1e1e1e, #141414);
+      padding: 5rem 2rem;
+      text-align: center;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    .cta-section__headline {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-section__subtext {
+      font-size: 1.15rem;
+      color: #999999;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* Legal microcopy */
+    .legal-micro {
+      font-size: 0.8rem;
+      color: #666666;
+      margin-top: 2rem;
+      line-height: 1.6;
+    }
+
+    .legal-micro a {
+      color: #999999;
+      text-decoration: underline;
+    }
+
+    .legal-micro a:hover {
+      color: #cccccc;
+    }
+
+    /* Footer */
+    .customer-footer {
+      background-color: #0f0f0f;
+      border-top: 1px solid #1e1e1e;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #666666;
+      font-size: 0.85rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #999999;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-headline {
+        font-size: 2rem;
+      }
+
+      .hero-subtext {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-section__headline {
+        font-size: 1.75rem;
+      }
+
+      .customer-hero {
+        padding: 4rem 1.5rem;
+        min-height: 400px;
+      }
+
+      .customer-section {
+        padding: 3rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Subtle bottom-left logo -->
+  <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener" class="page-logo-watermark">
+    <img src="../../../assets/logo.png" alt="Rise">
+  </a>
+
+<main>
+  <!-- Hero Section -->
+  <section class="customer-hero">
+    <div class="hero-badge">Rise Platform</div>
+    <h1 class="hero-headline">Your Workspace. Your Pace. Your Growth.</h1>
+    <p class="hero-subtext">A credit-based platform that gives you flexible access to tools, templates, and on-demand support — built for artists who execute on their own terms.</p>
+    <button class="cta-btn" id="hero-cta-btn">Subscribe Now</button>
+  </section>
+
+  <!-- Sliding Photo Gallery -->
+  <section class="gallery">
+    <div class="gallery-track">
+      <div class="gallery-item"><img src="../../../assets/photos/photo-2.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-8.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-14.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-3.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-9.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-4.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-10.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-16.jpg" alt="Rise Event" loading="lazy"></div>
+      <!-- Duplicate for seamless infinite scroll -->
+      <div class="gallery-item"><img src="../../../assets/photos/photo-2.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-8.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-14.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-3.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-9.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-4.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-10.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-16.jpg" alt="Rise Event" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- What You Get -->
+  <section class="customer-section">
+    <h2 class="section-title">What You Get</h2>
+    <p class="section-subtitle">Everything you need to build professionally, on your schedule.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+        <h3 class="feature-card__title">Monthly Credits</h3>
+        <p class="feature-card__text">Flexible allocation for support, resources, and sessions. Use them when and how you need.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <h3 class="feature-card__title">Resource Library</h3>
+        <p class="feature-card__text">Curated tools, templates, and strategic knowledge built for real execution.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          <path d="M9 10h.01M15 10h.01M9 14h6"></path>
+        </svg>
+        <h3 class="feature-card__title">On-Demand 1-on-1 Coaching Sessions</h3>
+        <p class="feature-card__text">Bookable one-on-one coaching sessions when you need targeted guidance. Schedule what matters, when it matters.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="12 3 20 7.46 20 16.54 12 21 4 16.54 4 7.46 12 3"></polyline>
+          <line x1="12" y1="12" x2="20" y2="7.46"></line>
+          <line x1="12" y1="12" x2="12" y2="21"></line>
+          <line x1="12" y1="12" x2="4" y2="7.46"></line>
+        </svg>
+        <h3 class="feature-card__title">Personal Dashboard</h3>
+        <p class="feature-card__text">Track your progress, credits, and development path all in one place.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+        <h3 class="feature-card__title">Planning Tools</h3>
+        <p class="feature-card__text">Templates for release strategy, branding, and execution planning.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+          <polyline points="17 6 23 6 23 12"></polyline>
+        </svg>
+        <h3 class="feature-card__title">Continuous Updates</h3>
+        <p class="feature-card__text">New resources and features added regularly to keep you ahead.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Happens Next -->
+  <section class="customer-section steps-section">
+    <h2 class="section-title">What Happens Next</h2>
+    <p class="section-subtitle">Your journey from subscription to execution.</p>
+
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-item__number">1</div>
+        <h3 class="step-item__title">Payment Confirmed</h3>
+        <p class="step-item__text">Your subscription is activated securely through Stripe. You're officially in.</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-item__number">2</div>
+        <h3 class="step-item__title">Dashboard Activated</h3>
+        <p class="step-item__text">Your personal workspace is set up immediately. Access everything right away.</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-item__number">3</div>
+        <h3 class="step-item__title">Credits Allocated</h3>
+        <p class="step-item__text">Monthly credits appear in your account. Start planning how you'll use them.</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-item__number">4</div>
+        <h3 class="step-item__title">Explore Products, Sample Packs & Presets</h3>
+        <p class="step-item__text">Browse the library and download the products, sample packs and presets you need most.</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-item__number">5</div>
+        <h3 class="step-item__title">Book Support Sessions</h3>
+        <p class="step-item__text">Use your credits for one-on-one guidance when you need expert input.</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-item__number">6</div>
+        <h3 class="step-item__title">Build at Your Pace</h3>
+        <p class="step-item__text">Execute independently with professional-grade tools and knowledge behind you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Break -->
+  <section class="photo-break">
+    <div class="photo-break-grid">
+      <img src="../../../assets/photos/photo-8.jpg" alt="Rise Event" loading="lazy">
+      <img src="../../../assets/photos/photo-13.jpg" alt="Rise Event" loading="lazy">
+      <img src="../../../assets/photos/photo-18.jpg" alt="Rise Event" loading="lazy">
+    </div>
+  </section>
+
+  <!-- What to Expect -->
+  <section class="customer-section">
+    <h2 class="section-title">What to Expect</h2>
+    <p class="section-subtitle">How the Rise Platform works in practice.</p>
+
+    <div class="expectations">
+      <div class="expectation-item">
+        <h3 class="expectation-item__title">Flexibility Without Chaos</h3>
+        <p class="expectation-item__text">Use your credits when and how you choose. The structure exists to support you, not restrict you. You decide your pace.</p>
+      </div>
+
+      <div class="expectation-item">
+        <h3 class="expectation-item__title">Professional-Grade Resources</h3>
+        <p class="expectation-item__text">Every tool and template is designed for real execution, not theory. You're getting what working artists actually use.</p>
+      </div>
+
+      <div class="expectation-item">
+        <h3 class="expectation-item__title">Support When It Matters</h3>
+        <p class="expectation-item__text">You work independently, but expert guidance is always one booking away. Get help exactly when you need it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why This Matters -->
+  <section class="customer-section">
+    <h2 class="section-title">Why This Matters</h2>
+
+    <div class="why-matters">
+      <p>Growth does not always follow a fixed schedule. Some weeks you need deep support. Other weeks you need to execute in silence. The Rise Platform is built for that reality. It gives you the tools, the knowledge, and the option of guided support — without locking you into a rigid program. This is professional infrastructure for self-directed artists who know what they want but need the right resources to get there.</p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-section__headline">Ready to Build on Your Terms?</h2>
+    <p class="cta-section__subtext">Subscribe to the Rise Platform and access the tools that drive real progress.</p>
+    <button class="cta-btn" id="cta-pay-btn">Subscribe Now</button>
+
+    <div class="legal-micro">
+      <p>Secure payment processing through Stripe. <a href="/terms/">Terms of Service</a> • <a href="/privacy/">Privacy Policy</a></p>
+      <p style="margin-top: 1rem;">Rise Platform subscription renews monthly. Cancel anytime from your dashboard.</p>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="customer-footer">
+  <div class="footer-links">
+    <a href="/terms/">Terms</a>
+    <a href="/privacy/">Privacy</a>
+  </div>
+  <p>&copy; 2026 Rise. All rights reserved. Built for artists who take themselves seriously.</p>
+</footer>
+
+<!-- Scripts -->
+<script src="../../../config.js"></script>
+<script>
+(function() {
+  var btn = document.getElementById('cta-pay-btn');
+  var heroBtn = document.getElementById('hero-cta-btn');
+
+  function pay() {
+    var url = RISE_CONFIG.platformPaymentUrl;
+    if (url && url.trim() !== '') {
+      window.open(url, '_blank');
+    } else {
+      alert('Payment link not set yet.');
+    }
+  }
+
+  if (btn) btn.addEventListener('click', pay);
+  if (heroBtn) heroBtn.addEventListener('click', pay);
+})();
+</script>
+
+</body>
+</html>

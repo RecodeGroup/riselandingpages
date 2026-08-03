@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Overview</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,15,15,0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      padding: 0.75rem 2rem;
+    }
+    .header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .header img {
+      width: 32px; height: 32px; border-radius: 6px;
+    }
+    .header h1 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    .page-title {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .page-sub {
+      color: #777;
+      font-size: 0.9rem;
+      margin-bottom: 3rem;
+    }
+
+    .section { margin-bottom: 2.5rem; }
+
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ff683e;
+      margin-bottom: 12px;
+      padding-left: 2px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 14px 18px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      border-color: rgba(255,104,62,0.25);
+      background: #1f1f1f;
+      transform: translateY(-1px);
+    }
+
+    .card-icon {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,104,62,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon svg {
+      width: 18px; height: 18px;
+      stroke: #ff683e; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .card-body { flex: 1; min-width: 0; }
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-path {
+      font-size: 0.7rem;
+      color: #555;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      margin-top: 2px;
+    }
+
+    .card-arrow {
+      flex-shrink: 0;
+      color: #333;
+      transition: color 0.2s;
+    }
+    .card:hover .card-arrow { color: #ff683e; }
+
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem;
+      text-align: center;
+      color: #444;
+      font-size: 0.75rem;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 2rem 1rem 3rem; }
+      .grid { grid-template-columns: 1fr; }
+      .header { padding: 0.6rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <img src="../assets/logo.png" alt="Rise">
+    <h1>Overview</h1>
+  </div>
+</div>
+
+<div class="container">
+  <h2 class="page-title">Rise Dashboard</h2>
+  <p class="page-sub">Alle pagina's op een rij.</p>
+
+  <!-- ── Landing Pages ──────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Landing Pages</div>
+    <div class="grid">
+
+      <a class="card" href="/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Homepage</div>
+          <div class="card-path">/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/community-vsl-b/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Community Landing Page</div>
+          <div class="card-path">/community-vsl-b/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/coursevsl-b/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Course Landing Page</div>
+          <div class="card-path">/coursevsl-b/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/coursevsl/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Course Landing (Original)</div>
+          <div class="card-path">/coursevsl/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/vsl/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 17h20"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">VSL Page</div>
+          <div class="card-path">/vsl/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/giveaway/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Free Artist Guide (Giveaway)</div>
+          <div class="card-path">/giveaway/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/partnership/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Partnership</div>
+          <div class="card-path">/partnership/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── Customer Pages ─────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Customer Pages</div>
+    <div class="grid">
+
+      <a class="card" href="/customers/base/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">BASE — Production Foundations</div>
+          <div class="card-path">/customers/base/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/customers/core/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">CORE — Community Membership</div>
+          <div class="card-path">/customers/core/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/customers/course/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Course</div>
+          <div class="card-path">/customers/course/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/customers/community/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Community (Original)</div>
+          <div class="card-path">/customers/community/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/customers/coaching/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Coaching</div>
+          <div class="card-path">/customers/coaching/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/customers/platform/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Platform Subscription</div>
+          <div class="card-path">/customers/platform/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/customers/portal/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Portal</div>
+          <div class="card-path">/customers/portal/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/customers/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Customer Portal (Index)</div>
+          <div class="card-path">/customers/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── Checkout & Onboarding ──────────────────── -->
+  <div class="section">
+    <div class="section-label">Checkout & Onboarding</div>
+    <div class="grid">
+
+      <a class="card" href="/checkout/payment-plan/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Payment Plan</div>
+          <div class="card-path">/checkout/payment-plan/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/checkout/remaining-payment/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Remaining Payment</div>
+          <div class="card-path">/checkout/remaining-payment/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/checkout/confirmation/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Payment Confirmed</div>
+          <div class="card-path">/checkout/confirmation/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/onboarding/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Onboarding (Thank You)</div>
+          <div class="card-path">/onboarding/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/community-vsl-b/bedankt/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Community Bedankt</div>
+          <div class="card-path">/community-vsl-b/bedankt/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/vsl/thanks/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">VSL Thanks</div>
+          <div class="card-path">/vsl/thanks/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── Admin & Tools ──────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Admin & Tools</div>
+    <div class="grid">
+
+      <a class="card" href="/admin/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Block Manager (CMS)</div>
+          <div class="card-path">/admin/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/leads/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Giveaway Leads</div>
+          <div class="card-path">/leads/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/overview/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">This Overview</div>
+          <div class="card-path">/overview/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── Legal ──────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Legal</div>
+    <div class="grid">
+
+      <a class="card" href="/terms/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Terms & Conditions</div>
+          <div class="card-path">/terms/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/privacy/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Privacy Policy</div>
+          <div class="card-path">/privacy/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── Archive / Test ─────────────────────────── -->
+  <div class="section">
+    <div class="section-label">Archief / Test</div>
+    <div class="grid">
+
+      <a class="card" href="/community-test/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Community (Test)</div>
+          <div class="card-path">/community-test/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+      <a class="card" href="/homepageexample/">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="card-body">
+          <div class="card-title">Homepage (Example/Draft)</div>
+          <div class="card-path">/homepageexample/</div>
+        </div>
+        <div class="card-arrow">&rsaquo;</div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  &copy; 2026 Rise Artist Academy &middot; Internal Overview
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Community</title>
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="../../../customer-styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #141414;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    /* Hero Section */
+    .customer-hero {
+      margin-top: 0;
+      position: relative;
+      min-height: 700px;
+      background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%),
+                  url('../../../assets/photos/photo-3.jpg') center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+
+    .customer-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(20, 20, 20, 0.75);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: rgba(253, 86, 42, 0.15);
+      border: 1px solid #ff683e;
+      color: #ff683e;
+      padding: 0.5rem 1.25rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .hero-headline {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtext {
+      font-size: 1.15rem;
+      color: #cccccc;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background-color: #ff683e;
+      color: #ffffff;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(253, 86, 42, 0.3);
+    }
+
+    .hero-cta:hover {
+      background-color: #ff6a3d;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(253, 86, 42, 0.4);
+    }
+
+    /* Customer Sections */
+    .customer-section {
+      padding: 6rem 2rem;
+      background-color: #141414;
+    }
+
+    .customer-section.alt {
+      background-color: #1a1a1a;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-intro {
+      font-size: 1.1rem;
+      color: #aaaaaa;
+      line-height: 1.7;
+    }
+
+    /* Feature Grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background-color: #1e1e1e;
+      border: 1px solid rgba(253, 86, 42, 0.1);
+      border-radius: 8px;
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background-color: #ff683e;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background-color: #252525;
+      border-color: #ff683e;
+      transform: translateY(-4px);
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 1.5rem;
+      color: #ff683e;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .feature-description {
+      color: #999999;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Steps Section */
+    .steps-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .step-item {
+      background-color: #1e1e1e;
+      border: 1px solid rgba(253, 86, 42, 0.1);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .step-item:hover {
+      background-color: #252525;
+      border-color: #ff683e;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ff683e 0%, #ff6a3d 100%);
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .step-description {
+      color: #999999;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* What to Expect Section */
+    .expect-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .expect-item {
+      background-color: #1e1e1e;
+      border-left: 4px solid #ff683e;
+      border-radius: 0 8px 8px 0;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .expect-item:hover {
+      background-color: #252525;
+      transform: translateX(8px);
+    }
+
+    .expect-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #ff683e;
+    }
+
+    .expect-description {
+      color: #aaaaaa;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* Why This Matters */
+    .matters-content {
+      background: linear-gradient(135deg, rgba(253, 86, 42, 0.05) 0%, rgba(30, 30, 30, 0.5) 100%);
+      border: 1px solid rgba(253, 86, 42, 0.15);
+      border-radius: 8px;
+      padding: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      color: #cccccc;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #1e1e1e 0%, #252525 100%);
+      border-top: 1px solid rgba(253, 86, 42, 0.15);
+      border-bottom: 1px solid rgba(253, 86, 42, 0.15);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .cta-headline {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-subtext {
+      font-size: 1.1rem;
+      color: #aaaaaa;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1.125rem 3rem;
+      background-color: #ff683e;
+      color: #ffffff;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 12px 32px rgba(253, 86, 42, 0.3);
+    }
+
+    .cta-btn:hover {
+      background-color: #ff6a3d;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(253, 86, 42, 0.4);
+    }
+
+    .cta-btn:active {
+      transform: translateY(0);
+    }
+
+    .legal-micro {
+      font-size: 0.8rem;
+      color: #666666;
+      margin-top: 2rem;
+      line-height: 1.6;
+    }
+
+    .legal-micro a {
+      color: #ff683e;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .legal-micro a:hover {
+      color: #ff6a3d;
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .customer-footer {
+      background-color: #0d0d0d;
+      border-top: 1px solid rgba(253, 86, 42, 0.1);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #666666;
+      font-size: 0.85rem;
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: #ff683e;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ff6a3d;
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .site-nav {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .hero-headline {
+        font-size: 2.25rem;
+      }
+
+      .hero-subtext {
+        font-size: 1rem;
+      }
+
+      .customer-section {
+        padding: 3rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .feature-grid,
+      .steps-section {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-headline {
+        font-size: 1.75rem;
+      }
+
+      .matters-content {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Subtle bottom-left logo -->
+  <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener" class="page-logo-watermark">
+    <img src="../../../assets/logo.png" alt="Rise">
+  </a>
+
+  <!-- Hero Section -->
+  <section class="customer-hero">
+    <div class="hero-content">
+      <div class="hero-badge">Rise Community</div>
+      <h1 class="hero-headline">Grow Together. Move Faster.</h1>
+      <p class="hero-subtext">A structured network of serious electronic artists built on accountability, execution, and shared momentum. This is not a group chat. This is a growth engine.</p>
+      <button id="hero-cta-btn" class="hero-cta">Join the Community</button>
+    </div>
+  </section>
+
+  <!-- Sliding Photo Gallery -->
+  <section class="gallery">
+    <div class="gallery-track">
+      <div class="gallery-item"><img src="../../../assets/photos/photo-5.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-11.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-17.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-1.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-6.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-16.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-10.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-4.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-9.jpg" alt="Rise Event" loading="lazy"></div>
+      <!-- Duplicate for seamless infinite scroll -->
+      <div class="gallery-item"><img src="../../../assets/photos/photo-5.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-11.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-17.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-1.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-6.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-16.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-10.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-15.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-4.jpg" alt="Rise Event" loading="lazy"></div>
+      <div class="gallery-item"><img src="../../../assets/photos/photo-9.jpg" alt="Rise Event" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- What You Get Section -->
+  <section class="customer-section">
+    <div class="section-header">
+      <h2 class="section-title">What You Get</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="1"></circle>
+          <path d="M12 1v6m0 6v6"></path>
+          <path d="M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24"></path>
+          <path d="M1 12h6m6 0h6"></path>
+          <path d="M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"></path>
+        </svg>
+        <h3 class="feature-title">Weekly Accountability Calls</h3>
+        <p class="feature-description">Structured group sessions focused on progress and forward momentum</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H12"></path>
+          <path d="M12 5h6.5a2.5 2.5 0 0 1 2.5 2.5v12"></path>
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M2 17h20"></path>
+        </svg>
+        <h3 class="feature-title">Monthly Deep-Dive Workshops</h3>
+        <p class="feature-description">Expert-led sessions on production, strategy, and industry topics</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <h3 class="feature-title">Peer Feedback</h3>
+        <p class="feature-description">Get honest, constructive feedback from artists who understand your craft</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        <h3 class="feature-title">Private Network</h3>
+        <p class="feature-description">Direct connection to a curated group of committed electronic artists</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="6" y1="9" x2="6" y2="20"></line>
+          <line x1="12" y1="9" x2="12" y2="20"></line>
+          <line x1="18" y1="9" x2="18" y2="20"></line>
+          <path d="M6 9a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2z"></path>
+          <path d="M12 9a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2z"></path>
+          <path d="M18 9a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2z"></path>
+        </svg>
+        <h3 class="feature-title">Event Access</h3>
+        <p class="feature-description">Invitations to exclusive Rise events and industry opportunities</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="2" width="20" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M9 12L15 8v8l-6-4z" fill="currentColor"/>
+        </svg>
+        <h3 class="feature-title">Access to the Course</h3>
+        <p class="feature-description">Includes video modules, sample packs, and manual</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Happens Next Section -->
+  <section class="customer-section alt">
+    <div class="section-header">
+      <h2 class="section-title">What Happens Next</h2>
+    </div>
+    <div class="steps-section">
+      <div class="step-item">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Payment Confirmed</h3>
+        <p class="step-description">Membership activated securely through Stripe</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Welcome & Onboarding</h3>
+        <p class="step-description">Receive your community guide and introduction protocol</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Introduce Yourself & Complete the Course</h3>
+        <p class="step-description">Share your background with the group and work through the included course. You must complete the course and introduce yourself before attending your first call.</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">4</div>
+        <h3 class="step-title">Join Your First Call</h3>
+        <p class="step-description">Once the course is completed and your introduction is done, attend your first weekly accountability session</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">5</div>
+        <h3 class="step-title">Engage Consistently</h3>
+        <p class="step-description">Participate in calls, workshops, and peer feedback cycles</p>
+      </div>
+
+      <div class="step-item">
+        <div class="step-number">6</div>
+        <h3 class="step-title">Build Real Momentum</h3>
+        <p class="step-description">Watch your consistency compound through structured support</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Break -->
+  <section class="photo-break">
+    <div class="photo-break-grid">
+      <img src="../../../assets/photos/photo-1.jpg" alt="Rise Event" loading="lazy">
+      <img src="../../../assets/photos/photo-14.jpg" alt="Rise Event" loading="lazy">
+      <img src="../../../assets/photos/photo-11.jpg" alt="Rise Event" loading="lazy">
+    </div>
+  </section>
+
+  <!-- What to Expect Section -->
+  <section class="customer-section">
+    <div class="section-header">
+      <h2 class="section-title">What to Expect</h2>
+    </div>
+    <div class="expect-container">
+      <div class="expect-item">
+        <div class="expect-title">Active Participation Required</div>
+        <p class="expect-description">This community works because every member is invested. Passive observers do not last.</p>
+      </div>
+
+      <div class="expect-item">
+        <div class="expect-title">Structured Cadence</div>
+        <p class="expect-description">Weekly calls and monthly workshops create rhythm. You always know what is coming next.</p>
+      </div>
+
+      <div class="expect-item">
+        <div class="expect-title">Long-Term Relationships</div>
+        <p class="expect-description">The connections you build here become collaborators, supporters, and lifelong contacts in the industry.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why This Matters Section -->
+  <section class="customer-section alt">
+    <div class="section-header">
+      <h2 class="section-title">Why This Matters</h2>
+    </div>
+    <div class="matters-content">
+      <p>Isolation kills careers faster than lack of talent. Most electronic artists work alone, iterate in silence, and never get the honest feedback that accelerates growth. The Rise Community changes that equation. It places you inside a structured environment where accountability is built in, participation is expected, and every member is moving in the same direction. The artists who succeed long-term are rarely the most talented. They are the most connected, the most accountable, and the most consistent. This is where that consistency is built.</p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-headline">Ready to Join a Network That Moves?</h2>
+    <p class="cta-subtext">Become part of the Rise Community and accelerate your growth through accountability and connection.</p>
+    <button id="cta-pay-btn" class="cta-btn">Join the Community</button>
+    <div class="legal-micro">
+      <p>By joining, you agree to our <a href="/terms/">Terms of Service</a> and <a href="/privacy/">Privacy Policy</a>. Secure payment processing via Stripe.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="customer-footer">
+    <div class="footer-links">
+      <a href="/terms/">Terms of Service</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="mailto:support@risemusic.io">Contact Support</a>
+    </div>
+    <p>&copy; 2026 Rise. All rights reserved. An artist development platform for electronic music creators.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../../../config.js"></script>
+  <script>
+    (function() {
+      var btn = document.getElementById('cta-pay-btn');
+      var heroBtn = document.getElementById('hero-cta-btn');
+
+      function pay() {
+        var url = RISE_CONFIG.communityPaymentUrl;
+        if (url && url.trim() !== '') {
+          window.open(url, '_blank');
+        } else {
+          alert('Payment link not set yet.');
+        }
+      }
+
+      if (btn) btn.addEventListener('click', pay);
+      if (heroBtn) heroBtn.addEventListener('click', pay);
+    })();
+  </script>
+</body>
+</html>

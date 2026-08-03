@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE Artist Academy &mdash; Become a producer with Base and Core.</title>
+  <meta name="description" content="Two guided programs for electronic producers. Base builds your production foundation in six months. Core holds you accountable for twelve. Find your starting line in two minutes.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* ════════════════════════════════════════════════
+       Rise Artist Academy — Homepage v2
+       Restyled to coursevsl-b design system
+       ════════════════════════════════════════════════ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Accessibility ───────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* ── Header ──────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.72);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom-color: rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 7px; }
+    .nav-logo span {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #0a0a0a !important;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .nav-cta:hover {
+      background: var(--accent-hover) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+
+    /* ── Buttons ──────────────────────────────────── */
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-block;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .btn-ghost {
+      padding: 16px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      transition: border-color 0.25s ease, color 0.25s ease;
+      display: inline-block;
+      background: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,104,62,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 20% 100%, rgba(255,104,62,0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .hero-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .hero-cta svg { width: 18px; height: 18px; }
+
+    /* ── Photo strip ─────────────────────────────── */
+    .photo-strip {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .photo-strip-track {
+      display: flex;
+      gap: 4px;
+      width: max-content;
+      animation: scroll-strip 40s linear infinite;
+    }
+    .photo-strip-track img {
+      height: 180px;
+      width: auto;
+      object-fit: cover;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+    @keyframes scroll-strip {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Section defaults ────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .section-body {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 55ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* ── Why Rise ─────────────────────────────────── */
+    .why-rise { background: var(--bg); }
+    .why-rise .section-body { margin-bottom: 0; }
+
+    /* ── Social Proof ────────────────────────────── */
+    .social-proof { background: var(--bg); }
+    .proof-placeholder {
+      margin-top: 32px;
+      padding: 40px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Choose Your Path ────────────────────────── */
+    .choose-path { background: var(--bg); }
+    .path-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .path-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .path-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .path-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .path-card:hover::before { opacity: 1; }
+    .path-card.main-product {
+      border-color: rgba(255,104,62,0.3);
+      background: linear-gradient(180deg, rgba(255,104,62,0.04) 0%, var(--bg-2) 40%);
+    }
+    .path-card.main-product:hover {
+      border-color: rgba(255,104,62,0.5);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .path-label {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .path-label.standalone {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+    }
+    .path-label.primary {
+      background: rgba(255,104,62,0.12);
+      color: var(--accent);
+    }
+    .path-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .path-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .path-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .path-sub-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .path-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .path-list li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding: 5px 0 5px 20px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .path-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 8px;
+      height: 4px;
+      border-left: 1.5px solid var(--accent);
+      border-bottom: 1.5px solid var(--accent);
+      transform: rotate(-45deg);
+    }
+    .path-cta {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      text-align: center;
+      width: 100%;
+    }
+    .path-cta.primary {
+      background: var(--accent);
+      color: #0a0a0a;
+    }
+    .path-cta.primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .path-cta.secondary {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--line-strong);
+    }
+    .path-cta.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .path-cta svg { width: 16px; height: 16px; }
+
+    /* ── Coaches ──────────────────────────────────── */
+    .coaches { background: var(--bg); }
+    .coaches-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 55ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .coach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 20px;
+    }
+    .coach-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .coach-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .coach-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .coach-card:hover::before { opacity: 1; }
+    .coach-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 14px;
+      border: 2px solid rgba(255,104,62,0.15);
+    }
+    .coach-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .coach-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .coach-bio {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Monthly Webinar ─────────────────────────── */
+    .webinar { background: var(--bg); }
+    .webinar-box {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,104,62,0.15);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 40px);
+    }
+    .webinar-icon {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .webinar-icon svg { width: 28px; height: 28px; color: var(--accent); }
+    .webinar-text { flex: 1; }
+    .webinar-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .webinar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #0a0a0a;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .webinar-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+
+    /* ── Closing ──────────────────────────────────── */
+    .closing {
+      background: var(--bg);
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .closing-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .closing p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq { background: var(--bg); }
+    .faq .section-eyebrow,
+    .faq .section-heading { text-align: center; }
+    .faq-list {
+      margin-top: 32px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      position: relative;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--muted);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .faq-icon::before {
+      width: 14px;
+      height: 2px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-icon::after {
+      width: 2px;
+      height: 14px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-item.open .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-a-inner {
+      padding: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a {
+      transition: color 0.2s;
+    }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .path-grid { grid-template-columns: 1fr; }
+      .coach-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+      .section { padding: 4rem 1.5rem; }
+      .closing { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      .webinar-box { flex-direction: column; text-align: center; }
+      .hero-cta, .btn-primary, .btn-ghost {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .section { padding: 2.5rem 1rem; }
+      .closing { padding: 2.5rem 1rem; }
+      .hero { padding: clamp(5rem, 10vw, 8rem) 1rem clamp(3rem, 6vw, 5rem); }
+      .site-header-inner { padding: 0.75rem 1rem; }
+      .footer { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       Navigation
+       ══════════════════════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a href="#" class="nav-logo">
+        <img src="../assets/logo.png" alt="Rise">
+        <span>Rise</span>
+      </a>
+      <div class="nav-links">
+        <a href="#why-rise">Why Rise</a>
+        <a href="#paths">Programs</a>
+        <a href="#coaches">Coaches</a>
+        <a href="#faq">FAQ</a>
+        <a href="#paths" class="nav-cta">Find Your Path</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       Hero
+       ══════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Rise Artist Academy</div>
+      <h1>Create the foundation&nbsp;once. Build your career on&nbsp;it&nbsp;forever.</h1>
+      <p class="hero-sub">We help electronic music producers grow through structure, accountability and coaching, wherever they are in their journey.</p>
+      <a href="#paths" class="hero-cta">
+        Find Your Path
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Photo Strip
+       ══════════════════════════════════════════════ -->
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       Why Rise
+       ══════════════════════════════════════════════ -->
+  <section class="section why-rise" id="why-rise">
+    <div class="section-inner">
+      <div class="section-eyebrow">The idea</div>
+      <h2 class="section-heading">Talent was never the&nbsp;issue.</h2>
+      <div class="section-body">
+        <p>You already have the drive. What's often missing is direction, honest feedback and guidance from people who are actually working in the industry. Just as important is building the mindset to keep moving when motivation fades.</p>
+        <p style="margin-top:16px;">That's what Rise is built on. We combine structure, accountability and coaching to help producers turn talent into long-term progress. Whether that starts with the Course, Base or Core depends on where you are today.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Social Proof
+       ══════════════════════════════════════════════ -->
+  <section class="section social-proof" id="social-proof">
+    <div class="section-inner">
+      <div class="section-eyebrow">Results</div>
+      <h2 class="section-heading">What our members have to&nbsp;say.</h2>
+      <div class="proof-placeholder">
+        Testimonials, videos and case studies &mdash; in production. Concrete results from participants: releases, bookings, growth.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Choose Your Path
+       ══════════════════════════════════════════════ -->
+  <section class="section choose-path" id="paths">
+    <div class="section-inner">
+      <div class="section-eyebrow">Choose your path</div>
+      <h2 class="section-heading">Two ways to start.</h2>
+
+      <div class="path-grid">
+
+        <!-- Course -->
+        <div class="path-card">
+          <span class="path-label standalone">Standalone start</span>
+          <h3>The Course</h3>
+          <div class="path-price">&euro;&nbsp;265,-</div>
+          <p class="path-desc">Learn the fundamentals of music production at your own pace. The perfect introduction to how Rise works before stepping into Base or Core.</p>
+          <div class="path-sub-label">Includes</div>
+          <ul class="path-list">
+            <li>11 video lesson modules</li>
+            <li>Taught by industry professionals</li>
+          </ul>
+          <a href="../coursevsl-b/" class="path-cta secondary">
+            Start the Course
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Academy (main product) -->
+        <div class="path-card main-product">
+          <span class="path-label primary">Main product</span>
+          <h3>The Academy</h3>
+          <p class="path-desc">Two tracks. One community. Base helps you build your foundation in six months. Core keeps you accountable for twelve. Which track is right for you follows from a short intake and a call with our team.</p>
+          <div class="path-sub-label">Includes</div>
+          <ul class="path-list">
+            <li>Weekly live coaching</li>
+            <li>Full platform access</li>
+            <li>Academy community</li>
+            <li>The Course included</li>
+            <li>Accountability from the coaches and community</li>
+            <li>Sample packs, presets &amp; Ableton chains</li>
+          </ul>
+          <a href="../customers/community/" class="path-cta primary">
+            Find Your Path
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Coaches
+       ══════════════════════════════════════════════ -->
+  <section class="section coaches" id="coaches">
+    <div class="section-inner">
+      <div class="section-eyebrow">The team</div>
+      <h2 class="section-heading">Learn from people doing it every&nbsp;day.</h2>
+
+      <div class="coach-grid">
+
+        <div class="coach-card">
+          <img src="../assets/photos/Maurits.png" alt="Maurits" class="coach-avatar">
+          <div class="coach-name">Maurits</div>
+          <div class="coach-role">Core Coach &middot; Music Business</div>
+          <p class="coach-bio">Runs the business and accountability side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/photos/photo-1.jpg" alt="Jurriaan" class="coach-avatar">
+          <div class="coach-name">Jurrian (Artcode)</div>
+          <div class="coach-role">Base Coach &middot; Techno Artist</div>
+          <p class="coach-bio">With over 15 years of experience across electronic music, Jurrian leads the Base production coaching. From sound design to arrangement, he helps producers build a foundation they can keep building on.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/photos/Jim.png" alt="Jim" class="coach-avatar">
+          <div class="coach-name">Jim (VANNOOD)</div>
+          <div class="coach-role">Techno Artist</div>
+          <p class="coach-bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist and entrepreneur. His experience brings a practical perspective to every lesson.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/photos/photo-2.jpg" alt="Yvo" class="coach-avatar">
+          <div class="coach-name">Yvo (Overhoff)</div>
+          <div class="coach-role">House Artist &middot; Advanced Modules</div>
+          <p class="coach-bio">Amsterdam-based producer and AEMA graduate with a groove-first approach to house music. He developed the advanced video modules using the same workflow he uses in his own studio.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/photos/photo-3.jpg" alt="David" class="coach-avatar">
+          <div class="coach-name">David (RDLF)</div>
+          <div class="coach-role">Techno Artist &middot; Basic Modules</div>
+          <p class="coach-bio">German techno producer, sound engineer and co-founder of Interrealm. He created the beginner modules around the fundamentals every producer needs before moving on.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Monthly Webinar Sessions
+       ══════════════════════════════════════════════ -->
+  <section class="section webinar" id="webinar">
+    <div class="section-inner">
+      <div class="section-eyebrow">Free monthly session</div>
+      <h2 class="section-heading">Monthly Webinar Sessions</h2>
+      <div class="webinar-box">
+        <div class="webinar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div class="webinar-text">
+          <p>Once a month, we bring producers together for a live session focused on the challenges almost everyone runs into: unfinished tracks, a lack of direction and getting music out into the world. Every session is built to give you practical insights you can apply straight away.</p>
+          <a href="#" class="webinar-cta">Join the Next Session</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Closing Section
+       ══════════════════════════════════════════════ -->
+  <section class="closing">
+    <div class="closing-inner">
+      <div class="section-eyebrow">Your move</div>
+      <h2>Build the foundation. Then build everything on top of&nbsp;it.</h2>
+      <p>Whatever stage you're at, Rise gives you the structure, coaching and community to keep moving forward. Stop guessing your next step and start building with people who expect more from themselves, and from you.</p>
+      <a href="#paths" class="hero-cta">
+        Find Your Path
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FAQ
+       ══════════════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Frequently asked</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What's the difference between Base and Core?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Base is a six-month production program &mdash; the foundation, focused on your sound and your skills. Core is a twelve-month accountability program, focused on turning that into results and getting you from where you are to where you actually want to be.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Which one is right for me?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Apply to the Academy and we'll point you to Base or Core based on where you're starting from. Not sure yet? Join a Monthly Webinar Session and get to know us and how we work.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What's actually inside the platform?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Video modules from mix and master engineers, artists, A&amp;Rs and marketing experts, each with a workbook so you apply it the same day. Production videos from artists who have been releasing solid tracks at big labels. Sample packs, presets and Ableton chains so you spend your time creating, not searching. Weekly live sessions with direct feedback. And AI tools for everything around the music, from your artist bio to mastering your track.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Do I get platform access and live sessions?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Both programs include platform access and the weekly live sessions for as long as you're in them. Part of the program, not a separate purchase. Base is missing out on advanced video production and the course is not included. The full course price will be deducted from the total amount of Core once you are eligible for the Academy.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What happens when my program ends?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">If started from Base you can move on to Core. You can also keep platform access through a 20 or 50 euro per month subscription. One-on-one sessions after that are billed separately, as you book them.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Is Rise for my genre and level?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Rise is built for electronic producers, mainly house, techno and trance, at any level that's serious about moving forward.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What's the cheapest way to start?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">The standalone Course. A complete production course for a one-time &euro;&nbsp;265,-, at your own pace. No feedback, accountability and live lessons included.</div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Footer
+       ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    <p style="font-size:0.95rem;color:var(--fg);font-weight:600;margin-bottom:4px;">Start building. <a href="#paths" style="color:var(--accent);">Find your path.</a></p>
+    <p style="margin-top:12px;">&copy; 2026 Rise &middot; Recode Operations B.V.</p>
+    <div class="links">
+      <a href="mailto:info@risemusicacademy.nl">Contact</a>
+      <a href="https://www.instagram.com/risemusicacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+       Scripts
+       ══════════════════════════════════════════════ -->
+  <script>
+    // ── Sticky header scroll effect ──
+    (function() {
+      var header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 60) { header.classList.add('scrolled'); }
+        else { header.classList.remove('scrolled'); }
+      }, { passive: true });
+    })();
+
+    // ── FAQ toggle ──
+    (function() {
+      var items = document.querySelectorAll('.faq-item');
+      items.forEach(function(item) {
+        var btn = item.querySelector('.faq-q');
+        btn.addEventListener('click', function() {
+          item.classList.toggle('open');
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

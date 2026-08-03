@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><title>Send Test Email</title></head>
+<body style="background:#0f0f0f;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;">
+  <div style="text-align:center;">
+    <h2>Test Email Sender</h2>
+    <p style="color:#999;">Click the button to send the test notification email.</p>
+    <button onclick="sendTest()" id="btn" style="background:#ff683e;color:#0a0a0a;padding:16px 40px;border:none;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;">
+      Send Test Email
+    </button>
+    <p id="status" style="margin-top:20px;color:#999;"></p>
+  </div>
+  <script>
+    async function sendTest() {
+      const btn = document.getElementById('btn');
+      const status = document.getElementById('status');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.textContent = '';
+
+      try {
+        const res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/send-test-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({}),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          status.textContent = 'Email sent! Check maurits@riseartistacademy.com';
+          status.style.color = '#22c55e';
+        } else {
+          status.textContent = 'Error: ' + JSON.stringify(data);
+          status.style.color = '#ef4444';
+        }
+      } catch (err) {
+        status.textContent = 'Error: ' + err.message;
+        status.style.color = '#ef4444';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send Test Email';
+    }
+  </script>
+</body>
+</html>

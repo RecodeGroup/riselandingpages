@@ -1,0 +1,6 @@
+# Default: open Community page
+/  /customers/community/  302
+
+# Legacy redirects
+/customers/portal/  /customers/community/  301
+/coursevsl/  /customers/course/  301
