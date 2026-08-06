@@ -685,6 +685,47 @@
       letter-spacing: 0.08em;
     }
 
+    /* ── Video Testimonials ────────────────────────────── */
+    .video-testimonials {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .video-testimonials-inner {
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .video-testimonials-head {
+      padding: 0 2rem; margin-bottom: 2rem;
+    }
+    .video-grid {
+      display: flex; gap: 18px;
+      overflow-x: auto; padding: 0 2rem 18px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .video-grid::-webkit-scrollbar { display: none; }
+    .video-card {
+      flex: 0 0 300px;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .video-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+    }
+    .video-card video {
+      width: 100%; aspect-ratio: 9/16;
+      object-fit: cover; display: block;
+      background: #000;
+    }
+    .video-card .video-caption {
+      padding: 1rem 1.25rem;
+      font-size: 0.82rem; color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+
     /* ── CTA Banner ──────────────────────────────────── */
     .cta-banner {
       padding: 5rem 2rem; text-align: center;
@@ -1014,6 +1055,7 @@
       .trust-badge .badge-num { font-size: 1.15rem; }
       .trust-badge .badge-label { font-size: 0.65rem; }
       .review-card { flex: 0 0 300px; }
+      .video-card { flex: 0 0 260px; }
       .community-card { flex: 0 0 260px; }
       .mobile-cta-bar { display: flex; }
       body { padding-bottom: 72px; }
@@ -1030,13 +1072,15 @@
       .community-card { flex: 0 0 240px; }
       .community-scroll { padding: 0 1rem 14px; gap: 12px; }
       .reviews-scroll { padding: 0 1rem 14px; gap: 12px; }
+      .video-grid { padding: 0 1rem 14px; gap: 12px; }
+      .video-card { flex: 0 0 240px; }
       .review-card { flex: 0 0 280px; }
       .stats-grid .stat-num { font-size: 1.6rem; }
       .review-chip .quote { font-size: 0.78rem; }
       .review-chip { padding: 8px 14px 8px 8px; gap: 8px; }
       .review-chip .avatar { width: 30px; height: 30px; }
       .cta-mid, .stats-banner, .vsl-section, .trusted-section,
-      .community-section, .about-section, .reviews-section,
+      .community-section, .about-section, .reviews-section, .video-testimonials,
       .faq-section, .cta-banner { padding: 2.5rem 1rem; }
       .carousel-track video { height: 140px; }
       .social-proof { gap: 8px; }
@@ -1046,7 +1090,7 @@
       .typewriter-word { border-right: none; animation: none; }
       .about-carousel img { transition: none; }
       .btn-primary, .btn-ghost, .module-card, .product-card,
-      .community-card, .review-card { transition: none; }
+      .community-card, .review-card, .video-card { transition: none; }
       html { scroll-behavior: auto; }
     }
     *:focus-visible {
@@ -1496,6 +1540,52 @@
 
       <div class="community-cta">
         <a class="btn-primary" href="https://riseartistacademy.com/store/bundles/rise-artist-program">Get Instant Access</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO TESTIMONIALS -->
+  <section class="video-testimonials">
+    <div class="video-testimonials-inner">
+      <div class="video-testimonials-head">
+        <div class="section-eyebrow">Testimonials</div>
+        <h2 class="section-title">Hear it from our artists.</h2>
+        <p class="section-sub">Real stories from producers who joined Rise and saw the difference.</p>
+      </div>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <video src="../assets/testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-caption">"Comprehensive course that covers everything to become a full-time artist."</div>
+        </div>
+        <div class="video-card">
+          <video src="../assets/testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-caption">"How Rise changed my consistency, production, and branding."</div>
+        </div>
+        <div class="video-card">
+          <video src="../assets/testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-caption">"Rise focuses on creating an artist, not just production."</div>
+        </div>
+        <div class="video-card">
+          <video src="../assets/testimonials/Rise%20broadens%20your%20scope%20beyond%20just%20music%20production.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-caption">"Rise broadens your scope beyond just music production."</div>
+        </div>
+        <div class="video-card">
+          <video src="../assets/testimonials/From%20struggling%20with%20identity%20to%20clear%20artistic%20direction.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-caption">"From struggling with identity to clear artistic direction."</div>
+        </div>
+        <div class="video-card">
+          <video src="../assets/testimonials/Be%20open-minded%2C%20make%20time%20%E2%80%93%20it%E2%80%99s%20a%20new%20profession%20you%E2%80%99re%20learning.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-caption">"Be open-minded, make time. It's a new profession you're learning."</div>
+        </div>
+        <div class="video-card">
+          <video src="../assets/testimonials/Why%20you%20should%20just%20do%20it%20and%20invest%20in%20yourself.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-caption">"Why you should just do it and invest in yourself."</div>
+        </div>
+        <div class="video-card">
+          <video src="../assets/testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-caption">"To anyone considering Rise: just do it, don't doubt."</div>
+        </div>
       </div>
     </div>
   </section>

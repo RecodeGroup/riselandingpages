@@ -357,32 +357,32 @@
     <div class="plan-grid">
       <div class="plan-card" data-plan="1x" onclick="selectPlan(this)">
         <div class="installments">Pay in full</div>
-        <div class="price">&euro; 1.200,-</div>
+        <div class="price">&euro; 1.500,-</div>
         <div class="price-sub">One-time payment</div>
-        <div class="total">&euro; 1.200,- total &middot; ex. VAT</div>
+        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
       </div>
 
       <div class="plan-card recommended selected" data-plan="2x" onclick="selectPlan(this)">
         <div class="plan-badge">Popular</div>
         <div class="installments">2 payments</div>
-        <div class="price">&euro; 600,-</div>
+        <div class="price">&euro; 750,-</div>
         <div class="price-sub">per payment</div>
-        <div class="total">&euro; 1.200,- total &middot; ex. VAT</div>
+        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
         <div class="plan-schedule" id="schedule-2x"></div>
       </div>
 
       <div class="plan-card" data-plan="4x" onclick="selectPlan(this)">
         <div class="installments">4 payments</div>
         <div class="price">&euro; 375,-</div>
-        <div class="price-sub">then 3 &times; &euro; 275,-</div>
-        <div class="total">&euro; 1.200,- total &middot; ex. VAT</div>
+        <div class="price-sub">then 3 &times; &euro; 375,-</div>
+        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
         <div class="plan-schedule" id="schedule-4x"></div>
       </div>
     </div>
 
     <div class="checkout-summary">
       <div class="summary-left">
-        <div class="summary-plan" id="summary-plan">Rise BASE &mdash; 2 payments of &euro; 600,-</div>
+        <div class="summary-plan" id="summary-plan">Rise BASE &mdash; 2 payments of &euro; 750,-</div>
         <div class="summary-detail" id="summary-detail"></div>
       </div>
       <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
@@ -427,26 +427,26 @@
     // ====== PLAN DATA ======
     const plans = {
       '1x': {
-        label: 'Pay in full — € 1.200,-',
+        label: 'Pay in full — € 1.500,-',
         getDetail: function() { return 'One-time payment now · ex. VAT'; },
-        amount: 1200,
+        amount: 1500,
         installments: 1,
       },
       '2x': {
-        label: '2 payments of € 600,-',
+        label: '2 payments of € 750,-',
         getDetail: function() {
-          return '€ 600,- now + € 600,- in ' + autoCohort.label + ' · ex. VAT';
+          return '€ 750,- now + € 750,- in ' + autoCohort.label + ' · ex. VAT';
         },
-        amount: 600,
+        amount: 750,
         installments: 2,
       },
       '4x': {
-        label: '€ 375,- + 3 × € 275,-',
+        label: '€ 375,- + 3 × € 375,-',
         getDetail: function() {
           var m1 = monthNames[autoCohort.startMonth];
           var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
           var m3 = monthNames[(autoCohort.startMonth + 2) % 12];
-          return '€ 375,- now + 3 × € 275,- in ' + m1 + ', ' + m2 + ', ' + m3 + ' ' + autoCohort.startYear + ' · ex. VAT';
+          return '€ 375,- now + 3 × € 375,- in ' + m1 + ', ' + m2 + ', ' + m3 + ' ' + autoCohort.startYear + ' · ex. VAT';
         },
         amount: 375,
         installments: 4,

@@ -9,39 +9,52 @@
     :root {
       --bg: #0f0f0f;
       --bg-2: #1a1a1a;
-      --bg-3: #141414;
       --fg: #ffffff;
       --muted: #999;
-      --line: rgba(255,255,255,0.06);
       --accent: #ff683e;
       --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
       line-height: 1.6;
+      overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* ── Header ── */
     .site-header {
       position: sticky; top: 0; z-index: 110;
-      background: rgba(15,15,15,0.95);
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
       border-bottom: 1px solid transparent;
-      transition: background 0.4s ease, border-bottom-color 0.4s ease, box-shadow 0.4s ease;
     }
     .site-header.scrolled {
-      background: rgba(15,15,15,0.92);
+      background: rgba(15,15,15,0.72);
       backdrop-filter: blur(20px) saturate(1.4);
       -webkit-backdrop-filter: blur(20px) saturate(1.4);
       border-bottom: 1px solid rgba(255,104,62,0.12);
       box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
     .site-header-inner {
-      max-width: 1200px; margin: 0 auto;
+      max-width: var(--maxw); margin: 0 auto;
       display: flex; align-items: center; justify-content: center;
       padding: 0.75rem 2rem; position: relative;
     }
@@ -62,7 +75,7 @@
       color: rgba(255,255,255,0.55);
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.3s ease;
+      transition: color 0.3s, background 0.3s;
       cursor: pointer; white-space: nowrap;
     }
     .header-tab:first-child { border-radius: 6px 0 0 6px; border-right: none; }
@@ -79,55 +92,158 @@
 
     /* ── Hero ── */
     .hero {
+      min-height: 80vh;
+      display: flex; align-items: center; justify-content: center;
       text-align: center;
-      padding: 4rem 2rem 2.5rem;
-      max-width: 720px; margin: 0 auto;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative; overflow: hidden;
     }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%);
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 2; }
     .hero-eyebrow {
       font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.2em; color: var(--accent);
-      text-transform: uppercase; margin-bottom: 14px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 700; line-height: 1.1;
-      letter-spacing: -0.02em; margin-bottom: 14px;
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.025em; margin-bottom: 20px;
     }
-    .hero p {
-      color: var(--muted); font-size: 1rem; line-height: 1.7;
-      max-width: 560px; margin: 0 auto;
+    .hero-sub {
+      font-size: clamp(0.95rem, 1.4vw, 1.12rem);
+      color: var(--muted); line-height: 1.65;
+      max-width: 56ch; margin: 0 auto;
     }
 
-    /* ── Highlights ── */
-    .highlights {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px; max-width: 900px; margin: 0 auto 3rem;
-      padding: 0 2rem;
+    /* ── Photo Strip ── */
+    .photo-strip {
+      overflow: hidden; padding: 1.5rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
-    .hl-card {
+    .photo-strip-track {
+      display: flex; gap: 12px;
+      animation: photo-scroll 40s linear infinite;
+      width: max-content;
+    }
+    .photo-strip-track img {
+      height: 160px; border-radius: 8px;
+      object-fit: cover; flex-shrink: 0;
+    }
+    @keyframes photo-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Sections ── */
+    .section {
+      padding: clamp(3rem, 6vw, 5rem) 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner {
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .section-heading {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; line-height: 1.12;
+      letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+    .section-body {
+      color: var(--muted); font-size: 0.95rem;
+      line-height: 1.7; max-width: 60ch;
+    }
+    .section-body p + p { margin-top: 16px; }
+
+    /* ── Feature Grid ── */
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 16px; margin-top: 2rem;
+    }
+    .feature-card {
       background: var(--bg-2);
       border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 10px; padding: 1.5rem;
+      border-radius: 12px; padding: 1.75rem;
+    }
+    .feature-card h3 {
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      color: var(--muted); font-size: 0.88rem; line-height: 1.6;
+    }
+
+    /* ── Pricing CTA (before payment reveal) ── */
+    .pricing-cta-section {
+      padding: clamp(3rem, 6vw, 5rem) 2rem;
+      text-align: center;
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(255,104,62,0.04) 50%, var(--bg) 100%);
+    }
+    .pricing-cta-inner {
+      max-width: 600px; margin: 0 auto;
+    }
+    .pricing-cta-inner .price-display {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; margin: 1rem 0 0.5rem;
+    }
+    .pricing-cta-inner .price-note {
+      color: var(--muted); font-size: 0.88rem;
+      margin-bottom: 2rem; line-height: 1.6;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #0a0a0a;
+      padding: 16px 36px; border-radius: 8px;
+      font-weight: 700; font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    /* ── Payment Section (hidden by default) ── */
+    .payment-section {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+      opacity: 0;
+    }
+    .payment-section.visible {
+      max-height: 1200px; opacity: 1;
+    }
+    .payment-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 3rem 2rem 2rem;
       text-align: center;
     }
-    .hl-card svg {
-      width: 28px; height: 28px; stroke: var(--accent);
-      fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
-      margin-bottom: 10px;
-    }
-    .hl-card h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
-    .hl-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-
-    /* ── Plan Section ── */
-    .plan-section {
-      max-width: 900px; margin: 0 auto;
-      padding: 0 2rem 2rem; text-align: center;
-    }
-    .plan-section h2 {
+    .payment-inner h2 {
       font-size: 1.4rem; font-weight: 700;
       letter-spacing: -0.02em; margin-bottom: 6px;
     }
-    .plan-section > p {
+    .payment-inner > p {
       color: var(--muted); font-size: 0.88rem;
       margin-bottom: 1.5rem;
     }
@@ -142,14 +258,14 @@
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 12px; padding: 1.75rem 1.25rem;
       text-align: center; cursor: pointer;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       position: relative; overflow: hidden;
     }
     .plan-card::before {
       content: ''; position: absolute;
       top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, var(--accent), transparent);
-      opacity: 0; transition: opacity 0.3s ease;
+      opacity: 0; transition: opacity 0.3s;
     }
     .plan-card:hover {
       border-color: rgba(255,104,62,0.25);
@@ -162,25 +278,18 @@
       box-shadow: 0 0 0 1px var(--accent), 0 10px 24px rgba(255,104,62,0.15);
     }
     .plan-card.selected::before { opacity: 1; }
-    .plan-badge {
-      position: absolute; top: 10px; right: 10px;
-      background: var(--accent); color: #0a0a0a;
-      font-size: 0.55rem; font-weight: 800;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 2px 7px; border-radius: 3px;
+    .plan-save {
+      display: inline-block;
+      background: rgba(34,197,94,0.15);
+      color: #22c55e; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 3px; margin-bottom: 10px;
     }
     .plan-surcharge {
       display: inline-block;
       background: rgba(255,255,255,0.06);
       color: var(--muted); font-size: 0.6rem; font-weight: 600;
       letter-spacing: 0.06em;
-      padding: 2px 8px; border-radius: 3px; margin-bottom: 10px;
-    }
-    .plan-save {
-      display: inline-block;
-      background: rgba(34,197,94,0.15);
-      color: #22c55e; font-size: 0.6rem; font-weight: 700;
-      letter-spacing: 0.06em; text-transform: uppercase;
       padding: 2px 8px; border-radius: 3px; margin-bottom: 10px;
     }
     .plan-card .installments {
@@ -211,7 +320,7 @@
       color: var(--accent); font-size: 0.65rem; font-weight: 700;
     }
 
-    /* ── Summary ── */
+    /* ── Checkout Summary ── */
     .checkout-summary {
       max-width: 900px; width: 100%; margin: 0 auto;
       padding: 1.75rem 2rem;
@@ -229,7 +338,8 @@
       font-weight: 700; font-size: 0.82rem;
       letter-spacing: 0.08em; text-transform: uppercase;
       border: none; cursor: pointer;
-      transition: all 0.25s ease; white-space: nowrap;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      white-space: nowrap;
     }
     .btn-checkout:hover {
       background: var(--accent-hover);
@@ -248,44 +358,67 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Security ── */
     .security-note {
       margin: 1.25rem auto 0; max-width: 900px;
       color: var(--muted); font-size: 0.7rem;
       letter-spacing: 0.06em; text-align: center;
       display: flex; align-items: center;
       justify-content: center; gap: 6px;
-      padding: 0 2rem;
+      padding: 0 2rem 3rem;
     }
     .security-note svg { flex-shrink: 0; }
 
+    /* ── Coach Card ── */
+    .coach-card-wide {
+      display: flex; align-items: center; gap: 2rem;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px; padding: 2rem;
+      margin-top: 1.5rem;
+    }
+    .coach-avatar {
+      width: 90px; height: 90px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid rgba(255,104,62,0.2);
+    }
+    .coach-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+    .coach-info .coach-role {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .coach-info p {
+      color: var(--muted); font-size: 0.88rem; line-height: 1.6;
+    }
+
     /* ── Footer ── */
-    .portal-footer {
-      margin-top: 4rem;
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255,104,62,0.1);
+    .footer {
+      border-top: 1px solid var(--line);
       padding: 2.5rem 2rem; text-align: center;
       color: #555; font-size: 0.8rem;
     }
-    .portal-footer-links {
+    .footer-links {
       display: flex; justify-content: center;
       gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap;
     }
-    .portal-footer-links a { color: #888; }
-    .portal-footer-links a:hover { color: var(--accent); }
+    .footer-links a { color: #888; }
+    .footer-links a:hover { color: var(--accent); }
 
     /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .coach-card-wide { flex-direction: column; text-align: center; }
+    }
     @media (max-width: 768px) {
       .plan-grid { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
       .checkout-summary { flex-direction: column; text-align: center; margin: 0 1rem; }
       .header-tab { min-width: 130px; padding: 0.5rem 1rem; font-size: 0.72rem; }
-      .highlights { grid-template-columns: repeat(2, 1fr); }
-      .hero { padding: 3rem 1.5rem 2rem; }
+      .hero { min-height: 60vh; padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 4rem); }
+      .photo-strip-track img { height: 120px; }
     }
     @media (max-width: 480px) {
       .plan-grid { grid-template-columns: 1fr; max-width: 320px; }
-      .highlights { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 1.5rem; }
+      .hero h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -309,83 +442,166 @@
      ═══════════════════════════════════════════════ -->
 <div class="panel active" id="panel-base">
 
-  <div class="hero">
-    <div class="hero-eyebrow">Rise Base</div>
-    <h1>Your 6-month production foundation</h1>
-    <p>A structured program with 30 live lessons, weekly group calls, and everything you need to build a solid creative foundation as an electronic music producer.</p>
-  </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="../../assets/photos/photo-3.jpg" alt="" loading="eager">
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Rise Artist Academy &middot; Base</div>
+      <h1>Six months. Real coaching. An all-round foundation built to&nbsp;last.</h1>
+      <p class="hero-sub">Being a successful DJ/producer takes more than making good music. Production, branding, social media and mindset all matter. Base gives you the foundation to develop every part of your career.</p>
+    </div>
+  </section>
 
-  <div class="highlights">
-    <div class="hl-card">
-      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-      <h4>30 Live Lessons</h4>
-      <p>Weekly sessions covering production, theory, mixing, and more.</p>
-    </div>
-    <div class="hl-card">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      <h4>Cohort Model</h4>
-      <p>Learn alongside a small group of committed producers.</p>
-    </div>
-    <div class="hl-card">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      <h4>Live Coaching</h4>
-      <p>Direct feedback on your work from active industry professionals.</p>
-    </div>
-    <div class="hl-card">
-      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M9 12l6-4v8l-6-4z" fill="#ff683e" stroke="none"/></svg>
-      <h4>Platform Access</h4>
-      <p>Full access to the Rise platform, tools, and resources.</p>
-    </div>
-  </div>
-
-  <div class="plan-section">
-    <h2>Choose your payment plan</h2>
-    <p>All plans include the exact same access to Rise Base.</p>
-  </div>
-
-  <div class="plan-grid" id="plans-base">
-    <div class="plan-card selected" data-plan="1" data-product="base" onclick="selectPlan(this)">
-      <div class="plan-save">Best price</div>
-      <div class="installments">Pay in full</div>
-      <div class="price">&euro; 1.500,-</div>
-      <div class="price-sub">One-time payment</div>
-      <div class="total">&euro; 1.500,- total</div>
-    </div>
-    <div class="plan-card" data-plan="2" data-product="base" onclick="selectPlan(this)">
-      <div class="plan-surcharge">+5%</div>
-      <div class="installments">2 payments</div>
-      <div class="price">&euro; 787,50</div>
-      <div class="price-sub">per payment</div>
-      <div class="total-highlight">&euro; 1.575,- total<span class="total-extra">&euro; 75,- extra</span></div>
-    </div>
-    <div class="plan-card" data-plan="3" data-product="base" onclick="selectPlan(this)">
-      <div class="plan-surcharge">+10%</div>
-      <div class="installments">3 payments</div>
-      <div class="price">&euro; 550,-</div>
-      <div class="price-sub">per payment</div>
-      <div class="total-highlight">&euro; 1.650,- total<span class="total-extra">&euro; 150,- extra</span></div>
-    </div>
-    <div class="plan-card" data-plan="4" data-product="base" onclick="selectPlan(this)">
-      <div class="plan-surcharge">+15%</div>
-      <div class="installments">4 payments</div>
-      <div class="price">&euro; 431,25</div>
-      <div class="price-sub">per payment</div>
-      <div class="total-highlight">&euro; 1.725,- total<span class="total-extra">&euro; 225,- extra</span></div>
+  <!-- Photo Strip -->
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
     </div>
   </div>
 
-  <div class="checkout-summary" id="summary-base">
-    <div>
-      <div class="summary-plan" id="summary-plan-base">Rise Base &mdash; Pay in full &euro; 1.500,-</div>
-      <div class="summary-detail" id="summary-detail-base">One-time payment &middot; ex. VAT</div>
+  <!-- Who It's For -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">Who it's for</div>
+      <h2 class="section-heading">Build the foundation your career&nbsp;deserves.</h2>
+      <div class="section-body">
+        <p>You don't need more ideas. You need a stronger foundation. Base is where you learn to finish tracks, build better production habits and develop the consistency every producer needs.</p>
+        <p>You'll do it alongside a cohort of producers who are working towards the same goal: becoming ready for the next step.</p>
+      </div>
     </div>
-    <button class="btn-checkout" onclick="startCheckout('base')">Continue to Payment</button>
+  </section>
+
+  <!-- What You Get -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">The program</div>
+      <h2 class="section-heading">What the six months&nbsp;include.</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>30 Live Lessons</h3>
+          <p>Every week, we host hands-on production sessions that follow our structured lesson curriculum. Together, we cover every essential aspect of music production, including sampling, synthesis, arrangement, melody, harmony, mixing, and production techniques.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Cohort Model</h3>
+          <p>Learn alongside the same group for six months, creating accountability, consistency, and a high-performance environment where everyone progresses together.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Live Coaching</h3>
+          <p>Receive weekly live feedback on your music, ask questions in real time, solve production challenges, and get actionable advice you can immediately apply to your tracks.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Platform Access</h3>
+          <p>Access our complete learning platform with in-depth video modules, premium sample packs, Ableton racks, project files, templates, and production tools that support your progress between coaching sessions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Coaches -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">The team</div>
+      <h2 class="section-heading">Meet the people behind&nbsp;Base.</h2>
+      <div class="coach-card-wide">
+        <img src="../../assets/photos/photo-1.jpg" alt="Jurriaan" class="coach-avatar">
+        <div class="coach-info">
+          <h3>Jurriaan (Artcode)</h3>
+          <div class="coach-role">Production Coach</div>
+          <p>For over 15 years, Jurriaan has worked across electronic music as a producer, performer and visual artist. In Base, he leads the production curriculum, helping you build the technical foundation every producer needs.</p>
+        </div>
+      </div>
+      <div class="coach-card-wide" style="margin-top:14px;">
+        <img src="../../assets/photos/Maurits.png" alt="Maurits" class="coach-avatar">
+        <div class="coach-info">
+          <h3>Maurits</h3>
+          <div class="coach-role">Accountability &amp; Mindset</div>
+          <p>Maurits focuses on everything outside the music. Through accountability, mindset and honest feedback, he helps you stay consistent and keep moving forward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing CTA -->
+  <section class="pricing-cta-section" id="pricing-base">
+    <div class="pricing-cta-inner">
+      <div class="section-eyebrow">Pricing</div>
+      <h2 class="section-heading">Start with Base Academy</h2>
+      <div class="price-display">&euro;&nbsp;1.500,-</div>
+      <p class="price-note">6 months of live coaching, platform access and everything you need to build a solid foundation. Payment plans available.</p>
+      <button class="btn-primary" onclick="revealPayment('base')">
+        Start Base Academy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Payment (hidden by default) -->
+  <div class="payment-section" id="payment-base">
+    <div class="payment-inner">
+      <h2>Choose your Base payment plan</h2>
+      <p>All plans include the exact same access to Rise Base.</p>
+    </div>
+
+    <div class="plan-grid" id="plans-base" style="padding:0 2rem;">
+      <div class="plan-card selected" data-plan="1" data-product="base" onclick="selectPlan(this)">
+        <div class="plan-save">Best price</div>
+        <div class="installments">Pay in full</div>
+        <div class="price">&euro; 1.500,-</div>
+        <div class="price-sub">One-time payment</div>
+        <div class="total">&euro; 1.500,- total</div>
+      </div>
+      <div class="plan-card" data-plan="2" data-product="base" onclick="selectPlan(this)">
+        <div class="plan-surcharge">+5%</div>
+        <div class="installments">2 payments</div>
+        <div class="price">&euro; 787,50</div>
+        <div class="price-sub">per payment</div>
+        <div class="total-highlight">&euro; 1.575,- total<span class="total-extra">&euro; 75,- extra</span></div>
+      </div>
+      <div class="plan-card" data-plan="3" data-product="base" onclick="selectPlan(this)">
+        <div class="plan-surcharge">+10%</div>
+        <div class="installments">3 payments</div>
+        <div class="price">&euro; 550,-</div>
+        <div class="price-sub">per payment</div>
+        <div class="total-highlight">&euro; 1.650,- total<span class="total-extra">&euro; 150,- extra</span></div>
+      </div>
+      <div class="plan-card" data-plan="4" data-product="base" onclick="selectPlan(this)">
+        <div class="plan-surcharge">+15%</div>
+        <div class="installments">4 payments</div>
+        <div class="price">&euro; 431,25</div>
+        <div class="price-sub">per payment</div>
+        <div class="total-highlight">&euro; 1.725,- total<span class="total-extra">&euro; 225,- extra</span></div>
+      </div>
+    </div>
+
+    <div class="checkout-summary" id="summary-base" style="margin:0 2rem;max-width:calc(900px);">
+      <div>
+        <div class="summary-plan" id="summary-plan-base">Rise Base &mdash; Pay in full &euro; 1.500,-</div>
+        <div class="summary-detail" id="summary-detail-base">One-time payment &middot; ex. VAT</div>
+      </div>
+      <button class="btn-checkout" onclick="startCheckout('base')">Pay for Rise Base</button>
+    </div>
+
+    <div class="security-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Secure payment powered by Stripe.
+    </div>
   </div>
 
-  <div class="security-note">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-    Secure payment powered by Stripe.
-  </div>
 </div>
 
 
@@ -394,93 +610,168 @@
      ═══════════════════════════════════════════════ -->
 <div class="panel" id="panel-core">
 
-  <div class="hero">
-    <div class="hero-eyebrow">Rise Core</div>
-    <h1>Structured growth with accountability</h1>
-    <p>Everything in Base, plus weekly accountability calls, monthly workshops, peer coaching, and a private network of committed electronic artists. The full Rise experience.</p>
-  </div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="../../assets/photos/photo-7.jpg" alt="" loading="eager">
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Rise Artist Academy &middot; Core</div>
+      <h1>Core is one straight line towards your&nbsp;goals.</h1>
+      <p class="hero-sub">One year. Weekly accountability. A community of artists who push each other forward. A coach who won't let you slide.</p>
+    </div>
+  </section>
 
-  <div class="highlights">
-    <div class="hl-card">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path d="M12 1v6m0 6v6"/><path d="M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24"/><path d="M1 12h6m6 0h6"/><path d="M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/></svg>
-      <h4>Weekly Accountability</h4>
-      <p>Structured group calls focused on progress and forward momentum.</p>
-    </div>
-    <div class="hl-card">
-      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 17h20"/></svg>
-      <h4>Monthly Workshops</h4>
-      <p>Expert-led deep-dives on production, strategy, and industry topics.</p>
-    </div>
-    <div class="hl-card">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      <h4>Peer Coaching</h4>
-      <p>Honest feedback from artists who understand your craft.</p>
-    </div>
-    <div class="hl-card">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      <h4>Private Network</h4>
-      <p>Curated group of committed electronic artists. Base included.</p>
-    </div>
-  </div>
-
-  <div class="plan-section">
-    <h2>Choose your payment plan</h2>
-    <p>All plans include the exact same access to Rise Core.</p>
-  </div>
-
-  <div class="plan-grid" id="plans-core">
-    <div class="plan-card selected" data-plan="1" data-product="core" onclick="selectPlan(this)">
-      <div class="plan-save">Best price</div>
-      <div class="installments">Pay in full</div>
-      <div class="price">&euro; 2.650,-</div>
-      <div class="price-sub">One-time payment</div>
-      <div class="total">&euro; 2.650,- total</div>
-    </div>
-    <div class="plan-card" data-plan="2" data-product="core" onclick="selectPlan(this)">
-      <div class="plan-surcharge">+5%</div>
-      <div class="installments">2 payments</div>
-      <div class="price">&euro; 1.391,25</div>
-      <div class="price-sub">per payment</div>
-      <div class="total-highlight">&euro; 2.782,50 total<span class="total-extra">&euro; 132,50 extra</span></div>
-    </div>
-    <div class="plan-card" data-plan="3" data-product="core" onclick="selectPlan(this)">
-      <div class="plan-surcharge">+10%</div>
-      <div class="installments">3 payments</div>
-      <div class="price">&euro; 971,67</div>
-      <div class="price-sub">per payment</div>
-      <div class="total-highlight">&euro; 2.915,- total<span class="total-extra">&euro; 265,- extra</span></div>
-    </div>
-    <div class="plan-card" data-plan="4" data-product="core" onclick="selectPlan(this)">
-      <div class="plan-surcharge">+15%</div>
-      <div class="installments">4 payments</div>
-      <div class="price">&euro; 761,88</div>
-      <div class="price-sub">per payment</div>
-      <div class="total-highlight">&euro; 3.047,50 total<span class="total-extra">&euro; 397,50 extra</span></div>
+  <!-- Photo Strip -->
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-9.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-11.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-10.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-9.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-11.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../../assets/photos/photo-10.jpg" alt="Rise" loading="lazy">
     </div>
   </div>
 
-  <div class="checkout-summary" id="summary-core">
-    <div>
-      <div class="summary-plan" id="summary-plan-core">Rise Core &mdash; Pay in full &euro; 2.650,-</div>
-      <div class="summary-detail" id="summary-detail-core">One-time payment &middot; ex. VAT</div>
+  <!-- Who It's For -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">Who it's for</div>
+      <h2 class="section-heading">Made for artists who are ready to make serious&nbsp;steps.</h2>
+      <div class="section-body">
+        <p>Core is not a course. It's a structured year of accountability, coaching and community. You'll set real goals, work towards them every week, and be surrounded by artists who expect the same from themselves.</p>
+        <p>Everything in Base is included. Core adds weekly accountability calls, monthly workshops, peer coaching, and a private network of committed electronic artists.</p>
+      </div>
     </div>
-    <button class="btn-checkout" onclick="startCheckout('core')">Continue to Payment</button>
+  </section>
+
+  <!-- What You Get -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">The program</div>
+      <h2 class="section-heading">What a year in Core actually looks&nbsp;like.</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Weekly Accountability</h3>
+          <p>Structured group calls focused on progress and forward momentum. Every week you set goals, report back, and stay on track with your music career.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Monthly Workshops</h3>
+          <p>Expert-led deep-dives on production, strategy, and industry topics. Go beyond the basics and develop skills that set you apart.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Peer Coaching</h3>
+          <p>Honest feedback from artists who understand your craft. Build relationships that push you forward and hold you accountable.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Private Network</h3>
+          <p>A curated group of committed electronic artists. Base included. Full platform access, production tools, and community resources.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Coach -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">The coach</div>
+      <h2 class="section-heading">Meet the person leading your&nbsp;year.</h2>
+      <div class="coach-card-wide">
+        <img src="../../assets/photos/Maurits.png" alt="Maurits" class="coach-avatar">
+        <div class="coach-info">
+          <h3>Maurits</h3>
+          <div class="coach-role">Runs Core</div>
+          <p>Maurits leads Core from start to finish. Every week he'll challenge you, keep you accountable and make sure you keep moving towards the goals you've set for yourself. No excuses. No coasting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing CTA -->
+  <section class="pricing-cta-section" id="pricing-core">
+    <div class="pricing-cta-inner">
+      <div class="section-eyebrow">Pricing</div>
+      <h2 class="section-heading">Join Core Academy</h2>
+      <div class="price-display">&euro;&nbsp;2.650,-</div>
+      <p class="price-note">12 months of weekly accountability, live coaching, workshops, and everything you need to build a real career. Payment plans available.</p>
+      <button class="btn-primary" onclick="revealPayment('core')">
+        Join Core Academy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Payment (hidden by default) -->
+  <div class="payment-section" id="payment-core">
+    <div class="payment-inner">
+      <h2>Choose your Core payment plan</h2>
+      <p>All plans include the exact same access to Rise Core.</p>
+    </div>
+
+    <div class="plan-grid" id="plans-core" style="padding:0 2rem;">
+      <div class="plan-card selected" data-plan="1" data-product="core" onclick="selectPlan(this)">
+        <div class="plan-save">Best price</div>
+        <div class="installments">Pay in full</div>
+        <div class="price">&euro; 2.650,-</div>
+        <div class="price-sub">One-time payment</div>
+        <div class="total">&euro; 2.650,- total</div>
+      </div>
+      <div class="plan-card" data-plan="2" data-product="core" onclick="selectPlan(this)">
+        <div class="plan-surcharge">+5%</div>
+        <div class="installments">2 payments</div>
+        <div class="price">&euro; 1.391,25</div>
+        <div class="price-sub">per payment</div>
+        <div class="total-highlight">&euro; 2.782,50 total<span class="total-extra">&euro; 132,50 extra</span></div>
+      </div>
+      <div class="plan-card" data-plan="3" data-product="core" onclick="selectPlan(this)">
+        <div class="plan-surcharge">+10%</div>
+        <div class="installments">3 payments</div>
+        <div class="price">&euro; 971,67</div>
+        <div class="price-sub">per payment</div>
+        <div class="total-highlight">&euro; 2.915,- total<span class="total-extra">&euro; 265,- extra</span></div>
+      </div>
+      <div class="plan-card" data-plan="4" data-product="core" onclick="selectPlan(this)">
+        <div class="plan-surcharge">+15%</div>
+        <div class="installments">4 payments</div>
+        <div class="price">&euro; 761,88</div>
+        <div class="price-sub">per payment</div>
+        <div class="total-highlight">&euro; 3.047,50 total<span class="total-extra">&euro; 397,50 extra</span></div>
+      </div>
+    </div>
+
+    <div class="checkout-summary" id="summary-core" style="margin:0 2rem;max-width:calc(900px);">
+      <div>
+        <div class="summary-plan" id="summary-plan-core">Rise Core &mdash; Pay in full &euro; 2.650,-</div>
+        <div class="summary-detail" id="summary-detail-core">One-time payment &middot; ex. VAT</div>
+      </div>
+      <button class="btn-checkout" onclick="startCheckout('core')">Pay for Rise Core</button>
+    </div>
+
+    <div class="security-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      Secure payment powered by Stripe.
+    </div>
   </div>
 
-  <div class="security-note">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-    Secure payment powered by Stripe.
-  </div>
 </div>
 
 
 <!-- ── Footer ── -->
-<footer class="portal-footer">
-  <div class="portal-footer-links">
+<footer class="footer">
+  <div class="footer-links">
     <a href="/terms/">Terms &amp; Conditions</a>
     <a href="/privacy/">Privacy Policy</a>
   </div>
-  <p>&copy; 2026 Rise Artist Academy. All rights reserved.</p>
+  <p>&copy; 2026 Rise &middot; Recode Operations B.V.</p>
 </footer>
 
 
@@ -518,6 +809,15 @@
     header.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
+  /* ── Reveal payment section ── */
+  window.revealPayment = function(product) {
+    var section = document.getElementById('payment-' + product);
+    section.classList.add('visible');
+    setTimeout(function() {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  };
+
   /* ── Price data ── */
   var pricing = {
     base: {
@@ -542,7 +842,6 @@
     }
   };
 
-  /* Track selected plan per product */
   var selected = { base: 1, core: 1 };
 
   /* ── Plan selection ── */
