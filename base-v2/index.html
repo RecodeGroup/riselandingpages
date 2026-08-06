@@ -76,49 +76,27 @@
       align-items: center;
       justify-content: space-between;
     }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 8px 40px 8px 16px; transition: transform 0.3s;
     }
-    .nav-logo img { width: 36px; height: 36px; border-radius: 7px; }
-    .nav-logo span {
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
     }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
+    body.has-urgency-bar .site-header { top: 36px; }
+    body.has-urgency-bar .hero { padding-top: 120px; }
+    .header-cta {
+      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s; text-decoration: none;
     }
-    .nav-links a {
-      font-size: 0.84rem;
-      font-weight: 500;
-      color: var(--muted);
-      transition: color 0.25s;
-    }
-    .nav-links a:hover { color: var(--fg); }
-    .nav-cta {
-      background: var(--accent) !important;
-      color: #0a0a0a !important;
-      padding: 10px 22px;
-      border-radius: 8px;
-      font-weight: 700 !important;
-      font-size: 0.78rem !important;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
-    }
-    .nav-cta:hover {
-      background: var(--accent-hover) !important;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
-    }
+    .header-cta:hover { background: var(--accent-hover); }
 
     @media (max-width: 768px) {
-      .nav-links a:not(.nav-cta) { display: none; }
       .site-header-inner { padding: 0.75rem 1.25rem; }
     }
 
@@ -178,14 +156,13 @@
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,104,62,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 80% at 20% 100%, rgba(255,104,62,0.03) 0%, transparent 60%);
-      pointer-events: none;
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.55) 40%, rgba(15,15,15,0.92) 100%),
+        url('../assets/photos/photo-18.jpg') center 30% / cover no-repeat;
     }
     .hero-content { max-width: 720px; position: relative; z-index: 1; }
     .hero-eyebrow {
@@ -578,24 +555,15 @@
     }
   </style>
 </head>
-<body>
-
-  <!-- ══════════════════════════════════════════════
-       Navigation
-       ══════════════════════════════════════════════ -->
+<body class="has-urgency-bar">
+  <div class="urgency-bar" id="urgency-bar">
+    Starting from &euro;1.500,- &middot; Join the next cohort
+    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
+  </div>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
-      <a href="#" class="nav-logo">
-        <img src="../assets/logo.png" alt="Rise">
-        <span>Rise</span>
-      </a>
-      <div class="nav-links" id="nav-links">
-        <a href="#program">The Program</a>
-        <a href="#coaches">Coaches</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
-        <a href="../checkout/payment-plan/" class="nav-cta">Join Base Academy</a>
-      </div>
+      <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
+      <a class="header-cta" href="#pricing">Start with Base</a>
     </div>
   </header>
 
@@ -603,14 +571,26 @@
        Hero
        ══════════════════════════════════════════════ -->
   <section class="hero">
+    <div class="hero-bg"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Base Academy</div>
       <h1>Six months. Real coaching. A production foundation that actually&nbsp;holds.</h1>
       <p class="hero-sub">You're here because your production needs real structure, not more tutorials. This is where you build it.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
+      <span>30 sessions</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>6-month program</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>Cohort model</span>
+    </div>
       <a href="#pricing" class="hero-cta">
         Start with Base Academy
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
+    <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
+      <span>&#10003; Payment plans available</span>
+      <span>&#10003; Small groups, personal attention</span>
+    </div>
     </div>
   </section>
 
@@ -622,8 +602,6 @@
       <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
@@ -633,8 +611,6 @@
       <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
@@ -833,22 +809,30 @@
        Footer
        ══════════════════════════════════════════════ -->
   <footer class="footer">
-    &copy; 2026 Rise &middot; Recode Operations B.V. &middot; All rights reserved
-    <div class="links"><a href="../privacy/">Privacy</a><a href="../terms/">Terms</a></div>
+    &copy; 2026 Rise Artist Academy. Recode Operations B.V. All rights reserved.
+    <div class="links">
+      <a href="mailto:info@risemusicacademy.nl">Contact</a>
+      <a href="https://www.instagram.com/risemusicacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </div>
   </footer>
 
   <!-- ══════════════════════════════════════════════
        Scripts
        ══════════════════════════════════════════════ -->
   <script>
-    // ── Sticky header scroll effect ──
+    // ── Urgency bar dismiss ──
     (function() {
-      var header = document.querySelector('.site-header');
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 60) { header.classList.add('scrolled'); }
-        else { header.classList.remove('scrolled'); }
-      }, { passive: true });
+      var bar = document.getElementById('urgency-bar');
+      var closeBtn = document.getElementById('urgency-bar-close');
+      if (!bar || !closeBtn) return;
+      if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
+      closeBtn.addEventListener('click', function() { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
     })();
+
+    // ── Sticky header scroll effect ──
+    window.addEventListener('scroll', function() { document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60); });
   </script>
 
 </body>

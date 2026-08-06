@@ -61,30 +61,25 @@
       align-items: center;
       justify-content: space-between;
     }
-    .site-header-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 8px 40px 8px 16px; transition: transform 0.3s;
     }
-    .site-header-logo img { width: 36px; height: 36px; border-radius: 7px; }
-    .site-header-logo span {
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
     }
-    .site-header-nav {
-      display: flex;
-      align-items: center;
-      gap: 32px;
+    body.has-urgency-bar .site-header { top: 36px; }
+    body.has-urgency-bar .hero { padding-top: 120px; }
+    .header-cta {
+      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s; text-decoration: none;
     }
-    .site-header-nav a {
-      font-size: 0.84rem;
-      font-weight: 500;
-      color: var(--muted);
-      transition: color 0.25s;
-    }
-    .site-header-nav a:hover { color: var(--fg); }
+    .header-cta:hover { background: var(--accent-hover); }
 
     /* ── Buttons ──────────────────────────────────── */
     .btn-primary {
@@ -129,18 +124,6 @@
       transform: translateY(-2px);
     }
 
-    /* Nav CTA is slightly smaller */
-    .site-header-nav .btn-primary {
-      padding: 10px 22px;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      border-radius: 8px;
-    }
-    .site-header-nav .btn-primary:hover { color: #0a0a0a; }
-
-    @media (max-width: 768px) {
-      .site-header-nav a:not(.btn-primary) { display: none; }
-    }
 
     /* ── Hero ─────────────────────────────────────── */
     .hero {
@@ -161,7 +144,7 @@
         radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
         radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
         linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%),
-        url('../assets/photos/photo-13.jpg') center 30% / cover no-repeat;
+        url('../assets/photos/photo-18.jpg') center 30% / cover no-repeat;
     }
     .hero-content { max-width: 720px; position: relative; z-index: 2; }
     .hero-eyebrow {
@@ -630,23 +613,15 @@
     }
   </style>
 </head>
-<body>
-
-  <!-- ══════════════════════════════════════════════
-       Navigation
-       ══════════════════════════════════════════════ -->
+<body class="has-urgency-bar">
+  <div class="urgency-bar" id="urgency-bar">
+    Free monthly session &middot; Join the next webinar
+    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
+  </div>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
-      <a href="#" class="site-header-logo">
-        <img src="../assets/logo.png" alt="Rise">
-        <span>Rise</span>
-      </a>
-      <nav class="site-header-nav">
-        <a href="#expect">What to Expect</a>
-        <a href="#about-rise">About Rise</a>
-        <a href="#faq">FAQ</a>
-        <a href="#" class="btn-primary">Find Your Path</a>
-      </nav>
+      <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
+      <a class="header-cta" href="/homepage-v2/#paths">Find Your Path</a>
     </div>
   </header>
 
@@ -659,7 +634,18 @@
       <div class="hero-eyebrow">Webinar Sessions</div>
       <h1>Every month, we host a free live session for music&nbsp;producers.</h1>
       <p class="hero-sub">The biggest obstacles for producers are almost always the same. We'll show you how to identify them and build a clear path forward.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
+        <span>Free to join</span>
+        <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+        <span>Monthly sessions</span>
+        <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+        <span>Live Q&amp;A</span>
+      </div>
       <a href="#" class="btn-primary">Find Your Path</a>
+      <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
+        <span>&#10003; Free, no commitment</span>
+        <span>&#10003; For all experience levels</span>
+      </div>
     </div>
   </section>
 
@@ -671,8 +657,6 @@
       <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
@@ -682,8 +666,6 @@
       <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
@@ -890,8 +872,10 @@
        Footer
        ══════════════════════════════════════════════ -->
   <footer class="footer">
-    &copy; 2026 Rise &middot; Recode Operations B.V. &middot; All rights reserved
+    &copy; 2026 Rise Artist Academy. Recode Operations B.V. All rights reserved.
     <div class="links">
+      <a href="mailto:info@risemusicacademy.nl">Contact</a>
+      <a href="https://www.instagram.com/risemusicacademy/" target="_blank" rel="noopener">Instagram</a>
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
     </div>
@@ -908,6 +892,15 @@
         if (window.scrollY > 60) { header.classList.add('scrolled'); }
         else { header.classList.remove('scrolled'); }
       }, { passive: true });
+    })();
+
+    // ── Urgency bar dismiss ──
+    (function() {
+      var bar = document.getElementById('urgency-bar');
+      var closeBtn = document.getElementById('urgency-bar-close');
+      if (!bar || !closeBtn) return;
+      if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
+      closeBtn.addEventListener('click', function() { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
     })();
   </script>
 

@@ -69,50 +69,38 @@
       align-items: center;
       justify-content: space-between;
     }
-    .nav-logo {
+    .header-logo {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .nav-logo img { width: 36px; height: 36px; border-radius: 7px; }
-    .nav-logo span {
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-    .nav-links a {
-      font-size: 0.84rem;
-      font-weight: 500;
-      color: var(--muted);
-      transition: color 0.25s;
-    }
-    .nav-links a:hover { color: var(--fg); }
-    .nav-cta {
-      background: var(--accent) !important;
-      color: #0a0a0a !important;
-      padding: 10px 22px;
-      border-radius: 8px;
-      font-weight: 700 !important;
-      font-size: 0.78rem !important;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .nav-cta:hover {
-      background: var(--accent-hover) !important;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
-    }
+    .header-logo img { width: 36px; height: 36px; border-radius: 7px; }
 
-    @media (max-width: 768px) {
-      .nav-links a:not(.nav-cta) { display: none; }
+    /* Urgency Bar */
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 8px 40px 8px 16px;
+      transition: transform 0.3s;
     }
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
+    }
+    body.has-urgency-bar .site-header { top: 36px; }
+    body.has-urgency-bar .hero { padding-top: 120px; }
+
+    .header-cta {
+      display: inline-flex; align-items: center;
+      background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
 
     /* ── Buttons ──────────────────────────────────── */
     .btn-primary {
@@ -170,7 +158,7 @@
         radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
         radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
         linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%),
-        url('../assets/photos/photo-1.jpg') center 30% / cover no-repeat;
+        url('../assets/photos/photo-18.jpg') center 30% / cover no-repeat;
     }
     .hero-content { max-width: 720px; position: relative; z-index: 2; }
     .hero-eyebrow {
@@ -768,24 +756,19 @@
     }
   </style>
 </head>
-<body>
+<body class="has-urgency-bar">
 
-  <!-- ══════════════════════════════════════════════
-       Navigation
-       ══════════════════════════════════════════════ -->
+  <!-- Urgency Bar -->
+  <div class="urgency-bar" id="urgency-bar">
+    Explore the Academy &middot; Find your path
+    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
+  </div>
+
+  <!-- Header -->
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
-      <a href="#" class="nav-logo">
-        <img src="../assets/logo.png" alt="Rise">
-        <span>Rise</span>
-      </a>
-      <div class="nav-links">
-        <a href="#why-rise">Why Rise</a>
-        <a href="#paths">Programs</a>
-        <a href="#coaches">Coaches</a>
-        <a href="#faq">FAQ</a>
-        <a href="#paths" class="nav-cta">Find Your Path</a>
-      </div>
+      <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
+      <a class="header-cta" href="#paths">Find Your Path</a>
     </div>
   </header>
 
@@ -798,10 +781,21 @@
       <div class="hero-eyebrow">Rise Artist Academy</div>
       <h1>Create the foundation&nbsp;once. Build your career on&nbsp;it&nbsp;forever.</h1>
       <p class="hero-sub">We help electronic music producers grow through structure, accountability and coaching, wherever they are in their journey.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
+      <span>Production coaching</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>Career accountability</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>Industry network</span>
+    </div>
       <a href="#paths" class="hero-cta">
         Find Your Path
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
+    <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
+      <span>&#10003; No subscription required</span>
+      <span>&#10003; Real coaching, not just tutorials</span>
+    </div>
     </div>
   </section>
 
@@ -813,8 +807,6 @@
       <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
@@ -824,8 +816,6 @@
       <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-7.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-13.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
@@ -848,8 +838,7 @@
             <p style="margin-top:16px;">That's what Rise is built on. We combine structure, accountability and coaching to help producers turn talent into long-term progress. Whether that starts with the Course, Base or Core depends on where you are today.</p>
           </div>
         </div>
-        <!-- TODO: Replace with final photo of Jim performing -->
-        <img src="../assets/photos/photo-7.jpg" alt="Rise Academy session" class="why-rise-image">
+        <img src="../assets/photos/photo-5.jpg" alt="Rise Academy session" class="why-rise-image">
       </div>
     </div>
   </section>
@@ -929,7 +918,7 @@
       <div class="coach-grid">
 
         <div class="coach-card">
-          <img src="../assets/photos/Maurits.png" alt="Maurits" class="coach-avatar">
+          <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" class="coach-avatar">
           <div class="coach-name">Maurits</div>
           <div class="coach-role">Core Coach &middot; Music Business</div>
           <p class="coach-bio">Runs the business and accountability side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
@@ -943,15 +932,14 @@
         </div>
 
         <div class="coach-card">
-          <!-- TODO: Replace with updated Jim photo from Google Drive -->
-          <img src="../assets/photos/Jim.png" alt="Jim" class="coach-avatar">
+          <img src="../assets/Pages/Coaches/Jim.png" alt="Jim" class="coach-avatar">
           <div class="coach-role">Founder</div>
           <div class="coach-name">Jim (VANNOOD)</div>
           <p class="coach-bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist and entrepreneur. His experience brings a practical perspective to every lesson.</p>
         </div>
 
         <div class="coach-card">
-          <img src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/8417ea74-fe03-4498-9e8e-27bcfedfa05b.webp" alt="Yvo" class="coach-avatar">
+          <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" class="coach-avatar">
           <div class="coach-name">Yvo (Overhoff)</div>
           <div class="coach-role">House Artist &middot; Advanced Modules</div>
           <p class="coach-bio">Amsterdam-based producer and AEMA graduate with a groove-first approach to house music. He developed the advanced video modules using the same workflow he uses in his own studio.</p>
@@ -977,7 +965,7 @@
       <h2 class="section-heading">Monthly Webinar Sessions</h2>
       <div class="webinar-box">
         <div class="webinar-icon" style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;">
-          <img src="../assets/photos/Maurits.png" alt="Maurits" style="width:100%;height:100%;object-fit:cover;">
+          <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="webinar-text">
           <p>Once a month, we bring producers together for a live session focused on the challenges almost everyone runs into: unfinished tracks, a lack of direction and getting music out into the world. Every session is built to give you practical insights you can apply straight away.</p>
@@ -1122,13 +1110,12 @@
        Footer
        ══════════════════════════════════════════════ -->
   <footer class="footer">
-    <p style="font-size:0.95rem;color:var(--fg);font-weight:600;margin-bottom:4px;">Start building. <a href="#paths" style="color:var(--accent);">Find your path.</a></p>
-    <p style="margin-top:12px;">&copy; 2026 Rise &middot; Recode Operations B.V.</p>
+    &copy; 2026 Rise Artist Academy. Recode Operations B.V. All rights reserved.
     <div class="links">
       <a href="mailto:info@risemusicacademy.nl">Contact</a>
       <a href="https://www.instagram.com/risemusicacademy/" target="_blank" rel="noopener">Instagram</a>
-      <a href="../privacy/">Privacy</a>
-      <a href="../terms/">Terms</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
     </div>
   </footer>
 
@@ -1143,6 +1130,22 @@
         if (window.scrollY > 60) { header.classList.add('scrolled'); }
         else { header.classList.remove('scrolled'); }
       }, { passive: true });
+    })();
+
+    // Urgency bar dismiss
+    (function() {
+      var bar = document.getElementById('urgency-bar');
+      var closeBtn = document.getElementById('urgency-bar-close');
+      if (!bar || !closeBtn) return;
+      if (sessionStorage.getItem('rise_urgency_dismissed')) {
+        bar.classList.add('hidden');
+        document.body.classList.remove('has-urgency-bar');
+      }
+      closeBtn.addEventListener('click', function() {
+        bar.classList.add('hidden');
+        document.body.classList.remove('has-urgency-bar');
+        sessionStorage.setItem('rise_urgency_dismissed', '1');
+      });
     })();
 
     // ── FAQ toggle ──
