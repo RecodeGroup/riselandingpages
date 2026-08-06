@@ -715,11 +715,27 @@
       border-color: rgba(255,104,62,0.2);
       transform: translateY(-3px);
     }
+    .video-card .video-wrap {
+      position: relative; cursor: pointer;
+    }
     .video-card video {
       width: 100%; aspect-ratio: 9/16;
       object-fit: cover; display: block;
       background: #000;
     }
+    .video-card .play-btn {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: background 0.3s;
+      z-index: 2;
+    }
+    .video-card .play-btn:hover { background: rgba(0,0,0,0.15); }
+    .video-card .play-btn svg {
+      width: 54px; height: 54px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+    }
+    .video-card .play-btn.hidden { display: none; }
     .video-card .video-caption {
       padding: 1rem 1.25rem;
       font-size: 0.82rem; color: rgba(255,255,255,0.8);
@@ -1555,35 +1571,45 @@
 
       <div class="video-grid">
         <div class="video-card">
-          <video src="../assets/testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-wrap" onclick="playVideo(this)">
+            <video src="../assets/testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4" playsinline preload="auto" muted></video>
+            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
+          </div>
           <div class="video-caption">"How Rise changed my consistency, production, and branding."</div>
         </div>
         <div class="video-card">
-          <video src="../assets/testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-wrap" onclick="playVideo(this)">
+            <video src="../assets/testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4" playsinline preload="auto" muted></video>
+            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
+          </div>
           <div class="video-caption">"Comprehensive course that covers everything to become a full-time artist."</div>
         </div>
         <div class="video-card">
-          <video src="../assets/testimonials/Rise%20broadens%20your%20scope%20beyond%20just%20music%20production.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-wrap" onclick="playVideo(this)">
+            <video src="../assets/testimonials/Rise%20broadens%20your%20scope%20beyond%20just%20music%20production.mp4" playsinline preload="auto" muted></video>
+            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
+          </div>
           <div class="video-caption">"Rise broadens your scope beyond just music production."</div>
         </div>
         <div class="video-card">
-          <video src="../assets/testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-wrap" onclick="playVideo(this)">
+            <video src="../assets/testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4" playsinline preload="auto" muted></video>
+            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
+          </div>
           <div class="video-caption">"Rise focuses on creating an artist, not just production."</div>
         </div>
         <div class="video-card">
-          <video src="../assets/testimonials/From%20struggling%20with%20identity%20to%20clear%20artistic%20direction.mp4" playsinline preload="metadata" controls></video>
-          <div class="video-caption">"From struggling with identity to clear artistic direction."</div>
-        </div>
-        <div class="video-card">
-          <video src="../assets/testimonials/Be%20open-minded%2C%20make%20time%20%E2%80%93%20it%E2%80%99s%20a%20new%20profession%20you%E2%80%99re%20learning.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-wrap" onclick="playVideo(this)">
+            <video src="../assets/testimonials/Be%20open-minded%2C%20make%20time%20%E2%80%93%20it%E2%80%99s%20a%20new%20profession%20you%E2%80%99re%20learning.mp4" playsinline preload="auto" muted></video>
+            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
+          </div>
           <div class="video-caption">"Be open-minded, make time. It's a new profession you're learning."</div>
         </div>
         <div class="video-card">
-          <video src="../assets/testimonials/Why%20you%20should%20just%20do%20it%20and%20invest%20in%20yourself.mp4" playsinline preload="metadata" controls></video>
-          <div class="video-caption">"Why you should just do it and invest in yourself."</div>
-        </div>
-        <div class="video-card">
-          <video src="../assets/testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4" playsinline preload="metadata" controls></video>
+          <div class="video-wrap" onclick="playVideo(this)">
+            <video src="../assets/testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4" playsinline preload="auto" muted></video>
+            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
+          </div>
           <div class="video-caption">"To anyone considering Rise: just do it, don't doubt."</div>
         </div>
       </div>
@@ -1601,56 +1627,56 @@
 
       <div class="reviews-scroll">
         <div class="review-card">
-          <img class="review-screenshot" src="../assets/photos/placeholder-1.jpg" alt="Rise artist" loading="lazy">
+          <img class="review-screenshot" src="../assets/testimonials/screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.47.04.png" alt="Rise artist review" loading="lazy">
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"Rise gives you everything you need to become a full-time artist. From music production to social media and business, it covers the complete picture."</p>
           </div>
         </div>
         <div class="review-card">
-          <img class="review-screenshot" src="../assets/photos/placeholder-2.jpg" alt="Rise artist" loading="lazy">
+          <img class="review-screenshot" src="../assets/testimonials/screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.47.13.png" alt="Rise artist review" loading="lazy">
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"I was genuinely impressed by how comprehensive the course is. It doesn't just teach music production, it teaches you how to build a career."</p>
           </div>
         </div>
         <div class="review-card">
-          <img class="review-screenshot" src="../assets/photos/placeholder-3.jpg" alt="Rise artist" loading="lazy">
+          <img class="review-screenshot" src="../assets/testimonials/screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.47.19.png" alt="Rise artist review" loading="lazy">
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"Rise has helped me tremendously. I've learned so much, and I would recommend it to any ambitious artist."</p>
           </div>
         </div>
         <div class="review-card">
-          <img class="review-screenshot" src="../assets/photos/placeholder-4.jpg" alt="Rise artist" loading="lazy">
+          <img class="review-screenshot" src="../assets/testimonials/screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.47.37.png" alt="Rise artist review" loading="lazy">
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"Rise isn't just about making better music. It's about becoming a complete artist. That's what makes it different."</p>
           </div>
         </div>
         <div class="review-card">
-          <img class="review-screenshot" src="../assets/photos/placeholder-5.jpg" alt="Rise artist" loading="lazy">
+          <img class="review-screenshot" src="../assets/testimonials/screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.48.24.png" alt="Rise artist review" loading="lazy">
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"Since joining Rise, I've become much more consistent with my music. My production skills and personal branding have improved tremendously."</p>
           </div>
         </div>
         <div class="review-card">
-          <img class="review-screenshot" src="../assets/photos/placeholder-6.jpg" alt="Rise artist" loading="lazy">
+          <img class="review-screenshot" src="../assets/testimonials/screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.48.44.png" alt="Rise artist review" loading="lazy">
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"I was struggling to figure out who I wanted to be as an artist. Rise gave me the structure and clarity to make the right decisions for my future."</p>
           </div>
         </div>
         <div class="review-card">
-          <img class="review-screenshot" src="../assets/photos/placeholder-7.jpg" alt="Rise artist" loading="lazy">
+          <img class="review-screenshot" src="../assets/testimonials/screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.49.06.png" alt="Rise artist review" loading="lazy">
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"It's one of the best investments you can make in yourself. You learn so much and gain a clear direction for your career."</p>
           </div>
         </div>
         <div class="review-card">
-          <img class="review-screenshot" src="../assets/photos/placeholder-8.jpg" alt="Rise artist" loading="lazy">
+          <img class="review-screenshot" src="../assets/testimonials/screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.49.24.png" alt="Rise artist review" loading="lazy">
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"If you're thinking about joining, just do it. Stay open-minded, put in the time, and you'll get an incredible amount of value from it."</p>
@@ -1992,6 +2018,49 @@
       // Wait for images to load so widths are correct
       window.addEventListener('load', initScroll);
     })();
+
+    // ── Video testimonials: preview frame + click-to-play ──
+    (function() {
+      var wraps = document.querySelectorAll('.video-card .video-wrap');
+      // Seek each video to 1s for a preview frame
+      wraps.forEach(function(w) {
+        var v = w.querySelector('video');
+        v.addEventListener('loadeddata', function() {
+          v.currentTime = 1;
+        });
+      });
+    })();
+
+    function playVideo(wrap) {
+      var vid = wrap.querySelector('video');
+      var btn = wrap.querySelector('.play-btn');
+      // Pause all other videos first
+      document.querySelectorAll('.video-card video').forEach(function(v) {
+        if (v !== vid && !v.paused) {
+          v.pause();
+          v.muted = true;
+          v.controls = false;
+          var otherBtn = v.closest('.video-wrap').querySelector('.play-btn');
+          if (otherBtn) otherBtn.classList.remove('hidden');
+        }
+      });
+      // Play this video
+      btn.classList.add('hidden');
+      vid.muted = false;
+      vid.controls = true;
+      vid.play().catch(function(){});
+      // When it ends, show play button again
+      vid.onended = function() {
+        btn.classList.remove('hidden');
+        vid.controls = false;
+        vid.muted = true;
+        vid.currentTime = 1;
+      };
+      vid.onpause = function() {
+        if (vid.ended) return;
+        // Keep controls visible while paused by user
+      };
+    }
 
   </script>
 
