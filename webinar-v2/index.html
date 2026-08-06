@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RISE &mdash; You're in. See you on the call.</title>
-  <meta name="description" content="You're confirmed for the next Rise Webinar Session. A free, monthly live coaching call for electronic music producers.">
-  <meta name="robots" content="noindex, nofollow">
+  <title>RISE &mdash; Free Monthly Live Session for Music Producers</title>
+  <meta name="description" content="Every month, we host a free live session for music producers. We'll show you how to identify the biggest obstacles and build a clear path forward.">
   <style>
     /* ════════════════════════════════════════════════
        Rise Webinar Sessions — Confirmation Page
@@ -401,40 +400,72 @@
     .academy-card {
       background: var(--bg-2);
       border: 1px solid rgba(255,255,255,0.05);
-      border-left: 3px solid var(--accent);
       border-radius: 12px;
-      padding: clamp(24px, 3vw, 32px);
+      padding: clamp(28px, 4vw, 40px);
       text-align: left;
+      position: relative;
+      overflow: hidden;
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
+    .academy-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
     .academy-card:hover {
-      border-color: var(--accent);
+      border-color: rgba(255,104,62,0.3);
       transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(255,104,62,0.1);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .academy-card:hover::before { opacity: 1; }
+    .academy-label {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      width: fit-content;
+      background: rgba(255,104,62,0.12);
+      color: var(--accent);
     }
     .academy-card h3 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .academy-meta {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
     .academy-card p {
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.7;
+      margin-bottom: 16px;
     }
-    .academy-note {
-      margin-top: 20px;
+    .academy-list {
+      list-style: none;
+    }
+    .academy-list li {
       font-size: 0.88rem;
       color: var(--muted);
-      font-style: italic;
+      padding: 5px 0 5px 24px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .academy-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 7px;
+      height: 3.5px;
+      border-left: 1.5px solid var(--accent);
+      border-bottom: 1.5px solid var(--accent);
+      transform: rotate(-45deg);
     }
     .academy-cta-wrap {
       margin-top: 2rem;
@@ -614,7 +645,7 @@
         <a href="#expect">What to Expect</a>
         <a href="#about-rise">About Rise</a>
         <a href="#faq">FAQ</a>
-        <a href="#" class="btn-primary">Add to Calendar</a>
+        <a href="#" class="btn-primary">Find Your Path</a>
       </nav>
     </div>
   </header>
@@ -626,20 +657,9 @@
     <div class="hero-bg"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Webinar Sessions</div>
-      <h1>You're in. See you on&nbsp;the&nbsp;call.</h1>
-      <p class="hero-sub">Thanks for signing up. We genuinely hope this hour is useful for you.</p>
-
-      <div class="detail-card">
-        <ul class="detail-list">
-          <li>Monthly live coaching session</li>
-          <li>Duration: 1 hour</li>
-          <li>Cost: Free, no obligation</li>
-        </ul>
-        <a href="#" class="detail-cta">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Add to Calendar
-        </a>
-      </div>
+      <h1>Every month, we host a free live session for music&nbsp;producers.</h1>
+      <p class="hero-sub">The biggest obstacles for producers are almost always the same. We'll show you how to identify them and build a clear path forward.</p>
+      <a href="#" class="btn-primary">Find Your Path</a>
     </div>
   </section>
 
@@ -678,7 +698,7 @@
   <section class="section expect" id="expect">
     <div class="section-inner">
       <div class="section-eyebrow">On the call</div>
-      <h2 class="section-heading">What we'll cover in your&nbsp;hour.</h2>
+      <h2 class="section-heading">What we'll cover in an hour</h2>
 
       <div class="expect-grid">
 
@@ -740,23 +760,36 @@
   <section class="section academies" id="academies">
     <div class="section-inner">
       <div class="section-eyebrow">After the call</div>
-      <h2 class="section-heading">Base and Core, the academy's</h2>
+      <h2 class="section-heading">Two Tracks. One community.</h2>
       <div class="section-body">
-        <p>Base builds your production foundation over six months. Core holds you accountable for a full year, once you are ready to turn skill into a career. We'll get into which one might fit you during the call.</p>
+        <p>Base and Core, the academy's. Which track is right for you follows from a short intake and a call with our team.</p>
       </div>
 
       <div class="academy-grid">
 
         <div class="academy-card">
+          <span class="academy-label">6 months</span>
           <h3>Base</h3>
-          <div class="academy-meta">6 months</div>
-          <p>Production foundation</p>
+          <p>Build your production foundation. From sound design and arrangement to mixing and finishing tracks, Base gives you the skills and structure to go from idea to finished music.</p>
+          <ul class="academy-list">
+            <li>Weekly live coaching sessions</li>
+            <li>Full platform access</li>
+            <li>Academy community</li>
+            <li>Production-focused curriculum</li>
+          </ul>
         </div>
 
         <div class="academy-card">
+          <span class="academy-label">12 months</span>
           <h3>Core</h3>
-          <div class="academy-meta">12 months</div>
-          <p>Career accountability</p>
+          <p>Turn skill into a career. Core holds you accountable for a full year with advanced coaching on releases, branding, audience growth, and building a sustainable artist career.</p>
+          <ul class="academy-list">
+            <li>Everything in Base</li>
+            <li>The Course included</li>
+            <li>Artist career coaching</li>
+            <li>Release and branding strategy</li>
+            <li>One-on-one accountability</li>
+          </ul>
         </div>
 
       </div>
