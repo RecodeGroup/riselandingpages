@@ -2019,14 +2019,16 @@
       window.addEventListener('load', initScroll);
     })();
 
-    // ── Video testimonials: preview frame + click-to-play ──
+    // ── Video testimonials: random thumbnail + click-to-play/pause ──
     (function() {
       var wraps = document.querySelectorAll('.video-card .video-wrap');
-      // Seek each video to 1s for a preview frame
       wraps.forEach(function(w) {
         var v = w.querySelector('video');
-        v.addEventListener('loadeddata', function() {
-          v.currentTime = 1;
+        v.addEventListener('loadedmetadata', function() {
+          // Random thumbnail from last 5 seconds, but at least 4s in
+          var dur = v.duration;
+          var earliest = Math.max(4, dur - 5);
+          v.currentTime = earliest + Math.random() * (dur - earliest);
         });
       });
     })();
@@ -2034,12 +2036,17 @@
     function playVideo(wrap) {
       var vid = wrap.querySelector('video');
       var btn = wrap.querySelector('.play-btn');
+      if (!vid.paused) {
+        // Currently playing → pause and show play button
+        vid.pause();
+        btn.classList.remove('hidden');
+        return;
+      }
       // Pause all other videos first
       document.querySelectorAll('.video-card video').forEach(function(v) {
         if (v !== vid && !v.paused) {
           v.pause();
           v.muted = true;
-          v.controls = false;
           var otherBtn = v.closest('.video-wrap').querySelector('.play-btn');
           if (otherBtn) otherBtn.classList.remove('hidden');
         }
@@ -2047,18 +2054,15 @@
       // Play this video
       btn.classList.add('hidden');
       vid.muted = false;
-      vid.controls = true;
+      vid.currentTime = 0;
       vid.play().catch(function(){});
-      // When it ends, show play button again
+      // When it ends, show play button again and reset thumbnail
       vid.onended = function() {
         btn.classList.remove('hidden');
-        vid.controls = false;
         vid.muted = true;
-        vid.currentTime = 1;
-      };
-      vid.onpause = function() {
-        if (vid.ended) return;
-        // Keep controls visible while paused by user
+        var dur = vid.duration;
+        var earliest = Math.max(4, dur - 5);
+        vid.currentTime = earliest + Math.random() * (dur - earliest);
       };
     }
 
