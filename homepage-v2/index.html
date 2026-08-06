@@ -274,9 +274,40 @@
     /* ── Why Rise ─────────────────────────────────── */
     .why-rise { background: var(--bg); }
     .why-rise .section-body { margin-bottom: 0; }
+    .why-rise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .why-rise-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .why-rise-image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 12px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+    }
+    @media (max-width: 768px) {
+      .why-rise-grid { grid-template-columns: 1fr; }
+    }
 
     /* ── Social Proof ────────────────────────────── */
     .social-proof { background: var(--bg); }
+    .social-proof .section-eyebrow,
+    .social-proof .section-heading { text-align: center; }
     .proof-placeholder {
       margin-top: 32px;
       padding: 40px;
@@ -767,11 +798,17 @@
        ══════════════════════════════════════════════ -->
   <section class="section why-rise" id="why-rise">
     <div class="section-inner">
-      <div class="section-eyebrow">The idea</div>
-      <h2 class="section-heading">Talent was never the&nbsp;issue.</h2>
-      <div class="section-body">
-        <p>You already have the drive. What's often missing is direction, honest feedback and guidance from people who are actually working in the industry. Just as important is building the mindset to keep moving when motivation fades.</p>
-        <p style="margin-top:16px;">That's what Rise is built on. We combine structure, accountability and coaching to help producers turn talent into long-term progress. Whether that starts with the Course, Base or Core depends on where you are today.</p>
+      <div class="why-rise-grid">
+        <div>
+          <div class="section-eyebrow">The idea</div>
+          <h2 class="section-heading">Talent was never the&nbsp;issue.</h2>
+          <div class="section-body">
+            <p>You already have the drive. What's often missing is direction, honest feedback and guidance from people who are actually working in the industry. Just as important is building the mindset to keep moving when motivation fades.</p>
+            <p style="margin-top:16px;">That's what Rise is built on. We combine structure, accountability and coaching to help producers turn talent into long-term progress. Whether that starts with the Course, Base or Core depends on where you are today.</p>
+          </div>
+        </div>
+        <!-- TODO: Replace with photo of Jim performing (from behind, purple glow) -->
+        <div class="why-rise-image-placeholder">Photo: Jim performing (shot from behind, purple glow)</div>
       </div>
     </div>
   </section>
@@ -865,9 +902,10 @@
         </div>
 
         <div class="coach-card">
+          <!-- TODO: Replace with updated Jim photo from Google Drive -->
           <img src="../assets/photos/Jim.png" alt="Jim" class="coach-avatar">
+          <div class="coach-role">Founder</div>
           <div class="coach-name">Jim (VANNOOD)</div>
-          <div class="coach-role">Techno Artist</div>
           <p class="coach-bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist and entrepreneur. His experience brings a practical perspective to every lesson.</p>
         </div>
 
@@ -897,6 +935,7 @@
       <div class="section-eyebrow">Free monthly session</div>
       <h2 class="section-heading">Monthly Webinar Sessions</h2>
       <div class="webinar-box">
+        <!-- TODO: Replace icon with photo of Maurits giving live sessions -->
         <div class="webinar-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         </div>

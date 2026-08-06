@@ -303,7 +303,7 @@
     /* ── What to Expect ──────────────────────────── */
     .expect-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
       margin-top: 36px;
     }
@@ -319,12 +319,25 @@
       transform: translateY(-4px);
     }
     .expect-num {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.1);
+      border: 1px solid rgba(255,104,62,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
       color: var(--accent);
-      margin-bottom: 12px;
+    }
+    .expect-num svg {
+      width: 22px;
+      height: 22px;
+    }
+    .expect-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
     .expect-card p {
       font-size: 0.92rem;
@@ -333,6 +346,27 @@
     }
 
     /* ── Why Rise ─────────────────────────────────── */
+    .why-rise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .why-rise-photo {
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-style: italic;
+      text-align: center;
+      padding: 2rem;
+    }
     .why-rise .section-body { margin-bottom: 0; }
     .why-rise .section-body p + p { margin-top: 16px; }
     .pull-quote {
@@ -352,22 +386,30 @@
     }
 
     /* ── Academies ───────────────────────────────── */
+    .academies .section-inner { text-align: center; }
+    .academies .section-body { margin-left: auto; margin-right: auto; }
     .academy-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
       margin-top: 32px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .academy-card {
       background: var(--bg-2);
       border: 1px solid rgba(255,255,255,0.05);
+      border-left: 3px solid var(--accent);
       border-radius: 12px;
       padding: clamp(24px, 3vw, 32px);
-      transition: border-color 0.3s, transform 0.3s;
+      text-align: left;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
     .academy-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(255,104,62,0.1);
     }
     .academy-card h3 {
       font-size: 1.2rem;
@@ -393,8 +435,14 @@
       color: var(--muted);
       font-style: italic;
     }
+    .academy-cta-wrap {
+      margin-top: 2rem;
+      text-align: center;
+    }
 
     /* ── Social Proof ────────────────────────────── */
+    .social-proof .section-eyebrow,
+    .social-proof .section-heading { text-align: center; }
     .proof-placeholder {
       margin-top: 32px;
       padding: 40px;
@@ -536,6 +584,7 @@
     @media (max-width: 900px) {
       .expect-grid { grid-template-columns: 1fr; }
       .academy-grid { grid-template-columns: 1fr; }
+      .why-rise-grid { grid-template-columns: 1fr; }
       .coach-large { flex-direction: column; align-items: center; text-align: center; }
     }
     @media (max-width: 768px) {
@@ -632,18 +681,27 @@
       <div class="expect-grid">
 
         <div class="expect-card">
-          <div class="expect-num">01</div>
-          <p>Where you're actually stuck in your production process, not just what you think is missing.</p>
+          <div class="expect-num"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></div>
+          <h3>Understand Your Situation</h3>
+          <p>We identify where you're stuck and why progress has slowed, so you know exactly what's preventing your growth.</p>
         </div>
 
         <div class="expect-card">
-          <div class="expect-num">02</div>
-          <p>What separates a finished, released track from another unfinished project.</p>
+          <div class="expect-num"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <h3>Learn the Framework</h3>
+          <p>You'll learn the biggest mistakes producers make and the roadmap that turns hobby producers into release-ready artists.</p>
         </div>
 
         <div class="expect-card">
-          <div class="expect-num">03</div>
-          <p>What it takes to move from producer to artist.</p>
+          <div class="expect-num"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Real Results</h3>
+          <p>We'll walk through real examples of producer growth, track improvements, coaching sessions, and artist success stories.</p>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-num"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <h3>Your Growth Plan</h3>
+          <p>You'll leave with a clear understanding of your next steps and how to systematically build your career as an artist.</p>
         </div>
 
       </div>
@@ -655,14 +713,21 @@
        ══════════════════════════════════════════════ -->
   <section class="section why-rise" id="about-rise">
     <div class="section-inner">
-      <div class="section-eyebrow">The idea</div>
-      <h2 class="section-heading">Talent was never the&nbsp;bottleneck.</h2>
-      <div class="section-body">
-        <p>You can work hard on your craft and still stay in the same place without direction. What's actually missing is two things: a mirror that shows you exactly where you stand, and a structure that won't let you walk away once you see it.</p>
-        <p>We ran into that same wall for years, across releasing music, playing shows, running labels and building events. What changed things wasn't more information. It was direction, structure, accountability, and an environment that holds a higher standard than you'd hold yourself to.</p>
-      </div>
-      <div class="pull-quote">
-        <p>You don't rise to the level of your goals. You fall to the level of your standards.</p>
+      <div class="why-rise-grid">
+        <div>
+          <div class="section-eyebrow">The idea</div>
+          <h2 class="section-heading">Talent was never the&nbsp;bottleneck.</h2>
+          <div class="section-body">
+            <p>You can work hard on your craft and still stay in the same place without direction. What's actually missing is two things: a mirror that shows you exactly where you stand, and a structure that won't let you walk away once you see it.</p>
+            <p>We ran into that same wall for years, across releasing music, playing shows, running labels and building events. What changed things wasn't more information. It was direction, structure, accountability, and an environment that holds a higher standard than you'd hold yourself to.</p>
+          </div>
+          <div class="pull-quote">
+            <p>You don't rise to the level of your goals. You fall to the level of your standards.</p>
+          </div>
+        </div>
+        <div class="why-rise-photo">
+          Photo: studio, performance, or something aspirational
+        </div>
       </div>
     </div>
   </section>
@@ -673,7 +738,7 @@
   <section class="section academies" id="academies">
     <div class="section-inner">
       <div class="section-eyebrow">After the call</div>
-      <h2 class="section-heading">Two tracks. One community.</h2>
+      <h2 class="section-heading">Base and Core, the academy's</h2>
       <div class="section-body">
         <p>Base builds your production foundation over six months. Core holds you accountable for a full year, once you are ready to turn skill into a career. We'll get into which one might fit you during the call.</p>
       </div>
@@ -694,7 +759,9 @@
 
       </div>
 
-      <p class="academy-note">We'll discuss which one fits you on the call.</p>
+      <div class="academy-cta-wrap">
+        <a href="#" class="btn-primary">Find Your Path</a>
+      </div>
     </div>
   </section>
 

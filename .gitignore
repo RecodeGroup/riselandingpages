@@ -1,5 +1,7 @@
 # Deploy scripts with tokens
 deploy.command
+push.command
+setup-github.command
 start.command
 start.bat
 

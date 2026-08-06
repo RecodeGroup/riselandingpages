@@ -557,9 +557,88 @@
     }
     .footer .links a:hover { color: var(--accent); }
 
+    /* ── Two-column "how we work" layout ────────── */
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .how-photo-placeholder {
+      border: 2px dashed rgba(255,255,255,0.12);
+      border-radius: 14px;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 2rem;
+      background: var(--bg-2);
+    }
+    @media (max-width: 768px) {
+      .how-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Centered tracks section ─────────────────── */
+    .tracks-centered .section-eyebrow,
+    .tracks-centered .section-heading,
+    .tracks-centered .section-body {
+      text-align: center;
+    }
+    .tracks-centered .section-body {
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── Products marquee ────────────────────────── */
+    .products-section { padding: 5rem 0; border-top: 1px solid var(--line); }
+    .products-head { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; margin-bottom: 2rem; text-align: center; }
+    .products-scroll-wrap { overflow: hidden; padding: 0 0 18px; }
+    .products-scroll { display: flex; gap: 18px; width: max-content; animation: products-scroll 50s linear infinite; }
+    .products-scroll:hover { animation-play-state: paused; }
+    @keyframes products-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .product-card { flex: 0 0 260px; background: var(--bg-2); border: 1px solid rgba(255,255,255,0.05); border-radius: 14px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(255,104,62,0.25); }
+    .product-card .thumb { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+    .product-card .info { padding: 14px 16px 18px; }
+    .product-card .info h4 { font-size: 0.9rem; font-weight: 700; }
+
+    /* ── Social proof centered ───────────────────── */
+    .social-proof .section-eyebrow,
+    .social-proof .section-heading {
+      text-align: center;
+    }
+
+    /* ── Closing section bg placeholder ──────────── */
+    .closing {
+      position: relative;
+      overflow: hidden;
+    }
+    /* TODO: Replace this pseudo-element with an actual background image (optreden/show shot) */
+    .closing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px dashed rgba(255,255,255,0.08);
+      border-radius: 0;
+      pointer-events: none;
+      z-index: 0;
+      /* background-image: url('../assets/photos/closing-bg.jpg'); */
+      /* background-size: cover; background-position: center; */
+      /* opacity: 0.15; */
+    }
+    .closing-inner {
+      position: relative;
+      z-index: 1;
+    }
+
     /* ── Section CTA helper ──────────────────────── */
     .section-cta-wrap {
       margin-top: 32px;
+    }
+    .section-cta-wrap--center {
+      text-align: center;
     }
 
     /* ── Responsive ───────────────────────────────── */
@@ -611,7 +690,7 @@
     <div class="hero-content">
       <div class="hero-eyebrow">Rise Artist Academy</div>
       <h1>A straight line in the music&nbsp;industry.</h1>
-      <p class="hero-sub">No more guessing what actually moves you forward. Answer a few questions and we'll tell you exactly where to start.</p>
+      <p class="hero-sub">The structure that turns talent into an actual career.</p>
       <a href="#intake" class="btn-primary">
         Apply for the Academy
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -654,7 +733,7 @@
   <section class="section" id="why-rise">
     <div class="section-inner">
       <div class="section-eyebrow">The idea</div>
-      <h2 class="section-heading">The direction, structure and accountability that turn talent into an actual&nbsp;career.</h2>
+      <h2 class="section-heading">The structure that turns talent into an actual&nbsp;career.</h2>
       <div class="section-body">
         <p>You can work hard on your craft and still stay in the same place without direction. What's actually missing is two things: a mirror that shows you exactly where you stand, and a structure that won't let you walk away once you see it.</p>
         <p style="margin-top:16px;">We ran into that same wall for years, across releasing music, playing shows, running labels and building events. What changed things wasn't more information. It was direction, structure, accountability, and an environment that holds a higher standard than you'd hold yourself to.</p>
@@ -670,11 +749,18 @@
        ══════════════════════════════════════════════ -->
   <section class="section" id="how-we-work">
     <div class="section-inner">
-      <div class="section-eyebrow">The method</div>
-      <h2 class="section-heading">What actually happens once you're&nbsp;in.</h2>
-      <div class="section-body">
-        <p>Most producers already know they're stuck, they just don't know exactly where and how to fix it. So we start there, with an honest read on where your sound and your habits actually stand today, not where you assume they do.</p>
-        <p style="margin-top:16px;">From there it gets structural, not motivational. Deadlines you can't quietly slide past. A standard set higher than the one you'd hold yourself to. And progress measured only by what actually gets finished, posted and released, nothing else.</p>
+      <div class="how-grid">
+        <!-- LEFT: photo placeholder -->
+        <div class="how-photo-placeholder">Photo: Webinar, live session, or coaching moment</div>
+        <!-- RIGHT: text content -->
+        <div>
+          <div class="section-eyebrow">The method</div>
+          <h2 class="section-heading">What actually happens once you're&nbsp;in.</h2>
+          <div class="section-body">
+            <p>Most producers already know they're stuck, they just don't know exactly where and how to fix it. So we start there, with an honest read on where your sound and your habits actually stand today, not where you assume they do.</p>
+            <p style="margin-top:16px;">From there it gets structural, not motivational. Deadlines you can't quietly slide past. A standard set higher than the one you'd hold yourself to. And progress measured only by what actually gets finished, posted and released, nothing else.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -682,14 +768,14 @@
   <!-- ══════════════════════════════════════════════
        Two Tracks
        ══════════════════════════════════════════════ -->
-  <section class="section" id="tracks">
+  <section class="section tracks-centered" id="tracks">
     <div class="section-inner">
       <div class="section-eyebrow">The programs</div>
       <h2 class="section-heading">Base and Core, at a&nbsp;glance.</h2>
       <div class="section-body">
         <p>Base runs six months and builds the foundation, your sound, your workflow, your skill. Core runs a full year and turns that foundation into an actual career, with the same coaches, the same weekly sessions and the same standard throughout. Start the intake, and create the foundation you can build your career upon.</p>
       </div>
-      <div class="section-cta-wrap">
+      <div class="section-cta-wrap section-cta-wrap--center">
         <a href="#intake" class="btn-primary">
           Apply for the Academy
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -718,6 +804,38 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
+       Full Program (Products Marquee)
+       ══════════════════════════════════════════════ -->
+  <section class="products-section">
+    <div class="products-head">
+      <div class="section-eyebrow">Full program</div>
+      <h2 class="section-heading">Everything you need, all in one place</h2>
+      <p style="color:var(--muted);font-size:0.95rem;line-height:1.7;max-width:55ch;margin:0 auto;">No more searching for separate courses or random tutorials. Inside Rise you'll find everything you need to keep improving.</p>
+    </div>
+    <div class="products-scroll-wrap">
+      <div class="products-scroll">
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/hero/3d174879-3f49-4f2f-9f3f-5cb9f25412cf.webp" alt="Rise Artist Course" loading="lazy"><div class="info"><h4>Rise Artist Course</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/96e7f4d6-0ded-4eee-866e-9ae8c4a6f102/hero/2450e7a7-9a88-4d3d-b279-5cffe3fbefb8.webp" alt="The Manual" loading="lazy"><div class="info"><h4>The Manual</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/018b6581-4bb6-4127-a361-8dcd52fe4e2d/hero/d5f0ff0d-3bc7-4484-84fd-09275e87e73d.jpg" alt="House Sample Pack" loading="lazy"><div class="info"><h4>House Sample Pack</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/7b7bcf13-b6b2-45a2-98b9-07d81138bff0/hero/d25836a3-1936-4461-8ecf-5a172de54660.jpg" alt="EcHooligan Chain" loading="lazy"><div class="info"><h4>EcHooligan Chain</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fbf5e278-3e97-4b17-9f33-2d29ed5894fa/hero/2cb5cb16-6a08-40c1-b7f7-b05cff0be657.jpg" alt="909 Pack" loading="lazy"><div class="info"><h4>909 Pack</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/08048efa-e754-48c2-bc9f-eedb974ea90e/hero/8640f43d-0bed-47cf-8a29-7f0a1b6b0494.jpg" alt="Serum Presets" loading="lazy"><div class="info"><h4>Serum Presets</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/a986bfda-f52b-451d-8bca-08185eb00752/hero/7cfa56c3-5c1c-4254-ab8d-39377937fc80.jpg" alt="Kick Rack House" loading="lazy"><div class="info"><h4>Kick Rack House</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fef71bf3-c89d-497a-9b89-6189178f31f7/hero/63115779-b6c8-41cc-a1ce-94ab71fd20f9.jpg" alt="Kick Rack Techno" loading="lazy"><div class="info"><h4>Kick Rack Techno</h4></div></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/hero/3d174879-3f49-4f2f-9f3f-5cb9f25412cf.webp" alt="Rise Artist Course" loading="lazy"><div class="info"><h4>Rise Artist Course</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/96e7f4d6-0ded-4eee-866e-9ae8c4a6f102/hero/2450e7a7-9a88-4d3d-b279-5cffe3fbefb8.webp" alt="The Manual" loading="lazy"><div class="info"><h4>The Manual</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/018b6581-4bb6-4127-a361-8dcd52fe4e2d/hero/d5f0ff0d-3bc7-4484-84fd-09275e87e73d.jpg" alt="House Sample Pack" loading="lazy"><div class="info"><h4>House Sample Pack</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/7b7bcf13-b6b2-45a2-98b9-07d81138bff0/hero/d25836a3-1936-4461-8ecf-5a172de54660.jpg" alt="EcHooligan Chain" loading="lazy"><div class="info"><h4>EcHooligan Chain</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fbf5e278-3e97-4b17-9f33-2d29ed5894fa/hero/2cb5cb16-6a08-40c1-b7f7-b05cff0be657.jpg" alt="909 Pack" loading="lazy"><div class="info"><h4>909 Pack</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/08048efa-e754-48c2-bc9f-eedb974ea90e/hero/8640f43d-0bed-47cf-8a29-7f0a1b6b0494.jpg" alt="Serum Presets" loading="lazy"><div class="info"><h4>Serum Presets</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/a986bfda-f52b-451d-8bca-08185eb00752/hero/7cfa56c3-5c1c-4254-ab8d-39377937fc80.jpg" alt="Kick Rack House" loading="lazy"><div class="info"><h4>Kick Rack House</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fef71bf3-c89d-497a-9b89-6189178f31f7/hero/63115779-b6c8-41cc-a1ce-94ab71fd20f9.jpg" alt="Kick Rack Techno" loading="lazy"><div class="info"><h4>Kick Rack Techno</h4></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
        Social Proof
        ══════════════════════════════════════════════ -->
   <section class="section social-proof" id="social-proof">
@@ -740,20 +858,29 @@
 
       <div class="steps">
         <div class="step">
-          <div class="step-num">1</div>
+          <div class="step-num">
+            <!-- Clipboard / form icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg>
+          </div>
           <p>Answer a handful of questions about where you're at and where you're trying to go.</p>
         </div>
         <div class="step">
-          <div class="step-num">2</div>
+          <div class="step-num">
+            <!-- Megaphone / announcement icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
           <p>The Academy team reads through your answers and reaches out personally.</p>
         </div>
         <div class="step">
-          <div class="step-num">3</div>
+          <div class="step-num">
+            <!-- Trending-up / chart icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
           <p>We book a call and figure out together how to accelerate your career the fastest.</p>
         </div>
       </div>
 
-      <div class="section-cta-wrap">
+      <div class="section-cta-wrap section-cta-wrap--center">
         <a href="#" class="btn-primary">
           Apply for the Academy
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -768,11 +895,13 @@
   <section class="section" id="coaches">
     <div class="section-inner">
       <div class="section-eyebrow">The team</div>
-      <h2 class="section-heading">Coached by people still doing the&nbsp;work.</h2>
+      <h2 class="section-heading">Coached by professionals within the&nbsp;industry.</h2>
 
+      <!-- TODO: Add Jim's coach card with correct photo -->
       <div class="coach-grid">
 
         <div class="coach-card">
+          <!-- TODO: Verify Maurits photo is up to date -->
           <img src="../assets/photos/Maurits.png" alt="Maurits" class="coach-avatar">
           <div class="coach-name">Maurits</div>
           <div class="coach-role">Core Coach &middot; Music Business Expert</div>
@@ -780,6 +909,7 @@
         </div>
 
         <div class="coach-card">
+          <!-- TODO: Replace with correct photo of Jurriaan (Artcode) — photo-1.jpg is a placeholder -->
           <img src="../assets/photos/photo-1.jpg" alt="Jurriaan" class="coach-avatar">
           <div class="coach-name">Jurriaan (Artcode)</div>
           <div class="coach-role">Base Coach &middot; Techno Artist</div>
@@ -787,6 +917,7 @@
         </div>
 
         <div class="coach-card">
+          <!-- TODO: Replace with correct photo of Yvo (Overhoff) — photo-2.jpg is a placeholder -->
           <img src="../assets/photos/photo-2.jpg" alt="Yvo" class="coach-avatar">
           <div class="coach-name">Yvo (Overhoff)</div>
           <div class="coach-role">Video Lessons &middot; House Artist</div>
@@ -794,6 +925,7 @@
         </div>
 
         <div class="coach-card">
+          <!-- TODO: Replace with correct photo of Dave (RDLF) — photo-3.jpg is a placeholder -->
           <img src="../assets/photos/photo-3.jpg" alt="Dave" class="coach-avatar">
           <div class="coach-name">Dave (RDLF)</div>
           <div class="coach-role">Video Lessons &middot; Techno Artist</div>
@@ -806,6 +938,7 @@
 
   <!-- ══════════════════════════════════════════════
        Closing Section
+       TODO: Add background photo (optreden/show shot) — see .closing::before in CSS
        ══════════════════════════════════════════════ -->
   <section class="closing">
     <div class="closing-inner">
