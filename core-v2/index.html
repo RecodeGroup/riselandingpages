@@ -347,40 +347,6 @@
       font-size: 0.9rem;
     }
 
-    /* ── Pricing ─────────────────────────────────── */
-    .pricing { background: var(--bg); }
-    .price-box {
-      margin-top: 36px;
-      background: linear-gradient(180deg, rgba(255,104,62,0.04) 0%, var(--bg-2) 40%);
-      border: 1px solid rgba(255,104,62,0.3);
-      border-radius: 12px;
-      padding: clamp(36px, 5vw, 56px);
-      text-align: center;
-      max-width: 560px;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    .price-box:hover {
-      border-color: rgba(255,104,62,0.5);
-      box-shadow: 0 0 40px rgba(255,104,62,0.08);
-    }
-    .price-amount {
-      font-size: clamp(2.4rem, 5vw, 3.4rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-    .price-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-    .price-note {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 16px;
-    }
-
     /* ── Coach ────────────────────────────────────── */
     .coach-section { background: var(--bg); }
     .coach-large-card {
@@ -498,6 +464,57 @@
     .footer .links a { transition: color 0.2s; }
     .footer .links a:hover { color: var(--accent); }
 
+    /* ── Section Images ──────────────────────────── */
+    .section-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 12px; margin: 2rem auto; display: block; }
+    .image-break { padding: 0 2rem; max-width: var(--maxw); margin: 0 auto; }
+
+    /* ── Video Testimonials ──────────────────────── */
+    .video-testimonials { padding: 5rem 2rem; text-align: center; }
+    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; }
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: var(--maxw); margin: 0 auto; }
+    .video-card { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16; max-height: 480px; cursor: pointer; background: #000; }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; }
+    .video-card .play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+    .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
+
+    /* ── Questionnaire Modal ─────────────────────── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: stretch; justify-content: stretch; animation: fadeIn 0.25s ease; }
+    .modal-overlay.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    .modal { width: 100%; display: flex; flex-direction: column; padding: 32px; position: relative; animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes slideUp { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+    .modal-top { max-width: 720px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .modal-back { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; padding: 8px 0; transition: color 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-back:hover { color: var(--fg); }
+    .modal-back.hidden { visibility: hidden; }
+    .modal-close { font-size: 22px; color: var(--muted); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-close:hover { color: var(--fg); background: var(--line); }
+    .modal-body { max-width: 720px; width: 100%; margin: 60px auto 0; flex: 1; }
+    .progress { display: flex; gap: 8px; margin-bottom: 28px; }
+    .progress span { flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+    .progress span.done { background: var(--accent); }
+    .step-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; max-width: 18ch; margin-bottom: 36px; }
+    .options { display: grid; gap: 12px; }
+    .option { display: flex; gap: 18px; align-items: flex-start; padding: 18px 22px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; width: 100%; transition: all 0.2s; font-family: inherit; color: inherit; }
+    .option:hover { background: rgba(255,255,255,0.06); border-color: var(--line-strong); }
+    .option.selected { border-color: var(--accent); background: rgba(255,104,62,0.08); }
+    .option .letter { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0; width: 14px; }
+    .option .text { font-size: 0.92rem; line-height: 1.4; }
+    .slider-step { text-align: center; padding-top: 20px; }
+    .slider-value { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+    .slider-label { margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
+    .slider-wrap { margin-top: 50px; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .slider-wrap input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--line); border-radius: 4px; outline: none; }
+    .slider-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--fg); border-radius: 50%; cursor: pointer; border: 4px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+    .slider-bounds { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; }
+    .btn-continue { background: var(--accent); color: #0a0a0a; width: 100%; max-width: 420px; margin: 36px auto 0; display: block; padding: 18px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; border: none; cursor: pointer; font-family: inherit; }
+    .btn-continue:hover { background: var(--accent-hover); }
+    .form-step .form-row { display: grid; gap: 14px; max-width: 480px; margin: 0 auto; }
+    .form-step input { background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--fg); padding: 16px 18px; border-radius: 8px; font-family: inherit; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+    .form-step input:focus { border-color: var(--accent); }
+
     /* ── Accessibility ───────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -537,13 +554,13 @@
 </head>
 <body class="has-urgency-bar">
   <div class="urgency-bar" id="urgency-bar">
-    Starting from &euro;2.650,- per year &middot; Apply now
+    Apply now &middot; Join the Core program
     <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
   </div>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
-      <a class="header-cta" href="#pricing">Join Core Academy</a>
+      <a class="header-cta" href="javascript:void(0)" onclick="openModal()">Apply Now</a>
     </div>
   </header>
 
@@ -563,13 +580,13 @@
         <span style="color:rgba(255,255,255,0.2);">&middot;</span>
         <span>1-on-1 accountability</span>
       </div>
-      <a href="#pricing" class="hero-cta">
-        Join Core Academy
+      <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
+        Apply Now
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
       <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
-        <span>&#10003; Payment plans available</span>
-        <span>&#10003; Weekly coaching with Maurits</span>
+        <span>&#10003; Weekly coaching with experienced producers</span>
+        <span>&#10003; 12-month structured program</span>
       </div>
     </div>
   </section>
@@ -611,6 +628,10 @@
       </div>
     </div>
   </section>
+
+  <div class="image-break">
+    <img src="../assets/photos/photo-4.jpg" alt="Rise producers at work" class="section-image" loading="lazy">
+  </div>
 
   <!-- ══════════════════════════════════════════════
        Two Ways In
@@ -660,7 +681,7 @@
 
         <div class="feature-card">
           <h3>Weekly Sessions</h3>
-          <p>Live accountability with Maurits</p>
+          <p>Live accountability with experienced coaches</p>
         </div>
 
         <div class="feature-card">
@@ -682,6 +703,26 @@
     </div>
   </section>
 
+  <div class="image-break">
+    <img src="../assets/photos/photo-9.jpg" alt="Rise community session" class="section-image" loading="lazy">
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       Video Testimonials
+       ══════════════════════════════════════════════ -->
+  <section class="video-testimonials">
+    <h2 class="section-title">What our artists have to say</h2>
+    <p class="section-sub">Real stories from producers who joined Rise.</p>
+    <div class="video-grid">
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/videos/video-1.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/videos/video-2.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/videos/video-3.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/videos/video-4.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/videos/video-5.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/videos/video-6.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    </div>
+  </section>
+
   <!-- ══════════════════════════════════════════════
        Social Proof
        ══════════════════════════════════════════════ -->
@@ -695,43 +736,31 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════
-       Pricing
-       ══════════════════════════════════════════════ -->
-  <section class="section pricing" id="pricing">
-    <div class="section-inner">
-      <div class="section-eyebrow">Investment</div>
-      <h2 class="section-heading">What Core costs, plainly.</h2>
-
-      <div class="price-box">
-        <div class="price-amount">&euro; 2.650,-</div>
-        <p class="price-sub">For the full year. Installments available with a down payment.</p>
-        <a href="#" class="hero-cta">
-          Join Core Academy
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-        <p class="price-note">Installments available with a down payment.</p>
-      </div>
-    </div>
-  </section>
+  <div class="image-break">
+    <img src="../assets/photos/photo-10.jpg" alt="Rise studio environment" class="section-image" loading="lazy">
+  </div>
 
   <!-- ══════════════════════════════════════════════
        Coach
        ══════════════════════════════════════════════ -->
   <section class="section coach-section" id="coach">
     <div class="section-inner">
-      <div class="section-eyebrow">Your coach</div>
-      <h2 class="section-heading">The person who runs your year, live, every&nbsp;week.</h2>
+      <div class="section-eyebrow">Your coaches</div>
+      <h2 class="section-heading">The people who guide your year, live, every&nbsp;week.</h2>
 
       <div class="coach-large-card">
         <img src="../assets/photos/Maurits.png" alt="Maurits" class="coach-large-avatar">
         <div class="coach-large-info">
           <div class="coach-large-name">Maurits</div>
-          <p class="coach-large-bio">Runs the business and operations side of artist development. Inside Core, he's the one holding you accountable every single week, no exceptions.</p>
+          <p class="coach-large-bio">Runs the business and operations side of artist development. Maurits is one of the coaches holding you accountable every single week inside Core, alongside the rest of the Rise coaching team.</p>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="image-break">
+    <img src="../assets/photos/photo-11.jpg" alt="Rise artists performing" class="section-image" loading="lazy">
+  </div>
 
   <!-- ══════════════════════════════════════════════
        Closing Section
@@ -740,8 +769,8 @@
     <div class="closing-inner">
       <h2>Ready to make serious steps? This is where that&nbsp;starts.</h2>
       <p>Core isn't for people testing the water. It's for producers who've decided this is the career they want, and are ready to be held to that decision, every week, for a year.</p>
-      <a href="#pricing" class="hero-cta">
-        Join Core Academy
+      <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
+        Apply Now
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
@@ -770,7 +799,7 @@
             <span>Can I pay in installments?</span>
             <span class="faq-icon"></span>
           </button>
-          <div class="faq-a">Yes, as long as a down payment is made first.</div>
+          <div class="faq-a">We're flexible. We'll discuss payment options during your intro call.</div>
         </div>
 
         <div class="faq-item">
@@ -778,7 +807,7 @@
             <span>What happens after Core?</span>
             <span class="faq-icon"></span>
           </button>
-          <div class="faq-a">Standard platform access ends when the year does. You can keep it going through a subscription, 20 or 50 euro a month depending on what you need.</div>
+          <div class="faq-a">Standard platform access ends when the year does. You can keep it going through a subscription to maintain access to the platform and community.</div>
         </div>
 
         <div class="faq-item">
@@ -802,7 +831,7 @@
             <span>Who coaches Core?</span>
             <span class="faq-icon"></span>
           </button>
-          <div class="faq-a">Maurits runs the weekly live sessions, focused on accountability and actually hitting your goals.</div>
+          <div class="faq-a">Maurits is one of the coaches running the weekly live sessions, alongside the rest of the Rise coaching team. The focus is on accountability and actually hitting your goals.</div>
         </div>
 
       </div>
@@ -821,6 +850,19 @@
       <a href="/terms/">Terms</a>
     </div>
   </footer>
+
+  <!-- ══════════════════════════════════════════════
+       Application Modal
+       ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div class="modal-top">
+        <button class="modal-back" id="back-btn" onclick="prevStep()">&larr; Back</button>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════════════════
        Scripts
@@ -843,6 +885,203 @@
       if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
       closeBtn.addEventListener('click', function() { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
     })();
+
+    // ── Video testimonials ──
+    function playVideo(card){var v=card.querySelector("video");if(card.classList.contains("playing")){v.pause();card.classList.remove("playing")}else{document.querySelectorAll(".video-card.playing").forEach(function(c){c.querySelector("video").pause();c.classList.remove("playing")});v.play();card.classList.add("playing")}}
+
+    // ── Application questionnaire ──
+    var state = {
+      step: 0,
+      answers: {
+        years: null,
+        time: null,
+        challenge: null,
+        budget: 2500,
+        name: "",
+        whatsapp: "",
+        email: ""
+      }
+    };
+
+    var STEPS = [
+      {
+        type: "choice",
+        key: "years",
+        title: "How many years have you been producing?",
+        options: [
+          "Less than 1 year",
+          "1 – 3 years",
+          "3 – 5 years",
+          "5+ years"
+        ]
+      },
+      {
+        type: "choice",
+        key: "time",
+        title: "How much time do you spend on your music?",
+        options: [
+          "A few hours a week",
+          "5 – 15 hours a week",
+          "15 – 30 hours a week",
+          "It’s my full-time focus"
+        ]
+      },
+      {
+        type: "choice",
+        key: "challenge",
+        title: "What’s your biggest challenge right now?",
+        options: [
+          "Finishing tracks consistently",
+          "Getting my music heard / building an audience",
+          "Improving my production or mixing skills",
+          "Staying motivated and accountable",
+          "Turning music into a career or income"
+        ]
+      },
+      {
+        type: "slider",
+        key: "budget",
+        title: "What’s your yearly budget for your music career?",
+        min: 0,
+        max: 10000,
+        step: 250,
+        format: function(v) { return v >= 10000 ? "€10k+" : "€" + v.toLocaleString("en-US"); }
+      },
+      {
+        type: "form",
+        title: "One last thing.",
+        subtitle: "Where can our community manager reach you to set up the call?"
+      },
+      {
+        type: "success"
+      }
+    ];
+
+    var overlay = document.getElementById("modal");
+    var mbody = document.getElementById("modal-body");
+    var backBtn = document.getElementById("back-btn");
+
+    function openModal() {
+      state.step = 0;
+      overlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+      render();
+    }
+    function closeModal() {
+      overlay.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    function nextStep() {
+      if (state.step < STEPS.length - 1) {
+        state.step++;
+        render();
+      }
+    }
+    function prevStep() {
+      if (state.step > 0) {
+        state.step--;
+        render();
+      } else {
+        closeModal();
+      }
+    }
+
+    function render() {
+      var step = STEPS[state.step];
+      backBtn.classList.toggle("hidden", state.step === 0 || step.type === "success");
+
+      var totalQuestionSteps = STEPS.filter(function(s) { return s.type !== "success"; }).length;
+      var progressBars = step.type === "success"
+        ? ""
+        : '<div class="progress">' +
+            Array.from({length: totalQuestionSteps}, function(_, i) {
+              return '<span class="' + (i <= state.step ? 'done' : '') + '"></span>';
+            }).join("") +
+          '</div>';
+
+      if (step.type === "choice") {
+        mbody.innerHTML =
+          progressBars +
+          '<h2 class="step-title">' + step.title + '</h2>' +
+          '<div class="options">' +
+            step.options.map(function(opt, i) {
+              return '<button class="option ' + (state.answers[step.key] === opt ? 'selected' : '') + '" data-value="' + opt + '">' +
+                '<span class="letter">' + String.fromCharCode(65 + i) + '.</span>' +
+                '<span class="text">' + opt + '</span>' +
+              '</button>';
+            }).join("") +
+          '</div>';
+        mbody.querySelectorAll(".option").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            state.answers[step.key] = btn.dataset.value;
+            mbody.querySelectorAll(".option").forEach(function(b) { b.classList.remove("selected"); });
+            btn.classList.add("selected");
+            setTimeout(nextStep, 220);
+          });
+        });
+      }
+      else if (step.type === "slider") {
+        mbody.innerHTML =
+          progressBars +
+          '<h2 class="step-title">' + step.title + '</h2>' +
+          '<div class="slider-step">' +
+            '<div class="slider-value" id="slider-val">' + step.format(state.answers[step.key]) + '</div>' +
+            '<div class="slider-label">Per year</div>' +
+            '<div class="slider-wrap">' +
+              '<input type="range" min="' + step.min + '" max="' + step.max + '" step="' + step.step + '" value="' + state.answers[step.key] + '" id="slider-input"/>' +
+              '<div class="slider-bounds"><span>€0</span><span>€10k+</span></div>' +
+            '</div>' +
+            '<button class="btn-continue" id="continue-btn">Continue →</button>' +
+          '</div>';
+        var input = document.getElementById("slider-input");
+        var valEl = document.getElementById("slider-val");
+        input.addEventListener("input", function(e) {
+          var v = Number(e.target.value);
+          state.answers[step.key] = v;
+          valEl.textContent = step.format(v);
+        });
+        document.getElementById("continue-btn").addEventListener("click", nextStep);
+      }
+      else if (step.type === "form") {
+        mbody.innerHTML =
+          progressBars +
+          '<h2 class="step-title">' + step.title + '</h2>' +
+          '<p style="color:var(--muted); margin-bottom:30px; max-width:48ch;">' + step.subtitle + '</p>' +
+          '<form class="form-step" id="apply-form">' +
+            '<div class="form-row">' +
+              '<input type="text" name="name" placeholder="Your name" required value="' + state.answers.name + '"/>' +
+              '<input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required value="' + state.answers.whatsapp + '"/>' +
+              '<input type="email" name="email" placeholder="Email address" required value="' + state.answers.email + '"/>' +
+              '<button type="submit" class="btn-continue" style="margin-top: 8px;">Submit Application →</button>' +
+            '</div>' +
+          '</form>';
+        document.getElementById("apply-form").addEventListener("submit", function(e) {
+          e.preventDefault();
+          var fd = new FormData(e.target);
+          state.answers.name = fd.get("name");
+          state.answers.whatsapp = fd.get("whatsapp");
+          state.answers.email = fd.get("email");
+          console.log("Application submitted:", state.answers);
+          nextStep();
+        });
+      }
+      else if (step.type === "success") {
+        var params = new URLSearchParams();
+        if (state.answers.name) params.set('name', state.answers.name);
+        if (state.answers.email) params.set('email', state.answers.email);
+        window.location.href = '/academy-thankyou/' + (params.toString() ? '?' + params.toString() : '');
+        return;
+      }
+    }
+
+    // close on backdrop click
+    overlay.addEventListener("click", function(e) {
+      if (e.target === overlay) closeModal();
+    });
+    // close on escape
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && overlay.classList.contains("open")) closeModal();
+    });
   </script>
 
 </body>

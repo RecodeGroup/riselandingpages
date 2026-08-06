@@ -685,62 +685,6 @@
       letter-spacing: 0.08em;
     }
 
-    /* ── Video Testimonials ────────────────────────────── */
-    .video-testimonials {
-      padding: 5rem 0;
-      border-top: 1px solid var(--line);
-    }
-    .video-testimonials-inner {
-      max-width: var(--maxw); margin: 0 auto;
-    }
-    .video-testimonials-head {
-      padding: 0 2rem; margin-bottom: 2rem;
-    }
-    .video-grid {
-      display: flex; gap: 18px;
-      overflow-x: auto; padding: 0 2rem 18px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .video-grid::-webkit-scrollbar { display: none; }
-    .video-card {
-      flex: 0 0 300px;
-      background: var(--bg-2);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .video-card:hover {
-      border-color: rgba(255,104,62,0.2);
-      transform: translateY(-3px);
-    }
-    .video-card .video-wrap {
-      position: relative; cursor: pointer;
-    }
-    .video-card video {
-      width: 100%; aspect-ratio: 9/16;
-      object-fit: cover; display: block;
-      background: #000;
-    }
-    .video-card .play-btn {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.25);
-      transition: background 0.3s;
-      z-index: 2;
-    }
-    .video-card .play-btn:hover { background: rgba(0,0,0,0.15); }
-    .video-card .play-btn svg {
-      width: 54px; height: 54px;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
-    }
-    .video-card .play-btn.hidden { display: none; }
-    .video-card .video-caption {
-      padding: 1rem 1.25rem;
-      font-size: 0.82rem; color: rgba(255,255,255,0.8);
-      line-height: 1.5;
-    }
 
     /* ── CTA Banner ──────────────────────────────────── */
     .cta-banner {
@@ -1075,7 +1019,6 @@
       .trust-badge .badge-num { font-size: 1.15rem; }
       .trust-badge .badge-label { font-size: 0.65rem; }
       .review-card { flex: 0 0 300px; }
-      .video-card { flex: 0 0 260px; }
       .community-card { flex: 0 0 260px; }
       .mobile-cta-bar { display: flex; }
       body { padding-bottom: 72px; }
@@ -1092,15 +1035,13 @@
       .community-card { flex: 0 0 240px; }
       .community-scroll { padding: 0 1rem 14px; gap: 12px; }
       .reviews-scroll { padding: 0 1rem 14px; gap: 12px; }
-      .video-grid { padding: 0 1rem 14px; gap: 12px; }
-      .video-card { flex: 0 0 240px; }
       .review-card { flex: 0 0 280px; }
       .stats-grid .stat-num { font-size: 1.6rem; }
       .review-chip .quote { font-size: 0.78rem; }
       .review-chip { padding: 8px 14px 8px 8px; gap: 8px; }
       .review-chip .avatar { width: 30px; height: 30px; }
       .cta-mid, .stats-banner, .vsl-section, .trusted-section,
-      .community-section, .about-section, .reviews-section, .video-testimonials,
+      .community-section, .about-section, .reviews-section,
       .faq-section, .cta-banner { padding: 2.5rem 1rem; }
       .carousel-track video { height: 140px; }
       .social-proof { gap: 8px; }
@@ -1399,19 +1340,19 @@
     <div class="teachers-marquee-wrap">
     <div class="teachers-grid" id="teachers-marquee">
       <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/photos/Photo-20.png" alt="Remy" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Remy.png" alt="Remy" loading="lazy">
         <h4>Remy</h4>
         <p class="teacher-role">Pop &amp; Dance Production</p>
         <p class="teacher-bio">Producer from The Hague. Known for layered textures and emotional depth. Collaborated with Lost Frequencies.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/photos/Photo-22.png" alt="Artcode" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Artcode.png" alt="Artcode" loading="lazy">
         <h4>Artcode</h4>
         <p class="teacher-role">Audiovisual &amp; Production</p>
         <p class="teacher-bio">Based in Rotterdam with 15+ years across electronic genres. Combines music with TouchDesigner visuals and live modular performance.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/photos/Jim.png" alt="Vannood" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Jim.png" alt="Vannood" loading="lazy">
         <h4>Vannood</h4>
         <p class="teacher-role">Entrepreneur &amp; Producer</p>
         <p class="teacher-bio">Over 15 years specializing in production. Expert in structuring creative processes into finished work.</p>
@@ -1423,49 +1364,49 @@
         <p class="teacher-bio">Specializes in getting your tracks to sound polished and release-ready. Teaches mixing techniques, mastering workflows, and how to bring out the best in every production.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/photos/Maurits.png" alt="Maurits" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" loading="lazy">
         <h4>Maurits</h4>
         <p class="teacher-role">Artist Development</p>
         <p class="teacher-bio">Guides producers from first release to full career. Focused on building sustainable momentum through strategy and structure.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/9ccd7f52-9f8d-4d9d-9e01-01187bc629ff.webp" alt="Tim Hox" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Tim.png" alt="Tim Hox" loading="lazy">
         <h4>Tim Hox</h4>
         <p class="teacher-role">Music Producer / DJ</p>
         <p class="teacher-bio">International DJ/producer with releases on major labels. Teaches the art of finishing tracks and building a release strategy.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/0cd7c506-1380-492f-817a-efb0ec7bafcc.webp" alt="Noah Smits" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Noah.png" alt="Noah Smits" loading="lazy">
         <h4>Noah Smits</h4>
         <p class="teacher-role">Media Strategist</p>
         <p class="teacher-bio">Specializes in content strategy and social media growth for electronic music producers. Turns followers into fans.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/3b46aade-22ba-4034-bcf7-9412e9fd59c9.webp" alt="Milan Fernandes" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" loading="lazy">
         <h4>Milan Fernandes</h4>
         <p class="teacher-role">Music Producer / DJ</p>
         <p class="teacher-bio">Active techno and house producer with a sharp ear for arrangement. Co-teaches production alongside Vannood and Paul.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/8417ea74-fe03-4498-9e8e-27bcfedfa05b.webp" alt="Yvo Overhoff" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Yvo.png" alt="Yvo Overhoff" loading="lazy">
         <h4>Yvo Overhoff</h4>
         <p class="teacher-role">A&amp;R &amp; Producer</p>
         <p class="teacher-bio">A&amp;R at Recode Records and active DJ/producer. Knows what labels look for and how to get your demos signed.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/82098bd8-0b18-487d-a6e1-3dde0247ccf7.webp" alt="Hendrik Kamminga" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Hen.png" alt="Hendrik Kamminga" loading="lazy">
         <h4>Hendrik Kamminga</h4>
         <p class="teacher-role">Manager &amp; Booker</p>
         <p class="teacher-bio">Artist manager and booker. Teaches how to get gigs, build relationships with promoters, and grow a live career.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/492fed69-185e-4b60-8a2e-61f55401a941.webp" alt="Marco Meeuwsen" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Marco.png" alt="Marco Meeuwsen" loading="lazy">
         <h4>Marco Meeuwsen</h4>
         <p class="teacher-role">Performance Marketing</p>
         <p class="teacher-bio">Content strategist specialized in performance marketing. Teaches how to promote your music and grow your audience effectively.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/teachers/896de7ea-2311-4c28-aaf2-68186c3eb160.webp" alt="Maarten Broere" loading="lazy">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Maarten.png" alt="Maarten Broere" loading="lazy">
         <h4>Maarten Broere</h4>
         <p class="teacher-role">Branding Expert</p>
         <p class="teacher-bio">Builds artist brands from the ground up. Teaches visual identity, positioning, and how to stand out in a crowded scene.</p>
@@ -1563,68 +1504,12 @@
     </div>
   </section>
 
-  <!-- VIDEO TESTIMONIALS -->
-  <section class="video-testimonials">
-    <div class="video-testimonials-inner">
-      <div class="video-testimonials-head">
-        <div class="section-eyebrow">Testimonials</div>
-        <h2 class="section-title">Hear it from our artists.</h2>
-        <p class="section-sub">Real stories from producers who joined Rise and saw the difference.</p>
-      </div>
-
-      <div class="video-grid">
-        <div class="video-card">
-          <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4#t=5" playsinline preload="auto" muted></video>
-            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
-          </div>
-          <div class="video-caption">"How Rise changed my consistency, production, and branding."</div>
-        </div>
-        <div class="video-card">
-          <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4#t=3" playsinline preload="auto" muted></video>
-            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
-          </div>
-          <div class="video-caption">"Comprehensive course that covers everything to become a full-time artist."</div>
-        </div>
-        <div class="video-card">
-          <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/Rise%20broadens%20your%20scope%20beyond%20just%20music%20production.mp4#t=7" playsinline preload="auto" muted></video>
-            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
-          </div>
-          <div class="video-caption">"Rise broadens your scope beyond just music production."</div>
-        </div>
-        <div class="video-card">
-          <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4#t=5" playsinline preload="auto" muted></video>
-            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
-          </div>
-          <div class="video-caption">"Rise focuses on creating an artist, not just production."</div>
-        </div>
-        <div class="video-card">
-          <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/Be%20open-minded%2C%20make%20time%20%E2%80%93%20it%E2%80%99s%20a%20new%20profession%20you%E2%80%99re%20learning.mp4" playsinline preload="auto" muted></video>
-            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
-          </div>
-          <div class="video-caption">"Be open-minded, make time. It's a new profession you're learning."</div>
-        </div>
-        <div class="video-card">
-          <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4#t=5" playsinline preload="auto" muted></video>
-            <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
-          </div>
-          <div class="video-caption">"To anyone considering Rise: just do it, don't doubt."</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 12. REVIEWS — horizontal scroll -->
   <section class="reviews-section">
     <div class="reviews-inner">
       <div class="reviews-head">
         <div class="section-eyebrow">Reviews</div>
-        <h2 class="section-title">Real artists. Real progress.</h2>
+        <h2 class="section-title">Hear it from our artists</h2>
         <p class="section-sub">Producers have already joined Rise to improve their music, build confidence and take the next step in their journey. Here's what some of them have to say:</p>
       </div>
 
@@ -1909,7 +1794,7 @@
       var originalWidth = grid.scrollWidth;
       var gap = 24; // matches CSS gap
       var cards = grid.innerHTML;
-      grid.innerHTML = cards + cards;
+      grid.innerHTML = cards + cards + cards;
       var scrollDist = originalWidth + gap;
       grid.style.setProperty('--scroll-dist', '-' + scrollDist + 'px');
 
@@ -2018,53 +1903,6 @@
       window.addEventListener('load', initScroll);
     })();
 
-    // ── Video testimonials: fixed thumbnails + click-to-play/pause ──
-    (function() {
-      var thumbSeconds = [5, 3, 7, 5, 0, 5]; // fixed thumbnail per video
-      var wraps = document.querySelectorAll('.video-card .video-wrap');
-      wraps.forEach(function(w, i) {
-        var v = w.querySelector('video');
-        var t = thumbSeconds[i] || 0;
-        w._thumbTime = t;
-        function seekToThumb() {
-          if (v.readyState >= 1 && v.duration > t) {
-            v.currentTime = t;
-          }
-        }
-        v.addEventListener('loadedmetadata', seekToThumb);
-        v.addEventListener('loadeddata', seekToThumb);
-        // Fallback: if already loaded, seek now
-        if (v.readyState >= 1) seekToThumb();
-      });
-    })();
-
-    function playVideo(wrap) {
-      var vid = wrap.querySelector('video');
-      var btn = wrap.querySelector('.play-btn');
-      if (!vid.paused) {
-        vid.pause();
-        btn.classList.remove('hidden');
-        return;
-      }
-      // Pause all other videos
-      document.querySelectorAll('.video-card video').forEach(function(v) {
-        if (v !== vid && !v.paused) {
-          v.pause();
-          v.muted = true;
-          var ob = v.closest('.video-wrap').querySelector('.play-btn');
-          if (ob) ob.classList.remove('hidden');
-        }
-      });
-      btn.classList.add('hidden');
-      vid.muted = false;
-      vid.currentTime = 0;
-      vid.play().catch(function(){});
-      vid.onended = function() {
-        btn.classList.remove('hidden');
-        vid.muted = true;
-        vid.currentTime = wrap._thumbTime || 0;
-      };
-    }
 
   </script>
 

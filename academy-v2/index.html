@@ -118,7 +118,7 @@
         radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
         radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
         linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%),
-        url('../assets/photos/photo-2.jpg') center 30% / cover no-repeat;
+        url('../assets/Pages/Academy/photo-4.jpg') center 30% / cover no-repeat;
     }
     .hero-content { max-width: 720px; position: relative; z-index: 2; }
     .hero-eyebrow {
@@ -666,6 +666,56 @@
       text-align: center;
     }
 
+    /* ── Video Testimonials ──────────────────────── */
+    .video-testimonials { padding: 5rem 2rem; text-align: center; }
+    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; }
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: var(--maxw); margin: 0 auto; }
+    .video-card { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16; max-height: 480px; cursor: pointer; background: #000; }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; }
+    .video-card .play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+    .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
+    .video-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); }
+    .video-caption strong { display: block; font-size: 0.88rem; }
+    .video-caption span { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── Questionnaire Modal ─────────────────────── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: stretch; justify-content: stretch; animation: fadeIn 0.25s ease; }
+    .modal-overlay.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    .modal { width: 100%; display: flex; flex-direction: column; padding: 32px; position: relative; animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes slideUp { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+    .modal-top { max-width: 720px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .modal-back { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; padding: 8px 0; transition: color 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-back:hover { color: var(--fg); }
+    .modal-back.hidden { visibility: hidden; }
+    .modal-close { font-size: 22px; color: var(--muted); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-close:hover { color: var(--fg); background: var(--line); }
+    .modal-body { max-width: 720px; width: 100%; margin: 60px auto 0; flex: 1; }
+    .progress { display: flex; gap: 8px; margin-bottom: 28px; }
+    .progress span { flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+    .progress span.done { background: var(--accent); }
+    .step-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; max-width: 18ch; margin-bottom: 36px; }
+    .options { display: grid; gap: 12px; }
+    .option { display: flex; gap: 18px; align-items: flex-start; padding: 18px 22px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; width: 100%; transition: all 0.2s; font-family: inherit; color: inherit; }
+    .option:hover { background: rgba(255,255,255,0.06); border-color: var(--line-strong); }
+    .option.selected { border-color: var(--accent); background: rgba(255,104,62,0.08); }
+    .option .letter { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0; width: 14px; }
+    .option .text { font-size: 0.92rem; line-height: 1.4; }
+    .slider-step { text-align: center; padding-top: 20px; }
+    .slider-value { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+    .slider-label { margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
+    .slider-wrap { margin-top: 50px; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .slider-wrap input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--line); border-radius: 4px; outline: none; }
+    .slider-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--fg); border-radius: 50%; cursor: pointer; border: 4px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+    .slider-bounds { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; }
+    .btn-continue { background: var(--accent); color: #0a0a0a; width: 100%; max-width: 420px; margin: 36px auto 0; display: block; padding: 18px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; border: none; cursor: pointer; font-family: inherit; }
+    .btn-continue:hover { background: var(--accent-hover); }
+    .form-step .form-row { display: grid; gap: 14px; max-width: 480px; margin: 0 auto; }
+    .form-step input { background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--fg); padding: 16px 18px; border-radius: 8px; font-family: inherit; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+    .form-step input:focus { border-color: var(--accent); }
+
     /* ── Responsive ───────────────────────────────── */
     @media (max-width: 900px) {
       .section { padding: 3.5rem 1.5rem; }
@@ -697,7 +747,7 @@
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
-      <a class="header-cta" href="#intake">Apply for the Academy</a>
+      <a class="header-cta" href="javascript:void(0)" onclick="openModal()">Apply for the Academy</a>
     </div>
   </header>
 
@@ -717,7 +767,7 @@
       <span style="color:rgba(255,255,255,0.2);">&middot;</span>
       <span>Personal coaching</span>
     </div>
-      <a href="#intake" class="btn-primary">
+      <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">
         Apply for the Academy
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
@@ -802,7 +852,7 @@
         <p>Base runs six months and builds the foundation, your sound, your workflow, your skill. Core runs a full year and turns that foundation into an actual career, with the same coaches, the same weekly sessions and the same standard throughout. Start the intake, and create the foundation you can build your career upon.</p>
       </div>
       <div class="section-cta-wrap section-cta-wrap--center">
-        <a href="#intake" class="btn-primary">
+        <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">
           Apply for the Academy
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
@@ -875,47 +925,6 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
-       How You Get In (Intake)
-       ══════════════════════════════════════════════ -->
-  <section class="section" id="intake">
-    <div class="section-inner">
-      <div class="section-eyebrow">The intake</div>
-      <h2 class="section-heading">How the intake actually&nbsp;works.</h2>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">
-            <!-- Clipboard / form icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg>
-          </div>
-          <p>Answer a handful of questions about where you're at and where you're trying to go.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">
-            <!-- Megaphone / announcement icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <p>The Academy team reads through your answers and reaches out personally.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">
-            <!-- Trending-up / chart icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-          </div>
-          <p>We book a call and figure out together how to accelerate your career the fastest.</p>
-        </div>
-      </div>
-
-      <div class="section-cta-wrap section-cta-wrap--center">
-        <a href="#" class="btn-primary">
-          Apply for the Academy
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
        Coaches
        ══════════════════════════════════════════════ -->
   <section class="section" id="coaches">
@@ -957,6 +966,40 @@
           <p class="coach-bio">German techno producer and sound engineer, co-founder of the label Interrealm. Built the basic video modules around the fundamentals he had to learn himself first.</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Video Testimonials
+       ══════════════════════════════════════════════ -->
+  <section class="video-testimonials">
+    <h2 class="section-title">What our artists have to say</h2>
+    <p class="section-sub">Real stories from producers who joined Rise.</p>
+    <div class="video-grid">
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/videos/video-1.mp4" preload="metadata" playsinline loop></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/videos/video-2.mp4" preload="metadata" playsinline loop></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/videos/video-3.mp4" preload="metadata" playsinline loop></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/videos/video-4.mp4" preload="metadata" playsinline loop></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/videos/video-5.mp4" preload="metadata" playsinline loop></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/videos/video-6.mp4" preload="metadata" playsinline loop></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
     </div>
   </section>
@@ -1015,7 +1058,7 @@
     <div class="closing-inner">
       <h2>A year from now, you'll be somewhere. Make it somewhere you&nbsp;chose.</h2>
       <p>Another year will pass either way. Make it count on your terms, toward the career you actually want. The intake takes a few minutes. What follows can turn a year of guessing into an actual plan.</p>
-      <a href="#intake" class="btn-primary">
+      <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">
         Apply for the Academy
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
@@ -1084,6 +1127,16 @@
     </div>
   </footer>
 
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-top">
+      <button class="modal-back" id="back-btn" onclick="prevStep()">&larr; Back</button>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
   <!-- ══════════════════════════════════════════════
        Scripts
        ══════════════════════════════════════════════ -->
@@ -1108,6 +1161,69 @@
     window.addEventListener('scroll', function() {
       document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60);
     });
+
+    // ── Video play/pause ──
+    function playVideo(card) {
+      var video = card.querySelector('video');
+      if (card.classList.contains('playing')) {
+        video.pause();
+        card.classList.remove('playing');
+      } else {
+        document.querySelectorAll('.video-card.playing').forEach(function(c) {
+          c.querySelector('video').pause();
+          c.classList.remove('playing');
+        });
+        video.play();
+        card.classList.add('playing');
+      }
+    }
+
+    // ====== APPLICATION QUESTIONNAIRE ======
+    var qState = { step: 0, answers: { years: null, time: null, challenge: null, budget: 2500, name: "", whatsapp: "", email: "" } };
+    var STEPS = [
+      { type: "choice", key: "years", title: "How many years have you been producing?", options: ["Less than 1 year", "1 – 3 years", "3 – 5 years", "5+ years"] },
+      { type: "choice", key: "time", title: "How much time do you spend on your music?", options: ["A few hours a week", "5 – 15 hours a week", "15 – 30 hours a week", "It's my full-time focus"] },
+      { type: "choice", key: "challenge", title: "What's your biggest challenge right now?", options: ["Finishing tracks consistently", "Getting my music heard / building an audience", "Improving my production or mixing skills", "Staying motivated and accountable", "Turning music into a career or income"] },
+      { type: "slider", key: "budget", title: "What's your yearly budget for your music career?", min: 0, max: 10000, step: 250, format: function(v) { return v >= 10000 ? "€10k+" : "€" + v.toLocaleString("en-US"); } },
+      { type: "form", title: "One last thing.", subtitle: "Where can our community manager reach you to set up the call?" },
+      { type: "success" }
+    ];
+    var qOverlay = document.getElementById("modal");
+    var qBody = document.getElementById("modal-body");
+    var qBackBtn = document.getElementById("back-btn");
+
+    function openModal() { qState.step = 0; qOverlay.classList.add("open"); document.body.style.overflow = "hidden"; renderStep(); }
+    function closeModal() { qOverlay.classList.remove("open"); document.body.style.overflow = ""; }
+    function nextStep() { if (qState.step < STEPS.length - 1) { qState.step++; renderStep(); } }
+    function prevStep() { if (qState.step > 0) { qState.step--; renderStep(); } else { closeModal(); } }
+
+    function renderStep() {
+      var step = STEPS[qState.step];
+      qBackBtn.classList.toggle("hidden", qState.step === 0 || step.type === "success");
+      var total = STEPS.filter(function(s) { return s.type !== "success"; }).length;
+      var bars = step.type === "success" ? "" : '<div class="progress">' + Array.from({length: total}, function(_, i) { return '<span class="' + (i <= qState.step ? "done" : "") + '"></span>'; }).join("") + '</div>';
+
+      if (step.type === "choice") {
+        qBody.innerHTML = bars + '<h2 class="step-title">' + step.title + '</h2><div class="options">' + step.options.map(function(opt, i) { return '<button class="option" data-value="' + opt + '"><span class="letter">' + String.fromCharCode(65 + i) + '.</span><span class="text">' + opt + '</span></button>'; }).join("") + '</div>';
+        qBody.querySelectorAll(".option").forEach(function(btn) {
+          btn.addEventListener("click", function() { qState.answers[step.key] = btn.dataset.value; qBody.querySelectorAll(".option").forEach(function(b) { b.classList.remove("selected"); }); btn.classList.add("selected"); setTimeout(nextStep, 220); });
+        });
+      } else if (step.type === "slider") {
+        qBody.innerHTML = bars + '<h2 class="step-title">' + step.title + '</h2><div class="slider-step"><div class="slider-value" id="slider-val">' + step.format(qState.answers[step.key]) + '</div><div class="slider-label">Per year</div><div class="slider-wrap"><input type="range" min="' + step.min + '" max="' + step.max + '" step="' + step.step + '" value="' + qState.answers[step.key] + '" id="slider-input"/><div class="slider-bounds"><span>€0</span><span>€10k+</span></div></div><button class="btn-continue" id="continue-btn">Continue →</button></div>';
+        document.getElementById("slider-input").addEventListener("input", function(e) { var v = Number(e.target.value); qState.answers[step.key] = v; document.getElementById("slider-val").textContent = step.format(v); });
+        document.getElementById("continue-btn").addEventListener("click", nextStep);
+      } else if (step.type === "form") {
+        qBody.innerHTML = bars + '<h2 class="step-title">' + step.title + '</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">' + step.subtitle + '</p><form class="form-step" id="apply-form"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required/><input type="email" name="email" placeholder="Email address" required/><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application →</button></div></form>';
+        document.getElementById("apply-form").addEventListener("submit", function(e) { e.preventDefault(); var fd = new FormData(e.target); qState.answers.name = fd.get("name"); qState.answers.whatsapp = fd.get("whatsapp"); qState.answers.email = fd.get("email"); nextStep(); });
+      } else if (step.type === "success") {
+        var params = new URLSearchParams();
+        if (qState.answers.name) params.set("name", qState.answers.name);
+        if (qState.answers.email) params.set("email", qState.answers.email);
+        window.location.href = "/academy-thankyou/?" + params.toString();
+      }
+    }
+    qOverlay.addEventListener("click", function(e) { if (e.target === qOverlay) closeModal(); });
+    document.addEventListener("keydown", function(e) { if (e.key === "Escape" && qOverlay.classList.contains("open")) closeModal(); });
 
     // ── FAQ toggle ──
     (function() {

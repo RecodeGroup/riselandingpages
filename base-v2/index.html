@@ -382,45 +382,6 @@
       line-height: 1.7;
     }
 
-    /* ── Pricing section ─────────────────────────── */
-    .pricing {
-      background: var(--bg);
-      text-align: center;
-    }
-    .pricing .section-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .price-card {
-      background: var(--bg-2);
-      border: 1px solid rgba(255,104,62,0.25);
-      border-radius: 12px;
-      padding: clamp(2.5rem, 5vw, 3.5rem);
-      margin-top: 2rem;
-      max-width: 560px;
-      width: 100%;
-      box-shadow: 0 0 60px rgba(255,104,62,0.06);
-    }
-    .price-display {
-      font-size: clamp(3rem, 7vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin: 0 0 8px;
-      line-height: 1;
-    }
-    .price-sub {
-      font-size: 1.05rem;
-      color: var(--muted);
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-    .price-note {
-      margin-top: 14px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
     /* ── Closing ──────────────────────────────────── */
     .closing {
       background: var(--bg-2);
@@ -546,6 +507,42 @@
       }
     }
 
+    /* ── Modal / Questionnaire ────────────────────── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: stretch; justify-content: stretch; animation: fadeIn 0.25s ease; }
+    .modal-overlay.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    .modal { width: 100%; display: flex; flex-direction: column; padding: 32px; position: relative; animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes slideUp { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+    .modal-top { max-width: 720px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .modal-back { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; padding: 8px 0; transition: color 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-back:hover { color: var(--fg); }
+    .modal-back.hidden { visibility: hidden; }
+    .modal-close { font-size: 22px; color: var(--muted); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-close:hover { color: var(--fg); background: var(--line); }
+    .modal-body { max-width: 720px; width: 100%; margin: 60px auto 0; flex: 1; }
+    .progress { display: flex; gap: 8px; margin-bottom: 28px; }
+    .progress span { flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+    .progress span.done { background: var(--accent); }
+    .step-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; max-width: 18ch; margin-bottom: 36px; }
+    .options { display: grid; gap: 12px; }
+    .option { display: flex; gap: 18px; align-items: flex-start; padding: 18px 22px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; width: 100%; transition: all 0.2s; font-family: inherit; color: inherit; }
+    .option:hover { background: rgba(255,255,255,0.06); border-color: var(--line-strong); }
+    .option.selected { border-color: var(--accent); background: rgba(255,104,62,0.08); }
+    .option .letter { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; flex-shrink: 0; width: 14px; }
+    .option .text { font-size: 0.92rem; line-height: 1.4; }
+    .slider-step { text-align: center; padding-top: 20px; }
+    .slider-value { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+    .slider-label { margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
+    .slider-wrap { margin-top: 50px; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .slider-wrap input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; background: var(--line); border-radius: 4px; outline: none; }
+    .slider-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--fg); border-radius: 50%; cursor: pointer; border: 4px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+    .slider-bounds { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.68rem; color: var(--muted); }
+    .btn-continue { background: var(--accent); color: #0a0a0a; width: 100%; max-width: 420px; margin: 36px auto 0; display: block; padding: 18px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; border: none; cursor: pointer; font-family: inherit; }
+    .btn-continue:hover { background: var(--accent-hover); }
+    .form-step .form-row { display: grid; gap: 14px; max-width: 480px; margin: 0 auto; }
+    .form-step input { background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--fg); padding: 16px 18px; border-radius: 8px; font-family: inherit; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+    .form-step input:focus { border-color: var(--accent); }
+
     @media (max-width: 520px) {
       .section { padding: 3.5rem 1.25rem; }
       .closing { padding: 3.5rem 1.25rem; }
@@ -557,13 +554,13 @@
 </head>
 <body class="has-urgency-bar">
   <div class="urgency-bar" id="urgency-bar">
-    Starting from &euro;1.500,- &middot; Join the next cohort
+    Apply now &middot; Start your journey
     <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
   </div>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
-      <a class="header-cta" href="#pricing">Start with Base</a>
+      <a class="header-cta" href="javascript:void(0)" onclick="openModal()">Apply Now</a>
     </div>
   </header>
 
@@ -583,12 +580,11 @@
       <span style="color:rgba(255,255,255,0.2);">&middot;</span>
       <span>Cohort model</span>
     </div>
-      <a href="#pricing" class="hero-cta">
-        Start with Base Academy
+      <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
+        Apply Now
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
-      <span>&#10003; Payment plans available</span>
       <span>&#10003; Small groups, personal attention</span>
     </div>
     </div>
@@ -724,23 +720,48 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
-       Pricing
+       Learning Path
        ══════════════════════════════════════════════ -->
-  <section class="section pricing" id="pricing">
-    <div class="section-inner">
-      <div class="section-eyebrow">Investment</div>
-      <h2 class="section-heading">What Base costs, plainly.</h2>
-      <div class="price-card">
-        <div class="price-display">&euro; 1.500,-</div>
-        <p class="price-sub">For the full six-month program. Installments available.</p>
-        <a href="../checkout/payment-plan/" class="hero-cta">
-          Join Base Academy
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-        <p class="price-note">Installments available with a down payment.</p>
+<section style="padding:5rem 2rem;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;text-align:center;">Your learning journey</div>
+    <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.02em;text-align:center;margin-bottom:3rem;">Four steps to becoming a professional producer</h2>
+
+    <div style="display:grid;gap:24px;">
+      <div style="border:1px solid var(--line);border-radius:12px;padding:28px 32px;background:rgba(255,255,255,0.02);">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
+          <span style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;">STEP 1</span>
+          <span style="font-size:1.1rem;font-weight:700;">Build Your Foundation</span>
+        </div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Learn the fundamentals of music production, music theory, and Ableton. Build a solid workflow and understand the principles behind professional tracks.</p>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:12px;padding:28px 32px;background:rgba(255,255,255,0.02);">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
+          <span style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;">STEP 2</span>
+          <span style="font-size:1.1rem;font-weight:700;">Create Your Sound</span>
+        </div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Develop your own sonic identity through sound design, synthesis, sampling, recording, and vocal production. Learn how to create sounds that stand out.</p>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:12px;padding:28px 32px;background:rgba(255,255,255,0.02);">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
+          <span style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;">STEP 3</span>
+          <span style="font-size:1.1rem;font-weight:700;">Turn Ideas into Tracks</span>
+        </div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Transform loops into complete songs using professional arrangement techniques, transitions, energy flow, and songwriting principles that keep listeners engaged.</p>
+      </div>
+
+      <div style="border:1px solid var(--line);border-radius:12px;padding:28px 32px;background:rgba(255,255,255,0.02);">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
+          <span style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;">STEP 4</span>
+          <span style="font-size:1.1rem;font-weight:700;">Finish Like a Professional</span>
+        </div>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Polish your music with mixing, mastering, studio acoustics, and industry knowledge. Prepare your tracks for release and learn how to build your career as an artist.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- ══════════════════════════════════════════════
        Closing Section
@@ -749,8 +770,8 @@
     <div class="closing-inner">
       <h2>Six months pass either way. Spend them building, not&nbsp;waiting.</h2>
       <p>You already know your production isn't where it needs to be. Waiting doesn't change that, it just delays it. This cohort is where you close the gap.</p>
-      <a href="../checkout/payment-plan/" class="hero-cta">
-        Join Base Academy
+      <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
+        Apply Now
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
@@ -772,11 +793,6 @@
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Can I pay in installments?</span><span class="faq-icon"></span></button>
-          <div class="faq-a">Yes, as long as a down payment is made first.</div>
-        </div>
-
-        <div class="faq-item">
           <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What happens after Base?</span><span class="faq-icon"></span></button>
           <div class="faq-a">Everyone gets a strategy call with Hendrik to talk through next steps. For most people that's Core, though it depends on where you land. If you're not ready yet, you can keep your platform access through a subscription.</div>
         </div>
@@ -789,11 +805,6 @@
         <div class="faq-item">
           <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>When does the next cohort start?</span><span class="faq-icon"></span></button>
           <div class="faq-a">A new group starts every six months, and you can sign up months in advance.</div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What does Base cost?</span><span class="faq-icon"></span></button>
-          <div class="faq-a">&euro;&nbsp;1.500,- for the full six-month program, installments available.</div>
         </div>
 
         <div class="faq-item">
@@ -819,6 +830,11 @@
   </footer>
 
   <!-- ══════════════════════════════════════════════
+       Modal
+       ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal"><div class="modal"><div class="modal-top"><button class="modal-back" id="back-btn" onclick="prevStep()">&larr; Back</button><button class="modal-close" onclick="closeModal()">&times;</button></div><div class="modal-body" id="modal-body"></div></div></div>
+
+  <!-- ══════════════════════════════════════════════
        Scripts
        ══════════════════════════════════════════════ -->
   <script>
@@ -833,6 +849,18 @@
 
     // ── Sticky header scroll effect ──
     window.addEventListener('scroll', function() { document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60); });
+
+    // ── Questionnaire modal ──
+    var qState={step:0,answers:{years:null,time:null,challenge:null,budget:2500,name:"",whatsapp:"",email:""}};
+    var STEPS=[{type:"choice",key:"years",title:"How many years have you been producing?",options:["Less than 1 year","1 – 3 years","3 – 5 years","5+ years"]},{type:"choice",key:"time",title:"How much time do you spend on your music?",options:["A few hours a week","5 – 15 hours a week","15 – 30 hours a week","It's my full-time focus"]},{type:"choice",key:"challenge",title:"What's your biggest challenge right now?",options:["Finishing tracks consistently","Getting my music heard / building an audience","Improving my production or mixing skills","Staying motivated and accountable","Turning music into a career or income"]},{type:"slider",key:"budget",title:"What's your yearly budget for your music career?",min:0,max:10000,step:250,format:function(v){return v>=10000?"€10k+":"€"+v.toLocaleString("en-US")}},{type:"form",title:"One last thing.",subtitle:"Where can our community manager reach you to set up the call?"},{type:"success"}];
+    var qOverlay=document.getElementById("modal"),qBody=document.getElementById("modal-body"),qBackBtn=document.getElementById("back-btn");
+    function openModal(){qState.step=0;qOverlay.classList.add("open");document.body.style.overflow="hidden";renderStep()}
+    function closeModal(){qOverlay.classList.remove("open");document.body.style.overflow=""}
+    function nextStep(){if(qState.step<STEPS.length-1){qState.step++;renderStep()}}
+    function prevStep(){if(qState.step>0){qState.step--;renderStep()}else{closeModal()}}
+    function renderStep(){var s=STEPS[qState.step];qBackBtn.classList.toggle("hidden",qState.step===0||s.type==="success");var t=STEPS.filter(function(x){return x.type!=="success"}).length;var bars=s.type==="success"?"":'<div class="progress">'+Array.from({length:t},function(_,i){return'<span class="'+(i<=qState.step?"done":"")+'"></span>'}).join("")+"</div>";if(s.type==="choice"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="options">'+s.options.map(function(o,i){return'<button class="option" data-value="'+o+'"><span class="letter">'+String.fromCharCode(65+i)+'.</span><span class="text">'+o+"</span></button>"}).join("")+"</div>";qBody.querySelectorAll(".option").forEach(function(b){b.addEventListener("click",function(){qState.answers[s.key]=b.dataset.value;qBody.querySelectorAll(".option").forEach(function(x){x.classList.remove("selected")});b.classList.add("selected");setTimeout(nextStep,220)})})}else if(s.type==="slider"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="slider-step"><div class="slider-value" id="sv">'+s.format(qState.answers[s.key])+'</div><div class="slider-label">Per year</div><div class="slider-wrap"><input type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+qState.answers[s.key]+'" id="si"/><div class="slider-bounds"><span>€0</span><span>€10k+</span></div></div><button class="btn-continue" id="cb">Continue →</button></div>';document.getElementById("si").addEventListener("input",function(e){var v=Number(e.target.value);qState.answers[s.key]=v;document.getElementById("sv").textContent=s.format(v)});document.getElementById("cb").addEventListener("click",nextStep)}else if(s.type==="form"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">'+s.subtitle+'</p><form class="form-step" id="af"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required/><input type="email" name="email" placeholder="Email address" required/><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application →</button></div></form>';document.getElementById("af").addEventListener("submit",function(e){e.preventDefault();var fd=new FormData(e.target);qState.answers.name=fd.get("name");qState.answers.whatsapp=fd.get("whatsapp");qState.answers.email=fd.get("email");nextStep()})}else if(s.type==="success"){var p=new URLSearchParams();if(qState.answers.name)p.set("name",qState.answers.name);if(qState.answers.email)p.set("email",qState.answers.email);window.location.href="/academy-thankyou/?"+p.toString()}}
+    qOverlay.addEventListener("click",function(e){if(e.target===qOverlay)closeModal()});
+    document.addEventListener("keydown",function(e){if(e.key==="Escape"&&qOverlay.classList.contains("open"))closeModal()});
   </script>
 
 </body>

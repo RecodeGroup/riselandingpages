@@ -532,71 +532,48 @@
     </div>
   </section>
 
-  <!-- Pricing CTA -->
-  <section class="pricing-cta-section" id="pricing-base">
-    <div class="pricing-cta-inner">
-      <div class="section-eyebrow">Pricing</div>
-      <h2 class="section-heading">Start with Base Academy</h2>
-      <div class="price-display">&euro;&nbsp;1.500,-</div>
-      <p class="price-note">6 months of live coaching, platform access and everything you need to build a solid foundation. Payment plans available.</p>
-      <button class="btn-primary" onclick="revealPayment('base')">
-        Start Base Academy
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </button>
+  <!-- What You'll Learn -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">What you'll learn</div>
+      <h2 class="section-heading">Base Academy at a&nbsp;glance.</h2>
+      <div class="feature-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="feature-card">
+          <h3>Production Foundation</h3>
+          <p>Build a solid foundation in music production, theory, and Ableton.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Sound Design &amp; Identity</h3>
+          <p>Develop your own sonic identity through sound design and synthesis.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Arrangement</h3>
+          <p>Transform loops into complete songs with professional arrangement.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Mixing &amp; Industry</h3>
+          <p>Polish your music with mixing, mastering, and industry knowledge.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Payment (hidden by default) -->
-  <div class="payment-section" id="payment-base">
-    <div class="payment-inner">
-      <h2>Choose your Base payment plan</h2>
-      <p>All plans include the exact same access to Rise Base.</p>
-    </div>
-
-    <div class="plan-grid" id="plans-base" style="padding:0 2rem;">
-      <div class="plan-card selected" data-plan="1" data-product="base" onclick="selectPlan(this)">
-        <div class="plan-save">Best price</div>
-        <div class="installments">Pay in full</div>
-        <div class="price">&euro; 1.500,-</div>
-        <div class="price-sub">One-time payment</div>
-        <div class="total">&euro; 1.500,- total</div>
-      </div>
-      <div class="plan-card" data-plan="2" data-product="base" onclick="selectPlan(this)">
-        <div class="plan-surcharge">+5%</div>
-        <div class="installments">2 payments</div>
-        <div class="price">&euro; 787,50</div>
-        <div class="price-sub">per payment</div>
-        <div class="total-highlight">&euro; 1.575,- total<span class="total-extra">&euro; 75,- extra</span></div>
-      </div>
-      <div class="plan-card" data-plan="3" data-product="base" onclick="selectPlan(this)">
-        <div class="plan-surcharge">+10%</div>
-        <div class="installments">3 payments</div>
-        <div class="price">&euro; 550,-</div>
-        <div class="price-sub">per payment</div>
-        <div class="total-highlight">&euro; 1.650,- total<span class="total-extra">&euro; 150,- extra</span></div>
-      </div>
-      <div class="plan-card" data-plan="4" data-product="base" onclick="selectPlan(this)">
-        <div class="plan-surcharge">+15%</div>
-        <div class="installments">4 payments</div>
-        <div class="price">&euro; 431,25</div>
-        <div class="price-sub">per payment</div>
-        <div class="total-highlight">&euro; 1.725,- total<span class="total-extra">&euro; 225,- extra</span></div>
+  <!-- Enroll CTA -->
+  <section class="pricing-cta-section" id="pricing-base">
+    <div class="pricing-cta-inner">
+      <div class="section-eyebrow">Enroll</div>
+      <h2 class="section-heading">Start with Base Academy</h2>
+      <p class="price-note">6 months of live coaching, platform access and everything you need to build a solid foundation.</p>
+      <button class="btn-primary" onclick="startCheckout('base')">
+        Enroll in Base Academy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="security-note" style="padding:1.25rem 0 0;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Secure payment powered by Stripe.
       </div>
     </div>
-
-    <div class="checkout-summary" id="summary-base" style="margin:0 2rem;max-width:calc(900px);">
-      <div>
-        <div class="summary-plan" id="summary-plan-base">Rise Base &mdash; Pay in full &euro; 1.500,-</div>
-        <div class="summary-detail" id="summary-detail-base">One-time payment &middot; ex. VAT</div>
-      </div>
-      <button class="btn-checkout" onclick="startCheckout('base')">Pay for Rise Base</button>
-    </div>
-
-    <div class="security-note">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-      Secure payment powered by Stripe.
-    </div>
-  </div>
+  </section>
 
 </div>
 
@@ -692,71 +669,48 @@
     </div>
   </section>
 
-  <!-- Pricing CTA -->
-  <section class="pricing-cta-section" id="pricing-core">
-    <div class="pricing-cta-inner">
-      <div class="section-eyebrow">Pricing</div>
-      <h2 class="section-heading">Join Core Academy</h2>
-      <div class="price-display">&euro;&nbsp;2.650,-</div>
-      <p class="price-note">12 months of weekly accountability, live coaching, workshops, and everything you need to build a real career. Payment plans available.</p>
-      <button class="btn-primary" onclick="revealPayment('core')">
-        Join Core Academy
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </button>
+  <!-- What You'll Learn -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-eyebrow">What you'll learn</div>
+      <h2 class="section-heading">Core Academy at a&nbsp;glance.</h2>
+      <div class="feature-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="feature-card">
+          <h3>Everything in Base, Plus Live Coaching</h3>
+          <p>Everything in Base, plus weekly live coaching with experienced producers.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Deep-Dive Feedback</h3>
+          <p>Deep-dive feedback sessions on your tracks.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Advanced Techniques &amp; Strategy</h3>
+          <p>Advanced production techniques and career strategy.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Mentorship &amp; Accountability</h3>
+          <p>Direct accountability and mentorship throughout the year.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Payment (hidden by default) -->
-  <div class="payment-section" id="payment-core">
-    <div class="payment-inner">
-      <h2>Choose your Core payment plan</h2>
-      <p>All plans include the exact same access to Rise Core.</p>
-    </div>
-
-    <div class="plan-grid" id="plans-core" style="padding:0 2rem;">
-      <div class="plan-card selected" data-plan="1" data-product="core" onclick="selectPlan(this)">
-        <div class="plan-save">Best price</div>
-        <div class="installments">Pay in full</div>
-        <div class="price">&euro; 2.650,-</div>
-        <div class="price-sub">One-time payment</div>
-        <div class="total">&euro; 2.650,- total</div>
-      </div>
-      <div class="plan-card" data-plan="2" data-product="core" onclick="selectPlan(this)">
-        <div class="plan-surcharge">+5%</div>
-        <div class="installments">2 payments</div>
-        <div class="price">&euro; 1.391,25</div>
-        <div class="price-sub">per payment</div>
-        <div class="total-highlight">&euro; 2.782,50 total<span class="total-extra">&euro; 132,50 extra</span></div>
-      </div>
-      <div class="plan-card" data-plan="3" data-product="core" onclick="selectPlan(this)">
-        <div class="plan-surcharge">+10%</div>
-        <div class="installments">3 payments</div>
-        <div class="price">&euro; 971,67</div>
-        <div class="price-sub">per payment</div>
-        <div class="total-highlight">&euro; 2.915,- total<span class="total-extra">&euro; 265,- extra</span></div>
-      </div>
-      <div class="plan-card" data-plan="4" data-product="core" onclick="selectPlan(this)">
-        <div class="plan-surcharge">+15%</div>
-        <div class="installments">4 payments</div>
-        <div class="price">&euro; 761,88</div>
-        <div class="price-sub">per payment</div>
-        <div class="total-highlight">&euro; 3.047,50 total<span class="total-extra">&euro; 397,50 extra</span></div>
+  <!-- Enroll CTA -->
+  <section class="pricing-cta-section" id="pricing-core">
+    <div class="pricing-cta-inner">
+      <div class="section-eyebrow">Enroll</div>
+      <h2 class="section-heading">Join Core Academy</h2>
+      <p class="price-note">12 months of weekly accountability, live coaching, workshops, and everything you need to build a real career.</p>
+      <button class="btn-primary" onclick="startCheckout('core')">
+        Enroll in Core Academy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="security-note" style="padding:1.25rem 0 0;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Secure payment powered by Stripe.
       </div>
     </div>
-
-    <div class="checkout-summary" id="summary-core" style="margin:0 2rem;max-width:calc(900px);">
-      <div>
-        <div class="summary-plan" id="summary-plan-core">Rise Core &mdash; Pay in full &euro; 2.650,-</div>
-        <div class="summary-detail" id="summary-detail-core">One-time payment &middot; ex. VAT</div>
-      </div>
-      <button class="btn-checkout" onclick="startCheckout('core')">Pay for Rise Core</button>
-    </div>
-
-    <div class="security-note">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-      Secure payment powered by Stripe.
-    </div>
-  </div>
+  </section>
 
 </div>
 
@@ -805,55 +759,8 @@
     header.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  /* ── Reveal payment section ── */
-  window.revealPayment = function(product) {
-    var section = document.getElementById('payment-' + product);
-    section.classList.add('visible');
-    setTimeout(function() {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  };
-
-  /* ── Price data ── */
-  var pricing = {
-    base: {
-      name: 'Rise Base',
-      base: 1500,
-      plans: {
-        1: { label: 'Pay in full — € 1.500,-', detail: 'One-time payment · ex. VAT' },
-        2: { label: '2 payments of € 787,50', detail: '2 × € 787,50 · € 1.575,- total · ex. VAT' },
-        3: { label: '3 payments of € 550,-', detail: '3 × € 550,- · € 1.650,- total · ex. VAT' },
-        4: { label: '4 payments of € 431,25', detail: '4 × € 431,25 · € 1.725,- total · ex. VAT' }
-      }
-    },
-    core: {
-      name: 'Rise Core',
-      base: 2650,
-      plans: {
-        1: { label: 'Pay in full — € 2.650,-', detail: 'One-time payment · ex. VAT' },
-        2: { label: '2 payments of € 1.391,25', detail: '2 × € 1.391,25 · € 2.782,50 total · ex. VAT' },
-        3: { label: '3 payments of € 971,67', detail: '3 × € 971,67 · € 2.915,- total · ex. VAT' },
-        4: { label: '4 payments of € 761,88', detail: '4 × € 761,88 · € 3.047,50 total · ex. VAT' }
-      }
-    }
-  };
-
+  /* ── Checkout (always plan 1 = pay in full) ── */
   var selected = { base: 1, core: 1 };
-
-  /* ── Plan selection ── */
-  window.selectPlan = function(el) {
-    var product = el.dataset.product;
-    var plan = parseInt(el.dataset.plan);
-    var grid = el.parentElement;
-
-    grid.querySelectorAll('.plan-card').forEach(function(c) { c.classList.remove('selected'); });
-    el.classList.add('selected');
-    selected[product] = plan;
-
-    var info = pricing[product].plans[plan];
-    document.getElementById('summary-plan-' + product).textContent = pricing[product].name + ' — ' + info.label;
-    document.getElementById('summary-detail-' + product).textContent = info.detail;
-  };
 
   /* ── Checkout ── */
   window.startCheckout = async function(product) {
