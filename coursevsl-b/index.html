@@ -1583,7 +1583,7 @@
         </div>
         <div class="video-card">
           <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4#t=2" playsinline preload="auto" muted></video>
+            <video src="../assets/testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4#t=3" playsinline preload="auto" muted></video>
             <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
           </div>
           <div class="video-caption">"Comprehensive course that covers everything to become a full-time artist."</div>
@@ -1675,7 +1675,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"I was struggling to figure out who I wanted to be as an artist. Rise gave me the structure and clarity to make the right decisions for my future."</p>
-            <div class="reviewer">SILECTA</div>
+            <div class="reviewer">Moszq</div>
           </div>
         </div>
         <div class="review-card">
@@ -1691,7 +1691,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"If you're thinking about joining, just do it. Stay open-minded, put in the time, and you'll get an incredible amount of value from it."</p>
-            <div class="reviewer">AGLS</div>
+            <div class="reviewer">APPA!?</div>
           </div>
         </div>
       </div>
@@ -1970,17 +1970,20 @@
       wrap.style.cursor = 'grab';
     })();
 
-    // Team photo carousel — auto-rotate
+    // Team photo carousel — auto-rotate every 4s
     (function() {
       var carousel = document.getElementById('team-carousel');
       if (!carousel) return;
-      var imgs = carousel.querySelectorAll('img');
+      var imgs = Array.from(carousel.querySelectorAll('img'));
+      if (imgs.length < 2) return;
+      // Ensure first image is active
+      if (!carousel.querySelector('img.active')) imgs[0].classList.add('active');
       var idx = 0;
       setInterval(function() {
         imgs[idx].classList.remove('active');
         idx = (idx + 1) % imgs.length;
         imgs[idx].classList.add('active');
-      }, 3000);
+      }, 4000);
     })();
 
     // FAQ toggle with aria-expanded
@@ -1992,32 +1995,32 @@
       });
     });
 
-    // Products infinite marquee — duplicate cards for seamless loop
+    // Products infinite marquee — triplicate for seamless loop
     (function() {
       var grid = document.getElementById('products-marquee');
       if (!grid) return;
       function initScroll() {
         var cards = Array.from(grid.children);
-        var clone = cards.map(function(c) { return c.cloneNode(true); });
-        clone.forEach(function(c) { grid.appendChild(c); });
+        // Add two extra copies so there's always content visible
+        for (var c = 0; c < 2; c++) {
+          cards.forEach(function(card) { grid.appendChild(card.cloneNode(true)); });
+        }
         var scrollDist = 0;
         var gap = 18;
         for (var i = 0; i < cards.length; i++) {
           scrollDist += cards[i].offsetWidth + gap;
         }
         grid.style.setProperty('--products-scroll-dist', '-' + scrollDist + 'px');
-        // Restart animation so it picks up the new value
         grid.style.animation = 'none';
-        grid.offsetHeight; // force reflow
+        grid.offsetHeight;
         grid.style.animation = '';
       }
-      // Wait for images to load so widths are correct
       window.addEventListener('load', initScroll);
     })();
 
     // ── Video testimonials: fixed thumbnails + click-to-play/pause ──
     (function() {
-      var thumbSeconds = [5, 2, 7, 5, 0, 5]; // fixed thumbnail per video
+      var thumbSeconds = [5, 3, 7, 5, 0, 5]; // fixed thumbnail per video
       var wraps = document.querySelectorAll('.video-card .video-wrap');
       wraps.forEach(function(w, i) {
         var v = w.querySelector('video');
