@@ -1106,9 +1106,8 @@
       .social-proof { gap: 8px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .marquee-row, .carousel-track, .teachers-grid, .brand-track, .products-scroll { animation: none; }
+      .marquee-row, .carousel-track, .teachers-grid, .brand-track { animation: none; }
       .typewriter-word { border-right: none; animation: none; }
-      .about-carousel img { transition: none; }
       .btn-primary, .btn-ghost, .module-card, .product-card,
       .community-card, .review-card, .video-card { transition: none; }
       html { scroll-behavior: auto; }
@@ -1868,8 +1867,9 @@
 
     // ── Typewriter effect ──
     (function() {
-      var words = ['dream.', 'tracks.', 'fanbase.', 'network.', 'brand.', 'production skills.', 'artist career.'];
       var el = document.getElementById('typewriter');
+      if (!el) return;
+      var words = ['dream.', 'tracks.', 'fanbase.', 'network.', 'brand.', 'production skills.', 'artist career.'];
       var wordIdx = 0, charIdx = 0, deleting = false;
       var typeSpeed = 100, deleteSpeed = 60, pauseBetween = 1800;
 
