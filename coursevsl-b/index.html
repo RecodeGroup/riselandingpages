@@ -831,15 +831,19 @@
       opacity: 0;
     }
     .faq-answer {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.35s ease, padding 0.35s ease;
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
     }
     .faq-item.open .faq-answer {
-      max-height: 300px;
+      grid-template-rows: 1fr;
     }
     .faq-answer-inner {
-      padding: 0 0 1.25rem;
+      overflow: hidden;
+      padding: 0 0 0;
       color: var(--muted); font-size: 0.92rem; line-height: 1.7;
+    }
+    .faq-item.open .faq-answer-inner {
+      padding: 0 0 1.25rem;
     }
 
     /* ── Footer ──────────────────────────────────────── */
@@ -1519,7 +1523,7 @@
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <h3>Weekly live sessions</h3>
-            <p>Join live masterclasses and Q&amp;A sessions with the Rise team every week. Real-time feedback on your work.</p>
+            <p>Ready to go further? Upgrade to the Rise Community for weekly live masterclasses, Q&amp;A sessions, and real-time feedback from the Rise team.</p>
           </div>
         </div>
         <div class="community-card">
@@ -1572,28 +1576,28 @@
       <div class="video-grid">
         <div class="video-card">
           <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4" playsinline preload="auto" muted></video>
+            <video src="../assets/testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4#t=5" playsinline preload="auto" muted></video>
             <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
           </div>
           <div class="video-caption">"How Rise changed my consistency, production, and branding."</div>
         </div>
         <div class="video-card">
           <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4" playsinline preload="auto" muted></video>
+            <video src="../assets/testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4#t=2" playsinline preload="auto" muted></video>
             <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
           </div>
           <div class="video-caption">"Comprehensive course that covers everything to become a full-time artist."</div>
         </div>
         <div class="video-card">
           <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/Rise%20broadens%20your%20scope%20beyond%20just%20music%20production.mp4" playsinline preload="auto" muted></video>
+            <video src="../assets/testimonials/Rise%20broadens%20your%20scope%20beyond%20just%20music%20production.mp4#t=7" playsinline preload="auto" muted></video>
             <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
           </div>
           <div class="video-caption">"Rise broadens your scope beyond just music production."</div>
         </div>
         <div class="video-card">
           <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4" playsinline preload="auto" muted></video>
+            <video src="../assets/testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4#t=5" playsinline preload="auto" muted></video>
             <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
           </div>
           <div class="video-caption">"Rise focuses on creating an artist, not just production."</div>
@@ -1607,7 +1611,7 @@
         </div>
         <div class="video-card">
           <div class="video-wrap" onclick="playVideo(this)">
-            <video src="../assets/testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4" playsinline preload="auto" muted></video>
+            <video src="../assets/testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4#t=5" playsinline preload="auto" muted></video>
             <div class="play-btn"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.9)"/><polygon points="33,24 33,56 58,40" fill="#0f0f0f"/></svg></div>
           </div>
           <div class="video-caption">"To anyone considering Rise: just do it, don't doubt."</div>
@@ -1631,6 +1635,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"Rise gives you everything you need to become a full-time artist. From music production to social media and business, it covers the complete picture."</p>
+            <div class="reviewer">SILECTA</div>
           </div>
         </div>
         <div class="review-card">
@@ -1638,6 +1643,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"I was genuinely impressed by how comprehensive the course is. It doesn't just teach music production, it teaches you how to build a career."</p>
+            <div class="reviewer">APPA!?</div>
           </div>
         </div>
         <div class="review-card">
@@ -1645,6 +1651,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"Rise has helped me tremendously. I've learned so much, and I would recommend it to any ambitious artist."</p>
+            <div class="reviewer">AGLS</div>
           </div>
         </div>
         <div class="review-card">
@@ -1652,6 +1659,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"Rise isn't just about making better music. It's about becoming a complete artist. That's what makes it different."</p>
+            <div class="reviewer">Moszq</div>
           </div>
         </div>
         <div class="review-card">
@@ -1659,6 +1667,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"Since joining Rise, I've become much more consistent with my music. My production skills and personal branding have improved tremendously."</p>
+            <div class="reviewer">SILECTA</div>
           </div>
         </div>
         <div class="review-card">
@@ -1666,6 +1675,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"I was struggling to figure out who I wanted to be as an artist. Rise gave me the structure and clarity to make the right decisions for my future."</p>
+            <div class="reviewer">SILECTA</div>
           </div>
         </div>
         <div class="review-card">
@@ -1673,6 +1683,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"It's one of the best investments you can make in yourself. You learn so much and gain a clear direction for your career."</p>
+            <div class="reviewer">AGLS</div>
           </div>
         </div>
         <div class="review-card">
@@ -1680,6 +1691,7 @@
           <div class="review-body">
             <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p class="review-text">"If you're thinking about joining, just do it. Stay open-minded, put in the time, and you'll get an incredible amount of value from it."</p>
+            <div class="reviewer">AGLS</div>
           </div>
         </div>
       </div>
@@ -1690,22 +1702,6 @@
   <section class="trusted-section">
     <h2>Your journey starts today.</h2>
     <p>A year from now you could still be searching for answers on YouTube. Stuck in a sea of plugins and samples. Or you could have finished more tracks, developed your own sound, released new music and become part of a community that's helping you grow every week.</p>
-    <p style="font-weight:700; margin-top: 12px;">The choice is yours.</p>
-    <p style="color: var(--muted); margin-top: 20px;">Producers from over 40 countries chose Rise as their roadmap to go from making tracks to building a real career.</p>
-    <div class="trust-badges">
-      <div class="trust-badge">
-        <div class="badge-num">40+</div>
-        <div class="badge-label">Countries</div>
-      </div>
-      <div class="trust-badge">
-        <div class="badge-num">4.9/5</div>
-        <div class="badge-label">Avg. Rating</div>
-      </div>
-      <div class="trust-badge">
-        <div class="badge-num">90%</div>
-        <div class="badge-label">Completion Rate</div>
-      </div>
-    </div>
   </section>
 
   <!-- 13. CTA BANNER -->
@@ -2027,7 +2023,15 @@
         var v = w.querySelector('video');
         var t = thumbSeconds[i] || 0;
         w._thumbTime = t;
-        v.addEventListener('loadedmetadata', function() { v.currentTime = t; });
+        function seekToThumb() {
+          if (v.readyState >= 1 && v.duration > t) {
+            v.currentTime = t;
+          }
+        }
+        v.addEventListener('loadedmetadata', seekToThumb);
+        v.addEventListener('loadeddata', seekToThumb);
+        // Fallback: if already loaded, seek now
+        if (v.readyState >= 1) seekToThumb();
       });
     })();
 
