@@ -83,6 +83,14 @@
       position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
       font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
     }
+    .urgency-text {
+      display: inline;
+      animation: urgency-pulse 3s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
     body.has-urgency-bar .site-header { top: 36px; }
     body.has-urgency-bar .hero { margin-top: -61px; padding-top: 181px; }
     .header-cta {
@@ -627,10 +635,10 @@
   </style>
 </head>
 <body class="has-urgency-bar">
-  <div class="urgency-bar" id="urgency-bar">
-    Apply now &middot; Join the Core program
+  <a href="javascript:void(0)" onclick="openModal()" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
+    <span class="urgency-text">Applications open</span> &middot; Apply for Core
     <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
-  </div>
+  </a>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
@@ -1002,7 +1010,7 @@
       var closeBtn = document.getElementById('urgency-bar-close');
       if (!bar || !closeBtn) return;
       if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
-      closeBtn.addEventListener('click', function() { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
+      closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
     })();
 
     // ── Video testimonials ──

@@ -89,6 +89,14 @@
       position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
       font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
     }
+    .urgency-text {
+      display: inline;
+      animation: urgency-pulse 3s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
     body.has-urgency-bar .site-header { top: 36px; }
     body.has-urgency-bar .hero { margin-top: -61px; padding-top: 181px; }
 
@@ -864,7 +872,7 @@
 
   <!-- Urgency Bar -->
   <a href="#paths" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
-    Explore the Academy &middot; Start your journey
+    <span class="urgency-text">Applications open</span> &middot; Start your journey
     <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
   </a>
 

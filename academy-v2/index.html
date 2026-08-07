@@ -90,6 +90,14 @@
       position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
       font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
     }
+    .urgency-text {
+      display: inline;
+      animation: urgency-pulse 3s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
     body.has-urgency-bar .site-header { top: 36px; }
     body.has-urgency-bar .hero { margin-top: -61px; padding-top: 181px; }
     .header-cta {
@@ -472,6 +480,71 @@
       line-height: 1.65;
     }
 
+    /* ── Scrolling Review Bar ── */
+    .review-bar-section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+    }
+    .review-bar-head {
+      text-align: center;
+      padding: 0 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .review-bar-row {
+      overflow: hidden;
+      padding: 0;
+    }
+    .review-bar-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+    }
+    .review-bar-track--left {
+      animation: scroll-reviews 35s linear infinite;
+    }
+    .review-bar-track--right {
+      animation: scroll-reviews-reverse 40s linear infinite;
+    }
+    .review-bar-row + .review-bar-row {
+      margin-top: 12px;
+    }
+    .review-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px 8px 8px;
+      white-space: nowrap;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 40px;
+      flex-shrink: 0;
+    }
+    .review-pill img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .review-pill span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.3;
+    }
+    @keyframes scroll-reviews {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scroll-reviews-reverse {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
     /* ── Closing ──────────────────────────────────── */
     .closing {
       text-align: center;
@@ -766,10 +839,10 @@
   </style>
 </head>
 <body class="has-urgency-bar">
-  <div class="urgency-bar" id="urgency-bar">
-    Applications open &middot; Apply for the Academy
+  <a href="javascript:void(0)" onclick="openModal()" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
+    <span class="urgency-text">Applications open</span> &middot; Apply for the Academy
     <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
-  </div>
+  </a>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
@@ -892,6 +965,10 @@
           <div class="track-duration">6 months</div>
           <p class="track-desc">Production foundation</p>
           <p class="track-desc" style="margin-top:10px;">Learn the fundamentals of production, sound design, and arrangement. Build your workflow from the ground up.</p>
+          <a href="../base-v2/" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color 0.2s;">
+            More info
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
         <div class="track-card">
           <div class="track-icon">
@@ -901,6 +978,10 @@
           <div class="track-duration">12 months</div>
           <p class="track-desc">Career accountability</p>
           <p class="track-desc" style="margin-top:10px;">Go deeper with weekly coaching, feedback sessions, and career strategy from experienced producers.</p>
+          <a href="../core-v2/" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color 0.2s;">
+            More info
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -934,19 +1015,6 @@
         <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/08048efa-e754-48c2-bc9f-eedb974ea90e/hero/8640f43d-0bed-47cf-8a29-7f0a1b6b0494.jpg" alt="Serum Presets" loading="lazy"><div class="info"><h4>Serum Presets</h4></div></div>
         <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/a986bfda-f52b-451d-8bca-08185eb00752/hero/7cfa56c3-5c1c-4254-ab8d-39377937fc80.jpg" alt="Kick Rack House" loading="lazy"><div class="info"><h4>Kick Rack House</h4></div></div>
         <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fef71bf3-c89d-497a-9b89-6189178f31f7/hero/63115779-b6c8-41cc-a1ce-94ab71fd20f9.jpg" alt="Kick Rack Techno" loading="lazy"><div class="info"><h4>Kick Rack Techno</h4></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       Social Proof
-       ══════════════════════════════════════════════ -->
-  <section class="section social-proof" id="social-proof">
-    <div class="section-inner">
-      <div class="section-eyebrow">Results</div>
-      <h2 class="section-heading">What our members say</h2>
-      <div class="proof-placeholder">
-        Testimonials, videos and case studies &mdash; in production.
       </div>
     </div>
   </section>
@@ -1003,10 +1071,6 @@
     <p class="section-sub">Real stories from producers who joined Rise.</p>
     <div class="video-grid">
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/Testimonials/From%20struggling%20with%20identity%20to%20clear%20artistic%20direction.mp4" preload="metadata" playsinline loop></video>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="video-card" onclick="playVideo(this)">
         <video src="../assets/Testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4" preload="metadata" playsinline loop></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
@@ -1019,58 +1083,58 @@
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/Testimonials/Why%20you%20should%20just%20do%20it%20and%20invest%20in%20yourself.mp4" preload="metadata" playsinline loop></video>
-        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      </div>
-      <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/Testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/Be%20open-minded%2C%20make%20time%20%E2%80%93%20it%E2%80%99s%20a%20new%20profession%20you%E2%80%99re%20learning.mp4" preload="metadata" playsinline loop></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════════
-       Reviews
+       Reviews (Scrolling Bar)
        ══════════════════════════════════════════════ -->
-  <section class="reviews-section">
-    <div class="reviews-inner">
-      <div class="reviews-head">
-        <div class="section-eyebrow">Reviews</div>
-        <h2 class="section-heading">What our members say</h2>
+  <section class="review-bar-section">
+    <div class="review-bar-head">
+      <div class="section-eyebrow">Reviews</div>
+      <h2 class="section-heading">What our members say</h2>
+    </div>
+
+    <!-- Row 1: scrolls left -->
+    <div class="review-bar-row">
+      <div class="review-bar-track review-bar-track--left">
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-4.png" alt="Member" loading="lazy"><span>"It really covers everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-1.png" alt="Member" loading="lazy"><span>"Rise broadens your scope beyond just music production."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-3.png" alt="Member" loading="lazy"><span>"I made really good progression with my production and branding."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-2.png" alt="Member" loading="lazy"><span>"It's more about creating an artist, not just production."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-6.png" alt="Member" loading="lazy"><span>"Just do it, it's a good investment into yourself."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-7.png" alt="Member" loading="lazy"><span>"I really get structured in making the right decisions."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-5.png" alt="Member" loading="lazy"><span>"Just do it, don't doubt."</span></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-4.png" alt="Member" loading="lazy"><span>"It really covers everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-1.png" alt="Member" loading="lazy"><span>"Rise broadens your scope beyond just music production."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-3.png" alt="Member" loading="lazy"><span>"I made really good progression with my production and branding."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-2.png" alt="Member" loading="lazy"><span>"It's more about creating an artist, not just production."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-6.png" alt="Member" loading="lazy"><span>"Just do it, it's a good investment into yourself."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-7.png" alt="Member" loading="lazy"><span>"I really get structured in making the right decisions."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-5.png" alt="Member" loading="lazy"><span>"Just do it, don't doubt."</span></div>
       </div>
-      <div class="reviews-scroll">
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"Rise gives you everything you need to become a full-time artist. From music production to social media and business, it covers the complete picture."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"I was genuinely impressed by how comprehensive the course is. It doesn't just teach music production, it teaches you how to build a career."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"Rise has helped me tremendously. I've learned so much, and I would recommend it to any ambitious artist."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"Rise isn't just about making better music. It's about becoming a complete artist. That's what makes it different."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"Since joining Rise, I've become much more consistent with my music. My production skills and personal branding have improved tremendously."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"I was struggling to figure out who I wanted to be as an artist. Rise gave me the structure and clarity to make the right decisions for my future."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"It's one of the best investments you can make in yourself. You learn so much and gain a clear direction for your career."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"If you're thinking about joining, just do it. Stay open-minded, put in the time, and you'll get an incredible amount of value from it."</p>
-        </div>
+    </div>
+
+    <!-- Row 2: scrolls right -->
+    <div class="review-bar-row">
+      <div class="review-bar-track review-bar-track--right">
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-8.png" alt="Member" loading="lazy"><span>"It has everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-9.png" alt="Member" loading="lazy"><span>"Be open-minded, it's a new profession you're learning."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-10.png" alt="Member" loading="lazy"><span>"I'm consistently busy with music now."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-11.png" alt="Member" loading="lazy"><span>"A comprehensive course that covers everything."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-12.png" alt="Member" loading="lazy"><span>"Keep this in mind and then you will have fun."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-13.png" alt="Member" loading="lazy"><span>"You learn so much."</span></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-8.png" alt="Member" loading="lazy"><span>"It has everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-9.png" alt="Member" loading="lazy"><span>"Be open-minded, it's a new profession you're learning."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-10.png" alt="Member" loading="lazy"><span>"I'm consistently busy with music now."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-11.png" alt="Member" loading="lazy"><span>"A comprehensive course that covers everything."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-12.png" alt="Member" loading="lazy"><span>"Keep this in mind and then you will have fun."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-13.png" alt="Member" loading="lazy"><span>"You learn so much."</span></div>
       </div>
     </div>
   </section>
@@ -1175,7 +1239,8 @@
         bar.classList.add('hidden');
         document.body.classList.remove('has-urgency-bar');
       }
-      closeBtn.addEventListener('click', function() {
+      closeBtn.addEventListener('click', function(e) {
+        e.preventDefault(); e.stopPropagation();
         bar.classList.add('hidden');
         document.body.classList.remove('has-urgency-bar');
         sessionStorage.setItem('rise_urgency_dismissed', '1');
