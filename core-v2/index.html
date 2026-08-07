@@ -485,6 +485,55 @@
     .image-break { padding: 0 2rem; max-width: var(--maxw); margin: 0 auto; }
 
     /* ── Video Testimonials ──────────────────────── */
+    /* ── VSL Player (click play/pause, no controls) ── */
+    .vsl-player {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .vsl-player video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    .vsl-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .vsl-play-overlay svg {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      transition: transform 0.2s ease;
+    }
+    .vsl-player:hover .vsl-play-overlay svg { transform: scale(1.08); }
+    .vsl-player.playing .vsl-play-overlay { opacity: 0; }
+    .vsl-progress-wrap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+    }
+    .vsl-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s linear;
+    }
+
     .video-testimonials { padding: 5rem 2rem; text-align: center; }
     .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
     .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; }
@@ -493,6 +542,7 @@
       gap: 16px;
       max-width: var(--maxw);
       margin: 0 auto;
+      justify-content: center;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
@@ -698,6 +748,25 @@
       <img src="../assets/photos/photo-5.jpg" alt="Rise" loading="lazy">
     </div>
   </div>
+
+  <!-- ══════════════════════════════════════════════
+       Maurits VSL
+       ══════════════════════════════════════════════ -->
+  <section style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--line);">
+    <div style="max-width:var(--maxw);margin:0 auto;">
+      <div class="vsl-player" id="core-vsl-player">
+        <video id="core-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Core/maurits-vsl-thumb.jpg">
+          <source src="../assets/Pages/Core/Maurits%20VSL.mp4" type="video/mp4">
+        </video>
+        <div class="vsl-play-overlay" id="core-vsl-overlay">
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
+        </div>
+        <div class="vsl-progress-wrap">
+          <div class="vsl-progress-bar" id="core-vsl-progress"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ══════════════════════════════════════════════
        Who Core Is For
@@ -1203,6 +1272,38 @@
         if (!v._hasPlayed) { v.currentTime = 0; v._hasPlayed = true; }
       });
     });
+
+    // ── Core VSL Player: click play/pause + deceptive progress bar ──
+    (function() {
+      var player = document.getElementById('core-vsl-player');
+      var video = document.getElementById('core-vsl-video');
+      var progressBar = document.getElementById('core-vsl-progress');
+      if (!player || !video) return;
+
+      var CURVE = 0.575;
+
+      player.addEventListener('click', function() {
+        if (video.paused || video.ended) {
+          video.play().catch(function(){});
+          player.classList.add('playing');
+        } else {
+          video.pause();
+          player.classList.remove('playing');
+        }
+      });
+
+      video.addEventListener('ended', function() {
+        player.classList.remove('playing');
+        progressBar.style.width = '100%';
+      });
+
+      video.addEventListener('timeupdate', function() {
+        if (!video.duration) return;
+        var actual = video.currentTime / video.duration;
+        var displayed = Math.pow(actual, CURVE) * 100;
+        progressBar.style.width = displayed + '%';
+      });
+    })();
   </script>
 
 </body>

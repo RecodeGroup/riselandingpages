@@ -314,11 +314,45 @@
       overflow: hidden;
       border: 1px solid var(--line);
       background: #000;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .vsl-video-wrap video {
       width: 100%;
       display: block;
       aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    .vsl-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .vsl-play-overlay svg {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      transition: transform 0.2s ease;
+    }
+    .vsl-video-wrap:hover .vsl-play-overlay svg { transform: scale(1.08); }
+    .vsl-video-wrap.playing .vsl-play-overlay { opacity: 0; }
+    .vsl-progress-wrap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+    }
+    .vsl-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s linear;
     }
 
     /* ── Choose Your Path ────────────────────────── */
@@ -943,10 +977,16 @@
     <div class="section-inner">
       <div class="section-eyebrow">Watch</div>
       <h2 class="section-heading">Hear it from our members.</h2>
-      <div class="vsl-video-wrap">
-        <video controls playsinline preload="metadata">
+      <div class="vsl-video-wrap" id="hp-vsl-player">
+        <video id="hp-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Main/VSL%20Thumbnail.png">
           <source src="../assets/vsl/mini-vsl.mp4" type="video/mp4">
         </video>
+        <div class="vsl-play-overlay" id="hp-vsl-overlay">
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
+        </div>
+        <div class="vsl-progress-wrap">
+          <div class="vsl-progress-bar" id="hp-vsl-progress"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1363,6 +1403,38 @@
         e.preventDefault();
         var x = e.pageX - strip.offsetLeft;
         strip.scrollLeft = scrollLeft - (x - startX);
+      });
+    })();
+
+    // ── VSL Player: click play/pause + deceptive progress bar ──
+    (function() {
+      var player = document.getElementById('hp-vsl-player');
+      var video = document.getElementById('hp-vsl-video');
+      var progressBar = document.getElementById('hp-vsl-progress');
+      if (!player || !video) return;
+
+      var CURVE = 0.575;
+
+      player.addEventListener('click', function() {
+        if (video.paused || video.ended) {
+          video.play().catch(function(){});
+          player.classList.add('playing');
+        } else {
+          video.pause();
+          player.classList.remove('playing');
+        }
+      });
+
+      video.addEventListener('ended', function() {
+        player.classList.remove('playing');
+        progressBar.style.width = '100%';
+      });
+
+      video.addEventListener('timeupdate', function() {
+        if (!video.duration) return;
+        var actual = video.currentTime / video.duration;
+        var displayed = Math.pow(actual, CURVE) * 100;
+        progressBar.style.width = displayed + '%';
       });
     })();
   </script>
