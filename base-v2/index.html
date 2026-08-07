@@ -505,6 +505,14 @@
         width: 100%;
         justify-content: center;
       }
+      [style*="grid-template-columns:repeat(4"] {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+    @media (max-width: 480px) {
+      [style*="grid-template-columns:repeat(4"] {
+        grid-template-columns: 1fr !important;
+      }
     }
 
     /* ── Modal / Questionnaire ────────────────────── */
@@ -727,37 +735,33 @@
     <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;text-align:center;">Your learning journey</div>
     <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.02em;text-align:center;margin-bottom:3rem;">Four steps to becoming a professional producer</h2>
 
-    <div style="display:grid;gap:24px;">
-      <div style="border:1px solid var(--line);border-radius:12px;padding:28px 32px;background:rgba(255,255,255,0.02);">
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
-          <span style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;">STEP 1</span>
-          <span style="font-size:1.1rem;font-weight:700;">Build Your Foundation</span>
-        </div>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Learn the fundamentals of music production, music theory, and Ableton. Build a solid workflow and understand the principles behind professional tracks.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+      <div style="border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:rgba(255,255,255,0.02);text-align:center;">
+        <div style="font-size:2rem;margin-bottom:10px;">🎹</div>
+        <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">STEP 1</span>
+        <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Build Your Foundation</span>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Learn production fundamentals, music theory, and Ableton. Build a solid workflow from day one.</p>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:12px;padding:28px 32px;background:rgba(255,255,255,0.02);">
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
-          <span style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;">STEP 2</span>
-          <span style="font-size:1.1rem;font-weight:700;">Create Your Sound</span>
-        </div>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Develop your own sonic identity through sound design, synthesis, sampling, recording, and vocal production. Learn how to create sounds that stand out.</p>
+      <div style="border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:rgba(255,255,255,0.02);text-align:center;">
+        <div style="font-size:2rem;margin-bottom:10px;">🎛️</div>
+        <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">STEP 2</span>
+        <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Create Your Sound</span>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Develop your sonic identity through sound design, synthesis, and sampling techniques.</p>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:12px;padding:28px 32px;background:rgba(255,255,255,0.02);">
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
-          <span style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;">STEP 3</span>
-          <span style="font-size:1.1rem;font-weight:700;">Turn Ideas into Tracks</span>
-        </div>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Transform loops into complete songs using professional arrangement techniques, transitions, energy flow, and songwriting principles that keep listeners engaged.</p>
+      <div style="border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:rgba(255,255,255,0.02);text-align:center;">
+        <div style="font-size:2rem;margin-bottom:10px;">🎵</div>
+        <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">STEP 3</span>
+        <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Turn Ideas into Tracks</span>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Transform loops into complete songs with professional arrangement and energy flow.</p>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:12px;padding:28px 32px;background:rgba(255,255,255,0.02);">
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
-          <span style="font-size:0.72rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;">STEP 4</span>
-          <span style="font-size:1.1rem;font-weight:700;">Finish Like a Professional</span>
-        </div>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Polish your music with mixing, mastering, studio acoustics, and industry knowledge. Prepare your tracks for release and learn how to build your career as an artist.</p>
+      <div style="border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:rgba(255,255,255,0.02);text-align:center;">
+        <div style="font-size:2rem;margin-bottom:10px;">🚀</div>
+        <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">STEP 4</span>
+        <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Finish Like a Pro</span>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Polish with mixing and mastering, then prepare your tracks for release and build your career.</p>
       </div>
     </div>
   </div>

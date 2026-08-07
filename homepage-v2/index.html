@@ -464,22 +464,30 @@
       margin-bottom: 2.5rem;
       line-height: 1.7;
     }
-    .coach-grid {
+    .coach-strip {
+      overflow: hidden;
+      padding: 0;
+    }
+    .coach-strip-track {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 32px;
+      gap: 20px;
+      width: max-content;
+      animation: scroll-coaches 45s linear infinite;
+    }
+    @keyframes scroll-coaches {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     .coach-card {
       background: var(--bg-2);
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 12px;
-      padding: 28px 20px;
+      padding: 28px 24px;
       text-align: center;
       position: relative;
       overflow: hidden;
       transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      width: 170px;
+      width: 220px;
       flex-shrink: 0;
     }
     .coach-card::before {
@@ -748,7 +756,7 @@
     /* ── Responsive ───────────────────────────────── */
     @media (max-width: 900px) {
       .path-grid { grid-template-columns: 1fr; }
-      .coach-card { width: 150px; }
+      .coach-card { width: 200px; }
       .section { padding: 4rem 1.5rem; }
       .closing { padding: 4rem 1.5rem; }
       .review-card { flex: 0 0 280px; }
@@ -784,7 +792,7 @@
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
-      <a class="header-cta" href="/academy-v2/">Explore the Academy</a>
+      <a class="header-cta" href="#paths">Choose your path</a>
     </div>
   </header>
 
@@ -932,7 +940,8 @@
       <div class="section-eyebrow">The team</div>
       <h2 class="section-heading">Learn from people doing it every&nbsp;day.</h2>
 
-      <div class="coach-grid">
+      <div class="coach-strip">
+      <div class="coach-strip-track">
 
         <div class="coach-card">
           <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" class="coach-avatar">
@@ -967,7 +976,7 @@
         <div class="coach-card">
           <img src="../assets/Pages/Coaches/RDLF.jpg" alt="David" class="coach-avatar">
           <div class="coach-name">David (RDLF)</div>
-          <div class="coach-role">Techno Artist &middot; Basic Modules</div>
+          <div class="coach-role">Techno Artist &middot; Base Modules</div>
           <p class="coach-bio">German techno producer, sound engineer and co-founder of Interrealm. He created the beginner modules around the fundamentals every producer needs before moving on.</p>
         </div>
 
@@ -986,6 +995,54 @@
           <p class="coach-bio">Remy is an artist with a long career in the music industry. He's an expert on music rights, organizes writing camps, and produces for the Eurovision Song Festival.</p>
         </div>
 
+        <!-- Duplicate for seamless loop -->
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" class="coach-avatar">
+          <div class="coach-name">Maurits</div>
+          <div class="coach-role">Operations &amp; Artist Development Coach</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Runs the business and accountability side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
+        </div>
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurjen" class="coach-avatar">
+          <div class="coach-name">Jurjen (Artcode)</div>
+          <div class="coach-role">Base Coach &middot; Techno Artist</div>
+          <p class="coach-bio">With over 15 years of experience across electronic music, Jurjen leads the Base production coaching. From sound design to arrangement, he helps producers build a foundation they can keep building on.</p>
+        </div>
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Jim.png" alt="Jim" class="coach-avatar">
+          <div class="coach-name">Jim van Nood</div>
+          <div class="coach-role">Founder &amp; Techno Artist</div>
+          <p class="coach-bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist and entrepreneur. His experience brings a practical perspective to every lesson.</p>
+        </div>
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" class="coach-avatar">
+          <div class="coach-name">Yvo (Overhoff)</div>
+          <div class="coach-role">Operations &amp; Products</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Amsterdam-based producer and AEMA graduate with a groove-first approach to house music. He developed the advanced video modules using the same workflow he uses in his own studio.</p>
+        </div>
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/RDLF.jpg" alt="David" class="coach-avatar">
+          <div class="coach-name">David (RDLF)</div>
+          <div class="coach-role">Techno Artist &middot; Base Modules</div>
+          <p class="coach-bio">German techno producer, sound engineer and co-founder of Interrealm. He created the beginner modules around the fundamentals every producer needs before moving on.</p>
+        </div>
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" class="coach-avatar">
+          <div class="coach-name">Hendrik</div>
+          <div class="coach-role">Partnerships &amp; Bookings</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Hendrik manages Rise's partnerships and runs a booking agency for artists. He connects emerging talent with the right stages, labels, and industry players.</p>
+        </div>
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Remy.png" alt="Remy" class="coach-avatar">
+          <div class="coach-name">Remy</div>
+          <div class="coach-role">Monetisation &amp; Rights</div>
+          <p class="coach-bio">Remy is an artist with a long career in the music industry. He's an expert on music rights, organizes writing camps, and produces for the Eurovision Song Festival.</p>
+        </div>
+
+      </div>
       </div>
     </div>
   </section>
@@ -1063,8 +1120,8 @@
       <div class="section-eyebrow">Your move</div>
       <h2>Build the foundation. Then build everything on top of&nbsp;it.</h2>
       <p>Whatever stage you're at, Rise gives you the structure, coaching and community to keep moving forward. Stop guessing your next step and start building with people who expect more from themselves, and from you.</p>
-      <a href="/academy-v2/" class="hero-cta">
-        Explore the Academy
+      <a href="#paths" class="hero-cta">
+        Choose your path
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
