@@ -472,6 +472,13 @@
       line-height: 1.65;
     }
 
+    /* ── Testimonial Screenshots ────────────────── */
+    .testimonial-screenshots { padding: 2rem 2rem 4rem; max-width: var(--maxw); margin: 0 auto; }
+    .testimonial-screenshots .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; text-align: center; margin-bottom: 2rem; }
+    .screenshot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .screenshot-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+    .screenshot-card img { width: 100%; height: auto; display: block; }
+
     /* ── Closing ──────────────────────────────────── */
     .closing {
       text-align: center;
@@ -670,8 +677,34 @@
     .video-testimonials { padding: 5rem 2rem; text-align: center; }
     .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
     .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; }
-    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: var(--maxw); margin: 0 auto; }
-    .video-card { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16; max-height: 480px; cursor: pointer; background: #000; }
+    .video-grid {
+      display: flex;
+      gap: 16px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) transparent;
+    }
+    .video-grid::-webkit-scrollbar { height: 4px; }
+    .video-grid::-webkit-scrollbar-track { background: transparent; }
+    .video-grid::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+    .video-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+      min-width: 240px;
+      max-width: 280px;
+      height: 420px;
+      cursor: pointer;
+      background: #000;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
     .video-card video { width: 100%; height: 100%; object-fit: cover; }
     .video-card .play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
     .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
@@ -811,8 +844,7 @@
       <div class="section-eyebrow">The idea</div>
       <h2 class="section-heading">The structure that turns talent into an actual&nbsp;career.</h2>
       <div class="section-body">
-        <p>You can work hard on your craft and still stay in the same place without direction. What's actually missing is two things: a mirror that shows you exactly where you stand, and a structure that won't let you walk away once you see it.</p>
-        <p style="margin-top:16px;">We ran into that same wall for years, across releasing music, playing shows, running labels and building events. What changed things wasn't more information. It was direction, structure, accountability, and an environment that holds a higher standard than you'd hold yourself to.</p>
+        <p>What's missing isn't more information. It's direction, structure, and accountability that holds you to a higher standard than you'd hold yourself to.</p>
       </div>
       <div class="pull-quote">
         <p>You don't rise to the level of your goals. You fall to the level of your standards.</p>
@@ -866,6 +898,7 @@
           <h3>Base</h3>
           <div class="track-duration">6 months</div>
           <p class="track-desc">Production foundation</p>
+          <p class="track-desc" style="margin-top:10px;">Learn the fundamentals of production, sound design, and arrangement. Build your workflow from the ground up.</p>
         </div>
         <div class="track-card">
           <div class="track-icon">
@@ -874,6 +907,7 @@
           <h3>Core</h3>
           <div class="track-duration">12 months</div>
           <p class="track-desc">Career accountability</p>
+          <p class="track-desc" style="margin-top:10px;">Go deeper with weekly coaching, feedback sessions, and career strategy from experienced producers.</p>
         </div>
       </div>
     </div>
@@ -944,9 +978,8 @@
         </div>
 
         <div class="coach-card">
-          <!-- TODO: Replace with correct photo of Jurriaan (Artcode) — photo-1.jpg is a placeholder -->
-          <img src="../assets/photos/photo-1.jpg" alt="Jurriaan" class="coach-avatar">
-          <div class="coach-name">Jurriaan (Artcode)</div>
+          <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurjen" class="coach-avatar">
+          <div class="coach-name">Jurjen (Artcode)</div>
           <div class="coach-role">Base Coach &middot; Techno Artist</div>
           <p class="coach-bio">15+ years across electronic genres, from production to live visuals and modular performance. Brings that same range into how he coaches Base.</p>
         </div>
@@ -959,8 +992,7 @@
         </div>
 
         <div class="coach-card">
-          <!-- TODO: Replace with correct photo of Dave (RDLF) — photo-3.jpg is a placeholder -->
-          <img src="../assets/photos/photo-3.jpg" alt="Dave" class="coach-avatar">
+          <img src="../assets/Pages/Coaches/RDLF.jpg" alt="Dave" class="coach-avatar">
           <div class="coach-name">Dave (RDLF)</div>
           <div class="coach-role">Video Lessons &middot; Techno Artist</div>
           <p class="coach-bio">German techno producer and sound engineer, co-founder of the label Interrealm. Built the basic video modules around the fundamentals he had to learn himself first.</p>
@@ -978,27 +1010,27 @@
     <p class="section-sub">Real stories from producers who joined Rise.</p>
     <div class="video-grid">
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/videos/video-1.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/From%20struggling%20with%20identity%20to%20clear%20artistic%20direction.mp4" preload="metadata" playsinline loop></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/videos/video-2.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4" preload="metadata" playsinline loop></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/videos/video-3.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4" preload="metadata" playsinline loop></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/videos/video-4.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4" preload="metadata" playsinline loop></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/videos/video-5.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/Why%20you%20should%20just%20do%20it%20and%20invest%20in%20yourself.mp4" preload="metadata" playsinline loop></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/videos/video-6.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4" preload="metadata" playsinline loop></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
     </div>
@@ -1045,6 +1077,18 @@
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
           <p class="review-text">"If you're thinking about joining, just do it. Stay open-minded, put in the time, and you'll get an incredible amount of value from it."</p>
+        </div>
+      </div>
+      <div class="testimonial-screenshots">
+        <h3 class="section-title">Real feedback from our community</h3>
+        <div class="screenshot-grid">
+          <div class="screenshot-card"><img src="../assets/Testimonials/Screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.47.04.png" alt="Member testimonial" loading="lazy"></div>
+          <div class="screenshot-card"><img src="../assets/Testimonials/Screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.47.13.png" alt="Member testimonial" loading="lazy"></div>
+          <div class="screenshot-card"><img src="../assets/Testimonials/Screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.47.19.png" alt="Member testimonial" loading="lazy"></div>
+          <div class="screenshot-card"><img src="../assets/Testimonials/Screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.47.37.png" alt="Member testimonial" loading="lazy"></div>
+          <div class="screenshot-card"><img src="../assets/Testimonials/Screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.48.24.png" alt="Member testimonial" loading="lazy"></div>
+          <div class="screenshot-card"><img src="../assets/Testimonials/Screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.48.44.png" alt="Member testimonial" loading="lazy"></div>
+          <div class="screenshot-card"><img src="../assets/Testimonials/Screenshots/Scherm%C2%ADafbeelding%202026-08-06%20om%2008.49.06.png" alt="Member testimonial" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -1233,6 +1277,17 @@
         });
       });
     })();
+
+    // Show thumbnail from near end of video
+    document.querySelectorAll('.video-card video').forEach(function(v) {
+      v.addEventListener('loadedmetadata', function() {
+        if (v.duration > 3) v.currentTime = v.duration - 2;
+      });
+      // Reset to start when playing
+      v.addEventListener('play', function() {
+        if (!v._hasPlayed) { v.currentTime = 0; v._hasPlayed = true; }
+      });
+    });
   </script>
 
 </body>

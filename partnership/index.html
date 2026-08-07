@@ -497,8 +497,11 @@
     .closing {
       text-align: center;
       padding: 6rem 2rem;
-      max-width: 700px;
+      max-width: 960px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .closing h2 {
       font-size: clamp(2rem, 4vw, 2.75rem);
@@ -520,17 +523,32 @@
     .closing-contact a { color: var(--accent); font-weight: 600; }
     .closing-contact a:hover { opacity: 0.85; }
 
+    /* ── Section break photos ─────────────────────── */
+    .section-photo {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+    .section-photo img {
+      width: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+      max-height: 360px;
+    }
+
     /* ── Hendrik card ─────────────────────────────── */
     .contact-card {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1.5rem;
       background: var(--bg-2);
       border: 1px solid var(--line-strong);
       border-radius: 12px;
-      padding: 1.25rem 2rem;
+      padding: 1.75rem 2.5rem;
       margin-top: 2rem;
       text-align: left;
+      width: 100%;
+      max-width: 900px;
     }
     .contact-card img {
       width: 56px; height: 56px;
@@ -610,8 +628,10 @@
       .team-member img { width: 64px; height: 64px; }
       .offers-grid { grid-template-columns: 1fr; }
       .how-grid { grid-template-columns: 1fr; }
-      .contact-card { flex-direction: column; text-align: center; }
+      .contact-card { flex-direction: column; text-align: center; max-width: 100%; }
       .closing { padding: 4rem 1.5rem; }
+      .section-photo { padding: 1.5rem 1.5rem; }
+      .section-photo img { max-height: 240px; }
       .footer { padding: 2rem 1rem; }
     }
   </style>
@@ -671,6 +691,10 @@
 </div>
 
 
+<div class="section-photo">
+  <img src="../assets/photos/photo-1.jpg" alt="Rise community" loading="lazy">
+</div>
+
 <!-- ════════════════════════════════════════════════════
      3. WHAT RISE OFFERS
      ════════════════════════════════════════════════════ -->
@@ -719,6 +743,10 @@
   </div>
 </div>
 
+
+<div class="section-photo">
+  <img src="../assets/photos/photo-4.jpg" alt="Rise studio" loading="lazy">
+</div>
 
 <!-- ════════════════════════════════════════════════════
      4. PROOF — BUILT BY EXPERTS
@@ -820,6 +848,10 @@
 </div>
 
 
+<div class="section-photo">
+  <img src="../assets/photos/photo-9.jpg" alt="Rise artists" loading="lazy">
+</div>
+
 <!-- ════════════════════════════════════════════════════
      6. HOW WE PARTNER
      ════════════════════════════════════════════════════ -->
@@ -853,6 +885,10 @@
   </div>
 </div>
 
+
+<div class="section-photo">
+  <img src="../assets/photos/photo-10.jpg" alt="Rise production" loading="lazy">
+</div>
 
 <!-- ════════════════════════════════════════════════════
      7. WHY THIS WORKS — WIN-WIN

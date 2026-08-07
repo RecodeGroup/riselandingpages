@@ -455,7 +455,8 @@
     .path-cta svg { width: 16px; height: 16px; }
 
     /* ── Coaches ──────────────────────────────────── */
-    .coaches { background: var(--bg); }
+    .coaches { background: var(--bg); padding-bottom: 6rem; }
+    .coaches .section-heading { margin-bottom: 3.5rem; }
     .coaches-sub {
       color: var(--muted);
       font-size: 0.95rem;
@@ -464,9 +465,10 @@
       line-height: 1.7;
     }
     .coach-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
     }
     .coach-card {
       background: var(--bg-2);
@@ -477,6 +479,8 @@
       position: relative;
       overflow: hidden;
       transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      width: 170px;
+      flex-shrink: 0;
     }
     .coach-card::before {
       content: '';
@@ -744,7 +748,7 @@
     /* ── Responsive ───────────────────────────────── */
     @media (max-width: 900px) {
       .path-grid { grid-template-columns: 1fr; }
-      .coach-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+      .coach-card { width: 150px; }
       .section { padding: 4rem 1.5rem; }
       .closing { padding: 4rem 1.5rem; }
       .review-card { flex: 0 0 280px; }
@@ -882,12 +886,13 @@
         <div class="path-card">
           <span class="path-label standalone">Standalone start</span>
           <h3>The Course</h3>
-          <div class="path-price">&euro;&nbsp;265,-</div>
-          <p class="path-desc">Learn the fundamentals of music production at your own pace. The perfect introduction to how Rise works before stepping into Base or Core.</p>
+          <div class="path-price">&euro;&nbsp;260,-</div>
+          <p class="path-desc">Learn the fundamentals of music production at your own pace. Includes various sample packs and Ableton chains to get you started. The perfect introduction to how Rise works before stepping into Base or Core.</p>
           <div class="path-sub-label">Includes</div>
           <ul class="path-list">
             <li>11 video lesson modules</li>
             <li>Taught by industry professionals</li>
+            <li>Various sample packs &amp; Ableton chains</li>
           </ul>
           <a href="../coursevsl-b/" class="path-cta secondary">
             Start the Course
@@ -932,7 +937,7 @@
         <div class="coach-card">
           <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" class="coach-avatar">
           <div class="coach-name">Maurits</div>
-          <div class="coach-role">Core Coach &middot; Music Business</div>
+          <div class="coach-role">Operations &amp; Artist Development Coach</div>
           <div class="coach-label">Founding Team</div>
           <p class="coach-bio">Runs the business and accountability side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
         </div>
@@ -946,15 +951,15 @@
 
         <div class="coach-card">
           <img src="../assets/Pages/Coaches/Jim.png" alt="Jim" class="coach-avatar">
-          <div class="coach-name">Jim (VANNOOD)</div>
-          <div class="coach-role">Founder</div>
+          <div class="coach-name">Jim van Nood</div>
+          <div class="coach-role">Founder &amp; Techno Artist</div>
           <p class="coach-bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist and entrepreneur. His experience brings a practical perspective to every lesson.</p>
         </div>
 
         <div class="coach-card">
           <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" class="coach-avatar">
           <div class="coach-name">Yvo (Overhoff)</div>
-          <div class="coach-role">House Artist &middot; Advanced Modules</div>
+          <div class="coach-role">Operations &amp; Products</div>
           <div class="coach-label">Founding Team</div>
           <p class="coach-bio">Amsterdam-based producer and AEMA graduate with a groove-first approach to house music. He developed the advanced video modules using the same workflow he uses in his own studio.</p>
         </div>
@@ -1128,7 +1133,7 @@
             <span>What's the cheapest way to start?</span>
             <span class="faq-icon"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner">The standalone Course. A complete production course for a one-time &euro;&nbsp;265,-, at your own pace. No feedback, accountability and live lessons included.</div></div>
+          <div class="faq-a"><div class="faq-a-inner">The standalone Course. A complete production course for a one-time &euro;&nbsp;260,-, at your own pace. No feedback, accountability and live lessons included.</div></div>
         </div>
 
       </div>
