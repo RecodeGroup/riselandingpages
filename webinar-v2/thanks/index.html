@@ -173,9 +173,68 @@
     }
     .footer .links a:hover { color: var(--accent); }
 
+    /* Product CTA cards */
+    .programs {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      animation: fadeUp 0.6s 0.8s ease both;
+    }
+    .programs-heading {
+      text-align: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .programs-grid {
+      display: flex;
+      gap: 16px;
+    }
+    .program-card {
+      flex: 1;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .program-card:hover {
+      border-color: rgba(255,104,62,0.35);
+      transform: translateY(-3px);
+    }
+    .program-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .program-desc {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: 1.2rem;
+    }
+    .program-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      transition: color 0.2s;
+    }
+    .program-card:hover .program-link { color: #e55a33; }
+
     @media (max-width: 480px) {
       .main { padding: 2rem 1rem 3rem; }
       .info-card { padding: 1.5rem 1.25rem; }
+    }
+    @media (max-width: 640px) {
+      .programs-grid { flex-direction: column; }
     }
   </style>
 </head>
@@ -229,6 +288,27 @@
       Questions? Reach out to <a href="mailto:contact@riseartistacademy.com" style="color: var(--accent);">contact@riseartistacademy.com</a>
     </p>
   </main>
+
+  <section class="programs">
+    <h2 class="programs-heading">Explore our programs</h2>
+    <div class="programs-grid">
+      <a href="../../coursevsl-b/" class="program-card">
+        <div class="program-name">Course</div>
+        <div class="program-desc">Our self-paced production course — learn at your own tempo, on your own schedule.</div>
+        <span class="program-link">Learn more &rarr;</span>
+      </a>
+      <a href="../../base-v2/" class="program-card">
+        <div class="program-name">Base</div>
+        <div class="program-desc">Foundation program for emerging artists ready to build real skills from the ground up.</div>
+        <span class="program-link">Learn more &rarr;</span>
+      </a>
+      <a href="../../core-v2/" class="program-card">
+        <div class="program-name">Core</div>
+        <div class="program-desc">Advanced program with weekly coaching to take your production to the next level.</div>
+        <span class="program-link">Learn more &rarr;</span>
+      </a>
+    </div>
+  </section>
 
   <footer class="footer">
     &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
