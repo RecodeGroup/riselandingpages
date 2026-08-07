@@ -368,98 +368,6 @@
     }
     .security-note svg { flex-shrink: 0; }
 
-    /* ── Payment Plan Cards ── */
-    .payment-plans-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      max-width: 780px;
-      margin: 2rem auto 0;
-    }
-    .payment-plan-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      background: #1a1a1a;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px;
-      padding: 2rem 1.5rem;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      text-decoration: none;
-      color: inherit;
-    }
-    .payment-plan-card:hover {
-      border-color: rgba(255,104,62,0.3);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
-    }
-    .payment-plan-card.recommended {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent), 0 12px 32px rgba(255,104,62,0.12);
-    }
-    .payment-plan-card.recommended:hover {
-      box-shadow: 0 0 0 1px var(--accent), 0 16px 40px rgba(255,104,62,0.2);
-    }
-    .plan-badge {
-      display: inline-block;
-      background: rgba(255,104,62,0.12);
-      color: var(--accent);
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 1rem;
-    }
-    .plan-badge-spacer {
-      height: 22px;
-      margin-bottom: 1rem;
-    }
-    .plan-type {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-    .plan-price {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-    .plan-price-sub {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-    .plan-total {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 1.25rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      width: 100%;
-    }
-    .plan-cta-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 1.25rem;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.02em;
-    }
-    .plan-cta-label svg {
-      width: 14px;
-      height: 14px;
-    }
-
     /* ── Coach Card ── */
     .coach-card-wide {
       display: flex; align-items: center; gap: 2rem;
@@ -507,7 +415,6 @@
       .header-tab { min-width: 130px; padding: 0.5rem 1rem; font-size: 0.72rem; }
       .hero { min-height: 60vh; padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 4rem); }
       .photo-strip-track img { height: 120px; }
-      .payment-plans-grid { grid-template-columns: 1fr; max-width: 360px; }
     }
     @media (max-width: 480px) {
       .plan-grid { grid-template-columns: 1fr; max-width: 320px; }
@@ -544,6 +451,7 @@
       <div class="hero-eyebrow">Rise Artist Academy &middot; Base</div>
       <h1>Six months. Real coaching. An all-round foundation built to&nbsp;last.</h1>
       <p class="hero-sub">Being a successful DJ/producer takes more than making good music. Production, branding, social media and mindset all matter. Base gives you the foundation to develop every part of your career.</p>
+      <a href="base/" class="btn-primary" style="margin-top:2rem;">Choose your payment plan <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
   </section>
 
@@ -597,6 +505,9 @@
           <h3>Platform Access</h3>
           <p>Access our complete learning platform with in-depth video modules, premium sample packs, Ableton racks, project files, templates, and production tools that support your progress between coaching sessions.</p>
         </div>
+      </div>
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a href="base/" class="btn-primary">Choose your payment plan <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
       </div>
     </div>
   </section>
@@ -657,45 +568,8 @@
       <div class="section-eyebrow">Enroll</div>
       <h2 class="section-heading">Start with Base Academy</h2>
       <div class="price-display">&euro;1.500</div>
-      <p class="price-note">6 months of live coaching, platform access and everything you need to build a solid foundation. Choose your payment plan below.</p>
-      <div class="payment-plans-grid">
-        <a href="#stripe-base-full" class="payment-plan-card recommended">
-          <div class="plan-badge">Recommended</div>
-          <div class="plan-type">Pay in full</div>
-          <div class="plan-price">&euro;1.500</div>
-          <div class="plan-price-sub">One-time payment</div>
-          <div class="plan-cta-label">
-            Select plan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-        </a>
-        <a href="#stripe-base-3x" class="payment-plan-card">
-          <div class="plan-badge-spacer"></div>
-          <div class="plan-type">3 installments</div>
-          <div class="plan-price">&euro;500</div>
-          <div class="plan-price-sub">per month</div>
-          <div class="plan-total">Total: &euro;1.500</div>
-          <div class="plan-cta-label">
-            Select plan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-        </a>
-        <a href="#stripe-base-6x" class="payment-plan-card">
-          <div class="plan-badge-spacer"></div>
-          <div class="plan-type">6 installments</div>
-          <div class="plan-price">&euro;250</div>
-          <div class="plan-price-sub">per month</div>
-          <div class="plan-total">Total: &euro;1.500</div>
-          <div class="plan-cta-label">
-            Select plan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-        </a>
-      </div>
-      <div class="security-note" style="padding:1.25rem 0 0;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        Secure payment powered by Stripe.
-      </div>
+      <p class="price-note">6 months of live coaching, platform access and everything you need to build a solid foundation. Flexible payment plans available.</p>
+      <a href="base/" class="btn-primary" style="margin-top:0.5rem;">Choose your payment plan <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
   </section>
 
@@ -716,6 +590,7 @@
       <div class="hero-eyebrow">Rise Artist Academy &middot; Core</div>
       <h1>Core is one straight line towards your&nbsp;goals.</h1>
       <p class="hero-sub">One year. Weekly accountability. A community of artists who push each other forward. A coach who won't let you slide.</p>
+      <a href="core/" class="btn-primary" style="margin-top:2rem;">Choose your payment plan <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
   </section>
 
@@ -774,6 +649,9 @@
           <p>A curated group of committed electronic artists. Base included. Full platform access, production tools, and community resources.</p>
         </div>
       </div>
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a href="core/" class="btn-primary">Choose your payment plan <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      </div>
     </div>
   </section>
 
@@ -825,45 +703,8 @@
       <div class="section-eyebrow">Enroll</div>
       <h2 class="section-heading">Join Core Academy</h2>
       <div class="price-display">&euro;2.650</div>
-      <p class="price-note">12 months of weekly accountability, live coaching, workshops, and everything you need to build a real career. Choose your payment plan below.</p>
-      <div class="payment-plans-grid">
-        <a href="#stripe-core-full" class="payment-plan-card recommended">
-          <div class="plan-badge">Recommended</div>
-          <div class="plan-type">Pay in full</div>
-          <div class="plan-price">&euro;2.650</div>
-          <div class="plan-price-sub">One-time payment</div>
-          <div class="plan-cta-label">
-            Select plan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-        </a>
-        <a href="#stripe-core-3x" class="payment-plan-card">
-          <div class="plan-badge-spacer"></div>
-          <div class="plan-type">3 installments</div>
-          <div class="plan-price">&euro;883,33</div>
-          <div class="plan-price-sub">per month</div>
-          <div class="plan-total">Total: &euro;2.650</div>
-          <div class="plan-cta-label">
-            Select plan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-        </a>
-        <a href="#stripe-core-6x" class="payment-plan-card">
-          <div class="plan-badge-spacer"></div>
-          <div class="plan-type">6 installments</div>
-          <div class="plan-price">&euro;441,67</div>
-          <div class="plan-price-sub">per month</div>
-          <div class="plan-total">Total: &euro;2.650</div>
-          <div class="plan-cta-label">
-            Select plan
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-        </a>
-      </div>
-      <div class="security-note" style="padding:1.25rem 0 0;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        Secure payment powered by Stripe.
-      </div>
+      <p class="price-note">12 months of weekly accountability, live coaching, workshops, and everything you need to build a real career. Flexible payment plans available.</p>
+      <a href="core/" class="btn-primary" style="margin-top:0.5rem;">Choose your payment plan <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
   </section>
 

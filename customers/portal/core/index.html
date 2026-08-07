@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE — Choose Your Payment Plan</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .checkout-header {
+      text-align: center;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    .checkout-header .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .checkout-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .checkout-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* ── Plan Grid ── */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 960px;
+      width: 100%;
+    }
+    .plan-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .plan-card:hover {
+      border-color: rgba(255,104,62,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .plan-card:hover::before { opacity: 1; }
+    .plan-card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 12px 30px rgba(255,104,62,0.15);
+    }
+    .plan-card.selected::before { opacity: 1; }
+    .plan-card.recommended {
+      border-color: rgba(255,104,62,0.3);
+    }
+    .plan-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .plan-save-badge {
+      display: inline-block;
+      background: rgba(34,197,94,0.15);
+      color: #22c55e;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+    }
+    .plan-card .installments {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .plan-card .price {
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .plan-card .price-sub {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 6px;
+    }
+    .plan-card .total {
+      color: var(--muted);
+      font-size: 0.75rem;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    .plan-schedule {
+      color: var(--muted);
+      font-size: 0.72rem;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    /* ── Summary + CTA ── */
+    .checkout-summary {
+      max-width: 960px;
+      width: 100%;
+      margin-top: 2.5rem;
+      padding: 2rem;
+      background: rgba(255,104,62,0.04);
+      border: 1px solid rgba(255,104,62,0.12);
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    .summary-left .summary-plan {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .summary-left .summary-detail {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .btn-checkout {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 40px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-checkout:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
+    .btn-checkout:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ── Security Note ── */
+    .security-note {
+      margin-top: 1.5rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .security-note svg { flex-shrink: 0; }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Loading State ── */
+    .btn-checkout.loading {
+      pointer-events: none;
+      position: relative;
+      color: transparent;
+    }
+    .btn-checkout.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(10,10,10,0.3);
+      border-top-color: #0a0a0a;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .plan-grid { grid-template-columns: repeat(2, 1fr); max-width: 500px; }
+      .checkout-summary { max-width: 500px; }
+    }
+    @media (max-width: 768px) {
+      .checkout-summary { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 540px) {
+      .plan-grid { grid-template-columns: 1fr; max-width: 380px; }
+      .checkout-summary { max-width: 380px; }
+    }
+    @media (max-width: 480px) {
+      .main { padding: 1.5rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="../" class="logo-wrap">
+      <img src="../../../assets/logo.png" alt="Rise">
+      <span class="logo-text">Rise</span>
+    </a>
+  </header>
+
+  <main class="main">
+    <div class="checkout-header">
+      <div class="eyebrow">Almost there</div>
+      <h1>Choose your payment plan</h1>
+      <p>You're one step away from joining Rise CORE. Pick the plan that works best for you. All plans give you the exact same access.</p>
+    </div>
+
+    <div class="plan-grid">
+      <div class="plan-card" data-plan="1x" onclick="selectPlan(this)">
+        <div class="installments">Pay in full</div>
+        <div class="price">&euro; 2.650,-</div>
+        <div class="price-sub">One-time payment</div>
+        <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
+      </div>
+
+      <div class="plan-card recommended selected" data-plan="2x" onclick="selectPlan(this)">
+        <div class="plan-badge">Popular</div>
+        <div class="installments">2 payments</div>
+        <div class="price">&euro; 1.325,-</div>
+        <div class="price-sub">per payment</div>
+        <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
+        <div class="plan-schedule" id="schedule-2x"></div>
+      </div>
+
+      <div class="plan-card" data-plan="3x" onclick="selectPlan(this)">
+        <div class="installments">3 payments</div>
+        <div class="price">&euro; 883,-</div>
+        <div class="price-sub">per payment</div>
+        <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
+        <div class="plan-schedule" id="schedule-3x"></div>
+      </div>
+
+      <div class="plan-card" data-plan="4x" onclick="selectPlan(this)">
+        <div class="installments">4 payments</div>
+        <div class="price">&euro; 662,50</div>
+        <div class="price-sub">per payment</div>
+        <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
+        <div class="plan-schedule" id="schedule-4x"></div>
+      </div>
+    </div>
+
+    <div class="checkout-summary">
+      <div class="summary-left">
+        <div class="summary-plan" id="summary-plan">Rise CORE &mdash; 2 payments of &euro; 1.325,-</div>
+        <div class="summary-detail" id="summary-detail"></div>
+      </div>
+      <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
+        Continue to Payment
+      </button>
+    </div>
+
+    <div class="security-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure payment powered by Stripe. Your card details are never stored on our servers.
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved
+    <div class="links">
+      <a href="../../../privacy/">Privacy</a>
+      <a href="../../../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <script>
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    // ====== AUTO COHORT ======
+    // Automatically determine the next cohort (April or October)
+    function getNextCohort() {
+      var now = new Date();
+      var month = now.getMonth(); // 0-indexed
+      var year = now.getFullYear();
+      if (month < 3) { // Jan-Mar → April this year
+        return { key: year + '-04', label: 'April ' + year, startMonth: 3, startYear: year };
+      } else if (month < 9) { // Apr-Sep → October this year
+        return { key: year + '-10', label: 'October ' + year, startMonth: 9, startYear: year };
+      } else { // Oct-Dec → April next year
+        return { key: (year + 1) + '-04', label: 'April ' + (year + 1), startMonth: 3, startYear: year + 1 };
+      }
+    }
+
+    const autoCohort = getNextCohort();
+
+    // ====== PLAN DATA ======
+    const plans = {
+      '1x': {
+        label: 'Pay in full — € 2.650,-',
+        getDetail: function() { return 'One-time payment now · ex. VAT'; },
+        amount: 2650,
+        installments: 1,
+      },
+      '2x': {
+        label: '2 payments of € 1.325,-',
+        getDetail: function() {
+          return '€ 1.325,- now + € 1.325,- in ' + autoCohort.label + ' · ex. VAT';
+        },
+        amount: 1325,
+        installments: 2,
+      },
+      '3x': {
+        label: '3 payments of € 883,33',
+        getDetail: function() {
+          var m1 = monthNames[autoCohort.startMonth];
+          var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
+          return '€ 883,33 now + 2 × € 883,33 in ' + m1 + ', ' + m2 + ' · ex. VAT';
+        },
+        amount: 883.33,
+        installments: 3,
+      },
+      '4x': {
+        label: '4 payments of € 662,50',
+        getDetail: function() {
+          var m1 = monthNames[autoCohort.startMonth];
+          var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
+          var m3 = monthNames[(autoCohort.startMonth + 2) % 12];
+          return '€ 662,50 now + 3 × € 662,50 in ' + m1 + ', ' + m2 + ', ' + m3 + ' · ex. VAT';
+        },
+        amount: 662.50,
+        installments: 4,
+      },
+    };
+
+    let selectedPlan = '2x';
+    let selectedCohort = autoCohort.key;
+
+    // Read URL params (passed from application form)
+    const params = new URLSearchParams(window.location.search);
+    const customerName = params.get('name') || '';
+    const customerEmail = params.get('email') || '';
+
+    function selectPlan(el) {
+      document.querySelectorAll('.plan-card').forEach(function(c) { c.classList.remove('selected'); });
+      el.classList.add('selected');
+      selectedPlan = el.dataset.plan;
+      updateSummary();
+    }
+
+    function updateSchedules() {
+      // 2x schedule
+      var el2 = document.getElementById('schedule-2x');
+      if (el2) {
+        el2.textContent = '1st: now · 2nd: ' + autoCohort.label;
+      }
+      // 3x schedule
+      var el3 = document.getElementById('schedule-3x');
+      if (el3) {
+        var m1 = monthNames[autoCohort.startMonth];
+        var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
+        el3.textContent = '1st: now · 2nd: ' + m1 + ' · 3rd: ' + m2;
+      }
+      // 4x schedule
+      var el4 = document.getElementById('schedule-4x');
+      if (el4) {
+        var m1 = monthNames[autoCohort.startMonth];
+        var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
+        var m3 = monthNames[(autoCohort.startMonth + 2) % 12];
+        el4.textContent = '1st: now · 2nd: ' + m1 + ' · 3rd: ' + m2 + ' · 4th: ' + m3;
+      }
+    }
+
+    function updateSummary() {
+      var plan = plans[selectedPlan];
+      document.getElementById('summary-plan').textContent = 'Rise CORE — ' + plan.label;
+      document.getElementById('summary-detail').textContent = plan.getDetail();
+    }
+
+    async function startCheckout() {
+      var btn = document.getElementById('btn-checkout');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      try {
+        var res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plan: selectedPlan,
+            cohort: selectedCohort,
+            name: customerName,
+            email: customerEmail,
+            product: 'core',
+          }),
+        });
+
+        var data = await res.json();
+
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      } catch (err) {
+        alert('Could not start checkout: ' + err.message);
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+
+    // Init
+    updateSchedules();
+    updateSummary();
+  </script>
+</body>
+</html>
