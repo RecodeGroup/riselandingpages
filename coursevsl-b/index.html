@@ -687,6 +687,66 @@
     }
 
 
+    /* ── Scrolling Review Bar (indepenjend-style) ────── */
+    .review-bar-section {
+      padding: 60px 0;
+      overflow: hidden;
+    }
+    .review-bar-heading {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .review-bar-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .review-bar-row {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+    }
+    .review-bar-row.row-left {
+      animation: scroll-reviews 35s linear infinite;
+    }
+    .review-bar-row.row-right {
+      animation: scroll-reviews-reverse 40s linear infinite;
+    }
+    @keyframes scroll-reviews {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scroll-reviews-reverse {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .review-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px 8px 8px;
+      white-space: nowrap;
+      background: #f5f5f5;
+      border-radius: 40px;
+      flex-shrink: 0;
+    }
+    .review-pill img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      display: block;
+    }
+    .review-pill span {
+      font-size: 0.85rem;
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .review-bar-row { animation: none !important; }
+    }
+
     /* ── CTA Banner ──────────────────────────────────── */
     .cta-banner {
       padding: 5rem 2rem; text-align: center;
@@ -1579,6 +1639,50 @@
             <div class="reviewer">APPA!?</div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLLING REVIEW BAR -->
+  <section class="review-bar-section">
+    <div class="review-bar-heading">
+      <div class="section-eyebrow">Reviews</div>
+      <h2 class="section-title">What Our Members Say</h2>
+    </div>
+    <div class="review-bar-rows">
+      <!-- Row 1: scrolls left -->
+      <div class="review-bar-row row-left">
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-4.png" alt="" loading="lazy"><span>"It really covers everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-1.png" alt="" loading="lazy"><span>"Rise broadens your scope beyond just music production."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-3.png" alt="" loading="lazy"><span>"I made really good progression with my production and branding."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-2.png" alt="" loading="lazy"><span>"It's more about creating an artist, not just production."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-6.png" alt="" loading="lazy"><span>"Just do it, it's a good investment into yourself."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-7.png" alt="" loading="lazy"><span>"I really get structured in making the right decisions."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-5.png" alt="" loading="lazy"><span>"Just do it, don't doubt."</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-4.png" alt="" loading="lazy"><span>"It really covers everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-1.png" alt="" loading="lazy"><span>"Rise broadens your scope beyond just music production."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-3.png" alt="" loading="lazy"><span>"I made really good progression with my production and branding."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-2.png" alt="" loading="lazy"><span>"It's more about creating an artist, not just production."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-6.png" alt="" loading="lazy"><span>"Just do it, it's a good investment into yourself."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-7.png" alt="" loading="lazy"><span>"I really get structured in making the right decisions."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-5.png" alt="" loading="lazy"><span>"Just do it, don't doubt."</span></div>
+      </div>
+      <!-- Row 2: scrolls right -->
+      <div class="review-bar-row row-right">
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-8.png" alt="" loading="lazy"><span>"It has everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-9.png" alt="" loading="lazy"><span>"Be open-minded, it's a new profession you're learning."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-10.png" alt="" loading="lazy"><span>"I'm consistently busy with music now."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-11.png" alt="" loading="lazy"><span>"A comprehensive course that covers everything."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-12.png" alt="" loading="lazy"><span>"Keep this in mind and then you will have fun."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-13.png" alt="" loading="lazy"><span>"You learn so much."</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-8.png" alt="" loading="lazy"><span>"It has everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-9.png" alt="" loading="lazy"><span>"Be open-minded, it's a new profession you're learning."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-10.png" alt="" loading="lazy"><span>"I'm consistently busy with music now."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-11.png" alt="" loading="lazy"><span>"A comprehensive course that covers everything."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-12.png" alt="" loading="lazy"><span>"Keep this in mind and then you will have fun."</span></div>
+        <div class="review-pill"><img src="../assets/testimonials/Screenshots/review-13.png" alt="" loading="lazy"><span>"You learn so much."</span></div>
       </div>
     </div>
   </section>
