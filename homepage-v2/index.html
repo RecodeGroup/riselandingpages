@@ -293,18 +293,24 @@
       .why-rise-grid { grid-template-columns: 1fr; }
     }
 
-    /* ── Social Proof ────────────────────────────── */
+    /* ── Social Proof / VSL ──────────────────────── */
     .social-proof { background: var(--bg); }
     .social-proof .section-eyebrow,
     .social-proof .section-heading { text-align: center; }
-    .proof-placeholder {
+    .vsl-video-wrap {
       margin-top: 32px;
-      padding: 40px;
-      border: 1px dashed rgba(255,255,255,0.1);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
       border-radius: 12px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+    }
+    .vsl-video-wrap video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
     }
 
     /* ── Choose Your Path ────────────────────────── */
@@ -935,9 +941,11 @@
   <section class="section social-proof" id="social-proof">
     <div class="section-inner">
       <div class="section-eyebrow">Results</div>
-      <h2 class="section-heading">What our members have to&nbsp;say.</h2>
-      <div class="proof-placeholder">
-        Testimonials, videos and case studies &mdash; in production. Concrete results from participants: releases, bookings, growth.
+      <h2 class="section-heading">Hear it from our members.</h2>
+      <div class="vsl-video-wrap">
+        <video controls playsinline preload="metadata">
+          <source src="../assets/vsl/mini-vsl.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </section>
