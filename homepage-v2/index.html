@@ -271,7 +271,7 @@
     }
     .why-rise-image {
       width: 100%;
-      aspect-ratio: 4/5;
+      height: 100%;
       border-radius: 12px;
       object-fit: cover;
       border: 1px solid rgba(255,255,255,0.05);
@@ -471,14 +471,23 @@
       line-height: 1.7;
     }
     .coach-strip {
-      overflow: hidden;
+      overflow-x: auto;
       padding: 0;
+      cursor: grab;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
+    .coach-strip::-webkit-scrollbar { display: none; }
+    .coach-strip:active { cursor: grabbing; }
     .coach-strip-track {
       display: flex;
       gap: 20px;
       width: max-content;
       animation: scroll-coaches 45s linear infinite;
+    }
+    .coach-strip:hover .coach-strip-track,
+    .coach-strip.is-dragging .coach-strip-track {
+      animation-play-state: paused;
     }
     @keyframes scroll-coaches {
       0% { transform: translateX(0); }
@@ -675,7 +684,10 @@
       gap: 12px;
       padding: 8px 20px 8px 8px;
       white-space: nowrap;
-      background: #f5f5f5;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 40px;
       flex-shrink: 0;
     }
@@ -689,7 +701,7 @@
     .review-pill span {
       font-size: 0.85rem;
       font-weight: 500;
-      color: #1a1a1a;
+      color: rgba(255,255,255,0.85);
       line-height: 1.3;
     }
     @keyframes scroll-reviews {
@@ -851,10 +863,10 @@
 <body class="has-urgency-bar">
 
   <!-- Urgency Bar -->
-  <div class="urgency-bar" id="urgency-bar">
+  <a href="#paths" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
     Explore the Academy &middot; Start your journey
     <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
-  </div>
+  </a>
 
   <!-- Header -->
   <header class="site-header" id="site-header">
@@ -917,6 +929,21 @@
   </div>
 
   <!-- ══════════════════════════════════════════════
+       Social Proof (Video)
+       ══════════════════════════════════════════════ -->
+  <section class="section social-proof" id="social-proof">
+    <div class="section-inner">
+      <div class="section-eyebrow">Watch</div>
+      <h2 class="section-heading">Hear it from our members.</h2>
+      <div class="vsl-video-wrap">
+        <video controls playsinline preload="metadata">
+          <source src="../assets/vsl/mini-vsl.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
        Why Rise
        ══════════════════════════════════════════════ -->
   <section class="section why-rise" id="why-rise">
@@ -931,21 +958,6 @@
           </div>
         </div>
         <img src="../assets/photos/photo-5.jpg" alt="Rise Academy session" class="why-rise-image">
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       Social Proof
-       ══════════════════════════════════════════════ -->
-  <section class="section social-proof" id="social-proof">
-    <div class="section-inner">
-      <div class="section-eyebrow">Results</div>
-      <h2 class="section-heading">Hear it from our members.</h2>
-      <div class="vsl-video-wrap">
-        <video controls playsinline preload="metadata">
-          <source src="../assets/vsl/mini-vsl.mp4" type="video/mp4">
-        </video>
       </div>
     </div>
   </section>
@@ -972,6 +984,7 @@
             <li>Taught by industry professionals</li>
             <li>Various sample packs &amp; Ableton chains</li>
           </ul>
+          <div class="path-sub-label" style="margin-top:18px;">Includes the artist manual</div>
           <a href="../coursevsl-b/" class="path-cta secondary">
             Start the Course
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -1016,7 +1029,7 @@
         <div class="coach-card">
           <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" class="coach-avatar">
           <div class="coach-name">Maurits</div>
-          <div class="coach-role">Operations &amp; Artist Development Coach</div>
+          <div class="coach-role">Operations &amp; Artist Development</div>
           <div class="coach-label">Founding Team</div>
           <p class="coach-bio">Runs the business and accountability side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
         </div>
@@ -1069,7 +1082,7 @@
         <div class="coach-card">
           <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" class="coach-avatar">
           <div class="coach-name">Maurits</div>
-          <div class="coach-role">Operations &amp; Artist Development Coach</div>
+          <div class="coach-role">Operations &amp; Artist Development</div>
           <div class="coach-label">Founding Team</div>
           <p class="coach-bio">Runs the business and accountability side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
         </div>
@@ -1137,58 +1150,12 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
-       Reviews
-       ══════════════════════════════════════════════ -->
-  <section class="reviews-section">
-    <div class="reviews-inner">
-      <div class="reviews-head">
-        <div class="section-eyebrow">Reviews</div>
-        <h2 class="section-heading">What our members say</h2>
-      </div>
-      <div class="reviews-scroll">
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"Rise gives you everything you need to become a full-time artist. From music production to social media and business, it covers the complete picture."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"I was genuinely impressed by how comprehensive the course is. It doesn't just teach music production, it teaches you how to build a career."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"Rise has helped me tremendously. I've learned so much, and I would recommend it to any ambitious artist."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"Rise isn't just about making better music. It's about becoming a complete artist. That's what makes it different."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"Since joining Rise, I've become much more consistent with my music. My production skills and personal branding have improved tremendously."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"I was struggling to figure out who I wanted to be as an artist. Rise gave me the structure and clarity to make the right decisions for my future."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"It's one of the best investments you can make in yourself. You learn so much and gain a clear direction for your career."</p>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-text">"If you're thinking about joining, just do it. Stay open-minded, put in the time, and you'll get an incredible amount of value from it."</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       Scrolling Review Bar
+       Reviews (Scrolling Bar)
        ══════════════════════════════════════════════ -->
   <section class="review-bar-section">
     <div class="review-bar-head">
-      <div class="section-eyebrow">Testimonials</div>
-      <h2 class="section-heading">What Our Members Say</h2>
+      <div class="section-eyebrow">Reviews</div>
+      <h2 class="section-heading">What our members say</h2>
     </div>
 
     <!-- Row 1: scrolls left -->
@@ -1367,6 +1334,27 @@
         btn.addEventListener('click', function() {
           item.classList.toggle('open');
         });
+      });
+    })();
+
+    // ── Coach strip drag-to-scroll ──
+    (function() {
+      var strip = document.querySelector('.coach-strip');
+      if (!strip) return;
+      var isDown = false, startX, scrollLeft;
+      strip.addEventListener('mousedown', function(e) {
+        isDown = true;
+        strip.classList.add('is-dragging');
+        startX = e.pageX - strip.offsetLeft;
+        scrollLeft = strip.scrollLeft;
+      });
+      strip.addEventListener('mouseleave', function() { isDown = false; strip.classList.remove('is-dragging'); });
+      strip.addEventListener('mouseup', function() { isDown = false; strip.classList.remove('is-dragging'); });
+      strip.addEventListener('mousemove', function(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        var x = e.pageX - strip.offsetLeft;
+        strip.scrollLeft = scrollLeft - (x - startX);
       });
     })();
   </script>
