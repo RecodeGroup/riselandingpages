@@ -526,22 +526,16 @@
       line-height: 1.7;
     }
     .coach-strip {
-      overflow-x: auto;
+      overflow: hidden;
       padding: 0;
-      cursor: grab;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
     }
-    .coach-strip::-webkit-scrollbar { display: none; }
-    .coach-strip:active { cursor: grabbing; }
     .coach-strip-track {
       display: flex;
       gap: 20px;
       width: max-content;
       animation: scroll-coaches 45s linear infinite;
     }
-    .coach-strip:hover .coach-strip-track,
-    .coach-strip.is-dragging .coach-strip-track {
+    .coach-strip:hover .coach-strip-track {
       animation-play-state: paused;
     }
     @keyframes scroll-coaches {
@@ -1092,7 +1086,7 @@
           <div class="coach-name">Maurits</div>
           <div class="coach-role">Operations &amp; Artist Development</div>
           <div class="coach-label">Founding Team</div>
-          <p class="coach-bio">Runs the business and accountability side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
+          <p class="coach-bio">Runs the operations and artist development side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
         </div>
 
         <div class="coach-card">
@@ -1145,7 +1139,7 @@
           <div class="coach-name">Maurits</div>
           <div class="coach-role">Operations &amp; Artist Development</div>
           <div class="coach-label">Founding Team</div>
-          <p class="coach-bio">Runs the business and accountability side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
+          <p class="coach-bio">Runs the operations and artist development side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
         </div>
         <div class="coach-card">
           <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" class="coach-avatar">
@@ -1400,26 +1394,7 @@
       });
     })();
 
-    // ── Coach strip drag-to-scroll ──
-    (function() {
-      var strip = document.querySelector('.coach-strip');
-      if (!strip) return;
-      var isDown = false, startX, scrollLeft;
-      strip.addEventListener('mousedown', function(e) {
-        isDown = true;
-        strip.classList.add('is-dragging');
-        startX = e.pageX - strip.offsetLeft;
-        scrollLeft = strip.scrollLeft;
-      });
-      strip.addEventListener('mouseleave', function() { isDown = false; strip.classList.remove('is-dragging'); });
-      strip.addEventListener('mouseup', function() { isDown = false; strip.classList.remove('is-dragging'); });
-      strip.addEventListener('mousemove', function(e) {
-        if (!isDown) return;
-        e.preventDefault();
-        var x = e.pageX - strip.offsetLeft;
-        strip.scrollLeft = scrollLeft - (x - startX);
-      });
-    })();
+    // Coach strip: pure CSS animation, pauses on hover
 
     // ── VSL Player: click play/pause + deceptive progress bar ──
     (function() {
