@@ -79,7 +79,7 @@
     .checkout-header {
       text-align: center;
       max-width: 600px;
-      margin-bottom: 2rem;
+      margin: 0 auto 2rem;
     }
     .checkout-header .eyebrow {
       font-size: 0.68rem;
@@ -332,7 +332,7 @@
     <div class="checkout-header">
       <div class="eyebrow">Almost there</div>
       <h1>Choose your payment plan</h1>
-      <p>You're one step away from joining Rise CORE. Pick the plan that works best for you. All plans give you the exact same access.</p>
+      <p>You're one step away from joining Rise Core. Pick the plan that works best for you. All plans give you the exact same access.</p>
     </div>
   </div>
 
@@ -374,7 +374,7 @@
 
     <div class="checkout-summary">
       <div class="summary-left">
-        <div class="summary-plan" id="summary-plan">Rise CORE &mdash; 2 payments of &euro; 1.325,-</div>
+        <div class="summary-plan" id="summary-plan">Rise Core &mdash; 2 payments of &euro; 1.325,-</div>
         <div class="summary-detail" id="summary-detail"></div>
       </div>
       <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
@@ -495,7 +495,7 @@
 
     function updateSummary() {
       var plan = plans[selectedPlan];
-      document.getElementById('summary-plan').textContent = 'Rise CORE — ' + plan.label;
+      document.getElementById('summary-plan').textContent = 'Rise Core — ' + plan.label;
       document.getElementById('summary-detail').textContent = plan.getDetail();
     }
 
