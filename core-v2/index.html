@@ -1253,6 +1253,7 @@
         var params = new URLSearchParams();
         if (state.answers.name) params.set('name', state.answers.name);
         if (state.answers.email) params.set('email', state.answers.email);
+        if (state.answers.whatsapp) params.set('phone', state.answers.whatsapp);
         window.location.href = '/academy-thankyou/' + (params.toString() ? '?' + params.toString() : '');
         return;
       }

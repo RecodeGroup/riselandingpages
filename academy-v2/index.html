@@ -1325,6 +1325,7 @@
         var params = new URLSearchParams();
         if (qState.answers.name) params.set("name", qState.answers.name);
         if (qState.answers.email) params.set("email", qState.answers.email);
+        if (qState.answers.whatsapp) params.set("phone", qState.answers.whatsapp);
         window.location.href = "/academy-thankyou/?" + params.toString();
       }
     }
