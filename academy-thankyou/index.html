@@ -242,12 +242,20 @@
       }
 
       // Build GHL booking URL with prefilled contact details
+      // Default form fields: Voornaam, last naam, Email, Phone, Notities
       var bookingUrl = 'https://api.leadconnectorhq.com/widget/booking/NkLVSabjjsfmQptJOhw1';
       var ghlParams = new URLSearchParams();
       if (name) {
         var parts = name.trim().split(/\s+/);
-        ghlParams.set('first_name', parts[0]);
-        if (parts.length > 1) ghlParams.set('last_name', parts.slice(1).join(' '));
+        var firstName = parts[0];
+        var lastName = parts.length > 1 ? parts.slice(1).join(' ') : '';
+        // Pass all common GHL param name variants
+        ghlParams.set('first_name', firstName);
+        ghlParams.set('last_name', lastName);
+        ghlParams.set('firstName', firstName);
+        ghlParams.set('lastName', lastName);
+        ghlParams.set('name', name);
+        ghlParams.set('full_name', name);
       }
       if (email) ghlParams.set('email', email);
       if (phone) ghlParams.set('phone', phone);
