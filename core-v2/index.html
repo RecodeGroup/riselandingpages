@@ -547,37 +547,24 @@
       transition: width 0.3s linear, opacity 0.3s linear;
     }
 
-    .video-testimonials { padding: 5rem 2rem; text-align: center; }
-    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
-    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; }
-    .video-grid {
-      display: flex;
-      gap: 16px;
-      max-width: var(--maxw);
-      margin: 0 auto;
-      justify-content: center;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 12px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--accent) transparent;
+    .video-testimonials { padding: 5rem 0; text-align: center; }
+    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; padding: 0 2rem; }
+    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; padding: 0 2rem; }
+    .video-strip { overflow: hidden; }
+    .video-strip-track {
+      display: flex; gap: 16px; width: max-content;
+      animation: video-scroll 50s linear infinite;
     }
-    .video-grid::-webkit-scrollbar { height: 4px; }
-    .video-grid::-webkit-scrollbar-track { background: transparent; }
-    .video-grid::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+    .video-strip:hover .video-strip-track { animation-play-state: paused; }
+    .video-strip.paused .video-strip-track { animation-play-state: paused; }
+    @keyframes video-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
     .video-card {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 9/16;
-      min-width: 240px;
-      max-width: 280px;
-      height: 420px;
-      cursor: pointer;
-      background: #000;
-      flex-shrink: 0;
-      scroll-snap-align: start;
+      position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
+      width: 240px; height: 420px; cursor: pointer;
+      background: #000; flex-shrink: 0;
     }
     .video-card video { width: 100%; height: 100%; object-fit: cover; }
     .video-card .play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
@@ -878,14 +865,24 @@
   <section class="video-testimonials">
     <h2 class="section-title">What our artists have to say</h2>
     <p class="section-sub">Real stories from producers who joined Rise.</p>
-    <div class="video-grid">
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/4_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/7_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/13_y.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    <div class="video-strip">
+      <div class="video-strip-track">
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/2_mcy.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/4_my.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4_my.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/7_my.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/7_my.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8_mcy.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9_my.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10_myc.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/13_y.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/13_y.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/2_mcy.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/4_my.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4_my.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/7_my.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/7_my.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8_mcy.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9_my.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10_myc.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/13_y.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/13_y.jpg" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
     </div>
   </section>
 
@@ -1075,7 +1072,33 @@
     })();
 
     // ── Video testimonials ──
-    function playVideo(card){var v=card.querySelector("video");if(card.classList.contains("playing")){v.pause();card.classList.remove("playing")}else{document.querySelectorAll(".video-card.playing").forEach(function(c){c.querySelector("video").pause();c.classList.remove("playing")});v.play();card.classList.add("playing");v.onended=function(){card.classList.remove("playing")};}}
+    (function(){
+      var strip = document.querySelector('.video-strip');
+      if (!strip) return;
+      strip.querySelectorAll('.video-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var v = card.querySelector('video');
+          if (card.classList.contains('playing')) {
+            v.pause();
+            card.classList.remove('playing');
+            strip.classList.remove('paused');
+          } else {
+            document.querySelectorAll('.video-card.playing').forEach(function(c) {
+              c.querySelector('video').pause();
+              c.classList.remove('playing');
+            });
+            v.play();
+            card.classList.add('playing');
+            strip.classList.add('paused');
+          }
+          v.onended = function() {
+            card.classList.remove('playing');
+            strip.classList.remove('paused');
+          };
+        });
+      });
+    })();
 
     // ── Auto-detect country dial code from IP ──
     var _dialCode = "";
