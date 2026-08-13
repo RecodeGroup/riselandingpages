@@ -347,6 +347,7 @@
       bottom: 0; left: 0; right: 0;
       height: 4px;
       background: rgba(255,255,255,0.1);
+      transition: opacity 0.3s linear;
     }
     .vsl-progress-bar {
       height: 100%;
@@ -1428,6 +1429,7 @@
         // Fade out: 100% opacity at 0%, invisible at 70% displayed
         var opacity = Math.max(0, 1 - (displayed / 70));
         progressBar.style.opacity = opacity;
+        progressBar.parentElement.style.opacity = opacity;
       });
     })();
   </script>
