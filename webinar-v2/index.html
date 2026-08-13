@@ -626,6 +626,49 @@
       .section-heading { font-size: clamp(1.5rem, 3.5vw, 2rem); }
       .hero h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
     }
+    /* ── VSL Video Player ─────────────────────────── */
+    .vsl-video-wrap {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      margin-top: 32px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+    }
+    .vsl-video-wrap video {
+      display: block;
+      width: 100%;
+      border-radius: 14px;
+    }
+    .vsl-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: opacity 0.35s;
+      pointer-events: none;
+    }
+    .vsl-play-overlay svg { width: 72px; height: 72px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+    .vsl-video-wrap.playing .vsl-play-overlay { opacity: 0; }
+    .vsl-progress-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      transition: opacity 0.6s;
+    }
+    .vsl-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      border-radius: 0 2px 2px 0;
+      transition: width 0.3s linear;
+    }
+
     @media (max-width: 520px) {
       .section { padding: 3.5rem 1.25rem; }
       .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 4rem); }
@@ -693,6 +736,27 @@
       <img src="../assets/photos/Aug/aug_13.JPG" alt="Rise" loading="lazy">
     </div>
   </div>
+
+  <!-- ══════════════════════════════════════════════
+       VSL Video
+       ══════════════════════════════════════════════ -->
+  <section class="section" id="web-vsl" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-eyebrow">Watch</div>
+      <h2 class="section-heading">See what the webinar covers.</h2>
+      <div class="vsl-video-wrap" id="web-vsl-player">
+        <video id="web-vsl-video" playsinline preload="metadata" poster="../assets/vsl/Webinar.png">
+          <source src="../assets/vsl/Webinar%20Forefront%20VSL_Tessel_V2.mp4" type="video/mp4">
+        </video>
+        <div class="vsl-play-overlay" id="web-vsl-overlay">
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
+        </div>
+        <div class="vsl-progress-wrap">
+          <div class="vsl-progress-bar" id="web-vsl-progress"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ══════════════════════════════════════════════
        What to Expect
@@ -922,6 +986,38 @@
       if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
       closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
     })();
+  </script>
+
+  <!-- VSL Player Script -->
+  <script>
+  (function() {
+    var player = document.getElementById('web-vsl-player');
+    var video = document.getElementById('web-vsl-video');
+    var progressBar = document.getElementById('web-vsl-progress');
+    if (!player || !video) return;
+    var CURVE = 0.575;
+    player.addEventListener('click', function() {
+      if (video.paused || video.ended) {
+        video.play().catch(function(){});
+        player.classList.add('playing');
+      } else {
+        video.pause();
+        player.classList.remove('playing');
+      }
+    });
+    video.addEventListener('ended', function() {
+      player.classList.remove('playing');
+      progressBar.style.width = '100%';
+    });
+    video.addEventListener('timeupdate', function() {
+      if (!video.duration) return;
+      var actual = video.currentTime / video.duration;
+      var displayed = Math.pow(actual, CURVE) * 100;
+      progressBar.style.width = displayed + '%';
+      var opacity = Math.max(0, 1 - (displayed / 70));
+      progressBar.parentElement.style.opacity = opacity;
+    });
+  })();
   </script>
 
 </body>
