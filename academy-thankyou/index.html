@@ -366,38 +366,49 @@
   </script>
   <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
   <script>
-    // Listen for GoHighLevel booking confirmation via postMessage
+    // Listen for ANY postMessage from GHL iframe (catch-all approach)
+    var step2Activated = false;
     window.addEventListener('message', function(e) {
-      try {
-        var d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-        // GHL sends various event types; check for booking/appointment confirmation
-        if (d && (d.type === 'booking-confirmed' || d.type === 'appointment-booked' ||
-            d.action === 'booking-confirmed' || d.action === 'appointment-booked' ||
-            (d.type === 'form-submitted') || (d.event === 'booked'))) {
-          activateStep2();
+      if (step2Activated) return;
+      // Accept messages from GHL domains
+      var origin = (e.origin || '').toLowerCase();
+      if (origin.indexOf('leadconnectorhq') !== -1 ||
+          origin.indexOf('msgsndr') !== -1 ||
+          origin.indexOf('gohighlevel') !== -1) {
+        // Any message from GHL after initial load likely means booking action
+        // Skip resize-only messages by checking for meaningful content
+        var d = e.data;
+        if (typeof d === 'string') {
+          try { d = JSON.parse(d); } catch(err) { /* raw string is fine */ }
         }
-      } catch (err) { /* not JSON, ignore */ }
+        // If it's just a resize number, skip it
+        if (typeof d === 'number') return;
+        // If it's an object with only height/width, skip it
+        if (d && typeof d === 'object' && Object.keys(d).length <= 2 &&
+            (d.height !== undefined || d.scrollHeight !== undefined) &&
+            !d.type && !d.action && !d.event && !d.status) return;
+        activateStep2();
+      }
     });
 
-    // Also detect iframe navigation (fallback: GHL often navigates to a confirmation screen)
+    // Fallback: monitor iframe for attribute changes (GHL form_embed.js modifies iframe style)
     var ghlIframe = document.getElementById('r0Ob1gUmQEoJ5KG046Dq_1786630166143');
     if (ghlIframe) {
-      // MutationObserver on iframe height changes (GHL resizes on confirmation)
-      var lastHeight = 0;
-      var checkInterval = setInterval(function() {
-        try {
-          var h = ghlIframe.offsetHeight;
-          // GHL confirmation screen is typically much shorter than the calendar
-          if (lastHeight > 400 && h < lastHeight * 0.5) {
-            activateStep2();
-            clearInterval(checkInterval);
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          if (m.type === 'attributes' && m.attributeName === 'style') {
+            // form_embed.js resizes iframe; big shrink = confirmation screen
+            var h = parseInt(ghlIframe.style.height);
+            if (h && h < 400) activateStep2();
           }
-          lastHeight = h;
-        } catch (err) {}
-      }, 1000);
+        });
+      });
+      observer.observe(ghlIframe, { attributes: true });
     }
 
     function activateStep2() {
+      if (step2Activated) return;
+      step2Activated = true;
       var step = document.getElementById('step-call-scheduled');
       if (!step) return;
       var icon = step.querySelector('.flow-icon');
