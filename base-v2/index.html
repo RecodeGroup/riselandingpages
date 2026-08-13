@@ -572,18 +572,27 @@
     .form-step input:focus { border-color: var(--accent); }
 
     /* ── VSL Video Player ─────────────────────────── */
+    .social-proof .section-eyebrow,
+    .social-proof .section-heading { text-align: center; }
     .vsl-video-wrap {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      cursor: pointer;
       margin-top: 32px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .vsl-video-wrap video {
-      display: block;
       width: 100%;
-      border-radius: 14px;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
     }
     .vsl-play-overlay {
       position: absolute;
@@ -592,26 +601,28 @@
       align-items: center;
       justify-content: center;
       background: rgba(0,0,0,0.25);
-      transition: opacity 0.35s;
+      transition: opacity 0.3s ease;
       pointer-events: none;
     }
-    .vsl-play-overlay svg { width: 72px; height: 72px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+    .vsl-play-overlay svg {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      transition: transform 0.2s ease;
+    }
+    .vsl-video-wrap:hover .vsl-play-overlay svg { transform: scale(1.08); }
     .vsl-video-wrap.playing .vsl-play-overlay { opacity: 0; }
     .vsl-progress-wrap {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 4px;
-      background: rgba(255,255,255,0.08);
-      transition: opacity 0.6s;
+      background: rgba(255,255,255,0.1);
+      transition: opacity 0.3s linear;
     }
     .vsl-progress-bar {
       height: 100%;
       width: 0%;
       background: var(--accent);
-      border-radius: 0 2px 2px 0;
-      transition: width 0.3s linear;
+      transition: width 0.3s linear, opacity 0.3s linear;
     }
 
     @media (max-width: 520px) {
