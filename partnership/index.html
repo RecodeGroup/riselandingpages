@@ -501,6 +501,7 @@
       justify-content: center;
       align-items: center;
       padding: 2rem 0;
+      overflow: hidden;
     }
     .flywheel-svg {
       max-width: 520px;
@@ -515,7 +516,8 @@
     }
     .flywheel-ring {
       animation: spin-slow 30s linear infinite;
-      transform-origin: 260px 260px;
+      transform-box: fill-box;
+      transform-origin: center;
     }
     .flywheel-arrows {
       stroke-dasharray: 12 8;
@@ -755,7 +757,7 @@
     /* -- Dual CTA section ----------------------------------------- */
     .dual-cta {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1fr;
       gap: 24px;
       max-width: var(--maxw);
       margin: 0 auto;
@@ -832,7 +834,6 @@
     /* -- Responsive ----------------------------------------------- */
     @media (max-width: 900px) {
       .process-grid { grid-template-columns: repeat(2, 1fr); }
-      .dual-cta { grid-template-columns: 1fr; }
       .benefits-grid { grid-template-columns: 1fr; }
       .winwin-grid { grid-template-columns: 1fr; }
       .ways-grid { grid-template-columns: repeat(2, 1fr); }
