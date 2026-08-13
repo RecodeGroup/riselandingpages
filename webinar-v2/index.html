@@ -708,14 +708,14 @@
   </style>
 </head>
 <body class="has-urgency-bar">
-  <a href="#register" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
+  <a href="https://api.leadconnectorhq.com/widget/booking/zzYQhu4kE75pC8vmxvQB" target="_blank" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
     <span class="urgency-text">Applications open</span> &middot; Join the next webinar
     <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
   </a>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
       <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
-      <a class="header-cta" href="#">Register for the webinar</a>
+      <a class="header-cta" href="https://api.leadconnectorhq.com/widget/booking/zzYQhu4kE75pC8vmxvQB" target="_blank">Register for the webinar</a>
     </div>
   </header>
 
@@ -735,7 +735,7 @@
         <span style="color:rgba(255,255,255,0.2);">&middot;</span>
         <span>Live Q&amp;A</span>
       </div>
-      <a href="#" class="btn-primary">Register for the webinar</a>
+      <a href="https://api.leadconnectorhq.com/widget/booking/zzYQhu4kE75pC8vmxvQB" target="_blank" class="btn-primary">Register for the webinar</a>
       <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
         <span>&#10003; Free, no commitment</span>
         <span>&#10003; For all experience levels</span>
@@ -893,7 +893,7 @@
       </div>
 
       <div class="academy-cta-wrap">
-        <a href="#" class="btn-primary">Register for the webinar</a>
+        <a href="https://api.leadconnectorhq.com/widget/booking/zzYQhu4kE75pC8vmxvQB" target="_blank" class="btn-primary">Register for the webinar</a>
       </div>
     </div>
   </section>
@@ -1076,9 +1076,25 @@
           c.querySelector('video').pause();
           c.classList.remove('playing');
         });
-        var p = v.play();
-        if (p) p.catch(function(){});
-        card.classList.add('playing');
+        function tryPlay() {
+          var p = v.play();
+          if (p && p.then) {
+            p.then(function() {
+              card.classList.add('playing');
+            }).catch(function() {
+              v.load();
+              v.addEventListener('canplay', function handler() {
+                v.removeEventListener('canplay', handler);
+                v.play().then(function() {
+                  card.classList.add('playing');
+                }).catch(function() {});
+              });
+            });
+          } else {
+            card.classList.add('playing');
+          }
+        }
+        tryPlay();
       }
       v.onended = function() { card.classList.remove('playing'); };
     });

@@ -1253,9 +1253,25 @@
           c.querySelector('video').pause();
           c.classList.remove('playing');
         });
-        var p = v.play();
-        if (p) p.catch(function(){});
-        card.classList.add('playing');
+        function tryPlay() {
+          var p = v.play();
+          if (p && p.then) {
+            p.then(function() {
+              card.classList.add('playing');
+            }).catch(function() {
+              v.load();
+              v.addEventListener('canplay', function handler() {
+                v.removeEventListener('canplay', handler);
+                v.play().then(function() {
+                  card.classList.add('playing');
+                }).catch(function() {});
+              });
+            });
+          } else {
+            card.classList.add('playing');
+          }
+        }
+        tryPlay();
       }
       v.onended = function() { card.classList.remove('playing'); };
     });

@@ -863,6 +863,19 @@
     @media (max-width: 600px) {
       .msg-bubble { width: 270px; font-size: 0.82rem; }
       .msg-carousel { padding: 3rem 0 2rem; }
+
+      /* ── WhatsApp messages: swipeable on mobile ── */
+      .msg-carousel-track-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+      .msg-carousel-track-wrap::-webkit-scrollbar { display: none; }
+      .msg-carousel-track {
+        animation: none;
+      }
     }
 
     /* ── Video Testimonials ──────────────────────── */
@@ -1008,18 +1021,6 @@
         flex-wrap: nowrap;
       }
 
-      /* ── Review bar: swipeable on mobile ───────── */
-      .review-bar-row {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding: 0 1rem;
-      }
-      .review-bar-row::-webkit-scrollbar { display: none; }
-      .review-bar-track--left,
-      .review-bar-track--right {
-        animation: none;
-      }
     }
 
     @media (max-width: 520px) {
@@ -1259,52 +1260,6 @@
           <p class="coach-bio">Remy is an artist with a long career in the music industry. He's an expert on music rights, organizes writing camps, and produces for the Eurovision Song Festival.</p>
         </div>
 
-        <!-- Duplicate for seamless loop -->
-        <div class="coach-card">
-          <img src="../assets/Pages/Coaches/Mau2.png" alt="Maurits" class="coach-avatar">
-          <div class="coach-name">Maurits</div>
-          <div class="coach-role">Operations &amp; Artist Development</div>
-          <div class="coach-label">Founding Team</div>
-          <p class="coach-bio">Runs the operations and artist development side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
-        </div>
-        <div class="coach-card">
-          <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" class="coach-avatar">
-          <div class="coach-name">Jurrian (Artcode)</div>
-          <div class="coach-role">Base Coach &middot; Techno Artist</div>
-          <p class="coach-bio">With over 15 years of experience across electronic music, Jurrian leads the Base production coaching. From sound design to arrangement, he helps producers build a foundation they can keep building on.</p>
-        </div>
-        <div class="coach-card">
-          <img src="../assets/Pages/Coaches/Jim.png" alt="Jim" class="coach-avatar">
-          <div class="coach-name">Jim (Vannood)</div>
-          <div class="coach-role">Founder &amp; Techno Artist</div>
-          <p class="coach-bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist and entrepreneur. His experience brings a practical perspective to every lesson.</p>
-        </div>
-        <div class="coach-card">
-          <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" class="coach-avatar">
-          <div class="coach-name">Yvo (Overhoff)</div>
-          <div class="coach-role">Operations &amp; Products</div>
-          <div class="coach-label">Founding Team</div>
-          <p class="coach-bio">Amsterdam-based producer and AEMA graduate with a groove-first approach to house music. He developed the advanced video modules using the same workflow he uses in his own studio.</p>
-        </div>
-        <div class="coach-card">
-          <img src="../assets/Pages/Coaches/RDLF.jpg" alt="David" class="coach-avatar">
-          <div class="coach-name">David (RDLF)</div>
-          <div class="coach-role">Techno Artist &middot; Base Modules</div>
-          <p class="coach-bio">German techno producer, sound engineer and co-founder of Interrealm. He created the beginner modules around the fundamentals every producer needs before moving on.</p>
-        </div>
-        <div class="coach-card">
-          <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" class="coach-avatar">
-          <div class="coach-name">Hendrik</div>
-          <div class="coach-role">Partnerships &amp; Bookings</div>
-          <div class="coach-label">Founding Team</div>
-          <p class="coach-bio">Hendrik manages Rise's partnerships and runs a booking agency for artists. He connects emerging talent with the right stages, labels, and industry players.</p>
-        </div>
-        <div class="coach-card">
-          <img src="../assets/Pages/Coaches/Remy.png" alt="Remy" class="coach-avatar">
-          <div class="coach-name">Remy</div>
-          <div class="coach-role">Monetisation &amp; Rights</div>
-          <p class="coach-bio">Remy is an artist with a long career in the music industry. He's an expert on music rights, organizes writing camps, and produces for the Eurovision Song Festival.</p>
-        </div>
 
       </div>
       </div>
@@ -1658,9 +1613,25 @@
           c.querySelector('video').pause();
           c.classList.remove('playing');
         });
-        var p = v.play();
-        if (p) p.catch(function(){});
-        card.classList.add('playing');
+        function tryPlay() {
+          var p = v.play();
+          if (p && p.then) {
+            p.then(function() {
+              card.classList.add('playing');
+            }).catch(function() {
+              v.load();
+              v.addEventListener('canplay', function handler() {
+                v.removeEventListener('canplay', handler);
+                v.play().then(function() {
+                  card.classList.add('playing');
+                }).catch(function() {});
+              });
+            });
+          } else {
+            card.classList.add('playing');
+          }
+        }
+        tryPlay();
       }
       v.onended = function() { card.classList.remove('playing'); };
     });
