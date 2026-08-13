@@ -879,10 +879,13 @@
     <h2 class="section-title">What our artists have to say</h2>
     <p class="section-sub">Real stories from producers who joined Rise.</p>
     <div class="video-grid">
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Be%20open-minded%2C%20make%20time%20%E2%80%93%20it%E2%80%99s%20a%20new%20profession%20you%E2%80%99re%20learning.mp4" preload="metadata" playsinline loop></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/4_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/7_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/13_y.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
     </div>
   </section>
 
@@ -1072,7 +1075,7 @@
     })();
 
     // ── Video testimonials ──
-    function playVideo(card){var v=card.querySelector("video");if(card.classList.contains("playing")){v.pause();card.classList.remove("playing")}else{document.querySelectorAll(".video-card.playing").forEach(function(c){c.querySelector("video").pause();c.classList.remove("playing")});v.play();card.classList.add("playing")}}
+    function playVideo(card){var v=card.querySelector("video");if(card.classList.contains("playing")){v.pause();card.classList.remove("playing")}else{document.querySelectorAll(".video-card.playing").forEach(function(c){c.querySelector("video").pause();c.classList.remove("playing")});v.play();card.classList.add("playing");v.onended=function(){card.classList.remove("playing")};}}
 
     // ── Auto-detect country dial code from IP ──
     var _dialCode = "";

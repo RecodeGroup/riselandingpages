@@ -152,7 +152,7 @@
         radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
         radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
         linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%),
-        url('../assets/photos/photo-2.jpg') center 30% / cover no-repeat;
+        url('../assets/photos/Aug/aug_22.png') center 30% / cover no-repeat;
     }
     .hero-content { max-width: 720px; position: relative; z-index: 2; }
     .hero-eyebrow {
@@ -532,6 +532,29 @@
       line-height: 1.75;
     }
 
+    /* ── Video Testimonials ──────────────────────── */
+    .video-testimonials { padding: 5rem 2rem; text-align: center; }
+    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; }
+    .video-grid {
+      display: flex; gap: 16px; max-width: var(--maxw); margin: 0 auto;
+      overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px; scrollbar-width: thin; scrollbar-color: var(--accent) transparent;
+      justify-content: center;
+    }
+    .video-grid::-webkit-scrollbar { height: 4px; }
+    .video-grid::-webkit-scrollbar-track { background: transparent; }
+    .video-grid::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+    .video-card {
+      position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
+      min-width: 240px; max-width: 280px; height: 420px; cursor: pointer;
+      background: #000; flex-shrink: 0; scroll-snap-align: start;
+    }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; }
+    .video-card .play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+    .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
+
     /* ── FAQ ──────────────────────────────────────── */
     .faq-list {
       margin-top: 32px;
@@ -734,6 +757,7 @@
       <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/Aug/aug_7.JPG" alt="Rise" loading="lazy">
       <img src="../assets/photos/Aug/aug_13.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
       <!-- Duplicate for seamless loop -->
       <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
       <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
@@ -743,6 +767,7 @@
       <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
       <img src="../assets/photos/Aug/aug_7.JPG" alt="Rise" loading="lazy">
       <img src="../assets/photos/Aug/aug_13.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
     </div>
   </div>
 
@@ -908,6 +933,23 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
+       VIDEO TESTIMONIALS
+       ══════════════════════════════════════════════ -->
+  <section class="video-testimonials">
+    <h2 class="section-title">What our artists have to say</h2>
+    <p class="section-sub">Real stories from Rise community members.</p>
+    <div class="video-grid">
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/4_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/7_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="video-card" onclick="playVideo(this)"><video src="../assets/Testimonials/Voor%20site/Clips/Final/13_y.mp4" preload="metadata" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
        FAQ
        ══════════════════════════════════════════════ -->
   <section class="section faq" id="faq">
@@ -1027,6 +1069,10 @@
       progressBar.parentElement.style.opacity = opacity;
     });
   })();
+  </script>
+
+  <script>
+    function playVideo(card){var v=card.querySelector("video");if(card.classList.contains("playing")){v.pause();card.classList.remove("playing")}else{document.querySelectorAll(".video-card.playing").forEach(function(c){c.querySelector("video").pause();c.classList.remove("playing")});v.play();card.classList.add("playing");v.onended=function(){card.classList.remove("playing")};}}
   </script>
 
 </body>

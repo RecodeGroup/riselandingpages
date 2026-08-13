@@ -766,6 +766,7 @@
       padding-bottom: 12px;
       scrollbar-width: thin;
       scrollbar-color: var(--accent) transparent;
+      justify-content: center;
     }
     .video-grid::-webkit-scrollbar { height: 4px; }
     .video-grid::-webkit-scrollbar-track { background: transparent; }
@@ -1085,19 +1086,31 @@
     <p class="section-sub">Real stories from producers who joined Rise.</p>
     <div class="video-grid">
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/Testimonials/Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy.mp4" preload="metadata" playsinline></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/Testimonials/Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/Voor%20site/Clips/Final/4_my.mp4" preload="metadata" playsinline></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/Testimonials/How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/Voor%20site/Clips/Final/7_my.mp4" preload="metadata" playsinline></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="video-card" onclick="playVideo(this)">
-        <video src="../assets/Testimonials/Be%20open-minded%2C%20make%20time%20%E2%80%93%20it%E2%80%99s%20a%20new%20profession%20you%E2%80%99re%20learning.mp4" preload="metadata" playsinline loop></video>
+        <video src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy.mp4" preload="metadata" playsinline></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my.mp4" preload="metadata" playsinline></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc.mp4" preload="metadata" playsinline></video>
+        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="video-card" onclick="playVideo(this)">
+        <video src="../assets/Testimonials/Voor%20site/Clips/Final/13_y.mp4" preload="metadata" playsinline></video>
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
     </div>
@@ -1281,6 +1294,7 @@
         });
         video.play();
         card.classList.add('playing');
+        video.onended = function() { card.classList.remove('playing'); };
       }
     }
 
