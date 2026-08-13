@@ -536,17 +536,9 @@
     .video-testimonials { padding: 5rem 0; text-align: center; }
     .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; padding: 0 2rem; }
     .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; padding: 0 2rem; }
-    .video-strip { overflow: hidden; }
-    .video-strip-track {
-      display: flex; gap: 16px; width: max-content;
-      animation: video-scroll 50s linear infinite;
-    }
-    .video-strip:hover .video-strip-track { animation-play-state: paused; }
-    .video-strip.paused .video-strip-track { animation-play-state: paused; }
-    @keyframes video-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+    .video-strip { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 2rem; }
+    .video-strip::-webkit-scrollbar { display: none; }
+    .video-strip-track { display: flex; gap: 16px; width: max-content; }
     .video-card {
       position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
       width: 240px; height: 420px; cursor: pointer;
@@ -942,20 +934,14 @@
     <p class="section-sub">Real stories from Rise community members.</p>
     <div class="video-strip">
       <div class="video-strip-track">
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy_B.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/2.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/13_y_A.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/13.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/7_my_C.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/7.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <!-- Duplicate for seamless loop -->
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/1_mc_E.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/1.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy_B.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/2.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/13_y_A.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/13.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/11v2_cm_B.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/11.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/12_mc_D.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/12.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video src="../assets/Testimonials/Voor%20site/Clips/Final/7_my_C.mp4" poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/7.png" preload="none" playsinline></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
       </div>
     </div>
@@ -1085,28 +1071,27 @@
 
   <script>
     (function(){
-      var strip = document.querySelector('.video-strip');
-      if (!strip) return;
-      strip.querySelectorAll('.video-card').forEach(function(card) {
+      document.querySelectorAll('.video-card').forEach(function(card) {
         card.addEventListener('click', function(e) {
+          e.preventDefault();
           e.stopPropagation();
           var v = card.querySelector('video');
           if (card.classList.contains('playing')) {
             v.pause();
             card.classList.remove('playing');
-            strip.classList.remove('paused');
           } else {
             document.querySelectorAll('.video-card.playing').forEach(function(c) {
               c.querySelector('video').pause();
               c.classList.remove('playing');
             });
-            v.play();
+            var playPromise = v.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(function() {});
+            }
             card.classList.add('playing');
-            strip.classList.add('paused');
           }
           v.onended = function() {
             card.classList.remove('playing');
-            strip.classList.remove('paused');
           };
         });
       });
