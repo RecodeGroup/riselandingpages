@@ -545,7 +545,8 @@
       background: #000; flex-shrink: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
     }
     .video-card video { width: 100%; height: 100%; object-fit: cover; }
-    .video-card .play-btn { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; pointer-events: none; }
+    .video-card video { pointer-events: none; }
+    .video-card .play-btn { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
     .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
     .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
 
@@ -555,6 +556,7 @@
       max-width: 720px;
       margin: 32px auto 0;
     }
+    .faq .section-eyebrow,
     .faq .section-heading {
       text-align: center;
     }
@@ -695,6 +697,9 @@
       transition: width 0.3s linear, opacity 0.3s linear;
     }
 
+    @media (max-width: 700px) {
+      .hero-bg { background-position: 65% 30%; }
+    }
     @media (max-width: 520px) {
       .section { padding: 3.5rem 1.25rem; }
       .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 4rem); }
@@ -893,18 +898,6 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════
-       Social Proof
-       ══════════════════════════════════════════════ -->
-  <section class="section social-proof" id="social-proof">
-    <div class="section-inner">
-      <div class="section-eyebrow">Results</div>
-      <h2 class="section-heading">What our members say</h2>
-      <div class="proof-placeholder">
-        Testimonials, videos and case studies &mdash; in production. Concrete results from participants: releases, bookings, growth.
-      </div>
-    </div>
-  </section>
 
   <!-- ══════════════════════════════════════════════
        Meet Your Coach

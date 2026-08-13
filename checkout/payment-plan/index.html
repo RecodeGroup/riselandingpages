@@ -401,6 +401,11 @@
       </div>
     </div>
 
+    <label style="display:flex;align-items:flex-start;gap:10px;margin:1.5rem 0;text-align:left;font-size:0.85rem;color:var(--muted);cursor:pointer;max-width:480px;margin-left:auto;margin-right:auto;">
+      <input type="checkbox" id="core-approval-check" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required>
+      <span>I confirm that I have spoken with a member of the Rise founding team and have been approved as a suitable candidate for the Core program. I understand that payments made without prior approval may be declared invalid.</span>
+    </label>
+
     <div class="checkout-summary">
       <div class="summary-left">
         <div class="summary-plan" id="summary-plan">Rise BASE &mdash; 2 payments of &euro; 750,-</div>
@@ -512,6 +517,19 @@
     }
 
     async function startCheckout() {
+      var checkbox = document.getElementById('core-approval-check');
+      if (checkbox && !checkbox.checked) {
+        checkbox.parentElement.style.outline = '2px solid var(--accent)';
+        checkbox.parentElement.style.outlineOffset = '4px';
+        checkbox.focus();
+        alert('Please confirm that you have been approved by a Rise founding team member before proceeding with payment.');
+        return;
+      }
+      if (checkbox) {
+        checkbox.parentElement.style.outline = '';
+        checkbox.parentElement.style.outlineOffset = '';
+      }
+
       var btn = document.getElementById('btn-checkout');
       btn.classList.add('loading');
       btn.disabled = true;
