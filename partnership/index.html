@@ -307,12 +307,14 @@
       color: var(--accent);
     }
 
+    @keyframes cardFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     .self-select-card {
       display: none;
       background: var(--bg-2);
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 2.5rem;
+      animation: cardFadeIn 0.4s ease;
       max-width: 720px;
       margin: 0 auto;
       text-align: left;
@@ -351,6 +353,17 @@
       font-size: 0.85rem;
       color: #bbb;
       line-height: 1.6;
+    }
+    .self-select-card ul {
+      list-style: none; padding: 0; margin: 0 0 0.5rem 0;
+    }
+    .self-select-card ul li {
+      position: relative; padding-left: 1.2rem; margin-bottom: 0.35rem;
+      font-size: 0.92rem; color: #ccc; line-height: 1.6;
+    }
+    .self-select-card ul li::before {
+      content: ''; position: absolute; left: 0; top: 0.55rem;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
     }
     .self-select-card .card-scenario strong {
       color: var(--fg);
@@ -922,84 +935,167 @@
   <div class="self-select-card" id="card-label">
     <div class="card-headline">"Your A&amp;R inbox is 90% noise. We filter it."</div>
     <h4>The Problem</h4>
-    <p>Most demos landing in your inbox aren't release-ready. Your A&amp;R team spends hours sifting through tracks that need months more work on mixdowns, arrangements, and overall quality. You see potential in some artists, but you can't develop every one of them yourself. Rejecting promising talent feels like leaving value on the table.</p>
+    <ul>
+      <li>Most demos aren't release-ready — your A&amp;R team wastes hours on tracks that need months more work</li>
+      <li>You see potential but can't develop every artist yourself</li>
+      <li>Rejecting promising talent means leaving value on the table</li>
+    </ul>
     <h4>How Rise Solves This</h4>
-    <p>Instead of rejecting artists, refer them to Rise. Our Course and Base programs give them structured production training, professional mixing guidance, and detailed track feedback from active producers. When they reach release-ready quality, you get first access. Think of Rise as your outsourced artist development department — we do the heavy lifting, you get the finished product.</p>
+    <ul>
+      <li>Refer artists instead of rejecting them — Rise handles production training, mixing guidance, and track feedback</li>
+      <li>When they reach release-ready quality, you get first access</li>
+      <li>Rise is your outsourced artist development department</li>
+    </ul>
     <h4>How You Earn</h4>
-    <p>Earn a commission on every artist that joins Rise through your referral. With our affiliate model, referring 10 to 50 artists per month generates recurring revenue — while we handle all the development. You turn every rejection into a revenue opportunity and a future signing.</p>
-    <div class="card-scenario"><strong>Example:</strong> A melodic techno producer submits to your label but the mixdown isn't there yet. Instead of a flat rejection, you refer them to Rise. They complete 6 months of coaching, come back with polished tracks, and you sign the release. You earned a referral commission <strong>and</strong> got a release-ready artist.</div>
+    <ul>
+      <li>Commission on every artist that joins through your referral</li>
+      <li>Recurring revenue from 10-50 referrals per month</li>
+      <li>Every rejection becomes a revenue opportunity and a future signing</li>
+    </ul>
+    <div class="card-scenario"><strong>Example:</strong> A producer submits but the mixdown isn't there. You refer them to Rise. After 6 months of coaching, they return with polished tracks. You sign the release <strong>and</strong> earned a referral commission.</div>
   </div>
 
   <!-- Agency -->
   <div class="self-select-card" id="card-agency">
-    <div class="card-headline">"You don't have time to teach artists how to post on Instagram."</div>
+    <div class="card-headline">"You book artists, not teach them Instagram."</div>
     <h4>The Problem</h4>
-    <p>Your artists need help with branding, social media presence, and staying consistent — but you're a booking agency, not a content studio. You don't have the bandwidth to hold every artist's hand on their online presence, keep them accountable, and coach them through the business side. Yet without that, they're harder to book and command lower fees.</p>
+    <ul>
+      <li>Artists need branding and social media help, but you're a booking agency</li>
+      <li>No bandwidth for accountability, content coaching, or business guidance</li>
+      <li>Without that, artists are harder to book and command lower fees</li>
+    </ul>
     <h4>How Rise Solves This</h4>
-    <p>Rise Core handles exactly what you can't: personal branding, social media strategy, content creation guidance, and weekly accountability sessions. Your artists get a dedicated team keeping them on track while you focus on what you do best — bookings. As a bonus, your artists can earn additional income through coaching and content creation within the Rise ecosystem.</p>
+    <ul>
+      <li>Rise Core covers branding, social strategy, content, and weekly accountability</li>
+      <li>You focus on bookings — we handle development</li>
+      <li>Artists can earn extra income through coaching within Rise</li>
+    </ul>
     <h4>How You Earn</h4>
-    <p>Affiliate commission on every artist you refer to Rise. The more artists from your roster that join Core, the more developed and bookable they become — which means higher booking fees for you. Plus, you earn on every referral. Your roster improves and your revenue grows at the same time.</p>
-    <div class="card-scenario"><strong>Example:</strong> You have 20 artists on your roster. Five of them are struggling with social media and consistency. You refer them to Rise Core. They build their brand, grow their following, and become easier to book at higher rates. You earned referral commissions and now have more bookable artists.</div>
+    <ul>
+      <li>Affiliate commission on every artist you refer</li>
+      <li>More developed roster = higher booking fees</li>
+      <li>Revenue grows while your artists improve</li>
+    </ul>
+    <div class="card-scenario"><strong>Example:</strong> Five artists on your roster struggle with consistency. You refer them to Core. They build their brand, grow their following, and become easier to book at higher rates.</div>
   </div>
 
   <!-- Management -->
   <div class="self-select-card" id="card-management">
-    <div class="card-headline">"You already manage their career. You need specialist support."</div>
+    <div class="card-headline">"You manage careers. You need specialist support."</div>
     <h4>The Problem</h4>
-    <p>As a manager, you're already doing a lot of what Rise Core offers — accountability, career planning, strategy. But you can't be an expert in everything. Sometimes your artists need specialized production coaching, professional track feedback, or mental and personal development support that falls outside your expertise or capacity.</p>
+    <ul>
+      <li>You already handle accountability and career planning</li>
+      <li>But production coaching, track feedback, and personal development fall outside your expertise</li>
+      <li>You can't be a specialist in everything</li>
+    </ul>
     <h4>How Rise Solves This</h4>
-    <p>Rise offers services tailored for managed artists: standalone 1-on-1 coaching sessions with professional producers, detailed track feedback, and personal development guidance. We supplement what you already do, not replace it. Your artists get expert help in areas where they need it most, and you stay in the driver's seat of their career.</p>
+    <ul>
+      <li>Standalone 1-on-1 coaching with professional producers</li>
+      <li>Detailed track feedback and personal development guidance</li>
+      <li>We supplement what you do, not replace it — you stay in control</li>
+    </ul>
     <h4>How You Earn</h4>
-    <p>Referral fee on every service your managed artists use through Rise. You expand your offering without adding overhead, and your artists get specialized support that makes them more successful — which directly benefits your management business.</p>
-    <div class="card-scenario"><strong>Example:</strong> You manage 3 artists. One needs production coaching, another wants professional feedback on their EP, and the third is struggling with motivation. You refer each to the specific Rise service they need. They get expert help, you earn referral fees, and your roster levels up across the board.</div>
+    <ul>
+      <li>Referral fee on every service your artists use through Rise</li>
+      <li>Expand your offering without adding overhead</li>
+      <li>Better artists = better management business</li>
+    </ul>
+    <div class="card-scenario"><strong>Example:</strong> You manage 3 artists. One needs production coaching, another wants EP feedback, the third needs motivation support. You refer each to Rise. They level up, you earn fees.</div>
   </div>
 
   <!-- Community -->
   <div class="self-select-card" id="card-community">
-    <div class="card-headline">"You've built the audience. Now monetize it without alienating them."</div>
+    <div class="card-headline">"Monetize your audience without alienating them."</div>
     <h4>The Problem</h4>
-    <p>You run a thriving community of producers and DJs — Discord, forum, Facebook group, subreddit, whatever the platform. Engagement is high, but the revenue model is unclear. Sponsorships feel off-brand, merch margins are thin, and aggressive sales would alienate the members who trust you. You need a monetization path that actually helps your community.</p>
+    <ul>
+      <li>Thriving community, but the revenue model is unclear</li>
+      <li>Sponsorships feel off-brand, merch margins are thin</li>
+      <li>Aggressive sales would break the trust you built</li>
+    </ul>
     <h4>How Rise Solves This</h4>
-    <p>A simple, clean affiliate partnership. Share Rise with your community in a way that genuinely helps your members grow — because it does. No hard selling needed. When members ask about courses, coaching, or how to get better, you point them to Rise. Your members get access to professional development, and you earn for connecting them with something they actually want.</p>
+    <ul>
+      <li>Simple affiliate partnership — share Rise when members ask how to grow</li>
+      <li>No hard selling needed — you're recommending something that genuinely helps</li>
+      <li>Members get professional development, you earn for the connection</li>
+    </ul>
     <h4>How You Earn</h4>
-    <p>Straightforward affiliate commission per signup. This is the simplest model to implement and the most natural fit for community leaders. Your members already want to grow — you're just pointing them to the right resource. No inventory, no overhead, no awkward sales pitches.</p>
-    <div class="card-scenario"><strong>Example:</strong> You run a Discord server with 2,000 producers. You share your Rise referral link in the resources channel and mention it when members ask about courses or coaching. 15 members sign up this month. You earned a commission without changing anything about how you run your community.</div>
+    <ul>
+      <li>Commission per signup — the simplest model to implement</li>
+      <li>No inventory, no overhead, no awkward pitches</li>
+      <li>Your members already want to grow — just point them the right way</li>
+    </ul>
+    <div class="card-scenario"><strong>Example:</strong> You run a Discord with 2,000 producers. You share your Rise link in the resources channel. 15 sign up this month. You earned a commission without changing how you run your community.</div>
   </div>
 
   <!-- Events -->
   <div class="self-select-card" id="card-events">
-    <div class="card-headline">"You need fresh talent for your lineup. We have a pipeline."</div>
+    <div class="card-headline">"Fresh talent for your lineup. We have a pipeline."</div>
     <h4>The Problem</h4>
-    <p>Finding reliable emerging talent for your events is hit-or-miss. Organizing DJ contests takes time and bandwidth you don't have. You want pre-event activation and fresh opening acts, but scouting is a full-time job. And when you do find emerging artists, you're never sure if they can actually deliver on stage.</p>
+    <ul>
+      <li>Scouting emerging talent is hit-or-miss and time-consuming</li>
+      <li>Organizing DJ contests takes bandwidth you don't have</li>
+      <li>No guarantee that emerging artists can deliver on stage</li>
+    </ul>
     <h4>How Rise Solves This</h4>
-    <p>Rise provides turnkey DJ contests, curated opening act pipelines, and a network of coached, performance-ready artists. We handle curation, logistics, judging, and promotion. You provide the stage. Our artists have been through structured training — they know how to perform, promote, and show up professionally.</p>
+    <ul>
+      <li>Turnkey DJ contests — we handle curation, judging, and promotion</li>
+      <li>Curated pipeline of coached, performance-ready artists</li>
+      <li>You provide the stage, we provide the talent</li>
+    </ul>
     <h4>How You Earn</h4>
-    <p>Co-branded event revenue plus affiliate commission on every artist who joins Rise through your event. Your events become a talent funnel, and every contestant or attendee who signs up for Rise earns you a referral fee. The contest pays for itself.</p>
-    <div class="card-scenario"><strong>Example:</strong> You're organizing a festival and want a DJ contest as pre-event activation. Rise handles everything — curation, judging, promotion. The winner opens your main stage. 30 contestants sign up for Rise to prepare for the contest. You earned referral commissions <strong>and</strong> got a turnkey activation with zero effort.</div>
+    <ul>
+      <li>Co-branded event revenue + affiliate commission per signup</li>
+      <li>Every contestant who joins Rise earns you a referral fee</li>
+      <li>The contest pays for itself</li>
+    </ul>
+    <div class="card-scenario"><strong>Example:</strong> You want a DJ contest as pre-event activation. Rise handles everything. The winner opens your main stage. 30 contestants sign up for Rise. Referral commissions <strong>and</strong> turnkey activation, zero effort.</div>
   </div>
 
   <!-- Media -->
   <div class="self-select-card" id="card-media">
-    <div class="card-headline">"You need stories before they hit mainstream."</div>
+    <div class="card-headline">"Stories before they hit mainstream."</div>
     <h4>The Problem</h4>
-    <p>Your blog, YouTube channel, or podcast thrives on fresh content and emerging artist stories. But finding interesting artists before they blow up — and getting quality content from them — takes relationships and timing you don't always have. By the time everyone covers them, the story isn't exclusive anymore.</p>
+    <ul>
+      <li>Your content thrives on emerging artist stories, but finding them early takes relationships</li>
+      <li>By the time everyone covers them, it's not exclusive anymore</li>
+    </ul>
     <h4>How Rise Solves This</h4>
-    <p>Rise gives you exclusive early access to artist development journeys, behind-the-scenes studio content, graduate profiles, and interviews. Our artists come with narratives already shaped by their program — transformation stories, breakthrough moments, and real growth. Ready-made content, exclusive access, before anyone else covers them.</p>
+    <ul>
+      <li>Exclusive early access to artist development journeys and studio content</li>
+      <li>Graduate profiles with ready-made transformation narratives</li>
+      <li>Behind-the-scenes content before anyone else covers them</li>
+    </ul>
     <h4>How You Earn</h4>
-    <p>Affiliate links in your content earn you a commission on every viewer who signs up for Rise. Co-created series, sponsored features, and exclusive coverage deals add additional revenue streams beyond your regular ad income.</p>
-    <div class="card-scenario"><strong>Example:</strong> You run a YouTube channel about emerging producers. Rise gives you early access to 3 graduate stories per month with studio footage and interviews. You create a "Rise to the Top" series. Viewers sign up through your link — you earn affiliate revenue while building a unique content franchise nobody else has.</div>
+    <ul>
+      <li>Affiliate links in your content earn commission per signup</li>
+      <li>Co-created series and exclusive coverage deals</li>
+      <li>Additional revenue beyond your regular ad income</li>
+    </ul>
+    <div class="card-scenario"><strong>Example:</strong> You run a YouTube channel. Rise gives you early access to 3 graduate stories per month. You create a "Rise to the Top" series. Viewers sign up through your link — affiliate revenue while building a unique franchise.</div>
   </div>
 
   <!-- Music Platforms -->
   <div class="self-select-card" id="card-platform">
-    <div class="card-headline">"Your users sign up but don't know how to use your product effectively."</div>
+    <div class="card-headline">"Users sign up but don't use your product properly."</div>
     <h4>The Problem</h4>
-    <p>Whether you're a distribution platform, a production tool, a sample marketplace, or an artist services platform — the challenge is the same: users sign up but don't get the full value from your product. They need education, workflow guidance, and professional context that a tool alone can't provide. Churn is high because artists don't know what they're doing.</p>
+    <ul>
+      <li>Users sign up but don't get full value from your platform</li>
+      <li>They need education and workflow guidance a tool alone can't provide</li>
+      <li>High churn because artists don't know what they're doing</li>
+    </ul>
     <h4>How Rise Solves This</h4>
-    <p>Rise integrates your platform into our curriculum. Our artists learn to use your tools as part of their professional development — not as an afterthought, but as a core part of their workflow. We create educated, engaged users who actually understand your product and stick around. We recommend and teach your platform to hundreds of artists per year.</p>
+    <ul>
+      <li>Rise integrates your platform into our curriculum as a core workflow tool</li>
+      <li>Artists learn to use your product properly — educated, engaged users</li>
+      <li>We recommend your platform to hundreds of artists per year</li>
+    </ul>
     <h4>How You Earn</h4>
-    <p>Cross-referral model — we recommend your platform to our artists, you recommend Rise to your users. Affiliate commission flows both ways. Your platform gets educated users who actually engage (lower churn, higher LTV), and Rise artists get professional tools they know how to use.</p>
-    <div class="card-scenario"><strong>Example:</strong> Your platform helps artists with release distribution. Rise teaches artists how to plan and execute a release strategy using your tool as part of the curriculum. Artists who come through Rise are significantly more engaged on your platform. Meanwhile, you refer your users to Rise for the education they need — earning commission on every signup.</div>
+    <ul>
+      <li>Cross-referral model — we recommend you, you recommend us</li>
+      <li>Affiliate commission flows both ways</li>
+      <li>Lower churn, higher LTV from educated users</li>
+    </ul>
+    <div class="card-scenario"><strong>Example:</strong> Your platform handles distribution. Rise teaches release strategy using your tool. Artists from Rise are significantly more engaged. You refer users to Rise — earning commission on every signup.</div>
   </div>
 </div>
 
@@ -1256,8 +1352,7 @@
 <div class="section section-center">
   <div class="section-divider div-5"><span class="div-line"></span></div>
   <div class="section-label">What Partners Get</div>
-  <h2 class="section-title">Six reasons to join the ecosystem</h2>
-  <p class="section-sub">Every partnership comes with concrete deliverables. No vague promises.</p>
+  <h2 class="section-title">What every partner gets</h2>
 
   <div class="benefits-grid">
 
@@ -1268,7 +1363,7 @@
         <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
       </div>
       <h4>The Warm No</h4>
-      <p>Every "no" from our coaches becomes a warm referral to you. Pre-qualified, pre-briefed, ready to pitch. When an artist is not the right fit for our roster, they do not disappear. They land in your pipeline with context, coach notes, and a warm introduction.</p>
+      <p>Every "no" from our coaches becomes a warm referral to you. Pre-qualified, pre-briefed, with context and coach notes.</p>
     </div>
 
     <!-- Development Report -->
@@ -1278,7 +1373,7 @@
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
       <h4>Development Report</h4>
-      <p>When an artist completes their Rise program, we deliver a comprehensive development report to the partner — covering where the artist stands, what they have mastered, and areas to continue working on. A quality guarantee and handoff document so you can build on what Rise has done.</p>
+      <p>When an artist completes their program, you get a full handoff report: what they've mastered, where they stand, and what to build on next.</p>
     </div>
 
     <!-- First Refusal Tiers -->
@@ -1287,7 +1382,7 @@
         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       </div>
       <h4>First Refusal Tiers</h4>
-      <p>Gold partners get 30-day exclusive access to new graduates before anyone else. Category exclusivity means you are the only partner in your lane with early access.</p>
+      <p>Gold partners get 30-day exclusive access to new graduates. Category exclusivity in your lane.</p>
     </div>
 
     <!-- Coach Capacity -->
@@ -1296,7 +1391,7 @@
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
       <h4>Coach Capacity</h4>
-      <p>Our coaches are active industry professionals. Their network IS your pipeline. When they coach an artist, they are assessing fit for your roster in real time.</p>
+      <p>Our coaches are active professionals. Their network is your pipeline — they assess fit for your roster in real time.</p>
     </div>
 
     <!-- Powered by Rise -->
@@ -1305,7 +1400,7 @@
         <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
       <h4>Powered by Rise</h4>
-      <p>Co-brand with Rise on releases, events, and campaigns. The "Powered by Rise" badge signals quality to audiences and industry alike. It tells the world this artist was built right.</p>
+      <p>Co-brand on releases, events, and campaigns. The "Powered by Rise" badge signals quality to the industry.</p>
     </div>
 
     <!-- Contest in a Box -->
@@ -1314,7 +1409,7 @@
         <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="16 21 16 3 8 3 8 21"/></svg>
       </div>
       <h4>Contest in a Box</h4>
-      <p>We handle the full DJ or producer contest for your event. Curation, logistics, promotion, judging. You just provide the stage. Turnkey activation, zero overhead.</p>
+      <p>Turnkey DJ/producer contests for your event. Curation, logistics, promotion, judging. You provide the stage.</p>
     </div>
 
   </div>
@@ -1387,44 +1482,40 @@
     <div class="section-divider div-7"><span class="div-line"></span></div>
     <div class="section-label">How We Partner</div>
     <h2 class="section-title">Ways to grow together</h2>
-    <p class="section-sub">Multiple models, one principle: everyone earns when the partnership works.</p>
+    <p class="section-sub">Everyone earns when the partnership works.</p>
 
     <div class="ways-grid">
 
-      <!-- Affiliate -->
       <div class="way-card">
         <div class="way-icon">
           <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
         </div>
         <h4>Affiliate</h4>
-        <p>Everyone earns when leads come in. Simple tracking, transparent payouts, no limits.</p>
+        <p>Simple tracking, transparent payouts, no limits.</p>
       </div>
 
-      <!-- Joint Campaigns -->
       <div class="way-card">
         <div class="way-icon">
           <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="23 7 16 12 16 3 23 7"/><line x1="1" y1="20" x2="23" y2="20"/></svg>
         </div>
         <h4>Joint Campaigns</h4>
-        <p>Run campaigns together and share the upside. Content, events, social pushes, co-branded initiatives.</p>
+        <p>Co-branded content, events, and social pushes with shared upside.</p>
       </div>
 
-      <!-- Commission Deals -->
       <div class="way-card">
         <div class="way-icon">
           <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
         </div>
         <h4>Commission Deals</h4>
-        <p>Your network at work. We share the commission on every artist that comes through your pipeline.</p>
+        <p>Commission on every artist from your pipeline.</p>
       </div>
 
-      <!-- Artist Pipeline -->
       <div class="way-card">
         <div class="way-icon">
           <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
         </div>
         <h4>Artist Pipeline</h4>
-        <p>We develop artists. You get access to developed talent for labels, events, media, and more.</p>
+        <p>Access to developed talent for your label, event, or platform.</p>
       </div>
 
     </div>
@@ -1445,37 +1536,33 @@
   <div class="section-divider div-8"><span class="div-line"></span></div>
   <div class="section-label">Why This Works</div>
   <h2 class="section-title">A win for everyone</h2>
-  <p class="section-sub">Rise builds talent. Partners bring reach and opportunity. Both earn as artists grow.</p>
 
   <div class="winwin-grid">
 
     <div class="winwin-col">
       <h4>For Artists</h4>
       <ul>
-        <li>A path from learning to career</li>
+        <li>Path from learning to career</li>
         <li>Real industry exposure</li>
-        <li>Coaching and income opportunities</li>
-        <li>A community behind them</li>
+        <li>Coaching and income</li>
       </ul>
     </div>
 
     <div class="winwin-col">
       <h4>For Partners</h4>
       <ul>
-        <li>Pipeline of developed artists</li>
-        <li>New commission revenue</li>
-        <li>Roster rights on artists you helped shape</li>
-        <li>Campaigns with shared upside</li>
+        <li>Pipeline of developed talent</li>
+        <li>Commission revenue</li>
+        <li>Roster rights and shared campaigns</li>
       </ul>
     </div>
 
     <div class="winwin-col accent-col">
-      <h4>The Win-Win</h4>
+      <h4>The Result</h4>
       <ul>
-        <li>We build talent you cannot yet use</li>
-        <li>You bring reach we cannot</li>
+        <li>We build talent, you bring reach</li>
         <li>Both earn as artists grow</li>
-        <li>Partnership that compounds over time</li>
+        <li>A partnership that compounds</li>
       </ul>
     </div>
 
@@ -1545,11 +1632,12 @@
     <p>30 minutes, no commitment. Tell us what you need, and we will show you how the Rise pipeline fits your business.</p>
     <iframe
       src="https://api.leadconnectorhq.com/widget/booking/uwy75wV8Vf6XwG0zUF80"
+      allow="payment"
       class="booking-frame"
+      style="width:100%;border:none;overflow:hidden;"
       scrolling="no"
-      id="booking-iframe"
+      id="uwy75wV8Vf6XwG0zUF80_1786601284508"
       title="Book a call with Hendrik"
-      loading="lazy"
     ></iframe>
   </div>
 
@@ -1600,28 +1688,56 @@
     onScroll();
   })();
 
-  // Self-selection toggle
+  // Self-selection toggle with auto-cycle
   (function() {
     var btns = document.querySelectorAll('.self-select-btn');
     var cards = document.querySelectorAll('.self-select-card');
+    var current = -1;
+    var timer = null;
+    var pinned = false;
 
-    btns.forEach(function(btn) {
+    function show(idx) {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      cards.forEach(function(c) { c.classList.remove('visible'); });
+      btns[idx].classList.add('active');
+      var card = document.getElementById(btns[idx].getAttribute('data-target'));
+      if (card) card.classList.add('visible');
+      current = idx;
+    }
+
+    function next() {
+      if (pinned) return;
+      show((current + 1) % btns.length);
+    }
+
+    function startCycle() { timer = setInterval(next, 4000); }
+    function stopCycle() { clearInterval(timer); }
+
+    // Click = pin that card (click again = unpin + resume cycle)
+    btns.forEach(function(btn, i) {
       btn.addEventListener('click', function() {
-        var target = this.getAttribute('data-target');
-        var isActive = this.classList.contains('active');
-
-        // Remove all active states
-        btns.forEach(function(b) { b.classList.remove('active'); });
-        cards.forEach(function(c) { c.classList.remove('visible'); });
-
-        // If clicking a different button, activate it
-        if (!isActive) {
-          this.classList.add('active');
-          var card = document.getElementById(target);
-          if (card) card.classList.add('visible');
+        stopCycle();
+        if (pinned && current === i) {
+          pinned = false;
+          startCycle();
+        } else {
+          pinned = true;
+          show(i);
         }
       });
     });
+
+    // Pause auto-cycle on hover
+    var wrap = document.querySelector('.self-select-pills');
+    if (wrap) {
+      var parent = wrap.parentElement;
+      parent.addEventListener('mouseenter', function() { if (!pinned) stopCycle(); });
+      parent.addEventListener('mouseleave', function() { if (!pinned) startCycle(); });
+    }
+
+    // Start: show first card immediately, then cycle
+    show(0);
+    startCycle();
   })();
 </script>
 
