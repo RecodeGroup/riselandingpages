@@ -18,6 +18,8 @@ start.bat
 *.zip
 *.MOV
 *.mov
+*.mp4
+*.MP4
 
 # Claude/AI session files
 .claude/
