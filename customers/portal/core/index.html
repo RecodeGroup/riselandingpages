@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RISE — Choose Your Payment Plan</title>
+  <title>Rise Core — Rise Artist Academy</title>
   <meta name="robots" content="noindex, nofollow">
   <style>
     :root {
@@ -11,77 +11,166 @@
       --bg-2: #1a1a1a;
       --fg: #ffffff;
       --muted: #999;
-      --line: rgba(255,255,255,0.06);
-      --line-strong: rgba(255,255,255,0.14);
       --accent: #ff683e;
       --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --maxw: 1200px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
       line-height: 1.6;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
     }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* ── Header ── */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 32px;
-      max-width: 1200px;
+    .site-header {
+      position: sticky; top: 0; z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.72);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .header-inner {
+      max-width: var(--maxw);
       margin: 0 auto;
-      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0.85rem 2rem;
     }
     .logo-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
-    .logo-text {
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    a { color: inherit; text-decoration: none; }
 
-    /* ── Hero Background ── */
-    .checkout-hero {
+    /* ── Hero ── */
+    .hero {
       position: relative;
-      padding: 4rem 1.5rem 2rem;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 1.5rem clamp(4rem, 8vw, 6rem);
       overflow: hidden;
     }
-    .checkout-hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
       background:
-        linear-gradient(180deg, rgba(15,15,15,0.6) 0%, rgba(15,15,15,0.85) 60%, var(--bg) 100%),
+        linear-gradient(180deg, rgba(15,15,15,0.45) 0%, rgba(15,15,15,0.7) 50%, var(--bg) 100%),
         url('../../../assets/photos/photo-11.jpg') center 30% / cover no-repeat;
     }
-    .checkout-hero > * { position: relative; z-index: 1; }
-
-    /* ── Main ── */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+    .hero .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 18px;
+    }
+    .hero .subtitle {
+      color: var(--muted);
+      font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+    .btn-primary {
+      display: inline-flex;
       align-items: center;
-      padding: 0 1.5rem 4rem;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
     }
-    .checkout-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 2rem;
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
     }
-    .checkout-header .eyebrow {
+    .btn-primary svg { flex-shrink: 0; }
+
+    /* ── Photo Strip ── */
+    .photo-strip {
+      overflow: hidden;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .photo-strip-track {
+      display: flex;
+      gap: 12px;
+      animation: photo-scroll 40s linear infinite;
+      width: max-content;
+    }
+    .photo-strip-track img {
+      height: 160px;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    @keyframes photo-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Sections ── */
+    .section {
+      padding: clamp(4rem, 8vw, 6rem) 1.5rem;
+    }
+    .section-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .section .eyebrow {
       font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.2em;
@@ -89,26 +178,150 @@
       text-transform: uppercase;
       margin-bottom: 14px;
     }
-    .checkout-header h1 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
+    .section h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
       font-weight: 700;
       line-height: 1.1;
       letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
     }
-    .checkout-header p {
+    .section .body-text {
       color: var(--muted);
       font-size: 0.95rem;
+      line-height: 1.75;
+      max-width: 620px;
+    }
+    .section .body-text + .body-text { margin-top: 1rem; }
+
+    /* ── Feature Grid ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 2rem;
+    }
+    .feature-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    /* ── Coach Section ── */
+    .coach-card {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 2.5rem;
+      margin-top: 2rem;
+    }
+    .coach-card img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .coach-info .coach-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .coach-info .coach-role {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .coach-info .coach-bio {
+      color: var(--muted);
+      font-size: 0.9rem;
       line-height: 1.7;
+    }
+
+    /* ── Glance Grid ── */
+    .glance-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 2rem;
+    }
+    .glance-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .glance-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .glance-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    /* ── Pricing Section ── */
+    .pricing-section {
+      text-align: center;
+      padding: clamp(4rem, 8vw, 6rem) 1.5rem;
+    }
+    .pricing-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .pricing-section .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .pricing-section h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .price-display {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .price-note {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 2.5rem;
     }
 
     /* ── Plan Grid ── */
     .plan-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      max-width: 960px;
-      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
     }
     .plan-card {
       background: var(--bg-2);
@@ -156,18 +369,6 @@
       padding: 3px 8px;
       border-radius: 3px;
     }
-    .plan-save-badge {
-      display: inline-block;
-      background: rgba(34,197,94,0.15);
-      color: #22c55e;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 3px;
-      margin-bottom: 12px;
-    }
     .plan-card .installments {
       font-size: 0.7rem;
       font-weight: 700;
@@ -177,7 +378,7 @@
       margin-bottom: 16px;
     }
     .plan-card .price {
-      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-size: clamp(1.6rem, 3.2vw, 2.2rem);
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1;
@@ -204,9 +405,9 @@
 
     /* ── Summary + CTA ── */
     .checkout-summary {
-      max-width: 960px;
+      max-width: 760px;
       width: 100%;
-      margin-top: 2.5rem;
+      margin: 2.5rem auto 0;
       padding: 2rem;
       background: rgba(255,104,62,0.04);
       border: 1px solid rgba(255,104,62,0.12);
@@ -216,6 +417,7 @@
       align-items: center;
       gap: 24px;
     }
+    .summary-left { text-align: left; }
     .summary-left .summary-plan {
       font-weight: 700;
       font-size: 1rem;
@@ -251,6 +453,25 @@
       box-shadow: none;
     }
 
+    /* ── Loading State ── */
+    .btn-checkout.loading {
+      pointer-events: none;
+      position: relative;
+      color: transparent;
+    }
+    .btn-checkout.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(10,10,10,0.3);
+      border-top-color: #0a0a0a;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     /* ── Security Note ── */
     .security-note {
       margin-top: 1.5rem;
@@ -283,124 +504,225 @@
     .footer .links a { transition: color 0.2s; }
     .footer .links a:hover { color: var(--accent); }
 
-    /* ── Loading State ── */
-    .btn-checkout.loading {
-      pointer-events: none;
-      position: relative;
-      color: transparent;
-    }
-    .btn-checkout.loading::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      margin: auto;
-      width: 20px; height: 20px;
-      border: 2px solid rgba(10,10,10,0.3);
-      border-top-color: #0a0a0a;
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
     /* ── Responsive ── */
-    @media (max-width: 960px) {
-      .plan-grid { grid-template-columns: repeat(2, 1fr); max-width: 500px; }
-      .checkout-summary { max-width: 500px; }
-    }
     @media (max-width: 768px) {
-      .checkout-summary { flex-direction: column; text-align: center; }
-    }
-    @media (max-width: 540px) {
+      .hero { min-height: 60vh; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .glance-grid { grid-template-columns: 1fr; }
       .plan-grid { grid-template-columns: 1fr; max-width: 380px; }
-      .checkout-summary { max-width: 380px; }
+      .checkout-summary { flex-direction: column; text-align: center; }
+      .summary-left { text-align: center; }
+      .coach-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+      }
+      .coach-card img { width: 160px; height: 160px; }
+      .photo-strip-track img { height: 120px; }
     }
     @media (max-width: 480px) {
-      .main { padding: 1.5rem 1rem 3rem; }
+      .header-inner { padding: 0.75rem 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-  <header class="header">
-    <a href="../" class="logo-wrap">
-      <img src="../../../assets/logo.png" alt="Rise">
-      <span class="logo-text">Rise</span>
-    </a>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/customers/portal/" class="logo-wrap">
+        <img src="../../../assets/logo.png" alt="Rise">
+      </a>
+    </div>
   </header>
 
-  <div class="checkout-hero">
-    <div class="checkout-header">
-      <div class="eyebrow">Almost there</div>
-      <h1>Choose your payment plan</h1>
-      <p>You're one step away from joining Rise Core. Pick the plan that works best for you. All plans give you the exact same access.</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="eyebrow">Rise Artist Academy &middot; Core</div>
+      <h1>Core is one straight line towards your goals.</h1>
+      <p class="subtitle">A full year of structured coaching, weekly accountability, and a private network of committed electronic artists. Everything you need to stop circling and start moving.</p>
+      <a href="#pricing" class="btn-primary">
+        Choose your payment plan
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Photo Strip -->
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../../../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/Aug/aug_03.jpg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/Aug/aug_04.JPG" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/Aug/aug_7.JPG" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/Aug/aug_11.2.png" alt="Rise" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <img src="../../../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/Aug/aug_03.jpg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/Aug/aug_04.JPG" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/Aug/aug_7.JPG" alt="Rise" loading="lazy">
+      <img src="../../../assets/photos/Aug/aug_11.2.png" alt="Rise" loading="lazy">
     </div>
   </div>
 
-  <main class="main">
+  <!-- Who it's for -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="eyebrow">Who it's for</div>
+      <h2>Made for artists who are ready to make serious steps.</h2>
+      <p class="body-text">Core is not a course. It's a structured year of accountability, coaching and community. You'll set real goals, work towards them every week, and be surrounded by artists who expect the same from themselves.</p>
+      <p class="body-text">Everything in Base is included. Core adds weekly accountability calls, monthly workshops, peer coaching, and a private network of committed electronic artists.</p>
+    </div>
+  </section>
 
-    <div class="plan-grid">
-      <div class="plan-card" data-plan="1x" onclick="selectPlan(this)">
-        <div class="installments">Pay in full</div>
-        <div class="price">&euro; 2.650,-</div>
-        <div class="price-sub">One-time payment</div>
-        <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-      </div>
-
-      <div class="plan-card recommended selected" data-plan="2x" onclick="selectPlan(this)">
-        <div class="plan-badge">Popular</div>
-        <div class="installments">2 payments</div>
-        <div class="price">&euro; 1.325,-</div>
-        <div class="price-sub">per payment</div>
-        <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-        <div class="plan-schedule" id="schedule-2x"></div>
-      </div>
-
-      <div class="plan-card" data-plan="3x" onclick="selectPlan(this)">
-        <div class="installments">3 payments</div>
-        <div class="price">&euro; 883,-</div>
-        <div class="price-sub">per payment</div>
-        <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-        <div class="plan-schedule" id="schedule-3x"></div>
-      </div>
-
-      <div class="plan-card" data-plan="4x" onclick="selectPlan(this)">
-        <div class="installments">4 payments</div>
-        <div class="price">&euro; 662,50</div>
-        <div class="price-sub">per payment</div>
-        <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-        <div class="plan-schedule" id="schedule-4x"></div>
+  <!-- What you get -->
+  <section class="section" style="border-top: 1px solid var(--line);">
+    <div class="section-inner">
+      <div class="eyebrow">The program</div>
+      <h2>What a year in Core actually looks like.</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Weekly Accountability</h3>
+          <p>Structured group calls focused on progress and forward momentum. Every week you set goals, report back, and stay on track with your music career.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Monthly Workshops</h3>
+          <p>Expert-led deep-dives on production, strategy, and industry topics. Go beyond the basics and develop skills that set you apart.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Peer Coaching</h3>
+          <p>Honest feedback from artists who understand your craft. Build relationships that push you forward and hold you accountable.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Private Network</h3>
+          <p>A curated group of committed electronic artists. Base included. Full platform access, production tools, and community resources.</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="checkout-summary">
-      <div class="summary-left">
-        <div class="summary-plan" id="summary-plan">Rise Core &mdash; 2 payments of &euro; 1.325,-</div>
-        <div class="summary-detail" id="summary-detail"></div>
+  <!-- Coach -->
+  <section class="section" style="border-top: 1px solid var(--line);">
+    <div class="section-inner">
+      <div class="eyebrow">The coach</div>
+      <h2>Meet the person leading your year.</h2>
+      <div class="coach-card">
+        <img src="../../../assets/Pages/Coaches/Mau2.png" alt="Maurits" loading="lazy">
+        <div class="coach-info">
+          <div class="coach-name">Maurits</div>
+          <div class="coach-role">Runs Core</div>
+          <p class="coach-bio">Maurits leads Core from start to finish. Every week he'll challenge you, keep you accountable and make sure you keep moving towards the goals you've set for yourself. No excuses. No coasting.</p>
+        </div>
       </div>
-      <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
-        Continue to Payment
-      </button>
     </div>
+  </section>
 
-    <div class="security-note">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      Secure payment powered by Stripe. Your card details are never stored on our servers.
+  <!-- What you'll learn -->
+  <section class="section" style="border-top: 1px solid var(--line);">
+    <div class="section-inner">
+      <div class="eyebrow">What you'll learn</div>
+      <h2>Core Academy at a glance.</h2>
+      <div class="glance-grid">
+        <div class="glance-card">
+          <h3>Everything in Base, Plus Live Coaching</h3>
+          <p>Everything in Base, plus weekly live coaching with experienced producers.</p>
+        </div>
+        <div class="glance-card">
+          <h3>Deep-Dive Feedback</h3>
+          <p>Deep-dive feedback sessions on your tracks.</p>
+        </div>
+        <div class="glance-card">
+          <h3>Advanced Techniques &amp; Strategy</h3>
+          <p>Advanced production techniques and career strategy.</p>
+        </div>
+        <div class="glance-card">
+          <h3>Mentorship &amp; Accountability</h3>
+          <p>Direct accountability and mentorship throughout the year.</p>
+        </div>
+      </div>
     </div>
-  </main>
+  </section>
 
+  <!-- Pricing -->
+  <section class="pricing-section" id="pricing" style="border-top: 1px solid var(--line);">
+    <div class="pricing-inner">
+      <div class="eyebrow">Enroll</div>
+      <h2 style="margin-left: auto; margin-right: auto; max-width: none;">Join Core Academy</h2>
+      <div class="price-display">&euro;2.650</div>
+      <div class="price-note">ex. VAT &middot; one-year program</div>
+
+      <div class="plan-grid">
+        <div class="plan-card" data-plan="1x" onclick="selectPlan(this)">
+          <div class="installments">Pay in full</div>
+          <div class="price">&euro;2.650</div>
+          <div class="price-sub">One-time payment</div>
+          <div class="total">&euro;2.650 total &middot; ex. VAT</div>
+        </div>
+
+        <div class="plan-card recommended selected" data-plan="2x" onclick="selectPlan(this)">
+          <div class="plan-badge">Popular</div>
+          <div class="installments">2 payments</div>
+          <div class="price">&euro;1.325</div>
+          <div class="price-sub">per payment</div>
+          <div class="total">&euro;2.650 total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-2x"></div>
+        </div>
+
+        <div class="plan-card" data-plan="3x" onclick="selectPlan(this)">
+          <div class="installments">3 payments</div>
+          <div class="price">&euro;883,33</div>
+          <div class="price-sub">per payment</div>
+          <div class="total">&euro;2.650 total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-3x"></div>
+        </div>
+      </div>
+
+      <div class="checkout-summary">
+        <div class="summary-left">
+          <div class="summary-plan" id="summary-plan">Rise Core &mdash; 2 payments of &euro;1.325</div>
+          <div class="summary-detail" id="summary-detail"></div>
+        </div>
+        <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
+          Continue to Payment
+        </button>
+      </div>
+
+      <div class="security-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secure payment powered by Stripe. Your card details are never stored on our servers.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer class="footer">
     &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved
     <div class="links">
+      <a href="mailto:info@riseartistacademy.com">Contact</a>
+      <a href="https://instagram.com/riseartistacademy" target="_blank" rel="noopener">Instagram</a>
       <a href="../../../privacy/">Privacy</a>
       <a href="../../../terms/">Terms</a>
     </div>
   </footer>
 
   <script>
+    // ── Scroll header effect ──
+    window.addEventListener('scroll', function() {
+      document.querySelector('.site-header').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
     const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
     // ====== AUTO COHORT ======
-    // Automatically determine the next cohort (April or October)
+    // Core is yearly — next cohort is April or October
     function getNextCohort() {
       var now = new Date();
       var month = now.getMonth(); // 0-indexed
@@ -419,39 +741,28 @@
     // ====== PLAN DATA ======
     const plans = {
       '1x': {
-        label: 'Pay in full — € 2.650,-',
+        label: 'Pay in full — €2.650',
         getDetail: function() { return 'One-time payment now · ex. VAT'; },
         amount: 2650,
         installments: 1,
       },
       '2x': {
-        label: '2 payments of € 1.325,-',
+        label: '2 payments of €1.325',
         getDetail: function() {
-          return '€ 1.325,- now + € 1.325,- in ' + autoCohort.label + ' · ex. VAT';
+          return '€1.325 now + €1.325 in ' + autoCohort.label + ' · ex. VAT';
         },
         amount: 1325,
         installments: 2,
       },
       '3x': {
-        label: '3 payments of € 883,33',
+        label: '3 payments of €883,33',
         getDetail: function() {
           var m1 = monthNames[autoCohort.startMonth];
           var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
-          return '€ 883,33 now + 2 × € 883,33 in ' + m1 + ', ' + m2 + ' · ex. VAT';
+          return '€883,33 now + 2 × €883,33 in ' + m1 + ', ' + m2 + ' · ex. VAT';
         },
         amount: 883.33,
         installments: 3,
-      },
-      '4x': {
-        label: '4 payments of € 662,50',
-        getDetail: function() {
-          var m1 = monthNames[autoCohort.startMonth];
-          var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
-          var m3 = monthNames[(autoCohort.startMonth + 2) % 12];
-          return '€ 662,50 now + 3 × € 662,50 in ' + m1 + ', ' + m2 + ', ' + m3 + ' · ex. VAT';
-        },
-        amount: 662.50,
-        installments: 4,
       },
     };
 
@@ -482,14 +793,6 @@
         var m1 = monthNames[autoCohort.startMonth];
         var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
         el3.textContent = '1st: now · 2nd: ' + m1 + ' · 3rd: ' + m2;
-      }
-      // 4x schedule
-      var el4 = document.getElementById('schedule-4x');
-      if (el4) {
-        var m1 = monthNames[autoCohort.startMonth];
-        var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
-        var m3 = monthNames[(autoCohort.startMonth + 2) % 12];
-        el4.textContent = '1st: now · 2nd: ' + m1 + ' · 3rd: ' + m2 + ' · 4th: ' + m3;
       }
     }
 
