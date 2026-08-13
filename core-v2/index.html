@@ -1323,7 +1323,6 @@
         progressBar.style.width = displayed + '%';
         // Fade out: 100% opacity at 0%, invisible at 70% displayed
         var opacity = Math.max(0, 1 - (displayed / 70));
-        progressBar.style.opacity = opacity;
         progressBar.parentElement.style.opacity = opacity;
       });
     })();
