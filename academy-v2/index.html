@@ -1284,6 +1284,18 @@
       }
     }
 
+    // ====== AUTO-DETECT COUNTRY DIAL CODE ======
+    var _dialCode = "";
+    (function() {
+      var codes = {NL:"+31",BE:"+32",DE:"+49",FR:"+33",GB:"+44",US:"+1",ES:"+34",IT:"+39",PT:"+351",AT:"+43",CH:"+41",SE:"+46",NO:"+47",DK:"+45",FI:"+358",PL:"+48",IE:"+353",CZ:"+420",HU:"+36",RO:"+40",BG:"+359",HR:"+385",SK:"+421",SI:"+386",LT:"+370",LV:"+371",EE:"+372",GR:"+30",TR:"+90",AU:"+61",NZ:"+64",CA:"+1",BR:"+55",MX:"+52",AR:"+54",CO:"+57",ZA:"+27",IN:"+91",JP:"+81",KR:"+82",ID:"+62",SG:"+65",AE:"+971",SA:"+966",RU:"+7",UA:"+380",IL:"+972"};
+      try {
+        fetch("https://ipapi.co/country_code/").then(function(r) { return r.text(); }).then(function(cc) {
+          cc = cc.trim().toUpperCase();
+          if (codes[cc]) _dialCode = codes[cc] + " ";
+        }).catch(function() {});
+      } catch(e) {}
+    })();
+
     // ====== APPLICATION QUESTIONNAIRE ======
     var qState = { step: 0, answers: { years: null, time: null, challenge: null, budget: 2500, name: "", whatsapp: "", email: "" } };
     var STEPS = [
@@ -1319,7 +1331,7 @@
         document.getElementById("slider-input").addEventListener("input", function(e) { var v = Number(e.target.value); qState.answers[step.key] = v; document.getElementById("slider-val").textContent = step.format(v); });
         document.getElementById("continue-btn").addEventListener("click", nextStep);
       } else if (step.type === "form") {
-        qBody.innerHTML = bars + '<h2 class="step-title">' + step.title + '</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">' + step.subtitle + '</p><form class="form-step" id="apply-form"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required/><input type="email" name="email" placeholder="Email address" required/><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application →</button></div></form>';
+        qBody.innerHTML = bars + '<h2 class="step-title">' + step.title + '</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">' + step.subtitle + '</p><form class="form-step" id="apply-form"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required value="'+(qState.answers.whatsapp||_dialCode)+'"/><input type="email" name="email" placeholder="Email address" required/><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application →</button></div></form>';
         document.getElementById("apply-form").addEventListener("submit", function(e) { e.preventDefault(); var fd = new FormData(e.target); qState.answers.name = fd.get("name"); qState.answers.whatsapp = fd.get("whatsapp"); qState.answers.email = fd.get("email"); nextStep(); });
       } else if (step.type === "success") {
         var params = new URLSearchParams();
