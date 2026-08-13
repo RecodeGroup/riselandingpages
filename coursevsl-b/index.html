@@ -985,6 +985,15 @@
       font-family: inherit;
     }
 
+    /* ── Hero stats ── */
+    .hero-stats { display:flex; gap:2rem; justify-content:center; margin-top:1.5rem; flex-wrap:wrap; }
+    .hero-stat { font-size:0.9rem; color:rgba(255,255,255,0.6); }
+    .hero-stat strong { color:#fff; font-weight:700; }
+
+    /* ── Step labels ── */
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
+    .step-label .step-num { width:24px; height:24px; border-radius:50%; background:var(--accent); color:#0a0a0a; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem; }
+
     /* ── Urgency Bar ────────────────────────────────── */
     .urgency-bar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 120;
@@ -1233,6 +1242,11 @@
         <span class="trust-badge-small">&#10003; Lifetime access, no subscription</span>
         <span class="trust-badge-small">&#10003; 14-Day Money Back Guarantee</span>
       </div>
+      <div class="hero-stats">
+        <span class="hero-stat"><strong>150+</strong> artists supported</span>
+        <span class="hero-stat"><strong>Active</strong> since 2023</span>
+        <span class="hero-stat"><strong>11</strong> industry professionals</span>
+      </div>
     </div>
   </section>
 
@@ -1266,7 +1280,7 @@
   <!-- 3b. COURSE PREVIEW -->
   <section style="padding:3rem 24px;text-align:center;">
     <div style="max-width:720px;margin:0 auto;">
-      <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;">Course Preview</div>
+      <div class="step-label"><span class="step-num">1</span>Watch this first</div>
       <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:10px;">See what you'll learn inside</h2>
       <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;margin-bottom:2rem;">Watch a walkthrough of the course, the production tools, and what you can expect as a Rise member.</p>
       <div class="vsl-player" id="vsl-player">

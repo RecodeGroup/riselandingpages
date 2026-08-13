@@ -826,6 +826,11 @@
       .closing { padding: 2.5rem 1rem; }
       .site-header-inner { padding: 0.75rem 1rem; }
     }
+
+    /* ── Limited spots indicator ── */
+    .limited-spots { display:flex; align-items:center; gap:10px; font-size:0.95rem; color:rgba(255,255,255,0.65); justify-content:center; margin:1.2rem 0 0; }
+    .pulse-dot { width:8px; height:8px; background:#1a1a1a; border-radius:50%; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; }
+    @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); } }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -860,6 +865,7 @@
         Apply for the Academy
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
+      <div class="limited-spots"><span class="pulse-dot"></span>We only take a limited number of artists each month.</div>
     <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
       <span>&#10003; Flexible payment plans</span>
       <span>&#10003; Start when you're ready</span>

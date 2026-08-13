@@ -14,12 +14,16 @@ start.bat
 .Spotlight-V100
 .Trashes
 
-# Archives & large media
+# Archives & large source media
 *.zip
 *.MOV
 *.mov
-*.mp4
-*.MP4
+
+# Large source video files (keep small clips trackable)
+assets/Testimonials/Voor site/Alletests.mp4
+assets/Testimonials/Voor site/GX010425.mp4
+assets/Testimonials/Voor site/DJI_*.mp4
+assets/Testimonials/Voor site/WhatsApp Video*.mp4
 
 # Claude/AI session files
 .claude/

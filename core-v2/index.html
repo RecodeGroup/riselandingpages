@@ -641,6 +641,32 @@
       100% { transform: translateX(0); }
     }
 
+    /* ── Limited spots indicator ── */
+    .limited-spots { display:flex; align-items:center; gap:10px; font-size:0.95rem; color:rgba(255,255,255,0.65); justify-content:center; margin:1.2rem 0 0; }
+    .pulse-dot { width:8px; height:8px; background:#1a1a1a; border-radius:50%; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; }
+    @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); } }
+
+    /* ── Step labels ── */
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
+    .step-label .step-num { width:24px; height:24px; border-radius:50%; background:var(--accent); color:#0a0a0a; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem; }
+
+    /* ── Inline CTA banner (repeated) ── */
+    .inline-cta { text-align:center; padding:3rem 2rem; }
+    .inline-cta .hero-cta { margin:0 auto; }
+    .inline-cta-sub { font-size:0.85rem; color:rgba(255,255,255,0.5); margin-top:0.8rem; }
+
+    /* ── Come Prepared / Walk Away ── */
+    .prep-section { padding:5rem 2rem; background:#111; }
+    .prep-section .section-inner { max-width:var(--maxw); margin:0 auto; }
+    .prep-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:2.5rem; }
+    @media(max-width:700px){ .prep-grid { grid-template-columns:1fr; } }
+    .prep-col h3 { font-size:1.3rem; margin-bottom:1.2rem; color:#fff; }
+    .prep-col ul { list-style:none; padding:0; }
+    .prep-col li { position:relative; padding-left:28px; margin-bottom:1rem; color:rgba(255,255,255,0.75); font-size:0.95rem; line-height:1.6; }
+    .prep-col li::before { content:''; position:absolute; left:0; top:8px; width:8px; height:8px; border-radius:50%; }
+    .prep-col.prepare li::before { background:var(--accent); }
+    .prep-col.walkaway li::before { background:#4ade80; }
+
     /* ── Accessibility ───────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -710,6 +736,7 @@
         Apply Now
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
+      <div class="limited-spots"><span class="pulse-dot"></span>We only take a limited number of artists each month.</div>
       <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
         <span>&#10003; Weekly coaching with experienced producers</span>
         <span>&#10003; 12-month structured program</span>
@@ -747,7 +774,7 @@
        ══════════════════════════════════════════════ -->
   <section style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--line);">
     <div style="max-width:var(--maxw);margin:0 auto;">
-      <div class="section-eyebrow">Watch</div>
+      <div class="step-label"><span class="step-num">1</span>Watch the video</div>
       <h2 class="section-heading" style="margin-bottom:2rem;">See what the Core is all about.</h2>
       <div class="vsl-player" id="core-vsl-player">
         <video id="core-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Core/Thumbnail.png">
@@ -873,6 +900,11 @@
     </div>
   </section>
 
+  <div class="inline-cta">
+    <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    <p class="inline-cta-sub">Limited spots available. Applications reviewed weekly.</p>
+  </div>
+
   <!-- ══════════════════════════════════════════════
        Coach
        ══════════════════════════════════════════════ -->
@@ -939,6 +971,7 @@
        ══════════════════════════════════════════════ -->
   <section class="closing">
     <div class="closing-inner">
+      <div class="step-label"><span class="step-num">2</span>Apply for your spot</div>
       <h2>Ready to make serious steps? This is where that&nbsp;starts.</h2>
       <p>Core isn't for people testing the water. It's for producers who've decided this is the career they want, and are ready to be held to that decision, every week, for a year.</p>
       <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
@@ -947,6 +980,38 @@
       </a>
     </div>
   </section>
+
+  <section class="prep-section">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="text-align:center;">Your introduction call</div>
+      <h2 class="section-heading" style="text-align:center;">This call only works if you show up ready.</h2>
+      <div class="prep-grid">
+        <div class="prep-col prepare">
+          <h3>Come prepared</h3>
+          <ul>
+            <li>Know what you want from the next twelve months. A label deal, a consistent release schedule, a proper live set.</li>
+            <li>Have your recent work ready to share. We review it ahead of the call.</li>
+            <li>Block the full slot. No half-listening from the bus.</li>
+            <li>Be ready to decide. We map your path on the call and show you how to walk it.</li>
+          </ul>
+        </div>
+        <div class="prep-col walkaway">
+          <h3>What you walk away with</h3>
+          <ul>
+            <li>An honest read on where you actually are as an artist versus where you think you are.</li>
+            <li>The real bottleneck between your current level and where you want to be, named out loud.</li>
+            <li>A month-by-month plan to close that gap inside the program.</li>
+            <li>A clear yes or no on whether Core is the right fit for you right now.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="inline-cta">
+    <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    <p class="inline-cta-sub">Limited spots available. Applications reviewed weekly.</p>
+  </div>
 
   <!-- ══════════════════════════════════════════════
        FAQ
@@ -1009,6 +1074,11 @@
       </div>
     </div>
   </section>
+
+  <div class="inline-cta">
+    <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">Apply Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    <p class="inline-cta-sub">Limited spots available. Applications reviewed weekly.</p>
+  </div>
 
   <!-- ══════════════════════════════════════════════
        Footer

@@ -705,6 +705,20 @@
       .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 4rem); }
       .site-header-inner { padding: 0.75rem 1.25rem; }
     }
+
+    /* ── Limited spots indicator ── */
+    .limited-spots { display:flex; align-items:center; gap:10px; font-size:0.95rem; color:rgba(255,255,255,0.65); justify-content:center; margin:1.2rem 0 0; }
+    .pulse-dot { width:8px; height:8px; background:#1a1a1a; border-radius:50%; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; }
+    @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); } }
+
+    /* ── Step labels ── */
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
+    .step-label .step-num { width:24px; height:24px; border-radius:50%; background:var(--accent); color:#0a0a0a; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem; }
+
+    /* ── Inline CTA banner (repeated) ── */
+    .inline-cta { text-align:center; padding:3rem 2rem; }
+    .inline-cta .hero-cta { margin:0 auto; }
+    .inline-cta-sub { font-size:0.85rem; color:rgba(255,255,255,0.5); margin-top:0.8rem; }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -736,6 +750,7 @@
         <span>Live Q&amp;A</span>
       </div>
       <a href="https://api.leadconnectorhq.com/widget/booking/zzYQhu4kE75pC8vmxvQB" target="_blank" class="btn-primary">Register for the webinar</a>
+      <div class="limited-spots"><span class="pulse-dot"></span>We only take a limited number of artists each month.</div>
       <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
         <span>&#10003; Free, no commitment</span>
         <span>&#10003; For all experience levels</span>
@@ -775,6 +790,7 @@
        ══════════════════════════════════════════════ -->
   <section class="section social-proof" id="web-vsl">
     <div class="section-inner">
+      <div class="step-label"><span class="step-num">1</span>Watch the video</div>
       <div class="section-eyebrow">Watch</div>
       <h2 class="section-heading">See what the webinar is all about.</h2>
       <div class="vsl-video-wrap" id="web-vsl-player">
@@ -829,6 +845,11 @@
     </div>
   </section>
 
+  <div class="inline-cta">
+    <a href="https://api.leadconnectorhq.com/widget/booking/zzYQhu4kE75pC8vmxvQB" target="_blank" class="btn-primary">Register Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    <p class="inline-cta-sub">Limited spots available. Sessions fill up fast.</p>
+  </div>
+
   <!-- ══════════════════════════════════════════════
        Why Rise
        ══════════════════════════════════════════════ -->
@@ -858,6 +879,7 @@
        ══════════════════════════════════════════════ -->
   <section class="section academies" id="academies">
     <div class="section-inner">
+      <div class="step-label"><span class="step-num">2</span>Register for the session</div>
       <div class="section-eyebrow">After the call</div>
       <h2 class="section-heading">Two Tracks. One community.</h2>
       <div class="section-body">
@@ -918,6 +940,11 @@
       </div>
     </div>
   </section>
+
+  <div class="inline-cta">
+    <a href="https://api.leadconnectorhq.com/widget/booking/zzYQhu4kE75pC8vmxvQB" target="_blank" class="btn-primary">Register Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    <p class="inline-cta-sub">Limited spots available. Sessions fill up fast.</p>
+  </div>
 
   <!-- ══════════════════════════════════════════════
        VIDEO TESTIMONIALS
