@@ -875,10 +875,10 @@
     .video-card {
       position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
       width: 240px; height: 420px; cursor: pointer;
-      background: #000; flex-shrink: 0;
+      background: #000; flex-shrink: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
     }
     .video-card video { width: 100%; height: 100%; object-fit: cover; }
-    .video-card .play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+    .video-card .play-btn { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; pointer-events: none; }
     .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
     .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
 
@@ -1618,32 +1618,25 @@
   </script>
 
   <script>
-    (function(){
-      document.querySelectorAll('.video-card').forEach(function(card) {
-        card.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          var v = card.querySelector('video');
-          if (card.classList.contains('playing')) {
-            v.pause();
-            card.classList.remove('playing');
-          } else {
-            document.querySelectorAll('.video-card.playing').forEach(function(c) {
-              c.querySelector('video').pause();
-              c.classList.remove('playing');
-            });
-            var playPromise = v.play();
-            if (playPromise !== undefined) {
-              playPromise.catch(function() {});
-            }
-            card.classList.add('playing');
-          }
-          v.onended = function() {
-            card.classList.remove('playing');
-          };
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('.video-card');
+      if (!card) return;
+      var v = card.querySelector('video');
+      if (!v) return;
+      if (card.classList.contains('playing')) {
+        v.pause();
+        card.classList.remove('playing');
+      } else {
+        document.querySelectorAll('.video-card.playing').forEach(function(c) {
+          c.querySelector('video').pause();
+          c.classList.remove('playing');
         });
-      });
-    })();
+        var p = v.play();
+        if (p) p.catch(function(){});
+        card.classList.add('playing');
+      }
+      v.onended = function() { card.classList.remove('playing'); };
+    });
   </script>
 
 </body>
