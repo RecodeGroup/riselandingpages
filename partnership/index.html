@@ -414,6 +414,18 @@
       font-size:0.7rem; font-weight:700; text-transform:uppercase;
       letter-spacing:0.08em; color:var(--accent); margin-bottom:8px;
     }
+    .pj-detail-item ul {
+      list-style:none; padding:0; margin:0;
+    }
+    .pj-detail-item li {
+      color:var(--muted); font-size:0.82rem; line-height:1.6;
+      padding-left:14px; position:relative; margin-bottom:4px;
+    }
+    .pj-detail-item li::before {
+      content:''; position:absolute; left:0; top:8px;
+      width:5px; height:5px; border-radius:50%;
+      background:var(--accent); opacity:0.6;
+    }
     @media(max-width:700px){
       .pj-detail-grid { grid-template-columns:1fr; gap:12px; }
     }
@@ -571,7 +583,15 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 10px;
+      margin-bottom: 4px;
+    }
+    .team-member .founding-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 8px;
     }
     .team-member { cursor: pointer; }
     .team-member .bio {
@@ -722,7 +742,7 @@
     }
     .logos-row img {
       height: 48px;
-      max-width: 140px;
+      max-width: 180px;
       width: auto;
       object-fit: contain;
       filter: brightness(0) invert(1);
@@ -1039,49 +1059,49 @@
     <div class="pj-carousel" id="pj-carousel">
 
       <div class="pj-slide active" data-idx="0">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="pj-label">The Artist</span>
         <span class="pj-title">Where it starts</span>
       </div>
 
       <div class="pj-slide" data-idx="1">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8l3 3-3 3"/><line x1="13" y1="14" x2="17" y2="14"/></svg></div>
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 21H16M12 17V21M6.8 17H17.2C18.8802 17 19.7202 17 20.362 16.673C20.9265 16.3854 21.3854 15.9265 21.673 15.362C22 14.7202 22 13.8802 22 12.2V7.8C22 6.11984 22 5.27976 21.673 4.63803C21.3854 4.07354 20.9265 3.6146 20.362 3.32698C19.7202 3 18.8802 3 17.2 3H6.8C5.11984 3 4.27976 3 3.63803 3.32698C3.07354 3.6146 2.6146 4.07354 2.32698 4.63803C2 5.27976 2 6.11984 2 7.8V12.2C2 13.8802 2 14.7202 2.32698 15.362C2.6146 15.9265 3.07354 16.3854 3.63803 16.673C4.27976 17 5.11984 17 6.8 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="pj-label">Music Platforms</span>
         <span class="pj-title">Tools that power the music</span>
       </div>
 
       <div class="pj-slide" data-idx="2">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/></svg></div>
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 8V5L19 2L20 4L22 5L19 8H16ZM16 8L12 11.9999M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="pj-label">Labels</span>
         <span class="pj-title">Better artists, sooner</span>
       </div>
 
       <div class="pj-slide" data-idx="3">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 21V19C22 17.1362 20.7252 15.5701 19 15.126M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M17 21C17 19.1362 17 18.2044 16.6955 17.4693C16.2895 16.4892 15.5108 15.7105 14.5307 15.3045C13.7956 15 12.8638 15 11 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="pj-label">Communities</span>
         <span class="pj-title">Where artists find each other</span>
       </div>
 
       <div class="pj-slide" data-idx="4">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-3 5-3 4 3 6 3 5-3 5-3"/><path d="M2 17s3-3 5-3 4 3 6 3 5-3 5-3"/><path d="M12 2v6"/><path d="M12 22v-4"/></svg></div>
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 10L3 14M7.5 6L7.5 18M12 3V21M16.5 6V18M21 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="pj-label">Events</span>
         <span class="pj-title">A stage for new talent</span>
       </div>
 
       <div class="pj-slide" data-idx="5">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v4"/><path d="M2 12h20"/></svg></div>
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 7C16 6.07003 16 5.60504 15.8978 5.22354C15.6204 4.18827 14.8117 3.37962 13.7765 3.10222C13.395 3 12.93 3 12 3C11.07 3 10.605 3 10.2235 3.10222C9.18827 3.37962 8.37962 4.18827 8.10222 5.22354C8 5.60504 8 6.07003 8 7M5.2 21H18.8C19.9201 21 20.4802 21 20.908 20.782C21.2843 20.5903 21.5903 20.2843 21.782 19.908C22 19.4802 22 18.9201 22 17.8V10.2C22 9.07989 22 8.51984 21.782 8.09202C21.5903 7.71569 21.2843 7.40973 20.908 7.21799C20.4802 7 19.9201 7 18.8 7H5.2C4.07989 7 3.51984 7 3.09202 7.21799C2.71569 7.40973 2.40973 7.71569 2.21799 8.09202C2 8.51984 2 9.07989 2 10.2V17.8C2 18.9201 2 19.4802 2.21799 19.908C2.40973 20.2843 2.71569 20.5903 3.09202 20.782C3.51984 21 4.0799 21 5.2 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="pj-label">Agencies</span>
         <span class="pj-title">Artists ready for your roster</span>
       </div>
 
       <div class="pj-slide" data-idx="6">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H20M12 22C6.47715 22 2 17.5228 2 12M12 22V20M2 12C2 6.47715 6.47715 2 12 2M2 12H4M12 2V4M19.0711 19.0711L17.6569 17.6569M6.34315 6.34315L4.92893 4.92893M17.6569 6.34315L19.0711 4.92893M4.92893 19.0711L6.34315 17.6569M8 12L10.5 10.5L12 8L13.5 10.5L16 12L13.5 13.5L12 16L10.5 13.5L8 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="pj-label">Management</span>
         <span class="pj-title">Specialist support</span>
       </div>
 
       <div class="pj-slide" data-idx="7">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19 10V12C19 15.866 15.866 19 12 19M5 10V12C5 15.866 8.13401 19 12 19M12 19V22M8 22H16M12 15C10.3431 15 9 13.6569 9 12V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V12C15 13.6569 13.6569 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <span class="pj-label">Media</span>
         <span class="pj-title">Stories that sell</span>
       </div>
@@ -1090,9 +1110,9 @@
 
     <div class="pj-detail" id="pj-detail">
       <div class="pj-detail-grid">
-        <div class="pj-detail-item"><div class="pj-detail-label">Problem</div><p>Talented but unstructured. No clear path from bedroom producer to professional.</p></div>
-        <div class="pj-detail-item"><div class="pj-detail-label">Solution</div><p>Rise gives them coaching, education and industry connections to go pro.</p></div>
-        <div class="pj-detail-item"><div class="pj-detail-label">What you earn</div><p>This is where every partner journey starts.</p></div>
+        <div class="pj-detail-item"><div class="pj-detail-label">Problem</div><ul><li>No clear path from bedroom to professional</li><li>Talented but unstructured and unfocused</li><li>No network, no guidance, no strategy</li></ul></div>
+        <div class="pj-detail-item"><div class="pj-detail-label">Solution</div><ul><li>Coaching from active industry professionals</li><li>Structured education on production and career</li><li>Real industry connections when they're ready</li></ul></div>
+        <div class="pj-detail-item"><div class="pj-detail-label">What you earn</div><ul><li>This is where every partner journey starts</li><li>You refer the artist, we develop them</li><li>Full transparency on progress and results</li></ul></div>
       </div>
     </div>
 
@@ -1158,7 +1178,7 @@
 
     <div class="offer-card">
       <div class="offer-icon">
-        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22 21V19C22 17.1362 20.7252 15.5701 19 15.126M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M17 21C17 19.1362 17 18.2044 16.6955 17.4693C16.2895 16.4892 15.5108 15.7105 14.5307 15.3045C13.7956 15 12.8638 15 11 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h4>Personal Coaching</h4>
       <p>1-on-1 sessions with active industry professionals on production, branding, marketing, and career strategy.</p>
@@ -1166,7 +1186,7 @@
 
     <div class="offer-card">
       <div class="offer-icon">
-        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21L11.8999 20.8499C11.2053 19.808 10.858 19.287 10.3991 18.9098C9.99286 18.5759 9.52476 18.3254 9.02161 18.1726C8.45325 18 7.82711 18 6.57482 18H5.2C4.07989 18 3.51984 18 3.09202 17.782C2.71569 17.5903 2.40973 17.2843 2.21799 16.908C2 16.4802 2 15.9201 2 14.8V6.2C2 5.07989 2 4.51984 2.21799 4.09202C2.40973 3.71569 2.71569 3.40973 3.09202 3.21799C3.51984 3 4.07989 3 5.2 3H5.6C7.84021 3 8.96031 3 9.81596 3.43597C10.5686 3.81947 11.1805 4.43139 11.564 5.18404C12 6.03968 12 7.15979 12 9.4M12 21V9.4M12 21L12.1001 20.8499C12.7947 19.808 13.142 19.287 13.6009 18.9098C14.0071 18.5759 14.4752 18.3254 14.9784 18.1726C15.5467 18 16.1729 18 17.4252 18H18.8C19.9201 18 20.4802 18 20.908 17.782C21.2843 17.5903 21.5903 17.2843 21.782 16.908C22 16.4802 22 15.9201 22 14.8V6.2C22 5.07989 22 4.51984 21.782 4.09202C21.5903 3.71569 21.2843 3.40973 20.908 3.21799C20.4802 3 19.9201 3 18.8 3H18.4C16.1598 3 15.0397 3 14.184 3.43597C13.4314 3.81947 12.8195 4.43139 12.436 5.18404C12 6.03968 12 7.15979 12 9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h4>Structured Education</h4>
       <p>Courses covering production, mixing, branding, social media, bookings and more. Built by people who do this for a living.</p>
@@ -1174,7 +1194,7 @@
 
     <div class="offer-card">
       <div class="offer-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H20M12 22C6.47715 22 2 17.5228 2 12M12 22V20M2 12C2 6.47715 6.47715 2 12 2M2 12H4M12 2V4M19.0711 19.0711L17.6569 17.6569M6.34315 6.34315L4.92893 4.92893M17.6569 6.34315L19.0711 4.92893M4.92893 19.0711L6.34315 17.6569M8 12L10.5 10.5L12 8L13.5 10.5L16 12L13.5 13.5L12 16L10.5 13.5L8 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h4>Industry Network</h4>
       <p>Direct connections to labels, agencies, events and other professionals. Not just theory, but real introductions when artists are ready.</p>
@@ -1199,7 +1219,7 @@
   <!-- Rise Elite -->
   <div style="margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--line);text-align:center;max-width:680px;margin-left:auto;margin-right:auto;">
     <div style="width:56px;height:56px;border-radius:12px;background:rgba(255,104,62,0.10);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;">
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none"><path d="M11.2827 3.45332C11.5131 2.98638 11.6284 2.75291 11.7848 2.67831C11.9209 2.61341 12.0791 2.61341 12.2152 2.67831C12.3717 2.75291 12.4869 2.98638 12.7174 3.45332L14.9041 7.88328C14.9721 8.02113 15.0061 8.09006 15.0558 8.14358C15.0999 8.19096 15.1527 8.22935 15.2113 8.25662C15.2776 8.28742 15.3536 8.29854 15.5057 8.32077L20.397 9.03571C20.9121 9.11099 21.1696 9.14863 21.2888 9.27444C21.3925 9.38389 21.4412 9.5343 21.4215 9.68377C21.3988 9.85558 21.2124 10.0372 20.8395 10.4004L17.3014 13.8464C17.1912 13.9538 17.136 14.0076 17.1004 14.0715C17.0689 14.128 17.0487 14.1902 17.0409 14.2545C17.0321 14.3271 17.0443 14.4012 17.0723 14.5494L17.906 19.4175C17.9946 19.9301 18.0389 20.1864 17.9553 20.3337C17.8831 20.462 17.7554 20.5494 17.6098 20.5712C17.4418 20.5964 17.2108 20.4746 16.7488 20.231L12.3723 17.9289C12.2349 17.8571 12.1662 17.8212 12.0938 17.8074C12.0299 17.7954 11.9642 17.7954 11.9003 17.8074C11.8279 17.8212 11.7592 17.8571 11.6218 17.9289L7.24531 20.231C6.78334 20.4746 6.55236 20.5964 6.38437 20.5712C6.2388 20.5494 6.11112 20.462 6.03888 20.3337C5.95526 20.1864 5.99957 19.9301 6.08818 19.4175L6.92183 14.5494C6.94978 14.4012 6.96375 14.3271 6.95831 14.2545C6.95352 14.1902 6.93334 14.128 6.90181 14.0715C6.86621 14.0076 6.81101 13.9538 6.70062 13.8464L3.16256 10.4004C2.78969 10.0372 2.60326 9.85558 2.58059 9.68377C2.56087 9.5343 2.60962 9.38389 2.71337 9.27444C2.83255 9.14863 3.09007 9.11099 3.60513 9.03571L8.49636 8.32077C8.64845 8.29854 8.72449 8.28742 8.79073 8.25662C8.84935 8.22935 8.90218 8.19096 8.9463 8.14358C8.99601 8.09006 9.03002 8.02113 9.09803 7.88328L11.2827 3.45332Z" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
     <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:0.6rem;">Rise Elite</h4>
     <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">An intensive 2 to 6 week trajectory for artists who need to move fast. We bring together a dedicated team around one artist: press kit, branding, production coaching, marketing, and network introductions.</p>
@@ -1209,6 +1229,9 @@
 
 </div>
 
+<div class="section-photo">
+  <img src="../assets/photos/Aug/aug_03.jpg" alt="Rise artists in session" loading="lazy" style="max-height:340px;">
+</div>
 
 <!-- ================================================================
      4. BUILT BY EXPERTS
@@ -1222,9 +1245,23 @@
 
     <div class="team-row">
       <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
+        <div class="name">Hendrik</div>
+        <div class="role">Partnerships &amp; Bookings</div>
+        <div class="founding-label">Founding Team</div>
+        <div class="bio">Runs all partner relationships at Rise. Your main point of contact for anything partnership-related.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/RDLF.jpg" alt="David" loading="lazy">
+        <div class="name">David (RDLF)</div>
+        <div class="role">Techno Artist &middot; Base Modules</div>
+        <div class="bio">Experienced producer coaching artists on songwriting, arrangement and developing their own sound.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" loading="lazy">
         <div class="name">Maurits</div>
         <div class="role">Operations &amp; Artist Development</div>
+        <div class="founding-label">Founding Team</div>
         <div class="bio">Branding engineer helping artists find their positioning, visual identity and audience connection.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
@@ -1240,28 +1277,17 @@
         <div class="bio">Builds the platform, tools and systems that power Rise. Background in music production and tech.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy">
-        <div class="name">Yvo (Overhoff)</div>
-        <div class="role">Operations &amp; Products</div>
-        <div class="bio">Handles marketing strategy, social media and growth. Connects the brand to the right audiences.</div>
-      </div>
-      <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/Pages/Coaches/RDLF.jpg" alt="David" loading="lazy">
-        <div class="name">David (RDLF)</div>
-        <div class="role">Techno Artist &middot; Base Modules</div>
-        <div class="bio">Experienced producer coaching artists on songwriting, arrangement and developing their own sound.</div>
-      </div>
-      <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
-        <div class="name">Hendrik</div>
-        <div class="role">Partnerships &amp; Bookings</div>
-        <div class="bio">Runs all partner relationships at Rise. Your main point of contact for anything partnership-related.</div>
-      </div>
-      <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Noah.png" alt="Noah" loading="lazy">
         <div class="name">Noah Smits</div>
         <div class="role">Production Coach</div>
         <div class="bio">Producer with credits for Ed Sheeran, Afrojack and more. Teaches advanced production and mixing at Rise.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy">
+        <div class="name">Yvo (Overhoff)</div>
+        <div class="role">Operations &amp; Products</div>
+        <div class="founding-label">Founding Team</div>
+        <div class="bio">Handles marketing strategy, social media and growth. Connects the brand to the right audiences.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Tim.png" alt="Tim Hox" loading="lazy">
@@ -1288,7 +1314,7 @@
 
     <div class="benefit-card">
       <div class="benefit-icon">
-        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 15.5H7.5C6.10444 15.5 5.40665 15.5 4.83886 15.6722C3.56045 16.06 2.56004 17.0605 2.17224 18.3389C2 18.9067 2 19.6044 2 21M19 21V15M16 18H22M14.5 7.5C14.5 9.98528 12.4853 12 10 12C7.51472 12 5.5 9.98528 5.5 7.5C5.5 5.01472 7.51472 3 10 3C12.4853 3 14.5 5.01472 14.5 7.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h4>Developed Talent Pipeline</h4>
       <p>Access to artists who've been coached, assessed and developed. You know exactly where they stand through our Rise Standard.</p>
@@ -1296,7 +1322,7 @@
 
     <div class="benefit-card">
       <div class="benefit-icon">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15.3333 8.27316C14.4487 7.48142 13.2806 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C13.2806 17 14.4487 16.5186 15.3333 15.7268M6 13.5H11M6 10.5H11M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h4>Recurring Commission</h4>
       <p>Earn on every artist that joins through you. Recurring, transparent, and for as long as they stay in the program.</p>
@@ -1304,7 +1330,7 @@
 
     <div class="benefit-card">
       <div class="benefit-icon">
-        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M11.2827 3.45332C11.5131 2.98638 11.6284 2.75291 11.7848 2.67831C11.9209 2.61341 12.0791 2.61341 12.2152 2.67831C12.3717 2.75291 12.4869 2.98638 12.7174 3.45332L14.9041 7.88328C14.9721 8.02113 15.0061 8.09006 15.0558 8.14358C15.0999 8.19096 15.1527 8.22935 15.2113 8.25662C15.2776 8.28742 15.3536 8.29854 15.5057 8.32077L20.397 9.03571C20.9121 9.11099 21.1696 9.14863 21.2888 9.27444C21.3925 9.38389 21.4412 9.5343 21.4215 9.68377C21.3988 9.85558 21.2124 10.0372 20.8395 10.4004L17.3014 13.8464C17.1912 13.9538 17.136 14.0076 17.1004 14.0715C17.0689 14.128 17.0487 14.1902 17.0409 14.2545C17.0321 14.3271 17.0443 14.4012 17.0723 14.5494L17.906 19.4175C17.9946 19.9301 18.0389 20.1864 17.9553 20.3337C17.8831 20.462 17.7554 20.5494 17.6098 20.5712C17.4418 20.5964 17.2108 20.4746 16.7488 20.231L12.3723 17.9289C12.2349 17.8571 12.1662 17.8212 12.0938 17.8074C12.0299 17.7954 11.9642 17.7954 11.9003 17.8074C11.8279 17.8212 11.7592 17.8571 11.6218 17.9289L7.24531 20.231C6.78334 20.4746 6.55236 20.5964 6.38437 20.5712C6.2388 20.5494 6.11112 20.462 6.03888 20.3337C5.95526 20.1864 5.99957 19.9301 6.08818 19.4175L6.92183 14.5494C6.94978 14.4012 6.96375 14.3271 6.95831 14.2545C6.95352 14.1902 6.93334 14.128 6.90181 14.0715C6.86621 14.0076 6.81101 13.9538 6.70062 13.8464L3.16256 10.4004C2.78969 10.0372 2.60326 9.85558 2.58059 9.68377C2.56087 9.5343 2.60962 9.38389 2.71337 9.27444C2.83255 9.14863 3.09007 9.11099 3.60513 9.03571L8.49636 8.32077C8.64845 8.29854 8.72449 8.28742 8.79073 8.25662C8.84935 8.22935 8.90218 8.19096 8.9463 8.14358C8.99601 8.09006 9.03002 8.02113 9.09803 7.88328L11.2827 3.45332Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h4>First Access to Graduates</h4>
       <p>Top-tier partners get exclusive early access to artists completing the program, before anyone else sees them.</p>
@@ -1312,7 +1338,7 @@
 
     <div class="benefit-card">
       <div class="benefit-icon">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M14 17H8M16 13H8M20 9.98822V17.2C20 18.8802 20 19.7202 19.673 20.362C19.3854 20.9265 18.9265 21.3854 18.362 21.673C17.7202 22 16.8802 22 15.2 22H8.8C7.11984 22 6.27976 22 5.63803 21.673C5.07354 21.3854 4.6146 20.9265 4.32698 20.362C4 19.7202 4 18.8802 4 17.2V6.8C4 5.11984 4 4.27976 4.32698 3.63803C4.6146 3.07354 5.07354 2.6146 5.63803 2.32698C6.27976 2 7.11984 2 8.8 2H12.0118C12.7455 2 13.1124 2 13.4577 2.08289C13.7638 2.15638 14.0564 2.27759 14.3249 2.44208C14.6276 2.6276 14.887 2.88703 15.4059 3.40589L18.5941 6.59411C19.113 7.11297 19.3724 7.3724 19.5579 7.67515C19.7224 7.94356 19.8436 8.2362 19.9171 8.5423C20 8.88757 20 9.25445 20 9.98822Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h4>Full Handoff Reports</h4>
       <p>When an artist graduates, you get a development report covering what they've learned, where they stand, and what comes next.</p>
@@ -1378,7 +1404,7 @@
 
       <div class="way-card">
         <div class="way-icon">
-          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12.7076 18.3639L11.2933 19.7781C9.34072 21.7308 6.1749 21.7308 4.22228 19.7781C2.26966 17.8255 2.26966 14.6597 4.22228 12.7071L5.63649 11.2929M18.3644 12.7071L19.7786 11.2929C21.7312 9.34024 21.7312 6.17441 19.7786 4.22179C17.826 2.26917 14.6602 2.26917 12.7076 4.22179L11.2933 5.636M8.50045 15.4999L15.5005 8.49994" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h4>Referral</h4>
         <p>Send artists our way, earn recurring commission. Simple tracking, transparent payouts.</p>
@@ -1386,7 +1412,7 @@
 
       <div class="way-card">
         <div class="way-icon">
-          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="23 7 16 12 16 3 23 7"/><line x1="1" y1="20" x2="23" y2="20"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 8.93137C22 8.32555 22 8.02265 21.8802 7.88238C21.7763 7.76068 21.6203 7.69609 21.4608 7.70865C21.2769 7.72312 21.0627 7.93731 20.6343 8.36569L17 12L20.6343 15.6343C21.0627 16.0627 21.2769 16.2769 21.4608 16.2914C21.6203 16.3039 21.7763 16.2393 21.8802 16.1176C22 15.9774 22 15.6744 22 15.0686V8.93137Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 9.8C2 8.11984 2 7.27976 2.32698 6.63803C2.6146 6.07354 3.07354 5.6146 3.63803 5.32698C4.27976 5 5.11984 5 6.8 5H12.2C13.8802 5 14.7202 5 15.362 5.32698C15.9265 5.6146 16.3854 6.07354 16.673 6.63803C17 7.27976 17 8.11984 17 9.8V14.2C17 15.8802 17 16.7202 16.673 17.362C16.3854 17.9265 15.9265 18.3854 15.362 18.673C14.7202 19 13.8802 19 12.2 19H6.8C5.11984 19 4.27976 19 3.63803 18.673C3.07354 18.3854 2.6146 17.9265 2.32698 17.362C2 16.7202 2 15.8802 2 14.2V9.8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h4>Content & Campaigns</h4>
         <p>Co-branded events, socials and content. You bring the reach, we bring the artists.</p>
@@ -1394,7 +1420,7 @@
 
       <div class="way-card">
         <div class="way-icon">
-          <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M17 2L21 6M21 6L17 10M21 6H7.8C6.11984 6 5.27976 6 4.63803 6.32698C4.07354 6.6146 3.6146 7.07354 3.32698 7.63803C3 8.27976 3 9.11984 3 10.8V11M3 18H16.2C17.8802 18 18.7202 18 19.362 17.673C19.9265 17.3854 20.3854 16.9265 20.673 16.362C21 15.7202 21 14.8802 21 13.2V13M3 18L7 22M3 18L7 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h4>Artist Development</h4>
         <p>Access our talent pipeline for your roster, label or platform. First access for top-tier partners.</p>
@@ -1495,28 +1521,28 @@
     <div class="process-grid">
       <div class="process-step">
         <div class="process-step-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M8.38028 8.85335C9.07627 10.303 10.0251 11.6616 11.2266 12.8632C12.4282 14.0648 13.7869 15.0136 15.2365 15.7096C15.3612 15.7694 15.4235 15.7994 15.5024 15.8224C15.7828 15.9041 16.127 15.8454 16.3644 15.6754C16.4313 15.6275 16.4884 15.5704 16.6027 15.4561C16.9523 15.1064 17.1271 14.9316 17.3029 14.8174C17.9658 14.3864 18.8204 14.3864 19.4833 14.8174C19.6591 14.9316 19.8339 15.1064 20.1835 15.4561L20.3783 15.6509C20.9098 16.1824 21.1755 16.4481 21.3198 16.7335C21.6069 17.301 21.6069 17.9713 21.3198 18.5389C21.1755 18.8242 20.9098 19.09 20.3783 19.6214L20.2207 19.779C19.6911 20.3087 19.4263 20.5735 19.0662 20.7757C18.6667 21.0001 18.0462 21.1615 17.588 21.1601C17.1751 21.1589 16.8928 21.0788 16.3284 20.9186C13.295 20.0576 10.4326 18.4332 8.04466 16.0452C5.65668 13.6572 4.03221 10.7948 3.17124 7.76144C3.01103 7.19699 2.93092 6.91477 2.9297 6.50182C2.92833 6.0436 3.08969 5.42311 3.31411 5.0236C3.51636 4.66357 3.78117 4.39876 4.3108 3.86913L4.46843 3.7115C4.99987 3.18006 5.2656 2.91433 5.55098 2.76999C6.11854 2.48292 6.7888 2.48292 7.35636 2.76999C7.64174 2.91433 7.90747 3.18006 8.43891 3.7115L8.63378 3.90637C8.98338 4.25597 9.15819 4.43078 9.27247 4.60655C9.70347 5.26945 9.70347 6.12403 9.27247 6.78692C9.15819 6.96269 8.98338 7.1375 8.63378 7.4871C8.51947 7.60142 8.46231 7.65857 8.41447 7.72538C8.24446 7.96281 8.18576 8.30707 8.26748 8.58743C8.29048 8.66632 8.32041 8.72866 8.38028 8.85335Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h4>Intro Call</h4>
         <p>30 minutes with Hendrik. We learn what you need, you learn what we build.</p>
       </div>
       <div class="process-step">
         <div class="process-step-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h4>90-Day Pilot</h4>
         <p>Start small. One category, one quarter. See the talent, test the fit.</p>
       </div>
       <div class="process-step">
         <div class="process-step-icon">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h4>Measure</h4>
         <p>We track referrals, signings, and satisfaction. You see the numbers.</p>
       </div>
       <div class="process-step">
         <div class="process-step-icon">
-          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 7L14.1314 14.8686C13.7354 15.2646 13.5373 15.4627 13.309 15.5368C13.1082 15.6021 12.8918 15.6021 12.691 15.5368C12.4627 15.4627 12.2646 15.2646 11.8686 14.8686L9.13137 12.1314C8.73535 11.7354 8.53735 11.5373 8.30902 11.4632C8.10817 11.3979 7.89183 11.3979 7.69098 11.4632C7.46265 11.5373 7.26465 11.7354 6.86863 12.1314L2 17M22 7H15M22 7V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h4>Expand</h4>
         <p>Working? Add categories, deepen the partnership, grow together.</p>
@@ -1525,6 +1551,9 @@
   </div>
 </div>
 
+<div class="section-photo">
+  <img src="../assets/photos/Aug/aug_04.JPG" alt="Rise coaching session" loading="lazy" style="max-height:340px;">
+</div>
 
 <!-- ================================================================
      12. BOOKING + CONTACT CTA (Dual CTA)
@@ -1614,44 +1643,44 @@
 
     var details = [
       {
-        problem: 'Talented but unstructured. No clear path from bedroom producer to professional.',
-        solution: 'Rise gives them coaching, education and industry connections to go pro.',
-        earn: 'This is where every partner journey starts.'
+        problem: ['No clear path from bedroom to professional', 'Talented but unstructured and unfocused', 'No network, no guidance, no strategy'],
+        solution: ['Coaching from active industry professionals', 'Structured education on production and career', 'Real industry connections when they\'re ready'],
+        earn: ['This is where every partner journey starts', 'You refer the artist, we develop them', 'Full transparency on progress and results']
       },
       {
-        problem: 'Artists buy tools but never learn to use them properly.',
-        solution: 'We teach production and distribution workflows hands-on, creating skilled, loyal users.',
-        earn: 'Earn recurring commission on every artist that signs up through your platform.'
+        problem: ['Artists buy tools but never master them', 'High churn from frustrated, untrained users', 'Support tickets instead of creative output'],
+        solution: ['Hands-on production and workflow training', 'Artists learn to use your tools properly', 'Skilled users stay longer and spend more'],
+        earn: ['Recurring commission on every signup', 'Reduced churn through better-trained users', 'Co-branded education builds loyalty']
       },
       {
-        problem: 'Too many unfinished demos. Not enough release-ready artists.',
-        solution: 'Refer developing artists to Rise. They come back with finished tracks and a real strategy.',
-        earn: 'Commission on every referral, plus first access to graduates for your roster.'
+        problem: ['Too many unfinished demos on your desk', 'Raw talent but no release-ready artists', 'Time wasted developing artists in-house'],
+        solution: ['Artists come back with finished tracks', 'Real strategy, not just creative coaching', 'We handle the development process end to end'],
+        earn: ['Commission on every referral', 'First access to graduates for your roster', 'Stronger catalog from better-prepared artists']
       },
       {
-        problem: 'Members want to grow but don\'t know where to start.',
-        solution: 'Recommend Rise to members ready to level up. We handle the development.',
-        earn: 'Simple affiliate model. Recurring payouts, no hard selling required.'
+        problem: ['Members want to grow but feel stuck', 'No clear next step after learning basics', 'Hard to recommend quality programs'],
+        solution: ['Rise picks up where your community stops', 'Structured coaching for serious members', 'We handle development, you keep the relationship'],
+        earn: ['Simple affiliate model, recurring payouts', 'No hard selling required', 'Adds value to your membership offering']
       },
       {
-        problem: 'Finding reliable new talent for your lineup is hit or miss.',
-        solution: 'We develop performance-ready artists and curate lineups for your events.',
-        earn: 'Access to a talent pipeline. Commission on every artist referred your way.'
+        problem: ['Finding reliable new talent is hit or miss', 'Unvetted artists waste time and budget', 'No pipeline for consistent quality acts'],
+        solution: ['We develop performance-ready artists', 'Curated lineups matched to your events', 'Every artist backed by coaching and assessment'],
+        earn: ['Access to a vetted talent pipeline', 'Commission on every artist referred', 'Reduced risk from pre-developed talent']
       },
       {
-        problem: 'Signing raw talent means months of development before they\'re bookable.',
-        solution: 'Artists arrive with strong branding, good music, and coaching behind them.',
-        earn: 'Skip the development phase. Earn commission on referred artists.'
+        problem: ['Raw talent needs months before they\'re bookable', 'Investing in development delays your ROI', 'Hard to judge potential vs. readiness'],
+        solution: ['Artists arrive with strong branding and music', 'Coaching and development already handled', 'Clear assessment of where each artist stands'],
+        earn: ['Skip the development phase entirely', 'Commission on referred artists', 'Faster time to market for new signings']
       },
       {
-        problem: 'Managing production coaching and personal growth on top of strategy is too much.',
-        solution: 'We handle coaching and artist development. You focus on bookings and career strategy.',
-        earn: 'Commission per referred artist. Reduced workload, better-prepared talent.'
+        problem: ['Production coaching on top of strategy is too much', 'Artists need personal growth, not just bookings', 'Burnout from wearing too many hats'],
+        solution: ['We handle coaching and artist development', 'You focus on bookings and career strategy', 'Shared progress tracking and communication'],
+        earn: ['Commission per referred artist', 'Reduced workload, better-prepared talent', 'Stronger artist relationships through shared support']
       },
       {
-        problem: 'Great content needs great stories, but finding them takes time.',
-        solution: 'Early access to artist transformation journeys and behind-the-scenes content.',
-        earn: 'Earn commission on every signup through your content or channels.'
+        problem: ['Great content needs great stories to tell', 'Finding authentic transformations takes time', 'Generic music content doesn\'t stand out'],
+        solution: ['Early access to artist transformation journeys', 'Behind-the-scenes content from real development', 'Authentic stories that resonate with audiences'],
+        earn: ['Commission on every signup through your channels', 'Exclusive content partnerships available', 'Growing library of artist stories to feature']
       }
     ];
 
@@ -1662,10 +1691,11 @@
       slides[current].classList.add('active');
       dots[current].classList.add('active');
       var d = details[current];
+      function toBullets(arr){ return '<ul>' + arr.map(function(i){ return '<li>' + i + '</li>'; }).join('') + '</ul>'; }
       detail.innerHTML = '<div class="pj-detail-grid">' +
-        '<div class="pj-detail-item"><div class="pj-detail-label">Problem</div><p>' + d.problem + '</p></div>' +
-        '<div class="pj-detail-item"><div class="pj-detail-label">Solution</div><p>' + d.solution + '</p></div>' +
-        '<div class="pj-detail-item"><div class="pj-detail-label">What you earn</div><p>' + d.earn + '</p></div>' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">Problem</div>' + toBullets(d.problem) + '</div>' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">Solution</div>' + toBullets(d.solution) + '</div>' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">What you earn</div>' + toBullets(d.earn) + '</div>' +
       '</div>';
 
       // Center active slide
@@ -1678,7 +1708,7 @@
 
     function startAuto(){
       stopAuto();
-      autoTimer = setInterval(next, 4000);
+      autoTimer = setInterval(next, 8000);
     }
     function stopAuto(){
       if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
