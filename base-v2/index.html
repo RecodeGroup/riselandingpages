@@ -635,11 +635,29 @@
 
     /* ── Limited spots indicator ── */
     .limited-spots { display:flex; align-items:center; gap:10px; font-size:0.95rem; color:rgba(255,255,255,0.65); justify-content:center; margin:1.2rem 0 0; }
-    .pulse-dot { width:5px; height:5px; background:var(--muted); border-radius:50%; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; margin-top:1px; }
-    @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); } }
+    .pulse-dot { width:14px; height:3px; background:var(--muted); border-radius:2px; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; margin-top:2px; }
+    @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); background:var(--muted); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); background:var(--accent); } }
 
     /* ── Step labels ── */
     .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; justify-content:center; width:100%; }
+
+    /* ── Learning Path: sequential border glow ── */
+    .lp-grid { display:flex; align-items:stretch; justify-content:center; gap:0; max-width:1000px; margin:0 auto; }
+    .lp-step { flex:1; border:1.5px solid var(--line); border-radius:12px; padding:24px 20px; background:rgba(255,255,255,0.02); text-align:center; transition:border-color 0.6s ease, box-shadow 0.6s ease; position:relative; }
+    .lp-connector { width:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center; position:relative; }
+    .lp-connector::before { content:''; width:100%; border-top:2px dashed transparent; transition:border-color 0.6s ease; }
+
+    /* Animation states */
+    .lp-step.glow { border-color:var(--accent); box-shadow:0 0 14px 2px rgba(255,104,62,0.25); }
+    .lp-connector.glow::before { border-color:var(--accent); }
+
+    @media(max-width:768px){
+      .lp-grid { flex-direction:column; gap:0; align-items:center; }
+      .lp-step { width:100%; max-width:340px; }
+      .lp-connector { width:2px; height:28px; }
+      .lp-connector::before { width:0; height:100%; border-top:none; border-left:2px dashed transparent; }
+      .lp-connector.glow::before { border-top:none; border-left-color:var(--accent); }
+    }
 
     /* ── Inline CTA banner (repeated) ── */
     .inline-cta { text-align:center; padding:3rem 2rem; }
@@ -776,34 +794,34 @@
 
         <div class="feature-card">
           <div class="feature-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 18v2"/><path d="M18 18v2"/><path d="M6 6V4"/><path d="M18 6V4"/><path d="M10 10v4"/><path d="M14 10v4"/></svg>
           </div>
-          <h3>30 Sessions</h3>
-          <p>Hands-on production + career fundamentals</p>
+          <h3>Production &amp; Arrangement</h3>
+          <p>Build your foundation in music theory, Ableton workflow, and learn to turn loops into complete tracks</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>
           </div>
-          <h3>Live Coaching</h3>
-          <p>Weekly sessions with direct feedback</p>
+          <h3>Sound Design &amp; Synthesis</h3>
+          <p>Develop your identity through sound design, synthesis en sampling techniques</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20V8l7 -4 7 4v12"/><rect x="9" y="12" width="6" height="8"/></svg>
           </div>
-          <h3>Full Platform</h3>
-          <p>Video modules, sample packs, Ableton chains</p>
+          <h3>Mixing &amp; Mastering</h3>
+          <p>Polish your tracks with professional mixing and mastering techniques to make them release-ready</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
-          <h3>Fundamental Course</h3>
-          <p>Includes the full course with sample packs and video lessons on production basics and track building, so you can review the material and prepare for sessions in your own time</p>
+          <h3>Career Development</h3>
+          <p>Build your artist profile, plan releases, and learn what it takes to turn music into a sustainable career</p>
         </div>
 
       </div>
@@ -848,35 +866,89 @@
     <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;text-align:center;">Your learning journey</div>
     <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.02em;text-align:center;margin-bottom:3rem;">Four steps to becoming a professional producer</h2>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
-      <div style="border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:rgba(255,255,255,0.02);text-align:center;">
+    <div class="lp-grid">
+      <!-- Step 1 -->
+      <div class="lp-step" data-step="1">
         <div style="width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 18v2"/><path d="M18 18v2"/><path d="M6 6V4"/><path d="M18 6V4"/><path d="M10 10v4"/><path d="M14 10v4"/></svg></div>
         <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">STEP 1</span>
         <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Build Your Foundation</span>
         <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Learn production fundamentals, music theory, and Ableton. Build a solid workflow from day one.</p>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:rgba(255,255,255,0.02);text-align:center;">
+      <!-- Connector 1→2 -->
+      <div class="lp-connector" data-conn="1"></div>
+
+      <!-- Step 2 -->
+      <div class="lp-step" data-step="2">
         <div style="width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg></div>
         <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">STEP 2</span>
         <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Create Your Sound</span>
-        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Develop your sonic identity through sound design, synthesis, and sampling techniques.</p>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Develop your identity through sound design, synthesis en sampling techniques.</p>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:rgba(255,255,255,0.02);text-align:center;">
+      <!-- Connector 2→3 -->
+      <div class="lp-connector" data-conn="2"></div>
+
+      <!-- Step 3 -->
+      <div class="lp-step" data-step="3">
         <div style="width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
         <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">STEP 3</span>
         <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Turn Ideas into Tracks</span>
         <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Transform loops into complete songs with professional arrangement and energy flow.</p>
       </div>
 
-      <div style="border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:rgba(255,255,255,0.02);text-align:center;">
+      <!-- Connector 3→4 -->
+      <div class="lp-connector" data-conn="3"></div>
+
+      <!-- Step 4 -->
+      <div class="lp-step" data-step="4">
         <div style="width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
         <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">STEP 4</span>
         <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Finish Like a Pro</span>
         <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Polish with mixing and mastering, then prepare your tracks for release and build your career.</p>
       </div>
     </div>
+
+    <script>
+    (function(){
+      const steps = document.querySelectorAll('.lp-step');
+      const conns = document.querySelectorAll('.lp-connector');
+      if(!steps.length) return;
+      // Timeline: step1 on → conn1 → step2 → conn2 → step3 → conn3 → step4 → hold → fade → pause → repeat
+      const STEP_DELAY = 600;  // ms between each element lighting up
+      const HOLD = 1800;       // ms all lit before fading
+      const FADE = 800;        // ms for fade-out (handled by CSS transition)
+      const PAUSE = 1200;      // ms dark before restarting
+      const SEQ = [
+        {type:'step', idx:0},
+        {type:'conn', idx:0},
+        {type:'step', idx:1},
+        {type:'conn', idx:1},
+        {type:'step', idx:2},
+        {type:'conn', idx:2},
+        {type:'step', idx:3}
+      ];
+      function clearAll(){
+        steps.forEach(s=>s.classList.remove('glow'));
+        conns.forEach(c=>c.classList.remove('glow'));
+      }
+      function runCycle(){
+        clearAll();
+        SEQ.forEach((item, i) => {
+          setTimeout(()=>{
+            if(item.type==='step') steps[item.idx].classList.add('glow');
+            else conns[item.idx].classList.add('glow');
+          }, i * STEP_DELAY);
+        });
+        // After all lit, hold, then fade
+        const allLitTime = (SEQ.length - 1) * STEP_DELAY;
+        setTimeout(()=>{ clearAll(); }, allLitTime + HOLD);
+        // Restart after fade + pause
+        setTimeout(runCycle, allLitTime + HOLD + FADE + PAUSE);
+      }
+      runCycle();
+    })();
+    </script>
   </div>
 </section>
 
@@ -998,7 +1070,7 @@
     function closeModal(){qOverlay.classList.remove("open");document.body.style.overflow=""}
     function nextStep(){if(qState.step<STEPS.length-1){qState.step++;renderStep()}}
     function prevStep(){if(qState.step>0){qState.step--;renderStep()}else{closeModal()}}
-    function renderStep(){var s=STEPS[qState.step];qBackBtn.classList.toggle("hidden",qState.step===0||s.type==="success");var t=STEPS.filter(function(x){return x.type!=="success"}).length;var bars=s.type==="success"?"":'<div class="progress">'+Array.from({length:t},function(_,i){return'<span class="'+(i<=qState.step?"done":"")+'"></span>'}).join("")+"</div>";if(s.type==="choice"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="options">'+s.options.map(function(o,i){return'<button class="option" data-value="'+o+'"><span class="letter">'+String.fromCharCode(65+i)+'.</span><span class="text">'+o+"</span></button>"}).join("")+"</div>";qBody.querySelectorAll(".option").forEach(function(b){b.addEventListener("click",function(){qState.answers[s.key]=b.dataset.value;qBody.querySelectorAll(".option").forEach(function(x){x.classList.remove("selected")});b.classList.add("selected");setTimeout(nextStep,220)})})}else if(s.type==="slider"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="slider-step"><div class="slider-value" id="sv">'+s.format(qState.answers[s.key])+'</div><div class="slider-label">Per year</div><div class="slider-wrap"><input type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+qState.answers[s.key]+'" id="si"/><div class="slider-bounds"><span>€ 0,-</span><span>€ 10k+</span></div></div><button class="btn-continue" id="cb">Continue →</button></div>';document.getElementById("si").addEventListener("input",function(e){var v=Number(e.target.value);qState.answers[s.key]=v;document.getElementById("sv").textContent=s.format(v)});document.getElementById("cb").addEventListener("click",nextStep)}else if(s.type==="form"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">'+s.subtitle+'</p><form class="form-step" id="af"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required value="'+(qState.answers.whatsapp||_dialCode)+'"/><input type="email" name="email" placeholder="Email address" required/><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application →</button></div></form>';document.getElementById("af").addEventListener("submit",function(e){e.preventDefault();var fd=new FormData(e.target);qState.answers.name=fd.get("name");qState.answers.whatsapp=fd.get("whatsapp");qState.answers.email=fd.get("email");nextStep()})}else if(s.type==="success"){var p=new URLSearchParams();if(qState.answers.name)p.set("name",qState.answers.name);if(qState.answers.email)p.set("email",qState.answers.email);if(qState.answers.whatsapp)p.set("phone",qState.answers.whatsapp);p.set("program","base");window.location.href="/academy-thankyou/?"+p.toString()}}
+    function renderStep(){var s=STEPS[qState.step];qBackBtn.classList.toggle("hidden",qState.step===0||s.type==="success");var t=STEPS.filter(function(x){return x.type!=="success"}).length;var bars=s.type==="success"?"":'<div class="progress">'+Array.from({length:t},function(_,i){return'<span class="'+(i<=qState.step?"done":"")+'"></span>'}).join("")+"</div>";if(s.type==="choice"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="options">'+s.options.map(function(o,i){return'<button class="option" data-value="'+o+'"><span class="letter">'+String.fromCharCode(65+i)+'.</span><span class="text">'+o+"</span></button>"}).join("")+"</div>";qBody.querySelectorAll(".option").forEach(function(b){b.addEventListener("click",function(){qState.answers[s.key]=b.dataset.value;qBody.querySelectorAll(".option").forEach(function(x){x.classList.remove("selected")});b.classList.add("selected");setTimeout(nextStep,220)})})}else if(s.type==="slider"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="slider-step"><div class="slider-value" id="sv">'+s.format(qState.answers[s.key])+'</div><div class="slider-label">Per year</div><div class="slider-wrap"><input type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+qState.answers[s.key]+'" id="si"/><div class="slider-bounds"><span>€ 0,-</span><span>€ 10k+</span></div></div><button class="btn-continue" id="cb">Continue →</button></div>';document.getElementById("si").addEventListener("input",function(e){var v=Number(e.target.value);qState.answers[s.key]=v;document.getElementById("sv").textContent=s.format(v)});document.getElementById("cb").addEventListener("click",nextStep)}else if(s.type==="form"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">'+s.subtitle+'</p><form class="form-step" id="af"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required value="'+(qState.answers.whatsapp||_dialCode)+'"/><input type="email" name="email" placeholder="Email address" required/><label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;cursor:pointer;text-align:left;"><input type="checkbox" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required><span>I confirm that I have been selected by a Rise founding team member for the Base program.</span></label><label style="display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;cursor:pointer;text-align:left;"><input type="checkbox" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required><span>I take responsibility for having access to a laptop and Ableton during the Base program.</span></label><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application &rarr;</button></div></form>';document.getElementById("af").addEventListener("submit",function(e){e.preventDefault();var fd=new FormData(e.target);qState.answers.name=fd.get("name");qState.answers.whatsapp=fd.get("whatsapp");qState.answers.email=fd.get("email");nextStep()})}else if(s.type==="success"){var p=new URLSearchParams();if(qState.answers.name)p.set("name",qState.answers.name);if(qState.answers.email)p.set("email",qState.answers.email);if(qState.answers.whatsapp)p.set("phone",qState.answers.whatsapp);p.set("program","base");window.location.href="/academy-thankyou/?"+p.toString()}}
     qOverlay.addEventListener("click",function(e){if(e.target===qOverlay)closeModal()});
     document.addEventListener("keydown",function(e){if(e.key==="Escape"&&qOverlay.classList.contains("open"))closeModal()});
   </script>
