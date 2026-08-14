@@ -605,7 +605,7 @@
       margin-top: 0;
     }
     .team-member.open .bio {
-      max-height: 120px;
+      max-height: 200px;
       opacity: 1;
       margin-top: 0.5rem;
     }
@@ -927,9 +927,27 @@
       overflow: hidden;
     }
     .cta-card.light-cta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .light-cta-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+    .light-cta-photo {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .light-cta-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      min-height: 280px;
+      max-height: 400px;
     }
     .hendrik-card {
       display: flex;
@@ -991,6 +1009,9 @@
       .section-photo img { max-height: 240px; }
       .footer { padding: 2rem 1rem; }
       .hendrik-card { flex-direction: column; text-align: center; }
+      .cta-card.light-cta { grid-template-columns: 1fr; }
+      .light-cta-photo { order: -1; }
+      .light-cta-photo img { max-height: 260px; }
       .team-member { flex: 0 0 180px; }
       .team-member img { width: 64px; height: 64px; }
     }
@@ -1011,6 +1032,19 @@
       .ways-grid { grid-template-columns: 1fr; }
       .offers-grid { grid-template-columns: 1fr; }
       .team-row { gap: 12px; padding: 0 1rem; }
+    }
+
+    /* Typewriter effect */
+    .tw-word {
+      color: var(--accent);
+      display: inline-block;
+      min-width: 80px;
+      border-right: 2px solid var(--accent);
+      animation: tw-blink 0.7s step-end infinite;
+    }
+    @keyframes tw-blink {
+      0%, 100% { border-color: var(--accent); }
+      50% { border-color: transparent; }
     }
   </style>
 </head>
@@ -1035,8 +1069,8 @@
     <img src="../assets/photos/Aug/aug_7 kopie.JPG" alt="" loading="eager">
   </div>
   <div class="hero-body">
-    <div class="hero-label">Rise Partner Ecosystem</div>
-    <h1>We develop artists. <span>You grow with us.</span></h1>
+    <div class="hero-label">Rise Partnerships</div>
+    <h1>We <span id="typewriter-word" class="tw-word">develop</span> artists. <span>You grow with us.</span></h1>
     <p class="hero-sub">Rise turns raw talent into release-ready artists through structured coaching, education and community. As a partner, you get access to developed talent, earn recurring commissions, and strengthen your own roster or platform.</p>
     <div class="hero-ctas">
       <a href="#booking" class="btn-primary">Let's See If There's a Fit</a>
@@ -1258,7 +1292,7 @@
         <div class="bio">Experienced producer coaching artists on songwriting, arrangement and developing their own sound.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" loading="lazy">
+        <img src="../assets/Pages/Coaches/Mau2.png" alt="Maurits" loading="lazy">
         <div class="name">Maurits</div>
         <div class="role">Operations &amp; Artist Development</div>
         <div class="founding-label">Founding Team</div>
@@ -1305,7 +1339,7 @@
         <img src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" loading="lazy">
         <div class="name">Milan Fernandes</div>
         <div class="role">Music Producer / DJ</div>
-        <div class="bio">Active techno and house producer with a sharp ear for arrangement. Co-teaches production alongside Vannood and Paul.</div>
+        <div class="bio">Growing house artist in the Dutch scene and a talented producer with a sharp ear for arrangement and sound design.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Marco.png" alt="Marco Meeuwsen" loading="lazy">
@@ -1320,7 +1354,7 @@
         <div class="bio">Builds artist brands from the ground up. Teaches visual identity, positioning, and how to stand out in a crowded scene.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/photos/Photo50.png" alt="Paul" loading="lazy">
+        <img src="../assets/photos/Aug/paulv2.png" alt="Paul" loading="lazy">
         <div class="name">Paul</div>
         <div class="role">Mix &amp; Master Engineer</div>
         <div class="bio">Specializes in getting tracks to sound polished and release-ready. Teaches mixing techniques, mastering workflows, and how to bring out the best in every production.</div>
@@ -1608,18 +1642,23 @@
 
   <!-- Right: Contact -->
   <div class="cta-card light-cta">
-    <div class="section-divider div-11"><span class="div-line"></span></div>
-    <h3>Rather just reach out?</h3>
-    <p>Not ready to book a call? Send Hendrik a message and we'll take it from there.</p>
-    <a href="mailto:hendrik@recode-group.com?subject=Partnership%20Inquiry" class="btn-primary" style="align-self: flex-start;">Get in Touch</a>
+    <div class="light-cta-content">
+      <div class="section-divider div-11"><span class="div-line"></span></div>
+      <h3>Rather just reach out?</h3>
+      <p>Not ready to book a call? Send Hendrik a message and we'll take it from there.</p>
+      <a href="mailto:hendrik@recode-group.com?subject=Partnership%20Inquiry" class="btn-primary" style="align-self: flex-start;">Get in Touch</a>
 
-    <div class="hendrik-card">
-      <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik">
-      <div class="info">
-        <div class="name">Hendrik</div>
-        <div class="title">Partnerships &middot; Founding Team</div>
-        <a href="mailto:hendrik@recode-group.com">hendrik@recode-group.com</a>
+      <div class="hendrik-card">
+        <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik">
+        <div class="info">
+          <div class="name">Hendrik</div>
+          <div class="title">Partnerships &middot; Founding Team</div>
+          <a href="mailto:hendrik@recode-group.com">hendrik@recode-group.com</a>
+        </div>
       </div>
+    </div>
+    <div class="light-cta-photo">
+      <img src="../assets/photos/photo-9.jpg" alt="Rise artists" loading="lazy">
     </div>
   </div>
 
@@ -1655,7 +1694,9 @@
 
   // Toggle coach bio
   function toggleBio(el) {
-    el.classList.toggle('open');
+    var wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.team-member.open').forEach(function(m) { m.classList.remove('open'); });
+    if (!wasOpen) el.classList.add('open');
   }
 
   // Partner Journey Carousel
@@ -1684,7 +1725,7 @@
       },
       {
         problem: ['Too many unfinished demos on your desk', 'Raw talent but no release-ready artists', 'Time wasted developing artists in-house'],
-        solution: ['Artists come back with finished tracks', 'Real strategy, not just creative coaching', 'We handle the development process end to end'],
+        solution: ['Artists come back with finished tracks', 'Receive demos pre-filtered for your label', 'We handle the development process end to end'],
         earn: ['Commission on every referral', 'First access to graduates for your roster', 'Stronger catalog from better-prepared artists']
       },
       {
@@ -1779,6 +1820,46 @@
 
     goTo(0);
     startAuto();
+  })();
+
+  /* ── Typewriter effect ── */
+  (function() {
+    var words = ['develop','support','create','coach','connect','elevate','prepare','launch'];
+    var el = document.getElementById('typewriter-word');
+    if (!el) return;
+    var idx = 0;
+    var charIdx = 0;
+    var deleting = false;
+    var typeSpeed = 110;
+    var deleteSpeed = 60;
+    var pauseEnd = 2000;
+    var pauseEmpty = 400;
+
+    function tick() {
+      var current = words[idx];
+      if (!deleting) {
+        charIdx++;
+        el.textContent = current.substring(0, charIdx);
+        if (charIdx === current.length) {
+          deleting = true;
+          setTimeout(tick, pauseEnd);
+          return;
+        }
+        setTimeout(tick, typeSpeed);
+      } else {
+        charIdx--;
+        el.textContent = current.substring(0, charIdx);
+        if (charIdx === 0) {
+          deleting = false;
+          idx = (idx + 1) % words.length;
+          setTimeout(tick, pauseEmpty);
+          return;
+        }
+        setTimeout(tick, deleteSpeed);
+      }
+    }
+
+    setTimeout(tick, pauseEnd);
   })();
 </script>
 
