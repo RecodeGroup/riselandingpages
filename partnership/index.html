@@ -370,50 +370,50 @@
       font-weight: 600;
     }
 
-    /* -- Partner Journey Steps ------------------------------------ */
-    .pj-grid { max-width:960px; margin:0 auto; }
-    .pj-row { display:flex; align-items:stretch; justify-content:center; gap:0; }
-    .pj-step {
-      flex:1; border:1.5px solid var(--line); border-radius:12px;
-      padding:20px 14px; background:rgba(255,255,255,0.02);
-      text-align:center; transition:border-color 0.6s ease, box-shadow 0.6s ease;
+    /* -- Partner Journey Carousel --------------------------------- */
+    .pj-carousel-wrap { position:relative; max-width:var(--maxw); margin:0 auto; overflow:hidden; }
+    .pj-carousel {
+      display:flex; gap:16px; transition:transform 0.5s ease;
+      padding:0 calc(50% - 140px);
     }
-    .pj-step .pj-icon {
-      width:38px; height:38px; margin:0 auto 8px; border-radius:10px;
+    .pj-slide {
+      flex:0 0 280px; border:1.5px solid var(--line); border-radius:12px;
+      padding:24px 18px; background:rgba(255,255,255,0.02);
+      text-align:center; cursor:pointer; opacity:0.4;
+      transition:opacity 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+      transform:scale(0.92);
+    }
+    .pj-slide.active {
+      opacity:1; border-color:var(--accent); transform:scale(1);
+      box-shadow:0 0 20px 2px rgba(255,104,62,0.15);
+    }
+    .pj-slide .pj-icon {
+      width:42px; height:42px; margin:0 auto 10px; border-radius:10px;
       background:rgba(255,104,62,0.1); display:flex; align-items:center; justify-content:center;
     }
-    .pj-step .pj-label {
+    .pj-slide .pj-label {
       font-size:0.6rem; font-weight:700; color:var(--accent);
       letter-spacing:0.1em; display:block; margin-bottom:6px; text-transform:uppercase;
     }
-    .pj-step .pj-title {
-      font-size:0.92rem; font-weight:700; display:block; margin-bottom:8px; color:var(--fg);
+    .pj-slide .pj-title {
+      font-size:0.95rem; font-weight:700; display:block; color:var(--fg);
     }
-    .pj-step .pj-desc {
-      color:var(--muted); font-size:0.78rem; line-height:1.5;
+    .pj-detail {
+      max-width:560px; margin:2rem auto 0; text-align:center;
+      min-height:80px;
     }
-    .pj-conn-h {
-      width:28px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    .pj-detail p { color:var(--muted); font-size:0.9rem; line-height:1.7; }
+    .pj-nav {
+      display:flex; justify-content:center; gap:8px; margin-top:1.5rem;
     }
-    .pj-conn-h::before {
-      content:''; width:100%; border-top:2px dashed transparent; transition:border-color 0.6s ease;
+    .pj-dot {
+      width:8px; height:8px; border-radius:50%; background:var(--line);
+      border:none; cursor:pointer; padding:0; transition:background 0.3s;
     }
-    .pj-conn-v {
-      height:28px; display:flex; align-items:center; justify-content:center;
-    }
-    .pj-conn-v::before {
-      content:''; height:100%; border-left:2px dashed transparent; transition:border-color 0.6s ease;
-    }
-    .pj-step.glow { border-color:var(--accent); box-shadow:0 0 14px 2px rgba(255,104,62,0.25); }
-    .pj-conn-h.glow::before { border-top-color:var(--accent); }
-    .pj-conn-v.glow::before { border-left-color:var(--accent); }
-
+    .pj-dot.active { background:var(--accent); }
     @media (max-width: 700px) {
-      .pj-row { flex-direction:column; align-items:center; gap:0; }
-      .pj-step { width:100%; max-width:320px; }
-      .pj-conn-h { width:2px; height:28px; }
-      .pj-conn-h::before { width:0; height:100%; border-top:none; border-left:2px dashed transparent; }
-      .pj-conn-h.glow::before { border-top:none; border-left-color:var(--accent); }
+      .pj-carousel { padding:0 calc(50% - 120px); gap:12px; }
+      .pj-slide { flex:0 0 240px; padding:18px 14px; }
     }
 
     /* -- Offers grid ---------------------------------------------- */
@@ -539,6 +539,26 @@
     .team-member .role {
       font-size: 0.72rem;
       color: #666;
+    }
+    .team-member { cursor: pointer; }
+    .team-member .bio {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+      margin-top: 0;
+    }
+    .team-member.open .bio {
+      max-height: 120px;
+      opacity: 1;
+      margin-top: 0.5rem;
+    }
+    .team-member.open img {
+      border-color: var(--accent);
+      filter: grayscale(0);
     }
 
     /* -- Development wheel (flywheel) ----------------------------- */
@@ -974,86 +994,72 @@
   <h2 class="section-title">Where you fit in</h2>
   <p class="section-sub">Every partner plays a role in the artist's path from beginner to professional.</p>
 
-  <div class="pj-grid">
-    <!-- Row 1: Artist → Music Platforms → Labels → Communities -->
-    <div class="pj-row">
+  <div class="pj-carousel-wrap">
+    <div class="pj-carousel" id="pj-carousel">
 
-      <div class="pj-step" data-pj="1">
+      <div class="pj-slide active" data-idx="0">
         <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <span class="pj-label">The Artist</span>
         <span class="pj-title">Where it starts</span>
-        <p class="pj-desc">Talented but unstructured. Rise gives them the coaching, skills and direction to go pro.</p>
       </div>
 
-      <div class="pj-conn-h" data-pjc="1"></div>
-
-      <div class="pj-step" data-pj="2">
+      <div class="pj-slide" data-idx="1">
         <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8l3 3-3 3"/><line x1="13" y1="14" x2="17" y2="14"/></svg></div>
         <span class="pj-label">Music Platforms</span>
         <span class="pj-title">Tools that power the music</span>
-        <p class="pj-desc">We teach artists to use production and distribution platforms properly, creating engaged, long-term users for your product.</p>
       </div>
 
-      <div class="pj-conn-h" data-pjc="2"></div>
-
-      <div class="pj-step" data-pj="3">
+      <div class="pj-slide" data-idx="2">
         <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/></svg></div>
         <span class="pj-label">Labels</span>
-        <span class="pj-title">Better artists before release</span>
-        <p class="pj-desc">Instead of rejecting demos, refer artists to Rise. They come back release-ready. You earn on every referral.</p>
+        <span class="pj-title">Better artists, sooner</span>
       </div>
 
-      <div class="pj-conn-h" data-pjc="3"></div>
-
-      <div class="pj-step" data-pj="4">
+      <div class="pj-slide" data-idx="3">
         <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <span class="pj-label">Communities</span>
         <span class="pj-title">Where artists find each other</span>
-        <p class="pj-desc">Recommend Rise to members who want to level up. Simple affiliate model, no hard selling.</p>
+      </div>
+
+      <div class="pj-slide" data-idx="4">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-3 5-3 4 3 6 3 5-3 5-3"/><path d="M2 17s3-3 5-3 4 3 6 3 5-3 5-3"/><path d="M12 2v6"/><path d="M12 22v-4"/></svg></div>
+        <span class="pj-label">Events</span>
+        <span class="pj-title">A stage for new talent</span>
+      </div>
+
+      <div class="pj-slide" data-idx="5">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v4"/><path d="M2 12h20"/></svg></div>
+        <span class="pj-label">Agencies</span>
+        <span class="pj-title">Artists ready for your roster</span>
+      </div>
+
+      <div class="pj-slide" data-idx="6">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+        <span class="pj-label">Management</span>
+        <span class="pj-title">Specialist support</span>
+      </div>
+
+      <div class="pj-slide" data-idx="7">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <span class="pj-label">Media</span>
+        <span class="pj-title">Stories that sell</span>
       </div>
 
     </div>
 
-    <!-- Vertical connector between rows -->
-    <div class="pj-conn-v" data-pjc="4"></div>
+    <div class="pj-detail" id="pj-detail">
+      <p>Talented but unstructured. Rise gives them the coaching, skills and direction to go pro.</p>
+    </div>
 
-    <!-- Row 2: Events → Agencies → Management → Media -->
-    <div class="pj-row">
-
-      <div class="pj-step" data-pj="5">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-3 5-3 4 3 6 3 5-3 5-3"/><path d="M2 17s3-3 5-3 4 3 6 3 5-3 5-3"/><path d="M12 2v6"/><path d="M12 22v-4"/></svg></div>
-        <span class="pj-label">Events</span>
-        <span class="pj-title">A stage for new talent</span>
-        <p class="pj-desc">We provide performance-ready artists and curate lineups. You provide the stage.</p>
-      </div>
-
-      <div class="pj-conn-h" data-pjc="5"></div>
-
-      <div class="pj-step" data-pj="6">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v4"/><path d="M2 12h20"/></svg></div>
-        <span class="pj-label">Agencies</span>
-        <span class="pj-title">Artists ready for your roster</span>
-        <p class="pj-desc">Artists come to you with a strong brand, good music, and coaching behind them. You focus on bookings.</p>
-      </div>
-
-      <div class="pj-conn-h" data-pjc="6"></div>
-
-      <div class="pj-step" data-pj="7">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
-        <span class="pj-label">Management</span>
-        <span class="pj-title">Specialist support</span>
-        <p class="pj-desc">We handle production coaching and personal development. You stay focused on strategy and bookings.</p>
-      </div>
-
-      <div class="pj-conn-h" data-pjc="7"></div>
-
-      <div class="pj-step" data-pj="8">
-        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
-        <span class="pj-label">Media</span>
-        <span class="pj-title">Content that writes itself</span>
-        <p class="pj-desc">Early access to artist journeys and transformation stories. Earn commission on every signup through your content.</p>
-      </div>
-
+    <div class="pj-nav" id="pj-nav">
+      <button class="pj-dot active" data-idx="0"></button>
+      <button class="pj-dot" data-idx="1"></button>
+      <button class="pj-dot" data-idx="2"></button>
+      <button class="pj-dot" data-idx="3"></button>
+      <button class="pj-dot" data-idx="4"></button>
+      <button class="pj-dot" data-idx="5"></button>
+      <button class="pj-dot" data-idx="6"></button>
+      <button class="pj-dot" data-idx="7"></button>
     </div>
   </div>
 </div>
@@ -1094,57 +1100,39 @@
 </div>
 
 
-<!-- Photo break -->
-<div class="section-photo">
-  <img src="../assets/photos/photo-9.jpg" alt="Rise artists" loading="lazy">
-</div>
-
-
 <!-- ================================================================
      3. WHAT RISE OFFERS
      ================================================================ -->
 <div class="section section-center">
   <div class="section-divider div-2"><span class="div-line"></span></div>
   <div class="section-label">What Rise Offers</div>
-  <h2 class="section-title">Everything an artist needs to go pro</h2>
-  <p class="section-sub">A complete ecosystem of education, tools, coaching and career support.</p>
+  <h2 class="section-title">What your artists actually get</h2>
+  <p class="section-sub">Coaching, education and real industry connection. Not just content.</p>
 
-  <div class="offers-grid">
+  <div class="offers-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
 
-    <!-- Courses & Academy -->
-    <div class="offer-card">
-      <div class="offer-icon">
-        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-      </div>
-      <h4>Courses &amp; Academy</h4>
-      <p>Structured programs covering production, mixing, branding, marketing, bookings, and more.</p>
-    </div>
-
-    <!-- Sample Packs & Tools -->
-    <div class="offer-card">
-      <div class="offer-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-      </div>
-      <h4>Sample Packs &amp; Tools</h4>
-      <p>Professional production tools, AI-powered utilities, and release-ready sample packs.</p>
-    </div>
-
-    <!-- 1-on-1 Coaching -->
     <div class="offer-card">
       <div class="offer-icon">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
-      <h4>1-on-1 Coaching</h4>
-      <p>Personal guidance from active industry professionals across every discipline.</p>
+      <h4>Personal Coaching</h4>
+      <p>1-on-1 sessions with active industry professionals on production, branding, marketing, and career strategy.</p>
     </div>
 
-    <!-- AI & Release Tools -->
     <div class="offer-card">
       <div class="offer-icon">
-        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
       </div>
-      <h4>AI &amp; Release Tools</h4>
-      <p>Smart tools that help artists plan releases, track progress, and make data-driven decisions.</p>
+      <h4>Structured Education</h4>
+      <p>Courses covering production, mixing, branding, social media, bookings and more. Built by people who do this for a living.</p>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      </div>
+      <h4>Industry Network</h4>
+      <p>Direct connections to labels, agencies, events and other professionals. Not just theory, but real introductions when artists are ready.</p>
     </div>
 
   </div>
@@ -1152,49 +1140,28 @@
   <!-- Track cards -->
   <div class="tracks-row">
     <div class="track-card">
-      <div class="track-label">Track 1</div>
+      <div class="track-label">Foundation</div>
       <h4>Base Academy</h4>
-      <p>The foundation. Self-paced courses, community access, sample packs, and AI tools. For artists who want to build skills at their own pace with professional resources.</p>
+      <p>Learning the craft. Structured courses on production, mixing, and the fundamentals every artist needs. Self-paced, with community and tools included.</p>
     </div>
     <div class="track-card">
-      <div class="track-label">Track 2</div>
+      <div class="track-label">Full Program</div>
       <h4>Core Academy</h4>
-      <p>The full program. Everything in Base plus 1-on-1 coaching, release planning, personal brand development, and direct pipeline to partner labels, agencies, and events.</p>
+      <p>Building the artist. Everything in Base plus 1-on-1 coaching, branding, socials, fanbase strategy, and direct access to our partner network.</p>
     </div>
   </div>
 
   <!-- Rise Elite -->
-  <div style="margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--line);">
-    <div style="display:flex;align-items:flex-start;gap:2rem;max-width:800px;margin:0 auto;flex-wrap:wrap;">
-      <div style="flex:0 0 56px;">
-        <div style="width:56px;height:56px;border-radius:12px;background:rgba(255,104,62,0.10);display:flex;align-items:center;justify-content:center;">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-      </div>
-      <div style="flex:1;min-width:280px;">
-        <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:0.4rem;">Rise Elite &mdash; When an Artist Needs to Move Fast</h4>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:0.8rem;">Sometimes an artist doesn't have years to figure everything out. Rise Elite brings together a dedicated team of specialists to accelerate an artist's development in a short, intensive trajectory of two to six weeks, fully dedicated to one artist.</p>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:0.8rem;">We start by looking at where the artist stands and what the possibilities are. From there, we build a tailored program that can include any combination of the following:</p>
-        <ul style="color:var(--muted);font-size:0.9rem;line-height:1.8;list-style:none;padding:0;margin-bottom:1rem;">
-          <li style="padding-left:1.4em;position:relative;margin-bottom:0.3rem;"><span style="position:absolute;left:0;color:var(--accent);">&#10003;</span> A full press kit, including press photos, video content, video templates and brand pillars</li>
-          <li style="padding-left:1.4em;position:relative;margin-bottom:0.3rem;"><span style="position:absolute;left:0;color:var(--accent);">&#10003;</span> In-depth sessions with a branding engineer on positioning, hooks, archetypes and audience connection</li>
-          <li style="padding-left:1.4em;position:relative;margin-bottom:0.3rem;"><span style="position:absolute;left:0;color:var(--accent);">&#10003;</span> Advanced production and mixing coaching at their level</li>
-          <li style="padding-left:1.4em;position:relative;margin-bottom:0.3rem;"><span style="position:absolute;left:0;color:var(--accent);">&#10003;</span> Marketing and advertising foundations, with the option to connect them to the right social media managers</li>
-          <li style="padding-left:1.4em;position:relative;margin-bottom:0.3rem;"><span style="position:absolute;left:0;color:var(--accent);">&#10003;</span> Access to the right contacts from our network to help move their career forward</li>
-        </ul>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:0.8rem;">These are just a few examples. Every Elite trajectory is built around what the artist needs most. The goal is to set them up in a way that carries them forward for a long time.</p>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:0.8rem;">When the project is commissioned by a label, management or booking agency, we work closely with them to align on goals, priorities and possibilities.</p>
-        <p style="color:var(--muted);font-size:0.85rem;line-height:1.7;font-style:italic;">This is designed for situations where speed matters, sufficient budget is available, and the artist has the time and commitment to go all in.</p>
-      </div>
+  <div style="margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--line);text-align:center;max-width:680px;margin-left:auto;margin-right:auto;">
+    <div style="width:56px;height:56px;border-radius:12px;background:rgba(255,104,62,0.10);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     </div>
+    <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:0.6rem;">Rise Elite</h4>
+    <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">An intensive 2 to 6 week trajectory for artists who need to move fast. We bring together a dedicated team around one artist: press kit, branding, production coaching, marketing, and network introductions.</p>
+    <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">Every Elite trajectory is custom-built. When commissioned by a label or agency, we align on goals and priorities together.</p>
+    <p style="color:var(--muted);font-size:0.82rem;line-height:1.7;font-style:italic;">For situations where speed matters, budget is available, and the artist is ready to go all in.</p>
   </div>
 
-</div>
-
-
-<!-- Photo break -->
-<div class="section-photo">
-  <img src="../assets/photos/photo-10.jpg" alt="Rise production" loading="lazy">
 </div>
 
 
@@ -1204,118 +1171,64 @@
 <div class="section-dark">
   <div class="section section-center">
     <div class="section-divider div-3"><span class="div-line"></span></div>
-    <div class="section-label">Built by Experts</div>
-    <h2 class="section-title">Proof, not promises</h2>
-    <p class="section-sub">Rise is built and backed by people who have done it themselves.</p>
-
-    <div class="experts-proof-bar">
-      <div class="experts-proof-stat">
-        <div class="num">200K+</div>
-        <div class="label">Monthly reach</div>
-      </div>
-      <div class="experts-proof-stat">
-        <div class="num">100+</div>
-        <div class="label">Artists helped</div>
-      </div>
-      <div class="experts-proof-stat">
-        <div class="num">2023</div>
-        <div class="label">Building since</div>
-      </div>
-    </div>
+    <div class="section-label">The Team</div>
+    <h2 class="section-title">The team</h2>
+    <p class="section-sub">Active professionals who coach, produce and perform themselves.</p>
 
     <div class="team-row">
-      <div class="team-member">
+      <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Noah.png" alt="Noah Smits" loading="lazy">
         <div class="name">Noah Smits</div>
-        <div class="role">Ed Sheeran &amp; Afrojack credits</div>
+        <div class="role">Production Coach</div>
+        <div class="bio">Producer with credits for Ed Sheeran, Afrojack and more. Teaches advanced production and mixing at Rise.</div>
       </div>
-      <div class="team-member">
+      <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
         <div class="name">Hendrik</div>
         <div class="role">Partnerships, Founding Team</div>
+        <div class="bio">Runs all partner relationships at Rise. Your main point of contact for anything partnership-related.</div>
       </div>
-      <div class="team-member">
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" loading="lazy">
+        <div class="name">Maurits</div>
+        <div class="role">Branding, Founding Team</div>
+        <div class="bio">Branding engineer helping artists find their positioning, visual identity and audience connection.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Jim.png" alt="Jim" loading="lazy">
+        <div class="name">Jim</div>
+        <div class="role">Tech &amp; Product, Founding Team</div>
+        <div class="bio">Builds the platform, tools and systems that power Rise. Background in music production and tech.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy">
+        <div class="name">Yvo</div>
+        <div class="role">Marketing, Founding Team</div>
+        <div class="bio">Handles marketing strategy, social media and growth. Connects the brand to the right audiences.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" loading="lazy">
+        <div class="name">Jurrian</div>
+        <div class="role">Producer &amp; Coach</div>
+        <div class="bio">Active producer and DJ coaching artists on production workflow, sound design and finishing tracks.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Tim.png" alt="Tim Hox" loading="lazy">
         <div class="name">Tim Hox</div>
         <div class="role">Producer &amp; DJ</div>
+        <div class="bio">Professional DJ and producer with releases on major labels. Coaches artists on performance and releases.</div>
       </div>
-      <div class="team-member">
+      <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/RDLF.jpg" alt="RDLF" loading="lazy">
         <div class="name">RDLF</div>
         <div class="role">Producer &amp; Coach</div>
-      </div>
-      <div class="team-member">
-        <img src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" loading="lazy">
-        <div class="name">Milan Fernandes</div>
-        <div class="role">Producer &amp; Coach</div>
+        <div class="bio">Experienced producer coaching artists on songwriting, arrangement and developing their own sound.</div>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- ================================================================
-     5. THE DEVELOPMENT WHEEL
-     ================================================================ -->
-<div class="section section-center" id="how-it-works">
-  <div class="section-divider div-4"><span class="div-line"></span></div>
-  <div class="section-label">The Rise Development Cycle</div>
-  <h2 class="section-title">The Development Wheel</h2>
-  <p class="section-sub">This is not a one-time transaction. It is a compounding cycle where every participant gets stronger.</p>
-
-  <div class="flywheel-wrap">
-    <svg class="flywheel-svg" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
-      <!-- Outer ring with dashed arrows -->
-      <g class="flywheel-ring">
-        <circle cx="260" cy="260" r="210" fill="none" stroke="rgba(255,104,62,0.12)" stroke-width="2"/>
-        <circle cx="260" cy="260" r="210" fill="none" stroke="var(--accent)" stroke-width="2.5" class="flywheel-arrows" opacity="0.6"/>
-      </g>
-
-      <!-- Center -->
-      <circle cx="260" cy="260" r="60" fill="rgba(255,104,62,0.08)" stroke="rgba(255,104,62,0.3)" stroke-width="1.5"/>
-      <text x="260" y="255" text-anchor="middle" fill="var(--accent)" font-size="14" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, sans-serif">RISE</text>
-      <text x="260" y="273" text-anchor="middle" fill="#777" font-size="10" font-family="-apple-system, BlinkMacSystemFont, sans-serif">DEVELOPMENT</text>
-
-      <!-- Node 1: Rise develops -->
-      <circle cx="260" cy="50" r="40" fill="var(--bg-2)" stroke="var(--accent)" stroke-width="1.5"/>
-      <text x="260" y="45" text-anchor="middle" fill="var(--fg)" font-size="10" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Rise</text>
-      <text x="260" y="59" text-anchor="middle" fill="var(--muted)" font-size="9" font-family="-apple-system, BlinkMacSystemFont, sans-serif">develops</text>
-
-      <!-- Node 2: Artists grow -->
-      <circle cx="460" cy="180" r="40" fill="var(--bg-2)" stroke="var(--accent)" stroke-width="1.5"/>
-      <text x="460" y="175" text-anchor="middle" fill="var(--fg)" font-size="10" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Artists</text>
-      <text x="460" y="189" text-anchor="middle" fill="var(--muted)" font-size="9" font-family="-apple-system, BlinkMacSystemFont, sans-serif">grow</text>
-
-      <!-- Node 3: Partners provide -->
-      <circle cx="460" cy="370" r="40" fill="var(--bg-2)" stroke="var(--accent)" stroke-width="1.5"/>
-      <text x="460" y="365" text-anchor="middle" fill="var(--fg)" font-size="10" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Partners</text>
-      <text x="460" y="379" text-anchor="middle" fill="var(--muted)" font-size="9" font-family="-apple-system, BlinkMacSystemFont, sans-serif">provide</text>
-
-      <!-- Node 4: Partners earn -->
-      <circle cx="260" cy="470" r="40" fill="var(--bg-2)" stroke="var(--accent)" stroke-width="1.5"/>
-      <text x="260" y="465" text-anchor="middle" fill="var(--fg)" font-size="10" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Partners</text>
-      <text x="260" y="479" text-anchor="middle" fill="var(--muted)" font-size="9" font-family="-apple-system, BlinkMacSystemFont, sans-serif">earn</text>
-
-      <!-- Node 5: Reinvest -->
-      <circle cx="60" cy="370" r="40" fill="var(--bg-2)" stroke="var(--accent)" stroke-width="1.5"/>
-      <text x="60" y="365" text-anchor="middle" fill="var(--fg)" font-size="10" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Reinvest</text>
-      <text x="60" y="379" text-anchor="middle" fill="var(--muted)" font-size="9" font-family="-apple-system, BlinkMacSystemFont, sans-serif">in Rise</text>
-
-      <!-- Node 6: Opportunity -->
-      <circle cx="60" cy="180" r="40" fill="var(--bg-2)" stroke="var(--accent)" stroke-width="1.5"/>
-      <text x="60" y="175" text-anchor="middle" fill="var(--fg)" font-size="10" font-weight="600" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Opportunity</text>
-      <text x="60" y="189" text-anchor="middle" fill="var(--muted)" font-size="9" font-family="-apple-system, BlinkMacSystemFont, sans-serif">expands</text>
-
-      <!-- Connecting arrows -->
-      <line x1="290" y1="72" x2="430" y2="152" stroke="rgba(255,104,62,0.25)" stroke-width="1.5"/>
-      <line x1="470" y1="222" x2="470" y2="328" stroke="rgba(255,104,62,0.25)" stroke-width="1.5"/>
-      <line x1="430" y1="392" x2="300" y2="452" stroke="rgba(255,104,62,0.25)" stroke-width="1.5"/>
-      <line x1="220" y1="452" x2="90" y2="392" stroke="rgba(255,104,62,0.25)" stroke-width="1.5"/>
-      <line x1="50" y1="328" x2="50" y2="222" stroke="rgba(255,104,62,0.25)" stroke-width="1.5"/>
-      <line x1="90" y1="152" x2="230" y2="72" stroke="rgba(255,104,62,0.25)" stroke-width="1.5"/>
-    </svg>
-  </div>
-</div>
 
 
 <!-- ================================================================
@@ -1323,65 +1236,41 @@
      ================================================================ -->
 <div class="section section-center">
   <div class="section-divider div-5"><span class="div-line"></span></div>
-  <div class="section-label">What Partners Get</div>
-  <h2 class="section-title">What every partner gets</h2>
+  <div class="section-label">What You Get</div>
+  <h2 class="section-title">Concrete partner benefits</h2>
 
   <div class="benefits-grid">
 
-    <!-- The Warm No -->
     <div class="benefit-card">
-      <div class="featured-tag">Key Concept</div>
       <div class="benefit-icon">
         <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
       </div>
-      <h4>The Warm No</h4>
-      <p>Every "no" from our coaches becomes a warm referral to you. Pre-qualified, pre-briefed, with context and coach notes.</p>
+      <h4>Developed Talent Pipeline</h4>
+      <p>Access to artists who've been coached, assessed and developed. You know exactly where they stand through our Rise Standard.</p>
     </div>
 
-    <!-- Development Report -->
     <div class="benefit-card">
-      <div class="featured-tag">Key Concept</div>
       <div class="benefit-icon">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
       </div>
-      <h4>Development Report</h4>
-      <p>When an artist completes their program, you get a full handoff report: what they've mastered, where they stand, and what to build on next.</p>
+      <h4>Recurring Commission</h4>
+      <p>Earn on every artist that joins through you. Recurring, transparent, and for as long as they stay in the program.</p>
     </div>
 
-    <!-- First Refusal Tiers -->
     <div class="benefit-card">
       <div class="benefit-icon">
         <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       </div>
-      <h4>First Refusal Tiers</h4>
-      <p>Gold partners get 30-day exclusive access to new graduates. Category exclusivity in your lane.</p>
+      <h4>First Access to Graduates</h4>
+      <p>Top-tier partners get exclusive early access to artists completing the program, before anyone else sees them.</p>
     </div>
 
-    <!-- Coach Capacity -->
     <div class="benefit-card">
       <div class="benefit-icon">
-        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       </div>
-      <h4>Coach Capacity</h4>
-      <p>Our coaches are active professionals. Their network is your pipeline — they assess fit for your roster in real time.</p>
-    </div>
-
-    <!-- Powered by Rise -->
-    <div class="benefit-card">
-      <div class="benefit-icon">
-        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      </div>
-      <h4>Powered by Rise</h4>
-      <p>Co-brand on releases, events, and campaigns. The "Powered by Rise" badge signals quality to the industry.</p>
-    </div>
-
-    <!-- Contest in a Box -->
-    <div class="benefit-card">
-      <div class="benefit-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="16 21 16 3 8 3 8 21"/></svg>
-      </div>
-      <h4>Contest in a Box</h4>
-      <p>Turnkey DJ/producer contests for your event. Curation, logistics, promotion, judging. You provide the stage.</p>
+      <h4>Full Handoff Reports</h4>
+      <p>When an artist graduates, you get a development report covering what they've learned, where they stand, and what comes next.</p>
     </div>
 
   </div>
@@ -1395,27 +1284,19 @@
   <div class="proof-bar">
     <div class="proof-stat">
       <div class="num">2023</div>
-      <div class="label">Building since</div>
+      <div class="label">Active since</div>
     </div>
     <div class="proof-stat">
       <div class="num">5</div>
       <div class="label">Partner labels</div>
     </div>
     <div class="proof-stat">
-      <div class="num">10K+</div>
-      <div class="label">Streams / day</div>
-    </div>
-    <div class="proof-stat">
-      <div class="num">3</div>
-      <div class="label">Writing camps</div>
-    </div>
-    <div class="proof-stat">
-      <div class="num">10</div>
-      <div class="label">Managed artists</div>
-    </div>
-    <div class="proof-stat">
       <div class="num">100+</div>
       <div class="label">Releases</div>
+    </div>
+    <div class="proof-stat">
+      <div class="num">10K+</div>
+      <div class="label">Daily streams</div>
     </div>
   </div>
 </div>
@@ -1426,23 +1307,15 @@
      ================================================================ -->
 <div class="section section-center">
   <div class="section-divider div-6"><span class="div-line"></span></div>
-  <div class="section-label">Already in the Ecosystem</div>
-  <h2 class="section-title">Current partners</h2>
-  <p class="section-sub">Labels, agencies, and communities already plugged into the Rise pipeline.</p>
+  <div class="section-label">Partners</div>
+  <h2 class="section-title">Who we work with</h2>
 
   <div class="logos-row">
-    <img src="../assets/partners/clear-agency.png" alt="Clear Agency" loading="lazy">
+    <img src="../assets/partners/clear-agency_2.png" alt="Clear Agency" loading="lazy">
     <img src="../assets/partners/recode-records.png" alt="Recode Records" loading="lazy">
-    <img src="../assets/partners/rd-icon.png" alt="RD" loading="lazy">
     <img src="../assets/partners/revoke.png" alt="Revoke" loading="lazy">
-    <span class="logo-text">AMPLIFY</span>
+    <span class="logo-text" style="opacity:0.5;font-size:0.85rem;">and more</span>
   </div>
-</div>
-
-
-<!-- Photo break -->
-<div class="section-photo">
-  <img src="../assets/photos/photo-11.jpg" alt="Rise artists" loading="lazy">
 </div>
 
 
@@ -1454,7 +1327,6 @@
     <div class="section-divider div-7"><span class="div-line"></span></div>
     <div class="section-label">How We Partner</div>
     <h2 class="section-title">Ways to grow together</h2>
-    <p class="section-sub">Everyone earns when the partnership works.</p>
 
     <div class="ways-grid">
 
@@ -1462,82 +1334,27 @@
         <div class="way-icon">
           <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
         </div>
-        <h4>Affiliate</h4>
-        <p>Simple tracking, transparent payouts, no limits.</p>
+        <h4>Referral</h4>
+        <p>Send artists our way, earn recurring commission. Simple tracking, transparent payouts.</p>
       </div>
 
       <div class="way-card">
         <div class="way-icon">
           <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="23 7 16 12 16 3 23 7"/><line x1="1" y1="20" x2="23" y2="20"/></svg>
         </div>
-        <h4>Joint Campaigns</h4>
-        <p>Co-branded content, events, and social pushes with shared upside.</p>
-      </div>
-
-      <div class="way-card">
-        <div class="way-icon">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-        </div>
-        <h4>Commission Deals</h4>
-        <p>Commission on every artist from your pipeline.</p>
+        <h4>Content & Campaigns</h4>
+        <p>Co-branded events, socials and content. You bring the reach, we bring the artists.</p>
       </div>
 
       <div class="way-card">
         <div class="way-icon">
           <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
         </div>
-        <h4>Artist Pipeline</h4>
-        <p>Access to developed talent for your label, event, or platform.</p>
+        <h4>Artist Development</h4>
+        <p>Access our talent pipeline for your roster, label or platform. First access for top-tier partners.</p>
       </div>
 
     </div>
-  </div>
-</div>
-
-
-<!-- Photo break -->
-<div class="section-photo">
-  <img src="../assets/photos/photo-8.jpg" alt="Rise community" loading="lazy">
-</div>
-
-
-<!-- ================================================================
-     10. A WIN FOR EVERYONE
-     ================================================================ -->
-<div class="section section-center">
-  <div class="section-divider div-8"><span class="div-line"></span></div>
-  <div class="section-label">Why This Works</div>
-  <h2 class="section-title">A win for everyone</h2>
-
-  <div class="winwin-grid">
-
-    <div class="winwin-col">
-      <h4>For Artists</h4>
-      <ul>
-        <li>Path from learning to career</li>
-        <li>Real industry exposure</li>
-        <li>Coaching and income</li>
-      </ul>
-    </div>
-
-    <div class="winwin-col">
-      <h4>For Partners</h4>
-      <ul>
-        <li>Pipeline of developed talent</li>
-        <li>Commission revenue</li>
-        <li>Roster rights and shared campaigns</li>
-      </ul>
-    </div>
-
-    <div class="winwin-col accent-col">
-      <h4>The Result</h4>
-      <ul>
-        <li>We build talent, you bring reach</li>
-        <li>Both earn as artists grow</li>
-        <li>A partnership that compounds</li>
-      </ul>
-    </div>
-
   </div>
 </div>
 
@@ -1550,7 +1367,7 @@
     <div class="section-divider div-8b"><span class="div-line"></span></div>
     <div class="section-label">Quality Framework</div>
     <h2 class="section-title">The Rise Standard</h2>
-    <p class="section-sub">Every artist we develop is measured against a clear, transparent standard. Partners know exactly what level of talent they're working with.</p>
+    <p class="section-sub">Every artist we develop is measured against a clear standard, so you always know where they stand.</p>
 
     <div style="display:flex;gap:2.5rem;margin-top:3.5rem;flex-wrap:wrap;justify-content:center;">
 
@@ -1622,12 +1439,12 @@
 <!-- ================================================================
      11. PROCESS (How It Works)
      ================================================================ -->
-<div class="section-dark">
+<div class="section-dark" id="how-it-works">
   <div class="section section-center">
     <div class="section-divider div-9"><span class="div-line"></span></div>
     <div class="section-label">How It Works</div>
-    <h2 class="section-title">Four steps to a working partnership</h2>
-    <p class="section-sub">Start small, prove the value, then scale. No long-term commitment required upfront.</p>
+    <h2 class="section-title">How it works</h2>
+    <p class="section-sub">Start small. Prove the value. Then grow from there.</p>
 
     <div class="process-grid">
       <div class="process-step">
@@ -1671,8 +1488,8 @@
   <!-- Left: Booking -->
   <div class="cta-card" id="booking">
     <div class="section-divider div-10"><span class="div-line"></span></div>
-    <h3>Book a Call with Hendrik</h3>
-    <p>30 minutes, no commitment. Tell us what you need, and we will show you how the Rise pipeline fits your business.</p>
+    <h3>Talk to Hendrik</h3>
+    <p>30 minutes, no strings attached. Tell us what you're looking for, and we'll see if there's a fit.</p>
     <iframe
       src="https://api.leadconnectorhq.com/widget/booking/uwy75wV8Vf6XwG0zUF80"
       allow="payment"
@@ -1687,8 +1504,8 @@
   <!-- Right: Contact -->
   <div class="cta-card light-cta">
     <div class="section-divider div-11"><span class="div-line"></span></div>
-    <h3>Let's explore a partnership</h3>
-    <p>Not ready to book? Reach out to Hendrik directly. We will walk you through how the Development Wheel works for your specific situation.</p>
+    <h3>Rather just reach out?</h3>
+    <p>Not ready to book a call? Send Hendrik a message and we'll take it from there.</p>
     <a href="mailto:hendrik@recode-group.com?subject=Partnership%20Inquiry" class="btn-primary" style="align-self: flex-start;">Get in Touch</a>
 
     <div class="hendrik-card">
@@ -1731,49 +1548,94 @@
     onScroll();
   })();
 
-  // Partner Journey glow animation
+  // Toggle coach bio
+  function toggleBio(el) {
+    el.classList.toggle('open');
+  }
+
+  // Partner Journey Carousel
   (function(){
-    var steps = document.querySelectorAll('.pj-step');
-    var conns = document.querySelectorAll('[data-pjc]');
-    if(!steps.length) return;
-    var SEQ = [
-      {type:'step', idx:0},
-      {type:'conn', idx:0},
-      {type:'step', idx:1},
-      {type:'conn', idx:1},
-      {type:'step', idx:2},
-      {type:'conn', idx:2},
-      {type:'step', idx:3},
-      {type:'conn', idx:3},
-      {type:'step', idx:4},
-      {type:'conn', idx:4},
-      {type:'step', idx:5},
-      {type:'conn', idx:5},
-      {type:'step', idx:6},
-      {type:'conn', idx:6},
-      {type:'step', idx:7}
+    var carousel = document.getElementById('pj-carousel');
+    var detail   = document.getElementById('pj-detail');
+    var navWrap  = document.getElementById('pj-nav');
+    if(!carousel) return;
+
+    var slides = carousel.querySelectorAll('.pj-slide');
+    var dots   = navWrap.querySelectorAll('.pj-dot');
+    var total  = slides.length;
+    var current = 0;
+    var autoTimer = null;
+
+    var details = [
+      'Talented but unstructured. Rise gives them the coaching, skills and direction to go pro.',
+      'We teach artists to use production and distribution platforms properly, creating engaged, long-term users for your product.',
+      'Instead of rejecting demos, refer artists to Rise. They come back release-ready. You earn on every referral.',
+      'Recommend Rise to members who want to level up. Simple affiliate model, no hard selling.',
+      'We provide performance-ready artists and curate lineups. You provide the stage.',
+      'Artists come to you with a strong brand, good music, and coaching behind them. You focus on bookings.',
+      'We handle production coaching and personal development. You stay focused on strategy and bookings.',
+      'Early access to artist journeys and transformation stories. Earn commission on every signup through your content.'
     ];
-    var STEP_DELAY = 500;
-    var HOLD = 2000;
-    var FADE = 800;
-    var PAUSE = 1200;
-    function clearAll(){
-      steps.forEach(function(s){ s.classList.remove('glow'); });
-      conns.forEach(function(c){ c.classList.remove('glow'); });
+
+    function goTo(idx){
+      current = ((idx % total) + total) % total;
+      slides.forEach(function(s){ s.classList.remove('active'); });
+      dots.forEach(function(d){ d.classList.remove('active'); });
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      detail.innerHTML = '<p>' + details[current] + '</p>';
+
+      // Center active slide
+      var slideW = 280 + 16; // width + gap
+      var offset = current * slideW;
+      carousel.style.transform = 'translateX(-' + offset + 'px)';
     }
-    function runCycle(){
-      clearAll();
-      SEQ.forEach(function(item, i){
-        setTimeout(function(){
-          if(item.type==='step') steps[item.idx].classList.add('glow');
-          else conns[item.idx].classList.add('glow');
-        }, i * STEP_DELAY);
+
+    function next(){ goTo(current + 1); }
+
+    function startAuto(){
+      stopAuto();
+      autoTimer = setInterval(next, 4000);
+    }
+    function stopAuto(){
+      if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+    }
+
+    // Click slide to go to it
+    slides.forEach(function(s){
+      s.addEventListener('click', function(){
+        goTo(parseInt(s.dataset.idx));
+        stopAuto();
+        startAuto();
       });
-      var totalLight = SEQ.length * STEP_DELAY;
-      setTimeout(clearAll, totalLight + HOLD);
-      setTimeout(runCycle, totalLight + HOLD + FADE + PAUSE);
-    }
-    runCycle();
+    });
+
+    // Click dot to go to it
+    dots.forEach(function(d){
+      d.addEventListener('click', function(){
+        goTo(parseInt(d.dataset.idx));
+        stopAuto();
+        startAuto();
+      });
+    });
+
+    // Touch/swipe support
+    var touchStartX = 0;
+    carousel.addEventListener('touchstart', function(e){
+      touchStartX = e.touches[0].clientX;
+      stopAuto();
+    }, {passive:true});
+    carousel.addEventListener('touchend', function(e){
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if(Math.abs(diff) > 40){
+        if(diff > 0) next();
+        else goTo(current - 1);
+      }
+      startAuto();
+    }, {passive:true});
+
+    goTo(0);
+    startAuto();
   })();
 </script>
 
