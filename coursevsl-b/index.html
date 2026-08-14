@@ -987,6 +987,7 @@
 
     /* ── Hero stats ── */
     .hero-stats { display:flex; gap:2rem; justify-content:center; margin-top:1.5rem; flex-wrap:wrap; }
+    @media (max-width: 768px) { .hero-stats { display:none; } }
     .hero-stat { font-size:0.9rem; color:rgba(255,255,255,0.6); }
     .hero-stat strong { color:#fff; font-weight:700; }
 
@@ -1080,8 +1081,12 @@
       display: flex; gap: 24px;
       animation: teachers-scroll 120s linear infinite;
       width: max-content;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
     .teachers-grid:hover { animation-play-state: paused; }
+    .teacher-card img { will-change: auto; }
     @keyframes teachers-scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(var(--scroll-dist, -50%)); }
@@ -1222,13 +1227,10 @@
       <p class="hero-sub" style="margin-bottom:2.5rem;">In-depth modules covering music production, sound design, branding, releasing, marketing and career development. Built by working producers and engineers for electronic music producers and DJs.</p>
 
       <!-- Feature strip -->
-      <div style="display:flex;flex-wrap:wrap;gap:14px 32px;justify-content:center;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
+      <div class="hero-features" style="display:grid;grid-template-columns:auto auto;gap:8px 32px;justify-content:center;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
         <span>11 video lessons</span>
-        <span style="color:rgba(255,255,255,0.2);">&middot;</span>
         <span>8 production tools</span>
-        <span style="color:rgba(255,255,255,0.2);">&middot;</span>
         <span>Professional sample packs</span>
-        <span style="color:rgba(255,255,255,0.2);">&middot;</span>
         <span>The Artist Manual</span>
       </div>
 
@@ -1685,6 +1687,9 @@
       <span class="trust-icons">iDEAL &middot; Klarna &middot; PayPal &middot; Visa &middot; Mastercard</span>
     </div>
   </section>
+
+  <!-- Divider -->
+  <div style="max-width:var(--maxw);margin:0 auto;padding:0 2rem;"><hr style="border:none;border-top:1px solid var(--line);margin:0;"></div>
 
   <!-- Video Testimonials -->
   <section class="video-testimonials">
