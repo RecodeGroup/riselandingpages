@@ -533,6 +533,81 @@
       line-height: 1.75;
     }
 
+    /* ── WhatsApp Testimonials Carousel ─────────── */
+    .msg-carousel {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+    }
+    .msg-carousel .section-eyebrow,
+    .msg-carousel .section-heading { text-align: center; }
+    .msg-carousel .section-heading { margin-bottom: 2.5rem; }
+    .msg-carousel-track-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+    .msg-carousel-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      width: max-content;
+      animation: msg-scroll 60s linear infinite;
+    }
+    .msg-carousel-track:hover { animation-play-state: paused; }
+    @keyframes msg-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .msg-bubble {
+      flex-shrink: 0;
+      width: 320px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 0 12px 12px 12px;
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #1a1a1a;
+      position: relative;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+    .msg-bubble::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -6px;
+      width: 8px;
+      height: 10px;
+      background: rgba(255,255,255,0.95);
+      clip-path: polygon(100% 0, 100% 100%, 0 0);
+    }
+    .msg-bubble .msg-time {
+      display: block;
+      text-align: right;
+      font-size: 0.65rem;
+      color: rgba(0,0,0,0.35);
+      margin-top: 6px;
+      line-height: 1;
+    }
+    @media (max-width: 600px) {
+      .msg-bubble { width: 270px; font-size: 0.82rem; }
+      .msg-carousel { padding: 3rem 0 2rem; }
+      .msg-carousel-track-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+      .msg-carousel-track-wrap::-webkit-scrollbar { display: none; }
+      .msg-carousel-track {
+        animation: none;
+      }
+    }
+
     /* ── Video Testimonials ──────────────────────── */
     .video-testimonials { padding: 5rem 0; text-align: center; }
     .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; padding: 0 2rem; }
@@ -915,6 +990,71 @@
 
       <div class="academy-cta-wrap">
         <a href="https://api.leadconnectorhq.com/widget/booking/zzYQhu4kE75pC8vmxvQB" target="_blank" class="btn-primary">Register for the webinar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       WhatsApp Testimonials Carousel
+       ══════════════════════════════════════════════ -->
+  <section class="msg-carousel">
+    <div class="section-inner">
+      <div class="section-eyebrow">Feedback</div>
+      <h2 class="section-heading">What our artists are saying</h2>
+    </div>
+    <div class="msg-carousel-track-wrap">
+      <div class="msg-carousel-track">
+
+        <div class="msg-bubble">I've learned to define one-year goals and how to use them to shape my every week tasks and prioritize.<span class="msg-time">18:42</span></div>
+
+        <div class="msg-bubble">It is a nice warm bath with other artists who aspire the same things! I've met some of them and invited them to play at my event for example. And we support each other for example on social media or in real life :)<span class="msg-time">20:04</span></div>
+
+        <div class="msg-bubble">And the community has been pretty nice so far! :)<span class="msg-time">16:28</span></div>
+
+        <div class="msg-bubble">I wanted to let you know that I find the Rise journey so far really valuable. The sessions have not only helped me become better at producing, but also to better understand the business side of being an artist. I've learned a lot about marketing, releases and building a strong and consistent artist profile.<span class="msg-time">13:22</span></div>
+
+        <div class="msg-bubble">It really helps me to have someone in the back who wants to see us succeed.<span class="msg-time">15:07</span></div>
+
+        <div class="msg-bubble">I think the best thing about Rise is the community of dedicated musicians you all have built. I find it inspiring, just meeting these people is honestly so important to me. Learning about them, their music, the way they do things.<span class="msg-time">22:14</span></div>
+
+        <div class="msg-bubble">Rise is enabling me to see and move towards what I want.<span class="msg-time">20:51</span></div>
+
+        <div class="msg-bubble">I think it's both good and bad that it consists of shorter videos. As someone with higher traits of autism, I like it when it's a little bit more in depth and I'm very detail oriented which is hard to make content for that type of mindset in shorter formats.<span class="msg-time">19:07</span></div>
+
+        <div class="msg-bubble">The consistency of the accountability form has helped me to work better, do more and more effectively.<span class="msg-time">14:15</span></div>
+
+        <div class="msg-bubble">I also find the community very motivating. It's great to be part of a group with people who all pursue the same goal and help each other grow. Thanks for all the effort you and the team put into it!<span class="msg-time">13:24</span></div>
+
+        <div class="msg-bubble">So far I learned a lot to help structure my week and to put music in as a task and not just a hobby that's happening next to everything.<span class="msg-time">21:33</span></div>
+
+        <div class="msg-bubble">The Rise course hasn't been life-changing but it's definitely introduced new perspectives and I am especially transformed by the knowledge about organisation, time management and accountability.<span class="msg-time">17:39</span></div>
+
+        <!-- Duplicate for seamless loop -->
+
+        <div class="msg-bubble">I've learned to define one-year goals and how to use them to shape my every week tasks and prioritize.<span class="msg-time">18:42</span></div>
+
+        <div class="msg-bubble">It is a nice warm bath with other artists who aspire the same things! I've met some of them and invited them to play at my event for example. And we support each other for example on social media or in real life :)<span class="msg-time">20:04</span></div>
+
+        <div class="msg-bubble">And the community has been pretty nice so far! :)<span class="msg-time">16:28</span></div>
+
+        <div class="msg-bubble">I wanted to let you know that I find the Rise journey so far really valuable. The sessions have not only helped me become better at producing, but also to better understand the business side of being an artist. I've learned a lot about marketing, releases and building a strong and consistent artist profile.<span class="msg-time">13:22</span></div>
+
+        <div class="msg-bubble">It really helps me to have someone in the back who wants to see us succeed.<span class="msg-time">15:07</span></div>
+
+        <div class="msg-bubble">I think the best thing about Rise is the community of dedicated musicians you all have built. I find it inspiring, just meeting these people is honestly so important to me. Learning about them, their music, the way they do things.<span class="msg-time">22:14</span></div>
+
+        <div class="msg-bubble">Rise is enabling me to see and move towards what I want.<span class="msg-time">20:51</span></div>
+
+        <div class="msg-bubble">I think it's both good and bad that it consists of shorter videos. As someone with higher traits of autism, I like it when it's a little bit more in depth and I'm very detail oriented which is hard to make content for that type of mindset in shorter formats.<span class="msg-time">19:07</span></div>
+
+        <div class="msg-bubble">The consistency of the accountability form has helped me to work better, do more and more effectively.<span class="msg-time">14:15</span></div>
+
+        <div class="msg-bubble">I also find the community very motivating. It's great to be part of a group with people who all pursue the same goal and help each other grow. Thanks for all the effort you and the team put into it!<span class="msg-time">13:24</span></div>
+
+        <div class="msg-bubble">So far I learned a lot to help structure my week and to put music in as a task and not just a hobby that's happening next to everything.<span class="msg-time">21:33</span></div>
+
+        <div class="msg-bubble">The Rise course hasn't been life-changing but it's definitely introduced new perspectives and I am especially transformed by the knowledge about organisation, time management and accountability.<span class="msg-time">17:39</span></div>
+
       </div>
     </div>
   </section>
