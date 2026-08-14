@@ -399,10 +399,24 @@
       font-size:0.95rem; font-weight:700; display:block; color:var(--fg);
     }
     .pj-detail {
-      max-width:560px; margin:2rem auto 0; text-align:center;
+      max-width:720px; margin:2rem auto 0; text-align:left;
       min-height:80px;
     }
-    .pj-detail p { color:var(--muted); font-size:0.9rem; line-height:1.7; }
+    .pj-detail p { color:var(--muted); font-size:0.85rem; line-height:1.6; margin:0; }
+    .pj-detail-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+    }
+    .pj-detail-item {
+      padding:16px; border:1px solid var(--line); border-radius:10px;
+      background:rgba(255,255,255,0.02);
+    }
+    .pj-detail-label {
+      font-size:0.7rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.08em; color:var(--accent); margin-bottom:8px;
+    }
+    @media(max-width:700px){
+      .pj-detail-grid { grid-template-columns:1fr; gap:12px; }
+    }
     .pj-nav {
       display:flex; justify-content:center; gap:8px; margin-top:1.5rem;
     }
@@ -509,21 +523,36 @@
     }
     .team-row {
       display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 1.5rem;
       margin-top: 2.5rem;
+      scrollbar-width: none;
     }
+    .team-row::-webkit-scrollbar { display: none; }
     .team-member {
       text-align: center;
-      width: 140px;
+      flex: 0 0 200px;
+      scroll-snap-align: start;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 24px 18px;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .team-member:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
     .team-member img {
-      width: 100px; height: 100px;
+      width: 72px; height: 72px;
       border-radius: 50%;
       object-fit: cover;
-      margin: 0 auto 0.75rem;
-      border: 2px solid rgba(255,104,62,0.2);
+      margin: 0 auto 14px;
+      border: 2px solid rgba(255,104,62,0.15);
       filter: grayscale(0.2);
       transition: filter 0.3s ease, border-color 0.3s ease;
     }
@@ -532,13 +561,17 @@
       border-color: var(--accent);
     }
     .team-member .name {
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-bottom: 0.15rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 2px;
     }
     .team-member .role {
       font-size: 0.72rem;
-      color: #666;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
     .team-member { cursor: pointer; }
     .team-member .bio {
@@ -592,11 +625,17 @@
 
     /* -- Benefits grid -------------------------------------------- */
     .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      display: flex;
       gap: 20px;
       margin-top: 2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
     }
+    .benefits-grid::-webkit-scrollbar { display: none; }
+    .benefit-card { flex: 0 0 280px; scroll-snap-align: start; }
     .benefit-card {
       background: var(--bg-2);
       border: 1px solid var(--line);
@@ -682,8 +721,10 @@
       padding: 1rem 0;
     }
     .logos-row img {
-      height: 36px;
+      height: 48px;
+      max-width: 140px;
       width: auto;
+      object-fit: contain;
       filter: brightness(0) invert(1);
       opacity: 0.65;
       transition: opacity 0.3s ease;
@@ -912,7 +953,7 @@
     /* -- Responsive ----------------------------------------------- */
     @media (max-width: 900px) {
       .process-grid { grid-template-columns: repeat(2, 1fr); }
-      .benefits-grid { grid-template-columns: 1fr; }
+      .benefit-card { flex: 0 0 260px; }
       .winwin-grid { grid-template-columns: 1fr; }
       .ways-grid { grid-template-columns: repeat(2, 1fr); }
       .offers-grid { grid-template-columns: repeat(2, 1fr); }
@@ -930,8 +971,8 @@
       .section-photo img { max-height: 240px; }
       .footer { padding: 2rem 1rem; }
       .hendrik-card { flex-direction: column; text-align: center; }
-      .team-member { width: 110px; }
-      .team-member img { width: 80px; height: 80px; }
+      .team-member { flex: 0 0 180px; }
+      .team-member img { width: 64px; height: 64px; }
     }
     @media (max-width: 600px) {
       .guarantee-nums { grid-template-columns: 1fr !important; }
@@ -946,10 +987,10 @@
       .proof-bar { gap: 1.25rem; }
       .proof-stat .num { font-size: 1.5rem; }
       .logos-row { gap: 1.5rem; }
-      .logos-row img { height: 28px; }
+      .logos-row img { height: 36px; max-width: 100px; }
       .ways-grid { grid-template-columns: 1fr; }
       .offers-grid { grid-template-columns: 1fr; }
-      .team-row { gap: 1rem; }
+      .team-row { gap: 12px; padding: 0 1rem; }
     }
   </style>
 </head>
@@ -1048,7 +1089,11 @@
     </div>
 
     <div class="pj-detail" id="pj-detail">
-      <p>Talented but unstructured. Rise gives them the coaching, skills and direction to go pro.</p>
+      <div class="pj-detail-grid">
+        <div class="pj-detail-item"><div class="pj-detail-label">Problem</div><p>Talented but unstructured. No clear path from bedroom producer to professional.</p></div>
+        <div class="pj-detail-item"><div class="pj-detail-label">Solution</div><p>Rise gives them coaching, education and industry connections to go pro.</p></div>
+        <div class="pj-detail-item"><div class="pj-detail-label">What you earn</div><p>This is where every partner journey starts.</p></div>
+      </div>
     </div>
 
     <div class="pj-nav" id="pj-nav">
@@ -1078,17 +1123,17 @@
     <div style="max-width:680px;margin:0 auto;text-align:left;">
       <p style="font-size:1rem;color:#ccc;line-height:1.8;margin-bottom:2.5rem;text-align:center;">When 10 to 50 artists per month join through your referral, you earn between <strong style="color:var(--accent);">&euro; 1.100,- and &euro; 7.600,-</strong> monthly. For as long as they stay.</p>
       <div class="guarantee-nums" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:2rem;">
-        <div style="text-align:center;">
+        <div style="text-align:center;border:1.5px solid var(--line);border-radius:12px;padding:24px 16px;background:rgba(255,255,255,0.02);">
           <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:700;color:var(--accent);margin-bottom:0.35rem;">10/mo</div>
           <div style="font-size:0.78rem;color:#666;margin-bottom:0.4rem;">artists</div>
           <div style="font-size:clamp(0.85rem,2.5vw,1.05rem);font-weight:600;color:#fff;">&euro; 1.100,- to &euro; 1.600,-</div>
         </div>
-        <div style="text-align:center;">
+        <div style="text-align:center;border:1.5px solid var(--line);border-radius:12px;padding:24px 16px;background:rgba(255,255,255,0.02);">
           <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:700;color:var(--accent);margin-bottom:0.35rem;">25/mo</div>
           <div style="font-size:0.78rem;color:#666;margin-bottom:0.4rem;">artists</div>
           <div style="font-size:clamp(0.85rem,2.5vw,1.05rem);font-weight:600;color:#fff;">&euro; 2.600,- to &euro; 3.850,-</div>
         </div>
-        <div style="text-align:center;">
+        <div style="text-align:center;border:1.5px solid var(--line);border-radius:12px;padding:24px 16px;background:rgba(255,255,255,0.02);">
           <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:700;color:var(--accent);margin-bottom:0.35rem;">50/mo</div>
           <div style="font-size:0.78rem;color:#666;margin-bottom:0.4rem;">artists</div>
           <div style="font-size:clamp(0.85rem,2.5vw,1.05rem);font-weight:600;color:#fff;">&euro; 5.100,- to &euro; 7.600,-</div>
@@ -1177,52 +1222,52 @@
 
     <div class="team-row">
       <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/Pages/Coaches/Noah.png" alt="Noah Smits" loading="lazy">
-        <div class="name">Noah Smits</div>
-        <div class="role">Production Coach</div>
-        <div class="bio">Producer with credits for Ed Sheeran, Afrojack and more. Teaches advanced production and mixing at Rise.</div>
-      </div>
-      <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
-        <div class="name">Hendrik</div>
-        <div class="role">Partnerships, Founding Team</div>
-        <div class="bio">Runs all partner relationships at Rise. Your main point of contact for anything partnership-related.</div>
-      </div>
-      <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Maurits.png" alt="Maurits" loading="lazy">
         <div class="name">Maurits</div>
-        <div class="role">Branding, Founding Team</div>
+        <div class="role">Operations &amp; Artist Development</div>
         <div class="bio">Branding engineer helping artists find their positioning, visual identity and audience connection.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" loading="lazy">
+        <div class="name">Jurrian (Artcode)</div>
+        <div class="role">Base Coach &middot; Techno Artist</div>
+        <div class="bio">Active producer and DJ coaching artists on production workflow, sound design and finishing tracks.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Jim.png" alt="Jim" loading="lazy">
-        <div class="name">Jim</div>
-        <div class="role">Tech &amp; Product, Founding Team</div>
+        <div class="name">Jim (Vannood)</div>
+        <div class="role">Founder &amp; Techno Artist</div>
         <div class="bio">Builds the platform, tools and systems that power Rise. Background in music production and tech.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy">
-        <div class="name">Yvo</div>
-        <div class="role">Marketing, Founding Team</div>
+        <div class="name">Yvo (Overhoff)</div>
+        <div class="role">Operations &amp; Products</div>
         <div class="bio">Handles marketing strategy, social media and growth. Connects the brand to the right audiences.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" loading="lazy">
-        <div class="name">Jurrian</div>
-        <div class="role">Producer &amp; Coach</div>
-        <div class="bio">Active producer and DJ coaching artists on production workflow, sound design and finishing tracks.</div>
+        <img src="../assets/Pages/Coaches/RDLF.jpg" alt="David" loading="lazy">
+        <div class="name">David (RDLF)</div>
+        <div class="role">Techno Artist &middot; Base Modules</div>
+        <div class="bio">Experienced producer coaching artists on songwriting, arrangement and developing their own sound.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
+        <div class="name">Hendrik</div>
+        <div class="role">Partnerships &amp; Bookings</div>
+        <div class="bio">Runs all partner relationships at Rise. Your main point of contact for anything partnership-related.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Noah.png" alt="Noah" loading="lazy">
+        <div class="name">Noah Smits</div>
+        <div class="role">Production Coach</div>
+        <div class="bio">Producer with credits for Ed Sheeran, Afrojack and more. Teaches advanced production and mixing at Rise.</div>
       </div>
       <div class="team-member" onclick="toggleBio(this)">
         <img src="../assets/Pages/Coaches/Tim.png" alt="Tim Hox" loading="lazy">
         <div class="name">Tim Hox</div>
         <div class="role">Producer &amp; DJ</div>
         <div class="bio">Professional DJ and producer with releases on major labels. Coaches artists on performance and releases.</div>
-      </div>
-      <div class="team-member" onclick="toggleBio(this)">
-        <img src="../assets/Pages/Coaches/RDLF.jpg" alt="RDLF" loading="lazy">
-        <div class="name">RDLF</div>
-        <div class="role">Producer &amp; Coach</div>
-        <div class="bio">Experienced producer coaching artists on songwriting, arrangement and developing their own sound.</div>
       </div>
     </div>
   </div>
@@ -1313,8 +1358,9 @@
   <div class="logos-row">
     <img src="../assets/partners/clear-agency_2.png" alt="Clear Agency" loading="lazy">
     <img src="../assets/partners/recode-records.png" alt="Recode Records" loading="lazy">
+    <img src="../assets/partners/rd-icon.png" alt="RD" loading="lazy">
     <img src="../assets/partners/revoke.png" alt="Revoke" loading="lazy">
-    <span class="logo-text" style="opacity:0.5;font-size:0.85rem;">and more</span>
+    <span class="logo-text">AMPLIFY</span>
   </div>
 </div>
 
@@ -1567,14 +1613,46 @@
     var autoTimer = null;
 
     var details = [
-      'Talented but unstructured. Rise gives them the coaching, skills and direction to go pro.',
-      'We teach artists to use production and distribution platforms properly, creating engaged, long-term users for your product.',
-      'Instead of rejecting demos, refer artists to Rise. They come back release-ready. You earn on every referral.',
-      'Recommend Rise to members who want to level up. Simple affiliate model, no hard selling.',
-      'We provide performance-ready artists and curate lineups. You provide the stage.',
-      'Artists come to you with a strong brand, good music, and coaching behind them. You focus on bookings.',
-      'We handle production coaching and personal development. You stay focused on strategy and bookings.',
-      'Early access to artist journeys and transformation stories. Earn commission on every signup through your content.'
+      {
+        problem: 'Talented but unstructured. No clear path from bedroom producer to professional.',
+        solution: 'Rise gives them coaching, education and industry connections to go pro.',
+        earn: 'This is where every partner journey starts.'
+      },
+      {
+        problem: 'Artists buy tools but never learn to use them properly.',
+        solution: 'We teach production and distribution workflows hands-on, creating skilled, loyal users.',
+        earn: 'Earn recurring commission on every artist that signs up through your platform.'
+      },
+      {
+        problem: 'Too many unfinished demos. Not enough release-ready artists.',
+        solution: 'Refer developing artists to Rise. They come back with finished tracks and a real strategy.',
+        earn: 'Commission on every referral, plus first access to graduates for your roster.'
+      },
+      {
+        problem: 'Members want to grow but don\'t know where to start.',
+        solution: 'Recommend Rise to members ready to level up. We handle the development.',
+        earn: 'Simple affiliate model. Recurring payouts, no hard selling required.'
+      },
+      {
+        problem: 'Finding reliable new talent for your lineup is hit or miss.',
+        solution: 'We develop performance-ready artists and curate lineups for your events.',
+        earn: 'Access to a talent pipeline. Commission on every artist referred your way.'
+      },
+      {
+        problem: 'Signing raw talent means months of development before they\'re bookable.',
+        solution: 'Artists arrive with strong branding, good music, and coaching behind them.',
+        earn: 'Skip the development phase. Earn commission on referred artists.'
+      },
+      {
+        problem: 'Managing production coaching and personal growth on top of strategy is too much.',
+        solution: 'We handle coaching and artist development. You focus on bookings and career strategy.',
+        earn: 'Commission per referred artist. Reduced workload, better-prepared talent.'
+      },
+      {
+        problem: 'Great content needs great stories, but finding them takes time.',
+        solution: 'Early access to artist transformation journeys and behind-the-scenes content.',
+        earn: 'Earn commission on every signup through your content or channels.'
+      }
     ];
 
     function goTo(idx){
@@ -1583,7 +1661,12 @@
       dots.forEach(function(d){ d.classList.remove('active'); });
       slides[current].classList.add('active');
       dots[current].classList.add('active');
-      detail.innerHTML = '<p>' + details[current] + '</p>';
+      var d = details[current];
+      detail.innerHTML = '<div class="pj-detail-grid">' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">Problem</div><p>' + d.problem + '</p></div>' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">Solution</div><p>' + d.solution + '</p></div>' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">What you earn</div><p>' + d.earn + '</p></div>' +
+      '</div>';
 
       // Center active slide
       var slideW = 280 + 16; // width + gap
