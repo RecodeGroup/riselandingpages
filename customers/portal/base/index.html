@@ -493,10 +493,6 @@
         <h3>Mixing &amp; Industry</h3>
         <p>Polish your music with mixing, mastering, and industry knowledge.</p>
       </div>
-      <div class="feature-card">
-        <h3>Fundamental Course</h3>
-        <p>Includes the full course with sample packs and video lessons on production basics and track building, so you can review the material and prepare for sessions in your own time.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -536,12 +532,17 @@
       </div>
     </div>
 
+      <label class="approval-check" style="display:flex;align-items:flex-start;gap:12px;margin:2.5rem auto;cursor:pointer;font-size:0.9rem;color:var(--muted);line-height:1.5;max-width:600px;text-align:left;">
+        <input type="checkbox" id="approval-checkbox" style="accent-color:var(--accent);width:20px;height:20px;flex-shrink:0;cursor:pointer;margin-top:2px;">
+        <span>I confirm that I have been selected by a Rise founding team member, and I take full responsibility for having access to a laptop and Ableton Live before the program starts.</span>
+      </label>
+
     <div class="checkout-summary">
       <div class="summary-left">
         <div class="summary-plan" id="summary-plan">Rise BASE &mdash; 2 payments of &euro; 750,-</div>
         <div class="summary-detail" id="summary-detail"></div>
       </div>
-      <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
+      <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()" disabled>
         Continue to Payment
       </button>
     </div>
@@ -655,6 +656,11 @@
     document.getElementById('summary-plan').textContent = 'Rise BASE — ' + plan.label;
     document.getElementById('summary-detail').textContent = plan.getDetail();
   }
+
+  // Approval checkbox
+  document.getElementById('approval-checkbox').addEventListener('change', function() {
+    document.getElementById('btn-checkout').disabled = !this.checked;
+  });
 
   async function startCheckout() {
     var btn = document.getElementById('btn-checkout');
