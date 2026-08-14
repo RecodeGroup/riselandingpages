@@ -956,7 +956,7 @@
         min: 0,
         max: 10000,
         step: 250,
-        format: (v) => v >= 10000 ? "€10k+" : "€" + v.toLocaleString("en-US")
+        format: (v) => v >= 10000 ? "€ 10k+" : "€ " + v.toLocaleString("nl-NL") + ",-"
       },
       {
         type: "form",
@@ -1044,8 +1044,8 @@
               <input type="range" min="${step.min}" max="${step.max}" step="${step.step}"
                      value="${state.answers[step.key]}" id="slider-input"/>
               <div class="slider-bounds">
-                <span>€0</span>
-                <span>€10k+</span>
+                <span>€ 0,-</span>
+                <span>€ 10k+</span>
               </div>
             </div>
             <button class="btn-continue" id="continue-btn">Continue →</button>

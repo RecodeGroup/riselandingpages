@@ -73,7 +73,7 @@
     /* ── Hero ── */
     .hero {
       position: relative;
-      min-height: 80vh;
+      min-height: 92vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -86,7 +86,7 @@
       inset: 0;
       z-index: 0;
       background:
-        linear-gradient(180deg, rgba(15,15,15,0.45) 0%, rgba(15,15,15,0.7) 50%, var(--bg) 100%),
+        linear-gradient(180deg, rgba(15,15,15,0.3) 0%, rgba(15,15,15,0.5) 45%, var(--bg) 100%),
         url('../../../assets/photos/photo-11.jpg') center 30% / cover no-repeat;
     }
     .hero-content {
@@ -267,6 +267,25 @@
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 2rem;
+    }
+    .glance-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255,104,62,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .glance-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .glance-card h3 {
       font-size: 1rem;
@@ -504,6 +523,26 @@
     .footer .links a { transition: color 0.2s; }
     .footer .links a:hover { color: var(--accent); }
 
+    /* ── Who-it's-for layout ── */
+    .who-layout {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+    .who-text { flex: 1; }
+    .who-photo {
+      flex: 0 0 340px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .who-photo img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .hero { min-height: 60vh; }
@@ -512,6 +551,11 @@
       .plan-grid { grid-template-columns: 1fr; max-width: 380px; }
       .checkout-summary { flex-direction: column; text-align: center; }
       .summary-left { text-align: center; }
+      .who-layout {
+        flex-direction: column;
+      }
+      .who-photo { flex: none; width: 100%; }
+      .who-photo img { height: 260px; }
       .coach-card {
         flex-direction: column;
         text-align: center;
@@ -578,8 +622,15 @@
     <div class="section-inner">
       <div class="eyebrow">Who it's for</div>
       <h2>Made for artists who are ready to make serious steps.</h2>
-      <p class="body-text">Core is not a course. It's a structured year of accountability, coaching and community. You'll set real goals, work towards them every week, and be surrounded by artists who expect the same from themselves.</p>
-      <p class="body-text">Everything in Base is included. Core adds weekly accountability calls, monthly workshops, peer coaching, and a private network of committed electronic artists.</p>
+      <div class="who-layout">
+        <div class="who-text">
+          <p class="body-text">Core is not a course. It's a structured year of accountability, coaching and community. You'll set clear goals, work towards them every week, and be surrounded by artists who expect the same from themselves.</p>
+          <p class="body-text">Everything in Base is included. Core adds weekly accountability calls, monthly workshops, peer coaching, and a private network of committed electronic artists.</p>
+        </div>
+        <div class="who-photo">
+          <img src="../../../assets/photos/Aug/aug_03.jpg" alt="Rise artists working together" loading="lazy">
+        </div>
+      </div>
     </div>
   </section>
 
@@ -587,7 +638,7 @@
   <section class="section" style="border-top: 1px solid var(--line);">
     <div class="section-inner">
       <div class="eyebrow">The program</div>
-      <h2>What a year in Core actually looks like.</h2>
+      <h2>What a year in Core looks like.</h2>
       <div class="feature-grid">
         <div class="feature-card">
           <h3>Weekly Accountability</h3>
@@ -632,20 +683,24 @@
       <h2>Core Academy at a glance.</h2>
       <div class="glance-grid">
         <div class="glance-card">
-          <h3>Everything in Base, Plus Live Coaching</h3>
-          <p>Everything in Base, plus weekly live coaching with experienced producers.</p>
+          <div class="glance-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Weekly Live Coaching</h3>
+          <p>Structured group coaching sessions with experienced producers who keep you on track, every single week.</p>
         </div>
         <div class="glance-card">
+          <div class="glance-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
           <h3>Deep-Dive Feedback</h3>
-          <p>Deep-dive feedback sessions on your tracks.</p>
+          <p>Detailed feedback sessions on your tracks, so you know exactly what to improve and how.</p>
         </div>
         <div class="glance-card">
+          <div class="glance-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
           <h3>Advanced Techniques &amp; Strategy</h3>
-          <p>Advanced production techniques and career strategy.</p>
+          <p>Go beyond production basics with career strategy workshops and advanced creative techniques.</p>
         </div>
         <div class="glance-card">
+          <div class="glance-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
           <h3>Mentorship &amp; Accountability</h3>
-          <p>Direct accountability and mentorship throughout the year.</p>
+          <p>Direct mentorship and weekly accountability throughout the full year, so nothing falls through the cracks.</p>
         </div>
       </div>
     </div>
@@ -656,38 +711,38 @@
     <div class="pricing-inner">
       <div class="eyebrow">Enroll</div>
       <h2 style="margin-left: auto; margin-right: auto; max-width: none;">Join Core Academy</h2>
-      <div class="price-display">&euro;2.650</div>
+      <div class="price-display">&euro; 2.650,-</div>
       <div class="price-note">ex. VAT &middot; one-year program</div>
 
       <div class="plan-grid">
         <div class="plan-card" data-plan="1x" onclick="selectPlan(this)">
           <div class="installments">Pay in full</div>
-          <div class="price">&euro;2.650</div>
+          <div class="price">&euro; 2.650,-</div>
           <div class="price-sub">One-time payment</div>
-          <div class="total">&euro;2.650 total &middot; ex. VAT</div>
+          <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
         </div>
 
         <div class="plan-card recommended selected" data-plan="2x" onclick="selectPlan(this)">
           <div class="plan-badge">Popular</div>
           <div class="installments">2 payments</div>
-          <div class="price">&euro;1.325</div>
+          <div class="price">&euro; 1.325,-</div>
           <div class="price-sub">per payment</div>
-          <div class="total">&euro;2.650 total &middot; ex. VAT</div>
+          <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
           <div class="plan-schedule" id="schedule-2x"></div>
         </div>
 
         <div class="plan-card" data-plan="3x" onclick="selectPlan(this)">
           <div class="installments">3 payments</div>
-          <div class="price">&euro;883,33</div>
+          <div class="price">&euro; 883,33</div>
           <div class="price-sub">per payment</div>
-          <div class="total">&euro;2.650 total &middot; ex. VAT</div>
+          <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
           <div class="plan-schedule" id="schedule-3x"></div>
         </div>
       </div>
 
       <div class="checkout-summary">
         <div class="summary-left">
-          <div class="summary-plan" id="summary-plan">Rise Core &mdash; 2 payments of &euro;1.325</div>
+          <div class="summary-plan" id="summary-plan">Rise Core &mdash; 2 payments of &euro; 1.325,-</div>
           <div class="summary-detail" id="summary-detail"></div>
         </div>
         <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
@@ -741,25 +796,25 @@
     // ====== PLAN DATA ======
     const plans = {
       '1x': {
-        label: 'Pay in full — €2.650',
+        label: 'Pay in full — € 2.650,-',
         getDetail: function() { return 'One-time payment now · ex. VAT'; },
         amount: 2650,
         installments: 1,
       },
       '2x': {
-        label: '2 payments of €1.325',
+        label: '2 payments of € 1.325,-',
         getDetail: function() {
-          return '€1.325 now + €1.325 in ' + autoCohort.label + ' · ex. VAT';
+          return '€ 1.325,- now + € 1.325,- in ' + autoCohort.label + ' · ex. VAT';
         },
         amount: 1325,
         installments: 2,
       },
       '3x': {
-        label: '3 payments of €883,33',
+        label: '3 payments of € 883,33',
         getDetail: function() {
           var m1 = monthNames[autoCohort.startMonth];
           var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
-          return '€883,33 now + 2 × €883,33 in ' + m1 + ', ' + m2 + ' · ex. VAT';
+          return '€ 883,33 now + 2 × € 883,33 in ' + m1 + ', ' + m2 + ' · ex. VAT';
         },
         amount: 883.33,
         installments: 3,
