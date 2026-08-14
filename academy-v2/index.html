@@ -705,9 +705,10 @@
     .products-section { padding: 5rem 0; border-top: 1px solid var(--line); }
     .products-head { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; margin-bottom: 2rem; text-align: center; }
     .products-scroll-wrap { overflow: hidden; padding: 0 0 18px; }
-    .products-scroll { display: flex; gap: 18px; width: max-content; animation: products-scroll 50s linear infinite; will-change: transform; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .products-scroll { display: flex; gap: 18px; width: max-content; will-change: transform; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
     .products-scroll:hover { animation-play-state: paused; }
-    @keyframes products-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .products-scroll.running { animation: products-scroll var(--scroll-dur, 50s) linear infinite; }
+    @keyframes products-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(var(--scroll-dist, -50%)); } }
     .product-card { flex: 0 0 260px; background: var(--bg-2); border: 1px solid rgba(255,255,255,0.05); border-radius: 14px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
     .product-card:hover { transform: translateY(-4px); border-color: rgba(255,104,62,0.25); }
     .product-card .thumb { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--bg-2); }
@@ -1013,6 +1014,26 @@
         <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fef71bf3-c89d-497a-9b89-6189178f31f7/hero/63115779-b6c8-41cc-a1ce-94ab71fd20f9.jpg" alt="Kick Rack Techno" loading="eager"><div class="info"><h4>Kick Rack Techno</h4></div></div>
       </div>
     </div>
+    <script>
+    // Calculate exact scroll distance for seamless loop
+    (function(){
+      var el = document.querySelector('.products-scroll');
+      if(!el) return;
+      function init(){
+        var cards = el.querySelectorAll('.product-card');
+        var half = Math.floor(cards.length / 2);
+        // Measure distance from first card start to first duplicate start
+        var dist = cards[half].offsetLeft - cards[0].offsetLeft;
+        el.style.setProperty('--scroll-dist', '-' + dist + 'px');
+        // Speed: ~40px/s for smooth feel
+        var dur = Math.round(dist / 40);
+        el.style.setProperty('--scroll-dur', dur + 's');
+        el.classList.add('running');
+      }
+      // Wait for images to load so widths are stable
+      window.addEventListener('load', init);
+    })();
+    </script>
   </section>
 
   <!-- ══════════════════════════════════════════════
