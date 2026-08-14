@@ -183,7 +183,7 @@
       font-weight: 700;
       line-height: 1.1;
       letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.8rem;
       max-width: 600px;
     }
     .section .body-text {
@@ -527,8 +527,8 @@
     .who-layout {
       display: flex;
       gap: 3rem;
-      align-items: center;
-      margin-top: 0.5rem;
+      align-items: flex-start;
+      margin-top: 0;
     }
     .who-text { flex: 1; }
     .who-photo {
@@ -740,12 +740,17 @@
         </div>
       </div>
 
+      <label class="approval-check" style="display:flex;align-items:flex-start;gap:12px;margin-bottom:1.5rem;cursor:pointer;font-size:0.9rem;color:var(--muted);line-height:1.5;">
+        <input type="checkbox" id="approval-checkbox" style="accent-color:var(--accent);width:20px;height:20px;margin-top:2px;flex-shrink:0;cursor:pointer;">
+        <span>I confirm that I have read the program details and agree to proceed with payment.</span>
+      </label>
+
       <div class="checkout-summary">
         <div class="summary-left">
           <div class="summary-plan" id="summary-plan">Rise Core &mdash; 2 payments of &euro; 1.325,-</div>
           <div class="summary-detail" id="summary-detail"></div>
         </div>
-        <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
+        <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()" disabled>
           Continue to Payment
         </button>
       </div>
@@ -856,6 +861,11 @@
       document.getElementById('summary-plan').textContent = 'Rise Core — ' + plan.label;
       document.getElementById('summary-detail').textContent = plan.getDetail();
     }
+
+    // Approval checkbox
+    document.getElementById('approval-checkbox').addEventListener('change', function() {
+      document.getElementById('btn-checkout').disabled = !this.checked;
+    });
 
     async function startCheckout() {
       var btn = document.getElementById('btn-checkout');
