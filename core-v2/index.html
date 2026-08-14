@@ -647,8 +647,7 @@
     @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); } }
 
     /* ── Step labels ── */
-    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
-    .step-label .step-num { width:24px; height:24px; border-radius:50%; background:var(--accent); color:#0a0a0a; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem; }
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; justify-content:center; width:100%; }
 
     /* ── Inline CTA banner (repeated) ── */
     .inline-cta { text-align:center; padding:3rem 2rem; }
@@ -774,7 +773,7 @@
        ══════════════════════════════════════════════ -->
   <section style="padding:3rem 2rem;text-align:center;border-top:1px solid var(--line);">
     <div style="max-width:var(--maxw);margin:0 auto;">
-      <div class="step-label"><span class="step-num">1</span>Watch the video</div>
+      <div class="step-label">Watch this first</div>
       <h2 class="section-heading" style="margin-bottom:2rem;">See what the Core is all about.</h2>
       <div class="vsl-player" id="core-vsl-player">
         <video id="core-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Core/Thumbnail.png">
@@ -971,7 +970,7 @@
        ══════════════════════════════════════════════ -->
   <section class="closing">
     <div class="closing-inner">
-      <div class="step-label"><span class="step-num">2</span>Apply for your spot</div>
+      <div class="step-label">Apply for your spot</div>
       <h2>Ready to make serious steps? This is where that&nbsp;starts.</h2>
       <p>Core isn't for people testing the water. It's for producers who've decided this is the career they want, and are ready to be held to that decision, every week, for a year.</p>
       <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">

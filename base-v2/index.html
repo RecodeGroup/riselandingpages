@@ -639,8 +639,7 @@
     @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); } }
 
     /* ── Step labels ── */
-    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; }
-    .step-label .step-num { width:24px; height:24px; border-radius:50%; background:var(--accent); color:#0a0a0a; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem; }
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; justify-content:center; width:100%; }
 
     /* ── Inline CTA banner (repeated) ── */
     .inline-cta { text-align:center; padding:3rem 2rem; }
@@ -732,7 +731,7 @@
        ══════════════════════════════════════════════ -->
   <section class="section social-proof" id="base-vsl">
     <div class="section-inner">
-      <div class="step-label"><span class="step-num">1</span>Watch the video</div>
+      <div class="step-label">Watch this first</div>
       <h2 class="section-heading">See what Base is all about.</h2>
       <div class="vsl-video-wrap" id="base-vsl-player">
         <video id="base-vsl-video" playsinline preload="metadata" poster="../assets/vsl/Base.png">
@@ -891,7 +890,7 @@
        ══════════════════════════════════════════════ -->
   <section class="closing" style="background-image:linear-gradient(rgba(15,15,15,0.7),rgba(15,15,15,0.85)),url('../assets/photos/Aug/aug_03.jpg');background-size:cover;background-position:center;">
     <div class="closing-inner">
-      <div class="step-label"><span class="step-num">2</span>Apply for your spot</div>
+      <div class="step-label">Apply for your spot</div>
       <h2>Six months pass either way. Spend them building, or waiting. Your&nbsp;choice.</h2>
       <p>You already know your production isn't where it needs to be. Waiting doesn't change that, it just delays it. This cohort is where you close the gap.</p>
       <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
@@ -913,7 +912,7 @@
           <h3>Come prepared</h3>
           <ul>
             <li>Know what you want from the next six months. A finished EP, a release, a consistent workflow.</li>
-            <li>Have a few recent tracks ready to share. We review them ahead of the call so we can skip the small talk.</li>
+            <li>Think about where you are in your production journey. Whether you have finished tracks or are just starting out, we want to know what you're working on and where you want to go.</li>
             <li>Block the full slot. No half-listening from the bus.</li>
             <li>Be ready to decide. We map your path on the call and show you how to walk it.</li>
           </ul>
