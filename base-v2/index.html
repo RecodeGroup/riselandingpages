@@ -635,7 +635,7 @@
 
     /* ── Limited spots indicator ── */
     .limited-spots { display:flex; align-items:center; gap:10px; font-size:0.95rem; color:rgba(255,255,255,0.65); justify-content:center; margin:1.2rem 0 0; }
-    .pulse-dot { width:8px; height:8px; background:#1a1a1a; border-radius:50%; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; }
+    .pulse-dot { width:5px; height:5px; background:var(--muted); border-radius:50%; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; margin-top:1px; }
     @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); } }
 
     /* ── Step labels ── */
@@ -780,14 +780,6 @@
           </div>
           <h3>30 Sessions</h3>
           <p>Hands-on production + career fundamentals</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>Cohort Model</h3>
-          <p>Same group, same six months, same standard</p>
         </div>
 
         <div class="feature-card">
