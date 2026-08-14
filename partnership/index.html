@@ -370,6 +370,52 @@
       font-weight: 600;
     }
 
+    /* -- Partner Journey Steps ------------------------------------ */
+    .pj-grid { max-width:960px; margin:0 auto; }
+    .pj-row { display:flex; align-items:stretch; justify-content:center; gap:0; }
+    .pj-step {
+      flex:1; border:1.5px solid var(--line); border-radius:12px;
+      padding:20px 14px; background:rgba(255,255,255,0.02);
+      text-align:center; transition:border-color 0.6s ease, box-shadow 0.6s ease;
+    }
+    .pj-step .pj-icon {
+      width:38px; height:38px; margin:0 auto 8px; border-radius:10px;
+      background:rgba(255,104,62,0.1); display:flex; align-items:center; justify-content:center;
+    }
+    .pj-step .pj-label {
+      font-size:0.6rem; font-weight:700; color:var(--accent);
+      letter-spacing:0.1em; display:block; margin-bottom:6px; text-transform:uppercase;
+    }
+    .pj-step .pj-title {
+      font-size:0.92rem; font-weight:700; display:block; margin-bottom:8px; color:var(--fg);
+    }
+    .pj-step .pj-desc {
+      color:var(--muted); font-size:0.78rem; line-height:1.5;
+    }
+    .pj-conn-h {
+      width:28px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    }
+    .pj-conn-h::before {
+      content:''; width:100%; border-top:2px dashed transparent; transition:border-color 0.6s ease;
+    }
+    .pj-conn-v {
+      height:28px; display:flex; align-items:center; justify-content:center;
+    }
+    .pj-conn-v::before {
+      content:''; height:100%; border-left:2px dashed transparent; transition:border-color 0.6s ease;
+    }
+    .pj-step.glow { border-color:var(--accent); box-shadow:0 0 14px 2px rgba(255,104,62,0.25); }
+    .pj-conn-h.glow::before { border-top-color:var(--accent); }
+    .pj-conn-v.glow::before { border-left-color:var(--accent); }
+
+    @media (max-width: 700px) {
+      .pj-row { flex-direction:column; align-items:center; gap:0; }
+      .pj-step { width:100%; max-width:320px; }
+      .pj-conn-h { width:2px; height:28px; }
+      .pj-conn-h::before { width:0; height:100%; border-top:none; border-left:2px dashed transparent; }
+      .pj-conn-h.glow::before { border-top:none; border-left-color:var(--accent); }
+    }
+
     /* -- Offers grid ---------------------------------------------- */
     .offers-grid {
       display: grid;
@@ -920,189 +966,95 @@
 
 
 <!-- ================================================================
-     2. SELF-SELECTION ("I am a...")
+     2. THE ARTIST JOURNEY
      ================================================================ -->
 <div class="section section-center">
   <div class="section-divider div-1"><span class="div-line"></span></div>
-  <div class="section-label">I Am A...</div>
-  <h2 class="section-title">What Rise means for you</h2>
-  <p class="section-sub">Select your category and see exactly what the partnership looks like from your side.</p>
+  <div class="section-label">The Artist Journey</div>
+  <h2 class="section-title">How every partner plays a role</h2>
+  <p class="section-sub">From raw talent to a thriving career. Each partner type contributes to a different stage of the artist's path.</p>
 
-  <div class="self-select-pills">
-    <button class="self-select-btn" data-target="card-label">Labels</button>
-    <button class="self-select-btn" data-target="card-agency">Agencies</button>
-    <button class="self-select-btn" data-target="card-management">Management</button>
-    <button class="self-select-btn" data-target="card-community">Communities</button>
-    <button class="self-select-btn" data-target="card-events">Events</button>
-    <button class="self-select-btn" data-target="card-media">Media</button>
-    <button class="self-select-btn" data-target="card-platform">Music Platforms</button>
-  </div>
+  <div class="pj-grid">
+    <!-- Row 1: Artist → Music Platforms → Labels → Communities -->
+    <div class="pj-row">
 
-  <!-- Label -->
-  <div class="self-select-card" id="card-label">
-    <div class="card-headline">"Your A&amp;R inbox is 90% noise. We filter it."</div>
-    <h4>The Problem</h4>
-    <ul>
-      <li>Most demos aren't release-ready — your A&amp;R team wastes hours on tracks that need months more work</li>
-      <li>You see potential but can't develop every artist yourself</li>
-      <li>Rejecting promising talent means leaving value on the table</li>
-    </ul>
-    <h4>How Rise Solves This</h4>
-    <ul>
-      <li>Refer artists instead of rejecting them — Rise handles production training, mixing guidance, and track feedback</li>
-      <li>When they reach release-ready quality, you get first access</li>
-      <li>Rise is your outsourced artist development department</li>
-    </ul>
-    <h4>How You Earn</h4>
-    <ul>
-      <li>Commission on every artist that joins through your referral</li>
-      <li>Recurring revenue from 10-50 referrals per month</li>
-      <li>Every rejection becomes a revenue opportunity and a future signing</li>
-    </ul>
-    <div class="card-scenario"><strong>Example:</strong> A producer submits but the mixdown isn't there. You refer them to Rise. After 6 months of coaching, they return with polished tracks. You sign the release <strong>and</strong> earned a referral commission.</div>
-  </div>
+      <div class="pj-step" data-pj="1">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <span class="pj-label">The Artist</span>
+        <span class="pj-title">Where every journey begins</span>
+        <p class="pj-desc">Raw talent looking for structure, income, and visibility. Rise provides education, coaching, and community to turn passion into a career.</p>
+      </div>
 
-  <!-- Agency -->
-  <div class="self-select-card" id="card-agency">
-    <div class="card-headline">"You book artists, not teach them Instagram."</div>
-    <h4>The Problem</h4>
-    <ul>
-      <li>Artists need branding and social media help, but you're a booking agency</li>
-      <li>No bandwidth for accountability, content coaching, or business guidance</li>
-      <li>Without that, artists are harder to book and command lower fees</li>
-    </ul>
-    <h4>How Rise Solves This</h4>
-    <ul>
-      <li>Rise Core covers branding, social strategy, content, and weekly accountability</li>
-      <li>You focus on bookings — we handle development</li>
-      <li>Artists can earn extra income through coaching within Rise</li>
-    </ul>
-    <h4>How You Earn</h4>
-    <ul>
-      <li>Affiliate commission on every artist you refer</li>
-      <li>More developed roster = higher booking fees</li>
-      <li>Revenue grows while your artists improve</li>
-    </ul>
-    <div class="card-scenario"><strong>Example:</strong> Five artists on your roster struggle with consistency. You refer them to Core. They build their brand, grow their following, and become easier to book at higher rates.</div>
-  </div>
+      <div class="pj-conn-h" data-pjc="1"></div>
 
-  <!-- Management -->
-  <div class="self-select-card" id="card-management">
-    <div class="card-headline">"You manage careers. You need specialist support."</div>
-    <h4>The Problem</h4>
-    <ul>
-      <li>You already handle accountability and career planning</li>
-      <li>But production coaching, track feedback, and personal development fall outside your expertise</li>
-      <li>You can't be a specialist in everything</li>
-    </ul>
-    <h4>How Rise Solves This</h4>
-    <ul>
-      <li>Standalone 1-on-1 coaching with professional producers</li>
-      <li>Detailed track feedback and personal development guidance</li>
-      <li>We supplement what you do, not replace it — you stay in control</li>
-    </ul>
-    <h4>How You Earn</h4>
-    <ul>
-      <li>Referral fee on every service your artists use through Rise</li>
-      <li>Expand your offering without adding overhead</li>
-      <li>Better artists = better management business</li>
-    </ul>
-    <div class="card-scenario"><strong>Example:</strong> You manage 3 artists. One needs production coaching, another wants EP feedback, the third needs motivation support. You refer each to Rise. They level up, you earn fees.</div>
-  </div>
+      <div class="pj-step" data-pj="2">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8l3 3-3 3"/><line x1="13" y1="14" x2="17" y2="14"/></svg></div>
+        <span class="pj-label">Music Platforms</span>
+        <span class="pj-title">Tools that power the workflow</span>
+        <p class="pj-desc">Distribution, production tools, and workflow integration. Rise teaches artists proper platform usage, reducing churn and creating engaged users.</p>
+      </div>
 
-  <!-- Community -->
-  <div class="self-select-card" id="card-community">
-    <div class="card-headline">"Monetize your audience without alienating them."</div>
-    <h4>The Problem</h4>
-    <ul>
-      <li>Thriving community, but the revenue model is unclear</li>
-      <li>Sponsorships feel off-brand, merch margins are thin</li>
-      <li>Aggressive sales would break the trust you built</li>
-    </ul>
-    <h4>How Rise Solves This</h4>
-    <ul>
-      <li>Simple affiliate partnership — share Rise when members ask how to grow</li>
-      <li>No hard selling needed — you're recommending something that genuinely helps</li>
-      <li>Members get professional development, you earn for the connection</li>
-    </ul>
-    <h4>How You Earn</h4>
-    <ul>
-      <li>Commission per signup — the simplest model to implement</li>
-      <li>No inventory, no overhead, no awkward pitches</li>
-      <li>Your members already want to grow — just point them the right way</li>
-    </ul>
-    <div class="card-scenario"><strong>Example:</strong> You run a Discord with 2,000 producers. You share your Rise link in the resources channel. 15 sign up this month. You earned a commission without changing how you run your community.</div>
-  </div>
+      <div class="pj-conn-h" data-pjc="2"></div>
 
-  <!-- Events -->
-  <div class="self-select-card" id="card-events">
-    <div class="card-headline">"Fresh talent for your lineup. We have a pipeline."</div>
-    <h4>The Problem</h4>
-    <ul>
-      <li>Scouting emerging talent is hit-or-miss and time-consuming</li>
-      <li>Organizing DJ contests takes bandwidth you don't have</li>
-      <li>No guarantee that emerging artists can deliver on stage</li>
-    </ul>
-    <h4>How Rise Solves This</h4>
-    <ul>
-      <li>Turnkey DJ contests — we handle curation, judging, and promotion</li>
-      <li>Curated pipeline of coached, performance-ready artists</li>
-      <li>You provide the stage, we provide the talent</li>
-    </ul>
-    <h4>How You Earn</h4>
-    <ul>
-      <li>Co-branded event revenue + affiliate commission per signup</li>
-      <li>Every contestant who joins Rise earns you a referral fee</li>
-      <li>The contest pays for itself</li>
-    </ul>
-    <div class="card-scenario"><strong>Example:</strong> You want a DJ contest as pre-event activation. Rise handles everything. The winner opens your main stage. 30 contestants sign up for Rise. Referral commissions <strong>and</strong> turnkey activation, zero effort.</div>
-  </div>
+      <div class="pj-step" data-pj="3">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/></svg></div>
+        <span class="pj-label">Labels</span>
+        <span class="pj-title">Quality gate to release</span>
+        <p class="pj-desc">Labels need release-ready artists. Rise develops them from demo to polished product. Refer instead of reject, and earn commissions on every signup.</p>
+      </div>
 
-  <!-- Media -->
-  <div class="self-select-card" id="card-media">
-    <div class="card-headline">"Stories before they hit mainstream."</div>
-    <h4>The Problem</h4>
-    <ul>
-      <li>Your content thrives on emerging artist stories, but finding them early takes relationships</li>
-      <li>By the time everyone covers them, it's not exclusive anymore</li>
-    </ul>
-    <h4>How Rise Solves This</h4>
-    <ul>
-      <li>Exclusive early access to artist development journeys and studio content</li>
-      <li>Graduate profiles with ready-made transformation narratives</li>
-      <li>Behind-the-scenes content before anyone else covers them</li>
-    </ul>
-    <h4>How You Earn</h4>
-    <ul>
-      <li>Affiliate links in your content earn commission per signup</li>
-      <li>Co-created series and exclusive coverage deals</li>
-      <li>Additional revenue beyond your regular ad income</li>
-    </ul>
-    <div class="card-scenario"><strong>Example:</strong> You run a YouTube channel. Rise gives you early access to 3 graduate stories per month. You create a "Rise to the Top" series. Viewers sign up through your link — affiliate revenue while building a unique franchise.</div>
-  </div>
+      <div class="pj-conn-h" data-pjc="3"></div>
 
-  <!-- Music Platforms -->
-  <div class="self-select-card" id="card-platform">
-    <div class="card-headline">"Users sign up but don't use your product properly."</div>
-    <h4>The Problem</h4>
-    <ul>
-      <li>Users sign up but don't get full value from your platform</li>
-      <li>They need education and workflow guidance a tool alone can't provide</li>
-      <li>High churn because artists don't know what they're doing</li>
-    </ul>
-    <h4>How Rise Solves This</h4>
-    <ul>
-      <li>Rise integrates your platform into our curriculum as a core workflow tool</li>
-      <li>Artists learn to use your product properly — educated, engaged users</li>
-      <li>We recommend your platform to hundreds of artists per year</li>
-    </ul>
-    <h4>How You Earn</h4>
-    <ul>
-      <li>Cross-referral model — we recommend you, you recommend us</li>
-      <li>Affiliate commission flows both ways</li>
-      <li>Lower churn, higher LTV from educated users</li>
-    </ul>
-    <div class="card-scenario"><strong>Example:</strong> Your platform handles distribution. Rise teaches release strategy using your tool. Artists from Rise are significantly more engaged. You refer users to Rise — earning commission on every signup.</div>
+      <div class="pj-step" data-pj="4">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <span class="pj-label">Communities</span>
+        <span class="pj-title">Where artists connect and grow</span>
+        <p class="pj-desc">Producer communities recommend Rise to members who want to level up. Simple affiliate model with no hard selling needed.</p>
+      </div>
+
+    </div>
+
+    <!-- Vertical connector between rows -->
+    <div class="pj-conn-v" data-pjc="4"></div>
+
+    <!-- Row 2: Events → Agencies → Management → Media -->
+    <div class="pj-row">
+
+      <div class="pj-step" data-pj="5">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-3 5-3 4 3 6 3 5-3 5-3"/><path d="M2 17s3-3 5-3 4 3 6 3 5-3 5-3"/><path d="M12 2v6"/><path d="M12 22v-4"/></svg></div>
+        <span class="pj-label">Events</span>
+        <span class="pj-title">The stage for emerging talent</span>
+        <p class="pj-desc">Turnkey DJ contests and curated artist pipelines. Rise provides performance-ready artists and handles curation. You provide the stage.</p>
+      </div>
+
+      <div class="pj-conn-h" data-pjc="5"></div>
+
+      <div class="pj-step" data-pj="6">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 12v4"/><path d="M2 12h20"/></svg></div>
+        <span class="pj-label">Agencies</span>
+        <span class="pj-title">Scaling the artist's reach</span>
+        <p class="pj-desc">Booking agencies need developed artists with strong branding. Rise handles artist development so agencies can focus on bookings and earn referral fees.</p>
+      </div>
+
+      <div class="pj-conn-h" data-pjc="6"></div>
+
+      <div class="pj-step" data-pj="7">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+        <span class="pj-label">Management</span>
+        <span class="pj-title">Strategic career guidance</span>
+        <p class="pj-desc">Managers need specialist support for production coaching and personal development. Rise supplements management without replacing it.</p>
+      </div>
+
+      <div class="pj-conn-h" data-pjc="7"></div>
+
+      <div class="pj-step" data-pj="8">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <span class="pj-label">Media</span>
+        <span class="pj-title">Telling the story</span>
+        <p class="pj-desc">Early access to artist development journeys and transformation narratives. Affiliate links in content earn commission on every signup.</p>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -1114,27 +1066,27 @@
   <div class="section section-center">
     <div class="section-divider div-2"><span class="div-line"></span></div>
     <div class="section-label">Partner Guarantee</div>
-    <h2 class="section-title">Earn &euro; 1.100,- &ndash; &euro; 7.600,- per month</h2>
+    <h2 class="section-title">Earn &euro; 1.100,- to &euro; 7.600,- per month</h2>
     <p class="section-sub" style="max-width:680px;">This is not a vague promise. It is a straightforward model with real numbers.</p>
 
     <div style="max-width:720px;margin:0 auto;text-align:left;">
       <div style="background:rgba(255,104,62,0.06);border:1px solid rgba(255,104,62,0.25);border-radius:10px;padding:2.5rem;">
         <p style="font-size:1.05rem;color:#fff;line-height:1.8;margin-bottom:1.5rem;">When <strong style="color:var(--accent);">10 to 50 artists per month</strong> join our Base or Core community through your referral, you earn between <strong style="color:var(--accent);">&euro; 1.100,- and &euro; 7.600,- per month</strong> in affiliate commissions. Every month. For as long as they stay.</p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:1.5rem;">
+        <div class="guarantee-nums" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:1.5rem;">
           <div style="background:rgba(15,15,15,0.5);border-radius:8px;padding:1.25rem;text-align:center;">
-            <div style="font-size:1.5rem;font-weight:700;color:var(--accent);margin-bottom:0.25rem;">10 leads/mo</div>
-            <div style="font-size:0.78rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Starting point</div>
-            <div style="font-size:1.1rem;font-weight:600;color:#fff;margin-top:0.5rem;">&euro; 1.100,- &ndash; &euro; 1.600,-/mo</div>
+            <div style="font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;color:var(--accent);margin-bottom:0.25rem;">10 leads/mo</div>
+            <div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Starting point</div>
+            <div style="font-size:clamp(0.82rem,2.5vw,1.1rem);font-weight:600;color:#fff;margin-top:0.5rem;">&euro; 1.100,- to &euro; 1.600,-/mo</div>
           </div>
           <div style="background:rgba(15,15,15,0.5);border-radius:8px;padding:1.25rem;text-align:center;">
-            <div style="font-size:1.5rem;font-weight:700;color:var(--accent);margin-bottom:0.25rem;">25 leads/mo</div>
-            <div style="font-size:0.78rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Growing</div>
-            <div style="font-size:1.1rem;font-weight:600;color:#fff;margin-top:0.5rem;">&euro; 2.600,- &ndash; &euro; 3.850,-/mo</div>
+            <div style="font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;color:var(--accent);margin-bottom:0.25rem;">25 leads/mo</div>
+            <div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Growing</div>
+            <div style="font-size:clamp(0.82rem,2.5vw,1.1rem);font-weight:600;color:#fff;margin-top:0.5rem;">&euro; 2.600,- to &euro; 3.850,-/mo</div>
           </div>
           <div style="background:rgba(15,15,15,0.5);border-radius:8px;padding:1.25rem;text-align:center;">
-            <div style="font-size:1.5rem;font-weight:700;color:var(--accent);margin-bottom:0.25rem;">50 leads/mo</div>
-            <div style="font-size:0.78rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Full pipeline</div>
-            <div style="font-size:1.1rem;font-weight:600;color:#fff;margin-top:0.5rem;">&euro; 5.100,- &ndash; &euro; 7.600,-/mo</div>
+            <div style="font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;color:var(--accent);margin-bottom:0.25rem;">50 leads/mo</div>
+            <div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Full pipeline</div>
+            <div style="font-size:clamp(0.82rem,2.5vw,1.1rem);font-weight:600;color:#fff;margin-top:0.5rem;">&euro; 5.100,- to &euro; 7.600,-/mo</div>
           </div>
         </div>
         <p style="font-size:0.88rem;color:#999;line-height:1.7;">The range depends on which programs your artists join. You solve their problems by connecting them with professional development. Rise handles the courses, coaching, tools, and accountability. You earn for making the connection.</p>
@@ -1781,56 +1733,49 @@
     onScroll();
   })();
 
-  // Self-selection toggle with auto-cycle
-  (function() {
-    var btns = document.querySelectorAll('.self-select-btn');
-    var cards = document.querySelectorAll('.self-select-card');
-    var current = -1;
-    var timer = null;
-    var pinned = false;
-
-    function show(idx) {
-      btns.forEach(function(b) { b.classList.remove('active'); });
-      cards.forEach(function(c) { c.classList.remove('visible'); });
-      btns[idx].classList.add('active');
-      var card = document.getElementById(btns[idx].getAttribute('data-target'));
-      if (card) card.classList.add('visible');
-      current = idx;
+  // Partner Journey glow animation
+  (function(){
+    var steps = document.querySelectorAll('.pj-step');
+    var conns = document.querySelectorAll('[data-pjc]');
+    if(!steps.length) return;
+    var SEQ = [
+      {type:'step', idx:0},
+      {type:'conn', idx:0},
+      {type:'step', idx:1},
+      {type:'conn', idx:1},
+      {type:'step', idx:2},
+      {type:'conn', idx:2},
+      {type:'step', idx:3},
+      {type:'conn', idx:3},
+      {type:'step', idx:4},
+      {type:'conn', idx:4},
+      {type:'step', idx:5},
+      {type:'conn', idx:5},
+      {type:'step', idx:6},
+      {type:'conn', idx:6},
+      {type:'step', idx:7}
+    ];
+    var STEP_DELAY = 500;
+    var HOLD = 2000;
+    var FADE = 800;
+    var PAUSE = 1200;
+    function clearAll(){
+      steps.forEach(function(s){ s.classList.remove('glow'); });
+      conns.forEach(function(c){ c.classList.remove('glow'); });
     }
-
-    function next() {
-      if (pinned) return;
-      show((current + 1) % btns.length);
-    }
-
-    function startCycle() { timer = setInterval(next, 4000); }
-    function stopCycle() { clearInterval(timer); }
-
-    // Click = pin that card (click again = unpin + resume cycle)
-    btns.forEach(function(btn, i) {
-      btn.addEventListener('click', function() {
-        stopCycle();
-        if (pinned && current === i) {
-          pinned = false;
-          startCycle();
-        } else {
-          pinned = true;
-          show(i);
-        }
+    function runCycle(){
+      clearAll();
+      SEQ.forEach(function(item, i){
+        setTimeout(function(){
+          if(item.type==='step') steps[item.idx].classList.add('glow');
+          else conns[item.idx].classList.add('glow');
+        }, i * STEP_DELAY);
       });
-    });
-
-    // Pause auto-cycle on hover
-    var wrap = document.querySelector('.self-select-pills');
-    if (wrap) {
-      var parent = wrap.parentElement;
-      parent.addEventListener('mouseenter', function() { if (!pinned) stopCycle(); });
-      parent.addEventListener('mouseleave', function() { if (!pinned) startCycle(); });
+      var totalLight = SEQ.length * STEP_DELAY;
+      setTimeout(clearAll, totalLight + HOLD);
+      setTimeout(runCycle, totalLight + HOLD + FADE + PAUSE);
     }
-
-    // Start: show first card immediately, then cycle
-    show(0);
-    startCycle();
+    runCycle();
   })();
 </script>
 
