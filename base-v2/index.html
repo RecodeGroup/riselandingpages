@@ -60,11 +60,10 @@
                   border-bottom-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                   box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       border-bottom: 1px solid transparent;
+      will-change: background, border-color, box-shadow;
     }
     .site-header.scrolled {
-      background: rgba(15,15,15,0.72);
-      backdrop-filter: blur(20px) saturate(1.4);
-      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      background: rgba(15,15,15,0.92);
       border-bottom: 1px solid rgba(255,104,62,0.12);
       box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
@@ -545,7 +544,7 @@
     .modal-back { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; padding: 8px 0; transition: color 0.2s; background: none; border: none; cursor: pointer; }
     .modal-back:hover { color: var(--fg); }
     .modal-back.hidden { visibility: hidden; }
-    .modal-close { font-size: 22px; color: var(--muted); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-close { font-size: 22px; color: var(--muted); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: color 0.2s, background 0.2s; background: none; border: none; cursor: pointer; }
     .modal-close:hover { color: var(--fg); background: var(--line); }
     .modal-body { max-width: 720px; width: 100%; margin: 60px auto 0; flex: 1; }
     .progress { display: flex; gap: 8px; margin-bottom: 28px; }
@@ -553,7 +552,7 @@
     .progress span.done { background: var(--accent); }
     .step-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; max-width: 18ch; margin-bottom: 36px; }
     .options { display: grid; gap: 12px; }
-    .option { display: flex; gap: 18px; align-items: flex-start; padding: 18px 22px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; width: 100%; transition: all 0.2s; font-family: inherit; color: inherit; }
+    .option { display: flex; gap: 18px; align-items: flex-start; padding: 18px 22px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; width: 100%; transition: background 0.2s, border-color 0.2s; font-family: inherit; color: inherit; }
     .option:hover { background: rgba(255,255,255,0.06); border-color: var(--line-strong); }
     .option.selected { border-color: var(--accent); background: rgba(255,104,62,0.08); }
     .option .letter { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; flex-shrink: 0; width: 14px; }
@@ -697,7 +696,7 @@
     <div class="hero-content">
       <div class="hero-eyebrow">Base Academy</div>
       <h1>Six months. Coaching. A production foundation that&nbsp;holds.</h1>
-      <p class="hero-sub">You're here because your production needs structure, not more tutorials. This is where you build it.</p>
+      <p class="hero-sub">In six months you build a production foundation that holds.</p>
     <div style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
       <span>30 sessions</span>
       <span style="color:rgba(255,255,255,0.2);">&middot;</span>
@@ -709,7 +708,7 @@
         Apply Now
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
-      <div class="limited-spots"><span class="pulse-dot"></span>We only take a limited number of artists each month.</div>
+      <div class="limited-spots"><span class="pulse-dot"></span>Limited spots left this month.</div>
     <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
       <span>&#10003; Small groups, personal attention</span>
       <span>&#10003; Including the base course</span>
@@ -1048,7 +1047,7 @@
     })();
 
     // ── Sticky header scroll effect ──
-    window.addEventListener('scroll', function() { document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60); });
+    window.addEventListener('scroll', function() { document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
 
     // ── Auto-detect country dial code from IP ──
     var _dialCode = "";

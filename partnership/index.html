@@ -53,11 +53,10 @@
                   border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
                   box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
       border-bottom: 1px solid transparent;
+      will-change: background, border-color, box-shadow;
     }
     .site-header.scrolled {
-      background: rgba(15,15,15,0.88);
-      backdrop-filter: blur(20px) saturate(1.4);
-      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      background: rgba(15,15,15,0.92);
       border-bottom-color: rgba(255,104,62,0.12);
       box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
@@ -264,6 +263,11 @@
     .div-10 { animation: pulse-b 3.7s ease-in-out -2.4s infinite; }
     .div-11 { animation: pulse-a 4.4s ease-in-out -1.3s infinite; }
 
+    @media (prefers-reduced-motion: reduce) {
+      [class^="div-"] { animation: none !important; }
+      .tw-word { animation: none !important; border-right-color: var(--accent) !important; }
+    }
+
     /* -- Section break photos ------------------------------------- */
     .section-photo {
       max-width: var(--maxw);
@@ -294,7 +298,7 @@
       font-weight: 600;
       color: var(--fg);
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
       font-family: inherit;
     }
     .self-select-btn:hover {
@@ -454,7 +458,7 @@
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 2rem;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
       text-align: left;
     }
     .offer-card:hover {
@@ -490,7 +494,7 @@
       border-radius: 10px;
       padding: 2rem;
       text-align: left;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .track-card:hover {
       border-color: rgba(255,104,62,0.2);
@@ -661,7 +665,7 @@
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 2rem;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, transform 0.3s ease;
       position: relative;
       overflow: hidden;
     }
@@ -774,7 +778,7 @@
       border-radius: 10px;
       padding: 2rem;
       text-align: left;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, transform 0.3s ease;
     }
     .way-card:hover {
       border-color: rgba(255,104,62,0.2);
@@ -857,7 +861,7 @@
       border-radius: 10px;
       padding: 2rem 1.5rem;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: border-color 0.3s ease, transform 0.3s ease;
       position: relative;
     }
     .process-step:hover {
