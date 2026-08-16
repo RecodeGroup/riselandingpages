@@ -1103,7 +1103,10 @@
     .teachers-grid {
       display: flex; gap: 24px;
       width: max-content;
-      animation: scroll-teachers 60s linear infinite;
+      animation: scroll-teachers 96s linear infinite;
+    }
+    .teachers-marquee-wrap:hover .teachers-grid {
+      animation-play-state: paused;
     }
     @keyframes scroll-teachers {
       0% { transform: translateX(0); }
