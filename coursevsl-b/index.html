@@ -1103,7 +1103,11 @@
     .teachers-grid {
       display: flex; gap: 24px;
       width: max-content;
-      will-change: transform;
+      animation: scroll-teachers 60s linear infinite;
+    }
+    @keyframes scroll-teachers {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
     .teacher-card {
       flex: 0 0 200px;
@@ -1546,16 +1550,16 @@
         <p class="teacher-bio">Producer from The Hague. Known for layered textures and emotional depth. Collaborated with Lost Frequencies.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Artcode.png" alt="Artcode" loading="lazy">
-        <h4>Artcode</h4>
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" loading="lazy">
+        <h4>Jurrian</h4>
         <p class="teacher-role">Audiovisual &amp; Production</p>
-        <p class="teacher-bio">Based in Rotterdam with 15+ years across electronic genres. Combines music with TouchDesigner visuals and live modular performance.</p>
+        <p class="teacher-bio">15+ years across electronic genres, Jurrian (Artcode) combines music with TouchDesigner visuals and live modular performance.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Jim.png" alt="Vannood" loading="lazy">
-        <h4>Vannood</h4>
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Jim.png" alt="Jim" loading="lazy">
+        <h4>Jim</h4>
         <p class="teacher-role">Entrepreneur &amp; Producer</p>
-        <p class="teacher-bio">Over 15 years specializing in production. Expert in structuring creative processes into finished work.</p>
+        <p class="teacher-bio">For over 15 years, Jim (Vannood) has been producing and releasing techno while building Rise as both an artist and entrepreneur.</p>
       </div>
       <div class="teacher-card">
         <img class="teacher-photo" src="../assets/photos/Aug/paulv2.png" alt="Paul" loading="lazy">
@@ -1589,15 +1593,91 @@
         <p class="teacher-bio">Growing house artist in the Dutch scene and a talented producer with a sharp ear for arrangement and sound design.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Yvo.png" alt="Yvo Overhoff" loading="lazy">
-        <h4>Yvo Overhoff</h4>
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy">
+        <h4>Yvo</h4>
         <p class="teacher-role">A&amp;R &amp; Producer</p>
         <div class="teacher-label">Founding Team</div>
         <p class="teacher-bio">A&amp;R at Recode Records and active DJ/producer. Knows what labels look for and how to get your demos signed.</p>
       </div>
       <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Hen.png" alt="Hendrik Kamminga" loading="lazy">
-        <h4>Hendrik Kamminga</h4>
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
+        <h4>Hendrik</h4>
+        <p class="teacher-role">Manager &amp; Booker</p>
+        <div class="teacher-label">Founding Team</div>
+        <p class="teacher-bio">Artist manager and booker. Teaches how to get gigs, build relationships with promoters, and grow a live career.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Marco.png" alt="Marco Meeuwsen" loading="lazy">
+        <h4>Marco Meeuwsen</h4>
+        <p class="teacher-role">Performance Marketing</p>
+        <p class="teacher-bio">Content strategist specialized in performance marketing. Teaches how to promote your music and grow your audience effectively.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Maarten.png" alt="Maarten Broere" loading="lazy">
+        <h4>Maarten Broere</h4>
+        <p class="teacher-role">Branding Expert</p>
+        <p class="teacher-bio">Builds artist brands from the ground up. Teaches visual identity, positioning, and how to stand out in a crowded scene.</p>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Remy.png" alt="Remy" loading="lazy">
+        <h4>Remy</h4>
+        <p class="teacher-role">Pop &amp; Dance Production</p>
+        <p class="teacher-bio">Producer from The Hague. Known for layered textures and emotional depth. Collaborated with Lost Frequencies.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" loading="lazy">
+        <h4>Jurrian</h4>
+        <p class="teacher-role">Audiovisual &amp; Production</p>
+        <p class="teacher-bio">15+ years across electronic genres, Jurrian (Artcode) combines music with TouchDesigner visuals and live modular performance.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Jim.png" alt="Jim" loading="lazy">
+        <h4>Jim</h4>
+        <p class="teacher-role">Entrepreneur &amp; Producer</p>
+        <p class="teacher-bio">For over 15 years, Jim (Vannood) has been producing and releasing techno while building Rise as both an artist and entrepreneur.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/photos/Aug/paulv2.png" alt="Paul" loading="lazy">
+        <h4>Paul</h4>
+        <p class="teacher-role">Mix &amp; Master Engineer</p>
+        <p class="teacher-bio">Specializes in getting your tracks to sound polished and release-ready. Teaches mixing techniques, mastering workflows, and how to bring out the best in every production.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Mau2.png" alt="Maurits" loading="lazy">
+        <h4>Maurits</h4>
+        <p class="teacher-role">Artist Development</p>
+        <div class="teacher-label">Founding Team</div>
+        <p class="teacher-bio">Runs the operations and artist development side of Rise. Focused on building sustainable momentum through strategy and structure.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Tim.png" alt="Tim Hox" loading="lazy">
+        <h4>Tim Hox</h4>
+        <p class="teacher-role">Music Producer / DJ</p>
+        <p class="teacher-bio">International DJ/producer with releases on major labels. Teaches the art of finishing tracks and building a release strategy.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Noah.png" alt="Noah Smits" loading="lazy">
+        <h4>Noah Smits</h4>
+        <p class="teacher-role">Media Strategist</p>
+        <p class="teacher-bio">Specializes in content strategy and social media growth for electronic music producers. Turns followers into fans.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" loading="lazy">
+        <h4>Milan Fernandes</h4>
+        <p class="teacher-role">Music Producer / DJ</p>
+        <p class="teacher-bio">Growing house artist in the Dutch scene and a talented producer with a sharp ear for arrangement and sound design.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy">
+        <h4>Yvo</h4>
+        <p class="teacher-role">A&amp;R &amp; Producer</p>
+        <div class="teacher-label">Founding Team</div>
+        <p class="teacher-bio">A&amp;R at Recode Records and active DJ/producer. Knows what labels look for and how to get your demos signed.</p>
+      </div>
+      <div class="teacher-card">
+        <img class="teacher-photo" src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
+        <h4>Hendrik</h4>
         <p class="teacher-role">Manager &amp; Booker</p>
         <div class="teacher-label">Founding Team</div>
         <p class="teacher-bio">Artist manager and booker. Teaches how to get gigs, build relationships with promoters, and grow a live career.</p>
@@ -1938,67 +2018,6 @@
         }
       }
       tick();
-    })();
-
-    // Teachers ping-pong scroll — show everyone once, auto-scroll left↔right, mouse drag
-    (function() {
-      var grid = document.getElementById('teachers-marquee');
-      if (!grid) return;
-      var wrap = grid.parentElement;
-
-      var speed = 0.5; // px per frame (~30px/s at 60fps)
-      var direction = 1; // 1 = scroll right (negative translateX), -1 = scroll left
-      var position = 0;
-      var dragging = false;
-      var startX = 0, dragStartPos = 0;
-      var pauseUntil = 0;
-
-      function maxScroll() {
-        return Math.max(0, grid.scrollWidth - wrap.clientWidth);
-      }
-
-      function tick(ts) {
-        if (!dragging) {
-          if (ts < pauseUntil) { requestAnimationFrame(tick); return; }
-          position += speed * direction;
-          var max = maxScroll();
-          if (position >= max) { position = max; direction = -1; pauseUntil = ts + 1500; }
-          if (position <= 0) { position = 0; direction = 1; pauseUntil = ts + 1500; }
-          grid.style.transform = 'translateX(' + (-position) + 'px)';
-        }
-        requestAnimationFrame(tick);
-      }
-
-      function onStart(x) {
-        dragging = true;
-        startX = x;
-        dragStartPos = position;
-        wrap.style.cursor = 'grabbing';
-      }
-      function onMove(x) {
-        if (!dragging) return;
-        var delta = startX - x;
-        position = Math.max(0, Math.min(maxScroll(), dragStartPos + delta));
-        grid.style.transform = 'translateX(' + (-position) + 'px)';
-      }
-      function onEnd() {
-        if (!dragging) return;
-        dragging = false;
-        wrap.style.cursor = 'grab';
-        pauseUntil = 0;
-        if (position >= maxScroll()) direction = -1;
-        else if (position <= 0) direction = 1;
-      }
-
-      wrap.addEventListener('mousedown', function(e) { e.preventDefault(); onStart(e.clientX); });
-      window.addEventListener('mousemove', function(e) { if (dragging) { e.preventDefault(); onMove(e.clientX); } });
-      window.addEventListener('mouseup', onEnd);
-      wrap.addEventListener('touchstart', function(e) { onStart(e.touches[0].clientX); }, { passive: true });
-      wrap.addEventListener('touchmove', function(e) { if (dragging) onMove(e.touches[0].clientX); }, { passive: true });
-      wrap.addEventListener('touchend', onEnd);
-      wrap.style.cursor = 'grab';
-
-      requestAnimationFrame(tick);
     })();
 
     // Team photo carousel — auto-rotate every 4s
