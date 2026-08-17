@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE Artist Academy &mdash; Become a producer with Base and Core.</title>
+  <meta name="description" content="Two guided programs for electronic producers. Base builds your production foundation in six months. Core holds you accountable for twelve. Find your starting line in two minutes.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* ════════════════════════════════════════════════
+       Rise Artist Academy — Homepage v2
+       Restyled to coursevsl-b design system
+       ════════════════════════════════════════════════ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Accessibility ───────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* ── Header ──────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.72);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom-color: rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-logo img { width: 36px; height: 36px; border-radius: 7px; }
+
+    /* Urgency Bar */
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 8px 40px 8px 16px;
+      transition: transform 0.3s;
+    }
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
+    }
+    .urgency-text {
+      display: inline;
+      animation: urgency-pulse 3s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    body.has-urgency-bar .site-header { top: 36px; }
+    body.has-urgency-bar .hero { margin-top: -61px; padding-top: 181px; }
+
+    .header-cta {
+      display: inline-flex; align-items: center;
+      background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
+
+    /* ── Buttons ──────────────────────────────────── */
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-block;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .btn-ghost {
+      padding: 16px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      transition: border-color 0.25s ease, color 0.25s ease;
+      display: inline-block;
+      background: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%),
+        url('../assets/photos/photo-18.jpg') center 30% / cover no-repeat;
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .hero-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .hero-cta svg { width: 18px; height: 18px; }
+
+    /* ── Photo strip ─────────────────────────────── */
+    .photo-strip {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .photo-strip-track {
+      display: flex;
+      gap: 4px;
+      width: max-content;
+      animation: scroll-strip 40s linear infinite;
+    }
+    .photo-strip-track img {
+      height: 180px;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+    @keyframes scroll-strip {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Section defaults ────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .section-body {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 55ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* ── Why Rise ─────────────────────────────────── */
+    .why-rise { background: var(--bg); }
+    .why-rise .section-body { margin-bottom: 0; }
+    .why-rise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .why-rise-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .why-rise-image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 12px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+    }
+    @media (max-width: 768px) {
+      .why-rise-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Social Proof / VSL ──────────────────────── */
+    .social-proof { background: var(--bg); }
+    .social-proof .section-eyebrow,
+    .social-proof .section-heading { text-align: center; }
+    .vsl-video-wrap {
+      margin-top: 32px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .vsl-video-wrap video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    .vsl-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .vsl-play-overlay svg {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      transition: transform 0.2s ease;
+    }
+    .vsl-video-wrap:hover .vsl-play-overlay svg { transform: scale(1.08); }
+    .vsl-video-wrap.playing .vsl-play-overlay { opacity: 0; }
+    .vsl-progress-wrap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      transition: opacity 0.3s linear;
+    }
+    .vsl-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s linear, opacity 0.3s linear;
+    }
+
+    /* ── Choose Your Path ────────────────────────── */
+    .choose-path { background: var(--bg); }
+    .path-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .path-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .path-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .path-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .path-card:hover::before { opacity: 1; }
+    .path-img {
+      width: 84%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .path-card.main-product {
+      border-color: rgba(255,104,62,0.3);
+      background: linear-gradient(180deg, rgba(255,104,62,0.04) 0%, var(--bg-2) 40%);
+    }
+    .path-card.main-product:hover {
+      border-color: rgba(255,104,62,0.5);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .path-label {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+    .path-label.standalone {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+    }
+    .path-label.primary {
+      background: rgba(255,104,62,0.12);
+      color: var(--accent);
+    }
+    .path-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .path-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .path-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .path-sub-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .path-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .path-list li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding: 5px 0 5px 20px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .path-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 8px;
+      height: 4px;
+      border-left: 1.5px solid var(--accent);
+      border-bottom: 1.5px solid var(--accent);
+      transform: rotate(-45deg);
+    }
+    .path-list.plus-list li::before {
+      content: '+';
+      position: absolute;
+      left: 0;
+      top: 3px;
+      width: auto;
+      height: auto;
+      border: none;
+      transform: none;
+      color: var(--accent);
+      font-weight: 400;
+      font-size: 0.95rem;
+    }
+    .path-cta {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      text-align: center;
+      width: 100%;
+    }
+    .path-cta.primary {
+      background: var(--accent);
+      color: #0a0a0a;
+    }
+    .path-cta.primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .path-cta.secondary {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--line-strong);
+    }
+    .path-cta.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .path-cta svg { width: 16px; height: 16px; }
+
+    /* ── Coaches ──────────────────────────────────── */
+    .coaches { background: var(--bg); padding-bottom: 6rem; }
+    .coaches .section-heading { margin-bottom: 3.5rem; }
+    .coaches-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 55ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .coach-strip {
+      overflow: hidden;
+      padding: 0;
+    }
+    .coach-strip-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: scroll-coaches 45s linear infinite;
+    }
+    .coach-strip:hover .coach-strip-track {
+      animation-play-state: paused;
+    }
+    @keyframes scroll-coaches {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .coach-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      width: 220px;
+      flex-shrink: 0;
+    }
+    .coach-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .coach-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .coach-card:hover::before { opacity: 1; }
+    .coach-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 14px;
+      border: 2px solid rgba(255,104,62,0.15);
+    }
+    .coach-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .coach-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .coach-bio {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .coach-label {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255,104,62,0.10);
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    /* ── Monthly Webinar ─────────────────────────── */
+    .webinar { background: var(--bg); }
+    .webinar-box {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,104,62,0.15);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 40px);
+    }
+    .webinar-icon {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .webinar-icon svg { width: 28px; height: 28px; color: var(--accent); }
+    .webinar-text { flex: 1; }
+    .webinar-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .webinar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #0a0a0a;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .webinar-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+
+    /* ── Reviews ────────────────────────────────── */
+    .reviews-section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .reviews-inner {
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .reviews-head {
+      padding: 0 2rem; margin-bottom: 2rem;
+    }
+    .reviews-scroll {
+      display: flex; gap: 18px; overflow-x: auto;
+      padding: 0 2rem 18px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .reviews-scroll::-webkit-scrollbar { display: none; }
+    .review-card {
+      flex: 0 0 340px;
+      background: var(--bg-2); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 2rem 1.75rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .review-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+    }
+    .review-stars {
+      color: var(--accent); font-size: 0.9rem;
+      letter-spacing: 2px; margin-bottom: 14px;
+    }
+    .review-card .review-text {
+      font-size: 0.92rem; color: rgba(255,255,255,0.85);
+      line-height: 1.65;
+    }
+
+    /* ── Scrolling Review Bar (indepenjend-style) ── */
+    .review-bar-section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+    }
+    .review-bar-head {
+      text-align: center;
+      padding: 0 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .review-bar-row {
+      overflow: hidden;
+      padding: 0;
+    }
+    .review-bar-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+    }
+    .review-bar-track--left {
+      animation: scroll-reviews 35s linear infinite;
+    }
+    .review-bar-track--right {
+      animation: scroll-reviews-reverse 40s linear infinite;
+    }
+    .review-bar-row + .review-bar-row {
+      margin-top: 12px;
+    }
+    .review-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px 8px 8px;
+      white-space: nowrap;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 40px;
+      flex-shrink: 0;
+    }
+    .review-pill img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .review-pill span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.3;
+    }
+    @keyframes scroll-reviews {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scroll-reviews-reverse {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* ── Closing ──────────────────────────────────── */
+    .closing {
+      background: var(--bg);
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .closing-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .closing p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Video Testimonials ──────────────────────── */
+    .video-testimonials { padding: 5rem 0; text-align: center; border-top: 1px solid var(--line); background: rgba(255,255,255,0.015); }
+    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; padding: 0 2rem; }
+    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; padding: 0 2rem; }
+    .video-strip { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 3rem; }
+    .video-strip::-webkit-scrollbar { display: none; }
+    .video-strip-track { display: flex; gap: 16px; width: max-content; }
+    .video-card {
+      position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
+      width: 240px; height: 420px; cursor: pointer;
+      background: #000; flex-shrink: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; }
+    .video-card video { pointer-events: none; }
+    .video-card .play-btn { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+    .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
+
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq { background: var(--bg); }
+    .faq .section-eyebrow,
+    .faq .section-heading { text-align: center; }
+    .faq-list {
+      margin-top: 32px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      position: relative;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--muted);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .faq-icon::before {
+      width: 14px;
+      height: 2px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-icon::after {
+      width: 2px;
+      height: 14px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-item.open .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-a-inner {
+      padding: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* ── Hero stats ── */
+    .hero-stats { display:flex; gap:2rem; justify-content:center; margin-top:1.5rem; flex-wrap:wrap; }
+    .hero-stat { font-size:0.9rem; color:rgba(255,255,255,0.6); }
+    .hero-stat strong { color:#fff; font-weight:700; }
+
+    /* ── Step labels ── */
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; justify-content:center; width:100%; }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a {
+      transition: color 0.2s;
+    }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 1080px) {
+      .path-grid { grid-template-columns: 1fr; }
+      .coach-card { width: 200px; }
+      .section { padding: 4rem 1.5rem; }
+      .closing { padding: 4rem 1.5rem; }
+      .review-card { flex: 0 0 280px; }
+      .reviews-scroll { padding: 0 1rem 14px; gap: 12px; }
+    }
+
+    @media (max-width: 768px) {
+      .webinar-box { flex-direction: column; text-align: center; }
+      .hero-cta, .btn-primary, .btn-ghost {
+        display: block;
+        width: 100%;
+      }
+
+      /* ── Team/Coaches: swipeable on mobile ────── */
+      .coach-strip {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 0 1rem;
+      }
+      .coach-strip::-webkit-scrollbar { display: none; }
+      .coach-strip-track {
+        animation: none;
+        flex-wrap: nowrap;
+      }
+
+    }
+
+    @media (max-width: 520px) {
+      .section { padding: 2.5rem 1rem; }
+      .closing { padding: 2.5rem 1rem; }
+      .hero { padding: clamp(5rem, 10vw, 8rem) 1rem clamp(3rem, 6vw, 5rem); }
+      .site-header-inner { padding: 0.75rem 1rem; }
+      .footer { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body class="has-urgency-bar">
+
+  <!-- Urgency Bar -->
+  <a href="#paths" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
+    <span class="urgency-text">Applications open</span> &middot; Start your journey
+    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
+  </a>
+
+  <!-- Header -->
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
+      <a class="header-cta" href="#paths">Get started now</a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       Hero
+       ══════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Rise Artist Academy</div>
+      <h1>Turn your music into a career you can live&nbsp;from.</h1>
+      <p class="hero-sub">Rise is a coaching academy for electronic producers and DJs. Weekly coaching, a clear structure and a community that keeps you moving, so you stop collecting tutorials and start finishing, releasing and growing.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
+      <span>Production coaching</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>Artist development</span>
+      <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+      <span>Access to industry opportunities</span>
+    </div>
+      <a href="#paths" class="hero-cta">
+        Get Started Now
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
+      <span>&#10003; No subscription required</span>
+      <span>&#10003; Coaching, not just tutorials</span>
+    </div>
+      <div class="hero-stats">
+        <span class="hero-stat"><strong>100+</strong> artists supported</span>
+        <span class="hero-stat"><strong>Active</strong> since 2023</span>
+        <span class="hero-stat"><strong>11</strong> expert coaches</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Photo Strip
+       ══════════════════════════════════════════════ -->
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_02.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_5.png" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_03.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_11.2.png" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <div aria-hidden="true" style="display:contents;">
+      <img src="../assets/photos/Aug/aug_01.jpeg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/Aug/aug_02.JPG" alt="" loading="lazy">
+      <img src="../assets/photos/Aug/aug_5.png" alt="" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/Aug/aug_03.jpg" alt="" loading="lazy">
+      <img src="../assets/photos/Aug/aug_11.2.png" alt="" loading="lazy">
+      <img src="../assets/photos/Aug/aug_23.png" alt="" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       Social Proof (Video)
+       ══════════════════════════════════════════════ -->
+  <section class="section social-proof" id="social-proof">
+    <div class="section-inner">
+      <div class="step-label">Watch this first</div>
+      <h2 class="section-heading">See what Rise is all about.</h2>
+      <div class="vsl-video-wrap" id="hp-vsl-player">
+        <video id="hp-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Main/VSL%20Thumbnail.png">
+          <source src="../assets/vsl/mini-vsl.mp4" type="video/mp4">
+        </video>
+        <div class="vsl-play-overlay" id="hp-vsl-overlay">
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
+        </div>
+        <div class="vsl-progress-wrap">
+          <div class="vsl-progress-bar" id="hp-vsl-progress"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Why Rise
+       ══════════════════════════════════════════════ -->
+  <section class="section why-rise" id="why-rise">
+    <div class="section-inner">
+      <div class="why-rise-grid">
+        <div>
+          <div class="section-eyebrow">The idea.</div>
+          <h2 class="section-heading">Talent was never the missing piece</h2>
+          <div class="section-body">
+            <p>You've got the drive. What's missing is a system. Most producers stall because they're figuring it all out alone, one tutorial to the next, tracks left half-finished. Rise replaces that with coaching, direct feedback and a structure that keeps you moving when motivation dips.</p>
+            <p style="margin-top:16px;">Wherever you are now, we combine structure, accountability and coaching to turn your talent into real, lasting progress.</p>
+          </div>
+        </div>
+        <img src="../assets/photos/Aug/aug_04.JPG" alt="Rise Academy session" class="why-rise-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Choose Your Path
+       ══════════════════════════════════════════════ -->
+  <section class="section choose-path" id="paths">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="text-align:center">Choose your path</div>
+      <h2 class="section-heading" style="text-align:center">Two ways to start.</h2>
+
+      <div class="path-grid">
+
+        <!-- Course -->
+        <div class="path-card">
+          <img src="../assets/photos/Aug/aug_14.webp" class="path-img" alt="Rise Course">
+          <span class="path-label standalone">Standalone start</span>
+          <h3>The Course</h3>
+          <div class="path-price">&euro;&nbsp;260,-</div>
+          <p class="path-desc">The complete production course you follow at your own pace. 11 video modules, professional sample packs, Ableton chains and the Artist Manual: everything to build a solid foundation. The easiest way to start with Rise, with lifetime access and no subscription.</p>
+          <div class="path-sub-label">Includes</div>
+          <ul class="path-list">
+            <li>11 video lesson modules</li>
+            <li>Taught by industry professionals</li>
+            <li>Sample packs &amp; Ableton chains</li>
+            <li>The Artist Manual</li>
+          </ul>
+          <a href="../coursevsl-b/" class="path-cta secondary">
+            Start the Course
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Academy (main product) -->
+        <div class="path-card main-product">
+          <img src="../assets/Coursevsl/Team/Theteam.png" class="path-img" alt="Rise Academy">
+          <span class="path-label primary">Main product</span>
+          <h3>The Academy</h3>
+          <p class="path-desc">Two tracks, one community. Base builds your production foundation in six months with weekly coaching. Core holds you accountable for a full year and turns skill into a career. In a short intake call we decide together which track fits where you are.</p>
+          <div class="path-sub-label">Includes everything in The Course. Plus:</div>
+          <ul class="path-list plus-list">
+            <li>Weekly live coaching</li>
+            <li>Full platform access</li>
+            <li>The Rise community</li>
+            <li>Accountability from coaches and members</li>
+            <li>Sample packs, presets &amp; Ableton chains</li>
+            <li>Access to industry opportunities</li>
+          </ul>
+          <a href="/academy-v2/" class="path-cta primary">
+            Explore the Academy
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Coaches
+       ══════════════════════════════════════════════ -->
+  <section class="section coaches" id="coaches">
+    <div class="section-inner">
+      <div class="section-eyebrow">The team</div>
+      <h2 class="section-heading">Learn from people doing it every&nbsp;day.</h2>
+
+      <div class="coach-strip">
+      <div class="coach-strip-track">
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Mau2.png" alt="Maurits" class="coach-avatar">
+          <div class="coach-name">Maurits</div>
+          <div class="coach-role">Operations &amp; Artist Development</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Runs the operations and artist development side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurriaan" class="coach-avatar">
+          <div class="coach-name">Jurrian</div>
+          <div class="coach-role">Base Coach &middot; Techno Artist</div>
+          <p class="coach-bio">With over 15 years of experience across electronic music, Jurrian (Artcode) leads the Base production coaching. From sound design to arrangement, he helps producers build a foundation they can keep building on.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Jim.png" alt="Jim" class="coach-avatar">
+          <div class="coach-name">Jim</div>
+          <div class="coach-role">Founder &amp; Techno Artist</div>
+          <p class="coach-bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist (Vannood) and entrepreneur. His experience brings a practical perspective to every lesson.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" class="coach-avatar">
+          <div class="coach-name">Yvo</div>
+          <div class="coach-role">Operations &amp; Products</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Amsterdam-based producer and AEMA graduate, Yvo (Overhoff) brings a groove-first approach to house music. He developed the advanced video modules using the same workflow he uses in his own studio.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/RDLF.jpg" alt="David" class="coach-avatar">
+          <div class="coach-name">David (RDLF)</div>
+          <div class="coach-role">Techno Artist &middot; Base Modules</div>
+          <p class="coach-bio">German techno producer, sound engineer and co-founder of Interrealm. He created the beginner modules around the fundamentals every producer needs before moving on.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" class="coach-avatar">
+          <div class="coach-name">Hendrik</div>
+          <div class="coach-role">Partnerships &amp; Bookings</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Hendrik manages Rise's partnerships and runs a booking agency for artists. He connects emerging talent with the right stages, labels, and industry players.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Remy.png" alt="Remy" class="coach-avatar">
+          <div class="coach-name">Remy</div>
+          <div class="coach-role">Monetisation &amp; Rights</div>
+          <p class="coach-bio">Remy is an artist with a long career in the music industry. He's an expert on music rights, organizes writing camps, and produces for the Eurovision Song Contest.</p>
+        </div>
+
+        <!-- Duplicate for seamless loop -->
+        <div aria-hidden="true" style="display:contents;">
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Mau2.png" alt="" class="coach-avatar">
+          <div class="coach-name">Maurits</div>
+          <div class="coach-role">Operations &amp; Artist Development</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Runs the operations and artist development side of Rise. He builds the structure that helps artists stay consistent and turn short-term progress into long-term growth.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Artcode.png" alt="" class="coach-avatar">
+          <div class="coach-name">Jurrian</div>
+          <div class="coach-role">Base Coach &middot; Techno Artist</div>
+          <p class="coach-bio">With over 15 years of experience across electronic music, Jurrian (Artcode) leads the Base production coaching. From sound design to arrangement, he helps producers build a foundation they can keep building on.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Jim.png" alt="" class="coach-avatar">
+          <div class="coach-name">Jim</div>
+          <div class="coach-role">Founder &amp; Techno Artist</div>
+          <p class="coach-bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist (Vannood) and entrepreneur. His experience brings a practical perspective to every lesson.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Yvo.png" alt="" class="coach-avatar">
+          <div class="coach-name">Yvo</div>
+          <div class="coach-role">Operations &amp; Products</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Amsterdam-based producer and AEMA graduate, Yvo (Overhoff) brings a groove-first approach to house music. He developed the advanced video modules using the same workflow he uses in his own studio.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/RDLF.jpg" alt="" class="coach-avatar">
+          <div class="coach-name">David (RDLF)</div>
+          <div class="coach-role">Techno Artist &middot; Base Modules</div>
+          <p class="coach-bio">German techno producer, sound engineer and co-founder of Interrealm. He created the beginner modules around the fundamentals every producer needs before moving on.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Hen.png" alt="" class="coach-avatar">
+          <div class="coach-name">Hendrik</div>
+          <div class="coach-role">Partnerships &amp; Bookings</div>
+          <div class="coach-label">Founding Team</div>
+          <p class="coach-bio">Hendrik manages Rise's partnerships and runs a booking agency for artists. He connects emerging talent with the right stages, labels, and industry players.</p>
+        </div>
+
+        <div class="coach-card">
+          <img src="../assets/Pages/Coaches/Remy.png" alt="" class="coach-avatar">
+          <div class="coach-name">Remy</div>
+          <div class="coach-role">Monetisation &amp; Rights</div>
+          <p class="coach-bio">Remy is an artist with a long career in the music industry. He's an expert on music rights, organizes writing camps, and produces for the Eurovision Song Contest.</p>
+        </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Monthly Webinar Sessions
+       ══════════════════════════════════════════════ -->
+  <section class="section webinar" id="webinar">
+    <div class="section-inner">
+      <div class="section-eyebrow">Free monthly session</div>
+      <h2 class="section-heading">Monthly webinar sessions</h2>
+      <div class="webinar-box">
+        <div class="webinar-icon" style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;">
+          <img src="../assets/Pages/Coaches/Mau2.png" alt="Maurits" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="webinar-text">
+          <p>Once a month, we bring producers together for a live session focused on the challenges almost everyone runs into: unfinished tracks, a lack of direction and getting music out into the world. Every session is built to give you practical insights you can apply straight away.</p>
+          <a href="#" class="webinar-cta">Join the Next Session</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Reviews (Scrolling Bar)
+       ══════════════════════════════════════════════ -->
+  <section class="review-bar-section">
+    <div class="review-bar-head">
+      <div class="section-eyebrow">Reviews</div>
+      <h2 class="section-heading">What our members say</h2>
+    </div>
+
+    <!-- Row 1: scrolls left -->
+    <div class="review-bar-row">
+      <div class="review-bar-track review-bar-track--left">
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/moszq.png" alt="Moszq" loading="lazy"><span>"A comprehensive course — really impressed."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="Leo" loading="lazy"><span>"The community of dedicated musicians is inspiring."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/silecta.png" alt="Silecta" loading="lazy"><span>"Great progress with my production and branding."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi" loading="lazy"><span>"When you drift off track, people help you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/appa.png" alt="Appa" loading="lazy"><span>"Creating an artist, not just productions."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max" loading="lazy"><span>"Motivational to talk with like-minded people."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth.png" alt="Seth" loading="lazy"><span>"I find the community really motivating."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy" loading="lazy"><span>"Go beyond just music production."</span></div>
+        <!-- Duplicate for seamless loop -->
+        <div aria-hidden="true" style="display:contents;">
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/moszq.png" alt="" loading="lazy"><span>"A comprehensive course — really impressed."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="" loading="lazy"><span>"The community of dedicated musicians is inspiring."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/silecta.png" alt="" loading="lazy"><span>"Great progress with my production and branding."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="" loading="lazy"><span>"When you drift off track, people help you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/appa.png" alt="" loading="lazy"><span>"Creating an artist, not just productions."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="" loading="lazy"><span>"Motivational to talk with like-minded people."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth.png" alt="" loading="lazy"><span>"I find the community really motivating."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="" loading="lazy"><span>"Go beyond just music production."</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: scrolls right -->
+    <div class="review-bar-row">
+      <div class="review-bar-track review-bar-track--right">
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/moszq2.png" alt="Moszq" loading="lazy"><span>"Everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo" loading="lazy"><span>"Meeting these people is so important to me."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/silecta2.png" alt="Silecta" loading="lazy"><span>"A good investment — you learn so much."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Andy2.png" alt="Andy" loading="lazy"><span>"A good opportunity to connect."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/appa2.png" alt="Appa" loading="lazy"><span>"Just do it, don't doubt."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth" loading="lazy"><span>"Working toward the same goal, helping each other."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi2.png" alt="Levi" loading="lazy"><span>"You get structure and people who push you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/moszq3.png" alt="Moszq" loading="lazy"><span>"It changed how I approach my music career."</span></div>
+        <!-- Duplicate for seamless loop -->
+        <div aria-hidden="true" style="display:contents;">
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/moszq2.png" alt="" loading="lazy"><span>"Everything you need to become a full-time artist."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="" loading="lazy"><span>"Meeting these people is so important to me."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/silecta2.png" alt="" loading="lazy"><span>"A good investment — you learn so much."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Andy2.png" alt="" loading="lazy"><span>"A good opportunity to connect."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/appa2.png" alt="" loading="lazy"><span>"Just do it, don't doubt."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="" loading="lazy"><span>"Working toward the same goal, helping each other."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi2.png" alt="" loading="lazy"><span>"You get structure and people who push you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/moszq3.png" alt="" loading="lazy"><span>"It changed how I approach my music career."</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Closing Section
+       ══════════════════════════════════════════════ -->
+  <section class="closing">
+    <div class="closing-inner">
+      <div class="section-eyebrow">Your move</div>
+      <h2>Build the foundation. Then build everything on top of&nbsp;it.</h2>
+      <p>Whatever stage you're at, Rise gives you the structure, coaching and community to keep moving. Stop guessing your next step and start building alongside producers who expect more, from themselves and from you.</p>
+      <a href="#paths" class="hero-cta">
+        Get started now
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       VIDEO TESTIMONIALS
+       ══════════════════════════════════════════════ -->
+  <section class="video-testimonials">
+    <h2 class="section-title">From chaos to structure.</h2>
+    <p class="section-sub">The stories behind the producers who stopped guessing and started finishing.</p>
+    <div class="video-strip">
+      <div class="video-strip-track">
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/1.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/1_mc_E.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/12.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/12_mc_D.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/7.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/7_my_C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FAQ
+       ══════════════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Frequently asked</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What's the difference between Base and Core?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Base is a six-month production program: the foundation, focused on your sound and your skills. Core is a twelve-month accountability program that turns those skills into results, taking you from where you are now to where you want to be.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Which one is right for me?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Apply to the Academy and we'll place you in Base or Core based on where you're starting from. Still unsure? Join a free Monthly Webinar Session first to get to know us and how we work.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What's inside the platform?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Video modules from mix and master engineers, artists, A&amp;Rs and marketing experts, each with a workbook so you can apply it the same day. Production breakdowns from artists releasing on big labels. Sample packs, presets and Ableton chains so you spend your time creating, not searching. Weekly live sessions with direct feedback. And AI tools for everything around the music, from your artist bio to mastering your track.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Do I get platform access and live sessions?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Both Base and Core include full platform access and weekly live sessions for as long as you're in the program. It's part of the program, not a separate purchase. Note: Base has a separate course focused on production, not the full artist program. The advanced video-production modules and the standalone Course are included in Core, not in Base. If you already bought the Course, its full price is deducted from Core once you join the Academy.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What happens when my program ends?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">If you started with Base, you can move on to Core. Either way, you can keep platform access through a subscription (&euro;&nbsp;50,- per month). Any one-on-one sessions after that are billed separately, as you book them.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Is Rise for my genre and level?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Rise is built for electronic producers, mainly house, techno and trance, at any level, as long as you're serious about moving forward.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>What's the cheapest way to start?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">The standalone Course: a complete production course for a one-time &euro;&nbsp;260,-, at your own pace. It doesn't include feedback, accountability or live lessons; those come with Base and Core.</div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Footer
+       ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+    <div class="links">
+      <a href="mailto:contact@riseartistacademy.com">Contact</a>
+      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+       Scripts
+       ══════════════════════════════════════════════ -->
+  <script>
+    // ── Sticky header scroll effect ──
+    (function() {
+      var header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 60) { header.classList.add('scrolled'); }
+        else { header.classList.remove('scrolled'); }
+      }, { passive: true });
+    })();
+
+    // Urgency bar dismiss
+    (function() {
+      var bar = document.getElementById('urgency-bar');
+      var closeBtn = document.getElementById('urgency-bar-close');
+      if (!bar || !closeBtn) return;
+      if (sessionStorage.getItem('rise_urgency_dismissed')) {
+        bar.classList.add('hidden');
+        document.body.classList.remove('has-urgency-bar');
+      }
+      closeBtn.addEventListener('click', function() {
+        bar.classList.add('hidden');
+        document.body.classList.remove('has-urgency-bar');
+        sessionStorage.setItem('rise_urgency_dismissed', '1');
+      });
+    })();
+
+    // ── FAQ toggle ──
+    (function() {
+      var items = document.querySelectorAll('.faq-item');
+      items.forEach(function(item) {
+        var btn = item.querySelector('.faq-q');
+        btn.addEventListener('click', function() {
+          item.classList.toggle('open');
+        });
+      });
+    })();
+
+    // Coach strip: pure CSS animation, pauses on hover
+
+    // ── VSL Player: click play/pause + deceptive progress bar ──
+    (function() {
+      var player = document.getElementById('hp-vsl-player');
+      var video = document.getElementById('hp-vsl-video');
+      var progressBar = document.getElementById('hp-vsl-progress');
+      if (!player || !video) return;
+
+      var CURVE = 0.575;
+
+      player.addEventListener('click', function() {
+        if (video.paused || video.ended) {
+          video.play().catch(function(){});
+          player.classList.add('playing');
+        } else {
+          video.pause();
+          player.classList.remove('playing');
+        }
+      });
+
+      video.addEventListener('ended', function() {
+        player.classList.remove('playing');
+        progressBar.style.width = '100%';
+      });
+
+      video.addEventListener('timeupdate', function() {
+        if (!video.duration) return;
+        var actual = video.currentTime / video.duration;
+        var displayed = Math.pow(actual, CURVE) * 100;
+        progressBar.style.width = displayed + '%';
+        // Fade out: 100% opacity at 0%, invisible at 70% displayed
+        var opacity = Math.max(0, 1 - (displayed / 70));
+        progressBar.parentElement.style.opacity = opacity;
+      });
+    })();
+  </script>
+
+  <script>
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('.video-card');
+      if (!card) return;
+      var v = card.querySelector('video');
+      if (!v) return;
+      e.preventDefault();
+      if (card.classList.contains('playing')) {
+        v.pause();
+        card.classList.remove('playing');
+      } else {
+        document.querySelectorAll('.video-card.playing').forEach(function(c) {
+          var cv = c.querySelector('video');
+          if (cv) cv.pause();
+          c.classList.remove('playing');
+        });
+        v.currentTime = 0;
+        var p = v.play();
+        if (p && typeof p.then === 'function') {
+          p.then(function() {
+            card.classList.add('playing');
+          }).catch(function() {});
+        } else {
+          card.classList.add('playing');
+        }
+      }
+      v.onended = function() { card.classList.remove('playing'); };
+    });
+  </script>
+
+</body>
+</html>

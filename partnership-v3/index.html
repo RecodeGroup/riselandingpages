@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — Partner Ecosystem</title>
+  <meta name="description" content="Partner with Rise Artist Academy: refer artists, earn recurring commission, and get first access to developed talent for your roster or platform.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* ================================================================
+       Rise Partnership — Partner Sales Page
+       Design system: dark theme, accent #ff683e
+       ================================================================ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* -- Accessibility -------------------------------------------- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* -- Header --------------------------------------------------- */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-bottom: 1px solid transparent;
+      will-change: background, border-color, box-shadow;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.92);
+      border-bottom-color: rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-logo img { width: 36px; height: 36px; border-radius: 7px; }
+    .header-cta {
+      display: inline-flex; align-items: center;
+      background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
+
+    /* -- Buttons -------------------------------------------------- */
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-block;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .btn-secondary {
+      display: inline-block;
+      color: var(--fg);
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(255,104,62,0.06);
+      transform: translateY(-2px);
+    }
+
+    /* -- Hero ----------------------------------------------------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center 30%;
+      filter: brightness(0.45) saturate(1.1);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(15,15,15,0.5) 0%, rgba(15,15,15,0.85) 70%, var(--bg) 100%);
+    }
+    .hero-body {
+      position: relative; z-index: 2;
+      max-width: 820px;
+      padding: 10rem 2rem 6rem;
+    }
+    .hero-label {
+      display: inline-block;
+      background: rgba(255,104,62,0.15);
+      border: 1px solid rgba(255,104,62,0.4);
+      color: var(--accent);
+      padding: 0.35rem 1rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.8;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* -- Sections ------------------------------------------------- */
+    .section {
+      padding: 6rem 2rem;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .section-dark {
+      background: rgba(20,20,20,0.6);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .section-dark .section { padding: 6rem 2rem; }
+    .section-center { text-align: center; }
+
+    .section-label {
+      display: inline-block;
+      background: rgba(255,104,62,0.12);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 3px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: #777;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+    .section-center .section-sub { margin-left: auto; margin-right: auto; }
+
+    /* -- Animated divider ----------------------------------------- */
+    .section-divider {
+      position: relative;
+      height: 3px;
+      margin-bottom: 2.5rem;
+    }
+    .div-line {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent) 0%, rgba(255,104,62,0.6) 40%, rgba(255,104,62,0) 100%);
+    }
+    @keyframes pulse-a {
+      0%   { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+      46%  { clip-path: inset(0 0%  0 0); opacity: 1; }
+      100% { clip-path: inset(0 88% 0 0); opacity: 0.6; }
+    }
+    @keyframes pulse-b {
+      0%   { clip-path: inset(0 90% 0 0); opacity: 0.55; }
+      55%  { clip-path: inset(0 0%  0 0); opacity: 1; }
+      100% { clip-path: inset(0 90% 0 0); opacity: 0.55; }
+    }
+    .div-1 { animation: pulse-a 4.1s ease-in-out infinite; }
+    .div-2 { animation: pulse-b 3.6s ease-in-out -2.1s infinite; }
+    .div-3 { animation: pulse-a 4.5s ease-in-out -1.0s infinite; }
+    .div-4 { animation: pulse-b 3.8s ease-in-out -3.2s infinite; }
+    .div-5 { animation: pulse-a 4.3s ease-in-out -0.7s infinite; }
+    .div-6 { animation: pulse-b 3.9s ease-in-out -2.8s infinite; }
+    .div-7 { animation: pulse-a 4.6s ease-in-out -1.5s infinite; }
+    .div-8 { animation: pulse-b 4.0s ease-in-out -1.8s infinite; }
+    .div-9 { animation: pulse-a 4.2s ease-in-out -0.5s infinite; }
+    .div-10 { animation: pulse-b 3.7s ease-in-out -2.4s infinite; }
+    .div-11 { animation: pulse-a 4.4s ease-in-out -1.3s infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      [class^="div-"] { animation: none !important; }
+      .tw-word { animation: none !important; border-right-color: var(--accent) !important; }
+    }
+
+    /* -- Section break photos ------------------------------------- */
+    .section-photo {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+    .section-photo img {
+      width: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+      max-height: 360px;
+    }
+
+    /* -- Self-selection pills ------------------------------------- */
+    .self-select-pills {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .self-select-btn {
+      background: var(--bg-2);
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--fg);
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      font-family: inherit;
+    }
+    .self-select-btn:hover {
+      border-color: var(--accent);
+      background: rgba(255,104,62,0.06);
+    }
+    .self-select-btn.active {
+      background: rgba(255,104,62,0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    @keyframes cardFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .self-select-card {
+      display: none;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2.5rem;
+      animation: cardFadeIn 0.4s ease;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: left;
+      animation: fadeCard 0.3s ease;
+    }
+    .self-select-card.visible { display: block; }
+    @keyframes fadeCard {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .self-select-card .card-headline {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+    .self-select-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1.25rem;
+      margin-bottom: 0.4rem;
+      color: var(--fg);
+    }
+    .self-select-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .self-select-card .card-scenario {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: rgba(255,104,62,0.06);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.85rem;
+      color: #bbb;
+      line-height: 1.6;
+    }
+    .self-select-card ul {
+      list-style: none; padding: 0; margin: 0 0 0.5rem 0;
+    }
+    .self-select-card ul li {
+      position: relative; padding-left: 1.2rem; margin-bottom: 0.35rem;
+      font-size: 0.92rem; color: #ccc; line-height: 1.6;
+    }
+    .self-select-card ul li::before {
+      content: ''; position: absolute; left: 0; top: 0.55rem;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    }
+    .self-select-card .card-scenario strong {
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    /* -- Partner Journey Carousel --------------------------------- */
+    .pj-carousel-wrap { position:relative; max-width:var(--maxw); margin:0 auto; overflow:hidden; }
+    .pj-carousel {
+      display:flex; gap:16px; transition:transform 0.5s ease;
+      padding:0 calc(50% - 140px);
+    }
+    .pj-slide {
+      flex:0 0 280px; border:1.5px solid var(--line); border-radius:12px;
+      padding:24px 18px; background:rgba(255,255,255,0.02);
+      text-align:center; cursor:pointer; opacity:0.4;
+      transition:opacity 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+      transform:scale(0.92);
+    }
+    .pj-slide.active {
+      opacity:1; border-color:var(--accent); transform:scale(1);
+      box-shadow:0 0 20px 2px rgba(255,104,62,0.15);
+    }
+    .pj-slide .pj-icon {
+      width:42px; height:42px; margin:0 auto 10px; border-radius:10px;
+      background:rgba(255,104,62,0.1); display:flex; align-items:center; justify-content:center;
+    }
+    .pj-slide .pj-label {
+      font-size:0.6rem; font-weight:700; color:var(--accent);
+      letter-spacing:0.1em; display:block; margin-bottom:6px; text-transform:uppercase;
+    }
+    .pj-slide .pj-title {
+      font-size:0.95rem; font-weight:700; display:block; color:var(--fg);
+    }
+    .pj-detail {
+      max-width:720px; margin:2rem auto 0; text-align:left;
+      min-height:80px;
+    }
+    .pj-detail p { color:var(--muted); font-size:0.85rem; line-height:1.6; margin:0; }
+    .pj-detail-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+    }
+    .pj-detail-item {
+      padding:16px; border:1px solid var(--line); border-radius:10px;
+      background:rgba(255,255,255,0.02);
+    }
+    .pj-detail-label {
+      font-size:0.7rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.08em; color:var(--accent); margin-bottom:8px;
+    }
+    .pj-detail-item ul {
+      list-style:none; padding:0; margin:0;
+    }
+    .pj-detail-item li {
+      color:var(--muted); font-size:0.82rem; line-height:1.6;
+      padding-left:14px; position:relative; margin-bottom:4px;
+    }
+    .pj-detail-item li::before {
+      content:''; position:absolute; left:0; top:8px;
+      width:5px; height:5px; border-radius:50%;
+      background:var(--accent); opacity:0.6;
+    }
+    @media(max-width:700px){
+      .pj-detail-grid { grid-template-columns:1fr; gap:12px; }
+    }
+    .pj-nav {
+      display:flex; justify-content:center; gap:8px; margin-top:1.5rem;
+    }
+    .pj-dot {
+      width:8px; height:8px; border-radius:50%; background:var(--line);
+      border:none; cursor:pointer; padding:0; transition:background 0.3s;
+    }
+    .pj-dot.active { background:var(--accent); }
+    @media (max-width: 700px) {
+      .pj-carousel { padding:0 calc(50% - 120px); gap:12px; }
+      .pj-slide { flex:0 0 240px; padding:18px 14px; }
+    }
+
+    /* -- Offers grid ---------------------------------------------- */
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .offer-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      text-align: left;
+    }
+    .offer-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .offer-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,104,62,0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .offer-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .offer-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .offer-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* -- Track cards ---------------------------------------------- */
+    .tracks-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .track-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: left;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .track-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+    }
+    .track-card .track-label {
+      display: inline-block;
+      background: rgba(255,104,62,0.12);
+      color: var(--accent);
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .track-card h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .track-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* -- Team / experts ------------------------------------------- */
+    .experts-proof-bar {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .experts-proof-stat { text-align: center; }
+    .experts-proof-stat .num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .experts-proof-stat .label {
+      font-size: 0.72rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .team-row {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 1.5rem;
+      margin-top: 2.5rem;
+      scrollbar-width: none;
+    }
+    .team-row::-webkit-scrollbar { display: none; }
+    .team-member {
+      text-align: center;
+      flex: 0 0 200px;
+      scroll-snap-align: start;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 24px 18px;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .team-member:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .team-member img {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 14px;
+      border: 2px solid rgba(255,104,62,0.15);
+      filter: grayscale(0.2);
+      transition: filter 0.3s ease, border-color 0.3s ease;
+    }
+    .team-member:hover img {
+      filter: grayscale(0);
+      border-color: var(--accent);
+    }
+    .team-member .name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .team-member .role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .team-member .founding-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 8px;
+    }
+    .team-member { cursor: pointer; }
+    .team-member .bio {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+      margin-top: 0;
+    }
+    .team-member.open .bio {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 0.5rem;
+    }
+    .team-member.open img {
+      border-color: var(--accent);
+      filter: grayscale(0);
+    }
+
+    /* -- Development wheel (flywheel) ----------------------------- */
+    .flywheel-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 0;
+      overflow: hidden;
+    }
+    .flywheel-svg {
+      max-width: 520px;
+      width: 100%;
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes dash-flow {
+      to { stroke-dashoffset: -40; }
+    }
+    .flywheel-ring {
+      animation: spin-slow 30s linear infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .flywheel-arrows {
+      stroke-dasharray: 12 8;
+      animation: dash-flow 2s linear infinite;
+    }
+
+    /* -- Benefits grid -------------------------------------------- */
+    .benefits-grid {
+      display: flex;
+      gap: 20px;
+      margin-top: 2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .benefits-grid::-webkit-scrollbar { display: none; }
+    .benefit-card { flex: 0 0 280px; scroll-snap-align: start; }
+    .benefit-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2rem;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .benefit-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .benefit-card:hover::before { opacity: 1; }
+    .benefit-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,104,62,0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .benefit-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .benefit-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .benefit-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .benefit-card .featured-tag {
+      display: inline-block;
+      background: rgba(255,104,62,0.15);
+      color: var(--accent);
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    /* -- Proof / stats bar ---------------------------------------- */
+    .proof-bar {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 3.5rem 2rem;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .proof-stat { text-align: center; }
+    .proof-stat .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .proof-stat .label {
+      font-size: 0.72rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* -- Partner logos --------------------------------------------- */
+    .logos-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+    }
+    .logos-row img {
+      height: 48px;
+      max-width: 180px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.65;
+      transition: opacity 0.3s ease;
+    }
+    .logos-row img:hover { opacity: 1; }
+    .logos-row .logo-text {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      opacity: 0.65;
+      transition: opacity 0.3s ease;
+    }
+    .logos-row .logo-text:hover { opacity: 1; }
+
+    /* -- Ways to grow / partnership models ------------------------- */
+    .ways-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .way-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: left;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .way-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .way-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,104,62,0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .way-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .way-card h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .way-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+    /* -- Win-win grid --------------------------------------------- */
+    .winwin-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .winwin-col {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: left;
+    }
+    .winwin-col h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .winwin-col ul {
+      list-style: none;
+      padding: 0;
+    }
+    .winwin-col ul li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 0.4rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+    .winwin-col ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .winwin-col.accent-col {
+      background: rgba(255,104,62,0.06);
+      border-color: rgba(255,104,62,0.25);
+    }
+    .winwin-col.accent-col h4 {
+      color: var(--accent);
+    }
+
+    /* -- Process steps -------------------------------------------- */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .process-step {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+    .process-step:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+    }
+    .process-step-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      background: rgba(255,104,62,0.12);
+      border-radius: 8px;
+      margin: 0 auto 1.25rem;
+    }
+    .process-step-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .process-step h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .process-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* -- Rise Standard badges --------------------------------------- */
+    .rise-badge-inner {
+      background: #1E1E1E;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+      transition: box-shadow 0.3s ease;
+    }
+    .rise-badge.badge-bronze:hover .rise-badge-inner { box-shadow: 0 4px 28px rgba(127,25,0,0.45), 0 0 0 1px rgba(127,25,0,0.3); }
+    .rise-badge.badge-silver:hover .rise-badge-inner { box-shadow: 0 4px 28px rgba(166,166,166,0.35), 0 0 0 1px rgba(166,166,166,0.25); }
+    .rise-badge.badge-gold:hover   .rise-badge-inner { box-shadow: 0 4px 28px rgba(255,104,62,0.4), 0 0 0 1px rgba(255,104,62,0.3); }
+
+    /* -- Dual CTA section ----------------------------------------- */
+    .dual-cta {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+    .cta-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 2.5rem;
+    }
+    .cta-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .cta-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .cta-card .booking-frame {
+      width: 100%;
+      min-height: 600px;
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .cta-card.light-cta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .light-cta-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .light-cta-photo {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .light-cta-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      min-height: 280px;
+      max-height: 400px;
+    }
+    .hendrik-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: rgba(255,104,62,0.04);
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .hendrik-card img {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,104,62,0.25);
+    }
+    .hendrik-card .info .name { font-weight: 600; font-size: 0.95rem; }
+    .hendrik-card .info .title { font-size: 0.78rem; color: #666; margin-bottom: 0.2rem; }
+    .hendrik-card .info a { font-size: 0.82rem; color: var(--accent); }
+
+    /* -- Footer --------------------------------------------------- */
+    .footer {
+      background: #0a0a0a;
+      border-top: 1px solid rgba(255,104,62,0.1);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #555;
+      font-size: 0.82rem;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer .links a { color: #666; transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* -- Responsive ----------------------------------------------- */
+    @media (max-width: 900px) {
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefit-card { flex: 0 0 260px; }
+      .winwin-grid { grid-template-columns: 1fr; }
+      .ways-grid { grid-template-columns: repeat(2, 1fr); }
+      .offers-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero { min-height: 80vh; }
+      .hero-body { padding: 8rem 1.5rem 4rem; }
+      .section { padding: 4rem 1.5rem; }
+      .section-dark .section { padding: 4rem 1.5rem; }
+      .proof-bar { gap: 1.5rem; padding: 2.5rem 1.5rem; }
+      .logos-row { gap: 2rem; }
+      .dual-cta { padding: 4rem 1.5rem; }
+      .cta-card { padding: 2rem 1.5rem; }
+      .section-photo { padding: 1.5rem 1.5rem; }
+      .section-photo img { max-height: 240px; }
+      .footer { padding: 2rem 1rem; }
+      .hendrik-card { flex-direction: column; text-align: center; }
+      .cta-card.light-cta { grid-template-columns: 1fr; }
+      .light-cta-photo { order: -1; }
+      .light-cta-photo img { max-height: 260px; }
+      .team-member { flex: 0 0 180px; }
+      .team-member img { width: 64px; height: 64px; }
+    }
+    @media (max-width: 600px) {
+      .guarantee-nums { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-sub { font-size: 1rem; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .self-select-pills { gap: 0.5rem; }
+      .self-select-btn { padding: 0.6rem 1rem; font-size: 0.8rem; }
+      .process-grid { grid-template-columns: 1fr; }
+      .proof-bar { gap: 1.25rem; }
+      .proof-stat .num { font-size: 1.5rem; }
+      .logos-row { gap: 1.5rem; }
+      .logos-row img { height: 36px; max-width: 100px; }
+      .ways-grid { grid-template-columns: 1fr; }
+      .offers-grid { grid-template-columns: 1fr; }
+      .team-row { gap: 12px; padding: 0 1rem; }
+    }
+
+    /* Typewriter effect */
+    .tw-word {
+      color: var(--accent);
+      display: inline-block;
+      min-width: 80px;
+      border-right: 2px solid var(--accent);
+      animation: tw-blink 0.7s step-end infinite;
+    }
+    @keyframes tw-blink {
+      0%, 100% { border-color: var(--accent); }
+      50% { border-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- == Header ===================================================== -->
+<header class="site-header" id="site-header">
+  <div class="site-header-inner">
+    <a href="/homepage-v2/" class="header-logo">
+      <img src="../assets/logo.png" alt="Rise Artist Academy">
+    </a>
+    <a href="#booking" class="header-cta">Book a Call</a>
+  </div>
+</header>
+
+
+<!-- ================================================================
+     1. HERO
+     ================================================================ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="../assets/photos/Aug/aug_7 kopie.JPG" alt="" loading="eager">
+  </div>
+  <div class="hero-body">
+    <div class="hero-label">Rise Partnerships</div>
+    <h1>We <span id="typewriter-word" class="tw-word">develop</span> artists.<br><span>You grow with us.</span></h1>
+    <p class="hero-sub">Refer artists, earn recurring commission for as long as they stay, and get first access to developed talent for your roster or platform. We handle coaching, education and community. You grow with every artist we develop.</p>
+    <div class="hero-ctas">
+      <a href="#booking" class="btn-primary">Let's See If There's a Fit</a>
+      <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     2. THE ARTIST JOURNEY
+     ================================================================ -->
+<div class="section section-center">
+  <div class="section-divider div-1"><span class="div-line"></span></div>
+
+  <!-- VSL Video Placeholder -->
+  <p style="font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;text-align:center;">Watch this first</p>
+  <h2 class="section-title">See what Rise Partnerships is all about</h2>
+  <div style="margin:1.5rem auto 0;max-width:720px;width:100%;">
+    <div style="width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;">
+      <img src="../assets/Pages/Coaches/Hen.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(2px) brightness(0.6);opacity:0.6;">
+      <span style="position:relative;z-index:1;color:#fff;font-size:1.4rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Coming Soon</span>
+    </div>
+  </div>
+
+  <!-- Divider between VSL and Artist Journey -->
+  <div style="width:100%;max-width:720px;margin:3.5rem auto;border-top:1px solid rgba(255,255,255,0.08);"></div>
+
+  <div class="section-label">The Artist Journey</div>
+  <h2 class="section-title">Where you fit in</h2>
+  <p class="section-sub">Every partner plays a role in the artist's path from beginner to professional.</p>
+
+  <div class="pj-carousel-wrap">
+    <div class="pj-carousel" id="pj-carousel">
+
+      <div class="pj-slide active" data-idx="0">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">The Artist</span>
+        <span class="pj-title">Where it starts</span>
+      </div>
+
+      <div class="pj-slide" data-idx="1">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 21H16M12 17V21M6.8 17H17.2C18.8802 17 19.7202 17 20.362 16.673C20.9265 16.3854 21.3854 15.9265 21.673 15.362C22 14.7202 22 13.8802 22 12.2V7.8C22 6.11984 22 5.27976 21.673 4.63803C21.3854 4.07354 20.9265 3.6146 20.362 3.32698C19.7202 3 18.8802 3 17.2 3H6.8C5.11984 3 4.27976 3 3.63803 3.32698C3.07354 3.6146 2.6146 4.07354 2.32698 4.63803C2 5.27976 2 6.11984 2 7.8V12.2C2 13.8802 2 14.7202 2.32698 15.362C2.6146 15.9265 3.07354 16.3854 3.63803 16.673C4.27976 17 5.11984 17 6.8 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">Music Platforms</span>
+        <span class="pj-title">Tools that power the music</span>
+      </div>
+
+      <div class="pj-slide" data-idx="2">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 8V5L19 2L20 4L22 5L19 8H16ZM16 8L12 11.9999M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">Labels</span>
+        <span class="pj-title">Better artists, sooner</span>
+      </div>
+
+      <div class="pj-slide" data-idx="3">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 21V19C22 17.1362 20.7252 15.5701 19 15.126M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M17 21C17 19.1362 17 18.2044 16.6955 17.4693C16.2895 16.4892 15.5108 15.7105 14.5307 15.3045C13.7956 15 12.8638 15 11 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">Communities</span>
+        <span class="pj-title">Where artists find each other</span>
+      </div>
+
+      <div class="pj-slide" data-idx="4">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 10L3 14M7.5 6L7.5 18M12 3V21M16.5 6V18M21 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">Events</span>
+        <span class="pj-title">A stage for new talent</span>
+      </div>
+
+      <div class="pj-slide" data-idx="5">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 7C16 6.07003 16 5.60504 15.8978 5.22354C15.6204 4.18827 14.8117 3.37962 13.7765 3.10222C13.395 3 12.93 3 12 3C11.07 3 10.605 3 10.2235 3.10222C9.18827 3.37962 8.37962 4.18827 8.10222 5.22354C8 5.60504 8 6.07003 8 7M5.2 21H18.8C19.9201 21 20.4802 21 20.908 20.782C21.2843 20.5903 21.5903 20.2843 21.782 19.908C22 19.4802 22 18.9201 22 17.8V10.2C22 9.07989 22 8.51984 21.782 8.09202C21.5903 7.71569 21.2843 7.40973 20.908 7.21799C20.4802 7 19.9201 7 18.8 7H5.2C4.07989 7 3.51984 7 3.09202 7.21799C2.71569 7.40973 2.40973 7.71569 2.21799 8.09202C2 8.51984 2 9.07989 2 10.2V17.8C2 18.9201 2 19.4802 2.21799 19.908C2.40973 20.2843 2.71569 20.5903 3.09202 20.782C3.51984 21 4.0799 21 5.2 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">Agencies</span>
+        <span class="pj-title">Artists ready for your roster</span>
+      </div>
+
+      <div class="pj-slide" data-idx="6">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H20M12 22C6.47715 22 2 17.5228 2 12M12 22V20M2 12C2 6.47715 6.47715 2 12 2M2 12H4M12 2V4M19.0711 19.0711L17.6569 17.6569M6.34315 6.34315L4.92893 4.92893M17.6569 6.34315L19.0711 4.92893M4.92893 19.0711L6.34315 17.6569M8 12L10.5 10.5L12 8L13.5 10.5L16 12L13.5 13.5L12 16L10.5 13.5L8 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">Management</span>
+        <span class="pj-title">Specialist support</span>
+      </div>
+
+      <div class="pj-slide" data-idx="7">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19 10V12C19 15.866 15.866 19 12 19M5 10V12C5 15.866 8.13401 19 12 19M12 19V22M8 22H16M12 15C10.3431 15 9 13.6569 9 12V5C9 3.34315 10.3431 2 12 2C13.6569 2 15 3.34315 15 5V12C15 13.6569 13.6569 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">Media</span>
+        <span class="pj-title">Stories that sell</span>
+      </div>
+
+      <div class="pj-slide" data-idx="8">
+        <div class="pj-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 14L21 9L12 4L3 9L12 14ZM12 14L18.16 10.578C18.72 12.562 19 14.638 19 16.766C16.512 16.766 14.152 17.434 12 18.622C9.848 17.434 7.488 16.766 5 16.766C5 14.638 5.28 12.562 5.84 10.578L12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="pj-label">Education</span>
+        <span class="pj-title">Bridge classroom and industry</span>
+      </div>
+
+    </div>
+
+    <div class="pj-detail" id="pj-detail">
+      <div class="pj-detail-grid">
+        <div class="pj-detail-item"><div class="pj-detail-label">Problem</div><ul><li>Income depends on gigs and streams</li><li>Building a course means building a company</li><li>Your followers came for music, not courses</li></ul></div>
+        <div class="pj-detail-item"><div class="pj-detail-label">Solution</div><ul><li>We turn your knowledge into products</li><li>We run platform, payments and marketing</li><li>We bring the audience that pays to learn</li></ul></div>
+        <div class="pj-detail-item"><div class="pj-detail-label">The outcome</div><ul><li>Second income next to gigs and streams</li><li>Seen as authority, not just performer</li><li>Access to labels, agencies and brands</li></ul></div>
+      </div>
+    </div>
+
+    <div class="pj-nav" id="pj-nav">
+      <button class="pj-dot active" data-idx="0"></button>
+      <button class="pj-dot" data-idx="1"></button>
+      <button class="pj-dot" data-idx="2"></button>
+      <button class="pj-dot" data-idx="3"></button>
+      <button class="pj-dot" data-idx="4"></button>
+      <button class="pj-dot" data-idx="5"></button>
+      <button class="pj-dot" data-idx="6"></button>
+      <button class="pj-dot" data-idx="7"></button>
+      <button class="pj-dot" data-idx="8"></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     PARTNER GUARANTEE
+     ================================================================ -->
+<div class="section-dark">
+  <div class="section section-center">
+    <div class="section-divider div-2"><span class="div-line"></span></div>
+    <div class="section-label">What You Earn</div>
+    <h2 class="section-title">Earn &euro; 1100,- to &euro; 7600,- per month</h2>
+    <p class="section-sub" style="max-width:680px;">Recurring commissions on every artist that joins through you.</p>
+
+    <div style="max-width:680px;margin:0 auto;text-align:left;">
+      <p style="font-size:1rem;color:#ccc;line-height:1.8;margin-bottom:2.5rem;text-align:center;">When 10 to 50 artists per month join through your referral, you earn between <strong style="color:var(--accent);">&euro; 1100,- and &euro; 7600,-</strong> monthly. For as long as they stay.</p>
+      <div class="guarantee-nums" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:2rem;">
+        <div style="text-align:center;border:1.5px solid var(--line);border-radius:12px;padding:24px 16px;background:rgba(255,255,255,0.02);">
+          <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:700;color:var(--accent);margin-bottom:0.35rem;">10/mo</div>
+          <div style="font-size:0.78rem;color:#666;margin-bottom:0.4rem;">artists</div>
+          <div style="font-size:clamp(0.85rem,2.5vw,1.05rem);font-weight:600;color:#fff;">&euro; 1100,- to &euro; 1600,-</div>
+        </div>
+        <div style="text-align:center;border:1.5px solid var(--line);border-radius:12px;padding:24px 16px;background:rgba(255,255,255,0.02);">
+          <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:700;color:var(--accent);margin-bottom:0.35rem;">25/mo</div>
+          <div style="font-size:0.78rem;color:#666;margin-bottom:0.4rem;">artists</div>
+          <div style="font-size:clamp(0.85rem,2.5vw,1.05rem);font-weight:600;color:#fff;">&euro; 2600,- to &euro; 3850,-</div>
+        </div>
+        <div style="text-align:center;border:1.5px solid var(--line);border-radius:12px;padding:24px 16px;background:rgba(255,255,255,0.02);">
+          <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:700;color:var(--accent);margin-bottom:0.35rem;">50/mo</div>
+          <div style="font-size:0.78rem;color:#666;margin-bottom:0.4rem;">artists</div>
+          <div style="font-size:clamp(0.85rem,2.5vw,1.05rem);font-weight:600;color:#fff;">&euro; 5100,- to &euro; 7600,-</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem;color:#777;line-height:1.7;text-align:center;">The range depends on which programs artists join. You connect them with us, we handle the rest.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     3. WHAT RISE OFFERS
+     ================================================================ -->
+<div class="section section-center">
+  <div class="section-divider div-2"><span class="div-line"></span></div>
+  <div class="section-label">What Rise Offers</div>
+  <h2 class="section-title">What your artists actually get</h2>
+  <p class="section-sub">Coaching, education and real industry connection. Not just content.</p>
+
+  <div class="offers-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22 21V19C22 17.1362 20.7252 15.5701 19 15.126M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M17 21C17 19.1362 17 18.2044 16.6955 17.4693C16.2895 16.4892 15.5108 15.7105 14.5307 15.3045C13.7956 15 12.8638 15 11 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Personal Coaching</h4>
+      <p>1-on-1 sessions with active industry professionals on production, branding, marketing, and career strategy.</p>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 21L11.8999 20.8499C11.2053 19.808 10.858 19.287 10.3991 18.9098C9.99286 18.5759 9.52476 18.3254 9.02161 18.1726C8.45325 18 7.82711 18 6.57482 18H5.2C4.07989 18 3.51984 18 3.09202 17.782C2.71569 17.5903 2.40973 17.2843 2.21799 16.908C2 16.4802 2 15.9201 2 14.8V6.2C2 5.07989 2 4.51984 2.21799 4.09202C2.40973 3.71569 2.71569 3.40973 3.09202 3.21799C3.51984 3 4.07989 3 5.2 3H5.6C7.84021 3 8.96031 3 9.81596 3.43597C10.5686 3.81947 11.1805 4.43139 11.564 5.18404C12 6.03968 12 7.15979 12 9.4M12 21V9.4M12 21L12.1001 20.8499C12.7947 19.808 13.142 19.287 13.6009 18.9098C14.0071 18.5759 14.4752 18.3254 14.9784 18.1726C15.5467 18 16.1729 18 17.4252 18H18.8C19.9201 18 20.4802 18 20.908 17.782C21.2843 17.5903 21.5903 17.2843 21.782 16.908C22 16.4802 22 15.9201 22 14.8V6.2C22 5.07989 22 4.51984 21.782 4.09202C21.5903 3.71569 21.2843 3.40973 20.908 3.21799C20.4802 3 19.9201 3 18.8 3H18.4C16.1598 3 15.0397 3 14.184 3.43597C13.4314 3.81947 12.8195 4.43139 12.436 5.18404C12 6.03968 12 7.15979 12 9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Structured Education</h4>
+      <p>Courses covering production, mixing, branding, social media, bookings and more. Built by people who do this for a living.</p>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M22 12H20M12 22C6.47715 22 2 17.5228 2 12M12 22V20M2 12C2 6.47715 6.47715 2 12 2M2 12H4M12 2V4M19.0711 19.0711L17.6569 17.6569M6.34315 6.34315L4.92893 4.92893M17.6569 6.34315L19.0711 4.92893M4.92893 19.0711L6.34315 17.6569M8 12L10.5 10.5L12 8L13.5 10.5L16 12L13.5 13.5L12 16L10.5 13.5L8 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Industry Network</h4>
+      <p>Direct connections to labels, agencies, events and other professionals. Not just theory, but real introductions when artists are ready.</p>
+    </div>
+
+  </div>
+
+  <!-- Track cards -->
+  <div class="tracks-row">
+    <div class="track-card">
+      <div class="track-label">Foundation</div>
+      <h4>Base Academy</h4>
+      <p>Learning the craft. Structured courses on production, mixing, and the fundamentals every artist needs. Self-paced, with community and tools included.</p>
+    </div>
+    <div class="track-card">
+      <div class="track-label">Full Program</div>
+      <h4>Core Academy</h4>
+      <p>Building the artist. Everything in Base plus 1-on-1 coaching, branding, socials, fanbase strategy, and direct access to our partner network.</p>
+    </div>
+  </div>
+
+  <!-- Rise Elite -->
+  <div style="margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--line);text-align:center;max-width:680px;margin-left:auto;margin-right:auto;">
+    <div style="width:56px;height:56px;border-radius:12px;background:rgba(255,104,62,0.10);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none"><path d="M11.2827 3.45332C11.5131 2.98638 11.6284 2.75291 11.7848 2.67831C11.9209 2.61341 12.0791 2.61341 12.2152 2.67831C12.3717 2.75291 12.4869 2.98638 12.7174 3.45332L14.9041 7.88328C14.9721 8.02113 15.0061 8.09006 15.0558 8.14358C15.0999 8.19096 15.1527 8.22935 15.2113 8.25662C15.2776 8.28742 15.3536 8.29854 15.5057 8.32077L20.397 9.03571C20.9121 9.11099 21.1696 9.14863 21.2888 9.27444C21.3925 9.38389 21.4412 9.5343 21.4215 9.68377C21.3988 9.85558 21.2124 10.0372 20.8395 10.4004L17.3014 13.8464C17.1912 13.9538 17.136 14.0076 17.1004 14.0715C17.0689 14.128 17.0487 14.1902 17.0409 14.2545C17.0321 14.3271 17.0443 14.4012 17.0723 14.5494L17.906 19.4175C17.9946 19.9301 18.0389 20.1864 17.9553 20.3337C17.8831 20.462 17.7554 20.5494 17.6098 20.5712C17.4418 20.5964 17.2108 20.4746 16.7488 20.231L12.3723 17.9289C12.2349 17.8571 12.1662 17.8212 12.0938 17.8074C12.0299 17.7954 11.9642 17.7954 11.9003 17.8074C11.8279 17.8212 11.7592 17.8571 11.6218 17.9289L7.24531 20.231C6.78334 20.4746 6.55236 20.5964 6.38437 20.5712C6.2388 20.5494 6.11112 20.462 6.03888 20.3337C5.95526 20.1864 5.99957 19.9301 6.08818 19.4175L6.92183 14.5494C6.94978 14.4012 6.96375 14.3271 6.95831 14.2545C6.95352 14.1902 6.93334 14.128 6.90181 14.0715C6.86621 14.0076 6.81101 13.9538 6.70062 13.8464L3.16256 10.4004C2.78969 10.0372 2.60326 9.85558 2.58059 9.68377C2.56087 9.5343 2.60962 9.38389 2.71337 9.27444C2.83255 9.14863 3.09007 9.11099 3.60513 9.03571L8.49636 8.32077C8.64845 8.29854 8.72449 8.28742 8.79073 8.25662C8.84935 8.22935 8.90218 8.19096 8.9463 8.14358C8.99601 8.09006 9.03002 8.02113 9.09803 7.88328L11.2827 3.45332Z" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h4 style="font-size:1.1rem;font-weight:700;margin-bottom:0.6rem;">Rise Elite</h4>
+    <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">An intensive 2 to 6 week trajectory for artists who need to move fast. We bring together a dedicated team around one artist: press kit, branding, production coaching, marketing, and network introductions.</p>
+    <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;">Every Elite trajectory is custom-built. When commissioned by a label or agency, we align on goals and priorities together.</p>
+    <p style="color:var(--muted);font-size:0.82rem;line-height:1.7;font-style:italic;">For situations where speed matters, budget is available, and the artist is ready to go all in.</p>
+  </div>
+
+</div>
+
+<div class="section-photo">
+  <img src="../assets/photos/Aug/aug_03.jpg" alt="Rise artists in session" loading="lazy" style="max-height:340px;">
+</div>
+
+<!-- ================================================================
+     4. BUILT BY EXPERTS
+     ================================================================ -->
+<div class="section-dark">
+  <div class="section section-center">
+    <div class="section-divider div-3"><span class="div-line"></span></div>
+    <div class="section-label">The Team</div>
+    <h2 class="section-title">The team and coaches</h2>
+    <p class="section-sub">Active professionals who coach, produce and perform themselves.</p>
+
+    <div class="team-row">
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
+        <div class="name">Hendrik</div>
+        <div class="role">Partnerships &amp; Bookings</div>
+        <div class="founding-label">Founding Team</div>
+        <div class="bio">Runs all partner relationships at Rise. Your main point of contact for anything partnership-related.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/RDLF.jpg" alt="David" loading="lazy">
+        <div class="name">David (RDLF)</div>
+        <div class="role">Techno Artist &middot; Base Modules</div>
+        <div class="bio">Experienced producer coaching artists on songwriting, arrangement and developing their own sound.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Mau2.png" alt="Maurits" loading="lazy">
+        <div class="name">Maurits</div>
+        <div class="role">Operations &amp; Artist Development</div>
+        <div class="founding-label">Founding Team</div>
+        <div class="bio">Branding engineer helping artists find their positioning, visual identity and audience connection.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" loading="lazy">
+        <div class="name">Jurrian</div>
+        <div class="role">Base Coach &middot; Techno Artist</div>
+        <div class="bio">Active producer and DJ, Jurrian (Artcode) coaches artists on production workflow, sound design and finishing tracks.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Jim.png" alt="Jim" loading="lazy">
+        <div class="name">Jim</div>
+        <div class="role">Founder &amp; Techno Artist</div>
+        <div class="bio">For over 15 years, Jim has been producing and releasing techno while building a career as both an artist (Vannood) and entrepreneur. He builds the platform, tools and systems that power Rise.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Noah.png" alt="Noah" loading="lazy">
+        <div class="name">Noah Smits</div>
+        <div class="role">Production Coach</div>
+        <div class="bio">Producer with credits for Ed Sheeran, Afrojack and more. Teaches advanced production and mixing at Rise.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy">
+        <div class="name">Yvo</div>
+        <div class="role">Operations &amp; Products</div>
+        <div class="founding-label">Founding Team</div>
+        <div class="bio">Yvo (Overhoff) handles marketing strategy, social media and growth. Connects the brand to the right audiences.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Tim.png" alt="Tim Hox" loading="lazy">
+        <div class="name">Tim Hox</div>
+        <div class="role">Producer &amp; DJ</div>
+        <div class="bio">Professional DJ and producer with releases on major labels. Coaches artists on performance and releases.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Remy.png" alt="Remy" loading="lazy">
+        <div class="name">Remy</div>
+        <div class="role">Pop &amp; Dance Production</div>
+        <div class="bio">Producer from The Hague. Known for layered textures and emotional depth. Collaborated with Lost Frequencies.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" loading="lazy">
+        <div class="name">Milan Fernandes</div>
+        <div class="role">Music Producer / DJ</div>
+        <div class="bio">Growing house artist in the Dutch scene and a talented producer with a sharp ear for arrangement and sound design.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Marco.png" alt="Marco Meeuwsen" loading="lazy">
+        <div class="name">Marco Meeuwsen</div>
+        <div class="role">Performance Marketing</div>
+        <div class="bio">Content strategist specialized in performance marketing. Teaches how to promote your music and grow your audience effectively.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/Pages/Coaches/Maarten.png" alt="Maarten Broere" loading="lazy">
+        <div class="name">Maarten Broere</div>
+        <div class="role">Branding Expert</div>
+        <div class="bio">Builds artist brands from the ground up. Teaches visual identity, positioning, and how to stand out in a crowded scene.</div>
+      </div>
+      <div class="team-member" onclick="toggleBio(this)">
+        <img src="../assets/photos/Aug/paulv2.png" alt="Paul" loading="lazy">
+        <div class="name">Paul</div>
+        <div class="role">Mix &amp; Master Engineer</div>
+        <div class="bio">Specializes in getting tracks to sound polished and release-ready. Teaches mixing techniques, mastering workflows, and how to bring out the best in every production.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ================================================================
+     6. WHAT PARTNERS GET (Benefits)
+     ================================================================ -->
+<div class="section section-center">
+  <div class="section-divider div-5"><span class="div-line"></span></div>
+  <div class="section-label">What You Get</div>
+  <h2 class="section-title">Concrete partner benefits</h2>
+
+  <div class="benefits-grid">
+
+    <div class="benefit-card">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 15.5H7.5C6.10444 15.5 5.40665 15.5 4.83886 15.6722C3.56045 16.06 2.56004 17.0605 2.17224 18.3389C2 18.9067 2 19.6044 2 21M19 21V15M16 18H22M14.5 7.5C14.5 9.98528 12.4853 12 10 12C7.51472 12 5.5 9.98528 5.5 7.5C5.5 5.01472 7.51472 3 10 3C12.4853 3 14.5 5.01472 14.5 7.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Developed Talent Pipeline</h4>
+      <p>Access to artists who've been coached, assessed and developed. You know exactly where they stand through our Rise Standard.</p>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15.3333 8.27316C14.4487 7.48142 13.2806 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C13.2806 17 14.4487 16.5186 15.3333 15.7268M6 13.5H11M6 10.5H11M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Recurring Commission</h4>
+      <p>Earn on every artist that joins through you. Recurring, transparent, and for as long as they stay in the program.</p>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M11.2827 3.45332C11.5131 2.98638 11.6284 2.75291 11.7848 2.67831C11.9209 2.61341 12.0791 2.61341 12.2152 2.67831C12.3717 2.75291 12.4869 2.98638 12.7174 3.45332L14.9041 7.88328C14.9721 8.02113 15.0061 8.09006 15.0558 8.14358C15.0999 8.19096 15.1527 8.22935 15.2113 8.25662C15.2776 8.28742 15.3536 8.29854 15.5057 8.32077L20.397 9.03571C20.9121 9.11099 21.1696 9.14863 21.2888 9.27444C21.3925 9.38389 21.4412 9.5343 21.4215 9.68377C21.3988 9.85558 21.2124 10.0372 20.8395 10.4004L17.3014 13.8464C17.1912 13.9538 17.136 14.0076 17.1004 14.0715C17.0689 14.128 17.0487 14.1902 17.0409 14.2545C17.0321 14.3271 17.0443 14.4012 17.0723 14.5494L17.906 19.4175C17.9946 19.9301 18.0389 20.1864 17.9553 20.3337C17.8831 20.462 17.7554 20.5494 17.6098 20.5712C17.4418 20.5964 17.2108 20.4746 16.7488 20.231L12.3723 17.9289C12.2349 17.8571 12.1662 17.8212 12.0938 17.8074C12.0299 17.7954 11.9642 17.7954 11.9003 17.8074C11.8279 17.8212 11.7592 17.8571 11.6218 17.9289L7.24531 20.231C6.78334 20.4746 6.55236 20.5964 6.38437 20.5712C6.2388 20.5494 6.11112 20.462 6.03888 20.3337C5.95526 20.1864 5.99957 19.9301 6.08818 19.4175L6.92183 14.5494C6.94978 14.4012 6.96375 14.3271 6.95831 14.2545C6.95352 14.1902 6.93334 14.128 6.90181 14.0715C6.86621 14.0076 6.81101 13.9538 6.70062 13.8464L3.16256 10.4004C2.78969 10.0372 2.60326 9.85558 2.58059 9.68377C2.56087 9.5343 2.60962 9.38389 2.71337 9.27444C2.83255 9.14863 3.09007 9.11099 3.60513 9.03571L8.49636 8.32077C8.64845 8.29854 8.72449 8.28742 8.79073 8.25662C8.84935 8.22935 8.90218 8.19096 8.9463 8.14358C8.99601 8.09006 9.03002 8.02113 9.09803 7.88328L11.2827 3.45332Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>First Access to Graduates</h4>
+      <p>Top-tier partners get exclusive early access to artists completing the program, before anyone else sees them.</p>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M14 17H8M16 13H8M20 9.98822V17.2C20 18.8802 20 19.7202 19.673 20.362C19.3854 20.9265 18.9265 21.3854 18.362 21.673C17.7202 22 16.8802 22 15.2 22H8.8C7.11984 22 6.27976 22 5.63803 21.673C5.07354 21.3854 4.6146 20.9265 4.32698 20.362C4 19.7202 4 18.8802 4 17.2V6.8C4 5.11984 4 4.27976 4.32698 3.63803C4.6146 3.07354 5.07354 2.6146 5.63803 2.32698C6.27976 2 7.11984 2 8.8 2H12.0118C12.7455 2 13.1124 2 13.4577 2.08289C13.7638 2.15638 14.0564 2.27759 14.3249 2.44208C14.6276 2.6276 14.887 2.88703 15.4059 3.40589L18.5941 6.59411C19.113 7.11297 19.3724 7.3724 19.5579 7.67515C19.7224 7.94356 19.8436 8.2362 19.9171 8.5423C20 8.88757 20 9.25445 20 9.98822Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Full Handoff Reports</h4>
+      <p>When an artist graduates, you get a development report covering what they've learned, where they stand, and what comes next.</p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ================================================================
+     7. STATS / PROOF BAR
+     ================================================================ -->
+<div class="section-dark">
+  <div class="proof-bar">
+    <div class="proof-stat">
+      <div class="num">2023</div>
+      <div class="label">Active since</div>
+    </div>
+    <div class="proof-stat">
+      <div class="num">5</div>
+      <div class="label">Partner labels</div>
+    </div>
+    <div class="proof-stat">
+      <div class="num">100+</div>
+      <div class="label">Releases</div>
+    </div>
+    <div class="proof-stat">
+      <div class="num">10K+</div>
+      <div class="label">Daily streams</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     8. PARTNER LOGOS
+     ================================================================ -->
+<div class="section section-center">
+  <div class="section-divider div-6"><span class="div-line"></span></div>
+  <div class="section-label">Partners</div>
+  <h2 class="section-title">Who we work with</h2>
+
+  <div class="logos-row">
+    <img src="../assets/partners/clear-agency_2.png" alt="Clear Agency" loading="lazy" style="height:120px;max-width:280px;">
+    <img src="../assets/partners/recode-records.png" alt="Recode Records" loading="lazy" style="height:100px;max-width:240px;">
+    <img src="../assets/partners/rd-icon.png" alt="RD" loading="lazy" style="height:45px;">
+    <img src="../assets/partners/revoke.png" alt="Revoke" loading="lazy" style="height:39px;">
+    <span class="logo-text" style="font-size:1.7rem;">AMPLIFY</span>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     9. WAYS TO GROW TOGETHER
+     ================================================================ -->
+<div class="section-dark">
+  <div class="section section-center">
+    <div class="section-divider div-7"><span class="div-line"></span></div>
+    <div class="section-label">How We Partner</div>
+    <h2 class="section-title">Three ways to grow together</h2>
+
+    <div class="ways-grid">
+
+      <div class="way-card">
+        <div class="way-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12.7076 18.3639L11.2933 19.7781C9.34072 21.7308 6.1749 21.7308 4.22228 19.7781C2.26966 17.8255 2.26966 14.6597 4.22228 12.7071L5.63649 11.2929M18.3644 12.7071L19.7786 11.2929C21.7312 9.34024 21.7312 6.17441 19.7786 4.22179C17.826 2.26917 14.6602 2.26917 12.7076 4.22179L11.2933 5.636M8.50045 15.4999L15.5005 8.49994" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Referral</h4>
+        <p>Send artists our way and earn recurring commission for as long as they stay. Simple tracking, transparent payouts.</p>
+      </div>
+
+      <div class="way-card">
+        <div class="way-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 8.93137C22 8.32555 22 8.02265 21.8802 7.88238C21.7763 7.76068 21.6203 7.69609 21.4608 7.70865C21.2769 7.72312 21.0627 7.93731 20.6343 8.36569L17 12L20.6343 15.6343C21.0627 16.0627 21.2769 16.2769 21.4608 16.2914C21.6203 16.3039 21.7763 16.2393 21.8802 16.1176C22 15.9774 22 15.6744 22 15.0686V8.93137Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 9.8C2 8.11984 2 7.27976 2.32698 6.63803C2.6146 6.07354 3.07354 5.6146 3.63803 5.32698C4.27976 5 5.11984 5 6.8 5H12.2C13.8802 5 14.7202 5 15.362 5.32698C15.9265 5.6146 16.3854 6.07354 16.673 6.63803C17 7.27976 17 8.11984 17 9.8V14.2C17 15.8802 17 16.7202 16.673 17.362C16.3854 17.9265 15.9265 18.3854 15.362 18.673C14.7202 19 13.8802 19 12.2 19H6.8C5.11984 19 4.27976 19 3.63803 18.673C3.07354 18.3854 2.6146 17.9265 2.32698 17.362C2 16.7202 2 15.8802 2 14.2V9.8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Content & campaigns</h4>
+        <p>Co-branded events, socials and content. You bring the reach, we bring the artists and the stories.</p>
+      </div>
+
+      <div class="way-card">
+        <div class="way-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M17 2L21 6M21 6L17 10M21 6H7.8C6.11984 6 5.27976 6 4.63803 6.32698C4.07354 6.6146 3.6146 7.07354 3.32698 7.63803C3 8.27976 3 9.11984 3 10.8V11M3 18H16.2C17.8802 18 18.7202 18 19.362 17.673C19.9265 17.3854 20.3854 16.9265 20.673 16.362C21 15.7202 21 14.8802 21 13.2V13M3 18L7 22M3 18L7 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Artist development</h4>
+        <p>Tap into our talent pipeline for your roster, label or platform, with first access for top-tier partners.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ================================================================
+     THE RISE STANDARD
+     ================================================================ -->
+<div class="section-dark">
+  <div class="section section-center">
+    <div class="section-divider div-8b"><span class="div-line"></span></div>
+    <div class="section-label">Quality Framework</div>
+    <h2 class="section-title">The Rise Standard</h2>
+    <p class="section-sub">Every artist we develop is measured against a clear standard, so you always know where they stand.</p>
+
+    <div style="display:flex;gap:2.5rem;margin-top:3.5rem;flex-wrap:wrap;justify-content:center;">
+
+      <!-- Bronze Standard Badge -->
+      <div class="rise-badge badge-bronze" style="flex:1;min-width:280px;max-width:340px;">
+        <div class="rise-badge-inner">
+          <div style="display:flex;align-items:center;padding:1.6rem 1.5rem 1.2rem;">
+            <div style="flex:0 0 64px;margin-right:1.2rem;">
+              <img src="../assets/logo-bronze.png" alt="Rise" style="width:64px;height:64px;object-fit:contain;">
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:0.95rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.08em;line-height:1.3;">Bronze Standard</div>
+              <div style="width:100%;height:2px;background:#7F1900;margin:6px 0;"></div>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);font-weight:500;letter-spacing:0.02em;">Verified Producer</div>
+            </div>
+          </div>
+          <div style="padding:0 1.5rem 1rem;border-top:1px solid rgba(255,255,255,0.08);">
+            <p style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.6;margin:0.8rem 0 0;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Production Ready</p>
+            <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;line-height:1.5;margin:0.4rem 0 0;font-weight:400;letter-spacing:0;">Can produce and finish tracks to a professional standard.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Silver Standard Badge -->
+      <div class="rise-badge badge-silver" style="flex:1;min-width:280px;max-width:340px;">
+        <div class="rise-badge-inner">
+          <div style="display:flex;align-items:center;padding:1.6rem 1.5rem 1.2rem;">
+            <div style="flex:0 0 64px;margin-right:1.2rem;">
+              <img src="../assets/logo-silver.png" alt="Rise" style="width:64px;height:64px;object-fit:contain;">
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:0.95rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.08em;line-height:1.3;">Silver Standard</div>
+              <div style="width:100%;height:2px;background:#A6A6A6;margin:6px 0;"></div>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);font-weight:500;letter-spacing:0.02em;">Verified Artist</div>
+            </div>
+          </div>
+          <div style="padding:0 1.5rem 1rem;border-top:1px solid rgba(255,255,255,0.08);">
+            <p style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.6;margin:0.8rem 0 0;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Independent Artist</p>
+            <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;line-height:1.5;margin:0.4rem 0 0;font-weight:400;letter-spacing:0;">Ready to release independently and grow a fanbase.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gold Standard Badge -->
+      <div class="rise-badge badge-gold" style="flex:1;min-width:280px;max-width:340px;">
+        <div class="rise-badge-inner">
+          <div style="display:flex;align-items:center;padding:1.6rem 1.5rem 1.2rem;">
+            <div style="flex:0 0 64px;margin-right:1.2rem;">
+              <img src="../assets/logo-gold.png" alt="Rise" style="width:64px;height:64px;object-fit:contain;">
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:0.95rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.08em;line-height:1.3;">Gold Standard</div>
+              <div style="width:100%;height:2px;background:#ff683e;margin:6px 0;"></div>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);font-weight:500;letter-spacing:0.02em;">Fully Independent Artist</div>
+            </div>
+          </div>
+          <div style="padding:0 1.5rem 1rem;border-top:1px solid rgba(255,255,255,0.08);">
+            <p style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.6;margin:0.8rem 0 0;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;">Industry Ready</p>
+            <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;line-height:1.5;margin:0.4rem 0 0;font-weight:400;letter-spacing:0;">Release-ready, with the skills and network to sustain a career.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="color:var(--muted);font-size:0.85rem;line-height:1.7;margin-top:2.5rem;max-width:640px;margin-left:auto;margin-right:auto;font-style:italic;">When we refer an artist to a partner, the standard level tells you exactly where they are in their development.</p>
+
+  </div>
+</div>
+
+
+<!-- ================================================================
+     11. PROCESS (How It Works)
+     ================================================================ -->
+<div class="section-dark" id="how-it-works">
+  <div class="section section-center">
+    <div class="section-divider div-9"><span class="div-line"></span></div>
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">From first call to full partnership</h2>
+    <p class="section-sub">Start small. Prove the value. Then grow from there.</p>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-step-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M8.38028 8.85335C9.07627 10.303 10.0251 11.6616 11.2266 12.8632C12.4282 14.0648 13.7869 15.0136 15.2365 15.7096C15.3612 15.7694 15.4235 15.7994 15.5024 15.8224C15.7828 15.9041 16.127 15.8454 16.3644 15.6754C16.4313 15.6275 16.4884 15.5704 16.6027 15.4561C16.9523 15.1064 17.1271 14.9316 17.3029 14.8174C17.9658 14.3864 18.8204 14.3864 19.4833 14.8174C19.6591 14.9316 19.8339 15.1064 20.1835 15.4561L20.3783 15.6509C20.9098 16.1824 21.1755 16.4481 21.3198 16.7335C21.6069 17.301 21.6069 17.9713 21.3198 18.5389C21.1755 18.8242 20.9098 19.09 20.3783 19.6214L20.2207 19.779C19.6911 20.3087 19.4263 20.5735 19.0662 20.7757C18.6667 21.0001 18.0462 21.1615 17.588 21.1601C17.1751 21.1589 16.8928 21.0788 16.3284 20.9186C13.295 20.0576 10.4326 18.4332 8.04466 16.0452C5.65668 13.6572 4.03221 10.7948 3.17124 7.76144C3.01103 7.19699 2.93092 6.91477 2.9297 6.50182C2.92833 6.0436 3.08969 5.42311 3.31411 5.0236C3.51636 4.66357 3.78117 4.39876 4.3108 3.86913L4.46843 3.7115C4.99987 3.18006 5.2656 2.91433 5.55098 2.76999C6.11854 2.48292 6.7888 2.48292 7.35636 2.76999C7.64174 2.91433 7.90747 3.18006 8.43891 3.7115L8.63378 3.90637C8.98338 4.25597 9.15819 4.43078 9.27247 4.60655C9.70347 5.26945 9.70347 6.12403 9.27247 6.78692C9.15819 6.96269 8.98338 7.1375 8.63378 7.4871C8.51947 7.60142 8.46231 7.65857 8.41447 7.72538C8.24446 7.96281 8.18576 8.30707 8.26748 8.58743C8.29048 8.66632 8.32041 8.72866 8.38028 8.85335Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Intro Call</h4>
+        <p>30 minutes with Hendrik. We learn what you need, you learn what we build.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>90-Day Pilot</h4>
+        <p>One category, one quarter. See the talent, test the fit, no long-term commitment.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Measure</h4>
+        <p>We track referrals, signings and satisfaction. You see the numbers, not promises.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-step-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 7L14.1314 14.8686C13.7354 15.2646 13.5373 15.4627 13.309 15.5368C13.1082 15.6021 12.8918 15.6021 12.691 15.5368C12.4627 15.4627 12.2646 15.2646 11.8686 14.8686L9.13137 12.1314C8.73535 11.7354 8.53735 11.5373 8.30902 11.4632C8.10817 11.3979 7.89183 11.3979 7.69098 11.4632C7.46265 11.5373 7.26465 11.7354 6.86863 12.1314L2 17M22 7H15M22 7V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Expand</h4>
+        <p>Working? Add categories, deepen the partnership and scale it together.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-photo">
+  <img src="../assets/photos/Aug/aug_04.JPG" alt="Rise coaching session" loading="lazy" style="max-height:340px;">
+</div>
+
+<!-- ================================================================
+     12. BOOKING + CONTACT CTA (Dual CTA)
+     ================================================================ -->
+<div class="dual-cta">
+
+  <!-- Left: Booking -->
+  <div class="cta-card" id="booking">
+    <div class="section-divider div-10"><span class="div-line"></span></div>
+    <h3>Talk to Hendrik</h3>
+    <p>30 minutes, no strings attached. Tell us what you're looking for, and we'll see if there's a fit.</p>
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/booking/uwy75wV8Vf6XwG0zUF80"
+      allow="payment"
+      class="booking-frame"
+      style="width:100%;border:none;overflow:hidden;"
+      scrolling="no"
+      id="uwy75wV8Vf6XwG0zUF80_1786601284508"
+      title="Book a call with Hendrik"
+    ></iframe>
+  </div>
+
+  <!-- Right: Contact -->
+  <div class="cta-card light-cta">
+    <div class="light-cta-content">
+      <div class="section-divider div-11"><span class="div-line"></span></div>
+      <h3>Rather just reach out?</h3>
+      <p>Not ready to book a call? Send Hendrik a message and we'll take it from there.</p>
+      <a href="mailto:hendrik@recode-group.com?subject=Partnership%20Inquiry" class="btn-primary" style="align-self: flex-start;">Get in Touch</a>
+
+      <div class="hendrik-card">
+        <img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik">
+        <div class="info">
+          <div class="name">Hendrik</div>
+          <div class="title">Partnerships &middot; Founding Team</div>
+          <a href="mailto:hendrik@recode-group.com">hendrik@recode-group.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="light-cta-photo">
+      <img src="../assets/photos/photo-9.jpg" alt="Rise artists" loading="lazy">
+    </div>
+  </div>
+
+</div>
+
+
+<!-- == Footer ===================================================== -->
+<footer class="footer">
+  &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+  <div class="links">
+    <a href="mailto:contact@riseartistacademy.com">Contact</a>
+    <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/terms/">Terms</a>
+  </div>
+</footer>
+
+
+<!-- == Scripts ==================================================== -->
+<script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+<script>
+  // Sticky header scroll effect
+  (function() {
+    var hdr = document.getElementById('site-header');
+    if (!hdr) return;
+    function onScroll() {
+      if (window.scrollY > 40) hdr.classList.add('scrolled');
+      else hdr.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Toggle coach bio
+  function toggleBio(el) {
+    var wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.team-member.open').forEach(function(m) { m.classList.remove('open'); });
+    if (!wasOpen) el.classList.add('open');
+  }
+
+  // Partner Journey Carousel
+  (function(){
+    var carousel = document.getElementById('pj-carousel');
+    var detail   = document.getElementById('pj-detail');
+    var navWrap  = document.getElementById('pj-nav');
+    if(!carousel) return;
+
+    var slides = carousel.querySelectorAll('.pj-slide');
+    var dots   = navWrap.querySelectorAll('.pj-dot');
+    var total  = slides.length;
+    var current = 0;
+    var autoTimer = null;
+
+    var details = [
+      {
+        problem: ['Income depends on gigs and streams', 'Building a course means building a company', 'Your followers came for music, not courses'],
+        solution: ['We turn your knowledge into products', 'We run platform, payments and marketing', 'We bring the audience that pays to learn'],
+        earn: ['Second income next to gigs and streams', 'Seen as authority, not just performer', 'Access to labels, agencies and brands']
+      },
+      {
+        problem: ['Too many competing tools, price pressure', 'A sale doesn\'t mean people use it', 'You need creators who pass it on'],
+        solution: ['Your product built into our workflows', 'Masterclasses and content with your name', 'Feedback from an active producer group'],
+        earn: ['Reach through a channel producers trust', 'More users who actually stay', 'Next generation learns on your product']
+      },
+      {
+        problem: ['More demos every year, fewer that fit', 'Developing artists after signing costs time', 'A&R time runs out before good ones surface'],
+        solution: ['Pre-filtered demos matched to your sound', 'We develop the artists you turn down', 'Artists learn to run their own release'],
+        earn: ['Fewer A&R hours per signing', 'Income from demos you\'d otherwise delete', 'First pick at writing camps and graduates']
+      },
+      {
+        problem: ['Members cancel when growth stalls', 'No progress means no reason to stay', 'One level means nowhere to go next'],
+        solution: ['Programmes, coaching and weekly goals', 'A paid level above your membership', 'Results: releases, signings and real skills'],
+        earn: ['Fewer cancellations, more monthly revenue', 'Revenue share without building courses', 'Member stories that bring new people in']
+      },
+      {
+        problem: ['People buy tickets later every year', 'Costs rise faster than ticket prices', 'Your audience belongs to ad platforms'],
+        solution: ['Community activation aimed at pre-sale', 'Programming between editions keeps you visible', 'Artists sell to their own audience'],
+        earn: ['Tickets sold earlier, better cash flow', 'Extra channel next to paid social', 'Audience that carries to next edition']
+      },
+      {
+        problem: ['Talent alone doesn\'t make artists bookable', 'Demand is built outside the agency', 'Artists who aren\'t ready waste your time'],
+        solution: ['We develop artists you can\'t book yet', 'We build audience, content and visibility', 'Positioning a buyer gets in one line'],
+        earn: ['Middle of your roster gets placed', 'Income from artists you\'d turn away', 'Your artists teach and get paid']
+      },
+      {
+        problem: ['Smallest artists need the most hours', 'Can\'t hire for everything at 15–20%', 'No structure or reporting on development'],
+        solution: ['Specialists per artist, not per hire', 'Clear ownership with milestones and updates', 'One development path for every artist'],
+        earn: ['Specialists without payroll or fixed cost', 'Your commission grows with artist income', 'Extra income and visibility for artists']
+      },
+      {
+        problem: ['You need a steady flow of stories', 'Press releases are what AI replaces now', 'Readers on your own channels matter most'],
+        solution: ['Direct access to artists we develop', 'First look before everyone covers them', 'Formats we build together for your channels'],
+        earn: ['Stories nobody else has', 'Early access to emerging artists', 'Access to labels, agencies and brands']
+      },
+      {
+        problem: ['Your programme changes in years, not months', 'Students want practice and industry contact', 'Can\'t hire for every discipline at once'],
+        solution: ['Modules taught by active industry professionals', 'Career layer after the programme ends', 'Direct access to our industry network'],
+        earn: ['Current content without fixed staff', 'Better results and a stronger story', 'An industry network for your students']
+      }
+    ];
+
+    function goTo(idx){
+      current = ((idx % total) + total) % total;
+      slides.forEach(function(s){ s.classList.remove('active'); });
+      dots.forEach(function(d){ d.classList.remove('active'); });
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      var d = details[current];
+      function toBullets(arr){ return '<ul>' + arr.map(function(i){ return '<li>' + i + '</li>'; }).join('') + '</ul>'; }
+      detail.innerHTML = '<div class="pj-detail-grid">' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">Problem</div>' + toBullets(d.problem) + '</div>' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">Solution</div>' + toBullets(d.solution) + '</div>' +
+        '<div class="pj-detail-item"><div class="pj-detail-label">The outcome</div>' + toBullets(d.earn) + '</div>' +
+      '</div>';
+
+      // Center active slide
+      var slideW = 280 + 16; // width + gap
+      var offset = current * slideW;
+      carousel.style.transform = 'translateX(-' + offset + 'px)';
+    }
+
+    function next(){ goTo(current + 1); }
+
+    function startAuto(){
+      stopAuto();
+      autoTimer = setInterval(next, 8000);
+    }
+    function stopAuto(){
+      if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+    }
+
+    // Click slide to go to it
+    slides.forEach(function(s){
+      s.addEventListener('click', function(){
+        goTo(parseInt(s.dataset.idx));
+        stopAuto();
+        startAuto();
+      });
+    });
+
+    // Click dot to go to it
+    dots.forEach(function(d){
+      d.addEventListener('click', function(){
+        goTo(parseInt(d.dataset.idx));
+        stopAuto();
+        startAuto();
+      });
+    });
+
+    // Touch/swipe support
+    var touchStartX = 0;
+    carousel.addEventListener('touchstart', function(e){
+      touchStartX = e.touches[0].clientX;
+      stopAuto();
+    }, {passive:true});
+    carousel.addEventListener('touchend', function(e){
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if(Math.abs(diff) > 40){
+        if(diff > 0) next();
+        else goTo(current - 1);
+      }
+      startAuto();
+    }, {passive:true});
+
+    goTo(0);
+    startAuto();
+  })();
+
+  /* ── Typewriter effect ── */
+  (function() {
+    var words = ['develop','support','create','coach','connect','elevate','prepare','launch'];
+    var el = document.getElementById('typewriter-word');
+    if (!el) return;
+    var idx = 0;
+    var charIdx = words[0].length;
+    var deleting = true;
+    var typeSpeed = 110;
+    var deleteSpeed = 60;
+    var pauseEnd = 2000;
+    var pauseEmpty = 400;
+
+    function tick() {
+      var current = words[idx];
+      if (!deleting) {
+        charIdx++;
+        el.textContent = current.substring(0, charIdx);
+        if (charIdx === current.length) {
+          deleting = true;
+          setTimeout(tick, pauseEnd);
+          return;
+        }
+        setTimeout(tick, typeSpeed);
+      } else {
+        charIdx--;
+        el.textContent = current.substring(0, charIdx);
+        if (charIdx === 0) {
+          deleting = false;
+          idx = (idx + 1) % words.length;
+          setTimeout(tick, pauseEmpty);
+          return;
+        }
+        setTimeout(tick, deleteSpeed);
+      }
+    }
+
+    setTimeout(tick, pauseEnd);
+  })();
+</script>
+
+</body>
+</html>
