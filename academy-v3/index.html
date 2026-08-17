@@ -845,9 +845,8 @@
     }
 
     /* ── Limited spots indicator ── */
-    .limited-spots { display:flex; align-items:center; gap:10px; font-size:0.95rem; color:rgba(255,255,255,0.65); justify-content:center; margin:1.2rem 0 0; }
-    .pulse-dot { width:5px; height:5px; background:var(--muted); border-radius:50%; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; margin-top:1px; }
-    @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); } 50%{ box-shadow:0 0 10px 4px rgba(255,104,62,0.6); } }
+    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); text-align:center; margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
+    @keyframes spots-breathe { 0%,100%{ color:rgba(255,255,255,0.45); } 50%{ color:rgba(255,255,255,0.85); } }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -882,7 +881,7 @@
         Apply for the Academy
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
-      <div class="limited-spots"><span class="pulse-dot"></span>Limited spots left this month.</div>
+      <div class="limited-spots">Limited spots left this month.</div>
     <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
       <span>&#10003; Flexible payment plans</span>
       <span>&#10003; Start when you're ready</span>

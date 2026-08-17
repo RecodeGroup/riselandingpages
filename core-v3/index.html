@@ -642,9 +642,8 @@
     }
 
     /* ── Limited spots indicator ── */
-    .limited-spots { display:flex; align-items:center; gap:10px; font-size:0.95rem; color:rgba(255,255,255,0.65); justify-content:center; margin:1.2rem 0 0; }
-    .pulse-dot { width:10px; height:2px; background:var(--muted); border-radius:1px; animation:pulse-glow 2.5s ease-in-out infinite; flex-shrink:0; margin-top:2px; }
-    @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 0 0 rgba(255,104,62,0); background:var(--muted); } 50%{ box-shadow:0 0 6px 2px rgba(255,104,62,0.4); background:var(--accent); } }
+    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); text-align:center; margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
+    @keyframes spots-breathe { 0%,100%{ color:rgba(255,255,255,0.45); } 50%{ color:rgba(255,255,255,0.85); } }
 
     /* ── Step labels ── */
     .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; justify-content:center; width:100%; }
@@ -735,7 +734,7 @@
         Apply Now
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
-      <div class="limited-spots"><span class="pulse-dot"></span>Limited spots left this month.</div>
+      <div class="limited-spots">Limited spots left this month.</div>
       <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
         <span>&#10003; Weekly coaching with experienced producers</span>
         <span>&#10003; 12-month structured program</span>
