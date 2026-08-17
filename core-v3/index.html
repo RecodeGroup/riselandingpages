@@ -246,60 +246,6 @@
     /* ── Who Core Is For ─────────────────────────── */
     .who-core { background: var(--bg); }
 
-    /* ── Two Ways In ─────────────────────────────── */
-    .two-ways { background: var(--bg); }
-    .two-ways .section-body { margin-bottom: 2.5rem; }
-    .entry-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    .entry-card {
-      background: var(--bg-2);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 12px;
-      padding: clamp(28px, 4vw, 40px);
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .entry-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-    }
-    .entry-card:hover {
-      border-color: rgba(255,104,62,0.2);
-      transform: translateY(-4px);
-    }
-    .entry-card:hover::before { transform: scaleX(1); }
-    .entry-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(255,104,62,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .entry-icon svg { width: 22px; height: 22px; color: var(--accent); }
-    .entry-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .entry-card p {
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
     /* ── What You Get ────────────────────────────── */
     .what-you-get { background: var(--bg); }
     .what-you-get .section-body { margin-bottom: 2.5rem; }
@@ -804,39 +750,6 @@
   <div class="image-break">
     <img src="../assets/photos/photo-4.jpg" alt="Rise producers at work" class="section-image" loading="lazy">
   </div>
-
-  <!-- ══════════════════════════════════════════════
-       Two Ways In
-       ══════════════════════════════════════════════ -->
-  <section class="section two-ways">
-    <div class="section-inner">
-      <div class="section-eyebrow">Two ways in</div>
-      <h2 class="section-heading">Two routes</h2>
-      <div class="section-body">
-        <p>You get here in one of two ways: directly, when your intro call places you at Core level, or by progressing after six months of Base and a strategy call. Either way there's selection. Core is never automatic.</p>
-      </div>
-
-      <div class="entry-grid">
-
-        <div class="entry-card">
-          <div class="entry-icon">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.09344 12.6879C3.74463 13.1064 3.57023 13.3157 3.56756 13.4925C3.56524 13.6461 3.63372 13.7923 3.75324 13.8889C3.89073 14 4.16316 14 4.70802 14H12L11 22L19.9065 11.3121C20.2553 10.8936 20.4297 10.6843 20.4324 10.5075C20.4347 10.3539 20.3663 10.2077 20.2467 10.1111C20.1092 10 19.8368 10 19.292 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Direct Entry</h3>
-          <p>Your intro call places you at Core level</p>
-        </div>
-
-        <div class="entry-card">
-          <div class="entry-icon">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M22 12H18L15 21L9 3L6 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Through Base</h3>
-          <p>After six months of Base plus a strategy call</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- ══════════════════════════════════════════════
        What You Get
