@@ -856,7 +856,7 @@
   </a>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
-      <a class="header-logo" href="/homepage-v2/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
+      <a class="header-logo" href="/homepage-v3/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
       <a class="header-cta" href="javascript:void(0)" onclick="openModal()">Apply for the Academy</a>
     </div>
   </header>
@@ -978,7 +978,7 @@
           <p class="track-desc">Production foundation</p>
           <p class="track-desc" style="margin-top:10px;">Learn the fundamentals of production, sound design, and arrangement. Build your workflow from the ground up.</p>
           <p class="track-desc" style="margin-top:12px;font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.45);">Payment plans available — discussed in your call.</p>
-          <a href="../base-v2/" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color 0.2s;">
+          <a href="../base-v3/" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color 0.2s;">
             More info
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
@@ -992,7 +992,7 @@
           <p class="track-desc">Career accountability</p>
           <p class="track-desc" style="margin-top:10px;">Weekly coaching, feedback sessions and career strategy from experienced producers. Where Base builds the skill, Core makes sure you actually use it, every week for a year.</p>
           <p class="track-desc" style="margin-top:12px;font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.45);">Payment plans available — discussed in your call.</p>
-          <a href="../core-v2/" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color 0.2s;">
+          <a href="../core-v3/" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color 0.2s;">
             More info
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
@@ -1403,7 +1403,7 @@
         if (qState.answers.email) params.set("email", qState.answers.email);
         if (qState.answers.whatsapp) params.set("phone", qState.answers.whatsapp);
         params.set("program", "academy");
-        window.location.href = "/academy-thankyou/?" + params.toString();
+        window.location.href = "/academy-thankyou-v3/?" + params.toString();
       }
     }
     qOverlay.addEventListener("click", function(e) { if (e.target === qOverlay) closeModal(); });
