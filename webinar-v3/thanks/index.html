@@ -254,9 +254,9 @@
       </svg>
     </div>
 
-    <h1>You're registered!</h1>
+    <h1>You're registered.</h1>
     <p class="subtitle">
-      We've saved your spot. <strong>You'll receive a confirmation email</strong> with all the details shortly.
+      Your spot is saved. <strong>Check your inbox</strong> in the next few minutes for your confirmation and the join link. Add it to your calendar now so it doesn't slip.
     </p>
 
     <div class="info-card">
@@ -271,16 +271,35 @@
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <div class="step-title">Mark your calendar</div>
-          <div class="step-desc">Add the session to your calendar so you don't miss it.</div>
+          <div class="step-title">Add it to your calendar</div>
+          <div class="step-desc">One click now means you actually show up.</div>
+          <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;">
+            <a href="#" id="gcal-link" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;font-size:0.75rem;font-weight:600;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:8px;text-decoration:none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Google Calendar
+            </a>
+            <a href="#" id="ical-link" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;font-size:0.75rem;font-weight:600;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:8px;text-decoration:none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Apple / Outlook
+            </a>
+          </div>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <div class="step-title">Come prepared</div>
-          <div class="step-desc">Think about what you'd like to get out of the session. The more specific your questions, the more you'll get from it.</div>
+          <div class="step-title">Come with one real question</div>
+          <div class="step-desc">Think about the single biggest thing you're stuck on. The sharper your question, the more you'll walk away with.</div>
         </div>
+      </div>
+    </div>
+
+    <!-- Host teaser (#100) -->
+    <div style="background:var(--bg-2);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:1.5rem 2rem;max-width:460px;width:100%;display:flex;gap:16px;align-items:center;margin-bottom:2rem;animation:fadeUp 0.6s 0.7s ease both;">
+      <img src="../../assets/Pages/Coaches/Mau2.png" alt="Maurits" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+      <div style="text-align:left;">
+        <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px;">Your host: Maurits</div>
+        <div style="color:var(--muted);font-size:0.8rem;line-height:1.5;">Maurits will walk you through what's holding you back, and show you a clear plan to move forward. Come with your toughest question.</div>
       </div>
     </div>
 
