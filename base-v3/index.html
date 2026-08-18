@@ -254,6 +254,21 @@
 
     /* ── What You Get — feature cards ─────────────── */
     .what-you-get { background: var(--bg-2); }
+    .program-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .program-grid img {
+      width: 100%;
+      border-radius: 14px;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      .program-grid { grid-template-columns: 1fr; }
+    }
     .feature-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -782,13 +797,16 @@
        ══════════════════════════════════════════════ -->
   <section class="section what-you-get" id="program">
     <div class="section-inner">
-      <div class="section-eyebrow">The program</div>
-      <h2 class="section-heading">What the six months include.</h2>
-      <div class="section-body">
-        <p>A new group starts every six months, and you can reserve your spot months ahead. Inside, it's 30 live sessions: most are hands-on production work, and a handful step outside production to sharpen your artist profile and the moves that push your career forward. Same six months, same group, same standard throughout.</p>
+      <div class="program-grid">
+        <div>
+          <div class="section-eyebrow">The program</div>
+          <h2 class="section-heading">What the six months include.</h2>
+          <div class="section-body">
+            <p>A new group starts every six months, and you can reserve your spot months ahead. Inside, it's 30 live sessions: most are hands-on production work, and a handful step outside production to sharpen your artist profile and the moves that push your career forward. Same six months, same group, same standard throughout.</p>
+          </div>
+        </div>
+        <img src="../assets/photos/Aug/aug_8.2.JPG" alt="Rise Base session">
       </div>
-
-      <!-- Feature cards merged into Learning Journey below (#55) -->
     </div>
   </section>
 
