@@ -882,10 +882,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
       <div class="limited-spots">Limited spots left this month.</div>
-    <div style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-top:16px;font-size:0.78rem;color:var(--muted);">
-      <span>&#10003; Flexible payment plans</span>
-      <span>&#10003; Start when you're ready</span>
-    </div>
     </div>
   </section>
 
@@ -943,9 +939,9 @@
           <div class="section-eyebrow">The method</div>
           <h2 class="section-heading">What happens once you're&nbsp;in.</h2>
           <div class="section-body">
-            <p>Most producers know they're stuck; they just can't pinpoint where. So we start there: an honest read on where your sound and your habits actually stand today, not where you assume they do.</p>
-            <p style="margin-top:16px;">From there it's structural, not motivational. Weekly coaching sessions with direct feedback on your tracks, deadlines you can't quietly slide past, and a standard higher than the one you'd set for yourself.</p>
-            <p style="margin-top:16px;">Every week you show up, share your work and get pushed forward. No fluff, no generic advice. Just real accountability from coaches who produce professionally and know exactly where you need to go next. Progress is measured by one thing only: what gets finished, posted and released.</p>
+            <p>Most producers know they're stuck; they just can't pinpoint where. So we start there: an honest read on where your sound and habits actually stand, not where you assume they do.</p>
+            <p style="margin-top:16px;">From there it's structural, not motivational. Weekly coaching with direct feedback, deadlines you can't slide past, and a standard higher than the one you'd set for yourself.</p>
+            <p style="margin-top:16px;">Every week you show up, share your work and get pushed forward. Real accountability from working producers. Progress is measured by one thing: what gets finished and released.</p>
           </div>
         </div>
       </div>
@@ -978,7 +974,7 @@
           <div class="track-duration">6 months</div>
           <p class="track-desc">Production foundation</p>
           <p class="track-desc" style="margin-top:10px;">Learn the fundamentals of production, sound design, and arrangement. Build your workflow from the ground up.</p>
-          <p class="track-desc" style="margin-top:12px;font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.45);">Payment plans available — discussed in your call.</p>
+          <p class="track-desc" style="margin-top:12px;font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.45);">Payment plans available, discussed in your call.</p>
           <a href="../base-v3/" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color 0.2s;">
             More info
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -992,7 +988,7 @@
           <div class="track-duration">12 months</div>
           <p class="track-desc">Career accountability</p>
           <p class="track-desc" style="margin-top:10px;">Weekly coaching, feedback sessions and career strategy from experienced producers. Where Base builds the skill, Core makes sure you actually use it, every week for a year.</p>
-          <p class="track-desc" style="margin-top:12px;font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.45);">Payment plans available — discussed in your call.</p>
+          <p class="track-desc" style="margin-top:12px;font-size:0.78rem;font-style:italic;color:rgba(255,255,255,0.45);">Payment plans available, discussed in your call.</p>
           <a href="../core-v3/" style="display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:0.82rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color 0.2s;">
             More info
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -1429,6 +1425,32 @@
         if (!v._hasPlayed) { v.currentTime = 0; v._hasPlayed = true; }
       });
     });
+  </script>
+
+  <!-- Coach grid auto-scroll on mobile -->
+  <script>
+  (function(){
+    var grid = document.querySelector('.coach-grid');
+    if (!grid) return;
+    var scrollInterval, paused = false, delay = 3000, speed = 1;
+    function autoScroll() {
+      scrollInterval = setInterval(function(){
+        if (paused) return;
+        if (grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 2) {
+          grid.scrollTo({left:0, behavior:'smooth'});
+        } else {
+          grid.scrollBy({left:speed, behavior:'auto'});
+        }
+      }, 16);
+    }
+    function onTouch() { paused = true; clearTimeout(grid._resume); grid._resume = setTimeout(function(){ paused = false; }, delay); }
+    grid.addEventListener('touchstart', onTouch, {passive:true});
+    grid.addEventListener('mousedown', onTouch);
+    if (window.matchMedia('(max-width:768px)').matches) autoScroll();
+    window.matchMedia('(max-width:768px)').addEventListener('change', function(e){
+      if (e.matches) { paused = false; autoScroll(); } else { clearInterval(scrollInterval); }
+    });
+  })();
   </script>
 
 </body>
