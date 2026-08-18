@@ -1110,7 +1110,7 @@
     }
     @keyframes scroll-teachers {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      100% { transform: translateX(var(--teachers-scroll-dist, -50%)); }
     }
     .teacher-card {
       flex: 0 0 200px;
@@ -1620,84 +1620,7 @@
         <p class="teacher-role">Branding Expert</p>
         <p class="teacher-bio">Builds artist brands from the ground up. Teaches visual identity, positioning, and how to stand out in a crowded scene.</p>
       </div>
-      <!-- Duplicate for seamless loop -->
-      <div aria-hidden="true" style="display:contents">
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Remy.png" alt="Remy" loading="lazy">
-        <h4>Remy</h4>
-        <p class="teacher-role">Monetisation &middot; Rights</p>
-        <p class="teacher-bio">Producer from The Hague. Known for layered textures and emotional depth. Collaborated with Lost Frequencies.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" loading="lazy">
-        <h4>Jurrian</h4>
-        <p class="teacher-role">Base Coach &middot; Techno Artist</p>
-        <p class="teacher-bio">15+ years across electronic genres, Jurrian (Artcode) combines music with TouchDesigner visuals and live modular performance.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Jim.png" alt="Jim" loading="lazy">
-        <h4>Jim</h4>
-        <p class="teacher-role">Founder &middot; Techno Artist</p>
-        <p class="teacher-bio">For over 15 years, Jim (Vannood) has been producing and releasing techno while building Rise as both an artist and entrepreneur.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/photos/Aug/paulv2.png" alt="Paul" loading="lazy">
-        <h4>Paul</h4>
-        <p class="teacher-role">Mix &amp; Master Engineer</p>
-        <p class="teacher-bio">Specializes in getting your tracks to sound polished and release-ready. Teaches mixing techniques, mastering workflows, and how to bring out the best in every production.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/photos/Aug/Mauv5.png" alt="Maurits" loading="lazy">
-        <h4>Maurits</h4>
-        <p class="teacher-role">Core Coach &middot; Music Business</p>
-        <div class="teacher-label">Founding Team</div>
-        <p class="teacher-bio">Runs the operations and artist development side of Rise. Focused on building sustainable momentum through strategy and structure.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Tim.png" alt="Tim Hox" loading="lazy">
-        <h4>Tim Hox</h4>
-        <p class="teacher-role">Music Producer / DJ</p>
-        <p class="teacher-bio">International DJ/producer with releases on major labels. Teaches the art of finishing tracks and building a release strategy.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Noah.png" alt="Noah Smits" loading="lazy">
-        <h4>Noah Smits</h4>
-        <p class="teacher-role">Media Strategist</p>
-        <p class="teacher-bio">Specializes in content strategy and social media growth for electronic music producers. Turns followers into fans.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" loading="lazy">
-        <h4>Milan Fernandes</h4>
-        <p class="teacher-role">Music Producer / DJ</p>
-        <p class="teacher-bio">Growing house artist in the Dutch scene and a talented producer with a sharp ear for arrangement and sound design.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy">
-        <h4>Yvo</h4>
-        <p class="teacher-role">Music Producer &middot; Advanced Modules</p>
-        <div class="teacher-label">Founding Team</div>
-        <p class="teacher-bio">A&amp;R at Recode Records and active DJ/producer. Knows what labels look for and how to get your demos signed.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy">
-        <h4>Hendrik</h4>
-        <p class="teacher-role">Partnerships &middot; Bookings</p>
-        <div class="teacher-label">Founding Team</div>
-        <p class="teacher-bio">Artist manager and booker. Teaches how to get gigs, build relationships with promoters, and grow a live career.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Marco.png" alt="Marco Meeuwsen" loading="lazy">
-        <h4>Marco Meeuwsen</h4>
-        <p class="teacher-role">Performance Marketing</p>
-        <p class="teacher-bio">Content strategist specialized in performance marketing. Teaches how to promote your music and grow your audience effectively.</p>
-      </div>
-      <div class="teacher-card">
-        <img class="teacher-photo" src="../assets/Pages/Coaches/Maarten.png" alt="Maarten Broere" loading="lazy">
-        <h4>Maarten Broere</h4>
-        <p class="teacher-role">Branding Expert</p>
-        <p class="teacher-bio">Builds artist brands from the ground up. Teaches visual identity, positioning, and how to stand out in a crowded scene.</p>
-      </div>
-      </div>
+      <!-- JS clones cards for seamless loop -->
     </div>
     </div>
   </section>
@@ -2088,6 +2011,35 @@
         var opacity = Math.max(0, 1 - (displayed / 70));
         progressBar.parentElement.style.opacity = opacity;
       });
+    })();
+
+    // Teachers infinite marquee — JS-based for seamless loop
+    (function() {
+      var grid = document.getElementById('teachers-marquee');
+      if (!grid) return;
+      function initTeachers() {
+        var cards = Array.from(grid.children);
+        var gap = 24;
+        // Calculate exact width of original set
+        var scrollDist = 0;
+        for (var i = 0; i < cards.length; i++) {
+          scrollDist += cards[i].offsetWidth + gap;
+        }
+        // Clone cards twice for guaranteed coverage
+        for (var c = 0; c < 2; c++) {
+          cards.forEach(function(card) {
+            var clone = card.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            grid.appendChild(clone);
+          });
+        }
+        grid.style.setProperty('--teachers-scroll-dist', '-' + scrollDist + 'px');
+        // Restart animation cleanly
+        grid.style.animation = 'none';
+        grid.offsetHeight;
+        grid.style.animation = '';
+      }
+      window.addEventListener('load', initTeachers);
     })();
 
     // Products infinite marquee — triplicate for seamless loop
