@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE — Application Received</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --line: rgba(255,255,255,0.06);
+      --accent: #ff683e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 3rem 1.5rem 4rem;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .check-circle {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.12);
+      border: 2px solid rgba(255,104,62,0.3);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 2rem;
+      animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    .check-circle svg {
+      width: 40px;
+      height: 40px;
+      color: var(--accent);
+    }
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      animation: fadeUp 0.6s 0.35s ease both;
+    }
+
+    @keyframes fadeUp {
+      0% { transform: translateY(16px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ── Commitment Gate ──────────────────────── */
+    .commitment-gate {
+      max-width: 480px;
+      width: 100%;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2rem 1.75rem 1.75rem;
+      text-align: left;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.45s ease both;
+    }
+    .commitment-gate .gate-eyebrow {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .commitment-gate .gate-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .expect-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 1.25rem;
+    }
+    .expect-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.1);
+      border: 1px solid rgba(255,104,62,0.25);
+      display: grid;
+      place-items: center;
+    }
+    .expect-icon svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+    .expect-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .expect-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── Slider ─────────────────────────────────── */
+    .slider-wrap {
+      margin-top: 1.5rem;
+      position: relative;
+      height: 56px;
+      background: rgba(255,104,62,0.08);
+      border: 1px solid rgba(255,104,62,0.2);
+      border-radius: 28px;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+    .slider-track-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,104,62,0.6);
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .slider-thumb {
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: grid;
+      place-items: center;
+      cursor: grab;
+      transition: box-shadow 0.2s;
+      z-index: 2;
+    }
+    .slider-thumb:active { cursor: grabbing; }
+    .slider-thumb svg {
+      width: 20px;
+      height: 20px;
+      color: #0a0a0a;
+    }
+    .slider-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 52px;
+      background: rgba(255,104,62,0.12);
+      border-radius: 28px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Confirmed state ─────────────────────────── */
+    .gate-confirmed {
+      display: none;
+      text-align: center;
+      padding: 1rem 0 0;
+    }
+    .gate-confirmed .confirmed-check {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(74,222,128,0.15);
+      border: 2px solid rgba(74,222,128,0.4);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 0.75rem;
+      animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    .gate-confirmed .confirmed-check svg {
+      width: 22px;
+      height: 22px;
+      color: #4ade80;
+    }
+    .gate-confirmed .confirmed-text {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4ade80;
+    }
+
+    /* ── Calendar reveal ─────────────────────────── */
+    .calendar-section {
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.6s 0.2s ease;
+    }
+    .calendar-section.revealed {
+      max-height: 900px;
+      opacity: 1;
+    }
+    .calendar-section h2 {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .calendar-section .cal-sub {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── Flow steps ──────────────────────────── */
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 480px;
+      width: 100%;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      text-align: left;
+      position: relative;
+      padding: 14px 0;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 46px;
+      bottom: -2px;
+      width: 1px;
+      background: rgba(255,104,62,0.2);
+    }
+    .flow-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+    .flow-icon.done {
+      background: rgba(255,104,62,0.15);
+      border: 1px solid rgba(255,104,62,0.35);
+    }
+    .flow-icon.upcoming {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .flow-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+    .flow-icon.done svg { color: var(--accent); }
+    .flow-icon.upcoming svg { color: var(--muted); }
+    .flow-icon.confirmed {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .flow-icon.confirmed svg { color: var(--muted); }
+    .flow-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-top: 5px;
+    }
+    .flow-label .done-text { color: var(--accent); }
+    .flow-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 3px;
+    }
+
+    /* ── WhatsApp ─────────────────────────────── */
+    .wa-box {
+      background: rgba(37,211,102,0.08);
+      border: 1px solid rgba(37,211,102,0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      max-width: 480px;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeUp 0.6s 0.8s ease both;
+    }
+    .wa-box svg { flex-shrink: 0; width: 20px; height: 20px; }
+    .wa-box p {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .wa-box a { color: #25D366; text-decoration: underline; }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a:hover { color: var(--accent); }
+
+    @media (max-width: 480px) {
+      .main { padding: 2rem 1rem 3rem; }
+      .commitment-gate { padding: 1.5rem 1.25rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="../" class="logo-wrap">
+      <img src="../assets/logo.png" alt="Rise">
+      <span class="logo-text">Rise</span>
+    </a>
+  </header>
+
+  <!-- ═══ BLOCK 1 — Confirmation ═══ -->
+  <main class="main">
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 id="heading">Application received!</h1>
+    <p class="subtitle" id="subtitle">
+      Your application has been submitted. One last step before you can reserve your Introduction Call.
+    </p>
+
+    <!-- ═══ BLOCK 2 — Commitment Gate ═══ -->
+    <div class="commitment-gate" id="commitmentGate">
+      <div class="gate-eyebrow">One last step</div>
+      <div class="gate-title">Before you reserve, make sure you're ready to:</div>
+
+      <div class="expect-item">
+        <div class="expect-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/><path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="expect-label">Show up</div>
+          <div class="expect-desc">Block 30 minutes and give the conversation your full attention.</div>
+        </div>
+      </div>
+
+      <div class="expect-item">
+        <div class="expect-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/><path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M9 9H9.01M15 9H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="expect-label">Be open</div>
+          <div class="expect-desc">Be honest about your current level, goals, and what's holding you back.</div>
+        </div>
+      </div>
+
+      <div class="expect-item">
+        <div class="expect-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="expect-label">Take action</div>
+          <div class="expect-desc">If there's a strong fit, be prepared to make a decision about your next step.</div>
+        </div>
+      </div>
+
+      <!-- Slider -->
+      <div class="slider-wrap" id="sliderWrap">
+        <div class="slider-fill" id="sliderFill"></div>
+        <div class="slider-track-text" id="sliderText">Slide to confirm I'm ready &rarr;</div>
+        <div class="slider-thumb" id="sliderThumb">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <!-- Confirmed state (hidden initially) -->
+      <div class="gate-confirmed" id="gateConfirmed">
+        <div class="confirmed-check">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="confirmed-text">Commitment confirmed</div>
+      </div>
+    </div>
+
+    <!-- ═══ BLOCK 3 — Calendar (hidden until confirmed) ═══ -->
+    <div class="calendar-section" id="calendarSection">
+      <h2>Reserve your Introduction Call</h2>
+      <p class="cal-sub">Choose a time that works for you. We personally review every application before the call to make sure the conversation is relevant for both sides.</p>
+      <iframe
+        src="about:blank"
+        data-src="https://api.leadconnectorhq.com/widget/booking/NkLVSabjjsfmQptJOhw1"
+        id="r0Ob1gUmQEoJ5KG046Dq_1786630166143"
+        style="width:100%;min-height:700px;border:none;border-radius:12px;background:var(--bg-2);"
+        scrolling="no"
+        allow="payment"
+      ></iframe>
+    </div>
+  </main>
+
+  <!-- ═══ BLOCK 4 — What happens next ═══ -->
+  <main class="main" style="padding-top:0;">
+    <div style="font-size:0.66rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">What happens next</div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon done">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="flow-label"><span class="done-text">Application submitted</span></div>
+        </div>
+      </div>
+      <div class="flow-step" id="step-commitment">
+        <div class="flow-icon upcoming" id="step-commitment-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="flow-label" id="step-commitment-label">Confirm you're ready</div>
+          <div class="flow-desc">Slide to confirm your commitment.</div>
+        </div>
+      </div>
+      <div class="flow-step" id="step-call-scheduled">
+        <div class="flow-icon upcoming">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="flow-label">Reserve your call</div>
+          <div class="flow-desc">Choose a time that works for you.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon upcoming">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M20 8V14M23 11H17M12.5 7C12.5 9.20914 10.7091 11 8.5 11C6.29086 11 4.5 9.20914 4.5 7C4.5 4.79086 6.29086 3 8.5 3C10.7091 3 12.5 4.79086 12.5 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="flow-label">Personal review</div>
+          <div class="flow-desc">We'll review your application and briefly contact you before the call.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon confirmed">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="flow-label">Introduction Call</div>
+          <div class="flow-desc">We'll look at where you are, where you want to go, and whether Rise is the right fit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ BLOCK 5 — Questions ═══ -->
+    <div class="wa-box">
+      <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <p>Questions before your call? <a href="https://wa.me/message/">Reach out via WhatsApp</a> and we'll help you out.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+    <div class="links">
+      <a href="mailto:contact@riseartistacademy.com">Contact</a>
+      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <!-- Personalization -->
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var name = params.get('name');
+      var program = params.get('program');
+
+      var programNames = {
+        academy: 'Rise Academy',
+        base: 'Rise Base',
+        core: 'Rise Core'
+      };
+      var programLabel = programNames[program] || 'Rise';
+
+      var heading = document.getElementById('heading');
+      if (name) {
+        heading.textContent = 'Thank you, ' + name.split(' ')[0] + '!';
+      }
+
+      var subtitle = document.getElementById('subtitle');
+      subtitle.innerHTML = 'Your application for <strong style="color:var(--fg)">' + programLabel + '</strong> has been submitted. One last step before you can reserve your Introduction Call.';
+    })();
+  </script>
+
+  <!-- Commitment slider logic -->
+  <script>
+    (function() {
+      var wrap = document.getElementById('sliderWrap');
+      var thumb = document.getElementById('sliderThumb');
+      var fill = document.getElementById('sliderFill');
+      var text = document.getElementById('sliderText');
+      var gate = document.getElementById('commitmentGate');
+      var confirmed = document.getElementById('gateConfirmed');
+      var calSection = document.getElementById('calendarSection');
+      var iframe = document.getElementById('r0Ob1gUmQEoJ5KG046Dq_1786630166143');
+
+      var isDragging = false;
+      var startX = 0;
+      var thumbX = 0;
+      var maxX = 0;
+      var completed = false;
+
+      function getMaxX() {
+        return wrap.offsetWidth - thumb.offsetWidth - 8; // 4px padding each side
+      }
+
+      function setPosition(x) {
+        x = Math.max(0, Math.min(x, maxX));
+        thumb.style.left = (x + 4) + 'px';
+        fill.style.width = (x + 52) + 'px';
+        // Fade out text as thumb moves
+        var progress = x / maxX;
+        text.style.opacity = Math.max(0, 1 - progress * 2);
+      }
+
+      function onStart(e) {
+        if (completed) return;
+        isDragging = true;
+        maxX = getMaxX();
+        var touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX - thumbX;
+        thumb.style.transition = 'none';
+        fill.style.transition = 'none';
+      }
+
+      function onMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        var touch = e.touches ? e.touches[0] : e;
+        thumbX = touch.clientX - startX;
+        thumbX = Math.max(0, Math.min(thumbX, maxX));
+        setPosition(thumbX);
+      }
+
+      function onEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+
+        // Check if slider reached the end (>90%)
+        if (thumbX >= maxX * 0.9) {
+          completeSlider();
+        } else {
+          // Snap back
+          thumbX = 0;
+          thumb.style.transition = 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          fill.style.transition = 'width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          setPosition(0);
+          text.style.opacity = '1';
+        }
+      }
+
+      function completeSlider() {
+        completed = true;
+        // Snap to end
+        thumbX = maxX;
+        thumb.style.transition = 'left 0.3s ease';
+        fill.style.transition = 'width 0.3s ease';
+        setPosition(maxX);
+
+        // After snap animation
+        setTimeout(function() {
+          // Hide slider, show confirmed state
+          wrap.style.transition = 'opacity 0.3s, max-height 0.4s';
+          wrap.style.opacity = '0';
+          wrap.style.maxHeight = '0';
+          wrap.style.overflow = 'hidden';
+          wrap.style.marginTop = '0';
+
+          // Hide expectation items
+          var items = gate.querySelectorAll('.expect-item');
+          items.forEach(function(item, i) {
+            setTimeout(function() {
+              item.style.transition = 'opacity 0.2s, max-height 0.3s';
+              item.style.opacity = '0';
+              item.style.maxHeight = '0';
+              item.style.overflow = 'hidden';
+              item.style.marginBottom = '0';
+            }, i * 80);
+          });
+
+          // Hide gate title
+          var gateTitle = gate.querySelector('.gate-title');
+          setTimeout(function() {
+            gateTitle.style.transition = 'opacity 0.2s, max-height 0.3s';
+            gateTitle.style.opacity = '0';
+            gateTitle.style.maxHeight = '0';
+            gateTitle.style.overflow = 'hidden';
+            gateTitle.style.marginBottom = '0';
+          }, 250);
+
+          // Show confirmed
+          setTimeout(function() {
+            confirmed.style.display = 'block';
+
+            // Update the gate styling
+            gate.style.transition = 'border-color 0.4s, background 0.4s';
+            gate.style.borderColor = 'rgba(74,222,128,0.25)';
+            gate.style.background = 'rgba(74,222,128,0.04)';
+
+            // Update eyebrow
+            var eyebrow = gate.querySelector('.gate-eyebrow');
+            eyebrow.style.color = '#4ade80';
+            eyebrow.textContent = 'CONFIRMED';
+
+            // Update flow step
+            var stepIcon = document.getElementById('step-commitment-icon');
+            stepIcon.className = 'flow-icon done';
+            stepIcon.style.background = 'rgba(74,222,128,0.15)';
+            stepIcon.style.borderColor = 'rgba(74,222,128,0.4)';
+            stepIcon.querySelector('svg').style.color = '#4ade80';
+            var stepLabel = document.getElementById('step-commitment-label');
+            stepLabel.innerHTML = '<span style="color:#4ade80">Commitment confirmed</span>';
+          }, 500);
+
+          // Reveal calendar
+          setTimeout(function() {
+            // Load the iframe now
+            if (iframe && iframe.dataset.src) {
+              iframe.src = iframe.dataset.src;
+            }
+            calSection.classList.add('revealed');
+
+            // Scroll calendar into view
+            setTimeout(function() {
+              calSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+          }, 800);
+
+        }, 300);
+      }
+
+      // Event listeners — mouse
+      thumb.addEventListener('mousedown', onStart);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onEnd);
+
+      // Event listeners — touch
+      thumb.addEventListener('touchstart', onStart, { passive: false });
+      window.addEventListener('touchmove', onMove, { passive: false });
+      window.addEventListener('touchend', onEnd);
+
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        if (!completed) {
+          maxX = getMaxX();
+        }
+      });
+    })();
+  </script>
+
+  <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+  <script>
+    // Listen for GHL iframe postMessage
+    var step2Activated = false;
+    window.addEventListener('message', function(e) {
+      if (step2Activated) return;
+      var origin = (e.origin || '').toLowerCase();
+      if (origin.indexOf('leadconnectorhq') !== -1 ||
+          origin.indexOf('msgsndr') !== -1 ||
+          origin.indexOf('gohighlevel') !== -1) {
+        var d = e.data;
+        if (typeof d === 'string') {
+          try { d = JSON.parse(d); } catch(err) {}
+        }
+        if (typeof d === 'number') return;
+        if (d && typeof d === 'object' && Object.keys(d).length <= 2 &&
+            (d.height !== undefined || d.scrollHeight !== undefined) &&
+            !d.type && !d.action && !d.event && !d.status) return;
+        step2Activated = true;
+      }
+    });
+
+    var ghlIframe = document.getElementById('r0Ob1gUmQEoJ5KG046Dq_1786630166143');
+    if (ghlIframe) {
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          if (m.type === 'attributes' && m.attributeName === 'style') {
+            var h = parseInt(ghlIframe.style.height);
+            if (h && h < 400) step2Activated = true;
+          }
+        });
+      });
+      observer.observe(ghlIframe, { attributes: true });
+    }
+  </script>
+
+</body>
+</html>
