@@ -15,7 +15,6 @@
       --line-strong: rgba(255,255,255,0.14);
       --accent: #ff683e;
       --accent-hover: #e55a33;
-      --maxw: 1120px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
@@ -26,61 +25,30 @@
       display: flex;
       flex-direction: column;
     }
-    a { color: inherit; text-decoration: none; }
 
-    /* ── Urgency Bar ── */
-    .urgency-bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
-      background: var(--accent); color: #fff; text-align: center;
-      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
-      padding: 8px 40px 8px 16px; transition: transform 0.3s;
-    }
-    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
-    .urgency-bar-close {
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
-    }
-    .urgency-text {
-      display: inline;
-      animation: urgency-pulse 3s ease-in-out infinite;
-    }
-    @keyframes urgency-pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-    body.has-urgency-bar .site-header { top: 36px; }
-
-    /* ── Site Header ── */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 110;
-      background: transparent;
-      transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                  border-bottom-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                  box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border-bottom: 1px solid transparent;
-      will-change: background, border-color, box-shadow;
-    }
-    .site-header.scrolled {
-      background: rgba(15,15,15,0.92);
-      border-bottom: 1px solid rgba(255,104,62,0.12);
-      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-    }
-    .site-header-inner {
-      max-width: var(--maxw);
+    /* ── Header ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0.75rem 2rem;
+      width: 100%;
+    }
+    .logo-wrap {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 12px;
     }
-    .header-cta {
-      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
-      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
-      transition: background 0.2s; text-decoration: none;
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
-    .header-cta:hover { background: var(--accent-hover); }
+    a { color: inherit; text-decoration: none; }
 
     /* ── Hero Background ── */
     .checkout-hero {
@@ -354,11 +322,7 @@
       gap: 24px;
       margin-top: 10px;
     }
-    .footer .links a {
-      color: var(--muted);
-      font-size: 0.75rem;
-      transition: color 0.2s;
-    }
+    .footer .links a { transition: color 0.2s; }
     .footer .links a:hover { color: var(--accent); }
 
     /* ── Loading State ── */
@@ -382,30 +346,23 @@
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      .site-header-inner { padding: 0.75rem 1.25rem; }
       .plan-grid { grid-template-columns: 1fr; max-width: 380px; }
       .checkout-summary { flex-direction: column; text-align: center; }
       .cohort-options { flex-direction: column; align-items: center; }
       .cohort-btn { width: 100%; max-width: 280px; }
-      .footer { padding: 2rem 1.25rem; }
     }
     @media (max-width: 480px) {
       .main { padding: 1.5rem 1rem 3rem; }
     }
   </style>
 </head>
-<body class="has-urgency-bar">
+<body>
 
-  <a href="../base-v3/" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
-    <span class="urgency-text">Applications open</span> &middot; Apply for Base
-    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
-  </a>
-
-  <header class="site-header" id="site-header">
-    <div class="site-header-inner">
-      <a class="header-logo" href="/homepage-v3/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
-      <a class="header-cta" href="../base-v3/">Apply Now</a>
-    </div>
+  <header class="header">
+    <a href="../" class="logo-wrap">
+      <img src="../assets/logo.png" alt="Rise">
+      <span class="logo-text">Rise</span>
+    </a>
   </header>
 
   <div class="checkout-hero">
@@ -461,10 +418,8 @@
   </main>
 
   <footer class="footer">
-    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+    &copy; 2026 Rise &middot; Recode Operations B.V. &middot; All rights reserved
     <div class="links">
-      <a href="mailto:contact@riseartistacademy.com">Contact</a>
-      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
       <a href="../privacy/">Privacy</a>
       <a href="../terms/">Terms</a>
     </div>
@@ -474,13 +429,18 @@
     const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
     // ====== AUTO COHORT ======
+    // Automatically determine the next cohort (April or October)
     function getNextCohort() {
       var now = new Date();
-      var month = now.getMonth();
+      var month = now.getMonth(); // 0-indexed
       var year = now.getFullYear();
-      if (month < 3) { return { key: year + '-04', label: 'April ' + year, startMonth: 3, startYear: year }; }
-      else if (month < 9) { return { key: year + '-10', label: 'October ' + year, startMonth: 9, startYear: year }; }
-      else { return { key: (year + 1) + '-04', label: 'April ' + (year + 1), startMonth: 3, startYear: year + 1 }; }
+      if (month < 3) { // Jan-Mar → April this year
+        return { key: year + '-04', label: 'April ' + year, startMonth: 3, startYear: year };
+      } else if (month < 9) { // Apr-Sep → October this year
+        return { key: year + '-10', label: 'October ' + year, startMonth: 9, startYear: year };
+      } else { // Oct-Dec → April next year
+        return { key: (year + 1) + '-04', label: 'April ' + (year + 1), startMonth: 3, startYear: year + 1 };
+      }
     }
 
     const autoCohort = getNextCohort();
@@ -517,6 +477,7 @@
     let selectedPlan = '2x';
     let selectedCohort = autoCohort.key;
 
+    // Read URL params (passed from application form)
     const params = new URLSearchParams(window.location.search);
     const customerName = params.get('name') || '';
     const customerEmail = params.get('email') || '';
@@ -529,8 +490,12 @@
     }
 
     function updateSchedules() {
+      // 2x schedule
       var el2 = document.getElementById('schedule-2x');
-      if (el2) { el2.textContent = '1st: now · 2nd: ' + autoCohort.label; }
+      if (el2) {
+        el2.textContent = '1st: now · 2nd: ' + autoCohort.label;
+      }
+      // 4x schedule
       var el4 = document.getElementById('schedule-4x');
       if (el4) {
         var m1 = monthNames[autoCohort.startMonth];
@@ -580,18 +545,6 @@
     // Init
     updateSchedules();
     updateSummary();
-
-    // ── Urgency bar dismiss ──
-    (function() {
-      var bar = document.getElementById('urgency-bar');
-      var closeBtn = document.getElementById('urgency-bar-close');
-      if (!bar || !closeBtn) return;
-      if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
-      closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
-    })();
-
-    // ── Header scroll effect ──
-    window.addEventListener('scroll', function() { document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
   </script>
 </body>
 </html>

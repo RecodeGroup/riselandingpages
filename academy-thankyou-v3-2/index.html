@@ -256,7 +256,7 @@
                   opacity 0.6s 0.2s ease;
     }
     .calendar-section.revealed {
-      max-height: 900px;
+      max-height: 2400px;
       opacity: 1;
     }
     .calendar-section h2 {
@@ -380,9 +380,70 @@
     }
     .footer .links a:hover { color: var(--accent); }
 
+    /* ── Call prep section ──────────────────── */
+    .call-prep {
+      text-align: left;
+      margin-bottom: 2rem;
+      padding: 2rem 1.75rem;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+    }
+    .call-prep .prep-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .call-prep .prep-headline {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+    .prep-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .prep-col h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    .prep-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .prep-col li {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.55;
+      padding-left: 18px;
+      position: relative;
+    }
+    .prep-col li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
     @media (max-width: 480px) {
       .main { padding: 2rem 1rem 3rem; }
       .commitment-gate { padding: 1.5rem 1.25rem 1.25rem; }
+      .prep-columns { grid-template-columns: 1fr; gap: 1.25rem; }
+      .call-prep { padding: 1.5rem 1.25rem; }
     }
   </style>
 </head>
@@ -465,6 +526,30 @@
     <div class="calendar-section" id="calendarSection">
       <h2>Reserve your Introduction Call</h2>
       <p class="cal-sub">Choose a time that works for you. We personally review every application before the call to make sure the conversation is relevant for both sides.</p>
+
+      <div class="call-prep">
+        <div class="prep-eyebrow">Your Introduction Call</div>
+        <div class="prep-headline">Come prepared. Leave with clarity.</div>
+        <div class="prep-columns">
+          <div class="prep-col">
+            <h3>Come prepared</h3>
+            <ul>
+              <li>Know what you want to achieve in the next 6 months.</li>
+              <li>Be ready to discuss your current level and biggest challenges.</li>
+              <li>Set aside 30 focused minutes and be ready to take action.</li>
+            </ul>
+          </div>
+          <div class="prep-col">
+            <h3>What you'll get</h3>
+            <ul>
+              <li>An honest assessment of where you are now.</li>
+              <li>Clarity on what's holding you back.</li>
+              <li>A clear yes or no whether Rise is the right fit for you at this moment.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <iframe
         src="about:blank"
         data-src="https://api.leadconnectorhq.com/widget/booking/NkLVSabjjsfmQptJOhw1"
