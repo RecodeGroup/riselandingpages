@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE — Choose Your Payment Plan</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --maxw: 1120px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Urgency Bar ── */
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 8px 40px 8px 16px; transition: transform 0.3s;
+    }
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
+    }
+    .urgency-text {
+      display: inline;
+      animation: urgency-pulse 3s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    body.has-urgency-bar .site-header { top: 36px; }
+
+    /* ── Site Header ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-bottom-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-bottom: 1px solid transparent;
+      will-change: background, border-color, box-shadow;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.92);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-cta {
+      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s; text-decoration: none;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .checkout-header {
+      text-align: center;
+      max-width: 540px;
+      margin-bottom: 2rem;
+    }
+    .checkout-header .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .checkout-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .checkout-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* ── Plan Grid ── */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 920px;
+      width: 100%;
+    }
+    .plan-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 2rem 1.2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .plan-card:hover {
+      border-color: rgba(255,104,62,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .plan-card:hover::before { opacity: 1; }
+    .plan-card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 12px 30px rgba(255,104,62,0.15);
+    }
+    .plan-card.selected::before { opacity: 1; }
+    .plan-card.recommended {
+      border-color: rgba(255,104,62,0.3);
+    }
+    .plan-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .plan-card .installments {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .plan-card .price {
+      font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .plan-card .price-sub {
+      color: var(--muted);
+      font-size: 0.76rem;
+      margin-top: 6px;
+    }
+    .plan-card .total {
+      color: var(--muted);
+      font-size: 0.72rem;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    .plan-schedule {
+      color: var(--muted);
+      font-size: 0.7rem;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    /* ── Summary + CTA ── */
+    .checkout-summary {
+      max-width: 920px;
+      width: 100%;
+      margin-top: 2.5rem;
+      padding: 2rem;
+      background: rgba(255,104,62,0.04);
+      border: 1px solid rgba(255,104,62,0.12);
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    .summary-left .summary-plan {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .summary-left .summary-detail {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .btn-checkout {
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 40px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-checkout:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
+    .btn-checkout:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ── Security Note ── */
+    .security-note {
+      margin-top: 1.5rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .security-note svg { flex-shrink: 0; }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a {
+      color: var(--muted);
+      font-size: 0.75rem;
+      transition: color 0.2s;
+    }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Loading State ── */
+    .btn-checkout.loading {
+      pointer-events: none;
+      position: relative;
+      color: transparent;
+    }
+    .btn-checkout.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(10,10,10,0.3);
+      border-top-color: #0a0a0a;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Approval checkbox ── */
+    .approval-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 1.5rem 0;
+      text-align: left;
+      font-size: 0.85rem;
+      color: var(--muted);
+      cursor: pointer;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .approval-label input {
+      margin-top: 3px;
+      accent-color: var(--accent);
+      min-width: 18px;
+      min-height: 18px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .site-header-inner { padding: 0.75rem 1.25rem; }
+      .plan-grid { grid-template-columns: 1fr; max-width: 380px; }
+      .checkout-summary { flex-direction: column; text-align: center; }
+      .footer { padding: 2rem 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      .main { padding: 1.5rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body class="has-urgency-bar">
+
+  <a href="../core-v3/" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
+    <span class="urgency-text">Applications open</span> &middot; Apply for Core
+    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
+  </a>
+
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a class="header-logo" href="/homepage-v3/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
+      <a class="header-cta" href="../core-v3/">Apply Now</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="checkout-header">
+      <div class="eyebrow">Almost there</div>
+      <h1>Choose your payment plan</h1>
+      <p>You're one step away from joining the Rise Community. Pick the plan that works best for you. All plans give you the exact same access.</p>
+    </div>
+
+    <div class="plan-grid">
+      <div class="plan-card" data-plan="community_1x" onclick="selectPlan(this)">
+        <div class="installments">Pay in full</div>
+        <div class="price">&euro; 1.500,-</div>
+        <div class="price-sub">One-time payment</div>
+        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+      </div>
+
+      <div class="plan-card recommended selected" data-plan="community_2x" onclick="selectPlan(this)">
+        <div class="plan-badge">Popular</div>
+        <div class="installments">2 payments</div>
+        <div class="price">&euro; 750,-</div>
+        <div class="price-sub">per payment</div>
+        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+        <div class="plan-schedule" id="schedule-2x">1st: now &middot; 2nd: in 1 month</div>
+      </div>
+
+      <div class="plan-card" data-plan="community_3x" onclick="selectPlan(this)">
+        <div class="installments">3 payments</div>
+        <div class="price">&euro; 500,-</div>
+        <div class="price-sub">per payment</div>
+        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+        <div class="plan-schedule" id="schedule-3x">Monthly for 3 months</div>
+      </div>
+
+      <div class="plan-card" data-plan="community_11x" onclick="selectPlan(this)">
+        <div class="installments">11 payments</div>
+        <div class="price">&euro; 375,-</div>
+        <div class="price-sub">then 10 &times; &euro; 112,50</div>
+        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+        <div class="plan-schedule" id="schedule-11x">Monthly for 11 months</div>
+      </div>
+    </div>
+
+    <label class="approval-label">
+      <input type="checkbox" id="core-approval-check" required>
+      <span>I confirm that I have spoken with a member of the Rise founding team and have been approved as a suitable candidate for the Core program. I understand that payments made without prior approval may be declared invalid.</span>
+    </label>
+
+    <div class="checkout-summary">
+      <div class="summary-left">
+        <div class="summary-plan" id="summary-plan">Rise Community &mdash; 2 payments of &euro; 750,-</div>
+        <div class="summary-detail" id="summary-detail">&euro; 750,- now + &euro; 750,- in 1 month &middot; ex. VAT</div>
+      </div>
+      <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
+        Continue to Payment
+      </button>
+    </div>
+
+    <div class="security-note">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure payment powered by Stripe. Your card details are never stored on our servers.
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+    <div class="links">
+      <a href="mailto:contact@riseartistacademy.com">Contact</a>
+      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <script>
+    // ====== PLAN DATA ======
+    const plans = {
+      'community_1x': {
+        label: 'Pay in full — € 1.500,-',
+        detail: 'One-time payment now · ex. VAT',
+      },
+      'community_2x': {
+        label: '2 payments of € 750,-',
+        detail: '€ 750,- now + € 750,- in 1 month · ex. VAT',
+      },
+      'community_3x': {
+        label: '3 payments of € 500,-',
+        detail: '€ 500,- now + 2 × € 500,- monthly · ex. VAT',
+      },
+      'community_11x': {
+        label: '€ 375,- + 10 × € 112,50',
+        detail: '€ 375,- now + 10 × € 112,50 monthly · ex. VAT',
+      },
+    };
+
+    let selectedPlan = 'community_2x';
+
+    const params = new URLSearchParams(window.location.search);
+    const customerName = params.get('name') || '';
+    const customerEmail = params.get('email') || '';
+
+    function selectPlan(el) {
+      document.querySelectorAll('.plan-card').forEach(function(c) { c.classList.remove('selected'); });
+      el.classList.add('selected');
+      selectedPlan = el.dataset.plan;
+      updateSummary();
+    }
+
+    function updateSummary() {
+      var plan = plans[selectedPlan];
+      document.getElementById('summary-plan').textContent = 'Rise Community — ' + plan.label;
+      document.getElementById('summary-detail').textContent = plan.detail;
+    }
+
+    async function startCheckout() {
+      var checkbox = document.getElementById('core-approval-check');
+      if (checkbox && !checkbox.checked) {
+        checkbox.parentElement.style.outline = '2px solid var(--accent)';
+        checkbox.parentElement.style.outlineOffset = '4px';
+        checkbox.focus();
+        alert('Please confirm that you have been approved by a Rise founding team member before proceeding with payment.');
+        return;
+      }
+      if (checkbox) {
+        checkbox.parentElement.style.outline = '';
+        checkbox.parentElement.style.outlineOffset = '';
+      }
+
+      var btn = document.getElementById('btn-checkout');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      try {
+        var res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plan: selectedPlan,
+            name: customerName,
+            email: customerEmail,
+          }),
+        });
+
+        var data = await res.json();
+
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      } catch (err) {
+        alert('Could not start checkout: ' + err.message);
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+
+    // Init
+    updateSummary();
+
+    // ── Urgency bar dismiss ──
+    (function() {
+      var bar = document.getElementById('urgency-bar');
+      var closeBtn = document.getElementById('urgency-bar-close');
+      if (!bar || !closeBtn) return;
+      if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
+      closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
+    })();
+
+    // ── Header scroll effect ──
+    window.addEventListener('scroll', function() { document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+  </script>
+</body>
+</html>
