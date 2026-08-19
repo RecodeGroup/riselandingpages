@@ -3,60 +3,512 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RISE — Choose Your Payment Plan</title>
+  <title>RISE Artist Academy &mdash; Core: One year of accountability.</title>
+  <meta name="description" content="One year. Weekly accountability. A community of artists who push each other forward. A coach who won't let you slide. Join Core Academy.">
   <meta name="robots" content="noindex, nofollow">
   <style>
+    /* ════════════════════════════════════════════════
+       Rise Artist Academy — Core (community-plan-v3)
+       Full landing + payment plan checkout
+       ════════════════════════════════════════════════ */
     :root {
       --bg: #0f0f0f;
       --bg-2: #1a1a1a;
       --fg: #ffffff;
       --muted: #999;
-      --line: rgba(255,255,255,0.06);
-      --line-strong: rgba(255,255,255,0.14);
       --accent: #ff683e;
       --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
       line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ── Header ── */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 32px;
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
-    .logo-text {
-      font-weight: 700;
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
-    /* ── Main ── */
-    .main {
-      flex: 1;
+    /* ── Accessibility ────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* ── Site Header ─────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1), border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.72);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 7px; }
+    .nav-logo span {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #0a0a0a !important;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-cta:hover {
+      background: var(--accent-hover) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%),
+        url('../assets/photos/Aug/aug_11.2.png') center 30% / cover no-repeat;
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin: 0 auto 2.5rem;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    /* ── Photo strip ─────────────────────────────── */
+    .photo-strip {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .photo-strip-track {
+      display: flex;
+      gap: 4px;
+      width: max-content;
+      animation: scroll-strip 40s linear infinite;
+    }
+    .photo-strip-track img {
+      height: 180px;
+      width: auto;
+      object-fit: cover;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+    @keyframes scroll-strip {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Section defaults ────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Pull quote ──────────────────────────────── */
+    .pull-quote {
+      margin-top: 32px;
+      padding: 24px 28px;
+      border-left: 3px solid var(--accent);
+      background: var(--bg-2);
+      border-radius: 0 12px 12px 0;
+      max-width: 640px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .pull-quote p {
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      font-style: italic;
+      color: var(--fg);
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    /* ── Coach card (single, wide) ────────────────── */
+    .coach-card-wide {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 40px);
+      max-width: 720px;
+      transition: border-color 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .coach-card-wide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .coach-card-wide:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .coach-card-wide:hover::before { opacity: 1; }
+    .coach-avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,104,62,0.15);
+      flex-shrink: 0;
+    }
+    .coach-info h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .coach-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .coach-bio {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Two Ways In ─────────────────────────────── */
+    .two-ways .section-inner { text-align: center; }
+    .two-ways .section-body { margin-bottom: 2.5rem; margin-left: auto; margin-right: auto; }
+    .entry-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .entry-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 40px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      text-align: center;
+    }
+    .entry-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .entry-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+    }
+    .entry-card:hover::before { transform: scaleX(1); }
+    .entry-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .entry-icon svg { width: 22px; height: 22px; color: var(--accent); }
+    .entry-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .entry-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .entry-card .btn-primary {
+      margin-top: 16px;
+      font-size: 0.72rem;
+      padding: 12px 24px;
+    }
+
+    /* ── Feature Grid ────────────────────────────── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(24px, 3vw, 32px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .feature-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Social Proof ────────────────────────────── */
+    .proof-placeholder {
+      margin-top: 32px;
+      padding: 40px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Products Scroll ─────────────────────────── */
+    .products-section { padding: 5rem 0; border-top: 1px solid var(--line); }
+    .products-head { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; margin-bottom: 2rem; text-align: center; }
+    .products-scroll-wrap { overflow: hidden; padding: 0 0 18px; }
+    .products-scroll { display: flex; gap: 18px; width: max-content; animation: products-scroll 50s linear infinite; }
+    .products-scroll:hover { animation-play-state: paused; }
+    @keyframes products-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .product-card { flex: 0 0 260px; background: var(--bg-2); border: 1px solid rgba(255,255,255,0.05); border-radius: 14px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(255,104,62,0.25); }
+    .product-card .thumb { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+    .product-card .info { padding: 14px 16px 18px; }
+    .product-card .info h4 { font-size: 0.9rem; font-weight: 700; }
+
+    /* ── Reviews ────────────────────────────────── */
+    .reviews-section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--line);
+    }
+    .reviews-inner {
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .reviews-head {
+      padding: 0 2rem; margin-bottom: 2rem;
+    }
+    .reviews-scroll {
+      display: flex; gap: 18px; overflow-x: auto;
+      padding: 0 2rem 18px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .reviews-scroll::-webkit-scrollbar { display: none; }
+    .review-card {
+      flex: 0 0 340px;
+      background: var(--bg-2); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 2rem 1.75rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .review-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-3px);
+    }
+    .review-stars {
+      color: var(--accent); font-size: 0.9rem;
+      letter-spacing: 2px; margin-bottom: 14px;
+    }
+    .review-card .review-text {
+      font-size: 0.92rem; color: rgba(255,255,255,0.85);
+      line-height: 1.65;
+    }
+
+    /* ── Closing ──────────────────────────────────── */
+    .closing {
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .closing-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .closing p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Payment Plan Section ────────────────────── */
+    .payment-section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .payment-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1.5rem 4rem;
     }
     .checkout-header {
       text-align: center;
@@ -71,7 +523,7 @@
       text-transform: uppercase;
       margin-bottom: 14px;
     }
-    .checkout-header h1 {
+    .checkout-header h2 {
       font-size: clamp(1.8rem, 4vw, 2.6rem);
       font-weight: 700;
       line-height: 1.1;
@@ -235,24 +687,6 @@
     }
     .security-note svg { flex-shrink: 0; }
 
-    /* ── Footer ── */
-    .footer {
-      border-top: 1px solid var(--line);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-    }
-    .footer .links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-top: 10px;
-    }
-    .footer .links a { transition: color 0.2s; }
-    .footer .links a:hover { color: var(--accent); }
-
     /* ── Loading State ── */
     .btn-checkout.loading {
       pointer-events: none;
@@ -272,98 +706,546 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Responsive ── */
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq-list {
+      max-width: 720px;
+      margin: 32px auto 0;
+    }
+    .faq .section-eyebrow,
+    .faq .section-heading {
+      text-align: center;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; padding: 1.25rem 0;
+      font-size: 1rem; font-weight: 600; color: var(--fg);
+      background: none; border: none; cursor: pointer;
+      text-align: left; gap: 1rem; font-family: inherit;
+    }
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .faq-icon::before {
+      content: '';
+      width: 14px;
+      height: 2px;
+      background: var(--muted);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 2px;
+    }
+    .faq-icon::after {
+      content: '';
+      width: 2px;
+      height: 14px;
+      background: var(--muted);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 2px;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .faq-item.open .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .faq-a-inner {
+      padding: 0 0 1.25rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer-cta {
+      margin-bottom: 20px;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a {
+      color: var(--muted);
+      transition: color 0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Section CTA helper ──────────────────────── */
+    .section-cta-wrap {
+      margin-top: 32px;
+    }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 900px) {
+      .section { padding: 3.5rem 1.5rem; }
+      .closing { padding: 3.5rem 1.5rem; }
+      .payment-section { padding: 3.5rem 1.5rem; }
+    }
     @media (max-width: 768px) {
+      .hero h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+      .section-heading { font-size: clamp(1.5rem, 4vw, 2rem); }
+      .closing h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+      .review-card { flex: 0 0 280px; }
+      .reviews-scroll { padding: 0 1rem 14px; gap: 12px; }
+      .coach-card-wide { flex-direction: column; text-align: center; }
+      .entry-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .section-cta-wrap { display: flex; flex-direction: column; align-items: stretch; }
+      .section-cta-wrap .btn-primary { text-align: center; justify-content: center; }
       .plan-grid { grid-template-columns: 1fr; max-width: 380px; }
       .checkout-summary { flex-direction: column; text-align: center; }
     }
-    @media (max-width: 480px) {
-      .main { padding: 1.5rem 1rem 3rem; }
+    @media (max-width: 520px) {
+      .section { padding: 2.5rem 1rem; }
+      .closing { padding: 2.5rem 1rem; }
+      .payment-section { padding: 2.5rem 1rem; }
+      .site-header-inner { padding: 0.75rem 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <header class="header">
-    <a href="../" class="logo-wrap">
-      <img src="../assets/logo.png" alt="Rise">
-      <span class="logo-text">Rise</span>
-    </a>
+  <!-- ══════════════════════════════════════════════
+       Navigation
+       ══════════════════════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a href="../homepage-v2/" class="nav-logo">
+        <img src="../assets/logo.png" alt="Rise">
+        <span>Rise</span>
+      </a>
+      <div class="nav-links">
+        <a href="#who-core-is-for">Who It's For</a>
+        <a href="#what-you-get">What You Get</a>
+        <a href="#coach">Coach</a>
+        <a href="#faq">FAQ</a>
+        <a href="#payment-plan" class="nav-cta">Join Core Academy</a>
+      </div>
+    </div>
   </header>
 
-  <main class="main">
-    <div class="checkout-header">
-      <div class="eyebrow">Almost there</div>
-      <h1>Choose your payment plan</h1>
-      <p>You're one step away from joining the Rise Community. Pick the plan that works best for you. All plans give you the exact same access.</p>
+  <!-- ══════════════════════════════════════════════
+       Hero
+       ══════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Rise Artist Academy &middot; Core</div>
+      <h1>Core is one straight line towards your&nbsp;goals.</h1>
+      <p class="hero-sub">One year. Weekly accountability. A community of artists who push each other forward. A coach who won't let you slide.</p>
+      <a href="#payment-plan" class="btn-primary">
+        Join Core Academy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
     </div>
+  </section>
 
-    <div class="plan-grid">
-      <div class="plan-card" data-plan="community_1x" onclick="selectPlan(this)">
-        <div class="installments">Pay in full</div>
-        <div class="price">&euro; 1.500,-</div>
-        <div class="price-sub">One-time payment</div>
-        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
-      </div>
+  <!-- ══════════════════════════════════════════════
+       Photo Strip
+       ══════════════════════════════════════════════ -->
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_11.2.png" alt="Rise" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <img src="../assets/photos/photo-1.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-2.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-3.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-14.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_11.2.png" alt="Rise" loading="lazy">
+    </div>
+  </div>
 
-      <div class="plan-card recommended selected" data-plan="community_2x" onclick="selectPlan(this)">
-        <div class="plan-badge">Popular</div>
-        <div class="installments">2 payments</div>
-        <div class="price">&euro; 750,-</div>
-        <div class="price-sub">per payment</div>
-        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
-        <div class="plan-schedule" id="schedule-2x">1st: now &middot; 2nd: in 1 month</div>
-      </div>
-
-      <div class="plan-card" data-plan="community_3x" onclick="selectPlan(this)">
-        <div class="installments">3 payments</div>
-        <div class="price">&euro; 500,-</div>
-        <div class="price-sub">per payment</div>
-        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
-        <div class="plan-schedule" id="schedule-3x">Monthly for 3 months</div>
-      </div>
-
-      <div class="plan-card" data-plan="community_11x" onclick="selectPlan(this)">
-        <div class="installments">11 payments</div>
-        <div class="price">&euro; 375,-</div>
-        <div class="price-sub">then 10 &times; &euro; 112,50</div>
-        <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
-        <div class="plan-schedule" id="schedule-11x">Monthly for 11 months</div>
+  <!-- ══════════════════════════════════════════════
+       Who Core Is For
+       ══════════════════════════════════════════════ -->
+  <section class="section" id="who-core-is-for">
+    <div class="section-inner">
+      <div class="section-eyebrow">Who it's for</div>
+      <h2 class="section-heading">Made for artists who are ready to make serious&nbsp;steps.</h2>
+      <div class="section-body">
+        <p>Core is for producers who are ready to take real steps in the industry and put in the work it takes to get there. It isn't an entry-level program, and it isn't for everyone. There's selection before you're in, and once you are, you're expected to show up every single week.</p>
+        <p style="margin-top:16px;">You'll be surrounded by artists chasing the same goal, pushing each other forward through feedback, accountability and shared ambition. We won't pat you on the back. We hold up a mirror instead.</p>
       </div>
     </div>
+  </section>
 
-    <label style="display:flex;align-items:flex-start;gap:10px;margin:1.5rem 0;text-align:left;font-size:0.85rem;color:var(--muted);cursor:pointer;max-width:480px;margin-left:auto;margin-right:auto;">
-      <input type="checkbox" id="core-approval-check" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required>
-      <span>I confirm that I have spoken with a member of the Rise founding team and have been approved as a suitable candidate for the Core program. I understand that payments made without prior approval may be declared invalid.</span>
-    </label>
-
-    <div class="checkout-summary">
-      <div class="summary-left">
-        <div class="summary-plan" id="summary-plan">Rise Community &mdash; 2 payments of &euro; 750,-</div>
-        <div class="summary-detail" id="summary-detail">&euro; 750,- now + &euro; 750,- in 1 month &middot; ex. VAT</div>
+  <!-- ══════════════════════════════════════════════
+       Two Ways In
+       ══════════════════════════════════════════════ -->
+  <section class="section two-ways">
+    <div class="section-inner">
+      <div class="section-eyebrow">Two ways in</div>
+      <h2 class="section-heading">Two ways in.</h2>
+      <div class="section-body">
+        <p>You get here either directly, once your intro call places you at Core level, or you progress here after finishing Base and a strategy call. Either way, there's selection, Core isn't automatic.</p>
       </div>
-      <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
-        Continue to Payment
-      </button>
-    </div>
 
-    <div class="security-note">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      Secure payment powered by Stripe. Your card details are never stored on our servers.
-    </div>
-  </main>
+      <div class="entry-grid">
 
+        <div class="entry-card">
+          <div class="entry-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Direct Entry</h3>
+          <p>After your intro call you are placed in the Core group</p>
+          <a href="#payment-plan" class="btn-primary">Find Your Path</a>
+        </div>
+
+        <div class="entry-card">
+          <div class="entry-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Through Base</h3>
+          <p>After 6 months of Base + a strategy call</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       What You Get
+       ══════════════════════════════════════════════ -->
+  <section class="section" id="what-you-get">
+    <div class="section-inner">
+      <div class="section-eyebrow">The program</div>
+      <h2 class="section-heading">What a year in Core actually looks&nbsp;like.</h2>
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <h3>Weekly Sessions</h3>
+          <p>Join weekly live coaching sessions with Maurits to stay accountable, review your progress, get feedback on your music, and receive clear action points to keep improving every week.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>12 Months</h3>
+          <p>A full year of structured growth with a clear roadmap, helping you build consistent habits, finish more music, and make lasting progress as an artist.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>Lesson Modules</h3>
+          <p>Access a growing library of advanced production lessons alongside Producer Practice modules designed to help you apply every concept through real-world exercises, projects, and workflows.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>Platform Access</h3>
+          <p>Get unlimited access to our full learning platform, including video modules, sample packs, Ableton racks, project files, templates, and all future content released during your membership.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Social Proof
+       ══════════════════════════════════════════════ -->
+  <section class="section" id="social-proof">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="text-align:center;">Results</div>
+      <h2 class="section-heading" style="text-align:center;">What our members say</h2>
+      <div class="proof-placeholder">
+        Testimonials, videos and case studies &mdash; in production.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Full Program
+       ══════════════════════════════════════════════ -->
+  <section class="products-section">
+    <div class="products-head">
+      <div class="section-eyebrow">Full program</div>
+      <h2 class="section-heading">Everything you need, all in one place</h2>
+      <p style="color:var(--muted);font-size:0.95rem;line-height:1.7;max-width:55ch;margin:0 auto;">No more searching for separate courses or random tutorials. Inside Rise you'll find everything you need to keep improving.</p>
+    </div>
+    <div class="products-scroll-wrap">
+      <div class="products-scroll">
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/hero/3d174879-3f49-4f2f-9f3f-5cb9f25412cf.webp" alt="Rise Artist Course" loading="lazy"><div class="info"><h4>Rise Artist Course</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/96e7f4d6-0ded-4eee-866e-9ae8c4a6f102/hero/2450e7a7-9a88-4d3d-b279-5cffe3fbefb8.webp" alt="The Manual" loading="lazy"><div class="info"><h4>The Manual</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/018b6581-4bb6-4127-a361-8dcd52fe4e2d/hero/d5f0ff0d-3bc7-4484-84fd-09275e87e73d.jpg" alt="House Sample Pack" loading="lazy"><div class="info"><h4>House Sample Pack</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/7b7bcf13-b6b2-45a2-98b9-07d81138bff0/hero/d25836a3-1936-4461-8ecf-5a172de54660.jpg" alt="EcHooligan Chain" loading="lazy"><div class="info"><h4>EcHooligan Chain</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fbf5e278-3e97-4b17-9f33-2d29ed5894fa/hero/2cb5cb16-6a08-40c1-b7f7-b05cff0be657.jpg" alt="909 Pack" loading="lazy"><div class="info"><h4>909 Pack</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/08048efa-e754-48c2-bc9f-eedb974ea90e/hero/8640f43d-0bed-47cf-8a29-7f0a1b6b0494.jpg" alt="Serum Presets" loading="lazy"><div class="info"><h4>Serum Presets</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/a986bfda-f52b-451d-8bca-08185eb00752/hero/7cfa56c3-5c1c-4254-ab8d-39377937fc80.jpg" alt="Kick Rack House" loading="lazy"><div class="info"><h4>Kick Rack House</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fef71bf3-c89d-497a-9b89-6189178f31f7/hero/63115779-b6c8-41cc-a1ce-94ab71fd20f9.jpg" alt="Kick Rack Techno" loading="lazy"><div class="info"><h4>Kick Rack Techno</h4></div></div>
+        <!-- Duplicate for loop -->
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/courses/4266a9fc-bd02-4c1c-92cc-907ced9454c3/4fa2bab2-5087-4b9d-aecb-48b78d2a805c/hero/3d174879-3f49-4f2f-9f3f-5cb9f25412cf.webp" alt="Rise Artist Course" loading="lazy"><div class="info"><h4>Rise Artist Course</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/96e7f4d6-0ded-4eee-866e-9ae8c4a6f102/hero/2450e7a7-9a88-4d3d-b279-5cffe3fbefb8.webp" alt="The Manual" loading="lazy"><div class="info"><h4>The Manual</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/018b6581-4bb6-4127-a361-8dcd52fe4e2d/hero/d5f0ff0d-3bc7-4484-84fd-09275e87e73d.jpg" alt="House Sample Pack" loading="lazy"><div class="info"><h4>House Sample Pack</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/7b7bcf13-b6b2-45a2-98b9-07d81138bff0/hero/d25836a3-1936-4461-8ecf-5a172de54660.jpg" alt="EcHooligan Chain" loading="lazy"><div class="info"><h4>EcHooligan Chain</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fbf5e278-3e97-4b17-9f33-2d29ed5894fa/hero/2cb5cb16-6a08-40c1-b7f7-b05cff0be657.jpg" alt="909 Pack" loading="lazy"><div class="info"><h4>909 Pack</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/08048efa-e754-48c2-bc9f-eedb974ea90e/hero/8640f43d-0bed-47cf-8a29-7f0a1b6b0494.jpg" alt="Serum Presets" loading="lazy"><div class="info"><h4>Serum Presets</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/a986bfda-f52b-451d-8bca-08185eb00752/hero/7cfa56c3-5c1c-4254-ab8d-39377937fc80.jpg" alt="Kick Rack House" loading="lazy"><div class="info"><h4>Kick Rack House</h4></div></div>
+        <div class="product-card"><img class="thumb" src="https://riseacademy.b-cdn.net/products/4266a9fc-bd02-4c1c-92cc-907ced9454c3/fef71bf3-c89d-497a-9b89-6189178f31f7/hero/63115779-b6c8-41cc-a1ce-94ab71fd20f9.jpg" alt="Kick Rack Techno" loading="lazy"><div class="info"><h4>Kick Rack Techno</h4></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       The Coach
+       ══════════════════════════════════════════════ -->
+  <section class="section" id="coach">
+    <div class="section-inner">
+      <div class="section-eyebrow">The coach</div>
+      <h2 class="section-heading">Meet the person leading your&nbsp;year.</h2>
+
+      <div class="coach-card-wide">
+        <img src="../assets/photos/Maurits.png" alt="Maurits" class="coach-avatar">
+        <div class="coach-info">
+          <h3>Maurits</h3>
+          <div class="coach-role">Runs Core</div>
+          <p class="coach-bio">Maurits leads Core from start to finish. Every week he'll challenge you, keep you accountable and make sure you keep moving towards the goals you've set for yourself. No excuses. No coasting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Reviews
+       ══════════════════════════════════════════════ -->
+  <section class="reviews-section">
+    <div class="reviews-inner">
+      <div class="reviews-head">
+        <div class="section-eyebrow">Reviews</div>
+        <h2 class="section-heading">What our members say</h2>
+      </div>
+      <div class="reviews-scroll">
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"Rise gives you everything you need to become a full-time artist. From music production to social media and business, it covers the complete picture."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"I was genuinely impressed by how comprehensive the course is. It doesn't just teach music production, it teaches you how to build a career."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"Rise has helped me tremendously. I've learned so much, and I would recommend it to any ambitious artist."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"Rise isn't just about making better music. It's about becoming a complete artist. That's what makes it different."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"Since joining Rise, I've become much more consistent with my music. My production skills and personal branding have improved tremendously."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"I was struggling to figure out who I wanted to be as an artist. Rise gave me the structure and clarity to make the right decisions for my future."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"It's one of the best investments you can make in yourself. You learn so much and gain a clear direction for your career."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">"If you're thinking about joining, just do it. Stay open-minded, put in the time, and you'll get an incredible amount of value from it."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Closing Section
+       ══════════════════════════════════════════════ -->
+  <section class="closing" style="background-image:linear-gradient(rgba(15,15,15,0.7),rgba(15,15,15,0.85)),url('../assets/photos/photo-18.jpg');background-size:cover;background-position:center;">
+    <div class="closing-inner">
+      <h2>Ready to make serious steps? This is where they&nbsp;start.</h2>
+      <p>Core isn't for people testing the water. It's for artists who've decided they're all in. If you're ready to commit to your music, your growth and the people around you, we'll make sure you keep moving forward every single week.</p>
+      <a href="#payment-plan" class="btn-primary">
+        Join Core Academy
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Payment Plan Section
+       ══════════════════════════════════════════════ -->
+  <section class="payment-section" id="payment-plan">
+    <div class="payment-inner">
+      <div class="checkout-header">
+        <div class="eyebrow">Almost there</div>
+        <h2>Choose your payment plan</h2>
+        <p>You're one step away from joining the Rise Community. Pick the plan that works best for you. All plans give you the exact same access.</p>
+      </div>
+
+      <div class="plan-grid">
+        <div class="plan-card" data-plan="community_1x" onclick="selectPlan(this)">
+          <div class="installments">Pay in full</div>
+          <div class="price">&euro; 1.500,-</div>
+          <div class="price-sub">One-time payment</div>
+          <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+        </div>
+
+        <div class="plan-card recommended selected" data-plan="community_2x" onclick="selectPlan(this)">
+          <div class="plan-badge">Popular</div>
+          <div class="installments">2 payments</div>
+          <div class="price">&euro; 750,-</div>
+          <div class="price-sub">per payment</div>
+          <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-2x">1st: now &middot; 2nd: in 1 month</div>
+        </div>
+
+        <div class="plan-card" data-plan="community_3x" onclick="selectPlan(this)">
+          <div class="installments">3 payments</div>
+          <div class="price">&euro; 500,-</div>
+          <div class="price-sub">per payment</div>
+          <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-3x">Monthly for 3 months</div>
+        </div>
+
+        <div class="plan-card" data-plan="community_11x" onclick="selectPlan(this)">
+          <div class="installments">11 payments</div>
+          <div class="price">&euro; 375,-</div>
+          <div class="price-sub">then 10 &times; &euro; 112,50</div>
+          <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-11x">Monthly for 11 months</div>
+        </div>
+      </div>
+
+      <label style="display:flex;align-items:flex-start;gap:10px;margin:1.5rem 0;text-align:left;font-size:0.85rem;color:var(--muted);cursor:pointer;max-width:480px;margin-left:auto;margin-right:auto;">
+        <input type="checkbox" id="core-approval-check" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required>
+        <span>I confirm that I have spoken with a member of the Rise founding team and have been approved as a suitable candidate for the Core program. I understand that payments made without prior approval may be declared invalid.</span>
+      </label>
+
+      <div class="checkout-summary">
+        <div class="summary-left">
+          <div class="summary-plan" id="summary-plan">Rise Community &mdash; 2 payments of &euro; 750,-</div>
+          <div class="summary-detail" id="summary-detail">&euro; 750,- now + &euro; 750,- in 1 month &middot; ex. VAT</div>
+        </div>
+        <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
+          Continue to Payment
+        </button>
+      </div>
+
+      <div class="security-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secure payment powered by Stripe. Your card details are never stored on our servers.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FAQ
+       ══════════════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Frequently asked</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question"><span>What if I'm not sure Core is right for me?</span><span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Core is for producers ready to fight for their career, it isn't a soft sell. If you're not there yet, Base or the subscription is the better starting point, and that's completely fine.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question"><span>Can I pay in installments?</span><span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes, as long as a down payment is made first.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question"><span>What happens after Core?</span><span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Standard platform access ends when the year does. You can keep it going through a subscription, 20 or 50 euro a month depending on what you need.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question"><span>Is Core the same as Base?</span><span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">No. Base is the foundation, Core is the main program. Some producers go straight into Core, others get there through Base first.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question"><span>How long does Core run?</span><span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">One year, with weekly live sessions and lesson modules unlocking throughout.</div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question"><span>Who coaches Core?</span><span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Maurits runs the weekly live sessions, focused on accountability and actually hitting your goals.</div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Footer
+       ══════════════════════════════════════════════ -->
   <footer class="footer">
-    &copy; 2026 Rise &middot; Recode Operations B.V. &middot; All rights reserved
+    <div class="footer-cta">
+      <p style="font-size:0.95rem;color:var(--fg);font-weight:600;margin-bottom:4px;">Start building. <a href="#payment-plan" style="color:var(--accent);">Join Core Academy.</a></p>
+    </div>
+    <p>&copy; 2026 Rise &middot; Recode Operations B.V.</p>
     <div class="links">
+      <a href="mailto:info@risemusicacademy.nl">Contact</a>
+      <a href="https://www.instagram.com/risemusicacademy/" target="_blank" rel="noopener">Instagram</a>
       <a href="../privacy/">Privacy</a>
       <a href="../terms/">Terms</a>
     </div>
   </footer>
 
+  <!-- ══════════════════════════════════════════════
+       Scripts
+       ══════════════════════════════════════════════ -->
   <script>
-    // ====== PLAN DATA ======
-    const plans = {
+    // ── Sticky header scroll effect ──
+    (function() {
+      var header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 60) { header.classList.add('scrolled'); }
+        else { header.classList.remove('scrolled'); }
+      }, { passive: true });
+    })();
+
+    // ── FAQ toggle ──
+    (function() {
+      document.querySelectorAll('.faq-question').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          this.parentElement.classList.toggle('open');
+        });
+      });
+    })();
+
+    // ── Plan selection + summary update + Stripe checkout ──
+    var plans = {
       'community_1x': {
         label: 'Pay in full — € 1.500,-',
         detail: 'One-time payment now · ex. VAT',
@@ -382,12 +1264,12 @@
       },
     };
 
-    let selectedPlan = 'community_2x';
+    var selectedPlan = 'community_2x';
 
     // Read URL params (passed from application form)
-    const params = new URLSearchParams(window.location.search);
-    const customerName = params.get('name') || '';
-    const customerEmail = params.get('email') || '';
+    var params = new URLSearchParams(window.location.search);
+    var customerName = params.get('name') || '';
+    var customerEmail = params.get('email') || '';
 
     function selectPlan(el) {
       document.querySelectorAll('.plan-card').forEach(function(c) { c.classList.remove('selected'); });
@@ -448,5 +1330,6 @@
     // Init
     updateSummary();
   </script>
+
 </body>
 </html>
