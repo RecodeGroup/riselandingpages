@@ -738,12 +738,15 @@
     /* -- Partner logos --------------------------------------------- */
     .logos-row {
       display: flex;
-      justify-content: center;
       align-items: center;
       gap: 3rem;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
       padding: 1rem 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .logos-row::-webkit-scrollbar { display: none; }
     .logos-row img {
       height: 48px;
       max-width: 180px;
@@ -1031,7 +1034,7 @@
       .process-grid { grid-template-columns: 1fr; }
       .proof-bar { gap: 1.25rem; }
       .proof-stat .num { font-size: 1.5rem; }
-      .logos-row { gap: 1.5rem; }
+      .logos-row { gap: 1.5rem; padding-left: 1rem; padding-right: 1rem; }
       .logos-row img { height: 36px; max-width: 100px; }
       .ways-grid { grid-template-columns: 1fr; }
       .offers-grid { grid-template-columns: 1fr; }
@@ -1471,13 +1474,13 @@
   <h2 class="section-title">Who we work with</h2>
 
   <div class="logos-row">
-    <img src="../assets/partners/clear-agency_2.png" alt="Clear Agency" loading="lazy" style="height:120px;max-width:280px;">
-    <img src="../assets/partners/recode-records.png" alt="Recode Records" loading="lazy" style="height:100px;max-width:240px;">
-    <img src="../assets/partners/weraveyou.png" alt="WeRaveYou" loading="lazy" style="height:84px;max-width:300px;">
-    <img src="../assets/partners/rd-icon.png" alt="RD" loading="lazy" style="height:45px;">
-    <img src="../assets/partners/revoke.png" alt="Revoke" loading="lazy" style="height:33px;">
-    <img src="../assets/partners/ttm.png" alt="TTM" loading="lazy" style="height:60px;max-width:200px;">
-    <span class="logo-text" style="font-size:1.45rem;">AMPLIFY</span>
+    <img src="../assets/partners/clear-agency_2.png" alt="Clear Agency" loading="lazy" style="height:120px;max-width:280px;flex-shrink:0;">
+    <img src="../assets/partners/recode-records.png" alt="Recode Records" loading="lazy" style="height:100px;max-width:240px;flex-shrink:0;">
+    <img src="../assets/partners/weraveyou.png" alt="WeRaveYou" loading="lazy" style="height:84px;max-width:300px;flex-shrink:0;">
+    <img src="../assets/partners/rd-icon.png" alt="RD" loading="lazy" style="height:45px;flex-shrink:0;">
+    <img src="../assets/partners/revoke.png" alt="Revoke" loading="lazy" style="height:33px;flex-shrink:0;">
+    <img src="../assets/partners/ttm.png" alt="Tracks to the Max" loading="lazy" style="height:60px;max-width:200px;flex-shrink:0;">
+    <span class="logo-text" style="font-size:1.45rem;flex-shrink:0;">AMPLIFY</span>
   </div>
 </div>
 

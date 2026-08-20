@@ -494,8 +494,9 @@
     .support-btn:hover { opacity: 0.85; }
     .support-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
     .support-btn.wa {
-      background: #25D366;
-      color: #fff;
+      background: rgba(37,211,102,0.15);
+      color: #25D366;
+      border: 1px solid rgba(37,211,102,0.3);
     }
     .support-btn.email {
       background: transparent;
@@ -567,12 +568,12 @@
         </div>
       </div>
       <!-- Step 3: Introduction Call -->
-      <div class="flow-step">
-        <div class="flow-icon upcoming">
+      <div class="flow-step" id="step-call">
+        <div class="flow-icon upcoming" id="step-call-icon">
           <svg viewBox="0 0 24 24" fill="none"><path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div>
-          <div class="flow-label">Introduction Call</div>
+          <div class="flow-label" id="step-call-label">Introduction Call</div>
           <div class="flow-desc">We'll explore where you are, where you want to go, and whether Rise is the right fit.</div>
         </div>
       </div>
@@ -598,7 +599,7 @@
     <div class="commitment-gate" id="commitmentGate">
       <div class="gate-eyebrow">OPTIONAL · FOR SERIOUS APPLICANTS</div>
       <div class="gate-title">Serious about moving forward? Reserve your call now.</div>
-      <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem;">If you're already confident that you want to explore Rise, you can reserve an Introduction Call ahead of our review.</p>
+      <p id="gateDesc" style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:1.5rem;">If you're already confident that you want to explore Rise, you can reserve a preferred time for an Introduction Call. We'll review your application and confirm the call with you afterwards.</p>
 
       <div class="expect-item">
         <div class="expect-icon">
@@ -689,15 +690,10 @@
 
   <!-- ═══ BLOCK 4 — Questions ═══ -->
   <main class="main" style="padding-top:0;">
-    <div class="wa-box">
-      <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      <p>Questions before your call? <a href="https://wa.me/message/">Reach out via WhatsApp</a> and we'll help you out.</p>
-    </div>
-
     <div class="support-block">
       <div class="support-eyebrow">Support</div>
-      <div class="support-title">Questions before the call?</div>
-      <div class="support-desc">Use the direct booking page if the embed does not load. If anything looks wrong, contact the Rise team and mention your application.</div>
+      <div class="support-title">Questions or issues?</div>
+      <div class="support-desc">Reach out via WhatsApp or email and we'll help you out. Use the direct booking page if the embed does not load.</div>
       <div class="support-buttons">
         <a href="https://wa.me/31644760134" target="_blank" rel="noopener" class="support-btn wa">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -842,14 +838,22 @@
             }, i * 80);
           });
 
-          // Hide gate title
+          // Hide gate title + description
           var gateTitle = gate.querySelector('.gate-title');
+          var gateDesc = document.getElementById('gateDesc');
           setTimeout(function() {
             gateTitle.style.transition = 'opacity 0.2s, max-height 0.3s';
             gateTitle.style.opacity = '0';
             gateTitle.style.maxHeight = '0';
             gateTitle.style.overflow = 'hidden';
             gateTitle.style.marginBottom = '0';
+            if (gateDesc) {
+              gateDesc.style.transition = 'opacity 0.2s, max-height 0.3s';
+              gateDesc.style.opacity = '0';
+              gateDesc.style.maxHeight = '0';
+              gateDesc.style.overflow = 'hidden';
+              gateDesc.style.marginBottom = '0';
+            }
           }, 250);
 
           // Show confirmed
@@ -866,7 +870,18 @@
             eyebrow.style.color = '#4ade80';
             eyebrow.textContent = 'CALL RESERVED';
 
-            // Flow step removed — booking is now separate from the timeline
+            // Update Introduction Call step in the timeline to green
+            var stepIcon = document.getElementById('step-call-icon');
+            if (stepIcon) {
+              stepIcon.className = 'flow-icon done';
+              stepIcon.style.background = 'rgba(74,222,128,0.15)';
+              stepIcon.style.borderColor = 'rgba(74,222,128,0.4)';
+              stepIcon.querySelector('svg').style.color = '#4ade80';
+            }
+            var stepLabel = document.getElementById('step-call-label');
+            if (stepLabel) {
+              stepLabel.innerHTML = '<span style="color:#4ade80">Call reserved</span>';
+            }
           }, 500);
 
           // Reveal calendar
