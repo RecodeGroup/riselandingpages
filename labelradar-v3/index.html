@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Label Radar x Rise &mdash; Free Strategy Call for Members</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* ════════════════════════════════════════════════
+       Label Radar x Rise — core-v3 design system
+       ════════════════════════════════════════════════ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+      --lr-blue: #4a90d9;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Site Header ─────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.72);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 7px; }
+    .nav-logo span {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .header-cta {
+      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s; text-decoration: none;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(74,144,217,0.12), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.08), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.92) 0%, rgba(15,15,15,0.65) 40%, rgba(15,15,15,0.95) 100%);
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 1; }
+    .hero-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .hero-logos img { height: 44px; }
+    .hero-logos .x-mark {
+      font-size: 1.2rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lr-blue);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── Buttons ──────────────────────────────────── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+
+    /* ── Member Badge ────────────────────────────── */
+    .member-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(74,144,217,0.12);
+      border: 1px solid rgba(74,144,217,0.25);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lr-blue);
+      margin-bottom: 24px;
+    }
+    .member-badge svg { width: 14px; height: 14px; }
+
+    /* ── Section defaults ────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 55ch;
+    }
+
+    /* ── What You Get ────────────────────────────── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 2.5rem;
+    }
+    .feature-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(24px, 3vw, 32px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .feature-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card .card-icon {
+      width: 40px; height: 40px;
+      background: rgba(255,104,62,0.08);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-card .card-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── How It Works ────────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 2.5rem;
+    }
+    .step {
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      transition: border-color 0.3s;
+    }
+    .step:hover { border-color: rgba(255,104,62,0.15); }
+    .step-number {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,104,62,0.10);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Label Radar Info ────────────────────────── */
+    .lr-info {
+      background: var(--bg-2);
+      border: 1px solid rgba(74,144,217,0.15);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 44px);
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    .lr-info-logo {
+      flex-shrink: 0;
+      width: 80px;
+    }
+    .lr-info-logo img {
+      width: 100%;
+      filter: brightness(1.1);
+    }
+    .lr-info-text h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .lr-info-text p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .lr-info-text a {
+      color: var(--lr-blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .lr-info-text a:hover { color: #6aacef; }
+
+    /* ── Closing CTA ─────────────────────────────── */
+    .closing {
+      background: var(--bg);
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .closing-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .closing p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq { background: var(--bg); }
+    .faq .section-eyebrow { text-align: center; }
+    .faq .section-heading { text-align: center; }
+    .faq-list {
+      margin: 32px auto 0;
+      max-width: 720px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; padding: 1.25rem 0;
+      font-size: 1rem; font-weight: 600; color: var(--fg);
+      background: none; border: none; cursor: pointer;
+      text-align: left; gap: 1rem; font-family: inherit;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      position: relative; transition: transform 0.3s ease;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute;
+      background: var(--muted); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .faq-icon::before { width: 14px; height: 2px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-icon::after { width: 2px; height: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-item.open .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+    .faq-a {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
+                  padding 0.35s cubic-bezier(0.4,0,0.2,1);
+      padding: 0;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 0 20px;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem; text-align: center;
+      color: var(--muted); font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links { display: flex; justify-content: center; gap: 24px; margin-top: 10px; }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .lr-info { flex-direction: column; align-items: center; text-align: center; }
+      .hero-logos img { height: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       Header
+       ══════════════════════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a href="../homepage-v3/" class="nav-logo">
+        <img src="../assets/Rise-logo.png" alt="Rise" />
+        <span>Rise</span>
+      </a>
+      <a href="#book" class="header-cta">Book Your Call</a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       Hero
+       ══════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-logos">
+        <img src="https://www.labelradar.com/assets/images/labelradar_rebranded.png" alt="Label Radar" style="filter: brightness(1.2);" />
+        <span class="x-mark">&times;</span>
+        <img src="../assets/Rise-logo.png" alt="Rise Artist Academy" style="height: 44px; border-radius: 7px;" />
+      </div>
+      <div class="member-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Exclusive for Label Radar Members
+      </div>
+      <h1>Free 30-Minute Strategy Call</h1>
+      <p class="hero-sub">As a Label Radar member with an active subscription, you get a free strategy call with Rise Artist Academy. We will look at where you are now, where you want to go, and map out a plan to get your music heard by the right labels.</p>
+      <a href="#book" class="btn-primary">Book Your Free Call</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       What You Get
+       ══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-eyebrow">What you get</p>
+      <h2 class="section-heading">30 minutes, zero fluff</h2>
+      <p class="section-body">This is not a sales pitch. It is a focused session where we look at your music career and give you clear next steps you can act on right away.</p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Career Assessment</h3>
+          <p>We look at where you stand today: your releases, your audience, your goals. Honest feedback on what is working and what is not.</p>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3>Label Strategy</h3>
+          <p>How to use Label Radar effectively, which labels to target, and how to make your demos stand out from the crowd.</p>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Action Plan</h3>
+          <p>You walk away with a concrete plan: what to do this week, this month, and this quarter to move your career forward.</p>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Rise Network Access</h3>
+          <p>Get introduced to a community of artists, coaches, and industry contacts who can help you take the next step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       How It Works
+       ══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-eyebrow">How it works</p>
+      <h2 class="section-heading">Three simple steps</h2>
+      <p class="section-body">From booking to action plan in under a week.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Book your slot</h3>
+          <p>Pick a time that works for you using the booking link below. Calls happen via Google Meet or Zoom.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Prepare your questions</h3>
+          <p>Think about where you are stuck. What are your goals for the next 6 months? What labels are you targeting?</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Join the call</h3>
+          <p>30 minutes with a Rise coach. You get honest feedback, a clear direction, and actionable next steps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       About Label Radar
+       ══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-eyebrow">About this partnership</p>
+      <h2 class="section-heading">Label Radar + Rise</h2>
+      <p class="section-body">Label Radar connects artists directly with labels like Armada Music, Monstercat, NCS, and Toolroom Records. Rise Artist Academy helps artists build sustainable careers. Together, we make sure you do not just submit demos, but submit the right demos to the right labels with a real strategy behind it.</p>
+
+      <div class="lr-info">
+        <div class="lr-info-logo">
+          <img src="https://www.labelradar.com/assets/images/labelradar_rebranded.png" alt="Label Radar" />
+        </div>
+        <div class="lr-info-text">
+          <h3>What is Label Radar?</h3>
+          <p>Label Radar is part of the Beatport ecosystem and gives artists a direct line to labels accepting demos. With features like remix contests, an artist network for collaborations, and an artist watchlist, it is the most direct way to get your music in front of decision makers. Members with a Pro subscription or higher qualify for this free strategy call with Rise.</p>
+          <p style="margin-top: 12px;"><a href="https://www.labelradar.com" target="_blank" rel="noopener">Visit labelradar.com &rarr;</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Book Your Call
+       ══════════════════════════════════════════════ -->
+  <section class="closing" id="book">
+    <div class="closing-inner">
+      <p class="section-eyebrow" style="color: var(--accent);">Ready?</p>
+      <h2>Book your free strategy call</h2>
+      <p>Pick a time below and we will see you on the call. No strings attached. This is a free benefit of your Label Radar membership.</p>
+      <a href="https://calendly.com/riseartistacademy/strategy-call" target="_blank" rel="noopener" class="btn-primary">Book a Time Slot</a>
+      <p style="margin-top: 16px; font-size: 0.78rem; color: var(--muted);">You will be redirected to our scheduling page.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FAQ
+       ══════════════════════════════════════════════ -->
+  <section class="section faq">
+    <div class="section-inner">
+      <p class="section-eyebrow">Questions</p>
+      <h2 class="section-heading">Frequently asked</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Who qualifies for the free strategy call?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">Any Label Radar member with an active subscription (Pro or higher) qualifies. If you have an active account on labelradar.com, you are eligible.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>What happens during the call?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">A Rise coach will spend 30 minutes with you going over your current situation, your goals, and your strategy for getting signed or growing your audience. You will leave with clear action steps.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Is this really free? What is the catch?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">There is no catch. This is a partnership between Label Radar and Rise. We believe that when artists get better guidance, everyone wins. If Rise turns out to be a good fit, great. If not, you still walk away with a clear plan.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Do I need to prepare anything?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">Think about what you want to achieve in the next 6 to 12 months. Have your Label Radar profile and recent releases in mind. The more specific your questions, the more you will get out of the call.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Can I book more than one call?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">The free strategy call is a one-time benefit per Label Radar member. If you want ongoing coaching and support after that, you can explore the Rise programs.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>What is Rise Artist Academy?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">Rise is an artist development academy founded in 2023. We offer structured programs (Base and Core) that help electronic music producers build real careers through coaching, accountability, and industry connections. Over 100 artists have gone through our programs.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Footer
+       ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+    <div class="links">
+      <a href="mailto:contact@riseartistacademy.com">Contact</a>
+      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+       Scripts
+       ══════════════════════════════════════════════ -->
+  <script>
+    // ── Sticky header scroll effect ──
+    (function() {
+      var header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 60) { header.classList.add('scrolled'); }
+        else { header.classList.remove('scrolled'); }
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
