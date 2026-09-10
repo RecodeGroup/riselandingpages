@@ -739,14 +739,11 @@
     .logos-row {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 3rem;
-      flex-wrap: nowrap;
-      overflow-x: auto;
+      flex-wrap: wrap;
       padding: 1rem 0;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
     }
-    .logos-row::-webkit-scrollbar { display: none; }
     .logos-row img {
       height: 48px;
       max-width: 180px;
