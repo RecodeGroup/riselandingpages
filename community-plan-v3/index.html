@@ -595,9 +595,9 @@
     /* ── Plan Grid ── */
     .plan-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      max-width: 760px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 920px;
       width: 100%;
     }
     .plan-card {
@@ -672,6 +672,23 @@
       margin-top: 16px;
       padding-top: 14px;
       border-top: 1px solid var(--line);
+    }
+    .bnpl-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding-top: 10px;
+      flex-wrap: wrap;
+    }
+    .bnpl-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
     }
     .plan-schedule {
       color: var(--muted);
@@ -789,10 +806,11 @@
       .section-heading,
       .closing h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
       .site-header-inner { padding: 0.75rem 1.25rem; }
-      .plan-grid { grid-template-columns: 1fr; max-width: 380px; }
+      .plan-grid { grid-template-columns: repeat(2, 1fr); max-width: 480px; }
       .checkout-summary { flex-direction: column; text-align: center; }
     }
     @media (max-width: 520px) {
+      .plan-grid { grid-template-columns: 1fr; max-width: 380px; }
       .section { padding: 3.5rem 1.25rem; }
       .closing { padding: 3.5rem 1.25rem; }
       .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 5rem); }
@@ -1070,6 +1088,17 @@
           <div class="price">&euro; 2.650,-</div>
           <div class="price-sub">One-time payment</div>
           <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
+          <div class="bnpl-badges">
+            <div class="bnpl-badge">
+              <svg width="44" height="12" viewBox="0 0 50 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.47 0H0v13.17h4.47V0zm.79 0C5.26 4.48 3.53 8.5.63 11.2l2.78 1.97C6.85 9.65 8.57 5.06 8.63 0H5.26zM13.9 0h-3.52v13.17h3.52V0zm5.64 0v4.8h-.06L15.99 0h-3.52l6.12 7.1-6.23 6.07h4.3l3.63-3.77h.05v3.77h3.52V0h-4.32zm14.37 0h-3.53v13.17h3.53V0zm-6.68 4.04c-1.31 0-2.48.56-3.3 1.45V4.3h-3.37v8.87h3.43V9.38c0-1.72.93-2.57 2.15-2.57 1.33 0 2.09.9 2.09 2.54v3.82h3.37V8.7c0-2.97-1.59-4.66-4.37-4.66zM42.49 4.3v.73a4.68 4.68 0 00-2.61-.78c-2.82 0-5.1 2.06-5.1 4.52s2.28 4.49 5.1 4.49c.98 0 1.87-.28 2.61-.78v.69h3.35V4.3h-3.35zm-2.16 5.98c-1.38 0-2.5-.8-2.5-1.54 0-.75 1.12-1.55 2.5-1.55 1.39 0 2.5.8 2.5 1.55 0 .74-1.11 1.54-2.5 1.54zM49.4 5.24a.86.86 0 100-1.72.86.86 0 000 1.72z" fill="#FFB3C7"/></svg>
+            </div>
+            <div class="bnpl-badge">
+              <svg width="52" height="14" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.8 0h-9.6C5 0 0 5 0 11.2v9.6C0 27 5 32 11.2 32h9.6C27 32 32 27 32 20.8v-9.6C32 5 27 0 20.8 0z" fill="#6C23B5"/><path d="M22.4 12.8h-4.8l-1.6 6.4-1.6-6.4h-4.8l3.2 9.6h5.6l4-9.6z" fill="#fff"/><path d="M48 8h-6.4v16H48c4.4 0 8-3.6 8-8s-3.6-8-8-8zm0 11.2h-1.6v-6.4H48c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2zM64 8c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 11.2c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zM86.4 8v1.6c-1.2-1.2-2.8-2-4.8-2-4 0-7.2 3.6-7.2 8s3.2 8 7.2 8c2 0 3.6-.8 4.8-2V24h4.8V8h-4.8zm-3.6 11.2c-2 0-3.6-1.4-3.6-3.2s1.6-3.2 3.6-3.2 3.6 1.4 3.6 3.2-1.6 3.2-3.6 3.2zM100.8 14.4V8H96v16h4.8v-5.6c0-2.4 2-3.2 4-3.2h.4V8c-2 0-3.6.8-4.4 2.4v4zM112 8c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 11.2c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2z" fill="#6C23B5"/></svg>
+            </div>
+            <div class="bnpl-badge">
+              <svg width="36" height="14" viewBox="0 0 80 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.2 0 0 7.2 0 16s7.2 16 16 16c3.6 0 6.8-1.2 9.6-3.2L40 16 25.6 3.2C22.8 1.2 19.6 0 16 0z" fill="#FA5022"/><path d="M40 16L25.6 28.8c2.8 2 6 3.2 9.6 3.2 8.8 0 16-7.2 16-16s-7.2-16-16-16c-3.6 0-6.8 1.2-9.6 3.2L40 16z" fill="#FA5022" opacity="0.6"/><path d="M60 10h-4l-3 12h4l3-12zm8 0h-4l-1 4h-3l-1 4h3l-1 4h4l3-12zm-24 0h-4l-3 12h4l3-12z" fill="#FA5022"/></svg>
+            </div>
+          </div>
         </div>
 
         <div class="plan-card recommended selected" data-plan="community_2x" onclick="selectPlan(this)">
@@ -1087,6 +1116,14 @@
           <div class="price-sub">then 2 &times; &euro; 883,-</div>
           <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
           <div class="plan-schedule" id="schedule-3x">Monthly for 3 months</div>
+        </div>
+
+        <div class="plan-card" data-plan="community_4x" onclick="selectPlan(this)">
+          <div class="installments">4 payments</div>
+          <div class="price">&euro; 662,50</div>
+          <div class="price-sub">per payment</div>
+          <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-4x">Monthly for 4 months</div>
         </div>
       </div>
 
@@ -1293,6 +1330,10 @@
       'community_3x': {
         label: '€ 884,- + 2 × € 883,-',
         detail: '€ 884,- now + 2 × € 883,- monthly · ex. VAT',
+      },
+      'community_4x': {
+        label: '4 payments of € 662,50',
+        detail: '€ 662,50 now + 3 × € 662,50 monthly · ex. VAT',
       },
     };
 
