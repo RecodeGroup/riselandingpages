@@ -1148,16 +1148,16 @@
         <div class="plan-card recommended selected" data-plan="2x" onclick="selectPlan(this)">
           <div class="plan-badge">Popular</div>
           <div class="installments">2 payments</div>
-          <div class="price">&euro; 750,-</div>
-          <div class="price-sub">per payment</div>
+          <div class="price">&euro; 375,-</div>
+          <div class="price-sub">deposit &middot; then &euro; 1.125,-</div>
           <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
           <div class="plan-schedule" id="schedule-2x"></div>
         </div>
 
         <div class="plan-card" data-plan="3x" onclick="selectPlan(this)">
           <div class="installments">3 payments</div>
-          <div class="price">&euro; 500,-</div>
-          <div class="price-sub">per payment</div>
+          <div class="price">&euro; 375,-</div>
+          <div class="price-sub">deposit &middot; then 2 &times; &euro; 562,50</div>
           <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
           <div class="plan-schedule" id="schedule-3x"></div>
         </div>
@@ -1170,7 +1170,7 @@
 
       <div class="checkout-summary">
         <div class="summary-left">
-          <div class="summary-plan" id="summary-plan">Rise BASE &mdash; 2 payments of &euro; 750,-</div>
+          <div class="summary-plan" id="summary-plan">Rise BASE &mdash; &euro; 375,- deposit + &euro; 1.125,-</div>
           <div class="summary-detail" id="summary-detail"></div>
         </div>
         <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
@@ -1313,21 +1313,21 @@
         installments: 1,
       },
       '2x': {
-        label: '2 payments of € 750,-',
+        label: '€ 375,- deposit + € 1.125,-',
         getDetail: function() {
-          return '€ 750,- now + € 750,- in ' + autoCohort.label + ' · ex. VAT';
+          return '€ 375,- now + € 1.125,- in ' + autoCohort.label + ' · ex. VAT';
         },
-        amount: 750,
+        amount: 375,
         installments: 2,
       },
       '3x': {
-        label: '3 payments of € 500,-',
+        label: '€ 375,- deposit + 2 × € 562,50',
         getDetail: function() {
           var m1 = monthNames[autoCohort.startMonth];
           var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
-          return '€ 500,- now + 2 × € 500,- in ' + m1 + ', ' + m2 + ' ' + autoCohort.startYear + ' · ex. VAT';
+          return '€ 375,- now + 2 × € 562,50 in ' + m1 + ', ' + m2 + ' ' + autoCohort.startYear + ' · ex. VAT';
         },
-        amount: 500,
+        amount: 375,
         installments: 3,
       },
     };
@@ -1351,14 +1351,14 @@
       // 2x schedule
       var el2 = document.getElementById('schedule-2x');
       if (el2) {
-        el2.textContent = '1st: now · 2nd: ' + autoCohort.label;
+        el2.textContent = '1st: € 375,- now · 2nd: € 1.125,- in ' + autoCohort.label;
       }
       // 3x schedule
       var el3 = document.getElementById('schedule-3x');
       if (el3) {
         var m1 = monthNames[autoCohort.startMonth];
         var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
-        el3.textContent = '1st: now · 2nd–3rd: ' + m1 + ', ' + m2;
+        el3.textContent = '1st: € 375,- now · 2nd–3rd: 2 × € 562,50 in ' + m1 + ', ' + m2;
       }
     }
 

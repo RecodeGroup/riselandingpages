@@ -1101,18 +1101,18 @@
         <div class="plan-card recommended selected" data-plan="community_2x" onclick="selectPlan(this)">
           <div class="plan-badge">Popular</div>
           <div class="installments">2 payments</div>
-          <div class="price">&euro; 1.325,-</div>
-          <div class="price-sub">per payment</div>
+          <div class="price">&euro; 375,-</div>
+          <div class="price-sub">deposit &middot; then &euro; 2.275,-</div>
           <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-          <div class="plan-schedule" id="schedule-2x">1st: now &middot; 2nd: in 1 month</div>
+          <div class="plan-schedule" id="schedule-2x">1st: &euro; 375,- now &middot; 2nd: &euro; 2.275,- in 1 month</div>
         </div>
 
         <div class="plan-card" data-plan="community_3x" onclick="selectPlan(this)">
           <div class="installments">3 payments</div>
-          <div class="price">&euro; 884,-</div>
-          <div class="price-sub">then 2 &times; &euro; 883,-</div>
+          <div class="price">&euro; 375,-</div>
+          <div class="price-sub">deposit &middot; then 2 &times; &euro; 1.137,50</div>
           <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-          <div class="plan-schedule" id="schedule-3x">Monthly for 3 months</div>
+          <div class="plan-schedule" id="schedule-3x">1st: &euro; 375,- now &middot; then 2 &times; &euro; 1.137,50 monthly</div>
         </div>
 
       </div>
@@ -1124,8 +1124,8 @@
 
       <div class="checkout-summary">
         <div class="summary-left">
-          <div class="summary-plan" id="summary-plan">Rise CORE &mdash; 2 payments of &euro; 1.325,-</div>
-          <div class="summary-detail" id="summary-detail">&euro; 1.325,- now + &euro; 1.325,- in 1 month &middot; ex. VAT</div>
+          <div class="summary-plan" id="summary-plan">Rise CORE &mdash; &euro; 375,- deposit + &euro; 2.275,-</div>
+          <div class="summary-detail" id="summary-detail">&euro; 375,- now + &euro; 2.275,- in 1 month &middot; ex. VAT</div>
         </div>
         <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
           Continue to Payment
@@ -1314,12 +1314,12 @@
         detail: 'One-time payment now · ex. VAT',
       },
       'community_2x': {
-        label: '2 payments of € 1.325,-',
-        detail: '€ 1.325,- now + € 1.325,- in 1 month · ex. VAT',
+        label: '€ 375,- deposit + € 2.275,-',
+        detail: '€ 375,- now + € 2.275,- in 1 month · ex. VAT',
       },
       'community_3x': {
-        label: '€ 884,- + 2 × € 883,-',
-        detail: '€ 884,- now + 2 × € 883,- monthly · ex. VAT',
+        label: '€ 375,- deposit + 2 × € 1.137,50',
+        detail: '€ 375,- now + 2 × € 1.137,50 monthly · ex. VAT',
       },
     };
 
