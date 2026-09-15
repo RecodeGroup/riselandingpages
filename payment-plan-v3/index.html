@@ -1161,6 +1161,14 @@
           <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
           <div class="plan-schedule" id="schedule-3x"></div>
         </div>
+
+        <div class="plan-card" data-plan="4x" onclick="selectPlan(this)">
+          <div class="installments">4 payments</div>
+          <div class="price">&euro; 375,-</div>
+          <div class="price-sub">deposit &middot; then 3 &times; &euro; 375,-</div>
+          <div class="total">&euro; 1.500,- total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-4x"></div>
+        </div>
       </div>
 
       <label style="display:flex;align-items:flex-start;gap:10px;margin:1.5rem 0;text-align:left;font-size:0.85rem;color:var(--muted);cursor:pointer;max-width:480px;margin-left:auto;margin-right:auto;">
@@ -1330,6 +1338,17 @@
         amount: 375,
         installments: 3,
       },
+      '4x': {
+        label: '€ 375,- deposit + 3 × € 375,-',
+        getDetail: function() {
+          var m1 = monthNames[autoCohort.startMonth];
+          var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
+          var m3 = monthNames[(autoCohort.startMonth + 2) % 12];
+          return '€ 375,- now + 3 × € 375,- in ' + m1 + ', ' + m2 + ', ' + m3 + ' · ex. VAT';
+        },
+        amount: 375,
+        installments: 4,
+      },
     };
 
     var selectedPlan = '2x';
@@ -1359,6 +1378,14 @@
         var m1 = monthNames[autoCohort.startMonth];
         var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
         el3.textContent = '1st: € 375,- now · 2nd–3rd: 2 × € 562,50 in ' + m1 + ', ' + m2;
+      }
+      // 4x schedule
+      var el4 = document.getElementById('schedule-4x');
+      if (el4) {
+        var m1 = monthNames[autoCohort.startMonth];
+        var m2 = monthNames[(autoCohort.startMonth + 1) % 12];
+        var m3 = monthNames[(autoCohort.startMonth + 2) % 12];
+        el4.textContent = '1st: € 375,- now · 2nd–4th: 3 × € 375,- in ' + m1 + ', ' + m2 + ', ' + m3;
       }
     }
 

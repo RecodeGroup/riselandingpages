@@ -1115,6 +1115,14 @@
           <div class="plan-schedule" id="schedule-3x">1st: &euro; 375,- now &middot; then 2 &times; &euro; 1.137,50 monthly</div>
         </div>
 
+        <div class="plan-card" data-plan="community_4x" onclick="selectPlan(this)">
+          <div class="installments">4 payments</div>
+          <div class="price">&euro; 375,-</div>
+          <div class="price-sub">deposit &middot; then 3 &times; &euro; 758,33</div>
+          <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-4x">1st: &euro; 375,- now &middot; then 3 &times; &euro; 758,33 monthly</div>
+        </div>
+
       </div>
 
       <label style="display:flex;align-items:flex-start;gap:10px;margin:1.5rem 0;text-align:left;font-size:0.85rem;color:var(--muted);cursor:pointer;max-width:480px;margin-left:auto;margin-right:auto;">
@@ -1320,6 +1328,10 @@
       'community_3x': {
         label: '€ 375,- deposit + 2 × € 1.137,50',
         detail: '€ 375,- now + 2 × € 1.137,50 monthly · ex. VAT',
+      },
+      'community_4x': {
+        label: '€ 375,- deposit + 3 × € 758,33',
+        detail: '€ 375,- now + 3 × € 758,33 monthly · ex. VAT',
       },
     };
 
