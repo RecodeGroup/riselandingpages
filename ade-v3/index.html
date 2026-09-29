@@ -38,6 +38,48 @@
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
+    /* ── Video Testimonials ──────────────────────── */
+    .video-testimonials { padding: 5rem 0; text-align: center; }
+    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; padding: 0 2rem; }
+    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; padding: 0 2rem; }
+    .video-strip { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 2rem; }
+    .video-strip::-webkit-scrollbar { display: none; }
+    .video-strip-track { display: flex; gap: 16px; width: max-content; margin: 0 auto; }
+    .video-card {
+      position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
+      width: 240px; height: 420px; cursor: pointer;
+      background: #000; flex-shrink: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .video-card .play-btn { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+    .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
+
+    /* ── Scrolling Reviews ────────────────────────── */
+    .reviews-scroll { padding: 60px 0; overflow: hidden; }
+    .reviews-scroll-header { text-align: center; margin-bottom: 32px; }
+    .reviews-scroll-eyebrow {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .reviews-scroll-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em;
+    }
+    .reviews-scroll-rows { display: flex; flex-direction: column; gap: 12px; }
+    .reviews-scroll-row { display: flex; width: max-content; gap: 12px; }
+    .reviews-scroll-row--left { animation: scroll-reviews 35s linear infinite; }
+    .reviews-scroll-row--right { animation: scroll-reviews-reverse 40s linear infinite; }
+    .review-pill {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 8px 20px 8px 8px; background: #f5f5f5;
+      border-radius: 40px; white-space: nowrap; flex-shrink: 0;
+    }
+    .review-pill img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .review-pill span { font-size: 0.85rem; font-weight: 500; color: #1a1a1a; }
+    @keyframes scroll-reviews { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes scroll-reviews-reverse { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
     /* ── Accessibility ────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -103,7 +145,7 @@
         radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.12), transparent 55%),
         radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.06), transparent 60%),
         linear-gradient(180deg, rgba(15,15,15,0.82) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%),
-        url('../assets/Pages/Core/ADE2025-008.jpg') center 30% / cover no-repeat;
+        url('../assets/photos/photo-11.jpg') center 30% / cover no-repeat;
     }
     .hero-content { max-width: 720px; position: relative; z-index: 2; }
     .hero-badge {
@@ -116,7 +158,7 @@
       border-radius: 6px;
       margin-bottom: 20px;
     }
-    .hero-badge img { width: 28px; height: 28px; border-radius: 5px; }
+    .hero-badge img { width: 48px; height: 48px; border-radius: 8px; }
     .hero-badge span {
       font-size: 0.72rem;
       font-weight: 700;
@@ -587,7 +629,7 @@
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.8rem; }
-      .hero-stats { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
       .header-cta { display: none; }
     }
   </style>
@@ -597,11 +639,11 @@
   <!-- HEADER -->
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
-      <a class="header-logo" href="../homepage-v3/" title="Rise × ADE">
-        <img src="https://intent.itsinside.co/static/customer-assets/ade/launcher-icon.svg" alt="ADE">
+      <a class="header-logo" href="../homepage-v3/" title="Rise Artist Academy">
+        <img src="../assets/logo.png" alt="Rise">
         <span>Rise &times; ADE</span>
       </a>
-      <a class="header-cta" href="#get-guide">Get Free Guide</a>
+      <a class="header-cta" href="#get-guide">Apply for Rise</a>
     </div>
   </header>
 
@@ -618,7 +660,7 @@
       <h1>Your free career checklist and Ableton effects from <em>Rise.</em></h1>
       <p class="hero-sub">Get the Artist Career Checklist, a set of Ableton effect chains, and book a free strategy call with our team. No strings attached.</p>
       <a href="#get-guide" class="btn-primary">
-        Get Your Free Guide
+        Apply for Rise
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
 
@@ -699,13 +741,6 @@
           <h3>Free Strategy Call</h3>
           <p>After signing up, we reach out to schedule a free strategy call. We look at where you stand in your career and how we can help.</p>
         </div>
-        <div class="inside-card">
-          <div class="ic-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>Meet Rise at ADE</h3>
-          <p>We are at Amsterdam Dance Event. Come say hi, talk music, and find out how Rise helps artists grow their career.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -767,13 +802,9 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Learn how Rise can support your goals
         </li>
-        <li>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          No commitment, no pressure
-        </li>
       </ul>
       <a href="#get-guide" class="btn-primary">
-        Get Your Free Guide
+        Apply for Rise
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
@@ -810,7 +841,7 @@
 
       <div>
         <div class="form-card" id="form-card">
-          <h3>Get Your Free Guide</h3>
+          <h3>Apply for Rise</h3>
           <p class="sub">Free, instant delivery. No spam, ever.</p>
           <form id="giveaway-form" onsubmit="handleSubmit(event)">
             <div class="field">
@@ -830,7 +861,7 @@
               <input type="tel" id="phone" name="phone" placeholder="+31 6 1234 5678" required>
               <p id="phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number. From outside the Netherlands, include your country code, e.g. +44 7400 123456.</p>
             </div>
-            <button type="submit" class="btn-submit" id="btn-submit">Get Free Guide</button>
+            <button type="submit" class="btn-submit" id="btn-submit">Apply for Rise</button>
           </form>
           <p class="form-note">We respect your privacy. Unsubscribe any time.</p>
         </div>
@@ -884,13 +915,56 @@
           </button>
           <div class="faq-a"><div class="faq-a-inner">Yes, the effect chains are built for Ableton Live. The checklist works for any producer regardless of your DAW.</div></div>
         </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>Will you spam me?</span>
-            <span class="faq-icon"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">No. We send the guide, and we reach out once about the strategy call. You can unsubscribe at any time.</div></div>
-        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Video Testimonials
+       ══════════════════════════════════════════════ -->
+  <section class="video-testimonials">
+    <h2 class="section-title">What our artists have to say</h2>
+    <p class="section-sub">Stories from producers who joined Rise.</p>
+    <div class="video-strip">
+      <div class="video-strip-track">
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B_v2.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Scrolling Reviews
+       ══════════════════════════════════════════════ -->
+  <section class="reviews-scroll">
+    <div class="reviews-scroll-header">
+      <div class="reviews-scroll-eyebrow">Reviews</div>
+      <h2 class="reviews-scroll-title">What Our Members Say</h2>
+    </div>
+    <div class="reviews-scroll-rows">
+      <div class="reviews-scroll-row reviews-scroll-row--left">
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="Leo" loading="lazy"><span>"The community of dedicated musicians is inspiring."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max" loading="lazy"><span>"The community was an eye-opener for me."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi" loading="lazy"><span>"When you drift off track, people help you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth.png" alt="Seth" loading="lazy"><span>"I find the community really motivating."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy" loading="lazy"><span>"A good opportunity to connect."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="Leo" loading="lazy"><span>"The community of dedicated musicians is inspiring."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max" loading="lazy"><span>"The community was an eye-opener for me."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi" loading="lazy"><span>"When you drift off track, people help you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth.png" alt="Seth" loading="lazy"><span>"I find the community really motivating."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy" loading="lazy"><span>"A good opportunity to connect."</span></div>
+      </div>
+      <div class="reviews-scroll-row reviews-scroll-row--right">
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo" loading="lazy"><span>"Meeting these people is so important to me."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max2.jpg" alt="Max" loading="lazy"><span>"They challenge you to make specific goals."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi2.png" alt="Levi" loading="lazy"><span>"Making your goals concrete is most valuable."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth" loading="lazy"><span>"Working toward the same goal, helping each other."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo" loading="lazy"><span>"Meeting these people is so important to me."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max2.jpg" alt="Max" loading="lazy"><span>"They challenge you to make specific goals."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi2.png" alt="Levi" loading="lazy"><span>"Making your goals concrete is most valuable."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth" loading="lazy"><span>"Working toward the same goal, helping each other."</span></div>
       </div>
     </div>
   </section>
@@ -904,7 +978,7 @@
       <h2>Start with the tools most producers <em>learn too late.</em></h2>
       <p>The checklist, the Ableton effects, and an honest conversation about your career. All free. Register now and we take it from there.</p>
       <a href="#get-guide" class="btn-primary">
-        Get Your Free Guide
+        Apply for Rise
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
@@ -987,6 +1061,35 @@
       }
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
+
+    // ── Video testimonials ──
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('.video-card');
+      if (!card) return;
+      var v = card.querySelector('video');
+      if (!v) return;
+      e.preventDefault();
+      if (card.classList.contains('playing')) {
+        v.pause();
+        card.classList.remove('playing');
+      } else {
+        document.querySelectorAll('.video-card.playing').forEach(function(c) {
+          var cv = c.querySelector('video');
+          if (cv) cv.pause();
+          c.classList.remove('playing');
+        });
+        v.currentTime = 0;
+        var p = v.play();
+        if (p && typeof p.then === 'function') {
+          p.then(function() {
+            card.classList.add('playing');
+          }).catch(function() {});
+        } else {
+          card.classList.add('playing');
+        }
+      }
+      v.onended = function() { card.classList.remove('playing'); };
+    });
 
     // Form submission
     async function handleSubmit(e) {
