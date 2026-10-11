@@ -167,7 +167,7 @@
         radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
         radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
         linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.55) 40%, rgba(15,15,15,0.92) 100%),
-        url('../assets/Pages/Base/Hero.png') center 40% / cover no-repeat;
+        url('../assets/Pages/Main/VSL Thumbnail.png') center center / cover no-repeat;
       filter: blur(2px);
       transform: scale(1.02);
     }
@@ -191,10 +191,17 @@
       letter-spacing: -0.02em;
       margin-bottom: 20px;
     }
-    .hero-sub {
+    .hero-sub-main {
       font-size: 1.1rem;
       color: rgba(255,255,255,0.82);
       line-height: 1.7;
+      max-width: 55ch;
+      margin: 0 0 1rem;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.5;
       max-width: 55ch;
       margin: 0 0 1.5rem;
       display: flex;
@@ -212,12 +219,10 @@
     }
     /* Animated rotating text */
     .hero-rotating {
-      display: inline-block;
+      display: inline-flex;
       overflow: hidden;
       height: 1.5em;
-      vertical-align: baseline;
-      position: relative;
-      top: 0.35em;
+      vertical-align: text-bottom;
       flex-shrink: 0;
       text-align: left;
     }
@@ -318,6 +323,7 @@
         grid-template-columns: 1fr;
       }
       .hero-text { text-align: center; }
+      .hero-sub-main { text-align: center; }
       .hero-sub { margin: 0 auto 1.5rem; justify-content: center; text-align: center; }
       .hero-stats { justify-content: center; }
       .hero-cta { width: 100%; justify-content: center; }
@@ -839,8 +845,8 @@
       <div class="hero-text">
         <div class="hero-eyebrow">Base Academy</div>
         <h1>Finish release-ready tracks in six&nbsp;months.</h1>
+        <p class="hero-sub-main">30 live sessions, one small group, one clear structure. You learn to finish tracks, find your own sound and build a workflow you can trust.</p>
         <p class="hero-sub">Learn to <span class="hero-rotating"><span class="hero-rotating-inner"><span>finish tracks consistently</span><span>find your own sound</span><span>build a reliable workflow</span><span>mix with confidence</span><span>finish tracks consistently</span></span></span></p>
-        <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:1.5rem;max-width:48ch;">30 live sessions, one small group, one clear structure. Six months of hands-on coaching to close the gap between where you are and where you want to be.</p>
         <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
           Start your application
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
