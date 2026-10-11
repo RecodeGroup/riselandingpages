@@ -28,6 +28,9 @@ assets/Testimonials/Voor site/WhatsApp Video*.mp4
 # Claude/AI session files
 .claude/
 
+# Large video files (over GitHub 100MB limit)
+assets/Pages/Core/Maurits VSL.mp4
+
 # Editor files
 *.swp
 *~
