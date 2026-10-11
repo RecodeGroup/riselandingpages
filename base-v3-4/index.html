@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE Base Academy &mdash; Your hard drive is full of ideas. Your release list is empty.</title>
+  <meta name="description" content="Base Academy: six months of hands-on production coaching, group-based, with weekly live sessions. Build a production foundation you can rely on.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* ════════════════════════════════════════════════
+       Rise Base Academy — Landing Page v3-4
+       Direct Qualifier / Shortest Path variant
+       ════════════════════════════════════════════════ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Accessibility ───────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ── Header ──────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-bottom-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-bottom: 1px solid transparent;
+      will-change: background, border-color, box-shadow;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.92);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 8px 40px 8px 16px; transition: transform 0.3s;
+    }
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
+    }
+    .urgency-text {
+      display: inline;
+      animation: urgency-pulse 3s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    body.has-urgency-bar .site-header { top: 36px; }
+    body.has-urgency-bar .hero { margin-top: -61px; padding-top: 181px; }
+    .header-cta {
+      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s; text-decoration: none;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
+
+    @media (max-width: 768px) {
+      .site-header-inner { padding: 0.75rem 1.25rem; }
+    }
+
+    /* ── Buttons ──────────────────────────────────── */
+    .btn-primary,
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover,
+    .hero-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .hero-cta svg { width: 18px; height: 18px; }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.55) 40%, rgba(15,15,15,0.92) 100%),
+        url('../assets/Pages/Base/Hero.png') center 30% / cover no-repeat;
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* ── Genre pills ─────────────────────────────── */
+    .genre-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .genre-pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .genre-pill:hover,
+    .genre-pill.active {
+      background: rgba(255,104,62,0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── Diagnosis cards ─────────────────────────── */
+    .diagnosis { background: var(--bg-2); }
+    .diagnosis-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 0;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .diagnosis-card {
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .diagnosis-step {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .diagnosis-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255,104,62,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .diagnosis-icon svg { width: 24px; height: 24px; color: var(--accent); }
+    .diagnosis-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .diagnosis-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .diagnosis-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+    }
+    .diagnosis-arrow svg {
+      width: 32px;
+      height: 12px;
+      color: rgba(255,255,255,0.15);
+    }
+    @media (max-width: 768px) {
+      .diagnosis-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+        max-width: 380px;
+      }
+      .diagnosis-arrow {
+        transform: rotate(90deg);
+        padding: 8px 0;
+      }
+    }
+
+    /* ── Solution / Stats ────────────────────────── */
+    .solution { background: var(--bg); }
+    .solution-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin-bottom: 2.5rem;
+    }
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .stat-block {
+      background: var(--bg-2);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .stat-block:first-child { border-radius: 14px 0 0 14px; }
+    .stat-block:last-child { border-radius: 0 14px 14px 0; }
+    .stat-number {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      .stats-bar {
+        grid-template-columns: 1fr 1fr;
+      }
+      .stat-block:first-child { border-radius: 14px 0 0 0; }
+      .stat-block:nth-child(2) { border-radius: 0 14px 0 0; }
+      .stat-block:nth-child(3) { border-radius: 0 0 0 14px; }
+      .stat-block:last-child { border-radius: 0 0 14px 0; }
+    }
+
+    /* ── Section defaults ────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    /* ── VSL Video Player ────────────────────────── */
+    .vsl-section { background: var(--bg-2); }
+    .vsl-video-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .vsl-video-wrap video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    .vsl-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .vsl-play-overlay svg {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      transition: transform 0.2s ease;
+    }
+    .vsl-video-wrap:hover .vsl-play-overlay svg { transform: scale(1.08); }
+    .vsl-video-wrap.playing .vsl-play-overlay { opacity: 0; }
+    .vsl-progress-wrap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      transition: opacity 0.3s linear;
+    }
+    .vsl-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s linear, opacity 0.3s linear;
+    }
+
+    /* ── Coaches (compact) ───────────────────────── */
+    .coaches { background: var(--bg); }
+    .coach-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .coach-compact {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .coach-compact img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,104,62,0.15);
+    }
+    .coach-compact-info { flex: 1; }
+    .coach-compact-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .coach-compact-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .coach-compact-bio {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    @media (max-width: 768px) {
+      .coach-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── Photo strip ─────────────────────────────── */
+    .photo-strip {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .photo-strip-track {
+      display: flex;
+      gap: 4px;
+      width: max-content;
+      animation: scroll-strip 40s linear infinite;
+    }
+    .photo-strip-track img {
+      height: 180px;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+    @keyframes scroll-strip {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Closing ──────────────────────────────────── */
+    .closing {
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .closing-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .closing p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq { background: var(--bg); }
+    .faq .section-eyebrow { text-align: center; }
+    .faq .section-heading { text-align: center; }
+    .faq-list {
+      max-width: 720px;
+      margin: 32px auto 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; padding: 1.25rem 0;
+      font-size: 1rem; font-weight: 600; color: var(--fg);
+      background: none; border: none; cursor: pointer;
+      text-align: left; gap: 1rem; font-family: inherit;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      position: relative; transition: transform 0.3s ease;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute;
+      background: var(--muted); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .faq-icon::before {
+      width: 14px; height: 2px; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-icon::after {
+      width: 2px; height: 14px; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .faq-item.open .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg); opacity: 0;
+    }
+    .faq-a {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 0 20px;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .footer .links a {
+      color: var(--muted);
+      font-size: 0.75rem;
+      transition: color 0.2s;
+    }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Limited spots indicator ── */
+    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); text-align:center; margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
+    @keyframes spots-breathe { 0%,100%{ color:rgba(255,255,255,0.45); } 50%{ color:rgba(255,255,255,0.85); } }
+
+    /* ── Step labels ── */
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; justify-content:center; width:100%; }
+
+    /* ── Modal / Questionnaire ────────────────────── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: stretch; justify-content: stretch; animation: fadeIn 0.25s ease; }
+    .modal-overlay.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    .modal { width: 100%; display: flex; flex-direction: column; padding: 32px; position: relative; animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes slideUp { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+    .modal-top { max-width: 720px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .modal-back { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; padding: 8px 0; transition: color 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-back:hover { color: var(--fg); }
+    .modal-back.hidden { visibility: hidden; }
+    .modal-close { font-size: 22px; color: var(--muted); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: color 0.2s, background 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-close:hover { color: var(--fg); background: var(--line); }
+    .modal-body { max-width: 720px; width: 100%; margin: 60px auto 0; flex: 1; }
+    .progress { display: flex; gap: 8px; margin-bottom: 28px; }
+    .progress span { flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+    .progress span.done { background: var(--accent); }
+    .step-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; max-width: 18ch; margin-bottom: 36px; }
+    .options { display: grid; gap: 12px; }
+    .option { display: flex; gap: 18px; align-items: flex-start; padding: 18px 22px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; width: 100%; transition: background 0.2s, border-color 0.2s; font-family: inherit; color: inherit; }
+    .option:hover { background: rgba(255,255,255,0.06); border-color: var(--line-strong); }
+    .option.selected { border-color: var(--accent); background: rgba(255,104,62,0.08); }
+    .option .letter { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; flex-shrink: 0; width: 14px; }
+    .option .text { font-size: 0.92rem; line-height: 1.4; }
+    .slider-step { text-align: center; padding-top: 20px; }
+    .slider-value { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+    .slider-label { margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
+    .slider-wrap { margin-top: 50px; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .slider-wrap input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; background: var(--line); border-radius: 4px; outline: none; }
+    .slider-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--fg); border-radius: 50%; cursor: pointer; border: 4px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+    .slider-bounds { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.68rem; color: var(--muted); }
+    .btn-continue { background: var(--accent); color: #0a0a0a; width: 100%; max-width: 420px; margin: 36px auto 0; display: block; padding: 18px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; border: none; cursor: pointer; font-family: inherit; }
+    .btn-continue:hover { background: var(--accent-hover); }
+    .form-step .form-row { display: grid; gap: 14px; max-width: 480px; margin: 0 auto; }
+    .form-step input { background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--fg); padding: 16px 18px; border-radius: 8px; font-family: inherit; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+    .form-step input:focus { border-color: var(--accent); }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+      .section-heading {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      .closing h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      .hero-cta,
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .section { padding: 3.5rem 1.25rem; }
+      .closing { padding: 3.5rem 1.25rem; }
+      .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 5rem); }
+      .site-header-inner { padding: 0.75rem 1rem; }
+      .footer { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+<body class="has-urgency-bar">
+  <a href="javascript:void(0)" onclick="openModal()" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
+    <span class="urgency-text">Applications open</span> &middot; Apply for Base
+    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
+  </a>
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a class="header-logo" href="/homepage-v3/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
+      <a class="header-cta" href="javascript:void(0)" onclick="openModal()">Apply Now</a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       1. Hero — strong headline + genre buttons + CTA
+       ══════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Base Academy</div>
+      <h1>Your hard drive is full of&nbsp;ideas. Your release list is&nbsp;empty.</h1>
+      <p class="hero-sub">That's not a talent problem. It's a structure problem. Base fixes it with a coach, a group and a deadline every&nbsp;week.</p>
+
+      <div class="genre-pills">
+        <span class="genre-pill" data-genre="house">House</span>
+        <span class="genre-pill" data-genre="afro-house">Afro house</span>
+        <span class="genre-pill" data-genre="techno">Techno</span>
+        <span class="genre-pill" data-genre="trance">Trance</span>
+        <span class="genre-pill" data-genre="edm">EDM</span>
+        <span class="genre-pill" data-genre="dnb">Drum &amp; Bass</span>
+        <span class="genre-pill" data-genre="other">Something else</span>
+      </div>
+
+      <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
+        Show me if I'm a fit
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <div class="limited-spots">Limited spots left this month.</div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       2. Diagnosis — 3 cards showing the problem pattern
+       ══════════════════════════════════════════════ -->
+  <section class="section diagnosis">
+    <div class="section-inner">
+      <div class="section-eyebrow" style="text-align:center;">Sound familiar?</div>
+      <h2 class="section-heading" style="text-align:center;margin-bottom:3rem;">The cycle you're stuck in.</h2>
+
+      <div class="diagnosis-grid">
+        <!-- Card 1 -->
+        <div class="diagnosis-card">
+          <div class="diagnosis-step">01</div>
+          <div class="diagnosis-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>You start strong</h3>
+          <p>A new idea, a great loop. Energy is high.</p>
+        </div>
+
+        <!-- Arrow 1→2 -->
+        <div class="diagnosis-arrow">
+          <svg viewBox="0 0 32 12" fill="none"><path d="M0 6h28m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="diagnosis-card">
+          <div class="diagnosis-step">02</div>
+          <div class="diagnosis-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9l6 6m0-6l-6 6"/></svg>
+          </div>
+          <h3>You hit the wall</h3>
+          <p>Arrangement, mixing, sound design &mdash; the project stalls.</p>
+        </div>
+
+        <!-- Arrow 2→3 -->
+        <div class="diagnosis-arrow">
+          <svg viewBox="0 0 32 12" fill="none"><path d="M0 6h28m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="diagnosis-card">
+          <div class="diagnosis-step">03</div>
+          <div class="diagnosis-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 002-2V6a2 2 0 00-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+          </div>
+          <h3>Another one shelved</h3>
+          <p>It joins 47 other unfinished projects. You tell yourself "next time."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       3. Solution — "Base breaks the cycle" + stat blocks
+       ══════════════════════════════════════════════ -->
+  <section class="section solution">
+    <div class="section-inner">
+      <div class="section-eyebrow">The fix</div>
+      <h2 class="section-heading">Base breaks the cycle.</h2>
+      <p class="solution-text">Six months, one group, one coach. You show up every week with a deadline and leave with finished tracks. No more producing in isolation.</p>
+
+      <div class="stats-bar">
+        <div class="stat-block">
+          <div class="stat-number">30</div>
+          <div class="stat-label">Live sessions</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Months</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">&le;8</div>
+          <div class="stat-label">Producers per group</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-number">&euro;1.500,-</div>
+          <div class="stat-label">Investment</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       4. VSL Video (compact)
+       ══════════════════════════════════════════════ -->
+  <section class="section vsl-section" id="base-vsl">
+    <div class="section-inner">
+      <div class="vsl-video-wrap" id="base-vsl-player">
+        <video id="base-vsl-video" playsinline preload="metadata" poster="../assets/vsl/Base.png">
+          <source src="../assets/vsl/Base%20Forefront%20VSL_Tessel_V2.mp4" type="video/mp4">
+        </video>
+        <div class="vsl-play-overlay" id="base-vsl-overlay">
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
+        </div>
+        <div class="vsl-progress-wrap">
+          <div class="vsl-progress-bar" id="base-vsl-progress"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       5. Coaches (compact — side by side)
+       ══════════════════════════════════════════════ -->
+  <section class="section coaches" id="coaches">
+    <div class="section-inner">
+      <div class="section-eyebrow">Your coaches</div>
+      <h2 class="section-heading">Who you'll work with.</h2>
+
+      <div class="coach-row">
+        <div class="coach-compact">
+          <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian">
+          <div class="coach-compact-info">
+            <div class="coach-compact-name">Jurrian</div>
+            <div class="coach-compact-role">Base Coach &middot; Techno Artist</div>
+            <p class="coach-compact-bio">15+ years in electronic music. Runs the full production curriculum, hands-on, start to finish.</p>
+          </div>
+        </div>
+        <div class="coach-compact">
+          <img src="../assets/photos/Aug/Mauv5.png" alt="Maurits">
+          <div class="coach-compact-info">
+            <div class="coach-compact-name">Maurits</div>
+            <div class="coach-compact-role">Core Coach &middot; Music Business</div>
+            <p class="coach-compact-bio">Runs operations and artist development. Holds you to your own standard and asks the hard questions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       6. Photo Strip
+       ══════════════════════════════════════════════ -->
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_6.png" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_8.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_9.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_10.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_6.png" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_8.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_9.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_10.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       7. Closing CTA with background
+       ══════════════════════════════════════════════ -->
+  <section class="closing" style="background-image:linear-gradient(rgba(15,15,15,0.7),rgba(15,15,15,0.85)),url('../assets/photos/Aug/aug_03.jpg');background-size:cover;background-position:center;">
+    <div class="closing-inner">
+      <div class="step-label">Apply for your spot</div>
+      <h2>Six months pass either way. Spend them building.</h2>
+      <p>If your production isn't where you want it yet, waiting won't change that. Apply now and find out if Base is the right fit.</p>
+      <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
+        Show me if I'm a fit
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       8. FAQ (4 items only)
+       ══════════════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Frequently asked</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What if I'm not sure Base is right for me?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Base isn't for casual curiosity. If you're ready to commit to the six months and finish what you start, it's built for you. If you're looking for something you can quietly walk away from, it isn't. Still on the fence? Join a free Monthly Webinar Session first and see how we work.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>When does the next group start?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">A new group starts every six months, and you can reserve your spot months in advance. Spots per group are limited, so earlier is better.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Is Base the same as Core?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">No. Base is the foundation: six months, focused entirely on your production. Core is the longer next step, a full year focused on turning that skill into a career.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What happens after Base?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Everyone gets a strategy call with Hendrik to talk through next steps. For most people that's Core, though it depends on where you land. Not ready for that yet? You can keep your platform access through a subscription (&euro;&nbsp;50,- per month).</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       9. Footer
+       ══════════════════════════════════════════════ -->
+  <footer class="footer">
+    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+    <div class="links">
+      <a href="mailto:contact@riseartistacademy.com">Contact</a>
+      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+       Modal
+       ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal"><div class="modal"><div class="modal-top"><button class="modal-back" id="back-btn" onclick="prevStep()">&larr; Back</button><button class="modal-close" onclick="closeModal()">&times;</button></div><div class="modal-body" id="modal-body"></div></div></div>
+
+  <!-- ══════════════════════════════════════════════
+       Scripts
+       ══════════════════════════════════════════════ -->
+  <script>
+    // ── Genre pill selection (visual only) ──
+    (function() {
+      var pills = document.querySelectorAll('.genre-pill');
+      pills.forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          pills.forEach(function(p) { p.classList.remove('active'); });
+          pill.classList.add('active');
+        });
+      });
+    })();
+
+    // ── Urgency bar dismiss ──
+    (function() {
+      var bar = document.getElementById('urgency-bar');
+      var closeBtn = document.getElementById('urgency-bar-close');
+      if (!bar || !closeBtn) return;
+      if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
+      closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
+    })();
+
+    // ── Sticky header scroll effect ──
+    window.addEventListener('scroll', function() { document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+    // ── Auto-detect country dial code from IP ──
+    var _dialCode = "";
+    (function() {
+      var codes = {NL:"+31",BE:"+32",DE:"+49",FR:"+33",GB:"+44",US:"+1",ES:"+34",IT:"+39",PT:"+351",AT:"+43",CH:"+41",SE:"+46",NO:"+47",DK:"+45",FI:"+358",PL:"+48",IE:"+353",CZ:"+420",HU:"+36",RO:"+40",BG:"+359",HR:"+385",SK:"+421",SI:"+386",LT:"+370",LV:"+371",EE:"+372",GR:"+30",TR:"+90",AU:"+61",NZ:"+64",CA:"+1",BR:"+55",MX:"+52",AR:"+54",CO:"+57",ZA:"+27",IN:"+91",JP:"+81",KR:"+82",ID:"+62",SG:"+65",AE:"+971",SA:"+966",RU:"+7",UA:"+380",IL:"+972"};
+      try {
+        fetch("https://ipapi.co/country_code/").then(function(r) { return r.text(); }).then(function(cc) {
+          cc = cc.trim().toUpperCase();
+          if (codes[cc]) _dialCode = codes[cc] + " ";
+        }).catch(function() {});
+      } catch(e) {}
+    })();
+
+    // ── Questionnaire modal ──
+    var qState={step:0,answers:{years:null,time:null,challenge:null,budget:2500,name:"",whatsapp:"",email:""}};
+    var STEPS=[{type:"choice",key:"years",title:"How many years have you been producing?",options:["Less than 1 year","1 – 3 years","3 – 5 years","5+ years"]},{type:"choice",key:"time",title:"How much time do you spend on your music?",options:["A few hours a week","5 – 15 hours a week","15 – 30 hours a week","It’s my full-time focus"]},{type:"choice",key:"challenge",title:"What’s your biggest challenge right now?",options:["Finishing tracks consistently","Getting my music heard / building an audience","Improving my production or mixing skills","Staying motivated and accountable","Turning music into a career or income"]},{type:"slider",key:"budget",title:"What’s your yearly budget for your music career?",min:0,max:10000,step:250,format:function(v){return v>=10000?"€ 10k+":"€ "+v.toLocaleString("nl-NL")+",-"}},{type:"form",title:"One last thing.",subtitle:"Where can our community manager reach you to set up the call?"},{type:"success"}];
+    var qOverlay=document.getElementById("modal"),qBody=document.getElementById("modal-body"),qBackBtn=document.getElementById("back-btn");
+    function openModal(){qState.step=0;qOverlay.classList.add("open");document.body.style.overflow="hidden";renderStep()}
+    function closeModal(){qOverlay.classList.remove("open");document.body.style.overflow=""}
+    function nextStep(){if(qState.step<STEPS.length-1){qState.step++;renderStep()}}
+    function prevStep(){if(qState.step>0){qState.step--;renderStep()}else{closeModal()}}
+    function renderStep(){var s=STEPS[qState.step];qBackBtn.classList.toggle("hidden",qState.step===0||s.type==="success");var t=STEPS.filter(function(x){return x.type!=="success"}).length;var bars=s.type==="success"?"":'<div class="progress">'+Array.from({length:t},function(_,i){return'<span class="'+(i<=qState.step?"done":"")+'"></span>'}).join("")+"</div>";if(s.type==="choice"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="options">'+s.options.map(function(o,i){return'<button class="option" data-value="'+o+'"><span class="letter">'+String.fromCharCode(65+i)+'.</span><span class="text">'+o+"</span></button>"}).join("")+"</div>";qBody.querySelectorAll(".option").forEach(function(b){b.addEventListener("click",function(){qState.answers[s.key]=b.dataset.value;qBody.querySelectorAll(".option").forEach(function(x){x.classList.remove("selected")});b.classList.add("selected");setTimeout(nextStep,220)})})}else if(s.type==="slider"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="slider-step"><div class="slider-value" id="sv">'+s.format(qState.answers[s.key])+'</div><div class="slider-label">Per year</div><div class="slider-wrap"><input type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+qState.answers[s.key]+'" id="si"/><div class="slider-bounds"><span>€ 0,-</span><span>€ 10k+</span></div></div><button class="btn-continue" id="cb">Continue →</button></div>';document.getElementById("si").addEventListener("input",function(e){var v=Number(e.target.value);qState.answers[s.key]=v;document.getElementById("sv").textContent=s.format(v)});document.getElementById("cb").addEventListener("click",nextStep)}else if(s.type==="form"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">'+s.subtitle+'</p><form class="form-step" id="af"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required value="'+(qState.answers.whatsapp||_dialCode)+'"/><input type="email" name="email" placeholder="Email address" required/><label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;cursor:pointer;text-align:left;"><input type="checkbox" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required><span>I confirm that I have been selected by a Rise founding team member for the Base program.</span></label><label style="display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;cursor:pointer;text-align:left;"><input type="checkbox" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required><span>I take responsibility for having access to a laptop and Ableton during the Base program.</span></label><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application →</button></div></form>';document.getElementById("af").addEventListener("submit",function(e){e.preventDefault();var fd=new FormData(e.target);qState.answers.name=fd.get("name");qState.answers.whatsapp=fd.get("whatsapp");qState.answers.email=fd.get("email");nextStep()})}else if(s.type==="success"){var p=new URLSearchParams();if(qState.answers.name)p.set("name",qState.answers.name);if(qState.answers.email)p.set("email",qState.answers.email);if(qState.answers.whatsapp)p.set("phone",qState.answers.whatsapp);p.set("program","base");window.location.href="/academy-thankyou-v3/?"+p.toString()}}
+    qOverlay.addEventListener("click",function(e){if(e.target===qOverlay)closeModal()});
+    document.addEventListener("keydown",function(e){if(e.key==="Escape"&&qOverlay.classList.contains("open"))closeModal()});
+  </script>
+
+  <!-- VSL Player Script -->
+  <script>
+  (function() {
+    var player = document.getElementById('base-vsl-player');
+    var video = document.getElementById('base-vsl-video');
+    var progressBar = document.getElementById('base-vsl-progress');
+    if (!player || !video) return;
+    var CURVE = 0.575;
+    player.addEventListener('click', function() {
+      if (video.paused || video.ended) {
+        video.play().catch(function(){});
+        player.classList.add('playing');
+      } else {
+        video.pause();
+        player.classList.remove('playing');
+      }
+    });
+    video.addEventListener('ended', function() {
+      player.classList.remove('playing');
+      progressBar.style.width = '100%';
+    });
+    video.addEventListener('timeupdate', function() {
+      if (!video.duration) return;
+      var actual = video.currentTime / video.duration;
+      var displayed = Math.pow(actual, CURVE) * 100;
+      progressBar.style.width = displayed + '%';
+      var opacity = Math.max(0, 1 - (displayed / 70));
+      progressBar.parentElement.style.opacity = opacity;
+    });
+  })();
+  </script>
+
+</body>
+</html>
