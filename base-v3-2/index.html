@@ -218,6 +218,8 @@
       vertical-align: baseline;
       position: relative;
       top: 0.35em;
+      flex-shrink: 0;
+      text-align: left;
     }
     .hero-rotating-inner {
       display: flex;
@@ -229,6 +231,7 @@
       line-height: 1.5;
       color: var(--accent);
       font-weight: 600;
+      white-space: nowrap;
     }
     @keyframes rotate-text {
       0%, 20%   { transform: translateY(0); }
@@ -315,7 +318,7 @@
         grid-template-columns: 1fr;
       }
       .hero-text { text-align: center; }
-      .hero-sub { margin: 0 auto 1.5rem; justify-content: center; }
+      .hero-sub { margin: 0 auto 1.5rem; justify-content: center; text-align: center; }
       .hero-stats { justify-content: center; }
       .hero-cta { width: 100%; justify-content: center; }
     }
@@ -855,7 +858,7 @@
         </video>
         <div class="vsl-play-overlay" id="hero-vsl-overlay">
           <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
-          <span style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:0.78rem;color:rgba(255,255,255,0.85);white-space:nowrap;letter-spacing:0.02em;">Watch the 90-sec overview</span>
+          <span style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:0.78rem;color:rgba(255,255,255,0.85);white-space:nowrap;letter-spacing:0.02em;">Watch the overview</span>
         </div>
         <div class="vsl-progress-wrap">
           <div class="vsl-progress-bar" id="hero-vsl-progress"></div>
