@@ -154,10 +154,10 @@
 
     /* ── Split Hero (v3-2 variant) ────────────────── */
     .hero {
-      min-height: 100vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
-      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(3rem, 6vw, 4rem);
       position: relative;
       overflow: hidden;
     }
@@ -167,7 +167,9 @@
         radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
         radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
         linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.55) 40%, rgba(15,15,15,0.92) 100%),
-        url('../assets/Pages/Base/Hero.png') center 30% / cover no-repeat;
+        url('../assets/Pages/Base/Musicandskill.png') center 40% / cover no-repeat;
+      filter: blur(2px);
+      transform: scale(1.02);
     }
     .hero-grid {
       max-width: var(--maxw);
@@ -190,11 +192,15 @@
       margin-bottom: 20px;
     }
     .hero-sub {
-      font-size: 0.95rem;
+      font-size: 1.1rem;
       color: rgba(255,255,255,0.82);
       line-height: 1.7;
       max-width: 55ch;
       margin: 0 0 1.5rem;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0 0.35em;
     }
     .hero-eyebrow {
       font-size: 0.68rem;
@@ -208,8 +214,10 @@
     .hero-rotating {
       display: inline-block;
       overflow: hidden;
-      height: 1.3em;
-      vertical-align: bottom;
+      height: 1.5em;
+      vertical-align: baseline;
+      position: relative;
+      top: 0.35em;
     }
     .hero-rotating-inner {
       display: flex;
@@ -217,16 +225,17 @@
       animation: rotate-text 9s cubic-bezier(0.4,0,0.2,1) infinite;
     }
     .hero-rotating-inner span {
-      height: 1.3em;
-      line-height: 1.3;
+      height: 1.5em;
+      line-height: 1.5;
       color: var(--accent);
+      font-weight: 600;
     }
     @keyframes rotate-text {
       0%, 20%   { transform: translateY(0); }
-      25%, 45%  { transform: translateY(-1.3em); }
-      50%, 70%  { transform: translateY(-2.6em); }
-      75%, 95%  { transform: translateY(-3.9em); }
-      100%      { transform: translateY(-5.2em); }
+      25%, 45%  { transform: translateY(-1.5em); }
+      50%, 70%  { transform: translateY(-3.0em); }
+      75%, 95%  { transform: translateY(-4.5em); }
+      100%      { transform: translateY(-6.0em); }
     }
     /* Hero VSL player (right side) */
     .hero-vsl {
@@ -288,12 +297,25 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
+    /* ── Scroll indicator ─────────────────────────── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: bounce-down 2s ease-in-out infinite;
+    }
+    @keyframes bounce-down {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+    }
     @media (max-width: 768px) {
       .hero-grid {
         grid-template-columns: 1fr;
       }
       .hero-text { text-align: center; }
-      .hero-sub { margin: 0 auto 1.5rem; }
+      .hero-sub { margin: 0 auto 1.5rem; justify-content: center; }
       .hero-stats { justify-content: center; }
       .hero-cta { width: 100%; justify-content: center; }
     }
@@ -824,7 +846,7 @@
         <div class="hero-stats">
           <div><div class="hero-stat-num">30</div><div class="hero-stat-label">Live Sessions</div></div>
           <div><div class="hero-stat-num">6</div><div class="hero-stat-label">Month Program</div></div>
-          <div><div class="hero-stat-num">8</div><div class="hero-stat-label">Max Group Size</div></div>
+          <div><div class="hero-stat-num">25</div><div class="hero-stat-label">Max Group Size</div></div>
         </div>
       </div>
       <div class="hero-vsl" id="hero-vsl-player">
@@ -839,6 +861,7 @@
         </div>
       </div>
     </div>
+    <div class="scroll-indicator"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></div>
   </section>
 
   <!-- ══════════════════════════════════════════════

@@ -154,7 +154,7 @@
 
     /* ── Proof-First Hero (v3-3 variant) ─────────── */
     .hero {
-      min-height: 100vh;
+      min-height: 85vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -170,7 +170,9 @@
         radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
         radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
         linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.55) 40%, rgba(15,15,15,0.92) 100%),
-        url('../assets/Pages/Base/Hero.png') center 30% / cover no-repeat;
+        url('../assets/Pages/Base/Musicandskill.png') center 40% / cover no-repeat;
+      filter: blur(2px);
+      transform: scale(1.02);
     }
     .hero-content {
       max-width: 720px;
@@ -291,6 +293,19 @@
       font-size: 0.82rem;
       font-weight: 500;
       color: rgba(255,255,255,0.85);
+    }
+    /* ── Scroll indicator ─────────────────────────── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: bounce-down 2s ease-in-out infinite;
+    }
+    @keyframes bounce-down {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
     }
     @media (max-width: 768px) {
       .hero h1 { font-size: clamp(1.5rem, 6vw, 2rem); }
@@ -868,6 +883,7 @@
         <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi"><span>"The accountability kept me on track every week."</span></div>
       </div>
     </div>
+    <div class="scroll-indicator"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></div>
   </section>
 
   <!-- ══════════════════════════════════════════════
