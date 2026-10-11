@@ -199,12 +199,16 @@
 
     /* ── Scroll indicator ─────────────────────────── */
     .scroll-indicator {
-      margin-top: 2rem;
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
       animation: bounce-down 2s ease-in-out infinite;
     }
     @keyframes bounce-down {
-      0%, 100% { transform: translateY(0); opacity: 0.5; }
-      50% { transform: translateY(8px); opacity: 1; }
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
     }
 
     /* ── Photo strip ─────────────────────────────── */
@@ -735,8 +739,8 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
       <div class="limited-spots">Takes 60 seconds · No payment · Applications reviewed weekly</div>
-      <div class="scroll-indicator"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></div>
     </div>
+    <div class="scroll-indicator"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></div>
   </section>
 
   <!-- ══════════════════════════════════════════════
