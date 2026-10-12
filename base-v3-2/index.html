@@ -276,6 +276,7 @@
     }
     .hero-vsl:hover .vsl-play-overlay svg { transform: scale(1.08); }
     .hero-vsl.playing .vsl-play-overlay { opacity: 0; }
+    .hero-vsl.playing.has-mute-btn .vsl-play-overlay { opacity: 1; background: transparent; pointer-events: auto; }
     .hero-vsl .vsl-progress-wrap {
       position: absolute; bottom: 0; left: 0; right: 0;
       height: 4px; background: rgba(255,255,255,0.1);
@@ -859,7 +860,7 @@
         </div>
       </div>
       <div class="hero-vsl" id="hero-vsl-player">
-        <video id="hero-vsl-video" playsinline preload="metadata" poster="../assets/vsl/Base.png">
+        <video id="hero-vsl-video" playsinline preload="auto" muted poster="../assets/vsl/Base.png">
           <source src="../assets/vsl/Base%20Forefront%20VSL_Tessel_V2.mp4" type="video/mp4">
         </video>
         <div class="vsl-play-overlay" id="hero-vsl-overlay">
@@ -1238,21 +1239,62 @@
   (function() {
     var player = document.getElementById('hero-vsl-player');
     var video = document.getElementById('hero-vsl-video');
+    var overlay = document.getElementById('hero-vsl-overlay');
     var progressBar = document.getElementById('hero-vsl-progress');
     if (!player || !video) return;
     var CURVE = 0.575;
+    var autoplayStarted = false;
+
+    // Autoplay muted after 3 seconds
+    setTimeout(function() {
+      video.muted = true;
+      video.play().then(function() {
+        autoplayStarted = true;
+        player.classList.add('playing');
+        // Show a small mute indicator on the overlay
+        if (overlay) {
+          overlay.style.opacity = '0';
+          overlay.innerHTML = '<div style="position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.6);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></div>';
+          overlay.style.opacity = '1';
+          overlay.style.background = 'transparent';
+        }
+      }).catch(function(){});
+    }, 3000);
+
+    // Click: toggle mute if playing, or play/pause
     player.addEventListener('click', function() {
-      if (video.paused || video.ended) {
+      if (autoplayStarted && !video.paused && video.muted) {
+        // Unmute
+        video.muted = false;
+        if (overlay) {
+          overlay.innerHTML = '<div style="position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.6);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>';
+        }
+      } else if (!video.paused && !video.muted) {
+        // Mute again
+        video.muted = true;
+        if (overlay) {
+          overlay.innerHTML = '<div style="position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.6);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></div>';
+        }
+      } else if (video.paused || video.ended) {
+        video.muted = false;
         video.play().catch(function(){});
         player.classList.add('playing');
-      } else {
-        video.pause();
-        player.classList.remove('playing');
+        autoplayStarted = true;
+        if (overlay) {
+          overlay.style.background = 'transparent';
+          overlay.innerHTML = '<div style="position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.6);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>';
+        }
       }
     });
     video.addEventListener('ended', function() {
       player.classList.remove('playing');
       progressBar.style.width = '100%';
+      autoplayStarted = false;
+      // Restore original play overlay
+      if (overlay) {
+        overlay.style.background = 'rgba(0,0,0,0.25)';
+        overlay.innerHTML = '<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg><span style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:0.78rem;color:rgba(255,255,255,0.85);white-space:nowrap;letter-spacing:0.02em;">Watch again</span>';
+      }
     });
     video.addEventListener('timeupdate', function() {
       if (!video.duration) return;
