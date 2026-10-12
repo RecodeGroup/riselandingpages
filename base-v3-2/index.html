@@ -275,15 +275,34 @@
       transition: transform 0.2s ease;
     }
     .hero-vsl:hover .vsl-play-overlay svg { transform: scale(1.08); }
-    .hero-vsl.playing .vsl-play-overlay { opacity: 0; }
-    .hero-vsl.playing.has-mute-btn .vsl-play-overlay { opacity: 1; background: transparent; pointer-events: auto; }
-    .hero-vsl .vsl-progress-wrap {
+    .hero-vsl.playing .vsl-play-overlay { opacity: 0; pointer-events: none; }
+    /* Video controls bar */
+    .vsl-controls {
       position: absolute; bottom: 0; left: 0; right: 0;
-      height: 4px; background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; gap: 2px;
+      padding: 8px 12px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.0) 100%);
+      opacity: 0; transition: opacity 0.3s ease;
+      pointer-events: none; z-index: 3;
     }
-    .hero-vsl .vsl-progress-bar {
+    .hero-vsl.playing .vsl-controls { opacity: 1; pointer-events: auto; }
+    .hero-vsl.playing:hover .vsl-controls { opacity: 1; }
+    .vsl-ctrl-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.12); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .vsl-ctrl-btn:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+    .vsl-ctrl-btn svg { width: 16px; height: 16px; }
+    .vsl-progress-wrap {
+      flex: 1; height: 4px; background: rgba(255,255,255,0.15);
+      border-radius: 2px; overflow: hidden; margin: 0 8px; cursor: pointer;
+    }
+    .vsl-progress-bar {
       height: 100%; width: 0%; background: var(--accent);
-      transition: width 0.3s linear;
+      border-radius: 2px; transition: width 0.3s linear;
     }
     /* Hero stats strip */
     .hero-stats {
@@ -867,8 +886,16 @@
           <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
           <span style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:0.78rem;color:rgba(255,255,255,0.85);white-space:nowrap;letter-spacing:0.02em;">Watch the overview</span>
         </div>
-        <div class="vsl-progress-wrap">
-          <div class="vsl-progress-bar" id="hero-vsl-progress"></div>
+        <div class="vsl-controls" id="hero-vsl-controls">
+          <button class="vsl-ctrl-btn" id="vsl-mute-btn" title="Unmute">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          </button>
+          <div class="vsl-progress-wrap" id="hero-vsl-progress-wrap">
+            <div class="vsl-progress-bar" id="hero-vsl-progress"></div>
+          </div>
+          <button class="vsl-ctrl-btn" id="vsl-restart-btn" title="Restart">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -1240,69 +1267,113 @@
     var player = document.getElementById('hero-vsl-player');
     var video = document.getElementById('hero-vsl-video');
     var overlay = document.getElementById('hero-vsl-overlay');
+    var controls = document.getElementById('hero-vsl-controls');
+    var muteBtn = document.getElementById('vsl-mute-btn');
+    var restartBtn = document.getElementById('vsl-restart-btn');
     var progressBar = document.getElementById('hero-vsl-progress');
+    var progressWrap = document.getElementById('hero-vsl-progress-wrap');
     if (!player || !video) return;
+
     var CURVE = 0.575;
-    var autoplayStarted = false;
+    var SVG_MUTED = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+    var SVG_UNMUTED = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+
+    function updateMuteIcon() {
+      if (!muteBtn) return;
+      muteBtn.innerHTML = video.muted ? SVG_MUTED : SVG_UNMUTED;
+      muteBtn.title = video.muted ? 'Unmute' : 'Mute';
+    }
 
     // Autoplay muted after 3 seconds
     setTimeout(function() {
       video.muted = true;
       video.play().then(function() {
-        autoplayStarted = true;
         player.classList.add('playing');
-        // Show a small mute indicator on the overlay
-        if (overlay) {
-          overlay.style.opacity = '0';
-          overlay.innerHTML = '<div style="position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.6);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></div>';
-          overlay.style.opacity = '1';
-          overlay.style.background = 'transparent';
-        }
+        updateMuteIcon();
       }).catch(function(){});
     }, 3000);
 
-    // Click: toggle mute if playing, or play/pause
-    player.addEventListener('click', function() {
-      if (autoplayStarted && !video.paused && video.muted) {
-        // Unmute
+    // Click on video area: unmute + restart from beginning, or toggle play/pause
+    player.addEventListener('click', function(e) {
+      // Don't handle clicks on the controls bar buttons
+      if (e.target.closest('.vsl-controls')) return;
+
+      if (!video.paused && video.muted) {
+        // Unmute and restart from the beginning
+        video.currentTime = 0;
         video.muted = false;
-        if (overlay) {
-          overlay.innerHTML = '<div style="position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.6);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>';
-        }
+        progressBar.style.width = '0%';
+        updateMuteIcon();
       } else if (!video.paused && !video.muted) {
-        // Mute again
-        video.muted = true;
-        if (overlay) {
-          overlay.innerHTML = '<div style="position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.6);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></div>';
-        }
-      } else if (video.paused || video.ended) {
+        // Pause
+        video.pause();
+        player.classList.remove('playing');
+      } else {
+        // Play (after pause or end)
         video.muted = false;
         video.play().catch(function(){});
         player.classList.add('playing');
-        autoplayStarted = true;
-        if (overlay) {
-          overlay.style.background = 'transparent';
-          overlay.innerHTML = '<div style="position:absolute;bottom:16px;right:16px;background:rgba(0,0,0,0.6);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.15);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>';
-        }
+        updateMuteIcon();
       }
     });
+
+    // Mute button: toggle mute
+    if (muteBtn) {
+      muteBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        updateMuteIcon();
+      });
+    }
+
+    // Restart button: go back to beginning
+    if (restartBtn) {
+      restartBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        video.currentTime = 0;
+        progressBar.style.width = '0%';
+        if (video.paused) {
+          video.play().catch(function(){});
+          player.classList.add('playing');
+        }
+      });
+    }
+
+    // Progress bar click: seek
+    if (progressWrap) {
+      progressWrap.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!video.duration) return;
+        var rect = progressWrap.getBoundingClientRect();
+        var pct = (e.clientX - rect.left) / rect.width;
+        video.currentTime = pct * video.duration;
+      });
+    }
+
+    // On video end: show play overlay again
     video.addEventListener('ended', function() {
       player.classList.remove('playing');
       progressBar.style.width = '100%';
-      autoplayStarted = false;
-      // Restore original play overlay
       if (overlay) {
-        overlay.style.background = 'rgba(0,0,0,0.25)';
-        overlay.innerHTML = '<svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg><span style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:0.78rem;color:rgba(255,255,255,0.85);white-space:nowrap;letter-spacing:0.02em;">Watch again</span>';
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
       }
     });
+
+    // Progress bar update
     video.addEventListener('timeupdate', function() {
       if (!video.duration) return;
       var actual = video.currentTime / video.duration;
       var displayed = Math.pow(actual, CURVE) * 100;
       progressBar.style.width = displayed + '%';
-      var opacity = Math.max(0, 1 - (displayed / 70));
-      progressBar.parentElement.style.opacity = opacity;
+    });
+
+    // When playing again after ended, hide overlay
+    video.addEventListener('play', function() {
+      if (overlay) {
+        overlay.style.opacity = '';
+        overlay.style.pointerEvents = '';
+      }
     });
   })();
   </script>
