@@ -968,10 +968,10 @@
         </div>
         <div class="field">
           <label for="reg-referrer">Who referred you? <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
-          <select id="reg-referrer" name="referrer">
-            <option value="">None</option>
-            <option value="Team Rise">Team Rise</option>
-          </select>
+          <div class="referrer-search-wrap" style="position:relative;">
+            <input type="text" id="reg-referrer" name="referrer" placeholder="None" autocomplete="off">
+            <ul id="referrer-suggestions" style="display:none;position:absolute;left:0;right:0;top:100%;background:#1a1a1a;border:1px solid #333;border-top:none;border-radius:0 0 8px 8px;max-height:180px;overflow-y:auto;list-style:none;margin:0;padding:0;z-index:100;"></ul>
+          </div>
         </div>
         <button type="submit" class="btn-submit" id="reg-btn">Register Now</button>
       </form>
@@ -1029,7 +1029,6 @@
     <div class="site-header-inner">
       <a class="header-logo" href="../homepage-v3/" title="Rise Artist Academy">
         <img src="../assets/logo.png" alt="Rise">
-        <span>Rise</span>
       </a>
       <a class="header-cta" href="#get-guide">Apply for Rise</a>
     </div>
@@ -1351,6 +1350,20 @@
           </button>
           <div class="faq-a"><div class="faq-a-inner">Yes, the effect chains are built for Ableton Live. The checklist works for any producer regardless of your DAW.</div></div>
         </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>How do I receive my free tools?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">After you register, we automatically send the Artist Career Checklist and Ableton effect chains to your email within one hour. Check your inbox (and spam folder, just in case).</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Can I join Rise if I'm not at ADE?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Rise is an online program, so you can join from anywhere. ADE is just one of the places where we meet our community in person, but it's not a requirement to be there.</div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1364,9 +1377,9 @@
     <div class="video-strip">
       <div class="video-strip-track">
         <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B_v2.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
       </div>
     </div>
   </section>
@@ -1530,31 +1543,64 @@
     }
     riseTrack('page_view');
 
-    // ── Populate referrer dropdown with dynamic names from ade_signups ──
-    (async () => {
-      try {
-        const SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
-        const res = await fetch(SUPABASE_URL + '/rest/v1/ade_signups?select=name&order=created_at.desc', {
-          headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY },
-          signal: AbortSignal.timeout(4000),
+    // ── Search-based referrer input with dynamic names from ade_signups ──
+    (() => {
+      const SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
+      const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
+      let allNames = null; // cached after first fetch
+
+      async function fetchNames() {
+        if (allNames) return allNames;
+        try {
+          const res = await fetch(SUPABASE_URL + '/rest/v1/ade_signups?select=name&order=created_at.desc', {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY },
+            signal: AbortSignal.timeout(4000),
+          });
+          const rows = await res.json();
+          if (!Array.isArray(rows)) return [];
+          const seen = new Set();
+          allNames = [];
+          rows.forEach(r => {
+            const n = (r.name || '').trim();
+            if (!n || n.toLowerCase().includes('test') || n.toLowerCase().includes('jimbot') || seen.has(n.toLowerCase())) return;
+            seen.add(n.toLowerCase());
+            allNames.push(n);
+          });
+          return allNames;
+        } catch (e) { return []; }
+      }
+
+      const input = document.getElementById('reg-referrer');
+      const list = document.getElementById('referrer-suggestions');
+      if (!input || !list) return;
+
+      const defaults = ['None', 'Team Rise'];
+
+      function showSuggestions(items) {
+        list.innerHTML = '';
+        items.forEach(name => {
+          const li = document.createElement('li');
+          li.textContent = name;
+          li.style.cssText = 'padding:10px 14px;cursor:pointer;font-size:14px;color:#fff;border-bottom:1px solid #333;';
+          li.onmousedown = (e) => { e.preventDefault(); input.value = name === 'None' ? '' : name; list.style.display = 'none'; };
+          li.onmouseenter = () => { li.style.background = '#333'; };
+          li.onmouseleave = () => { li.style.background = 'none'; };
+          list.appendChild(li);
         });
-        const rows = await res.json();
-        if (!Array.isArray(rows)) return;
-        const sel = document.getElementById('reg-referrer');
-        const existing = new Set();
-        sel.querySelectorAll('option').forEach(o => { if (o.value) existing.add(o.value.toLowerCase()); });
-        const added = new Set();
-        rows.forEach(r => {
-          const n = (r.name || '').trim();
-          if (!n || n.toLowerCase().includes('test') || existing.has(n.toLowerCase()) || added.has(n.toLowerCase())) return;
-          added.add(n.toLowerCase());
-          const opt = document.createElement('option');
-          opt.value = n;
-          opt.textContent = n;
-          sel.appendChild(opt);
-        });
-      } catch (e) { /* dropdown population is best-effort */ }
+        list.style.display = items.length ? 'block' : 'none';
+      }
+
+      input.addEventListener('focus', () => { showSuggestions(defaults); });
+
+      input.addEventListener('input', async () => {
+        const q = input.value.trim().toLowerCase();
+        if (q.length < 2) { showSuggestions(defaults); return; }
+        const names = await fetchNames();
+        const filtered = names.filter(n => n.toLowerCase().includes(q));
+        showSuggestions(filtered.length ? filtered : ['No results']);
+      });
+
+      input.addEventListener('blur', () => { setTimeout(() => { list.style.display = 'none'; }, 200); });
     })();
 
     // ── IP-based country code auto-detection ──
