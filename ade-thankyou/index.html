@@ -151,13 +151,14 @@
       max-width: var(--maxw);
       margin: 0 auto;
       padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
+      gap: 2.5rem;
       width: 100%;
     }
-    .hero-left { display: flex; flex-direction: column; }
+    .hero-left { display: flex; flex-direction: column; align-items: center; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -212,6 +213,8 @@
       color: var(--muted);
       line-height: 1.7;
       max-width: 44ch;
+      margin-left: auto;
+      margin-right: auto;
       margin-bottom: 2rem;
     }
     .btn-primary {
@@ -242,6 +245,7 @@
       margin-top: 1.5rem;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 18px;
       flex-wrap: wrap;
     }
@@ -260,7 +264,9 @@
       border-radius: 14px;
       overflow: hidden;
       aspect-ratio: 9/14;
-      max-height: 520px;
+      max-height: 420px;
+      width: 100%;
+      max-width: 280px;
       background: #000;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
       cursor: pointer;
@@ -772,9 +778,7 @@
     /* ── Responsive ───────────────────────────────── */
     @media (max-width: 768px) {
       .hero { min-height: auto; padding: 80px 0 40px; }
-      .hero-split { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-      .hero-left { align-items: center; }
-      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-split { gap: 2rem; }
       .hero-trust { justify-content: center; }
       .hero-right { max-height: 400px; aspect-ratio: 9/14; margin: 0 2rem; }
       .hero-reviews { margin-top: 1.5rem; }
@@ -1007,13 +1011,6 @@
         <div class="hero-video-play">
           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <div class="hero-video-label">
-          <img src="../assets/photos/Maurits.png" alt="Maurits">
-          <div class="hero-video-label-text">
-            <strong>Maurits, Rise Coach</strong>
-            <span>What Rise can do for you</span>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -1190,75 +1187,6 @@
       </div>
     </div>
 
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       Form Section
-       ══════════════════════════════════════════════ -->
-  <section class="form-section" id="get-guide">
-    <div class="form-inner">
-      <div class="form-left">
-        <div class="section-eyebrow">Register now</div>
-        <h2>Get your free guide and <em>Ableton effects.</em></h2>
-        <p>Enter your details and we send the complete Artist Guide straight to your inbox. The checklist, the Ableton chains, all yours. We also reach out to schedule your free introduction call.</p>
-        <ul class="form-perks">
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Artist Career Checklist (PDF)
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Ableton Effect Chains (ZIP)
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Free introduction call with the Rise team
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Instant delivery to your inbox
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="form-card" id="form-card">
-          <h3>Register</h3>
-          <p class="sub">Free, instant delivery. No spam, ever.</p>
-          <form id="giveaway-form" onsubmit="handleSubmit(event)">
-            <div class="field">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" placeholder="e.g. John Doe" required>
-            </div>
-            <div class="field">
-              <label for="artist_name">Artist Name</label>
-              <input type="text" id="artist_name" name="artist_name" placeholder="e.g. VANNOOD" required>
-            </div>
-            <div class="field">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" required>
-            </div>
-            <div class="field">
-              <label for="phone">Phone Number (mobile, for WhatsApp)</label>
-              <input type="tel" id="phone" name="phone" placeholder="+31 6 1234 5678" required>
-              <p id="phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number. From outside the Netherlands, include your country code, e.g. +44 7400 123456.</p>
-            </div>
-            <button type="submit" class="btn-submit" id="btn-submit">Register</button>
-          </form>
-          <p class="form-note">We respect your privacy. Unsubscribe any time.</p>
-        </div>
-
-        <div class="success-state" id="success-state">
-          <div class="check">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-          </div>
-          <h2>Check your inbox!</h2>
-          <p>We sent your Artist Guide to your email.<br>The checklist and Ableton chains are all attached.<br>We will also be in touch about your free introduction call.</p>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════════════

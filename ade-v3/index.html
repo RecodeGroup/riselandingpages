@@ -151,13 +151,14 @@
       max-width: var(--maxw);
       margin: 0 auto;
       padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
+      gap: 2.5rem;
       width: 100%;
     }
-    .hero-left { display: flex; flex-direction: column; }
+    .hero-left { display: flex; flex-direction: column; align-items: center; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -212,6 +213,8 @@
       color: var(--muted);
       line-height: 1.7;
       max-width: 44ch;
+      margin-left: auto;
+      margin-right: auto;
       margin-bottom: 2rem;
     }
     .btn-primary {
@@ -242,6 +245,7 @@
       margin-top: 1.5rem;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 18px;
       flex-wrap: wrap;
     }
@@ -763,7 +767,7 @@
     /* ── Responsive ───────────────────────────────── */
     @media (max-width: 768px) {
       .hero { min-height: auto; padding: 80px 0 40px; }
-      .hero-split { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .hero-split { gap: 2rem; }
       .hero-left { align-items: center; }
       .hero-sub { margin-left: auto; margin-right: auto; }
       .hero-trust { justify-content: center; }
@@ -1085,13 +1089,6 @@
         </video>
         <div class="hero-video-play">
           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <div class="hero-video-label">
-          <img src="../assets/photos/Maurits.png" alt="Maurits">
-          <div class="hero-video-label-text">
-            <strong>Maurits, Rise Coach</strong>
-            <span>What Rise can do for you</span>
-          </div>
         </div>
       </div>
     </div>
@@ -1769,7 +1766,7 @@
           try { sessionStorage.setItem('ade_referrer_data', JSON.stringify(formData)); } catch(e) {}
 
           // Redirect to standalone thank-you page
-          const tyParams = new URLSearchParams({ name: formData.name });
+          const tyParams = new URLSearchParams();
           if (riseLead) tyParams.set('lead', riseLead);
           window.location.href = '../ade-thankyou/?' + tyParams.toString();
         } else {
