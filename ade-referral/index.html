@@ -1546,7 +1546,8 @@
           allNames = [];
           rows.forEach(r => {
             const n = (r.name || '').trim();
-            if (!n || n.toLowerCase().includes('test') || n.toLowerCase().includes('jimbot') || seen.has(n.toLowerCase())) return;
+            const lo = n.toLowerCase();
+            if (!n || lo === 'test' || lo.startsWith('test') || lo === 'jimbot' || lo.startsWith('jimbot') || lo.startsWith('mrjimbot') || seen.has(lo)) return;
             seen.add(n.toLowerCase());
             allNames.push(n);
           });

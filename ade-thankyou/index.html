@@ -127,12 +127,34 @@
     }
     .header-cta:hover { background: var(--accent-hover); }
 
+    /* ── Announcement Bar ─────────────────────────── */
+    .announce-bar {
+      background: var(--accent);
+      color: #0a0a0a;
+      text-align: center;
+      padding: 10px 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 100;
+    }
+    .announce-bar a {
+      color: #0a0a0a;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-left: 6px;
+    }
+    .announce-bar a:hover { text-decoration-thickness: 2px; }
+
     /* ── Hero ─────────────────────────────────────── */
     .hero {
-      min-height: 100vh;
+      min-height: 90vh;
       display: flex;
       align-items: center;
-      padding: clamp(7rem, 14vw, 10rem) 0 clamp(3rem, 6vw, 5rem);
+      justify-content: center;
+      padding: clamp(8rem, 16vw, 12rem) 0 clamp(4rem, 8vw, 6rem);
       position: relative;
       overflow: hidden;
     }
@@ -140,83 +162,73 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      background:
-        radial-gradient(ellipse at 20% 30%, rgba(255,104,62,0.10), transparent 50%),
-        radial-gradient(ellipse at 85% 70%, rgba(255,104,62,0.05), transparent 55%),
-        linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.6) 50%, rgba(15,15,15,0.95) 100%),
-        url('../assets/Pages/Core/photo-11.jpg') center 30% / cover no-repeat;
+      background: url('../assets/Pages/Core/photo-11.jpg') center 30% / cover no-repeat;
     }
-    .hero-split {
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(15,15,15,0.72) 0%,
+        rgba(15,15,15,0.55) 40%,
+        rgba(15,15,15,0.82) 100%
+      );
+    }
+    .hero-content {
       position: relative; z-index: 2;
-      max-width: var(--maxw);
+      max-width: 720px;
       margin: 0 auto;
       padding: 0 2rem;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      gap: 2.5rem;
-      width: 100%;
     }
-    .hero-left { display: flex; flex-direction: column; align-items: center; }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin-bottom: 1.5rem;
-    }
-    .hero-badge img { width: 48px; height: 48px; border-radius: 10px; }
-    .hero-badge span {
-      font-size: 0.75rem;
+    .hero-eyebrow {
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
+      margin-bottom: 1.25rem;
     }
     .hero h1 {
-      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
       font-weight: 700;
       line-height: 1.08;
       letter-spacing: -0.025em;
       margin-bottom: 1.25rem;
     }
     .hero h1 em { font-style: normal; color: var(--accent); }
-
-    /* ── Rotating text ── */
-    .hero-rotate-wrap {
-      display: inline-block;
-      position: relative;
-      height: 1.1em;
-      vertical-align: bottom;
-      overflow: hidden;
-    }
-    .hero-rotate-word {
-      display: block;
-      position: absolute;
-      left: 0; top: 0; width: 100%;
-      opacity: 0;
-      transform: translateY(40%);
-      transition: opacity 0.45s ease, transform 0.45s ease;
-      color: var(--accent);
-    }
-    .hero-rotate-word.active {
-      opacity: 1;
-      transform: translateY(0);
-      position: relative;
-    }
-
     .hero-sub {
       font-size: 0.95rem;
-      color: var(--muted);
+      color: rgba(255,255,255,0.7);
       line-height: 1.7;
-      max-width: 44ch;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 2rem;
+      max-width: 48ch;
+      margin: 0 auto 2rem;
     }
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 40px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+      backdrop-filter: blur(6px);
+    }
+    .hero-pill svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -240,115 +252,33 @@
       box-shadow: 0 8px 24px rgba(255,104,62,0.3);
     }
     .btn-primary svg { width: 18px; height: 18px; }
-
-    .hero-trust {
+    .hero-urgency {
       margin-top: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .hero-trust-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       font-size: 0.78rem;
       color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .hero-urgency strong { color: #fff; font-weight: 600; }
+
+    /* Legacy classes kept for transitionToThankYou JS */
+    .hero-left { display: flex; flex-direction: column; align-items: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; border: none; padding: 0; margin-bottom: 1.5rem;
+    }
+    .hero-badge span {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .hero-trust {
+      margin-top: 1.5rem; display: flex; align-items: center;
+      justify-content: center; gap: 18px; flex-wrap: wrap;
+    }
+    .hero-trust-item {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; color: var(--muted);
     }
     .hero-trust-item svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
-
-    /* ── Hero Video ── */
-    .hero-right {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      aspect-ratio: 9/14;
-      max-height: 420px;
-      width: 100%;
-      max-width: 280px;
-      background: #000;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
-      cursor: pointer;
-    }
-    .hero-right video {
-      width: 100%; height: 100%; object-fit: cover;
-      display: block;
-    }
-    .hero-video-play {
-      position: absolute; inset: 0; z-index: 3;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.25);
-      transition: background 0.3s;
-    }
-    .hero-video-play svg {
-      width: 64px; height: 64px; fill: #fff;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
-      transition: transform 0.3s;
-    }
-    .hero-right:hover .hero-video-play svg { transform: scale(1.08); }
-    .hero-right.playing .hero-video-play { opacity: 0; pointer-events: none; }
-    .hero-video-label {
-      position: absolute; bottom: 16px; left: 16px; right: 16px; z-index: 4;
-      background: rgba(15,15,15,0.75);
-      backdrop-filter: blur(10px);
-      border-radius: 8px;
-      padding: 10px 14px;
-      display: flex; align-items: center; gap: 10px;
-      pointer-events: none;
-    }
-    .hero-video-label img {
-      width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
-    }
-    .hero-video-label-text { font-size: 0.75rem; line-height: 1.35; }
-    .hero-video-label-text strong { display: block; font-weight: 600; color: #fff; }
-    .hero-video-label-text span { color: var(--muted); }
-
-    /* ── Hero Review Pills (mini marquee) ── */
-    .hero-reviews {
-      position: relative; z-index: 2;
-      max-width: var(--maxw);
-      margin: 2.5rem auto 0;
-      padding: 0 2rem;
-      overflow: hidden;
-    }
-    .hero-reviews-track {
-      display: flex;
-      gap: 10px;
-      width: max-content;
-      animation: scroll-hero-reviews 30s linear infinite;
-    }
-    .hero-review-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 16px 6px 6px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 40px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .hero-review-pill img {
-      width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
-    }
-    .hero-review-pill span { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.7); }
-    @keyframes scroll-hero-reviews { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    .hero-stats {
-      position: relative; z-index: 2;
-      margin-top: 48px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      max-width: 700px;
-      width: 100%;
-      margin-left: auto; margin-right: auto;
-      border-top: 1px solid var(--line);
-      padding-top: 28px;
-    }
-    .stat .num { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
-    .stat .label { margin-top: 3px; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
 
     /* ── Thank-you hero: animated checkmark ── */
     .hero-check {
@@ -358,6 +288,11 @@
       animation: pop 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
     }
     .hero-check svg { width: 24px; height: 24px; color: var(--accent); }
+    @media (max-width: 600px) {
+      .hero-pills { gap: 8px; }
+      .hero-pill { padding: 7px 14px; font-size: 0.72rem; }
+      .announce-bar { font-size: 0.7rem; padding: 8px 1rem; }
+    }
 
     /* ── Photo Strip ─────────────────────────────── */
     .photo-strip {
@@ -948,6 +883,12 @@
     </div>
   </div>
 
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announce-bar">
+    ADE 2026 — Exclusive deal for early registrations
+    <a href="#" onclick="event.preventDefault(); openFriendForm();">Register now &rarr;</a>
+  </div>
+
   <!-- HEADER -->
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
@@ -959,82 +900,43 @@
   </header>
 
   <!-- ══════════════════════════════════════════════
-       Hero — Split Layout (Thank-You Variant)
+       Hero — Centered Thank-You (Core Academy Style)
        ══════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-bg"></div>
 
-    <div class="hero-split">
-      <div class="hero-left">
-        <div class="hero-badge">
-          <div class="hero-check">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <span>You're in</span>
-        </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Rise Academy</div>
 
-        <h1 id="hero-title">Thanks for your<br>
-          <span class="hero-rotate-wrap" id="heroRotate">
-            <span class="hero-rotate-word active">registration!</span>
-            <span class="hero-rotate-word">career tools!</span>
-            <span class="hero-rotate-word">first step!</span>
-          </span>
-        </h1>
+      <h1 id="hero-title">Thanks for joining<br><em>Rise at ADE 2026</em></h1>
 
-        <p class="hero-sub">Check your inbox for the Artist Career Checklist and Ableton effect chains. Know someone who could use these too?</p>
+      <p class="hero-sub">Check your inbox — your Artist Career Checklist and Ableton effect chains are on the way. Know a fellow artist who could use these?</p>
 
-        <a href="#" class="btn-primary" onclick="event.preventDefault(); openFriendForm();">
-          Register a friend
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-
-        <div class="hero-trust">
-          <span class="hero-trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Checklist sent to your email
-          </span>
-          <span class="hero-trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Ableton effect chains included
-          </span>
-          <span class="hero-trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Free intro call scheduled
-          </span>
-        </div>
+      <div class="hero-pills">
+        <span class="hero-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Artist Career Checklist
+        </span>
+        <span class="hero-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Ableton Effect Chains
+        </span>
+        <span class="hero-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Free Introduction Call
+        </span>
+        <span class="hero-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Artist Program Access
+        </span>
       </div>
 
-      <div class="hero-right" id="heroVideo">
-        <video poster="../assets/Pages/Core/maurits-vsl-thumb.jpg" preload="metadata" playsinline webkit-playsinline>
-          <source src="../assets/Pages/Core/Maurits%20VSL.mp4" type="video/mp4">
-        </video>
-        <div class="hero-video-play">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-      </div>
-    </div>
+      <a href="#" class="btn-primary" onclick="event.preventDefault(); openFriendForm();">
+        Register a friend
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
 
-    <!-- Review pills marquee inside hero -->
-    <div class="hero-reviews">
-      <div class="hero-reviews-track">
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="Leo"><span>"The community of dedicated musicians is inspiring."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max"><span>"The community was an eye-opener for me."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi"><span>"When you drift off track, people help you."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Seth.png" alt="Seth"><span>"I find the community really motivating."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy"><span>"A good opportunity to connect."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo"><span>"Meeting these people is so important to me."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Max2.jpg" alt="Max"><span>"They challenge you to make specific goals."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth"><span>"Working toward the same goal, helping each other."</span></div>
-        <!-- duplicate for seamless loop -->
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="Leo"><span>"The community of dedicated musicians is inspiring."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max"><span>"The community was an eye-opener for me."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi"><span>"When you drift off track, people help you."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Seth.png" alt="Seth"><span>"I find the community really motivating."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy"><span>"A good opportunity to connect."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo"><span>"Meeting these people is so important to me."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Max2.jpg" alt="Max"><span>"They challenge you to make specific goals."</span></div>
-        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth"><span>"Working toward the same goal, helping each other."</span></div>
-      </div>
+      <p class="hero-urgency"><strong>Temporary deal</strong> — this offer is only available during ADE 2026</p>
     </div>
   </section>
 
@@ -1197,6 +1099,7 @@
     <p class="section-sub">Stories from producers who joined Rise.</p>
     <div class="video-strip">
       <div class="video-strip-track">
+        <div class="video-card"><video poster="../assets/Testimonials/Videos/ad-testimonial-thumb.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Videos/ad-testimonial.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B_v2.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
@@ -1425,7 +1328,8 @@
           allNames = [];
           rows.forEach(r => {
             const n = (r.name || '').trim();
-            if (!n || n.toLowerCase().includes('test') || n.toLowerCase().includes('jimbot') || seen.has(n.toLowerCase())) return;
+            const lo = n.toLowerCase();
+            if (!n || lo === 'test' || lo.startsWith('test') || lo === 'jimbot' || lo.startsWith('jimbot') || lo.startsWith('mrjimbot') || seen.has(lo)) return;
             seen.add(n.toLowerCase());
             allNames.push(n);
           });
