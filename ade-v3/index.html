@@ -132,9 +132,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      padding: clamp(7rem, 14vw, 10rem) 0 clamp(3rem, 6vw, 5rem);
       position: relative;
       overflow: hidden;
     }
@@ -143,43 +141,78 @@
       inset: 0;
       z-index: 0;
       background:
-        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.12), transparent 55%),
-        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.06), transparent 60%),
-        linear-gradient(180deg, rgba(15,15,15,0.82) 0%, rgba(15,15,15,0.5) 40%, rgba(15,15,15,0.9) 100%),
-        url('../assets/photos/photo-11.jpg') center 30% / cover no-repeat;
+        radial-gradient(ellipse at 20% 30%, rgba(255,104,62,0.10), transparent 50%),
+        radial-gradient(ellipse at 85% 70%, rgba(255,104,62,0.05), transparent 55%),
+        linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.6) 50%, rgba(15,15,15,0.95) 100%),
+        url('../assets/Pages/Core/photo-11.jpg') center 30% / cover no-repeat;
     }
-    .hero-content { max-width: 720px; position: relative; z-index: 2; }
+    .hero-split {
+      position: relative; z-index: 2;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-left { display: flex; flex-direction: column; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       background: transparent;
       border: none;
       padding: 0;
-      margin-bottom: 20px;
+      margin-bottom: 1.5rem;
     }
-    .hero-badge img { width: 134px; height: 134px; border-radius: 12px; }
+    .hero-badge img { width: 48px; height: 48px; border-radius: 10px; }
     .hero-badge span {
-      font-size: 1.1rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #fff;
+      color: var(--accent);
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-size: clamp(2rem, 4.5vw, 3rem);
       font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.25rem;
     }
     .hero h1 em { font-style: normal; color: var(--accent); }
+
+    /* ── Rotating text ── */
+    .hero-rotate-wrap {
+      display: inline-block;
+      position: relative;
+      height: 1.1em;
+      vertical-align: bottom;
+      overflow: hidden;
+    }
+    .hero-rotate-word {
+      display: block;
+      position: absolute;
+      left: 0; top: 0; width: 100%;
+      opacity: 0;
+      transform: translateY(40%);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      color: var(--accent);
+    }
+    .hero-rotate-word.active {
+      opacity: 1;
+      transform: translateY(0);
+      position: relative;
+    }
+
     .hero-sub {
       font-size: 0.95rem;
       color: var(--muted);
       line-height: 1.7;
-      max-width: 55ch;
-      margin: 0 auto 2.5rem;
+      max-width: 44ch;
+      margin-bottom: 2rem;
     }
     .btn-primary {
       display: inline-flex;
@@ -204,6 +237,97 @@
       box-shadow: 0 8px 24px rgba(255,104,62,0.3);
     }
     .btn-primary svg { width: 18px; height: 18px; }
+
+    .hero-trust {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .hero-trust-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .hero-trust-item svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+
+    /* ── Hero Video ── */
+    .hero-right {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 9/14;
+      max-height: 520px;
+      background: #000;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+      cursor: pointer;
+    }
+    .hero-right video {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .hero-video-play {
+      position: absolute; inset: 0; z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: background 0.3s;
+    }
+    .hero-video-play svg {
+      width: 64px; height: 64px; fill: #fff;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+      transition: transform 0.3s;
+    }
+    .hero-right:hover .hero-video-play svg { transform: scale(1.08); }
+    .hero-right.playing .hero-video-play { opacity: 0; pointer-events: none; }
+    .hero-video-label {
+      position: absolute; bottom: 16px; left: 16px; right: 16px; z-index: 4;
+      background: rgba(15,15,15,0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px;
+      pointer-events: none;
+    }
+    .hero-video-label img {
+      width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    }
+    .hero-video-label-text { font-size: 0.75rem; line-height: 1.35; }
+    .hero-video-label-text strong { display: block; font-weight: 600; color: #fff; }
+    .hero-video-label-text span { color: var(--muted); }
+
+    /* ── Hero Review Pills (mini marquee) ── */
+    .hero-reviews {
+      position: relative; z-index: 2;
+      max-width: var(--maxw);
+      margin: 2.5rem auto 0;
+      padding: 0 2rem;
+      overflow: hidden;
+    }
+    .hero-reviews-track {
+      display: flex;
+      gap: 10px;
+      width: max-content;
+      animation: scroll-hero-reviews 30s linear infinite;
+    }
+    .hero-review-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 16px 6px 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 40px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .hero-review-pill img {
+      width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    }
+    .hero-review-pill span { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.7); }
+    @keyframes scroll-hero-reviews { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     .hero-stats {
       position: relative; z-index: 2;
@@ -617,7 +741,13 @@
 
     /* ── Responsive ───────────────────────────────── */
     @media (max-width: 768px) {
-      .hero { min-height: auto; padding: 80px 18px 60px; }
+      .hero { min-height: auto; padding: 80px 0 40px; }
+      .hero-split { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .hero-left { align-items: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-trust { justify-content: center; }
+      .hero-right { max-height: 400px; aspect-ratio: 9/14; margin: 0 2rem; }
+      .hero-reviews { margin-top: 1.5rem; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .inside-grid { grid-template-columns: 1fr; }
       .feature-row { grid-template-columns: 1fr; gap: 2rem; }
@@ -629,6 +759,7 @@
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.8rem; }
+      .hero-right { max-height: 340px; margin: 0 1.25rem; }
       .hero-stats { grid-template-columns: 1fr 1fr; }
       .header-cta { display: none; }
     }
@@ -683,9 +814,195 @@
       content: ''; width: 4px; height: 4px;
       border-radius: 50%; background: var(--accent); flex-shrink: 0;
     }
+
+    /* ── Registration Overlay ─────────────────────── */
+    .reg-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(15,15,15,0.97);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 1; transition: opacity 0.5s ease;
+      overflow-y: auto;
+    }
+    .reg-overlay.hidden { opacity: 0; pointer-events: none; }
+    body.overlay-active { overflow: hidden; }
+    .reg-overlay-inner {
+      width: 100%; max-width: 440px;
+      background: var(--bg-2); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .reg-overlay-inner .hero-badge {
+      display: flex; align-items: center; gap: 8px;
+      justify-content: center; margin-bottom: 1.2rem;
+    }
+    .reg-overlay-inner .hero-badge img { width: 32px; height: 32px; }
+    .reg-overlay-inner .hero-badge span {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .reg-overlay-inner h2 {
+      font-size: 1.5rem; font-weight: 700; text-align: center;
+      line-height: 1.2; margin-bottom: 6px;
+    }
+    .reg-overlay-inner h2 em { font-style: normal; color: var(--accent); }
+    .reg-overlay-inner .reg-sub {
+      text-align: center; color: var(--muted); font-size: 0.88rem;
+      line-height: 1.6; margin-bottom: 1.5rem;
+    }
+    .reg-overlay-inner .reg-perks {
+      list-style: none; display: flex; flex-wrap: wrap;
+      gap: 6px 16px; justify-content: center; margin-bottom: 1.5rem;
+    }
+    .reg-overlay-inner .reg-perks li {
+      font-size: 0.78rem; color: var(--muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ── Friend Form Overlay ─────────────────────── */
+    .friend-overlay {
+      position: fixed; inset: 0; z-index: 9998;
+      background: rgba(15,15,15,0.97);
+      display: none; align-items: center; justify-content: center;
+      padding: 20px; overflow-y: auto;
+    }
+    .friend-overlay.visible { display: flex; }
+    .friend-overlay-inner {
+      width: 100%; max-width: 440px;
+      background: var(--bg-2); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .friend-overlay-inner h2 {
+      font-size: 1.5rem; font-weight: 700; text-align: center;
+      line-height: 1.2; margin-bottom: 6px;
+    }
+    .friend-overlay-inner h2 em { font-style: normal; color: var(--accent); }
+    .friend-overlay-inner .reg-sub {
+      text-align: center; color: var(--muted); font-size: 0.88rem;
+      line-height: 1.6; margin-bottom: 1.5rem;
+    }
+    .friend-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px; border: none; background: none;
+      color: var(--muted); cursor: pointer; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; transition: background 0.2s;
+    }
+    .friend-close:hover { background: rgba(255,255,255,0.08); }
+    .friend-success {
+      display: none; text-align: center; padding: 2rem 0;
+    }
+    .friend-success.visible { display: block; }
+    .friend-success .check {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255,104,62,0.12); display: flex;
+      align-items: center; justify-content: center; margin: 0 auto 16px;
+    }
+    .friend-success .check svg { width: 28px; height: 28px; color: var(--accent); }
+    .friend-success h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .friend-success p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
   </style>
 </head>
 <body>
+
+  <!-- ══════════════════════════════════════════════
+       Registration Overlay (shown first on page load)
+       ══════════════════════════════════════════════ -->
+  <div class="reg-overlay" id="reg-overlay">
+    <div class="reg-overlay-inner">
+      <div class="hero-badge">
+        <img src="https://intent.itsinside.co/static/customer-assets/ade/launcher-icon.svg" alt="ADE">
+        <span>ADE 2026</span>
+      </div>
+      <h2>Claim your free career tools from <em>Rise.</em></h2>
+      <p class="reg-sub">Register below to receive the Artist Career Checklist, Ableton effect chains, and a free introduction call.</p>
+      <ul class="reg-perks">
+        <li>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Career Checklist
+        </li>
+        <li>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Ableton Effects
+        </li>
+        <li>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Free Intro Call
+        </li>
+      </ul>
+      <form id="reg-form" onsubmit="handleRegSubmit(event)">
+        <div class="field">
+          <label for="reg-name">Your Name</label>
+          <input type="text" id="reg-name" name="name" placeholder="e.g. John Doe" required>
+        </div>
+        <div class="field">
+          <label for="reg-artist">Artist Name</label>
+          <input type="text" id="reg-artist" name="artist_name" placeholder="e.g. VANNOOD" required>
+        </div>
+        <div class="field">
+          <label for="reg-email">Email Address</label>
+          <input type="email" id="reg-email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="field">
+          <label for="reg-phone">Phone Number (mobile, for WhatsApp)</label>
+          <input type="tel" id="reg-phone" name="phone" placeholder="+31 6 1234 5678" required>
+          <p id="reg-phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number. From outside the Netherlands, include your country code.</p>
+        </div>
+        <button type="submit" class="btn-submit" id="reg-btn">Register Now</button>
+      </form>
+      <p class="form-note">We respect your privacy. Unsubscribe any time.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       Friend Referral Form Overlay
+       ══════════════════════════════════════════════ -->
+  <div class="friend-overlay" id="friend-overlay">
+    <div class="friend-overlay-inner">
+      <button class="friend-close" id="friend-close" onclick="closeFriendForm()">&times;</button>
+      <div id="friend-form-wrap">
+        <div class="hero-badge" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:1.2rem;">
+          <img src="https://intent.itsinside.co/static/customer-assets/ade/launcher-icon.svg" alt="ADE" style="width:32px;height:32px;">
+          <span style="font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);">ADE 2026</span>
+        </div>
+        <h2>Register your friend for <em>free tools.</em></h2>
+        <p class="reg-sub">Fill in your friend's details. They'll receive the same career tools you got — and you earn a referral reward from Rise.</p>
+        <form id="friend-form" onsubmit="handleFriendSubmit(event)">
+          <div class="field">
+            <label for="friend-name">Friend's Name</label>
+            <input type="text" id="friend-name" name="name" placeholder="e.g. Jane Doe" required>
+          </div>
+          <div class="field">
+            <label for="friend-artist">Friend's Artist Name</label>
+            <input type="text" id="friend-artist" name="artist_name" placeholder="e.g. DJ Phoenix" required>
+          </div>
+          <div class="field">
+            <label for="friend-email">Friend's Email Address</label>
+            <input type="email" id="friend-email" name="email" placeholder="friend@email.com" required>
+          </div>
+          <div class="field">
+            <label for="friend-phone">Friend's Phone Number (mobile)</label>
+            <input type="tel" id="friend-phone" name="phone" placeholder="+31 6 1234 5678" required>
+            <p id="friend-phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number.</p>
+          </div>
+          <button type="submit" class="btn-submit" id="friend-btn">Register Friend</button>
+        </form>
+        <p class="form-note">Your friend will receive an email with their free tools.</p>
+      </div>
+      <div class="friend-success" id="friend-success">
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Friend registered!</h3>
+        <p>We've sent the career tools to your friend's inbox. Thanks for sharing — Rise will be in touch about your referral reward.</p>
+        <button class="btn-primary" style="margin-top:1.5rem;display:inline-flex;" onclick="resetFriendForm()">
+          Register another friend
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header class="site-header" id="site-header">
@@ -699,39 +1016,87 @@
   </header>
 
   <!-- ══════════════════════════════════════════════
-       Hero
+       Hero — Split Layout
        ══════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-bg"></div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <img src="https://intent.itsinside.co/static/customer-assets/ade/launcher-icon.svg" alt="ADE">
-        <span>ADE 2026</span>
-      </div>
-      <h1>Your free career checklist and Ableton effects from <em>Rise.</em></h1>
-      <p class="hero-sub">Get the Artist Career Checklist, a set of Ableton effect chains, and book a free introduction call with our team. No strings attached.</p>
-      <a href="#get-guide" class="btn-primary">
-        Apply for Rise
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
 
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="num">Checklist</div>
-          <div class="label">Career roadmap</div>
+    <div class="hero-split">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <img src="https://intent.itsinside.co/static/customer-assets/ade/launcher-icon.svg" alt="ADE">
+          <span>ADE 2026</span>
         </div>
-        <div class="stat">
-          <div class="num">Ableton</div>
-          <div class="label">Effect chains</div>
+
+        <h1>Free tools to grow your<br>
+          <span class="hero-rotate-wrap" id="heroRotate">
+            <span class="hero-rotate-word active">music career.</span>
+            <span class="hero-rotate-word">production skills.</span>
+            <span class="hero-rotate-word">artist brand.</span>
+            <span class="hero-rotate-word">industry network.</span>
+          </span>
+        </h1>
+
+        <p class="hero-sub">Get the Artist Career Checklist, Ableton effect chains, and a free introduction call with the Rise team. No strings attached.</p>
+
+        <a href="#get-guide" class="btn-primary">
+          Apply for Rise
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+
+        <div class="hero-trust">
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Career Checklist
+          </span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Ableton Effects
+          </span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Free Intro Call
+          </span>
         </div>
-        <div class="stat">
-          <div class="num">Introduction</div>
-          <div class="label">Free call</div>
+      </div>
+
+      <div class="hero-right" id="heroVideo">
+        <video poster="../assets/Pages/Core/maurits-vsl-thumb.jpg" preload="metadata" playsinline webkit-playsinline>
+          <source src="../assets/Pages/Core/Maurits%20VSL.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-play">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <div class="stat">
-          <div class="num">100% Free</div>
-          <div class="label">No strings</div>
+        <div class="hero-video-label">
+          <img src="../assets/photos/Maurits.png" alt="Maurits">
+          <div class="hero-video-label-text">
+            <strong>Maurits, Rise Founder</strong>
+            <span>What Rise can do for you</span>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Review pills marquee inside hero -->
+    <div class="hero-reviews">
+      <div class="hero-reviews-track">
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="Leo"><span>"The community of dedicated musicians is inspiring."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max"><span>"The community was an eye-opener for me."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi"><span>"When you drift off track, people help you."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Seth.png" alt="Seth"><span>"I find the community really motivating."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy"><span>"A good opportunity to connect."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo"><span>"Meeting these people is so important to me."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Max2.jpg" alt="Max"><span>"They challenge you to make specific goals."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth"><span>"Working toward the same goal, helping each other."</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="Leo"><span>"The community of dedicated musicians is inspiring."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max"><span>"The community was an eye-opener for me."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi"><span>"When you drift off track, people help you."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Seth.png" alt="Seth"><span>"I find the community really motivating."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy"><span>"A good opportunity to connect."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo"><span>"Meeting these people is so important to me."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Max2.jpg" alt="Max"><span>"They challenge you to make specific goals."</span></div>
+        <div class="hero-review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth"><span>"Working toward the same goal, helping each other."</span></div>
       </div>
     </div>
   </section>
@@ -1120,6 +1485,12 @@
     }
   </script>
   <script>
+    // ── Referrer data (stored after initial registration) ──
+    let referrerData = null;
+
+    // Lock body scroll while registration overlay is visible
+    document.body.classList.add('overlay-active');
+
     // Header scroll effect
     const header = document.getElementById('site-header');
     window.addEventListener('scroll', () => {
@@ -1161,6 +1532,43 @@
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
+    // ── Hero: rotating text ──
+    (() => {
+      const wrap = document.getElementById('heroRotate');
+      if (!wrap) return;
+      const words = wrap.querySelectorAll('.hero-rotate-word');
+      let cur = 0;
+      setInterval(() => {
+        words[cur].classList.remove('active');
+        cur = (cur + 1) % words.length;
+        words[cur].classList.add('active');
+      }, 2400);
+    })();
+
+    // ── Hero: video play/pause ──
+    (() => {
+      const container = document.getElementById('heroVideo');
+      if (!container) return;
+      const video = container.querySelector('video');
+      const playBtn = container.querySelector('.hero-video-play');
+      if (!video || !playBtn) return;
+      container.addEventListener('click', () => {
+        if (video.paused) {
+          video.play();
+          playBtn.style.opacity = '0';
+          playBtn.style.pointerEvents = 'none';
+        } else {
+          video.pause();
+          playBtn.style.opacity = '1';
+          playBtn.style.pointerEvents = 'auto';
+        }
+      });
+      video.addEventListener('ended', () => {
+        playBtn.style.opacity = '1';
+        playBtn.style.pointerEvents = 'auto';
+      });
+    })();
+
     // ── Video testimonials ──
     document.addEventListener('click', function(e) {
       var card = e.target.closest('.video-card');
@@ -1180,9 +1588,7 @@
         v.currentTime = 0;
         var p = v.play();
         if (p && typeof p.then === 'function') {
-          p.then(function() {
-            card.classList.add('playing');
-          }).catch(function() {});
+          p.then(function() { card.classList.add('playing'); }).catch(function() {});
         } else {
           card.classList.add('playing');
         }
@@ -1190,27 +1596,27 @@
       v.onended = function() { card.classList.remove('playing'); };
     });
 
-    // Form submission
-    async function handleSubmit(e) {
+    // ── Phase 1: Initial Registration (overlay form) ──
+    async function handleRegSubmit(e) {
       e.preventDefault();
-      const btn = document.getElementById('btn-submit');
+      const btn = document.getElementById('reg-btn');
 
-      const nameV = document.getElementById('name').value.trim();
-      const artistV = document.getElementById('artist_name').value.trim();
-      const emailV = document.getElementById('email').value.trim();
+      const nameV = document.getElementById('reg-name').value.trim();
+      const artistV = document.getElementById('reg-artist').value.trim();
+      const emailV = document.getElementById('reg-email').value.trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailV);
       if (!nameV || !artistV || !emailOk) {
-        if (!emailOk) document.getElementById('email').focus();
+        if (!emailOk) document.getElementById('reg-email').focus();
         alert('Please fill in your name, artist name and a valid email address.');
         return;
       }
 
-      const phoneRaw = document.getElementById('phone').value.trim();
-      const phoneErr = document.getElementById('phone-error');
+      const phoneRaw = document.getElementById('reg-phone').value.trim();
+      const phoneErr = document.getElementById('reg-phone-error');
       const checked = validateMobile(phoneRaw);
       if (!checked.ok) {
         phoneErr.style.display = 'block';
-        document.getElementById('phone').focus();
+        document.getElementById('reg-phone').focus();
         return;
       }
       phoneErr.style.display = 'none';
@@ -1235,8 +1641,8 @@
         const data = await res.json();
 
         if (data.ok) {
-          riseTrack('signup'); // giveaway won: lead filled in the form
-          // Go High Level webhook
+          riseTrack('signup');
+          // Go High Level webhook (UNCHANGED endpoint)
           try {
             fetch('https://services.leadconnectorhq.com/hooks/Y39uN5NpY87HDOD2hfNH/webhook-trigger/0b13d35f-280a-49db-9991-7361d580895c', {
               method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
@@ -1256,8 +1662,12 @@
               }),
             });
           } catch (e) { /* delivery is best-effort */ }
-          document.getElementById('form-card').style.display = 'none';
-          document.getElementById('success-state').style.display = 'block';
+
+          // Store referrer data for friend referral
+          referrerData = { ...formData };
+
+          // Transition to thank-you page
+          transitionToThankYou(formData.name);
         } else {
           throw new Error(data.error || 'Something went wrong');
         }
@@ -1266,6 +1676,155 @@
         btn.classList.remove('loading');
         btn.disabled = false;
       }
+    }
+
+    // ── Transition: overlay → thank-you landing page ──
+    function transitionToThankYou(userName) {
+      // Hide registration overlay and unlock scroll
+      const overlay = document.getElementById('reg-overlay');
+      overlay.classList.add('hidden');
+      document.body.classList.remove('overlay-active');
+      setTimeout(() => { overlay.style.display = 'none'; }, 500);
+
+      // Update hero to thank-you messaging
+      const heroH1 = document.querySelector('.hero h1');
+      const heroSub = document.querySelector('.hero .hero-sub');
+      if (heroH1) heroH1.innerHTML = 'Thanks, ' + userName.split(' ')[0] + '! Your free tools are on their <em>way.</em>';
+      if (heroSub) heroSub.textContent = 'Check your inbox for the Artist Career Checklist and Ableton effect chains. Know someone who could use these too? Register them below and earn a referral reward.';
+
+      // Update header CTA
+      const headerCta = document.querySelector('.header-cta');
+      if (headerCta) {
+        headerCta.textContent = 'Registreer je vriend';
+        headerCta.href = '#';
+        headerCta.onclick = function(e) { e.preventDefault(); openFriendForm(); };
+      }
+
+      // Update ALL btn-primary CTAs on the page
+      document.querySelectorAll('.btn-primary').forEach(function(btn) {
+        btn.innerHTML = 'Registreer je vriend <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+        btn.href = '#';
+        btn.onclick = function(e) { e.preventDefault(); openFriendForm(); };
+      });
+
+      // Hide the original form section (no longer needed)
+      const formSection = document.getElementById('get-guide');
+      if (formSection) formSection.style.display = 'none';
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Phase 3: Friend referral form ──
+    function openFriendForm() {
+      document.getElementById('friend-overlay').classList.add('visible');
+      document.getElementById('friend-form-wrap').style.display = 'block';
+      document.getElementById('friend-success').classList.remove('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFriendForm() {
+      document.getElementById('friend-overlay').classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+
+    function resetFriendForm() {
+      document.getElementById('friend-form').reset();
+      document.getElementById('friend-form-wrap').style.display = 'block';
+      document.getElementById('friend-success').classList.remove('visible');
+    }
+
+    async function handleFriendSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('friend-btn');
+
+      const nameV = document.getElementById('friend-name').value.trim();
+      const artistV = document.getElementById('friend-artist').value.trim();
+      const emailV = document.getElementById('friend-email').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailV);
+      if (!nameV || !artistV || !emailOk) {
+        if (!emailOk) document.getElementById('friend-email').focus();
+        alert('Please fill in your friend\'s name, artist name and a valid email address.');
+        return;
+      }
+
+      const phoneRaw = document.getElementById('friend-phone').value.trim();
+      const phoneErr = document.getElementById('friend-phone-error');
+      const checked = validateMobile(phoneRaw);
+      if (!checked.ok) {
+        phoneErr.style.display = 'block';
+        document.getElementById('friend-phone').focus();
+        return;
+      }
+      phoneErr.style.display = 'none';
+
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      // Friend's data + referrer info
+      const friendData = {
+        name: nameV,
+        artist_name: artistV,
+        email: emailV,
+        phone: checked.normalized,
+        referred_by_name: referrerData ? referrerData.name : '',
+        referred_by_email: referrerData ? referrerData.email : '',
+        referred_by_phone: referrerData ? referrerData.phone : '',
+        referred_by_artist: referrerData ? referrerData.artist_name : '',
+        is_referral: 'true',
+      };
+
+      try {
+        const res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/giveaway-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: nameV, artist_name: artistV, email: emailV, phone: checked.normalized }),
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+          riseTrack('referral_signup');
+          // Go High Level webhook — SAME endpoint, but with referrer info included
+          try {
+            fetch('https://services.leadconnectorhq.com/hooks/Y39uN5NpY87HDOD2hfNH/webhook-trigger/0b13d35f-280a-49db-9991-7361d580895c', {
+              method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+              body: JSON.stringify(friendData),
+            });
+          } catch (e) { /* webhook is best-effort */ }
+          // Delivery
+          const RISE_BASE = 'https://agent-acquisitie-leads.netlify.app';
+          try {
+            fetch(RISE_BASE + '/api/giveaway-deliver', {
+              method: 'POST', headers: { 'Content-Type': 'text/plain' }, keepalive: true,
+              body: JSON.stringify({
+                lead: riseLead || undefined, email: emailV,
+                name: nameV, artist_name: artistV, phone: checked.normalized,
+                campaign: 'giveaway', is_referral: true,
+                referred_by_name: referrerData ? referrerData.name : '',
+                referred_by_email: referrerData ? referrerData.email : '',
+              }),
+            });
+          } catch (e) { /* delivery is best-effort */ }
+
+          // Show friend success state
+          document.getElementById('friend-form-wrap').style.display = 'none';
+          document.getElementById('friend-success').classList.add('visible');
+          btn.classList.remove('loading');
+          btn.disabled = false;
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      } catch (err) {
+        alert('Could not submit: ' + err.message);
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+
+    // ── Legacy form handler (kept for the hidden form section, won't normally fire) ──
+    async function handleSubmit(e) {
+      e.preventDefault();
     }
   </script>
 </body>
