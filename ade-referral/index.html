@@ -1961,7 +1961,7 @@
           } catch (e) { /* tracking is best-effort */ }
 
           // Add friend to referrer cache so they appear immediately
-          if (allNames) allNames.push(nameV);
+          try { if (typeof allNames !== 'undefined' && allNames) allNames.push(nameV); } catch(e) {}
 
           // Show friend success state
           document.getElementById('friend-form-wrap').style.display = 'none';
