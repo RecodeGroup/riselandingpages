@@ -1553,7 +1553,7 @@
         const added = new Set();
         rows.forEach(r => {
           const n = (r.name || '').trim();
-          if (!n || existing.has(n.toLowerCase()) || added.has(n.toLowerCase())) return;
+          if (!n || n.toLowerCase().includes('test') || existing.has(n.toLowerCase()) || added.has(n.toLowerCase())) return;
           added.add(n.toLowerCase());
           const opt = document.createElement('option');
           opt.value = n;
