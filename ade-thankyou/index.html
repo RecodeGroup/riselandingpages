@@ -1,513 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>if('scrollRestoration' in history) history.scrollRestoration='manual'; window.scrollTo(0,0);</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rise &mdash; ADE 2026 &mdash; Thanks for Registering</title>
-  <meta name="description" content="You're in! Your career tools are on the way. Register a friend and earn a referral reward from Rise.">
-  <meta name="robots" content="noindex, nofollow">
+  <title>Thanks for your registration! — Rise Artist Academy</title>
+  <meta name="description" content="Your free tools are on their way. Check your inbox for the Artist Career Checklist, Ableton effect chains, and more.">
+  <link rel="icon" href="https://intent.itsinside.co/static/customer-assets/ade/launcher-icon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ════════════════════════════════════════════════
-       Rise — ADE 2026 — Thank You Page
-       Based on ade-v3 design system
-       ════════════════════════════════════════════════ */
+    /* EXACT SAME CSS VARIABLES AND BASE STYLES AS ADE-V3 */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg: #0f0f0f;
       --bg-2: #1a1a1a;
       --fg: #ffffff;
-      --muted: #999;
       --accent: #ff683e;
-      --accent-hover: #e55a33;
+      --accent-hover: #ff7f54;
+      --muted: #999;
       --line: rgba(255,255,255,0.06);
-      --line-strong: rgba(255,255,255,0.14);
-      --card: rgba(255,255,255,0.03);
-      --card-hover: rgba(255,255,255,0.06);
       --maxw: 1100px;
     }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--fg);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
 
-    /* ── Video Testimonials ──────────────────────── */
-    .video-testimonials { padding: 5rem 0; text-align: center; }
-    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; padding: 0 2rem; }
-    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; padding: 0 2rem; }
-    .video-strip { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 2rem; }
+    /* ── Video Testimonials ── */
+    .video-testimonials { padding: 4rem 0; text-align: center; }
+    .video-testimonials .section-title { font-size: clamp(1.4rem,3vw,2rem); font-weight: 700; margin-bottom: 6px; }
+    .video-testimonials .section-sub { color: var(--muted); font-size: 0.92rem; margin-bottom: 2rem; }
+    .video-strip { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
     .video-strip::-webkit-scrollbar { display: none; }
-    .video-strip-track { display: flex; gap: 16px; width: max-content; margin: 0 auto; }
-    .video-card {
-      position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
-      width: 240px; height: 420px; cursor: pointer;
-      background: #000; flex-shrink: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
-    }
-    .video-card video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-    .video-card .play-btn { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
-    .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
-    .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
+    .video-strip-track { display: flex; gap: 18px; padding: 0 2rem; justify-content: center; }
+    .video-card { flex: 0 0 220px; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; background: #000; }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; }
+    .video-card .play-btn { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,0.3); transition: opacity 0.3s; }
+    .video-card .play-btn svg { width: 40px; height: 40px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
+    .video-card.playing .play-btn { opacity: 0; }
 
-    /* ── Scrolling Reviews ────────────────────────── */
-    .reviews-scroll { padding: 60px 0; overflow: hidden; }
-    .reviews-scroll-header { text-align: center; margin-bottom: 32px; }
-    .reviews-scroll-eyebrow {
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
-    }
-    .reviews-scroll-title {
-      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
-      line-height: 1.1; letter-spacing: -0.02em;
-    }
-    .reviews-scroll-rows { display: flex; flex-direction: column; gap: 12px; }
-    .reviews-scroll-row { display: flex; width: max-content; gap: 12px; }
-    .reviews-scroll-row--left { animation: scroll-reviews 35s linear infinite; }
-    .reviews-scroll-row--right { animation: scroll-reviews-reverse 40s linear infinite; }
+    /* ── Scrolling Reviews ── */
+    .reviews-scroll { padding: 4rem 0; overflow: hidden; }
+    .reviews-scroll-header { text-align: center; margin-bottom: 2rem; }
+    .reviews-scroll-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .reviews-scroll-title { font-size: clamp(1.4rem,3vw,2rem); font-weight: 700; }
+    .reviews-scroll-rows { display: flex; flex-direction: column; gap: 14px; }
+    .reviews-scroll-row { display: flex; gap: 14px; width: max-content; }
+    .reviews-scroll-row--left { animation: scrollLeft 40s linear infinite; }
+    .reviews-scroll-row--right { animation: scrollRight 40s linear infinite; }
+    @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
     .review-pill {
-      display: inline-flex; align-items: center; gap: 12px;
-      padding: 8px 20px 8px 8px; background: #f5f5f5;
-      border-radius: 40px; white-space: nowrap; flex-shrink: 0;
+      display: flex; align-items: center; gap: 12px; padding: 10px 18px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 999px; white-space: nowrap; flex-shrink: 0;
     }
-    .review-pill img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-    .review-pill span { font-size: 0.85rem; font-weight: 500; color: #1a1a1a; }
-    @keyframes scroll-reviews { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    @keyframes scroll-reviews-reverse { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+    .review-pill img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .review-pill span { font-size: 0.85rem; color: var(--muted); }
 
-    /* ── Accessibility ────────────────────────────── */
+    /* ── Accessibility ── */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-      html { scroll-behavior: auto; }
+      .reviews-scroll-row--left, .reviews-scroll-row--right, .hero-reviews-track, .photo-strip-track { animation: none !important; }
     }
-    *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-    /* ── Site Header ─────────────────────────────── */
+    /* ── Site Header ── */
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 110;
-      background: transparent;
-      transition: background 0.4s cubic-bezier(0.4,0,0.2,1), border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
-      border-bottom: 1px solid transparent;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 24px; transition: all 0.3s ease;
     }
     .site-header.scrolled {
-      background: rgba(15,15,15,0.72);
-      backdrop-filter: blur(20px) saturate(1.4);
-      -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      border-bottom: 1px solid rgba(255,104,62,0.12);
-      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      background: rgba(15,15,15,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
     }
     .site-header-inner {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 0.75rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: var(--maxw); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .header-logo { display: flex; align-items: center; gap: 10px; }
-    .header-logo img { width: 36px; height: 36px; border-radius: 7px; }
-    .header-logo span {
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .header-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1rem; letter-spacing: -0.01em;
     }
+    .header-logo img { height: 28px; width: auto; }
     .header-cta {
-      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
-      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
-      transition: background 0.2s; text-decoration: none; cursor: pointer; border: none; font-family: inherit;
+      background: var(--accent); color: #0a0a0a;
+      padding: 10px 22px; border-radius: 6px;
+      font-weight: 700; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: all 0.25s ease; cursor: pointer; border: none;
     }
-    .header-cta:hover { background: var(--accent-hover); }
+    .header-cta:hover {
+      background: var(--accent-hover); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
+    }
 
-    /* ── Hero (Thank-You centered) ────────────────── */
+    /* ── Hero (Split Layout — matches ade-v3) ── */
     .hero {
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(7rem, 14vw, 10rem) 2rem clamp(3rem, 6vw, 5rem);
-      position: relative;
-      overflow: hidden;
-      text-align: center;
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 100px 0 0; position: relative; overflow: hidden;
     }
     .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background:
-        radial-gradient(ellipse at 20% 30%, rgba(255,104,62,0.10), transparent 50%),
-        radial-gradient(ellipse at 85% 70%, rgba(255,104,62,0.05), transparent 55%),
-        linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.6) 50%, rgba(15,15,15,0.95) 100%),
-        url('../assets/Pages/Core/photo-11.jpg') center 30% / cover no-repeat;
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 80%, rgba(255,104,62,0.04) 0%, transparent 50%);
     }
-    .hero-center {
-      position: relative; z-index: 2;
-      max-width: 640px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .hero-split {
+      position: relative; z-index: 1;
+      max-width: var(--maxw); width: 100%; margin: 0 auto;
+      padding: 0 2rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
     }
+    .hero-left { display: flex; flex-direction: column; gap: 18px; }
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      border: none;
-      padding: 0;
-      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 8px;
     }
-    .hero-badge img { width: 48px; height: 48px; border-radius: 10px; }
+    .hero-badge img { width: 28px; height: 28px; }
+    .hero-badge svg { width: 28px; height: 28px; }
     .hero-badge span {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
     }
-
-    .hero-check {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: rgba(255,104,62,0.12);
-      border: 2px solid rgba(255,104,62,0.3);
-      display: grid; place-items: center;
-      margin-bottom: 1.5rem;
-      animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
-    }
-    .hero-check svg { width: 32px; height: 32px; color: var(--accent); }
-    @keyframes pop { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-
     .hero h1 {
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.025em;
-      margin-bottom: 1.25rem;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.03em;
     }
     .hero h1 em { font-style: normal; color: var(--accent); }
     .hero-sub {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 50ch;
-      margin-bottom: 2rem;
+      font-size: 0.95rem; color: var(--muted);
+      line-height: 1.7; max-width: 480px;
     }
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent);
-      color: #0a0a0a;
-      padding: 16px 36px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: background 0.25s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #0a0a0a;
+      padding: 14px 28px; border-radius: 6px;
+      font-weight: 700; font-size: 0.78rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: all 0.25s ease; width: fit-content; border: none; cursor: pointer;
     }
+    .btn-primary svg { width: 16px; height: 16px; }
     .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+      background: var(--accent-hover); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.25);
     }
-    .btn-primary svg { width: 18px; height: 18px; }
-
-    .hero-trust {
-      margin-top: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    .hero-trust { display: flex; flex-wrap: wrap; gap: 20px; }
     .hero-trust-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; color: var(--muted);
     }
-    .hero-trust-item svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+    .hero-trust-item svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 
-    /* ── Hero Review Pills (mini marquee) ── */
+    /* Hero: rotating text */
+    .hero-rotate-wrap {
+      display: inline-block; position: relative; vertical-align: bottom;
+      height: 1.1em; overflow: hidden;
+    }
+    .hero-rotate-word {
+      display: block; color: var(--accent);
+      position: absolute; top: 0; left: 0;
+      opacity: 0; transform: translateY(40%);
+      transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .hero-rotate-word.active { opacity: 1; transform: translateY(0); position: relative; }
+
+    /* Hero: video */
+    .hero-right {
+      position: relative; border-radius: 16px; overflow: hidden;
+      aspect-ratio: 9/16; max-height: 520px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .hero-right video { width: 100%; height: 100%; object-fit: cover; }
+    .hero-video-play {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      background: rgba(0,0,0,0.2);
+      transition: opacity 0.3s ease;
+    }
+    .hero-video-play svg {
+      width: 52px; height: 52px; fill: rgba(255,255,255,0.9);
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+    }
+    .hero-video-label {
+      position: absolute; bottom: 16px; left: 16px; right: 16px;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+      border-radius: 10px; padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-video-label img { width: 32px; height: 32px; border-radius: 50%; }
+    .hero-video-label-text { display: flex; flex-direction: column; }
+    .hero-video-label-text strong { font-size: 0.78rem; }
+    .hero-video-label-text span { font-size: 0.68rem; color: var(--muted); }
+
+    /* Hero: review pills (marquee) */
     .hero-reviews {
-      position: relative; z-index: 2;
-      max-width: var(--maxw);
-      margin: 2.5rem auto 0;
-      padding: 0 2rem;
-      overflow: hidden;
+      position: relative; z-index: 1;
+      margin-top: 2rem; overflow: hidden; width: 100%;
     }
     .hero-reviews-track {
-      display: flex;
-      gap: 10px;
-      width: max-content;
-      animation: scroll-hero-reviews 30s linear infinite;
+      display: flex; gap: 14px; width: max-content;
+      animation: scrollLeft 45s linear infinite;
     }
     .hero-review-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 16px 6px 6px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 40px;
-      white-space: nowrap;
-      flex-shrink: 0;
+      display: flex; align-items: center; gap: 10px; padding: 8px 16px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 999px; white-space: nowrap; flex-shrink: 0;
     }
-    .hero-review-pill img {
-      width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
-    }
-    .hero-review-pill span { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.7); }
-    @keyframes scroll-hero-reviews { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .hero-review-pill img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+    .hero-review-pill span { font-size: 0.8rem; color: var(--muted); }
 
-    /* ── Photo Strip ─────────────────────────────── */
+    /* Thank-you hero: animated checkmark */
+    .hero-check {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,104,62,0.12); border: 2px solid rgba(255,104,62,0.3);
+      display: grid; place-items: center;
+      animation: pop 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+      margin-bottom: 4px;
+    }
+    .hero-check svg { width: 24px; height: 24px; color: var(--accent); }
+    @keyframes pop { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+    /* Hero: stats (not used on thank-you but kept for consistency) */
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      margin-top: 0.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
+    }
+    .hero-stat strong { display: block; font-size: 1.6rem; font-weight: 700; color: var(--fg); }
+    .hero-stat span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── Photo Strip ── */
     .photo-strip {
-      overflow: hidden;
-      padding: 2rem 0;
+      overflow: hidden; padding: 2rem 0;
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
     }
     .photo-strip-track {
-      display: flex;
-      gap: 4px;
-      width: max-content;
-      animation: scroll-strip 40s linear infinite;
+      display: flex; gap: 12px; width: max-content;
+      animation: scrollLeft 50s linear infinite;
     }
     .photo-strip-track img {
-      height: 180px;
-      aspect-ratio: 3/2;
-      object-fit: cover;
-      border-radius: 0;
-      flex-shrink: 0;
-    }
-    @keyframes scroll-strip {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      height: 180px; width: auto; border-radius: 10px;
+      object-fit: cover; flex-shrink: 0;
     }
 
-    /* ── Section defaults ────────────────────────── */
-    .section {
-      padding: 5rem 2rem;
-      border-top: 1px solid var(--line);
-    }
+    /* ── Section defaults ── */
+    .section { padding: 5rem 2rem; border-top: 1px solid var(--line); }
     .section-inner { max-width: var(--maxw); margin: 0 auto; }
     .section-eyebrow {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
     }
     .section-heading {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px;
     }
-    .section-body {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 55ch;
-      margin-bottom: 2.5rem;
-    }
+    .section-body { color: var(--muted); font-size: 0.92rem; line-height: 1.65; margin-bottom: 2.5rem; max-width: 640px; }
 
     /* ── What's Inside Cards ── */
-    .inside-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
+    .inside-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
     .inside-card {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 10px;
-      padding: 1.4rem 1.5rem;
-      transition: all 0.3s;
+      background: var(--bg-2); border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px; padding: 1.75rem;
+      transition: all 0.3s ease;
     }
     .inside-card:hover {
-      background: var(--card-hover);
-      border-color: rgba(255,104,62,0.15);
-      transform: translateY(-2px);
+      border-color: rgba(255,104,62,0.15); transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
-    .inside-card .ic-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: rgba(255,104,62,0.1);
-      display: grid;
-      place-items: center;
-      margin-bottom: 12px;
+    .ic-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255,104,62,0.1); display: grid; place-items: center;
+      margin-bottom: 14px;
     }
-    .inside-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; }
-    .inside-card p { color: var(--muted); font-size: 0.82rem; line-height: 1.55; }
+    .inside-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .inside-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
 
-    /* ── Feature Row ── */
+    /* ── Feature Rows ── */
     .feature-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      padding: 3rem 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
     }
     .feature-row.reverse { direction: rtl; }
     .feature-row.reverse > * { direction: ltr; }
-    .feature-img {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .feature-img img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      display: block;
-    }
-    .feature-text .ft-eyebrow {
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 10px;
+    .feature-img img { width: 100%; border-radius: 12px; }
+    .ft-eyebrow {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
     }
     .feature-text h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 12px;
     }
-    .feature-text p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.65;
-    }
+    .feature-text p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
 
-    /* ── Introduction Call section ── */
+    /* ── Strategy / Introduction Call ── */
     .strategy-section {
       text-align: center;
       padding: 5rem 2rem;
+      background: var(--bg-2);
       border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
     .strategy-inner { max-width: 640px; margin: 0 auto; }
     .strategy-inner h2 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 14px;
     }
     .strategy-inner h2 em { font-style: normal; color: var(--accent); }
-    .strategy-inner p {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 2rem;
-    }
-    .strategy-perks {
-      list-style: none;
-      display: grid;
-      gap: 10px;
-      max-width: 420px;
-      margin: 0 auto 2.5rem;
-      text-align: left;
-    }
+    .strategy-inner > p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; margin-bottom: 2rem; }
+    .strategy-perks { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
     .strategy-perks li {
-      font-size: 0.88rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 0.88rem; color: var(--muted);
+      display: flex; align-items: center; gap: 10px;
     }
     .strategy-perks li svg { flex-shrink: 0; }
 
-    /* ── Form field / button styles (for friend form) ── */
+    /* ── Form field/button styles (for friend overlay) ── */
     .field { margin-bottom: 0.9rem; }
     .field label {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 5px;
+      display: block; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 5px;
     }
     .field input {
-      width: 100%;
-      padding: 11px 14px;
+      width: 100%; padding: 11px 14px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 6px;
-      color: var(--fg);
-      font-size: 0.88rem;
-      font-family: inherit;
-      transition: border-color 0.2s;
-      outline: none;
+      border-radius: 6px; color: var(--fg);
+      font-size: 0.88rem; font-family: inherit;
+      transition: border-color 0.2s; outline: none;
     }
     .field input::placeholder { color: rgba(255,255,255,0.22); }
     .field input:focus { border-color: var(--accent); }
+    .field select {
+      width: 100%; padding: 11px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; color: var(--fg);
+      font-size: 0.88rem; font-family: inherit;
+      transition: border-color 0.2s; outline: none;
+      appearance: none; -webkit-appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .field select:focus { border-color: var(--accent); }
+    .field select option { background: #1a1a1a; color: #fff; }
     .btn-submit {
-      width: 100%;
-      background: var(--accent);
-      color: #0a0a0a;
-      padding: 14px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      margin-top: 0.4rem;
-      font-family: inherit;
+      width: 100%; background: var(--accent); color: #0a0a0a;
+      padding: 14px; border-radius: 6px; font-weight: 700;
+      font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; cursor: pointer; transition: all 0.25s ease;
+      margin-top: 0.4rem; font-family: inherit;
     }
     .btn-submit:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
+      background: var(--accent-hover); transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(255,104,62,0.25);
     }
     .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
     .btn-submit.loading { pointer-events: none; position: relative; color: transparent; }
     .btn-submit.loading::after {
-      content: '';
-      position: absolute; inset: 0; margin: auto;
+      content: ''; position: absolute; inset: 0; margin: auto;
       width: 20px; height: 20px;
-      border: 2px solid rgba(10,10,10,0.3);
-      border-top-color: #0a0a0a;
-      border-radius: 50%;
-      animation: spin 0.6s linear infinite;
+      border: 2px solid rgba(10,10,10,0.3); border-top-color: #0a0a0a;
+      border-radius: 50%; animation: spin 0.6s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     .form-note { margin-top: 0.8rem; color: var(--muted); font-size: 0.68rem; text-align: center; }
 
-    /* ── FAQ ──────────────────────────────────────── */
-    .faq-list {
-      max-width: 720px;
-      margin: 32px auto 0;
-    }
-    .faq .section-eyebrow,
-    .faq .section-heading {
-      text-align: center;
-    }
-    .faq-item {
-      border-bottom: 1px solid var(--line);
-    }
+    /* ── FAQ ── */
+    .faq-list { max-width: 720px; margin: 32px auto 0; }
+    .faq .section-eyebrow, .faq .section-heading { text-align: center; }
+    .faq-item { border-bottom: 1px solid var(--line); }
     .faq-question {
       width: 100%; display: flex; align-items: center;
       justify-content: space-between; padding: 1.25rem 0;
@@ -515,100 +385,54 @@
       background: none; border: none; cursor: pointer;
       text-align: left; gap: 1rem; font-family: inherit;
     }
-    .faq-icon {
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
-      position: relative;
-    }
+    .faq-icon { width: 24px; height: 24px; flex-shrink: 0; position: relative; }
     .faq-icon::before {
-      content: '';
-      width: 14px; height: 2px;
-      background: var(--muted);
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 2px;
+      content: ''; width: 14px; height: 2px; background: var(--muted);
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 2px;
     }
     .faq-icon::after {
-      content: '';
-      width: 2px; height: 14px;
-      background: var(--muted);
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 2px;
+      content: ''; width: 2px; height: 14px; background: var(--muted);
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 2px;
       transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s cubic-bezier(0.4,0,0.2,1);
     }
-    .faq-item.open .faq-icon::after {
-      transform: translate(-50%, -50%) rotate(90deg);
-      opacity: 0;
-    }
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
-    }
-    .faq-a-inner {
-      padding: 0 0 1.25rem;
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
+    .faq-item.open .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .faq-a-inner { padding: 0 0 1.25rem; font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
     .faq-item.open .faq-a { max-height: 300px; }
 
-    /* ── Closing ──────────────────────────────────── */
+    /* ── Closing ── */
     .closing {
-      text-align: center;
-      padding: 5rem 2rem;
+      text-align: center; padding: 5rem 2rem;
       border-top: 1px solid var(--line);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
-    .closing-inner {
-      max-width: 600px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
+    .closing-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
     .closing h2 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px;
     }
     .closing h2 em { font-style: normal; color: var(--accent); }
-    .closing p {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-    }
+    .closing p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 2.5rem; }
 
-    /* ── Footer ──────────────────────────────────── */
+    /* ── Footer ── */
     .footer {
-      border-top: 1px solid var(--line);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
+      border-top: 1px solid var(--line); padding: 2.5rem 2rem;
+      text-align: center; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.06em;
     }
-    .footer .links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-top: 10px;
-    }
-    .footer .links a {
-      color: var(--muted);
-      transition: color 0.2s cubic-bezier(0.4,0,0.2,1);
-    }
+    .footer .links { display: flex; justify-content: center; gap: 24px; margin-top: 10px; }
+    .footer .links a { color: var(--muted); transition: color 0.2s cubic-bezier(0.4,0,0.2,1); }
     .footer .links a:hover { color: var(--accent); }
 
-    /* ── Responsive ───────────────────────────────── */
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-      .hero { min-height: auto; padding: 80px 2rem 40px; }
+      .hero { min-height: auto; padding: 80px 0 40px; }
+      .hero-split { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .hero-left { align-items: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-trust { justify-content: center; }
+      .hero-right { max-height: 400px; aspect-ratio: 9/14; margin: 0 2rem; }
       .hero-reviews { margin-top: 1.5rem; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .inside-grid { grid-template-columns: 1fr; }
       .feature-row { grid-template-columns: 1fr; gap: 2rem; }
       .feature-row.reverse { direction: ltr; }
@@ -618,21 +442,20 @@
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.8rem; }
+      .hero-right { max-height: 340px; margin: 0 1.25rem; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
       .header-cta { display: none; }
     }
 
-    /* ── Module Cards (horizontal scroll) ────────────── */
+    /* ── Module Cards (horizontal scroll) ── */
     .modules-scroll {
       display: flex; gap: 18px; overflow-x: auto;
-      padding: 0 2rem 18px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      justify-content: center;
+      padding: 0 2rem 18px; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; justify-content: center;
     }
     .modules-scroll::-webkit-scrollbar { display: none; }
     .module-card {
-      flex: 0 0 320px;
-      background: var(--bg-2);
+      flex: 0 0 320px; background: var(--bg-2);
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 12px; padding: 2rem 1.75rem;
       transition: all 0.3s ease; position: relative; overflow: hidden;
@@ -644,8 +467,7 @@
       opacity: 0; transition: opacity 0.3s ease;
     }
     .module-card:hover {
-      border-color: rgba(255,104,62,0.2);
-      transform: translateY(-4px);
+      border-color: rgba(255,104,62,0.2); transform: translateY(-4px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
     .module-card:hover::before { opacity: 1; }
@@ -653,26 +475,16 @@
       width: 100%; aspect-ratio: 16/10; object-fit: cover;
       border-radius: 8px; margin-bottom: 14px; display: block;
     }
-    .module-card h3 {
-      font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;
-    }
-    .module-card p {
-      color: var(--muted); font-size: 0.88rem; line-height: 1.65;
-    }
-    .module-topics {
-      list-style: none; margin-top: 14px;
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .module-topics li {
-      font-size: 0.82rem; color: #bbb;
-      display: flex; align-items: center; gap: 8px;
-    }
+    .module-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+    .module-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+    .module-topics { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+    .module-topics li { font-size: 0.82rem; color: #bbb; display: flex; align-items: center; gap: 8px; }
     .module-topics li::before {
       content: ''; width: 4px; height: 4px;
       border-radius: 50%; background: var(--accent); flex-shrink: 0;
     }
 
-    /* ── Friend Form Overlay ─────────────────────── */
+    /* ── Friend Form Overlay ── */
     .friend-overlay {
       position: fixed; inset: 0; z-index: 9998;
       background: rgba(15,15,15,0.97);
@@ -683,8 +495,7 @@
     .friend-overlay-inner {
       width: 100%; max-width: 440px;
       background: var(--bg-2); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px; padding: 2.5rem 2rem;
-      position: relative;
+      border-radius: 16px; padding: 2.5rem 2rem; position: relative;
     }
     .friend-overlay-inner h2 {
       font-size: 1.5rem; font-weight: 700; text-align: center;
@@ -703,9 +514,7 @@
       border-radius: 50%; transition: background 0.2s;
     }
     .friend-close:hover { background: rgba(255,255,255,0.08); }
-    .friend-success {
-      display: none; text-align: center; padding: 2rem 0;
-    }
+    .friend-success { display: none; text-align: center; padding: 2rem 0; }
     .friend-success.visible { display: block; }
     .friend-success .check {
       width: 56px; height: 56px; border-radius: 50%;
@@ -746,6 +555,13 @@
             <input type="tel" id="friend-phone" name="phone" placeholder="+31 6 1234 5678" required>
             <p id="friend-phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number.</p>
           </div>
+          <div class="field">
+            <label for="friend-referrer">Who referred you? <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+            <select id="friend-referrer" name="referrer">
+              <option value="">None</option>
+              <option value="Team Rise">Team Rise</option>
+            </select>
+          </div>
           <button type="submit" class="btn-submit" id="friend-btn">Register Friend</button>
         </form>
         <p class="form-note">Your friend will receive an email with their free tools.</p>
@@ -771,48 +587,70 @@
         <img src="../assets/logo.png" alt="Rise">
         <span>Rise</span>
       </a>
-      <button class="header-cta" onclick="openFriendForm()">Register a friend</button>
+      <a class="header-cta" href="#" onclick="event.preventDefault(); openFriendForm();">Register a friend</a>
     </div>
   </header>
 
   <!-- ══════════════════════════════════════════════
-       Hero — Thank-You (Centered)
+       Hero — Split Layout (Thank-You Variant)
        ══════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-bg"></div>
 
-    <div class="hero-center">
-      <div class="hero-badge">
-        <img src="https://intent.itsinside.co/static/customer-assets/ade/launcher-icon.svg" alt="ADE">
-        <span>ADE 2026</span>
+    <div class="hero-split">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <div class="hero-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>You're in</span>
+        </div>
+
+        <h1 id="hero-title">Thanks for your<br>
+          <span class="hero-rotate-wrap" id="heroRotate">
+            <span class="hero-rotate-word active">registration!</span>
+            <span class="hero-rotate-word">career tools!</span>
+            <span class="hero-rotate-word">first step!</span>
+          </span>
+        </h1>
+
+        <p class="hero-sub">Check your inbox for the Artist Career Checklist and Ableton effect chains. Know someone who could use these too?</p>
+
+        <a href="#" class="btn-primary" onclick="event.preventDefault(); openFriendForm();">
+          Register a friend
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+
+        <div class="hero-trust">
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Checklist sent to your email
+          </span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Ableton effect chains included
+          </span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Free intro call scheduled
+          </span>
+        </div>
       </div>
 
-      <div class="hero-check">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-
-      <h1 id="hero-title">Thanks for registering!</h1>
-
-      <p class="hero-sub">Your career tools are on the way. Check your inbox for the Artist Career Checklist and Ableton effect chains. We'll also be in touch about your free introduction call.</p>
-
-      <button class="btn-primary" onclick="openFriendForm()">
-        Register a friend
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </button>
-
-      <div class="hero-trust">
-        <span class="hero-trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Checklist sent to your email
-        </span>
-        <span class="hero-trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Ableton effect chains included
-        </span>
-        <span class="hero-trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Free intro call coming up
-        </span>
+      <div class="hero-right" id="heroVideo">
+        <video poster="../assets/Pages/Core/maurits-vsl-thumb.jpg" preload="metadata" playsinline webkit-playsinline>
+          <source src="../assets/Pages/Core/Maurits%20VSL.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-play">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="hero-video-label">
+          <img src="../assets/photos/Maurits.png" alt="Maurits">
+          <div class="hero-video-label-text">
+            <strong>Maurits, Rise Coach</strong>
+            <span>What Rise can do for you</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -866,7 +704,7 @@
   </div>
 
   <!-- ══════════════════════════════════════════════
-       What You Get
+       What You Get (4 cards — includes Rise Artist Program)
        ══════════════════════════════════════════════ -->
   <section class="section" id="whats-inside">
     <div class="section-inner">
@@ -895,6 +733,13 @@
           </div>
           <h3>Free Introduction Call</h3>
           <p>After signing up, we reach out to schedule a free introduction call. We look at where you stand in your career and how we can help.</p>
+        </div>
+        <div class="inside-card">
+          <div class="ic-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Rise Artist Program Access</h3>
+          <p>Get early access to the Rise Artist Program. Watch the first video lessons and see how our coaches approach production, branding, and career growth.</p>
         </div>
       </div>
     </div>
@@ -937,13 +782,13 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
-       Introduction Call
+       Introduction Call (NO "No sales pitch")
        ══════════════════════════════════════════════ -->
   <section class="strategy-section">
     <div class="strategy-inner">
       <div class="section-eyebrow">After you sign up</div>
       <h2>A free introduction call to see where <em>you stand.</em></h2>
-      <p>Once you register, we reach out to schedule a free call. No sales pitch, just an honest look at your career and where to focus next.</p>
+      <p>Once you register, we reach out to schedule a free call. An honest look at your career and where to focus next.</p>
       <ul class="strategy-perks">
         <li>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -958,55 +803,62 @@
           Learn how Rise can support your goals
         </li>
       </ul>
-      <button class="btn-primary" onclick="openFriendForm()">
+      <a href="#" class="btn-primary" onclick="event.preventDefault(); openFriendForm();">
         Register a friend
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </button>
+      </a>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════════
-       FAQ
+       YOUR JOURNEY FROM PRODUCER TO ARTIST (moved ABOVE testimonials)
        ══════════════════════════════════════════════ -->
-  <section class="section faq">
-    <div class="section-inner">
-      <div class="section-eyebrow">Questions</div>
-      <h2 class="section-heading">Frequently asked.</h2>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>Is this actually free?</span>
-            <span class="faq-icon"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">Yes, completely free. The Artist Career Checklist and Ableton effect chains are yours to keep. No credit card, no hidden fees, no trial that expires.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>What is the introduction call about?</span>
-            <span class="faq-icon"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">After you sign up, we reach out to schedule a short call. We look at where you are in your career, what your goals are, and what steps could help you get there. If Rise can support you, we explain how. If not, you still walk away with actionable advice.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>What is Rise?</span>
-            <span class="faq-icon"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">Rise Artist Academy is a coaching program for music producers who want to build a career, not just make beats. We offer two tracks: Base (six months, production foundation) and Core (twelve months, career accountability). Weekly sessions, direct feedback, and a team that holds you to a higher standard.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>Do I need Ableton to use the effect chains?</span>
-            <span class="faq-icon"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">Yes, the effect chains are built for Ableton Live. The checklist works for any producer regardless of your DAW.</div></div>
-        </div>
+  <section id="modules" style="padding: 5rem 0; border-top: 1px solid var(--line);">
+    <div style="max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; margin-bottom: 2rem;">
+      <div class="section-eyebrow">Your journey</div>
+      <h2 class="section-title">Your journey from producer to artist</h2>
+      <p class="section-sub">Every successful artist starts somewhere. The difference is having a clear path to follow. We've broken that journey down into simple steps so you always know what to focus on next.</p>
+    </div>
+
+    <div class="modules-scroll">
+      <div class="module-card">
+        <img class="card-photo" src="../assets/Coursevsl/Musicandskill.png" alt="Music & Skill" loading="lazy">
+        <h3>Music &amp; Skill</h3>
+        <p>Stop making loops that go nowhere. Learn to finish tracks that sound like the records you look up to.</p>
+        <ul class="module-topics">
+          <li>Production fundamentals</li>
+          <li>Sound design &amp; synthesis</li>
+          <li>Mixing &amp; mastering</li>
+          <li>Arrangement &amp; structure</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <img class="card-photo" src="../assets/Coursevsl/Growth.png" alt="Industry & Positioning" loading="lazy">
+        <h3>Industry &amp; Positioning</h3>
+        <p>Know what labels look for, how royalties work, and how to get your music in front of the right people.</p>
+        <ul class="module-topics">
+          <li>Releasing &amp; distribution</li>
+          <li>Royalties &amp; sync</li>
+          <li>Branding &amp; identity</li>
+          <li>Working with labels</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <img class="card-photo" src="../assets/photos/Aug/aug_11.2.png" alt="Growth & Monetization" loading="lazy">
+        <h3>Growth &amp; Monetization</h3>
+        <p>Turn your music into a sustainable career. Get booked, build an audience, and create income.</p>
+        <ul class="module-topics">
+          <li>Marketing &amp; audience growth</li>
+          <li>Social media strategy</li>
+          <li>Revenue streams</li>
+          <li>Performance &amp; booking</li>
+        </ul>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════════
-       Video Testimonials
+       Video Testimonials (5 cards — includes ad_testimonials)
        ══════════════════════════════════════════════ -->
   <section class="video-testimonials">
     <h2 class="section-title">What our artists have to say</h2>
@@ -1017,6 +869,7 @@
         <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B_v2.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/ad_testimonials.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/ad_testimonials.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
       </div>
     </div>
   </section>
@@ -1056,65 +909,57 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
-       YOUR JOURNEY FROM PRODUCER TO ARTIST
-       ══════════════════════════════════════════════ -->
-  <section id="modules" style="padding: 5rem 0; border-top: 1px solid var(--line);">
-    <div style="max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; margin-bottom: 2rem;">
-      <div class="section-eyebrow">Your journey</div>
-      <h2 class="section-heading">Your journey from producer to artist</h2>
-      <p class="section-body">Every successful artist starts somewhere. The difference is having a clear path to follow. We've broken that journey down into simple steps so you always know what to focus on next.</p>
-    </div>
-
-    <div class="modules-scroll">
-      <div class="module-card">
-        <img class="card-photo" src="../assets/Coursevsl/Musicandskill.png" alt="Music & Skill" loading="lazy">
-        <h3>Music &amp; Skill</h3>
-        <p>Stop making loops that go nowhere. Learn to finish tracks that sound like the records you look up to.</p>
-        <ul class="module-topics">
-          <li>Production fundamentals</li>
-          <li>Sound design &amp; synthesis</li>
-          <li>Mixing &amp; mastering</li>
-          <li>Arrangement &amp; structure</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <img class="card-photo" src="../assets/Coursevsl/Growth.png" alt="Industry & Positioning" loading="lazy">
-        <h3>Industry &amp; Positioning</h3>
-        <p>Know what labels look for, how royalties work, and how to get your music in front of the right people.</p>
-        <ul class="module-topics">
-          <li>Releasing &amp; distribution</li>
-          <li>Royalties &amp; sync</li>
-          <li>Branding &amp; identity</li>
-          <li>Working with labels</li>
-        </ul>
-      </div>
-      <div class="module-card">
-        <img class="card-photo" src="../assets/photos/Aug/aug_11.2.png" alt="Growth & Monetization" loading="lazy">
-        <h3>Growth &amp; Monetization</h3>
-        <p>Turn your music into a sustainable career. Get booked, build an audience, and create income.</p>
-        <ul class="module-topics">
-          <li>Marketing &amp; audience growth</li>
-          <li>Social media strategy</li>
-          <li>Revenue streams</li>
-          <li>Performance &amp; booking</li>
-        </ul>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ══════════════════════════════════════════════
        Closing CTA
        ══════════════════════════════════════════════ -->
   <section class="closing">
     <div class="closing-inner">
       <div class="section-eyebrow">ADE 2026</div>
-      <h2>Know someone who could use these <em>career tools?</em></h2>
-      <p>Register a friend and they get the same checklist, Ableton effects, and free introduction call. You earn a referral reward from Rise.</p>
-      <button class="btn-primary" onclick="openFriendForm()">
+      <h2>Know someone who needs these <em>free tools?</em></h2>
+      <p>Share the checklist, the Ableton effects, and a free introduction call with a friend. Help them take the first step.</p>
+      <a href="#" class="btn-primary" onclick="event.preventDefault(); openFriendForm();">
         Register a friend
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </button>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FAQ (moved to bottom, above footer)
+       ══════════════════════════════════════════════ -->
+  <section class="section faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Frequently asked.</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Is this actually free?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes, completely free. The Artist Career Checklist and Ableton effect chains are yours to keep. No credit card, no hidden fees, no trial that expires.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>What is the introduction call about?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">After you sign up, we reach out to schedule a short call. We look at where you are in your career, what your goals are, and what steps could help you get there. If Rise can support you, we explain how. If not, you still walk away with actionable advice.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>What is Rise?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Rise Artist Academy is a coaching program for music producers who want to build a career, not just make beats. We offer two tracks: Base (six months, production foundation) and Core (twelve months, career accountability). Weekly sessions, direct feedback, and a team that holds you to a higher standard.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Do I need Ableton to use the effect chains?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Yes, the effect chains are built for Ableton Live. The checklist works for any producer regardless of your DAW.</div></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1130,7 +975,6 @@
   <!-- Phone validation library (libphonenumber) -->
   <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.11.4/bundle/libphonenumber-max.js"></script>
   <script>
-    // ── Phone validation ──
     function validateMobile(raw) {
       if (!raw || !raw.trim()) return { ok: false };
       try {
@@ -1145,32 +989,45 @@
           }
           return { ok: false };
         }
-      } catch (e) {}
+      } catch (e) { /* library error */ }
       return { ok: false };
     }
-
-    // ── Referrer data from sessionStorage (set by ade-v3/ade-referral before redirect) ──
+  </script>
+  <script>
+    // ── Referrer data (from session storage, set during initial registration on ade-v3) ──
     let referrerData = null;
     try {
-      const stored = sessionStorage.getItem('ade_referrer');
+      const stored = sessionStorage.getItem('ade_referrer_data');
       if (stored) referrerData = JSON.parse(stored);
     } catch (e) {}
 
-    // ── Personalize hero title from ?name= param ──
-    try {
-      const nameParam = new URLSearchParams(location.search).get('name');
-      if (nameParam && nameParam.trim()) {
-        document.getElementById('hero-title').textContent = 'Thanks, ' + nameParam.trim().split(' ')[0] + '!';
-      }
-    } catch (e) {}
+    // ── Personalize hero title from ?name= URL parameter ──
+    (() => {
+      try {
+        const params = new URLSearchParams(location.search);
+        const userName = params.get('name');
+        if (userName) {
+          const firstName = userName.trim().split(' ')[0];
+          const titleEl = document.getElementById('hero-title');
+          if (titleEl && firstName) {
+            titleEl.innerHTML = 'Thanks, ' + firstName + '! Your free tools are on their<br>' +
+              '<span class="hero-rotate-wrap" id="heroRotate">' +
+              '<span class="hero-rotate-word active">way!</span>' +
+              '<span class="hero-rotate-word">career tools!</span>' +
+              '<span class="hero-rotate-word">first step!</span>' +
+              '</span>';
+          }
+        }
+      } catch (e) {}
+    })();
 
-    // ── Header scroll effect ──
+    // Header scroll effect
     const header = document.getElementById('site-header');
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // ── Rise outreach tracking ──
+    // Rise outreach tracking: links this visit + signup back to the emailed lead.
     const RISE_TRACK_URL = 'https://agent-acquisitie-leads.netlify.app/api/track';
     const riseLead = (() => {
       try {
@@ -1183,11 +1040,44 @@
       if (!riseLead) return;
       try {
         navigator.sendBeacon(RISE_TRACK_URL, JSON.stringify({ lead: riseLead, event: event, campaign: 'giveaway' }));
-      } catch (e) {}
+      } catch (e) { /* tracking must never break the page */ }
     }
     riseTrack('thankyou_page_view');
 
-    // ── IP geolocation for friend phone field ──
+    // ── Populate friend referrer dropdown with dynamic names from ade_signups ──
+    // Team member names are replaced with "Team Rise" — filter them out individually
+    (async () => {
+      try {
+        const SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
+        const res = await fetch(SUPABASE_URL + '/rest/v1/ade_signups?select=name&order=created_at.desc', {
+          headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY },
+          signal: AbortSignal.timeout(4000),
+        });
+        const rows = await res.json();
+        if (!Array.isArray(rows)) return;
+        const sel = document.getElementById('friend-referrer');
+        // Team member names to filter out (replaced by "Team Rise")
+        const teamMembers = ['jim v nood', 'maurits poppelaars', 'yvo overhof', 'julian derijks', 'hendrik kamminga', 'abel pleijte', 'yoanna'];
+        const existing = new Set();
+        sel.querySelectorAll('option').forEach(o => { if (o.value) existing.add(o.value.toLowerCase()); });
+        const added = new Set();
+        rows.forEach(r => {
+          const n = (r.name || '').trim();
+          if (!n) return;
+          const lower = n.toLowerCase();
+          // Skip test entries, team members, and duplicates
+          if (lower.includes('test') || teamMembers.includes(lower) || existing.has(lower) || added.has(lower)) return;
+          added.add(lower);
+          const opt = document.createElement('option');
+          opt.value = n;
+          opt.textContent = n;
+          sel.appendChild(opt);
+        });
+      } catch (e) { /* dropdown population is best-effort */ }
+    })();
+
+    // ── IP-based country code auto-detection ──
     (async () => {
       try {
         const res = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) });
@@ -1199,10 +1089,10 @@
             if (el && !el.value) el.value = code + ' ';
           });
         }
-      } catch (e) {}
+      } catch (e) { /* geo-detection is best-effort */ }
     })();
 
-    // ── Scroll depth tracking ──
+    // Scroll depth (25/50/75/100%)
     (() => {
       const fired = {};
       function onScroll() {
@@ -1215,52 +1105,94 @@
             if (pct >= m && !fired[m]) { fired[m] = true; riseTrack('scroll_' + m); }
           });
           if (fired[100]) window.removeEventListener('scroll', onScroll);
-        } catch (e) {}
+        } catch (e) { /* tracking must never break the page */ }
       }
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
-    // ── Video testimonials click handler ──
-    document.querySelectorAll('.video-card').forEach(card => {
-      card.addEventListener('click', function () {
-        const v = this.querySelector('video');
-        if (!v) return;
-        // pause other videos
-        document.querySelectorAll('.video-card').forEach(c => {
-          if (c !== card) {
-            const ov = c.querySelector('video');
-            if (ov) { ov.pause(); ov.currentTime = 0; }
-            c.classList.remove('playing');
-          }
-        });
-        if (v.paused) {
-          v.play();
-          this.classList.add('playing');
+    // ── Hero: rotating text ──
+    (() => {
+      const wrap = document.getElementById('heroRotate');
+      if (!wrap) return;
+      const words = wrap.querySelectorAll('.hero-rotate-word');
+      let cur = 0;
+      setInterval(() => {
+        words[cur].classList.remove('active');
+        cur = (cur + 1) % words.length;
+        words[cur].classList.add('active');
+      }, 2400);
+    })();
+
+    // ── Hero: video play/pause ──
+    (() => {
+      const container = document.getElementById('heroVideo');
+      if (!container) return;
+      const video = container.querySelector('video');
+      const playBtn = container.querySelector('.hero-video-play');
+      if (!video || !playBtn) return;
+      container.addEventListener('click', () => {
+        if (video.paused) {
+          video.play();
+          playBtn.style.opacity = '0';
+          playBtn.style.pointerEvents = 'none';
         } else {
-          v.pause();
-          this.classList.remove('playing');
+          video.pause();
+          playBtn.style.opacity = '1';
+          playBtn.style.pointerEvents = 'auto';
         }
       });
+      video.addEventListener('ended', () => {
+        playBtn.style.opacity = '1';
+        playBtn.style.pointerEvents = 'auto';
+      });
+    })();
+
+    // ── Video testimonials ──
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('.video-card');
+      if (!card) return;
+      var v = card.querySelector('video');
+      if (!v) return;
+      e.preventDefault();
+      if (card.classList.contains('playing')) {
+        v.pause();
+        card.classList.remove('playing');
+      } else {
+        document.querySelectorAll('.video-card.playing').forEach(function(c) {
+          var cv = c.querySelector('video');
+          if (cv) cv.pause();
+          c.classList.remove('playing');
+        });
+        v.currentTime = 0;
+        var p = v.play();
+        if (p && typeof p.then === 'function') {
+          p.then(function() { card.classList.add('playing'); }).catch(function() {});
+        } else {
+          card.classList.add('playing');
+        }
+      }
+      v.onended = function() { card.classList.remove('playing'); };
     });
 
-    // ── Friend form functions ──
+    // ── Friend referral form ──
     function openFriendForm() {
       document.getElementById('friend-overlay').classList.add('visible');
       document.getElementById('friend-form-wrap').style.display = 'block';
       document.getElementById('friend-success').classList.remove('visible');
       document.body.style.overflow = 'hidden';
     }
+
     function closeFriendForm() {
       document.getElementById('friend-overlay').classList.remove('visible');
       document.body.style.overflow = '';
     }
+
     function resetFriendForm() {
       document.getElementById('friend-form').reset();
       document.getElementById('friend-form-wrap').style.display = 'block';
       document.getElementById('friend-success').classList.remove('visible');
     }
 
-    // ── Friend form submission ──
     async function handleFriendSubmit(e) {
       e.preventDefault();
       const btn = document.getElementById('friend-btn');
@@ -1286,6 +1218,9 @@
 
       btn.classList.add('loading');
       btn.disabled = true;
+
+      const referredBySelect = document.getElementById('friend-referrer');
+      const referredByName = referredBySelect ? referredBySelect.value.trim() : '';
 
       // Friend's data + referrer info
       const friendData = {
@@ -1315,7 +1250,7 @@
               method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
               body: JSON.stringify(friendData),
             });
-          } catch (e) {}
+          } catch (e) { /* webhook is best-effort */ }
           // Delivery
           const RISE_BASE = 'https://agent-acquisitie-leads.netlify.app';
           try {
@@ -1329,7 +1264,7 @@
                 referred_by_email: referrerData ? referrerData.email : '',
               }),
             });
-          } catch (e) {}
+          } catch (e) { /* delivery is best-effort */ }
           // Track friend referral in ade_signups
           try {
             fetch('https://rnegaikmtgcjyyykqocp.supabase.co/rest/v1/ade_signups', {
@@ -1343,11 +1278,11 @@
               body: JSON.stringify({
                 name: nameV, email: emailV, phone: checked.normalized,
                 source: 'ade-thankyou-referral',
-                referred_by: referrerData ? referrerData.name : null,
+                referred_by: referredByName || (referrerData ? referrerData.name : null),
                 referrer_id: referrerData ? referrerData.email : null,
               }),
             });
-          } catch (e) {}
+          } catch (e) { /* tracking is best-effort */ }
 
           // Show friend success state
           document.getElementById('friend-form-wrap').style.display = 'none';
