@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise &mdash; Thanks for signing up!</title>
+  <meta name="description" content="You're in! Check your inbox for the free Rise Artist Career Checklist and Ableton effect chains.">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --card: rgba(255,255,255,0.03);
+      --card-hover: rgba(255,255,255,0.06);
+      --maxw: 1100px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Header ───────────────────────────────────── */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(15,15,15,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header-inner {
+      max-width: var(--maxw); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 2rem;
+    }
+    .header-logo img { height: 22px; opacity: 0.92; }
+    .header-cta {
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
+      background: var(--accent); color: #fff; padding: 8px 20px; border-radius: 8px;
+      transition: background 0.2s; cursor: pointer; border: none;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
+
+    /* ── Hero Section ─────────────────────────────── */
+    .hero {
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,104,62,0.08); border: 1px solid rgba(255,104,62,0.18);
+      padding: 8px 18px; border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge svg { width: 28px; height: 28px; }
+    .hero-badge span {
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.15; margin-bottom: 1.2rem;
+      max-width: 700px; margin-left: auto; margin-right: auto;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub {
+      color: var(--muted); font-size: 1.05rem; line-height: 1.7;
+      max-width: 540px; margin: 0 auto 2rem;
+    }
+    .hero-trust {
+      display: flex; flex-wrap: wrap; gap: 12px 24px;
+      justify-content: center; margin-top: 1.5rem;
+    }
+    .hero-trust-item {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.88rem; color: var(--muted);
+    }
+    .hero-trust-item svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
+
+    /* ── Primary Button ───────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #fff;
+      padding: 14px 28px; border-radius: 12px;
+      font-size: 1rem; font-weight: 600; letter-spacing: 0.01em;
+      border: none; cursor: pointer;
+      transition: background 0.2s, gap 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); gap: 14px; }
+    .btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ── What You Get Section ─────────────────────── */
+    .what-you-get {
+      padding: 4rem 2rem;
+      max-width: var(--maxw); margin: 0 auto;
+    }
+    .what-you-get h2 {
+      text-align: center;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+    .wyg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .wyg-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .wyg-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-2px);
+    }
+    .wyg-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,104,62,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .wyg-icon svg { width: 22px; height: 22px; color: var(--accent); }
+    .wyg-card h3 {
+      font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .wyg-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+    /* ── Referral CTA Section ─────────────────────── */
+    .referral-cta {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--line);
+    }
+    .referral-cta h2 {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .referral-cta p {
+      color: var(--muted); font-size: 0.95rem;
+      max-width: 480px; margin: 0 auto 2rem;
+    }
+
+    /* ── Friend Overlay ───────────────────────────── */
+    .friend-overlay {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .friend-overlay.visible { display: flex; }
+    .friend-overlay-inner {
+      background: var(--bg-2); border: 1px solid var(--line);
+      border-radius: 18px; padding: 2.5rem; max-width: 420px; width: 100%;
+      position: relative; text-align: center;
+    }
+    .friend-overlay-inner h2 {
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px;
+    }
+    .friend-overlay-inner h2 em { font-style: normal; color: var(--accent); }
+    .friend-overlay-inner .reg-sub {
+      color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.5rem;
+    }
+    .friend-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; color: var(--muted);
+      font-size: 1.5rem; cursor: pointer; padding: 4px 8px;
+      transition: color 0.2s;
+    }
+    .friend-close:hover { color: var(--fg); }
+    .field { margin-bottom: 1rem; text-align: left; }
+    .field label {
+      display: block; font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.03em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .field input {
+      width: 100%; padding: 11px 14px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; color: var(--fg); font-size: 0.88rem;
+      font-family: inherit; transition: border-color 0.2s; outline: none;
+    }
+    .field input:focus { border-color: var(--accent); }
+    .field input::placeholder { color: rgba(255,255,255,0.25); }
+    .btn-submit {
+      width: 100%; padding: 13px; margin-top: 4px;
+      background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      font-size: 0.92rem; font-weight: 600; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--accent-hover); }
+    .btn-submit.loading { opacity: 0.7; pointer-events: none; }
+    .form-note {
+      color: var(--muted); font-size: 0.78rem; margin-top: 12px;
+    }
+    .friend-success { display: none; padding: 1rem 0; }
+    .friend-success.visible { display: block; }
+    .friend-success .check {
+      width: 48px; height: 48px; margin: 0 auto 1rem;
+      background: rgba(255,104,62,0.1); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .friend-success .check svg { width: 28px; height: 28px; color: var(--accent); }
+    .friend-success h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .friend-success p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* ── Footer ────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    .footer-links { display: flex; gap: 16px; justify-content: center; margin-bottom: 10px; }
+    .footer-links a { color: var(--muted); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--fg); }
+
+    /* ── Mobile ────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { padding: 6.5rem 1.25rem 3rem; }
+      .hero h1 { font-size: 1.75rem; }
+      .wyg-grid { grid-template-columns: 1fr; }
+      .friend-overlay-inner { padding: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       Friend Referral Form Overlay
+       ══════════════════════════════════════════════ -->
+  <div class="friend-overlay" id="friend-overlay">
+    <div class="friend-overlay-inner">
+      <button class="friend-close" id="friend-close" onclick="closeFriendForm()">&times;</button>
+      <div id="friend-form-wrap">
+        <div class="hero-badge" style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:1.2rem;">
+          <img src="https://intent.itsinside.co/static/customer-assets/ade/launcher-icon.svg" alt="ADE" style="width:32px;height:32px;">
+          <span style="font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);">ADE 2026</span>
+        </div>
+        <h2>Register your friend for <em>free tools.</em></h2>
+        <p class="reg-sub">Fill in your friend's details. They'll receive the same career tools you got — and you earn a referral reward from Rise.</p>
+        <form id="friend-form" onsubmit="handleFriendSubmit(event)">
+          <div class="field">
+            <label for="friend-name">Friend's Name</label>
+            <input type="text" id="friend-name" name="name" placeholder="e.g. Jane Doe" required>
+          </div>
+          <div class="field">
+            <label for="friend-email">Friend's Email Address</label>
+            <input type="email" id="friend-email" name="email" placeholder="friend@email.com" required>
+          </div>
+          <div class="field">
+            <label for="friend-phone">Friend's Phone Number (mobile)</label>
+            <input type="tel" id="friend-phone" name="phone" placeholder="+31 6 1234 5678" required>
+            <p id="friend-phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number.</p>
+          </div>
+          <button type="submit" class="btn-submit" id="friend-btn">Register Friend</button>
+        </form>
+        <p class="form-note">Your friend will receive an email with their free tools.</p>
+      </div>
+      <div class="friend-success" id="friend-success">
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Friend registered!</h3>
+        <p>We've sent the career tools to your friend's inbox. Thanks for sharing — Rise will be in touch about your referral reward.</p>
+        <button class="btn-primary" style="margin-top:1.5rem;display:inline-flex;" onclick="resetFriendForm()">
+          Register another friend
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="header-logo" href="../homepage-v3/" title="Rise Artist Academy">
+        <img src="../assets/logo.png" alt="Rise">
+      </a>
+      <button class="header-cta" onclick="openFriendForm()">Register a friend</button>
+    </div>
+  </header>
+
+  <!-- HERO — Thank You -->
+  <section class="hero">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span>You're in</span>
+    </div>
+    <h1 id="hero-heading">Thanks! Your free tools are on their <em>way.</em></h1>
+    <p class="hero-sub">Check your inbox for the Artist Career Checklist and Ableton effect chains. Know someone who could use these too?</p>
+    <button class="btn-primary" onclick="openFriendForm()">
+      Register a friend
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </button>
+    <div class="hero-trust" style="margin-top:1.5rem">
+      <span class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Checklist sent to your email
+      </span>
+      <span class="hero-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Ableton effect chains included
+      </span>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="what-you-get">
+    <h2>What's in your inbox</h2>
+    <div class="wyg-grid">
+      <div class="wyg-card">
+        <div class="wyg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Artist Career Checklist</h3>
+        <p>A step-by-step guide to help you evaluate where you are in your music career and what to focus on next.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="M8 17V5l12-2v12"/></svg>
+        </div>
+        <h3>Ableton Effect Chains</h3>
+        <p>Professional-grade effect chains used by Rise coaches, ready to drop into your projects.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Rise Community Access</h3>
+        <p>Join a growing network of artists who are serious about building a sustainable music career.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERRAL CTA -->
+  <section class="referral-cta">
+    <h2>Know someone who needs this?</h2>
+    <p>Register a friend and they'll get the same free career tools. You earn a referral reward from Rise.</p>
+    <button class="btn-primary" onclick="openFriendForm()">
+      Register a friend
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="mailto:info@riseartistacademy.com">Contact</a>
+      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../homepage-v3/">Rise Website</a>
+    </div>
+    <p>&copy; 2026 Rise &middot; Recode Operations B.V.</p>
+  </footer>
+
+  <!-- libphonenumber for phone validation -->
+  <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.11.20/bundle/libphonenumber-min.js"></script>
+
+  <script>
+    // ── Personalise heading if ?name= is present ──
+    (function() {
+      try {
+        const params = new URLSearchParams(location.search);
+        const name = params.get('name');
+        if (name) {
+          const firstName = name.split(' ')[0];
+          const h = document.getElementById('hero-heading');
+          if (h) h.innerHTML = 'Thanks, ' + firstName + '! Your free tools are on their <em>way.</em>';
+        }
+      } catch (e) {}
+    })();
+
+    // ── Rise outreach tracking ──
+    const RISE_TRACK_URL = 'https://agent-acquisitie-leads.netlify.app/api/track';
+    const riseLead = (() => {
+      try {
+        const q = new URLSearchParams(location.search).get('lead');
+        if (q) localStorage.setItem('rise_lead', q);
+        return q || localStorage.getItem('rise_lead');
+      } catch (e) { return null; }
+    })();
+    function riseTrack(event) {
+      if (!riseLead) return;
+      try {
+        navigator.sendBeacon(RISE_TRACK_URL, JSON.stringify({ lead: riseLead, event: event, campaign: 'giveaway' }));
+      } catch (e) {}
+    }
+    riseTrack('thankyou_page_view');
+
+    // ── Referrer data from the signup page (passed via sessionStorage) ──
+    let referrerData = null;
+    try {
+      const stored = sessionStorage.getItem('ade_referrer_data');
+      if (stored) referrerData = JSON.parse(stored);
+    } catch (e) {}
+
+    // ── Phone validation ──
+    function validateMobile(raw) {
+      if (!raw) return { ok: true, normalized: '' };
+      try {
+        const parsed = libphonenumber.parsePhoneNumber(raw);
+        if (!parsed || !parsed.isValid()) return { ok: false };
+        const t = parsed.getType();
+        if (t && t !== 'MOBILE' && t !== 'FIXED_LINE_OR_MOBILE') return { ok: false };
+        return { ok: true, normalized: parsed.format('E.164') };
+      } catch (e) { return { ok: false }; }
+    }
+
+    // ── Friend form ──
+    function openFriendForm() {
+      document.getElementById('friend-overlay').classList.add('visible');
+      document.getElementById('friend-form-wrap').style.display = 'block';
+      document.getElementById('friend-success').classList.remove('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFriendForm() {
+      document.getElementById('friend-overlay').classList.remove('visible');
+      document.body.style.overflow = '';
+    }
+
+    function resetFriendForm() {
+      document.getElementById('friend-form').reset();
+      document.getElementById('friend-form-wrap').style.display = 'block';
+      document.getElementById('friend-success').classList.remove('visible');
+    }
+
+    async function handleFriendSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('friend-btn');
+
+      const nameV = document.getElementById('friend-name').value.trim();
+      const emailV = document.getElementById('friend-email').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailV);
+      if (!nameV || !emailOk) {
+        if (!emailOk) document.getElementById('friend-email').focus();
+        alert('Please fill in your friend\'s name and a valid email address.');
+        return;
+      }
+
+      const phoneRaw = document.getElementById('friend-phone').value.trim();
+      const phoneErr = document.getElementById('friend-phone-error');
+      const checked = validateMobile(phoneRaw);
+      if (!checked.ok) {
+        phoneErr.style.display = 'block';
+        document.getElementById('friend-phone').focus();
+        return;
+      }
+      phoneErr.style.display = 'none';
+
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      const friendData = {
+        name: nameV,
+        email: emailV,
+        phone: checked.normalized,
+        referred_by_name: referrerData ? referrerData.name : '',
+        referred_by_email: referrerData ? referrerData.email : '',
+        referred_by_phone: referrerData ? referrerData.phone : '',
+        is_referral: 'true',
+      };
+
+      try {
+        const res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/giveaway-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: nameV, email: emailV, phone: checked.normalized }),
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+          riseTrack('referral_signup');
+          // Go High Level webhook
+          try {
+            fetch('https://services.leadconnectorhq.com/hooks/Y39uN5NpY87HDOD2hfNH/webhook-trigger/0b13d35f-280a-49db-9991-7361d580895c', {
+              method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+              body: JSON.stringify(friendData),
+            });
+          } catch (e) {}
+          // Delivery
+          try {
+            fetch('https://agent-acquisitie-leads.netlify.app/api/giveaway-deliver', {
+              method: 'POST', headers: { 'Content-Type': 'text/plain' }, keepalive: true,
+              body: JSON.stringify({
+                lead: riseLead || undefined, email: emailV,
+                name: nameV, phone: checked.normalized,
+                campaign: 'giveaway', is_referral: true,
+                referred_by_name: referrerData ? referrerData.name : '',
+                referred_by_email: referrerData ? referrerData.email : '',
+              }),
+            });
+          } catch (e) {}
+          // Track friend referral in ade_signups
+          try {
+            fetch('https://rnegaikmtgcjyyykqocp.supabase.co/rest/v1/ade_signups', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw',
+              },
+              keepalive: true,
+              body: JSON.stringify({
+                name: nameV, email: emailV, phone: checked.normalized,
+                source: 'ade-thankyou-referral',
+                referred_by: referrerData ? referrerData.name : null,
+                referrer_id: referrerData ? referrerData.email : null,
+              }),
+            });
+          } catch (e) {}
+
+          document.getElementById('friend-form-wrap').style.display = 'none';
+          document.getElementById('friend-success').classList.add('visible');
+          btn.classList.remove('loading');
+          btn.disabled = false;
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      } catch (err) {
+        alert('Could not submit: ' + err.message);
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

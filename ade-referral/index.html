@@ -575,6 +575,27 @@
     }
     .field input::placeholder { color: rgba(255,255,255,0.22); }
     .field input:focus { border-color: var(--accent); }
+    .field select {
+      width: 100%;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      color: var(--fg);
+      font-size: 0.88rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .field select:focus { border-color: var(--accent); }
+    .field select option { background: #1a1a1a; color: #fff; }
     .btn-submit {
       width: 100%;
       background: var(--accent);
@@ -947,7 +968,16 @@
         </div>
         <div class="field">
           <label for="reg-referrer">Who referred you? <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
-          <input type="text" id="reg-referrer" name="referrer" placeholder="e.g. John Doe" autocomplete="off">
+          <select id="reg-referrer" name="referrer">
+            <option value="">None</option>
+            <option value="Jim v Nood">Jim v Nood</option>
+            <option value="Maurits Poppelaars">Maurits Poppelaars</option>
+            <option value="Yvo Overhof">Yvo Overhof</option>
+            <option value="Julian Derijks">Julian Derijks</option>
+            <option value="Hendrik Kamminga">Hendrik Kamminga</option>
+            <option value="Abel Pleijte">Abel Pleijte</option>
+            <option value="Yoanna">Yoanna</option>
+          </select>
         </div>
         <button type="submit" class="btn-submit" id="reg-btn">Register Now</button>
       </form>
@@ -1509,6 +1539,33 @@
 
     riseTrack('page_view');
 
+    // ── Populate referrer dropdown with dynamic names from ade_signups ──
+    (async () => {
+      try {
+        const SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
+        const res = await fetch(SUPABASE_URL + '/rest/v1/ade_signups?select=name&order=created_at.desc', {
+          headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY },
+          signal: AbortSignal.timeout(4000),
+        });
+        const rows = await res.json();
+        if (!Array.isArray(rows)) return;
+        const sel = document.getElementById('reg-referrer');
+        const existing = new Set();
+        sel.querySelectorAll('option').forEach(o => { if (o.value) existing.add(o.value.toLowerCase()); });
+        const added = new Set();
+        rows.forEach(r => {
+          const n = (r.name || '').trim();
+          if (!n || existing.has(n.toLowerCase()) || added.has(n.toLowerCase())) return;
+          added.add(n.toLowerCase());
+          const opt = document.createElement('option');
+          opt.value = n;
+          opt.textContent = n;
+          sel.appendChild(opt);
+        });
+      } catch (e) { /* dropdown population is best-effort */ }
+    })();
+
     // ── IP-based country code auto-detection ──
     (async () => {
       try {
@@ -1695,11 +1752,13 @@
             });
           } catch (e) { /* tracking is best-effort */ }
 
-          // Store referrer data for friend referral
-          referrerData = { ...formData };
+          // Store referrer data in sessionStorage for the thank-you page
+          try { sessionStorage.setItem('ade_referrer_data', JSON.stringify(formData)); } catch(e) {}
 
-          // Transition to thank-you page
-          transitionToThankYou(formData.name);
+          // Redirect to standalone thank-you page
+          const tyParams = new URLSearchParams({ name: formData.name });
+          if (riseLead) tyParams.set('lead', riseLead);
+          window.location.href = '../ade-thankyou/?' + tyParams.toString();
         } else {
           throw new Error(data.error || 'Something went wrong');
         }
