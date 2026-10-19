@@ -702,11 +702,8 @@
         if (lib && lib.parsePhoneNumberFromString) {
           var pn = lib.parsePhoneNumberFromString(raw.trim(), 'NL'); // NL default if no country code
           if (pn && pn.isValid()) {
-            var t = pn.getType();
-            // Accept mobile (and the ambiguous "fixed-or-mobile" buckets).
-            if (t === 'MOBILE' || t === 'FIXED_LINE_OR_MOBILE' || t === undefined) {
-              return { ok: true, normalized: pn.number }; // E.164, e.g. +31612345678
-            }
+            // Accept any valid phone number — don't block real numbers due to strict type checking
+            return { ok: true, normalized: pn.number }; // E.164, e.g. +31612345678
           }
           return { ok: false };
         }

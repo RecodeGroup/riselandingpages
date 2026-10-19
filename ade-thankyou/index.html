@@ -1225,21 +1225,27 @@
   <script>
     function validateMobile(raw) {
       if (!raw || !raw.trim()) return { ok: false };
+      var cleaned = raw.trim();
       try {
         var lib = window.libphonenumber;
         if (lib && lib.parsePhoneNumberFromString) {
-          var pn = lib.parsePhoneNumberFromString(raw.trim(), 'NL');
+          var pn = lib.parsePhoneNumberFromString(cleaned, 'NL');
           if (pn && pn.isValid()) {
-            var t = pn.getType();
-            // Only accept mobile numbers (WhatsApp requires mobile)
-            if (t === 'MOBILE' || t === 'FIXED_LINE_OR_MOBILE') {
-              return { ok: true, normalized: pn.number };
-            }
+            // Accept any valid phone number (mobile, fixed-line, or unknown type)
+            // — we don't want to block real numbers due to strict type checking
+            return { ok: true, normalized: pn.number };
           }
           return { ok: false };
         }
       } catch (e) { /* library error */ }
-      // If libphonenumber failed to load, reject — we need proper validation for WhatsApp
+      // Fallback if libphonenumber failed to load: accept if 7-15 digits present
+      var digits = cleaned.replace(/[^0-9]/g, '');
+      if (digits.length >= 7 && digits.length <= 15) {
+        // Normalize: keep the original if it starts with +, otherwise prefix +
+        var normalized = cleaned.replace(/[\s\-\(\)\.]/g, '');
+        if (normalized.charAt(0) !== '+') normalized = '+' + normalized;
+        return { ok: true, normalized: normalized };
+      }
       return { ok: false };
     }
   </script>
