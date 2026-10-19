@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise — ADE Signups</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --bg-3: #222;
+      --fg: #ffffff;
+      --muted: #999;
+      --dim: #666;
+      --line: rgba(255,255,255,0.06);
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --accent-glow: rgba(255,104,62,0.15);
+      --green: #22c55e;
+      --red: #ef4444;
+      --blue: #3b82f6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--bg); color: var(--fg); min-height: 100vh; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Access Gate ── */
+    .access-gate {
+      position: fixed; inset: 0; z-index: 9999; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 20px;
+    }
+    .access-gate img { width: 80px; height: 80px; border-radius: 12px; margin-bottom: 8px; }
+    .access-gate h2 { color: var(--fg); font-size: 1.4rem; }
+    .access-gate p { color: var(--muted); font-size: 0.9rem; }
+    .access-gate input {
+      padding: 12px 20px; border-radius: 8px; border: 1px solid #333;
+      background: var(--bg-2); color: var(--fg); font-size: 1rem;
+      width: 260px; text-align: center; font-family: inherit; outline: none;
+    }
+    .access-gate input:focus { border-color: var(--accent); }
+    .access-gate button {
+      padding: 12px 32px; border-radius: 8px; border: none;
+      background: var(--accent); color: #fff; font-size: 1rem;
+      font-weight: 600; cursor: pointer; font-family: inherit;
+    }
+    .gate-error { color: var(--accent); font-size: 0.85rem; opacity: 0; transition: opacity 0.3s; }
+
+    /* ── Header ── */
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 32px; max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .logo-wrap img { width: 32px; height: 32px; border-radius: 6px; }
+    .logo-text { font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .header-links { display: flex; gap: 16px; }
+    .header-links a {
+      font-size: 0.8rem; color: var(--muted); padding: 6px 14px;
+      border: 1px solid var(--line); border-radius: 6px; transition: all 0.2s;
+    }
+    .header-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Main ── */
+    .main {
+      flex: 1; padding: 1rem 2rem 4rem;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+    .page-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
+    .page-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+
+    /* ── Stats Row ── */
+    .stats-row {
+      display: flex; gap: 16px; margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .stat-card {
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px;
+      padding: 20px 24px; flex: 1; min-width: 160px;
+    }
+    .stat-label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .stat-value { font-size: 1.8rem; font-weight: 700; }
+    .stat-value.accent { color: var(--accent); }
+    .stat-value.green { color: var(--green); }
+    .stat-value.blue { color: var(--blue); }
+
+    /* ── Tabs ── */
+    .page-tabs {
+      display: flex; gap: 8px; margin-bottom: 2rem;
+      border-bottom: 1px solid var(--line); padding-bottom: 12px;
+    }
+    .page-tab {
+      padding: 10px 20px; border-radius: 8px 8px 0 0;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: var(--muted); border: 1px solid transparent;
+      border-bottom: none; transition: all 0.2s; font-family: inherit;
+    }
+    .page-tab:hover { color: var(--fg); }
+    .page-tab.active {
+      background: var(--bg-2); color: var(--accent);
+      border-color: var(--line);
+    }
+
+    /* ── Table ── */
+    .table-wrap {
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px;
+      overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    thead th {
+      text-align: left; padding: 14px 16px; color: var(--muted);
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--line); white-space: nowrap;
+      cursor: pointer; user-select: none;
+    }
+    thead th:hover { color: var(--fg); }
+    thead th .sort-arrow { margin-left: 4px; font-size: 0.6rem; }
+    tbody td {
+      padding: 12px 16px; border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-qr { background: rgba(255,104,62,0.15); color: var(--accent); }
+    .badge-referral { background: rgba(34,197,94,0.15); color: var(--green); }
+    .badge-friend-qr { background: rgba(59,130,246,0.15); color: var(--blue); }
+    .badge-friend-ref { background: rgba(168,85,247,0.15); color: #a855f7; }
+
+    /* ── Leaderboard ── */
+    .leaderboard {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .leader-row {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px;
+      padding: 14px 20px;
+    }
+    .leader-rank {
+      font-size: 1.2rem; font-weight: 700; color: var(--accent);
+      min-width: 32px; text-align: center;
+    }
+    .leader-rank.gold { color: #fbbf24; }
+    .leader-rank.silver { color: #94a3b8; }
+    .leader-rank.bronze { color: #d97706; }
+    .leader-info { flex: 1; }
+    .leader-name { font-weight: 600; font-size: 0.95rem; }
+    .leader-email { color: var(--muted); font-size: 0.8rem; }
+    .leader-count {
+      font-size: 1.4rem; font-weight: 700; color: var(--green);
+    }
+    .leader-label { color: var(--muted); font-size: 0.7rem; text-transform: uppercase; }
+
+    /* ── Referral Chain ── */
+    .chain-section { margin-top: 2rem; }
+    .chain-group {
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px;
+      padding: 20px; margin-bottom: 12px;
+    }
+    .chain-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; cursor: pointer;
+    }
+    .chain-header h3 { font-size: 0.95rem; font-weight: 600; }
+    .chain-header .count { color: var(--accent); font-size: 0.85rem; }
+    .chain-list { padding-left: 20px; }
+    .chain-item {
+      padding: 8px 0; border-bottom: 1px solid var(--line);
+      font-size: 0.85rem; display: flex; gap: 12px; align-items: center;
+    }
+    .chain-item:last-child { border-bottom: none; }
+    .chain-arrow { color: var(--accent); font-size: 0.7rem; }
+
+    /* ── Loading / Empty ── */
+    .loading {
+      text-align: center; padding: 3rem; color: var(--muted); font-size: 0.9rem;
+    }
+    .empty-state {
+      text-align: center; padding: 3rem; color: var(--dim); font-size: 0.9rem;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center; padding: 2rem; color: var(--dim); font-size: 0.75rem;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── Search ── */
+    .search-bar {
+      margin-bottom: 1.5rem;
+    }
+    .search-bar input {
+      padding: 10px 16px; border-radius: 8px; border: 1px solid #333;
+      background: var(--bg-2); color: var(--fg); font-size: 0.9rem;
+      width: 100%; max-width: 360px; font-family: inherit; outline: none;
+    }
+    .search-bar input:focus { border-color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .header { padding: 14px 16px; }
+      .main { padding: 1rem 1rem 3rem; }
+      .stats-row { gap: 10px; }
+      .stat-card { min-width: 120px; padding: 14px 16px; }
+      .stat-value { font-size: 1.4rem; }
+      .page-tabs { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Access Gate ── -->
+<div class="access-gate" id="access-gate">
+  <img src="../assets/logo.png" alt="Rise">
+  <h2>ADE Signups</h2>
+  <p>Enter your team access code to continue.</p>
+  <input id="gate-code" type="password" placeholder="Access code" autocomplete="off">
+  <button id="gate-submit">Enter</button>
+  <p class="gate-error" id="gate-error">Invalid code. Try again.</p>
+</div>
+<script>
+(function() {
+  var TEAM_CODE = 'Team010#';
+  var gate = document.getElementById('access-gate');
+  var input = document.getElementById('gate-code');
+  var btn = document.getElementById('gate-submit');
+  var err = document.getElementById('gate-error');
+  if (sessionStorage.getItem('rise_team_auth') === 'true') { gate.style.display = 'none'; }
+  function tryCode() {
+    if (input.value === TEAM_CODE) {
+      sessionStorage.setItem('rise_team_auth', 'true');
+      gate.style.display = 'none';
+    } else {
+      err.style.opacity = '1';
+      input.value = '';
+      input.focus();
+      setTimeout(function() { err.style.opacity = '0'; }, 2500);
+    }
+  }
+  btn.addEventListener('click', tryCode);
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryCode(); });
+})();
+</script>
+
+<!-- ── Header ── -->
+<header class="header">
+  <a href="/" class="logo-wrap">
+    <img src="../assets/logo.png" alt="Rise">
+    <span class="logo-text">Rise ADE</span>
+  </a>
+  <div class="header-links">
+    <a href="/admin/">Block Manager</a>
+    <a href="/ade-v3/">ADE Page</a>
+    <a href="/ade-referral/">Referral Page</a>
+  </div>
+</header>
+
+<!-- ── Main ── -->
+<main class="main">
+  <h1 class="page-title">ADE Signup Tracker</h1>
+  <p class="page-sub">Track signups, referrals, and conversion from ADE landing pages.</p>
+
+  <!-- Stats -->
+  <div class="stats-row" id="stats-row">
+    <div class="stat-card"><div class="stat-label">Total signups</div><div class="stat-value accent" id="stat-total">—</div></div>
+    <div class="stat-card"><div class="stat-label">Direct (QR)</div><div class="stat-value" id="stat-direct">—</div></div>
+    <div class="stat-card"><div class="stat-label">Via referral</div><div class="stat-value green" id="stat-referral">—</div></div>
+    <div class="stat-card"><div class="stat-label">Friend referrals</div><div class="stat-value blue" id="stat-friends">—</div></div>
+    <div class="stat-card"><div class="stat-label">Top referrer</div><div class="stat-value" id="stat-top" style="font-size:1rem;">—</div></div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="page-tabs">
+    <button class="page-tab active" data-tab="all">All Signups</button>
+    <button class="page-tab" data-tab="leaderboard">Referral Leaderboard</button>
+    <button class="page-tab" data-tab="chains">Referral Chains</button>
+  </div>
+
+  <!-- Search -->
+  <div class="search-bar" id="search-bar">
+    <input type="text" id="search-input" placeholder="Search by name, email, or phone...">
+  </div>
+
+  <!-- Tab: All Signups -->
+  <div class="tab-content" id="tab-all">
+    <div class="loading" id="loading">Loading signups...</div>
+    <div class="table-wrap" id="table-wrap" style="display:none;">
+      <table>
+        <thead>
+          <tr>
+            <th data-sort="name">Name <span class="sort-arrow"></span></th>
+            <th data-sort="email">Email <span class="sort-arrow"></span></th>
+            <th data-sort="phone">Phone <span class="sort-arrow"></span></th>
+            <th data-sort="source">Source <span class="sort-arrow"></span></th>
+            <th data-sort="referred_by">Referred by <span class="sort-arrow"></span></th>
+            <th data-sort="created_at">Date <span class="sort-arrow"></span></th>
+          </tr>
+        </thead>
+        <tbody id="signups-body"></tbody>
+      </table>
+    </div>
+    <div class="empty-state" id="empty-state" style="display:none;">No signups yet.</div>
+  </div>
+
+  <!-- Tab: Leaderboard -->
+  <div class="tab-content" id="tab-leaderboard" style="display:none;">
+    <div class="leaderboard" id="leaderboard"></div>
+    <div class="empty-state" id="leaderboard-empty" style="display:none;">No referrals yet.</div>
+  </div>
+
+  <!-- Tab: Referral Chains -->
+  <div class="tab-content" id="tab-chains" style="display:none;">
+    <div id="chains-list"></div>
+    <div class="empty-state" id="chains-empty" style="display:none;">No referral chains yet.</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  &copy; 2026 Rise &middot; Recode Group B.V. &middot; ADE Tracker v1.0
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  var SUPABASE_URL = 'https://rnegaikmtgcjyyykqocp.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw';
+
+  var allSignups = [];
+  var sortCol = 'created_at';
+  var sortDir = 'desc';
+
+  // ── Supabase fetch ──
+  function supaFetch(path) {
+    return fetch(SUPABASE_URL + '/rest/v1/' + path, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+      }
+    }).then(function(r) { return r.json(); });
+  }
+
+  // ── Source badge ──
+  function sourceBadge(source) {
+    var map = {
+      'ade-v3': ['QR Page', 'badge-qr'],
+      'ade-referral': ['Referral Page', 'badge-referral'],
+      'ade-v3-referral': ['Friend (QR)', 'badge-friend-qr'],
+      'ade-referral-friend': ['Friend (Ref)', 'badge-friend-ref']
+    };
+    var m = map[source] || [source, 'badge-qr'];
+    return '<span class="badge ' + m[1] + '">' + m[0] + '</span>';
+  }
+
+  // ── Format date ──
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    var d = new Date(iso);
+    var day = String(d.getDate()).padStart(2, '0');
+    var mon = String(d.getMonth() + 1).padStart(2, '0');
+    var hr = String(d.getHours()).padStart(2, '0');
+    var min = String(d.getMinutes()).padStart(2, '0');
+    return day + '-' + mon + '-' + d.getFullYear() + ' ' + hr + ':' + min;
+  }
+
+  // ── Render stats ──
+  function renderStats(data) {
+    var total = data.length;
+    var direct = data.filter(function(r) { return r.source === 'ade-v3'; }).length;
+    var referral = data.filter(function(r) { return r.source === 'ade-referral'; }).length;
+    var friends = data.filter(function(r) {
+      return r.source === 'ade-v3-referral' || r.source === 'ade-referral-friend';
+    }).length;
+
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-direct').textContent = direct;
+    document.getElementById('stat-referral').textContent = referral;
+    document.getElementById('stat-friends').textContent = friends;
+
+    // Top referrer
+    var refCounts = {};
+    data.forEach(function(r) {
+      if (r.referred_by) {
+        refCounts[r.referred_by] = (refCounts[r.referred_by] || 0) + 1;
+      }
+    });
+    var topName = '—';
+    var topCount = 0;
+    Object.keys(refCounts).forEach(function(name) {
+      if (refCounts[name] > topCount) {
+        topCount = refCounts[name];
+        topName = name;
+      }
+    });
+    document.getElementById('stat-top').textContent = topCount > 0
+      ? topName + ' (' + topCount + ')'
+      : '—';
+  }
+
+  // ── Render table ──
+  function renderTable(data) {
+    var body = document.getElementById('signups-body');
+    var wrap = document.getElementById('table-wrap');
+    var empty = document.getElementById('empty-state');
+
+    if (data.length === 0) {
+      wrap.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+    wrap.style.display = 'block';
+    empty.style.display = 'none';
+
+    var html = '';
+    data.forEach(function(r) {
+      html += '<tr>'
+        + '<td>' + esc(r.name) + '</td>'
+        + '<td>' + esc(r.email) + '</td>'
+        + '<td>' + esc(r.phone || '—') + '</td>'
+        + '<td>' + sourceBadge(r.source) + '</td>'
+        + '<td>' + esc(r.referred_by || '—') + '</td>'
+        + '<td>' + fmtDate(r.created_at) + '</td>'
+        + '</tr>';
+    });
+    body.innerHTML = html;
+  }
+
+  // ── Render leaderboard ──
+  function renderLeaderboard(data) {
+    var el = document.getElementById('leaderboard');
+    var empty = document.getElementById('leaderboard-empty');
+
+    // Count referrals per referrer_id (email of referrer)
+    var refMap = {}; // referrer_id → { name, email, count }
+    data.forEach(function(r) {
+      if (r.referrer_id) {
+        if (!refMap[r.referrer_id]) {
+          refMap[r.referrer_id] = { name: r.referred_by || r.referrer_id, email: r.referrer_id, count: 0 };
+        }
+        refMap[r.referrer_id].count++;
+      }
+    });
+
+    var leaders = Object.values(refMap).sort(function(a, b) { return b.count - a.count; });
+
+    if (leaders.length === 0) {
+      el.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+
+    var html = '';
+    leaders.forEach(function(l, i) {
+      var rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+      html += '<div class="leader-row">'
+        + '<div class="leader-rank ' + rankClass + '">#' + (i + 1) + '</div>'
+        + '<div class="leader-info">'
+        + '<div class="leader-name">' + esc(l.name) + '</div>'
+        + '<div class="leader-email">' + esc(l.email) + '</div>'
+        + '</div>'
+        + '<div style="text-align:right;">'
+        + '<div class="leader-count">' + l.count + '</div>'
+        + '<div class="leader-label">referrals</div>'
+        + '</div>'
+        + '</div>';
+    });
+    el.innerHTML = html;
+  }
+
+  // ── Render referral chains ──
+  function renderChains(data) {
+    var el = document.getElementById('chains-list');
+    var empty = document.getElementById('chains-empty');
+
+    // Group: referrer → list of referred people
+    var chains = {}; // referrer_id → { name, email, referrals: [] }
+    data.forEach(function(r) {
+      if (r.referrer_id) {
+        if (!chains[r.referrer_id]) {
+          chains[r.referrer_id] = {
+            name: r.referred_by || r.referrer_id,
+            email: r.referrer_id,
+            referrals: []
+          };
+        }
+        chains[r.referrer_id].referrals.push(r);
+      }
+    });
+
+    var chainList = Object.values(chains).sort(function(a, b) {
+      return b.referrals.length - a.referrals.length;
+    });
+
+    if (chainList.length === 0) {
+      el.innerHTML = '';
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+
+    var html = '';
+    chainList.forEach(function(c) {
+      html += '<div class="chain-group">'
+        + '<div class="chain-header">'
+        + '<h3>' + esc(c.name) + ' <span style="color:var(--muted);font-weight:400;font-size:0.8rem;">' + esc(c.email) + '</span></h3>'
+        + '<span class="count">' + c.referrals.length + ' referral' + (c.referrals.length !== 1 ? 's' : '') + '</span>'
+        + '</div>'
+        + '<div class="chain-list">';
+
+      c.referrals.forEach(function(r) {
+        html += '<div class="chain-item">'
+          + '<span class="chain-arrow">→</span>'
+          + '<span>' + esc(r.name) + '</span>'
+          + '<span style="color:var(--muted);">' + esc(r.email) + '</span>'
+          + '<span>' + sourceBadge(r.source) + '</span>'
+          + '<span style="color:var(--dim);font-size:0.8rem;">' + fmtDate(r.created_at) + '</span>'
+          + '</div>';
+      });
+
+      html += '</div></div>';
+    });
+    el.innerHTML = html;
+  }
+
+  // ── Sorting ──
+  function sortData(data, col, dir) {
+    return data.slice().sort(function(a, b) {
+      var va = a[col] || '';
+      var vb = b[col] || '';
+      if (col === 'created_at') {
+        va = new Date(va || 0).getTime();
+        vb = new Date(vb || 0).getTime();
+      } else {
+        va = String(va).toLowerCase();
+        vb = String(vb).toLowerCase();
+      }
+      if (va < vb) return dir === 'asc' ? -1 : 1;
+      if (va > vb) return dir === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  // ── Search / filter ──
+  function filterData(data, query) {
+    if (!query) return data;
+    var q = query.toLowerCase();
+    return data.filter(function(r) {
+      return (r.name && r.name.toLowerCase().indexOf(q) !== -1)
+        || (r.email && r.email.toLowerCase().indexOf(q) !== -1)
+        || (r.phone && r.phone.toLowerCase().indexOf(q) !== -1)
+        || (r.referred_by && r.referred_by.toLowerCase().indexOf(q) !== -1);
+    });
+  }
+
+  // ── Escape HTML ──
+  function esc(s) {
+    var el = document.createElement('span');
+    el.textContent = s || '';
+    return el.innerHTML;
+  }
+
+  // ── Tab switching ──
+  var tabs = document.querySelectorAll('.page-tab');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      var target = tab.getAttribute('data-tab');
+      document.getElementById('tab-all').style.display = target === 'all' ? '' : 'none';
+      document.getElementById('tab-leaderboard').style.display = target === 'leaderboard' ? '' : 'none';
+      document.getElementById('tab-chains').style.display = target === 'chains' ? '' : 'none';
+      document.getElementById('search-bar').style.display = target === 'all' ? '' : 'none';
+    });
+  });
+
+  // ── Sort headers ──
+  document.querySelectorAll('thead th[data-sort]').forEach(function(th) {
+    th.addEventListener('click', function() {
+      var col = th.getAttribute('data-sort');
+      if (sortCol === col) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortCol = col;
+        sortDir = 'asc';
+      }
+      // Update arrows
+      document.querySelectorAll('thead th .sort-arrow').forEach(function(a) { a.textContent = ''; });
+      th.querySelector('.sort-arrow').textContent = sortDir === 'asc' ? '▲' : '▼';
+
+      var query = document.getElementById('search-input').value.trim();
+      var filtered = filterData(allSignups, query);
+      renderTable(sortData(filtered, sortCol, sortDir));
+    });
+  });
+
+  // ── Search input ──
+  document.getElementById('search-input').addEventListener('input', function() {
+    var query = this.value.trim();
+    var filtered = filterData(allSignups, query);
+    renderTable(sortData(filtered, sortCol, sortDir));
+  });
+
+  // ── Load data ──
+  supaFetch('ade_signups?order=created_at.desc')
+    .then(function(data) {
+      document.getElementById('loading').style.display = 'none';
+      if (!Array.isArray(data)) {
+        document.getElementById('empty-state').style.display = 'block';
+        document.getElementById('empty-state').textContent = 'Error loading data.';
+        return;
+      }
+      allSignups = data;
+      renderStats(data);
+      renderTable(sortData(data, sortCol, sortDir));
+      renderLeaderboard(data);
+      renderChains(data);
+
+      // Set default sort arrow
+      var defaultTh = document.querySelector('thead th[data-sort="created_at"]');
+      if (defaultTh) defaultTh.querySelector('.sort-arrow').textContent = '▼';
+    })
+    .catch(function(err) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('empty-state').style.display = 'block';
+      document.getElementById('empty-state').textContent = 'Failed to load: ' + err.message;
+    });
+
+})();
+</script>
+
+</body>
+</html>

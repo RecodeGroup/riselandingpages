@@ -937,10 +937,6 @@
           <input type="text" id="reg-name" name="name" placeholder="e.g. John Doe" required>
         </div>
         <div class="field">
-          <label for="reg-artist">Artist Name</label>
-          <input type="text" id="reg-artist" name="artist_name" placeholder="e.g. VANNOOD" required>
-        </div>
-        <div class="field">
           <label for="reg-email">Email Address</label>
           <input type="email" id="reg-email" name="email" placeholder="your@email.com" required>
         </div>
@@ -948,6 +944,10 @@
           <label for="reg-phone">Phone Number (mobile, for WhatsApp)</label>
           <input type="tel" id="reg-phone" name="phone" placeholder="+31 6 1234 5678" required>
           <p id="reg-phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number. From outside the Netherlands, include your country code.</p>
+        </div>
+        <div class="field">
+          <label for="reg-referrer">Who referred you? <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+          <input type="text" id="reg-referrer" name="referrer" placeholder="e.g. John Doe" autocomplete="off">
         </div>
         <button type="submit" class="btn-submit" id="reg-btn">Register Now</button>
       </form>
@@ -972,10 +972,6 @@
           <div class="field">
             <label for="friend-name">Friend's Name</label>
             <input type="text" id="friend-name" name="name" placeholder="e.g. Jane Doe" required>
-          </div>
-          <div class="field">
-            <label for="friend-artist">Friend's Artist Name</label>
-            <input type="text" id="friend-artist" name="artist_name" placeholder="e.g. DJ Phoenix" required>
           </div>
           <div class="field">
             <label for="friend-email">Friend's Email Address</label>
@@ -1070,7 +1066,7 @@
         <div class="hero-video-label">
           <img src="../assets/photos/Maurits.png" alt="Maurits">
           <div class="hero-video-label-text">
-            <strong>Maurits, Rise Founder</strong>
+            <strong>Maurits, Rise Coach</strong>
             <span>What Rise can do for you</span>
           </div>
         </div>
@@ -1263,10 +1259,6 @@
             <div class="field">
               <label for="name">Your Name</label>
               <input type="text" id="name" name="name" placeholder="e.g. John Doe" required>
-            </div>
-            <div class="field">
-              <label for="artist_name">Artist Name</label>
-              <input type="text" id="artist_name" name="artist_name" placeholder="e.g. VANNOOD" required>
             </div>
             <div class="field">
               <label for="email">Email Address</label>
@@ -1468,19 +1460,13 @@
           var pn = lib.parsePhoneNumberFromString(raw.trim(), 'NL');
           if (pn && pn.isValid()) {
             var t = pn.getType();
-            if (t === 'MOBILE' || t === 'FIXED_LINE_OR_MOBILE' || t === undefined) {
+            if (t === 'MOBILE' || t === 'FIXED_LINE_OR_MOBILE') {
               return { ok: true, normalized: pn.number };
             }
           }
           return { ok: false };
         }
-      } catch (e) { /* fall through to basic check */ }
-      var digits = raw.replace(/\D/g, '');
-      if (digits.length >= 9 && digits.length <= 15) {
-        var norm = raw.trim().charAt(0) === '+' ? '+' + digits
-          : (digits.charAt(0) === '0' ? '+31' + digits.slice(1) : '+' + digits);
-        return { ok: true, normalized: norm };
-      }
+      } catch (e) { /* library error */ }
       return { ok: false };
     }
   </script>
@@ -1522,6 +1508,21 @@
     })();
 
     riseTrack('page_view');
+
+    // ── IP-based country code auto-detection ──
+    (async () => {
+      try {
+        const res = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) });
+        const geo = await res.json();
+        if (geo && geo.country_calling_code) {
+          const code = geo.country_calling_code; // e.g. "+31"
+          ['reg-phone', 'friend-phone'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && !el.value) el.value = code + ' ';
+          });
+        }
+      } catch (e) { /* geo-detection is best-effort */ }
+    })();
 
     // Scroll depth (25/50/75/100%)
     (() => {
@@ -1611,12 +1612,11 @@
       const btn = document.getElementById('reg-btn');
 
       const nameV = document.getElementById('reg-name').value.trim();
-      const artistV = document.getElementById('reg-artist').value.trim();
       const emailV = document.getElementById('reg-email').value.trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailV);
-      if (!nameV || !artistV || !emailOk) {
+      if (!nameV || !emailOk) {
         if (!emailOk) document.getElementById('reg-email').focus();
-        alert('Please fill in your name, artist name and a valid email address.');
+        alert('Please fill in your name and a valid email address.');
         return;
       }
 
@@ -1633,9 +1633,10 @@
       btn.classList.add('loading');
       btn.disabled = true;
 
+      const referredByName = document.getElementById('reg-referrer').value.trim();
+
       const formData = {
         name: nameV,
-        artist_name: artistV,
         email: emailV,
         phone: checked.normalized,
       };
@@ -1651,11 +1652,15 @@
 
         if (data.ok) {
           riseTrack('signup');
-          // Go High Level webhook (UNCHANGED endpoint)
+          // Go High Level webhook — include referral data
+          const webhookData = { ...formData };
+          if (referredByName) webhookData.referred_by = referredByName;
+          if (riseReferrer) webhookData.referrer_id = riseReferrer;
+          webhookData.source = 'ade-referral';
           try {
             fetch('https://services.leadconnectorhq.com/hooks/Y39uN5NpY87HDOD2hfNH/webhook-trigger/0b13d35f-280a-49db-9991-7361d580895c', {
               method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
-              body: JSON.stringify(formData),
+              body: JSON.stringify(webhookData),
             });
           } catch (e) { /* webhook is best-effort */ }
           // Delivery + funnel move
@@ -1666,11 +1671,29 @@
               method: 'POST', headers: { 'Content-Type': 'text/plain' }, keepalive: true,
               body: JSON.stringify({
                 lead: riseLead || undefined, email: formData.email,
-                name: formData.name, artist_name: formData.artist_name, phone: formData.phone,
+                name: formData.name, phone: formData.phone,
                 step: riseStep, campaign: 'giveaway',
               }),
             });
           } catch (e) { /* delivery is best-effort */ }
+          // Track in ade_signups table
+          try {
+            fetch('https://rnegaikmtgcjyyykqocp.supabase.co/rest/v1/ade_signups', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw',
+              },
+              keepalive: true,
+              body: JSON.stringify({
+                name: nameV, email: emailV, phone: checked.normalized,
+                source: 'ade-referral',
+                referred_by: referredByName || null,
+                referrer_id: riseReferrer || null,
+              }),
+            });
+          } catch (e) { /* tracking is best-effort */ }
 
           // Store referrer data for friend referral
           referrerData = { ...formData };
@@ -1689,38 +1712,55 @@
 
     // ── Transition: overlay → thank-you landing page ──
     function transitionToThankYou(userName) {
-      // Hide registration overlay and unlock scroll
       const overlay = document.getElementById('reg-overlay');
       overlay.classList.add('hidden');
       document.body.classList.remove('overlay-active');
       setTimeout(() => { overlay.style.display = 'none'; }, 500);
 
-      // Update hero to thank-you messaging
-      const heroH1 = document.querySelector('.hero h1');
-      const heroSub = document.querySelector('.hero .hero-sub');
-      if (heroH1) heroH1.innerHTML = 'Thanks, ' + userName.split(' ')[0] + '! Your free tools are on their <em>way.</em>';
-      if (heroSub) heroSub.textContent = 'Check your inbox for the Artist Career Checklist and Ableton effect chains. Know someone who could use these too? Register them below and earn a referral reward.';
+      const firstName = userName.split(' ')[0];
 
-      // Update header CTA
+      const heroLeft = document.querySelector('.hero-left');
+      if (heroLeft) {
+        heroLeft.innerHTML = `
+          <div class="hero-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>You're in</span>
+          </div>
+          <h1>Thanks, ${firstName}! Your free tools are on their <em>way.</em></h1>
+          <p class="hero-sub">Check your inbox for the Artist Career Checklist and Ableton effect chains. Know someone who could use these too?</p>
+          <a href="#" class="btn-primary" onclick="event.preventDefault(); openFriendForm();">
+            Register a friend
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <div class="hero-trust" style="margin-top:1.5rem">
+            <span class="hero-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Checklist sent to your email
+            </span>
+            <span class="hero-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Ableton effect chains included
+            </span>
+          </div>
+        `;
+      }
+
       const headerCta = document.querySelector('.header-cta');
       if (headerCta) {
-        headerCta.textContent = 'Registreer je vriend';
+        headerCta.textContent = 'Register a friend';
         headerCta.href = '#';
         headerCta.onclick = function(e) { e.preventDefault(); openFriendForm(); };
       }
 
-      // Update ALL btn-primary CTAs on the page
       document.querySelectorAll('.btn-primary').forEach(function(btn) {
-        btn.innerHTML = 'Registreer je vriend <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+        if (btn.closest('.hero-left')) return;
+        btn.innerHTML = 'Register a friend <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
         btn.href = '#';
         btn.onclick = function(e) { e.preventDefault(); openFriendForm(); };
       });
 
-      // Hide the original form section (no longer needed)
       const formSection = document.getElementById('get-guide');
       if (formSection) formSection.style.display = 'none';
-
-      // Scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -1748,12 +1788,11 @@
       const btn = document.getElementById('friend-btn');
 
       const nameV = document.getElementById('friend-name').value.trim();
-      const artistV = document.getElementById('friend-artist').value.trim();
       const emailV = document.getElementById('friend-email').value.trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailV);
-      if (!nameV || !artistV || !emailOk) {
+      if (!nameV || !emailOk) {
         if (!emailOk) document.getElementById('friend-email').focus();
-        alert('Please fill in your friend\'s name, artist name and a valid email address.');
+        alert('Please fill in your friend\'s name and a valid email address.');
         return;
       }
 
@@ -1773,13 +1812,11 @@
       // Friend's data + referrer info
       const friendData = {
         name: nameV,
-        artist_name: artistV,
         email: emailV,
         phone: checked.normalized,
         referred_by_name: referrerData ? referrerData.name : '',
         referred_by_email: referrerData ? referrerData.email : '',
         referred_by_phone: referrerData ? referrerData.phone : '',
-        referred_by_artist: referrerData ? referrerData.artist_name : '',
         is_referral: 'true',
       };
 
@@ -1787,7 +1824,7 @@
         const res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/giveaway-submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: nameV, artist_name: artistV, email: emailV, phone: checked.normalized }),
+          body: JSON.stringify({ name: nameV, email: emailV, phone: checked.normalized }),
         });
 
         const data = await res.json();
@@ -1808,13 +1845,31 @@
               method: 'POST', headers: { 'Content-Type': 'text/plain' }, keepalive: true,
               body: JSON.stringify({
                 lead: riseLead || undefined, email: emailV,
-                name: nameV, artist_name: artistV, phone: checked.normalized,
+                name: nameV, phone: checked.normalized,
                 campaign: 'giveaway', is_referral: true,
                 referred_by_name: referrerData ? referrerData.name : '',
                 referred_by_email: referrerData ? referrerData.email : '',
               }),
             });
           } catch (e) { /* delivery is best-effort */ }
+          // Track friend referral in ade_signups
+          try {
+            fetch('https://rnegaikmtgcjyyykqocp.supabase.co/rest/v1/ade_signups', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZWdhaWttdGdjanl5eWtxb2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDE2MTMsImV4cCI6MjA5MzAxNzYxM30.n0n9IZH9_T6nhfgXhKUpvv3oU0RtkHwPL46blAFL0Uw',
+              },
+              keepalive: true,
+              body: JSON.stringify({
+                name: nameV, email: emailV, phone: checked.normalized,
+                source: 'ade-referral-friend',
+                referred_by: referrerData ? referrerData.name : null,
+                referrer_id: referrerData ? referrerData.email : null,
+              }),
+            });
+          } catch (e) { /* tracking is best-effort */ }
 
           // Show friend success state
           document.getElementById('friend-form-wrap').style.display = 'none';
