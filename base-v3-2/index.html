@@ -175,13 +175,14 @@
       position: relative; z-index: 1;
       max-width: var(--maxw);
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 57% 43%;
-      gap: 3rem;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      text-align: center;
       width: 100%;
+      gap: 2rem;
     }
-    .hero-left { text-align: left; }
+    .hero-left { text-align: center; }
     .hero-eyebrow {
       font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
@@ -192,10 +193,14 @@
     }
     .hero-sub {
       font-size: 0.95rem; color: rgba(255,255,255,0.82);
-      line-height: 1.7; max-width: 48ch; margin-bottom: 2rem;
+      line-height: 1.7; max-width: 48ch; margin: 0 auto 2rem;
     }
 
     /* Hero video */
+    .hero-right {
+      width: 100%;
+      max-width: 600px;
+    }
     .hero-video-wrap {
       position: relative;
       border-radius: 14px;
@@ -272,13 +277,8 @@
     }
 
     @media (max-width: 768px) {
-      .hero-split {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .hero-left { text-align: center; }
-      .hero-sub { margin-left: auto; margin-right: auto; }
       .hero { padding-top: clamp(5rem, 10vw, 8rem); }
+      .hero-right { max-width: 100%; }
     }
 
     /* ── Scroll indicator ─────────────────────────── */
@@ -811,7 +811,7 @@
       <div class="hero-left">
         <div class="hero-eyebrow">Base Academy</div>
         <h1>Finish release-ready tracks in six&nbsp;months.</h1>
-        <div style="display:flex;flex-wrap:wrap;gap:6px 10px;margin-bottom:12px;">
+        <div style="display:flex;flex-wrap:wrap;gap:6px 10px;margin-bottom:12px;justify-content:center;">
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">House</span>
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">Techno</span>
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">Trance</span>
@@ -819,7 +819,7 @@
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">EDM</span>
         </div>
         <p class="hero-sub">30 live sessions, one small group, one clear structure. You learn to finish tracks, find your own sound and build a workflow you can trust.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
+        <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:20px;font-size:0.82rem;color:var(--muted);justify-content:center;">
           <span>30 sessions</span><span style="color:rgba(255,255,255,0.2);">&middot;</span>
           <span>6-month program</span><span style="color:rgba(255,255,255,0.2);">&middot;</span>
           <span>Max 25 per group</span>
