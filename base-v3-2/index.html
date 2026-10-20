@@ -1222,15 +1222,13 @@
       }).catch(function(){});
     }, 3000);
 
-    // Click behavior: if muted → unmute; if unmuted playing → pause; if paused → restart muted
+    // Click behavior: first click plays with sound; second click pauses; third click resumes with sound
     wrap.addEventListener('click', function() {
       if (video.paused || video.ended) {
-        video.muted = true;
-        video.currentTime = 0;
+        video.muted = false;
+        if (video.ended) video.currentTime = 0;
         video.play().catch(function(){});
         wrap.classList.add('playing');
-      } else if (video.muted) {
-        video.muted = false;
       } else {
         video.pause();
         wrap.classList.remove('playing');
