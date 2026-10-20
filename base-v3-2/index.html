@@ -8,8 +8,8 @@
   <meta name="robots" content="noindex, nofollow">
   <style>
     /* ════════════════════════════════════════════════
-       Rise Base Academy — Landing Page v3-2
-       Split Hero variant
+       Rise Base Academy — Landing Page v2
+       coursevsl-b design system
        ════════════════════════════════════════════════ */
     :root {
       --bg: #0f0f0f;
@@ -152,16 +152,14 @@
       color: var(--accent);
     }
 
-    /* ── Hero — Split Layout ─────────────────────── */
+    /* ── Hero (Split variant) ── */
     .hero {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(3rem, 6vw, 4rem);
       position: relative;
       overflow: hidden;
-      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(2rem, 4vw, 3rem);
     }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
@@ -174,107 +172,99 @@
       transform: scale(1.02);
     }
     .hero-split {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       max-width: var(--maxw);
-      width: 100%;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 57% 43%;
-      gap: clamp(2rem, 4vw, 4rem);
+      gap: 3rem;
       align-items: center;
+      width: 100%;
     }
     .hero-left { text-align: left; }
     .hero-eyebrow {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px;
     }
     .hero-sub {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.7;
-      max-width: 55ch;
-      margin: 0 0 2.5rem;
+      font-size: 0.95rem; color: rgba(255,255,255,0.82);
+      line-height: 1.7; max-width: 48ch; margin-bottom: 2rem;
     }
-    .hero-right { position: relative; }
-    .hero-video-glow {
+
+    /* Hero video */
+    .hero-video-wrap {
       position: relative;
       border-radius: 14px;
       overflow: hidden;
-      border: 1px solid rgba(255,104,62,0.18);
-      box-shadow: 0 0 40px 8px rgba(255,104,62,0.08), 0 8px 32px rgba(0,0,0,0.4);
-      background: #000;
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
+      box-shadow: 0 0 60px rgba(255,104,62,0.15), 0 20px 60px rgba(0,0,0,0.4);
     }
-    .hero-video-glow video {
+    .hero-video-wrap video {
       width: 100%;
       display: block;
-      aspect-ratio: 16/9;
-      object-fit: cover;
+      border-radius: 14px;
     }
-    .hero-video-glow .vsl-play-overlay {
+    .hero-video-glow {
+      position: absolute; inset: -2px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255,104,62,0.3), transparent 50%, rgba(255,104,62,0.15));
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.6;
+    }
+    .hero-vsl-overlay {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.25);
-      transition: opacity 0.3s ease;
-      pointer-events: none;
+      z-index: 3; cursor: pointer;
+      transition: opacity 0.3s;
     }
-    .hero-video-glow .vsl-play-overlay svg {
-      width: 64px; height: 64px;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
-      transition: transform 0.2s ease;
-    }
-    .hero-video-glow:hover .vsl-play-overlay svg { transform: scale(1.08); }
-    .hero-video-glow.playing .vsl-play-overlay { opacity: 0; }
-    .hero-video-glow .vsl-progress-wrap {
+    .hero-vsl-overlay svg { width: 64px; height: 64px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+    .hero-video-wrap.playing .hero-vsl-overlay { opacity: 0; pointer-events: none; }
+    .hero-vsl-progress {
       position: absolute; bottom: 0; left: 0; right: 0;
-      height: 4px; background: rgba(255,255,255,0.1);
-      transition: opacity 0.3s linear;
+      height: 3px; z-index: 4;
     }
-    .hero-video-glow .vsl-progress-bar {
-      height: 100%; width: 0%; background: var(--accent);
-      transition: width 0.3s linear, opacity 0.3s linear;
+    .hero-vsl-bar {
+      height: 100%; width: 0;
+      background: var(--accent);
+      transition: width 0.3s linear;
     }
 
-    /* ── Hero Ticker Strip ────────────────────────── */
-    .hero-ticker {
+    /* Moving text strip */
+    .hero-ticker-strip {
       position: relative; z-index: 1;
-      width: 100vw; margin-left: calc(-50vw + 50%);
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-top: 2rem;
       overflow: hidden;
-      margin-top: clamp(2rem, 4vw, 3.5rem);
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding: 14px 0;
-      background: rgba(15,15,15,0.5);
-      backdrop-filter: blur(10px);
+      padding: 10px 0;
     }
     .hero-ticker-track {
-      display: flex; gap: 0; width: max-content;
+      display: flex;
+      gap: 3rem;
+      width: max-content;
       animation: ticker-scroll 25s linear infinite;
     }
     .hero-ticker-item {
-      display: flex; align-items: center; gap: 24px;
-      padding: 0 24px; white-space: nowrap;
-      font-size: 0.78rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.7;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .hero-ticker-item::after {
-      content: ''; display: block;
-      width: 4px; height: 4px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0;
+    .hero-ticker-item::before {
+      content: '\00B7';
+      opacity: 0.4;
     }
     @keyframes ticker-scroll {
       0% { transform: translateX(0); }
@@ -282,14 +272,22 @@
     }
 
     @media (max-width: 768px) {
-      .hero-split { grid-template-columns: 1fr; gap: 2rem; }
-      .hero h1 { font-size: clamp(1.5rem, 6vw, 2rem); }
+      .hero-split {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-left { text-align: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero { padding-top: clamp(5rem, 10vw, 8rem); }
     }
 
     /* ── Scroll indicator ─────────────────────────── */
     .scroll-indicator {
-      position: absolute; bottom: 2rem; left: 50%;
-      transform: translateX(-50%); z-index: 2;
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
       animation: bounce-down 2s ease-in-out infinite;
     }
     @keyframes bounce-down {
@@ -627,6 +625,9 @@
     }
 
     @media (max-width: 768px) {
+      .hero h1 {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
       .section-heading {
         font-size: clamp(1.5rem, 5vw, 2rem);
       }
@@ -741,13 +742,13 @@
     @media (max-width: 520px) {
       .section { padding: 3.5rem 1.25rem; }
       .closing { padding: 3.5rem 1.25rem; }
-      .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(2rem, 4vw, 3rem); }
+      .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 5rem); }
       .site-header-inner { padding: 0.75rem 1rem; }
       .footer { padding: 2rem 1.25rem; }
     }
 
     /* ── Limited spots indicator ── */
-    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
+    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); text-align:center; margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
     @keyframes spots-breathe { 0%,100%{ color:rgba(255,255,255,0.45); } 50%{ color:rgba(255,255,255,0.85); } }
 
     /* ── Step labels ── */
@@ -802,17 +803,15 @@
   </header>
 
   <!-- ══════════════════════════════════════════════
-       Hero — Split Layout
+       Hero (Split variant)
        ══════════════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-bg"></div>
-
     <div class="hero-split">
-      <!-- Left Column: Text -->
       <div class="hero-left">
         <div class="hero-eyebrow">Base Academy</div>
         <h1>Finish release-ready tracks in six&nbsp;months.</h1>
-        <div style="display:flex;flex-wrap:wrap;gap:6px 10px;margin-bottom:14px;">
+        <div style="display:flex;flex-wrap:wrap;gap:6px 10px;margin-bottom:12px;">
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">House</span>
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">Techno</span>
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">Trance</span>
@@ -821,53 +820,48 @@
         </div>
         <p class="hero-sub">30 live sessions, one small group, one clear structure. You learn to finish tracks, find your own sound and build a workflow you can trust.</p>
         <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
-          <span>30 sessions</span>
-          <span style="color:rgba(255,255,255,0.2);">&middot;</span>
-          <span>6-month program</span>
-          <span style="color:rgba(255,255,255,0.2);">&middot;</span>
+          <span>30 sessions</span><span style="color:rgba(255,255,255,0.2);">&middot;</span>
+          <span>6-month program</span><span style="color:rgba(255,255,255,0.2);">&middot;</span>
           <span>Max 25 per group</span>
         </div>
         <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">
           Start your application
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
-        <div class="limited-spots">Takes 60 seconds &middot; No payment &middot; Applications reviewed weekly</div>
+        <div class="limited-spots">Takes 60 seconds · No payment · Applications reviewed weekly</div>
       </div>
-
-      <!-- Right Column: Video -->
       <div class="hero-right">
-        <div class="hero-video-glow" id="hero-vsl-player">
+        <div class="hero-video-wrap" id="hero-vsl-player">
+          <div class="hero-video-glow"></div>
           <video id="hero-vsl-video" playsinline preload="metadata" poster="../assets/vsl/Base.png">
             <source src="../assets/vsl/Base%20Forefront%20VSL_Tessel_V2.mp4" type="video/mp4">
           </video>
-          <div class="vsl-play-overlay" id="hero-vsl-overlay">
+          <div class="hero-vsl-overlay" id="hero-vsl-overlay">
             <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
           </div>
-          <div class="vsl-progress-wrap">
-            <div class="vsl-progress-bar" id="hero-vsl-progress"></div>
-          </div>
+          <div class="hero-vsl-progress"><div class="hero-vsl-bar" id="hero-vsl-bar"></div></div>
         </div>
       </div>
     </div>
 
-    <!-- Ticker Strip -->
-    <div class="hero-ticker">
+    <!-- Moving text strip -->
+    <div class="hero-ticker-strip">
       <div class="hero-ticker-track">
         <span class="hero-ticker-item">30 Live Sessions</span>
+        <span class="hero-ticker-item">Find Your Sound</span>
+        <span class="hero-ticker-item">Release-Ready Tracks</span>
+        <span class="hero-ticker-item">Build Your Workflow</span>
         <span class="hero-ticker-item">Small Group (Max 25)</span>
         <span class="hero-ticker-item">6-Month Program</span>
         <span class="hero-ticker-item">Weekly Coaching</span>
-        <span class="hero-ticker-item">Release-Ready Tracks</span>
-        <span class="hero-ticker-item">Find Your Sound</span>
-        <span class="hero-ticker-item">Build Your Workflow</span>
-        <!-- Duplicate for seamless loop -->
+        <!-- duplicate for loop -->
         <span class="hero-ticker-item">30 Live Sessions</span>
+        <span class="hero-ticker-item">Find Your Sound</span>
+        <span class="hero-ticker-item">Release-Ready Tracks</span>
+        <span class="hero-ticker-item">Build Your Workflow</span>
         <span class="hero-ticker-item">Small Group (Max 25)</span>
         <span class="hero-ticker-item">6-Month Program</span>
         <span class="hero-ticker-item">Weekly Coaching</span>
-        <span class="hero-ticker-item">Release-Ready Tracks</span>
-        <span class="hero-ticker-item">Find Your Sound</span>
-        <span class="hero-ticker-item">Build Your Workflow</span>
       </div>
     </div>
 
@@ -1001,7 +995,7 @@
         <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Master production fundamentals, music theory and Ableton, and build a workflow you can rely on from day one.</p>
       </div>
 
-      <!-- Connector 1-2 -->
+      <!-- Connector 1→2 -->
       <div class="lp-connector" data-conn="1"></div>
 
       <!-- Step 2 -->
@@ -1012,7 +1006,7 @@
         <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Develop your own identity through sound design, synthesis and sampling.</p>
       </div>
 
-      <!-- Connector 2-3 -->
+      <!-- Connector 2→3 -->
       <div class="lp-connector" data-conn="2"></div>
 
       <!-- Step 3 -->
@@ -1023,7 +1017,7 @@
         <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Turn loops into finished songs with professional arrangement and energy flow.</p>
       </div>
 
-      <!-- Connector 3-4 -->
+      <!-- Connector 3→4 -->
       <div class="lp-connector" data-conn="3"></div>
 
       <!-- Step 4 -->
@@ -1040,10 +1034,11 @@
       const steps = document.querySelectorAll('.lp-step');
       const conns = document.querySelectorAll('.lp-connector');
       if(!steps.length) return;
-      const STEP_DELAY = 600;
-      const HOLD = 1800;
-      const FADE = 800;
-      const PAUSE = 1200;
+      // Timeline: step1 on → conn1 → step2 → conn2 → step3 → conn3 → step4 → hold → fade → pause → repeat
+      const STEP_DELAY = 600;  // ms between each element lighting up
+      const HOLD = 1800;       // ms all lit before fading
+      const FADE = 800;        // ms for fade-out (handled by CSS transition)
+      const PAUSE = 1200;      // ms dark before restarting
       const SEQ = [
         {type:'step', idx:0},
         {type:'conn', idx:0},
@@ -1065,8 +1060,10 @@
             else conns[item.idx].classList.add('glow');
           }, i * STEP_DELAY);
         });
+        // After all lit, hold, then fade
         const allLitTime = (SEQ.length - 1) * STEP_DELAY;
         setTimeout(()=>{ clearAll(); }, allLitTime + HOLD);
+        // Restart after fade + pause
         setTimeout(runCycle, allLitTime + HOLD + FADE + PAUSE);
       }
       runCycle();
@@ -1077,7 +1074,7 @@
 
   <div class="inline-cta">
     <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">Start your application <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    <p class="inline-cta-sub">Takes 60 seconds &middot; No payment &middot; Applications reviewed weekly</p>
+    <p class="inline-cta-sub">Takes 60 seconds · No payment · Applications reviewed weekly</p>
   </div>
 
   <!-- ══════════════════════════════════════════════
@@ -1136,7 +1133,7 @@
 
   <div class="inline-cta">
     <a href="javascript:void(0)" onclick="openModal()" class="hero-cta">Start your application <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    <p class="inline-cta-sub">Takes 60 seconds &middot; No payment &middot; Applications reviewed weekly</p>
+    <p class="inline-cta-sub">Takes 60 seconds · No payment · Applications reviewed weekly</p>
   </div>
 
   <!-- ══════════════════════════════════════════════
@@ -1161,7 +1158,7 @@
        Scripts
        ══════════════════════════════════════════════ -->
   <script>
-    // -- Urgency bar dismiss --
+    // ── Urgency bar dismiss ──
     (function() {
       var bar = document.getElementById('urgency-bar');
       var closeBtn = document.getElementById('urgency-bar-close');
@@ -1170,10 +1167,10 @@
       closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
     })();
 
-    // -- Sticky header scroll effect --
+    // ── Sticky header scroll effect ──
     window.addEventListener('scroll', function() { document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
 
-    // -- Auto-detect country dial code from IP --
+    // ── Auto-detect country dial code from IP ──
     var _dialCode = "";
     (function() {
       var codes = {NL:"+31",BE:"+32",DE:"+49",FR:"+33",GB:"+44",US:"+1",ES:"+34",IT:"+39",PT:"+351",AT:"+43",CH:"+41",SE:"+46",NO:"+47",DK:"+45",FI:"+358",PL:"+48",IE:"+353",CZ:"+420",HU:"+36",RO:"+40",BG:"+359",HR:"+385",SK:"+421",SI:"+386",LT:"+370",LV:"+371",EE:"+372",GR:"+30",TR:"+90",AU:"+61",NZ:"+64",CA:"+1",BR:"+55",MX:"+52",AR:"+54",CO:"+57",ZA:"+27",IN:"+91",JP:"+81",KR:"+82",ID:"+62",SG:"+65",AE:"+971",SA:"+966",RU:"+7",UA:"+380",IL:"+972"};
@@ -1185,15 +1182,15 @@
       } catch(e) {}
     })();
 
-    // -- Questionnaire modal --
+    // ── Questionnaire modal ──
     var qState={step:0,answers:{years:null,time:null,challenge:null,budget:2500,name:"",whatsapp:"",email:""}};
-    var STEPS=[{type:"choice",key:"years",title:"How many years have you been producing?",options:["Less than 1 year","1 – 3 years","3 – 5 years","5+ years"]},{type:"choice",key:"time",title:"How much time do you spend on your music?",options:["A few hours a week","5 – 15 hours a week","15 – 30 hours a week","It’s my full-time focus"]},{type:"choice",key:"challenge",title:"What’s your biggest challenge right now?",options:["Finishing tracks consistently","Getting my music heard / building an audience","Improving my production or mixing skills","Staying motivated and accountable","Turning music into a career or income"]},{type:"slider",key:"budget",title:"What’s your yearly budget for your music career?",min:0,max:10000,step:250,format:function(v){return v>=10000?"€ 10k+":"€ "+v.toLocaleString("nl-NL")+",-"}},{type:"form",title:"One last thing.",subtitle:"Where can our community manager reach you to set up the call?"},{type:"success"}];
+    var STEPS=[{type:"choice",key:"years",title:"How many years have you been producing?",options:["Less than 1 year","1 – 3 years","3 – 5 years","5+ years"]},{type:"choice",key:"time",title:"How much time do you spend on your music?",options:["A few hours a week","5 – 15 hours a week","15 – 30 hours a week","It's my full-time focus"]},{type:"choice",key:"challenge",title:"What's your biggest challenge right now?",options:["Finishing tracks consistently","Getting my music heard / building an audience","Improving my production or mixing skills","Staying motivated and accountable","Turning music into a career or income"]},{type:"slider",key:"budget",title:"What's your yearly budget for your music career?",min:0,max:10000,step:250,format:function(v){return v>=10000?"€ 10k+":"€ "+v.toLocaleString("nl-NL")+",-"}},{type:"form",title:"One last thing.",subtitle:"Where can our community manager reach you to set up the call?"},{type:"success"}];
     var qOverlay=document.getElementById("modal"),qBody=document.getElementById("modal-body"),qBackBtn=document.getElementById("back-btn");
     function openModal(){qState.step=0;qOverlay.classList.add("open");document.body.style.overflow="hidden";renderStep()}
     function closeModal(){qOverlay.classList.remove("open");document.body.style.overflow=""}
     function nextStep(){if(qState.step<STEPS.length-1){qState.step++;renderStep()}}
     function prevStep(){if(qState.step>0){qState.step--;renderStep()}else{closeModal()}}
-    function renderStep(){var s=STEPS[qState.step];qBackBtn.classList.toggle("hidden",qState.step===0||s.type==="success");var t=STEPS.filter(function(x){return x.type!=="success"}).length;var bars=s.type==="success"?"":'<div class="progress">'+Array.from({length:t},function(_,i){return'<span class="'+(i<=qState.step?"done":"")+'"></span>'}).join("")+"</div>";if(s.type==="choice"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="options">'+s.options.map(function(o,i){return'<button class="option" data-value="'+o+'"><span class="letter">'+String.fromCharCode(65+i)+'.</span><span class="text">'+o+"</span></button>"}).join("")+"</div>";qBody.querySelectorAll(".option").forEach(function(b){b.addEventListener("click",function(){qState.answers[s.key]=b.dataset.value;qBody.querySelectorAll(".option").forEach(function(x){x.classList.remove("selected")});b.classList.add("selected");setTimeout(nextStep,220)})})}else if(s.type==="slider"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="slider-step"><div class="slider-value" id="sv">'+s.format(qState.answers[s.key])+'</div><div class="slider-label">Per year</div><div class="slider-wrap"><input type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+qState.answers[s.key]+'" id="si"/><div class="slider-bounds"><span>€ 0,-</span><span>€ 10k+</span></div></div><button class="btn-continue" id="cb">Continue →</button></div>';document.getElementById("si").addEventListener("input",function(e){var v=Number(e.target.value);qState.answers[s.key]=v;document.getElementById("sv").textContent=s.format(v)});document.getElementById("cb").addEventListener("click",nextStep)}else if(s.type==="form"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">'+s.subtitle+'</p><form class="form-step" id="af"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required value="'+(qState.answers.whatsapp||_dialCode)+'"/><input type="email" name="email" placeholder="Email address" required/><label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;cursor:pointer;text-align:left;"><input type="checkbox" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required><span>I confirm that I have been selected by a Rise founding team member for the Base program.</span></label><label style="display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;cursor:pointer;text-align:left;"><input type="checkbox" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required><span>I take responsibility for having access to a laptop and Ableton during the Base program.</span></label><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application →</button></div></form>';document.getElementById("af").addEventListener("submit",function(e){e.preventDefault();var fd=new FormData(e.target);qState.answers.name=fd.get("name");qState.answers.whatsapp=fd.get("whatsapp");qState.answers.email=fd.get("email");nextStep()})}else if(s.type==="success"){var p=new URLSearchParams();if(qState.answers.name)p.set("name",qState.answers.name);if(qState.answers.email)p.set("email",qState.answers.email);if(qState.answers.whatsapp)p.set("phone",qState.answers.whatsapp);p.set("program","base");window.location.href="/academy-thankyou-v3/?"+p.toString()}}
+    function renderStep(){var s=STEPS[qState.step];qBackBtn.classList.toggle("hidden",qState.step===0||s.type==="success");var t=STEPS.filter(function(x){return x.type!=="success"}).length;var bars=s.type==="success"?"":'<div class="progress">'+Array.from({length:t},function(_,i){return'<span class="'+(i<=qState.step?"done":"")+'"></span>'}).join("")+"</div>";if(s.type==="choice"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="options">'+s.options.map(function(o,i){return'<button class="option" data-value="'+o+'"><span class="letter">'+String.fromCharCode(65+i)+'.</span><span class="text">'+o+"</span></button>"}).join("")+"</div>";qBody.querySelectorAll(".option").forEach(function(b){b.addEventListener("click",function(){qState.answers[s.key]=b.dataset.value;qBody.querySelectorAll(".option").forEach(function(x){x.classList.remove("selected")});b.classList.add("selected");setTimeout(nextStep,220)})})}else if(s.type==="slider"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><div class="slider-step"><div class="slider-value" id="sv">'+s.format(qState.answers[s.key])+'</div><div class="slider-label">Per year</div><div class="slider-wrap"><input type="range" min="'+s.min+'" max="'+s.max+'" step="'+s.step+'" value="'+qState.answers[s.key]+'" id="si"/><div class="slider-bounds"><span>€ 0,-</span><span>€ 10k+</span></div></div><button class="btn-continue" id="cb">Continue →</button></div>';document.getElementById("si").addEventListener("input",function(e){var v=Number(e.target.value);qState.answers[s.key]=v;document.getElementById("sv").textContent=s.format(v)});document.getElementById("cb").addEventListener("click",nextStep)}else if(s.type==="form"){qBody.innerHTML=bars+'<h2 class="step-title">'+s.title+'</h2><p style="color:var(--muted);margin-bottom:30px;max-width:48ch;">'+s.subtitle+'</p><form class="form-step" id="af"><div class="form-row"><input type="text" name="name" placeholder="Your name" required/><input type="tel" name="whatsapp" placeholder="WhatsApp number (incl. country code)" required value="'+(qState.answers.whatsapp||_dialCode)+'"/><input type="email" name="email" placeholder="Email address" required/><label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;cursor:pointer;text-align:left;"><input type="checkbox" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required><span>I confirm that I have been selected by a Rise founding team member for the Base program.</span></label><label style="display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5;cursor:pointer;text-align:left;"><input type="checkbox" style="margin-top:3px;accent-color:var(--accent);min-width:18px;min-height:18px;" required><span>I take responsibility for having access to a laptop and Ableton during the Base program.</span></label><button type="submit" class="btn-continue" style="margin-top:8px;">Submit Application &rarr;</button></div></form>';document.getElementById("af").addEventListener("submit",function(e){e.preventDefault();var fd=new FormData(e.target);qState.answers.name=fd.get("name");qState.answers.whatsapp=fd.get("whatsapp");qState.answers.email=fd.get("email");nextStep()})}else if(s.type==="success"){var p=new URLSearchParams();if(qState.answers.name)p.set("name",qState.answers.name);if(qState.answers.email)p.set("email",qState.answers.email);if(qState.answers.whatsapp)p.set("phone",qState.answers.whatsapp);p.set("program","base");window.location.href="/academy-thankyou-v3/?"+p.toString()}}
     qOverlay.addEventListener("click",function(e){if(e.target===qOverlay)closeModal()});
     document.addEventListener("keydown",function(e){if(e.key==="Escape"&&qOverlay.classList.contains("open"))closeModal()});
   </script>
@@ -1230,34 +1227,53 @@
   })();
   </script>
 
-  <!-- Hero VSL Player Script -->
+  <!-- Hero VSL autoplay script -->
   <script>
   (function() {
-    var player = document.getElementById('hero-vsl-player');
+    var wrap = document.getElementById('hero-vsl-player');
     var video = document.getElementById('hero-vsl-video');
-    var progressBar = document.getElementById('hero-vsl-progress');
-    if (!player || !video) return;
+    var bar = document.getElementById('hero-vsl-bar');
+    var overlay = document.getElementById('hero-vsl-overlay');
+    if (!wrap || !video) return;
     var CURVE = 0.575;
-    player.addEventListener('click', function() {
+    var autoStarted = false;
+
+    // Autoplay muted after 3 seconds
+    setTimeout(function() {
+      video.muted = true;
+      video.play().then(function() {
+        autoStarted = true;
+        wrap.classList.add('playing');
+      }).catch(function(){});
+    }, 3000);
+
+    // Click behavior: if muted → unmute; if unmuted playing → pause; if paused → restart muted
+    wrap.addEventListener('click', function() {
       if (video.paused || video.ended) {
+        video.muted = true;
+        video.currentTime = 0;
         video.play().catch(function(){});
-        player.classList.add('playing');
+        wrap.classList.add('playing');
+      } else if (video.muted) {
+        video.muted = false;
       } else {
         video.pause();
-        player.classList.remove('playing');
+        wrap.classList.remove('playing');
       }
     });
+
     video.addEventListener('ended', function() {
-      player.classList.remove('playing');
-      progressBar.style.width = '100%';
+      wrap.classList.remove('playing');
+      if (bar) bar.style.width = '100%';
     });
+
     video.addEventListener('timeupdate', function() {
-      if (!video.duration) return;
+      if (!video.duration || !bar) return;
       var actual = video.currentTime / video.duration;
       var displayed = Math.pow(actual, CURVE) * 100;
-      progressBar.style.width = displayed + '%';
+      bar.style.width = displayed + '%';
       var opacity = Math.max(0, 1 - (displayed / 70));
-      progressBar.parentElement.style.opacity = opacity;
+      bar.parentElement.style.opacity = opacity;
     });
   })();
   </script>
