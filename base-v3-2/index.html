@@ -175,14 +175,13 @@
       position: relative; z-index: 1;
       max-width: var(--maxw);
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      text-align: center;
+      gap: 3rem;
       width: 100%;
-      gap: 2rem;
     }
-    .hero-left { text-align: center; }
+    .hero-left { text-align: left; }
     .hero-eyebrow {
       font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
@@ -193,13 +192,12 @@
     }
     .hero-sub {
       font-size: 0.95rem; color: rgba(255,255,255,0.82);
-      line-height: 1.7; max-width: 48ch; margin: 0 auto 2rem;
+      line-height: 1.7; max-width: 48ch; margin: 0 0 2rem;
     }
 
     /* Hero video */
     .hero-right {
       width: 100%;
-      max-width: 600px;
     }
     .hero-video-wrap {
       position: relative;
@@ -238,35 +236,8 @@
       transition: width 0.3s linear;
     }
 
-    /* Moving text strip */
-    .hero-ticker-strip {
-      position: relative; z-index: 1;
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
-      margin-top: 2rem;
-      overflow: hidden;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      padding: 10px 0;
-    }
-    .hero-ticker-track {
-      display: flex;
-      gap: 3rem;
-      width: max-content;
-      animation: ticker-scroll 25s linear infinite;
-    }
-    .hero-ticker-item {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.7;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    /* Moving text strip — hidden in split variant */
+    .hero-ticker-strip { display: none; }
     .hero-ticker-item::before {
       content: '\00B7';
       opacity: 0.4;
@@ -278,6 +249,10 @@
 
     @media (max-width: 768px) {
       .hero { padding-top: clamp(5rem, 10vw, 8rem); }
+      .hero-split { grid-template-columns: 1fr; text-align: center; }
+      .hero-left { text-align: center; }
+      .hero-left .genre-tags,
+      .hero-left .hero-meta { justify-content: center; }
       .hero-right { max-width: 100%; }
     }
 
@@ -748,7 +723,7 @@
     }
 
     /* ── Limited spots indicator ── */
-    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); text-align:center; margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
+    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
     @keyframes spots-breathe { 0%,100%{ color:rgba(255,255,255,0.45); } 50%{ color:rgba(255,255,255,0.85); } }
 
     /* ── Step labels ── */
@@ -811,7 +786,7 @@
       <div class="hero-left">
         <div class="hero-eyebrow">Base Academy</div>
         <h1>Finish release-ready tracks in six&nbsp;months.</h1>
-        <div style="display:flex;flex-wrap:wrap;gap:6px 10px;margin-bottom:12px;justify-content:center;">
+        <div class="genre-tags" style="display:flex;flex-wrap:wrap;gap:6px 10px;margin-bottom:12px;">
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">House</span>
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">Techno</span>
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">Trance</span>
@@ -819,7 +794,7 @@
           <span style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(255,104,62,0.3);border-radius:100px;padding:3px 12px;">EDM</span>
         </div>
         <p class="hero-sub">30 live sessions, one small group, one clear structure. You learn to finish tracks, find your own sound and build a workflow you can trust.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:20px;font-size:0.82rem;color:var(--muted);justify-content:center;">
+        <div class="hero-meta" style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:20px;font-size:0.82rem;color:var(--muted);">
           <span>30 sessions</span><span style="color:rgba(255,255,255,0.2);">&middot;</span>
           <span>6-month program</span><span style="color:rgba(255,255,255,0.2);">&middot;</span>
           <span>Max 25 per group</span>
