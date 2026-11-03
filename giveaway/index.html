@@ -833,27 +833,21 @@
       };
 
       try {
-        const res = await fetch('https://rnegaikmtgcjyyykqocp.supabase.co/functions/v1/giveaway-submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
+        // Submit to Rise: captures the lead + forwards name/email/phone (plus
+        // outreach attribution) to Go High Level, which delivers the guide and
+        // runs the mail funnel. We no longer send any giveaway mail ourselves.
+        const res = await fetch(RISE_BASE + '/api/giveaway-deliver', {
+          method: 'POST', headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            lead: riseLead || undefined, email: formData.email,
+            name: formData.name, artist_name: formData.artist_name, phone: formData.phone,
+            step: riseStep, campaign: 'giveaway',
+          }),
         });
-
         const data = await res.json();
 
         if (data.ok) {
-          riseTrack('signup'); // giveaway won: lead filled in the form
-          // Central delivery + funnel move from our own system (Rise).
-          try {
-            fetch(RISE_BASE + '/api/giveaway-deliver', {
-              method: 'POST', headers: { 'Content-Type': 'text/plain' }, keepalive: true,
-              body: JSON.stringify({
-                lead: riseLead || undefined, email: formData.email,
-                name: formData.name, artist_name: formData.artist_name, phone: formData.phone,
-                step: riseStep, campaign: 'giveaway',
-              }),
-            });
-          } catch (e) { /* delivery is best-effort; form still succeeds */ }
+          riseTrack('signup'); // form filled -> handed off to Go High Level
           document.getElementById('form-card').style.display = 'none';
           document.getElementById('success-state').style.display = 'block';
         } else {
