@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RISE — Free Artist Guide</title>
-  <meta name="description" content="Download the free Rise Artist Guide — a career checklist, Ableton chains, and insights from 10 industry professionals on production, branding, bookings, marketing and monetisation.">
+  <meta name="description" content="Download the free Rise Artist Guide — a career checklist, Ableton chains, and insights from 11 industry professionals on production, branding, bookings, marketing and monetisation.">
   <meta property="og:title" content="Rise — Free Artist Guide">
-  <meta property="og:description" content="Get your free checklist, Ableton chains, and industry insights. Built by 10 working professionals.">
+  <meta property="og:description" content="Get your free checklist, Ableton chains, and industry insights. Built by 11 working professionals.">
   <meta property="og:image" content="../assets/photos/photo-18.jpg">
   <style>
     :root {
@@ -508,6 +508,25 @@
       .chapters-grid { grid-template-columns: 1fr; }
       .header-cta { display: none; }
     }
+
+    /* ── Sticky CTA (mobile): the form is always one tap away ── */
+    #get-kit { scroll-margin-top: 72px; }
+    .sticky-cta {
+      display: none;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 200;
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+      background: rgba(15, 15, 15, 0.96);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--line-strong);
+    }
+    .sticky-cta a {
+      display: block; text-align: center;
+      background: var(--accent); color: #fff; font-weight: 700;
+      padding: 14px 18px; border-radius: 12px; font-size: 1rem;
+      box-shadow: 0 6px 20px rgba(255, 104, 62, 0.35);
+    }
+    .sticky-cta a:active { background: var(--accent-hover); }
+    @media (max-width: 768px) { .sticky-cta { display: block; } body { padding-bottom: 76px; } }
   </style>
 </head>
 <body>
@@ -521,6 +540,11 @@
     <a href="#get-kit" class="header-cta">Get Free Guide</a>
   </header>
 
+  <!-- STICKY CTA (mobile) -->
+  <div class="sticky-cta">
+    <a href="#get-kit">Get your free producer pack →</a>
+  </div>
+
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg">
@@ -532,7 +556,7 @@
     <div class="hero-content">
       <div class="hero-eyebrow">Free Artist Guide</div>
       <h1>Start with the fundamentals most producers <em>learn too late.</em></h1>
-      <p class="hero-sub">Get the Rise Artist Checklist, Ableton chains, and a condensed preview of insights from 10 industry professionals. Completely free.</p>
+      <p class="hero-sub">Get the Rise Artist Checklist, Ableton chains, and a condensed preview of insights from 11 industry professionals. Completely free.</p>
       <div class="hero-cta-row">
         <a class="btn-primary" href="#get-kit">Download Free Guide</a>
         <a class="btn-ghost" href="#whats-inside">See what's inside</a>
@@ -541,7 +565,7 @@
 
     <div class="hero-stats">
       <div class="stat">
-        <div class="num">10 Experts</div>
+        <div class="num">11 Experts</div>
         <div class="label">Industry pros</div>
       </div>
       <div class="stat">
@@ -597,7 +621,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
         <h3>Artist Checklist & Guide</h3>
-        <p>A comprehensive checklist covering everything you need: branding, production workflow, social media setup, release strategy, legal registrations, and more. Plus a condensed guide with key insights from 10 industry professionals.</p>
+        <p>A comprehensive checklist covering everything you need: branding, production workflow, social media setup, release strategy, legal registrations, and more. Plus a condensed guide with key insights from 11 industry professionals.</p>
       </div>
       <div class="inside-card">
         <div class="ic-icon">
@@ -655,6 +679,10 @@
           </li>
           <li>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Preview of the 11 video modules
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             Instant delivery to your inbox
           </li>
         </ul>
@@ -670,16 +698,12 @@
               <input type="text" id="name" name="name" placeholder="e.g. John Doe" required>
             </div>
             <div class="field">
-              <label for="artist_name">Artist Name</label>
-              <input type="text" id="artist_name" name="artist_name" placeholder="e.g. VANNOOD" required>
-            </div>
-            <div class="field">
               <label for="email">Email Address</label>
               <input type="email" id="email" name="email" placeholder="your@email.com" required>
             </div>
             <div class="field">
-              <label for="phone">Phone Number (mobile, for WhatsApp)</label>
-              <input type="tel" id="phone" name="phone" placeholder="+31 6 1234 5678" required>
+              <label for="phone">Phone Number (optional, mobile for WhatsApp)</label>
+              <input type="tel" id="phone" name="phone" placeholder="+31 6 1234 5678">
               <p id="phone-error" style="display:none;color:#ff6b6b;font-size:13px;margin:6px 0 0">Please enter a valid mobile number. From outside the Netherlands, include your country code, e.g. +44 7400 123456.</p>
             </div>
             <button type="submit" class="btn-submit" id="btn-submit">Get Free Artist Guide</button>
@@ -798,27 +822,29 @@
       e.preventDefault();
       const btn = document.getElementById('btn-submit');
 
-      // All fields required: name, artist name, a valid email and a valid mobile.
+      // Required: name + a valid email. Phone is optional, artist name removed.
       const nameV = document.getElementById('name').value.trim();
-      const artistV = document.getElementById('artist_name').value.trim();
       const emailV = document.getElementById('email').value.trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailV);
-      if (!nameV || !artistV || !emailOk) {
+      if (!nameV || !emailOk) {
         if (!emailOk) document.getElementById('email').focus();
-        alert('Please fill in your name, artist name and a valid email address.');
+        alert('Please fill in your name and a valid email address.');
         return;
       }
 
-      // Phone validation (level 1): must be a valid MOBILE number. Catches
-      // junk like "12345" or landlines before we ever store the lead. The
-      // number is normalized to +country format so WhatsApp links work.
+      // Phone is optional. If one is entered, validate it as a real mobile and
+      // normalize to +country format so WhatsApp links work; if empty, skip.
       const phoneRaw = document.getElementById('phone').value.trim();
       const phoneErr = document.getElementById('phone-error');
-      const checked = validateMobile(phoneRaw);
-      if (!checked.ok) {
-        phoneErr.style.display = 'block';
-        document.getElementById('phone').focus();
-        return;
+      let phoneNormalized = '';
+      if (phoneRaw) {
+        const checked = validateMobile(phoneRaw);
+        if (!checked.ok) {
+          phoneErr.style.display = 'block';
+          document.getElementById('phone').focus();
+          return;
+        }
+        phoneNormalized = checked.normalized;
       }
       phoneErr.style.display = 'none';
 
@@ -827,9 +853,8 @@
 
       const formData = {
         name: nameV,
-        artist_name: artistV,
         email: emailV,
-        phone: checked.normalized,
+        phone: phoneNormalized,
       };
 
       try {
@@ -840,7 +865,7 @@
           method: 'POST', headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify({
             lead: riseLead || undefined, email: formData.email,
-            name: formData.name, artist_name: formData.artist_name, phone: formData.phone,
+            name: formData.name, phone: formData.phone,
             step: riseStep, campaign: 'giveaway',
           }),
         });
@@ -859,6 +884,17 @@
         btn.disabled = false;
       }
     }
+
+    // Hide the sticky CTA once the form section is on screen, so it never
+    // covers the submit button when the visitor is already at the form.
+    (function () {
+      var bar = document.querySelector('.sticky-cta');
+      var form = document.getElementById('get-kit');
+      if (!bar || !form || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (entries) {
+        bar.style.display = entries[0].isIntersecting ? 'none' : '';
+      }, { threshold: 0.15 }).observe(form);
+    })();
   </script>
 </body>
 </html>
