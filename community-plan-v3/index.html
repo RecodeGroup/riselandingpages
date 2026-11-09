@@ -595,22 +595,20 @@
     /* ── Plan Grid ── */
     .plan-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      max-width: 1200px;
+      max-width: 960px;
       width: 100%;
     }
-    .results-stats { padding: 1rem 2rem 4rem; }
-    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 2.5rem; }
-    .result-num { font-size: clamp(2.6rem, 5vw, 3.6rem); font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--fg); }
+    .results-stats { padding: 4rem 2rem; border-top: 1px solid var(--line); text-align: center; }
+    .results-stats .section-inner { max-width: 800px; }
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .result-num { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--fg); }
     .result-num span { font-size: 0.5em; color: var(--muted); margin-left: 2px; }
-    .result-label { margin-top: 0.75rem; font-size: 0.95rem; color: var(--fg); opacity: 0.85; }
+    .result-label { margin-top: 0.6rem; font-size: 0.85rem; color: var(--fg); opacity: 0.85; }
     @media (max-width: 700px) {
-      .results-stats { padding: 0.5rem 1.25rem 3rem; }
+      .results-stats { padding: 3rem 1.25rem; }
       .results-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
-    }
-    @media (max-width: 1100px) and (min-width: 769px) {
-      .plan-grid { grid-template-columns: repeat(3, 1fr); max-width: 760px; }
     }
     .plan-card {
       background: var(--bg-2);
@@ -1135,14 +1133,6 @@
           <div class="plan-schedule" id="schedule-2x">1st: &euro; 375,- now &middot; 2nd: &euro; 2.275,- in 1 month</div>
         </div>
 
-        <div class="plan-card" data-plan="community_3x" onclick="selectPlan(this)">
-          <div class="installments">3 payments</div>
-          <div class="price">&euro; 375,-</div>
-          <div class="price-sub">deposit &middot; then 2 &times; &euro; 1.137,50</div>
-          <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-          <div class="plan-schedule" id="schedule-3x">1st: &euro; 375,- now &middot; then 2 &times; &euro; 1.137,50 monthly</div>
-        </div>
-
         <div class="plan-card" data-plan="community_4x" onclick="selectPlan(this)">
           <div class="installments">4 payments</div>
           <div class="price">&euro; 375,-</div>
@@ -1360,10 +1350,6 @@
       'community_2x': {
         label: '€ 375,- deposit + € 2.275,-',
         detail: '€ 375,- now + € 2.275,- in 1 month · ex. VAT',
-      },
-      'community_3x': {
-        label: '€ 375,- deposit + 2 × € 1.137,50',
-        detail: '€ 375,- now + 2 × € 1.137,50 monthly · ex. VAT',
       },
       'community_4x': {
         label: '€ 375,- deposit + 3 × € 758,33',
