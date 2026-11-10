@@ -206,6 +206,43 @@
       100% { transform: translateX(-50%); }
     }
 
+
+    /* ── Results (numbers) — same look as community-plan-v3 ── */
+    .results { padding: 4rem 2rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
+    .results-inner { max-width: 800px; margin: 0 auto; }
+    .results .section-title { margin: 0 auto; max-width: none; }
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .result-num { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--fg); font-variant-numeric: tabular-nums; }
+    .result-num .suf { font-size: 0.5em; color: var(--muted); margin-left: 2px; font-weight: 800; }
+    .result-label { margin-top: 0.6rem; font-size: 0.85rem; color: var(--fg); opacity: 0.85; }
+    /* ── Video testimonials ── */
+    .vtesti { text-align: center; padding: 5rem 2rem; max-width: var(--maxw); margin: 0 auto; }
+    .vtesti .section-title { margin: 0 auto 0.4rem; max-width: none; }
+    .vtesti .section-sub { margin: 0 auto 2.2rem; }
+    .vtesti-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 1060px; margin: 0 auto; }
+    .sec-divider { border-top: 1px solid var(--line); }
+    .vt-card { position: relative; aspect-ratio: 9/16; border-radius: 10px; overflow: hidden; background: var(--bg-2); cursor: pointer; }
+    .vt-card video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .vt-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.08); transition: background .2s; }
+    .vt-play span { width: 54px; height: 54px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .vt-play span::after { content: ""; border-left: 15px solid #111; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 4px; }
+    .vt-card:hover .vt-play { background: rgba(0,0,0,0.2); }
+    .vt-card.playing .vt-play { display: none; }
+    /* ── Reviews marquee ── */
+    .reviews { padding: 4.5rem 0 3.5rem; border-bottom: 1px solid var(--line); overflow: hidden; text-align: center; }
+    .reviews .section-title { margin: 0 auto 2rem; max-width: none; }
+    .rv-row { display: flex; gap: 12px; width: max-content; margin-bottom: 12px; animation: rvScroll 60s linear infinite; }
+    .rv-row.rev { animation-direction: reverse; animation-duration: 70s; }
+    .rv-pill { display: flex; align-items: center; gap: 10px; background: #fff; color: #111; border-radius: 999px; padding: 7px 18px 7px 7px; font-size: 0.82rem; white-space: nowrap; }
+    .rv-pill img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+    @keyframes rvScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @media (max-width: 768px) {
+      .results-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+      .vtesti-grid { grid-template-columns: repeat(2, 1fr); }
+      .results { padding: 3rem 1.25rem; }
+      .vtesti { padding: 3rem 1.5rem; }
+    }
+
     /* ── Sections ── */
     .block {
       padding: 5rem 2rem;
@@ -609,6 +646,20 @@
     </div>
   </div>
 
+  <!-- RESULTS (numbers, from the Core page) -->
+  <section class="results" id="results">
+    <div class="results-inner">
+    <div class="section-eyebrow">The results</div>
+    <h2 class="section-title">What our artists have achieved.</h2>
+    <div class="results-grid">
+      <div><div class="result-num"><span class="count" data-to="7.9" data-dec="1">7.9</span><span class="suf">M+</span></div><div class="result-label">streams</div></div>
+      <div><div class="result-num"><span class="count" data-to="108">108</span></div><div class="result-label">gigs &amp; bookings</div></div>
+      <div><div class="result-num"><span class="count" data-to="98">98</span><span class="suf">+</span></div><div class="result-label">tracks released</div></div>
+      <div><div class="result-num"><span class="count" data-to="5">5</span></div><div class="result-label">events organized</div></div>
+    </div>
+    </div>
+  </section>
+
   <!-- WHAT'S INSIDE -->
   <section id="whats-inside" class="block">
     <div class="section-eyebrow">What you get</div>
@@ -658,6 +709,20 @@
         <h3>Ableton chains and 909 drums from real producers.</h3>
         <p>Drag EcHooligan and Filter Fantasm straight into your Ableton projects and build your house grooves with the Fundamentals 909 Pack. Made by the producers who teach in the Rise program. No fluff, just tools that work.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- VIDEO TESTIMONIALS (from the Core page) -->
+  <div class="sec-divider"></div>
+  <section class="vtesti" id="artists-say">
+    <h2 class="section-title">What our artists have to say</h2>
+    <p class="section-sub">Stories from producers who joined Rise.</p>
+    <div class="vtesti-grid">
+      <div class="vt-card"><video playsinline preload="none" poster="media/ad-testimonials-poster.jpg"><source src="media/ad-testimonials.mp4" type="video/mp4"></video><div class="vt-play"><span></span></div></div>
+      <div class="vt-card"><video playsinline preload="none" poster="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F020d08bf-95b6-4d38-aef1-77c900766d9d%2F020d08bf95b63d38eef177c9.png&amp;w=640&amp;q=75"><source src="https://riseacademy.b-cdn.net/media-library/e3d7d8b2-7546-4383-b600-2bbf696b37b0/e3d7d8b27546e38336002bbf.mp4" type="video/mp4"></video><div class="vt-play"><span></span></div></div>
+      <div class="vt-card"><video playsinline preload="none" poster="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F274fa051-f9a2-46ac-9e17-3ad61164169a%2F274fa051f9a2c6acde173ad6.png&amp;w=640&amp;q=75"><source src="https://riseacademy.b-cdn.net/media-library/9d036e86-8fb5-49b5-88af-af5012dae4f8/9d036e868fb519b508afaf50.mp4" type="video/mp4"></video><div class="vt-play"><span></span></div></div>
+      <div class="vt-card"><video playsinline preload="none" poster="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F1ea8f283-a7a6-4bf8-952f-eb990ff2fcd6%2F1ea8f283a7a6bbf8552feb99.png&amp;w=640&amp;q=75"><source src="https://riseacademy.b-cdn.net/media-library/3c6aa669-323e-48b0-bdf5-b083ff8a3b3a/3c6aa669323ec8b0bdf5b083.mp4" type="video/mp4"></video><div class="vt-play"><span></span></div></div>
+      <div class="vt-card"><video playsinline preload="none" poster="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Ff9d9bd59-a7e4-4bf1-9ee8-a863eb4738c7%2Ff9d9bd59a7e47bf1dee8a863.png&amp;w=640&amp;q=75"><source src="https://riseacademy.b-cdn.net/media-library/3436c2ef-926d-4e49-9673-3e6f94744feb/3436c2ef926dee4996733e6f.mp4" type="video/mp4"></video><div class="vt-play"><span></span></div></div>
     </div>
   </section>
 
@@ -729,6 +794,14 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- REVIEWS (from the Core page) -->
+  <section class="reviews" id="reviews">
+    <div class="section-eyebrow">Reviews</div>
+    <h2 class="section-title">What Our Members Say</h2>
+    <div class="rv-row"><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa79eb6a7-9aa1-4b2f-9db0-fb8a8757653a%2Fa79eb6a79aa1fb2f9db0fb8a.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;The community of dedicated musicians is inspiring.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F17887e7d-6683-4a35-9976-966d0463f86e%2F17887e7d66833a355976966d.png&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;The community was an eye-opener for me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F5cb14f3d-80ee-4372-ba19-483b408f1ee2%2F5cb14f3d80ee23727a19483b.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;When you drift off track, people help you.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fe2f13bb6-806f-48c4-af9e-569a1941d2fc%2Fe2f13bb6806f98c4af9e569a.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;I find the community really motivating.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F30f4f31d-712c-4ff0-a3d1-e4d9b289a457%2F30f4f31d712c5ff063d1e4d9.png&amp;w=96&amp;q=75" alt="Andy" loading="lazy">&ldquo;A good opportunity to connect.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa79eb6a7-9aa1-4b2f-9db0-fb8a8757653a%2Fa79eb6a79aa1fb2f9db0fb8a.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;The community of dedicated musicians is inspiring.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F17887e7d-6683-4a35-9976-966d0463f86e%2F17887e7d66833a355976966d.png&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;The community was an eye-opener for me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F5cb14f3d-80ee-4372-ba19-483b408f1ee2%2F5cb14f3d80ee23727a19483b.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;When you drift off track, people help you.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fe2f13bb6-806f-48c4-af9e-569a1941d2fc%2Fe2f13bb6806f98c4af9e569a.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;I find the community really motivating.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F30f4f31d-712c-4ff0-a3d1-e4d9b289a457%2F30f4f31d712c5ff063d1e4d9.png&amp;w=96&amp;q=75" alt="Andy" loading="lazy">&ldquo;A good opportunity to connect.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa79eb6a7-9aa1-4b2f-9db0-fb8a8757653a%2Fa79eb6a79aa1fb2f9db0fb8a.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;The community of dedicated musicians is inspiring.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F17887e7d-6683-4a35-9976-966d0463f86e%2F17887e7d66833a355976966d.png&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;The community was an eye-opener for me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F5cb14f3d-80ee-4372-ba19-483b408f1ee2%2F5cb14f3d80ee23727a19483b.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;When you drift off track, people help you.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fe2f13bb6-806f-48c4-af9e-569a1941d2fc%2Fe2f13bb6806f98c4af9e569a.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;I find the community really motivating.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F30f4f31d-712c-4ff0-a3d1-e4d9b289a457%2F30f4f31d712c5ff063d1e4d9.png&amp;w=96&amp;q=75" alt="Andy" loading="lazy">&ldquo;A good opportunity to connect.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa79eb6a7-9aa1-4b2f-9db0-fb8a8757653a%2Fa79eb6a79aa1fb2f9db0fb8a.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;The community of dedicated musicians is inspiring.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F17887e7d-6683-4a35-9976-966d0463f86e%2F17887e7d66833a355976966d.png&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;The community was an eye-opener for me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F5cb14f3d-80ee-4372-ba19-483b408f1ee2%2F5cb14f3d80ee23727a19483b.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;When you drift off track, people help you.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fe2f13bb6-806f-48c4-af9e-569a1941d2fc%2Fe2f13bb6806f98c4af9e569a.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;I find the community really motivating.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F30f4f31d-712c-4ff0-a3d1-e4d9b289a457%2F30f4f31d712c5ff063d1e4d9.png&amp;w=96&amp;q=75" alt="Andy" loading="lazy">&ldquo;A good opportunity to connect.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa79eb6a7-9aa1-4b2f-9db0-fb8a8757653a%2Fa79eb6a79aa1fb2f9db0fb8a.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;The community of dedicated musicians is inspiring.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F17887e7d-6683-4a35-9976-966d0463f86e%2F17887e7d66833a355976966d.png&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;The community was an eye-opener for me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F5cb14f3d-80ee-4372-ba19-483b408f1ee2%2F5cb14f3d80ee23727a19483b.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;When you drift off track, people help you.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fe2f13bb6-806f-48c4-af9e-569a1941d2fc%2Fe2f13bb6806f98c4af9e569a.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;I find the community really motivating.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F30f4f31d-712c-4ff0-a3d1-e4d9b289a457%2F30f4f31d712c5ff063d1e4d9.png&amp;w=96&amp;q=75" alt="Andy" loading="lazy">&ldquo;A good opportunity to connect.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa79eb6a7-9aa1-4b2f-9db0-fb8a8757653a%2Fa79eb6a79aa1fb2f9db0fb8a.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;The community of dedicated musicians is inspiring.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F17887e7d-6683-4a35-9976-966d0463f86e%2F17887e7d66833a355976966d.png&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;The community was an eye-opener for me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F5cb14f3d-80ee-4372-ba19-483b408f1ee2%2F5cb14f3d80ee23727a19483b.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;When you drift off track, people help you.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fe2f13bb6-806f-48c4-af9e-569a1941d2fc%2Fe2f13bb6806f98c4af9e569a.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;I find the community really motivating.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F30f4f31d-712c-4ff0-a3d1-e4d9b289a457%2F30f4f31d712c5ff063d1e4d9.png&amp;w=96&amp;q=75" alt="Andy" loading="lazy">&ldquo;A good opportunity to connect.&rdquo;</div></div>
+    <div class="rv-row rev"><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa003ead5-4c83-4e35-bec6-6dd6184ea91a%2Fa003ead54c832e35fec66dd6.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;Meeting these people is so important to me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F2c96742e-c939-4c70-8753-48647118e016%2F2c96742ec9396c7007534864.webp&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;They challenge you to make specific goals.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F3390efa7-894b-45b3-b2bf-3c044d4f18da%2F3390efa7894bc5b3f2bf3c04.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;Making your goals concrete is most valuable.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F83e1c952-9395-4c13-a500-9fb3cfd892ce%2F83e1c9529395ac13e5009fb3.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;Working toward the same goal, helping each other.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa003ead5-4c83-4e35-bec6-6dd6184ea91a%2Fa003ead54c832e35fec66dd6.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;Meeting these people is so important to me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F2c96742e-c939-4c70-8753-48647118e016%2F2c96742ec9396c7007534864.webp&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;They challenge you to make specific goals.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F3390efa7-894b-45b3-b2bf-3c044d4f18da%2F3390efa7894bc5b3f2bf3c04.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;Making your goals concrete is most valuable.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F83e1c952-9395-4c13-a500-9fb3cfd892ce%2F83e1c9529395ac13e5009fb3.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;Working toward the same goal, helping each other.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa003ead5-4c83-4e35-bec6-6dd6184ea91a%2Fa003ead54c832e35fec66dd6.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;Meeting these people is so important to me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F2c96742e-c939-4c70-8753-48647118e016%2F2c96742ec9396c7007534864.webp&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;They challenge you to make specific goals.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F3390efa7-894b-45b3-b2bf-3c044d4f18da%2F3390efa7894bc5b3f2bf3c04.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;Making your goals concrete is most valuable.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F83e1c952-9395-4c13-a500-9fb3cfd892ce%2F83e1c9529395ac13e5009fb3.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;Working toward the same goal, helping each other.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa003ead5-4c83-4e35-bec6-6dd6184ea91a%2Fa003ead54c832e35fec66dd6.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;Meeting these people is so important to me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F2c96742e-c939-4c70-8753-48647118e016%2F2c96742ec9396c7007534864.webp&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;They challenge you to make specific goals.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F3390efa7-894b-45b3-b2bf-3c044d4f18da%2F3390efa7894bc5b3f2bf3c04.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;Making your goals concrete is most valuable.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F83e1c952-9395-4c13-a500-9fb3cfd892ce%2F83e1c9529395ac13e5009fb3.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;Working toward the same goal, helping each other.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa003ead5-4c83-4e35-bec6-6dd6184ea91a%2Fa003ead54c832e35fec66dd6.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;Meeting these people is so important to me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F2c96742e-c939-4c70-8753-48647118e016%2F2c96742ec9396c7007534864.webp&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;They challenge you to make specific goals.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F3390efa7-894b-45b3-b2bf-3c044d4f18da%2F3390efa7894bc5b3f2bf3c04.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;Making your goals concrete is most valuable.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F83e1c952-9395-4c13-a500-9fb3cfd892ce%2F83e1c9529395ac13e5009fb3.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;Working toward the same goal, helping each other.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2Fa003ead5-4c83-4e35-bec6-6dd6184ea91a%2Fa003ead54c832e35fec66dd6.png&amp;w=96&amp;q=75" alt="Leo" loading="lazy">&ldquo;Meeting these people is so important to me.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F2c96742e-c939-4c70-8753-48647118e016%2F2c96742ec9396c7007534864.webp&amp;w=96&amp;q=75" alt="Max" loading="lazy">&ldquo;They challenge you to make specific goals.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F3390efa7-894b-45b3-b2bf-3c044d4f18da%2F3390efa7894bc5b3f2bf3c04.png&amp;w=96&amp;q=75" alt="Levi" loading="lazy">&ldquo;Making your goals concrete is most valuable.&rdquo;</div><div class="rv-pill"><img src="https://riseartistacademy.com/_next/image?url=https%3A%2F%2Friseacademy.b-cdn.net%2Fmedia-library%2F83e1c952-9395-4c13-a500-9fb3cfd892ce%2F83e1c9529395ac13e5009fb3.png&amp;w=96&amp;q=75" alt="Seth" loading="lazy">&ldquo;Working toward the same goal, helping each other.&rdquo;</div></div>
   </section>
 
   <!-- CTA BANNER -->
@@ -1028,6 +1101,36 @@
       }
     }
 
+
+    // Results: count the numbers up when they scroll into view.
+    (function () {
+      var els = document.querySelectorAll('.results .count');
+      if (!els.length || !('IntersectionObserver' in window)) return;
+      els.forEach(function (el) { el.textContent = '0'; });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          io.unobserve(en.target);
+          var el = en.target, to = parseFloat(el.dataset.to), dec = parseInt(el.dataset.dec || '0', 10), t0 = null;
+          function step(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1400); var v = to * (1 - Math.pow(1 - p, 3)); el.textContent = v.toFixed(dec); if (p < 1) requestAnimationFrame(step); }
+          requestAnimationFrame(step);
+        });
+      }, { threshold: 0.4 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+    // Video testimonials: click to play with sound; only one plays at a time.
+    (function () {
+      var cards = document.querySelectorAll('.vt-card');
+      cards.forEach(function (card) {
+        var v = card.querySelector('video');
+        card.addEventListener('click', function () {
+          if (card.classList.contains('playing')) { v.pause(); return; }
+          cards.forEach(function (c) { if (c !== card) { c.querySelector('video').pause(); c.classList.remove('playing'); } });
+          v.controls = true; card.classList.add('playing'); v.play().catch(function () {});
+        });
+        v.addEventListener('pause', function () { if (v.ended) { card.classList.remove('playing'); v.controls = false; } });
+      });
+    })();
     // Hide the sticky CTA once the form section is on screen, so it never
     // covers the submit button when the visitor is already at the form.
     (function () {
