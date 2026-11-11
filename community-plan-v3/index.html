@@ -1124,16 +1124,8 @@
           </div>
         </div>
 
-        <div class="plan-card recommended selected" data-plan="community_2x" onclick="selectPlan(this)">
+        <div class="plan-card recommended selected" data-plan="community_4x" onclick="selectPlan(this)">
           <div class="plan-badge">Popular</div>
-          <div class="installments">2 payments</div>
-          <div class="price">&euro; 375,-</div>
-          <div class="price-sub">deposit &middot; then &euro; 2.275,-</div>
-          <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-          <div class="plan-schedule" id="schedule-2x">1st: &euro; 375,- now &middot; 2nd: &euro; 2.275,- in 1 month</div>
-        </div>
-
-        <div class="plan-card" data-plan="community_4x" onclick="selectPlan(this)">
           <div class="installments">4 payments</div>
           <div class="price">&euro; 375,-</div>
           <div class="price-sub">deposit &middot; then 3 &times; &euro; 758,33</div>
@@ -1144,9 +1136,17 @@
         <div class="plan-card" data-plan="community_6x" onclick="selectPlan(this)">
           <div class="installments">6 payments</div>
           <div class="price">&euro; 375,-</div>
-          <div class="price-sub">deposit &middot; then 5 &times; &euro; 455,-</div>
-          <div class="total">&euro; 2.650,- total &middot; ex. VAT</div>
-          <div class="plan-schedule" id="schedule-6x">1st: &euro; 375,- now &middot; then 5 &times; &euro; 455,- monthly</div>
+          <div class="price-sub">deposit &middot; then 5 &times; &euro; 485,-</div>
+          <div class="total">&euro; 2.800,- total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-6x">1st: &euro; 375,- now &middot; then 5 &times; &euro; 485,- monthly</div>
+        </div>
+
+        <div class="plan-card" data-plan="community_12x" onclick="selectPlan(this)">
+          <div class="installments">12 payments</div>
+          <div class="price">&euro; 375,-</div>
+          <div class="price-sub">deposit &middot; then 11 &times; &euro; 243,18</div>
+          <div class="total">&euro; 3.050,- total &middot; ex. VAT</div>
+          <div class="plan-schedule" id="schedule-12x">1st: &euro; 375,- now &middot; then 11 &times; &euro; 243,18 monthly</div>
         </div>
 
       </div>
@@ -1158,8 +1158,8 @@
 
       <div class="checkout-summary">
         <div class="summary-left">
-          <div class="summary-plan" id="summary-plan">Rise CORE &mdash; &euro; 375,- deposit + &euro; 2.275,-</div>
-          <div class="summary-detail" id="summary-detail">&euro; 375,- now + &euro; 2.275,- in 1 month &middot; ex. VAT</div>
+          <div class="summary-plan" id="summary-plan">Rise CORE &mdash; &euro; 375,- deposit + 3 &times; &euro; 758,33</div>
+          <div class="summary-detail" id="summary-detail">&euro; 375,- now + 3 &times; &euro; 758,33 monthly &middot; ex. VAT</div>
         </div>
         <button class="btn-checkout" id="btn-checkout" onclick="startCheckout()">
           Continue to Payment
@@ -1347,21 +1347,21 @@
         label: 'Pay in full — € 2.650,-',
         detail: 'One-time payment now · ex. VAT',
       },
-      'community_2x': {
-        label: '€ 375,- deposit + € 2.275,-',
-        detail: '€ 375,- now + € 2.275,- in 1 month · ex. VAT',
-      },
       'community_4x': {
         label: '€ 375,- deposit + 3 × € 758,33',
         detail: '€ 375,- now + 3 × € 758,33 monthly · ex. VAT',
       },
       'community_6x': {
-        label: '€ 375,- deposit + 5 × € 455,-',
-        detail: '€ 375,- now + 5 × € 455,- monthly · ex. VAT',
+        label: '€ 375,- deposit + 5 × € 485,- (total € 2.800,-)',
+        detail: '€ 375,- now + 5 × € 485,- monthly · ex. VAT',
+      },
+      'community_12x': {
+        label: '€ 375,- deposit + 11 × € 243,18 (total € 3.050,-)',
+        detail: '€ 375,- now + 11 × € 243,18 monthly · ex. VAT',
       },
     };
 
-    var selectedPlan = 'community_2x';
+    var selectedPlan = 'community_4x';
 
     // Read URL params (passed from application form)
     var params = new URLSearchParams(window.location.search);
