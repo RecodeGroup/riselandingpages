@@ -861,15 +861,17 @@
     // still fires if they navigate around first or come back later.
     const RISE_BASE = 'https://agent-acquisitie-leads.netlify.app';
     const riseParams = new URLSearchParams(location.search);
+    // Short mail links: /p/<12-hex lead code>-<step><variant>, e.g. /p/3cabcba0b919-2a
+    const riseShort = (location.pathname.match(/^\/p\/([0-9a-f]{12})(?:-(\d)([a-z])?)?\/?$/i) || []);
     const riseLead = (() => {
       try {
-        const q = riseParams.get('lead');
+        const q = riseParams.get('lead') || riseShort[1] || null;
         if (q) localStorage.setItem('rise_lead', q);
         return q || localStorage.getItem('rise_lead');
       } catch (e) { return null; }
     })();
     // Which mail step they arrived from (set by the outreach links): step or utm_content.
-    const riseStep = riseParams.get('step') || riseParams.get('utm_content') || null;
+    const riseStep = riseParams.get('step') || riseParams.get('utm_content') || (riseShort[2] ? 'step' + riseShort[2] + '-' + String(riseShort[3] || '').toUpperCase() : null);
     function riseTrack(event) {
       if (!riseLead) return;
       try {
