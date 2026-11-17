@@ -824,6 +824,18 @@
       .shots { grid-template-columns:1fr 1fr; }
       .shots .shot-phone { display:none; }
     }
+
+    .appt-when { display:inline-flex; align-items:center; gap:10px; padding:12px 20px; border-radius:999px; background:rgba(15,15,15,0.6); border:1px solid var(--line-strong); font-size:1.02rem; font-weight:600; margin-bottom:1.1rem; }
+    .appt-when svg { width:18px; height:18px; color:var(--accent); }
+    .appt-when[hidden] { display:none; }
+    .appt-links { display:flex; flex-wrap:wrap; justify-content:center; gap:6px 22px; font-size:0.88rem; }
+    .appt-links a { color:rgba(255,255,255,0.75); text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgba(255,104,62,0.6); transition:color 0.2s; }
+    .appt-links a:hover { color:var(--accent); }
+    .tile-strip { overflow-x:auto; scrollbar-width:none; margin-top:2.5rem; }
+    .tile-strip::-webkit-scrollbar { display:none; }
+    .tile-track { display:flex; gap:12px; width:max-content; margin:0 auto; }
+    .tile-track .video-card { width:190px; height:338px; }
+    @media (max-width:700px) { .tile-track .video-card { width:150px; height:267px; } .tile-track { padding:0 1.25rem; } }
   </style>
 </head>
 <body>
@@ -841,16 +853,12 @@
     <div class="hero-content">
       <div class="booked-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Confirmed</div>
       <h1 id="hero-h">Your call is booked!</h1>
-      <p class="hero-sub">You're one step away from joining Rise. Your call is a short introduction and selection call: we get to know you, look at where you want to go, and see if Rise fits. It's not a free coaching session.</p>
-      <div class="appt-card">
-        <div class="appt-row"><span>When</span><b id="appt-when">See your confirmation email</b></div>
-        <div class="appt-row"><span>Duration</span><b>About 30 minutes</b></div>
-        <div class="appt-row"><span>Where</span><b>Video call &middot; the link is in your confirmation</b></div>
-        <div class="appt-actions">
-          <a class="btn-small" id="gcal-btn" href="#" target="_blank" rel="noopener">+ Google Calendar</a>
-          <a class="btn-small" id="ics-btn" href="#">+ Apple / Outlook</a>
-          <a class="btn-small btn-quiet" data-reschedule href="mailto:contact@riseartistacademy.com?subject=Reschedule%20my%20Rise%20call">Reschedule</a>
-        </div>
+      <p class="hero-sub">You're one step away from joining Rise. Your call is a short introduction and selection call: we get to know you, look at where you want to go, and see if Rise fits.</p>
+      <div class="appt-when" id="appt-when-wrap" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="appt-when"></span></div>
+      <div class="appt-links">
+        <a id="gcal-btn" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
+        <a id="ics-btn" href="#">Add to Apple / Outlook</a>
+        <a data-reschedule href="mailto:contact@riseartistacademy.com?subject=Reschedule%20my%20Rise%20call">Reschedule</a>
       </div>
     </div>
   </section>
@@ -892,22 +900,19 @@
     <div class="wrap">
       <div class="section-eyebrow">Student success stories</div>
       <h2 class="section-heading">Artists like you, a few months&nbsp;in.</h2>
-      <div class="story-grid">
-        <div class="story">
+      <div class="tile-strip">
+        <div class="tile-track">
           <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/yip_proactive.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/yip_proactive.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-          <p class="story-quote">"The biggest change has been the way I approach my music career. I've become proactive, instead of just focusing on making music."</p>
-          <span class="story-name">Yip &middot; Rise member</span>
-        </div>
-        <div class="story">
           <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/vendenti_album.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/vendenti_album.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-          <p class="story-quote">"I learnt a lot more about production, mixing and mastering, but also about promoting. For my album I asked other Rise members to be part of it."</p>
-          <span class="story-name">Vendenti &middot; Rise member</span>
-        </div>
-        <div class="story">
+          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
           <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/thalia_momentum.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/thalia_momentum.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-          <p class="story-quote">"We did some big steps as an artist the past months. It's a lot of momentum and power, being created with Rise."</p>
-          <span class="story-name">Thalia &middot; Rise member</span>
+          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         </div>
+      </div>
+      <div class="quote-grid" style="margin-top:2rem;padding:0;">
+        <div class="quote-card"><p>"The biggest change has been the way I approach my music career. I've become proactive."</p><span>Yip &middot; Rise member</span></div>
+        <div class="quote-card"><p>"For my album I asked other Rise members to be part of it. They didn't hesitate."</p><span>Vendenti &middot; Rise member</span></div>
+        <div class="quote-card"><p>"We did some big steps as an artist the past months. A lot of momentum, created with Rise."</p><span>Thalia &middot; Rise member</span></div>
       </div>
 
       <div class="case-mini">
@@ -936,11 +941,6 @@
       <div class="section-eyebrow">How Rise works</div>
       <h2 class="section-heading">Built by artists who release and play&nbsp;internationally.</h2>
       <div class="section-body"><p>Rise is the artist academy of Recode Group, next to the Recode labels and the Amplify agency. You learn from people who are doing it right now, with weekly accountability and feedback on your own music.</p></div>
-      <!-- VIDEO PLACEHOLDER (how Rise works, 60–90 sec) -->
-      <div class="video-placeholder" role="img" aria-label="How Rise works video coming soon" style="margin-top:2rem;">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
-        <span>How Rise works &middot; 60&ndash;90 sec</span>
-      </div>
 
       <div class="paths-grid">
         <div class="path-card" data-program="base">
@@ -1068,7 +1068,7 @@
         label = clean(q.get('date')) + (q.get('time') ? ' at ' + clean(q.get('time')) : '');
       }
       if (label) {
-        document.getElementById('appt-when').textContent = label;
+        document.getElementById('appt-when').textContent = label + ' \u00b7 30 min'; document.getElementById('appt-when-wrap').hidden = false;
         document.getElementById('closing-when').textContent = 'See you ' + label + '.';
       }
 
