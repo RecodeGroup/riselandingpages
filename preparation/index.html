@@ -851,6 +851,17 @@
     .prep-hero h1 { font-size: clamp(1.8rem, 4.2vw, 2.8rem); margin-bottom: 6px; }
     .hero-watch { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 1rem; }
     .prep-hero .vsl-player { box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .vsl-controls { position: absolute; right: 12px; bottom: 14px; display: flex; gap: 8px; opacity: 0; transition: opacity 0.25s ease; }
+    .vsl-player.playing .vsl-controls { opacity: 0; }
+    .vsl-player.started:hover .vsl-controls, .vsl-player.started:not(.playing) .vsl-controls, .vsl-player.show-ctrl .vsl-controls { opacity: 1; }
+    .vsl-ctrl { display: inline-flex; align-items: center; gap: 3px; height: 36px; min-width: 36px; padding: 0 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; background: rgba(10,10,10,0.65); color: #fff; font: 600 12px/1 inherit; font-family: inherit; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 0.2s ease, border-color 0.2s ease; }
+    .vsl-ctrl:hover { background: rgba(255,104,62,0.9); border-color: transparent; color: #0a0a0a; }
+    .vsl-ctrl:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .vsl-ctrl svg { width: 16px; height: 16px; }
+    .vsl-ctrl .ic-off { display: none; }
+    .vsl-ctrl.muted .ic-on { display: none; }
+    .vsl-ctrl.muted .ic-off { display: block; }
+    @media (hover: none) { .vsl-player.started .vsl-controls { opacity: 1; } }
     @media (max-width: 600px) {
       .prep-hero { padding: 1rem 1rem 3rem; }
       .prep-hero .booked-badge { padding: 5px 11px; font-size: 0.7rem; margin-bottom: 0.5rem; }
@@ -895,6 +906,11 @@
         </video>
         <div class="vsl-play-overlay"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></div>
         <div class="vsl-progress-wrap"><div class="vsl-progress-bar" id="prep-vsl-progress"></div></div>
+        <div class="vsl-controls" id="prep-vsl-controls">
+          <button type="button" class="vsl-ctrl" data-act="back" aria-label="Rewind 10 seconds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v5h5"/></svg><span>10</span></button>
+          <button type="button" class="vsl-ctrl" data-act="fwd" aria-label="Forward 10 seconds"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v5h-5"/></svg><span>10</span></button>
+          <button type="button" class="vsl-ctrl" data-act="mute" aria-label="Mute"><svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg></button>
+        </div>
       </div>
       <p class="hero-sub" style="margin-top:1.75rem;">You're one step away from joining Rise. Your call is a short introduction and selection call: we get to know you, look at where you want to go, and see if Rise fits.</p>
       <div class="appt-when" id="appt-when-wrap" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="appt-when"></span></div>
@@ -1139,7 +1155,17 @@
     (function() {
       var player = document.getElementById('prep-vsl-player'), video = document.getElementById('prep-vsl-video'), bar = document.getElementById('prep-vsl-progress');
       if (!player || !video) return;
+      var ctrls = document.getElementById('prep-vsl-controls');
+      if (ctrls) ctrls.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var b = e.target.closest('.vsl-ctrl'); if (!b) return;
+        var act = b.getAttribute('data-act');
+        if (act === 'back') video.currentTime = Math.max(0, video.currentTime - 10);
+        else if (act === 'fwd') video.currentTime = Math.min(video.duration || 0, video.currentTime + 10);
+        else if (act === 'mute') { video.muted = !video.muted; b.classList.toggle('muted', video.muted); b.setAttribute('aria-label', video.muted ? 'Unmute' : 'Mute'); }
+      });
       player.addEventListener('click', function() {
+        player.classList.add('started');
         if (video.paused || video.ended) { video.play().catch(function(){}); player.classList.add('playing'); }
         else { video.pause(); player.classList.remove('playing'); }
       });
