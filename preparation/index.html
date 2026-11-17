@@ -858,7 +858,6 @@
       <div class="appt-links">
         <a id="gcal-btn" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
         <a id="ics-btn" href="#">Add to Apple / Outlook</a>
-        <a data-reschedule href="mailto:contact@riseartistacademy.com?subject=Reschedule%20my%20Rise%20call">Reschedule</a>
       </div>
     </div>
   </section>
@@ -870,10 +869,12 @@
     <div class="wrap">
       <div class="step-label">A quick welcome</div>
       <h2 class="section-heading" style="margin-bottom:2rem;">Watch this before your&nbsp;call.</h2>
-      <!-- VIDEO PLACEHOLDER (welcome, ~45 sec): replace with vsl-player markup once ready -->
-      <div class="video-placeholder" role="img" aria-label="Welcome video coming soon">
-        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
-        <span>Welcome video &middot; 45 sec</span>
+      <div class="vsl-player" id="prep-vsl-player">
+        <video id="prep-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Preparation/precall-poster.jpg">
+          <source src="../assets/Pages/Preparation/precall.mp4" type="video/mp4">
+        </video>
+        <div class="vsl-play-overlay"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></div>
+        <div class="vsl-progress-wrap"><div class="vsl-progress-bar" id="prep-vsl-progress"></div></div>
       </div>
     </div>
   </section>
@@ -904,13 +905,13 @@
         <div class="tile-track">
           <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/yip_proactive.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/yip_proactive.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
           <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/vendenti_album.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/vendenti_album.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/ad_testimonials.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/ad_testimonials.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
           <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/thalia_momentum.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/thalia_momentum.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
           <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         </div>
       </div>
       <div class="quote-grid" style="margin-top:2rem;padding:0;">
-        <div class="quote-card"><p>"The biggest change has been the way I approach my music career. I've become proactive."</p><span>Yip &middot; Rise member</span></div>
+        <div class="quote-card"><p>"The biggest change has been the way I approach my music career. I've become proactive."</p><span>Jip &middot; Rise member</span></div>
         <div class="quote-card"><p>"For my album I asked other Rise members to be part of it. They didn't hesitate."</p><span>Vendenti &middot; Rise member</span></div>
         <div class="quote-card"><p>"We did some big steps as an artist the past months. A lot of momentum, created with Rise."</p><span>Thalia &middot; Rise member</span></div>
       </div>
@@ -1026,11 +1027,7 @@
     <div class="closing-inner">
       <div class="step-label">See you on the call</div>
       <h2 id="closing-when">Your call is booked.</h2>
-      <p>Can't make it? Reschedule instead of skipping it, so your spot goes to the right moment.</p>
-      <a data-reschedule href="mailto:contact@riseartistacademy.com?subject=Reschedule%20my%20Rise%20call" class="hero-cta">
-        Reschedule my call
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
+      <p>Can't make it? Reschedule instead of skipping it, so your spot goes to the right moment. You can reschedule or cancel your call through the confirmation email you received.</p>
     </div>
   </section>
 
@@ -1052,7 +1049,7 @@
     })();
 
     // Booking details from URL params
-    // Supported: ?name=  &start=<ISO datetime>  (or &date= &time=)  &reschedule=<url>  &program=base|core
+    // Supported: ?name=  &start=<ISO datetime>  (or &date= &time=)  &program=base|core
     (function() {
       var q = new URLSearchParams(location.search);
       var clean = function(t) { return String(t || '').replace(/[<>&"]/g, ''); };
@@ -1086,10 +1083,6 @@
         gcal.style.display = 'none'; ics.style.display = 'none';
       }
 
-      var r = q.get('reschedule');
-      if (r && /^https:\/\//.test(r)) {
-        document.querySelectorAll('[data-reschedule]').forEach(function(a) { a.href = r; a.target = '_blank'; a.rel = 'noopener'; });
-      }
 
       var p = (q.get('program') || '').toLowerCase();
       if (p === 'base' || p === 'core') {
@@ -1114,6 +1107,22 @@
       else { card.classList.add('playing'); }
       v.onended = function() { card.classList.remove('playing'); };
     });
+    // Pre-call video: click play/pause + progress bar
+    (function() {
+      var player = document.getElementById('prep-vsl-player'), video = document.getElementById('prep-vsl-video'), bar = document.getElementById('prep-vsl-progress');
+      if (!player || !video) return;
+      player.addEventListener('click', function() {
+        if (video.paused || video.ended) { video.play().catch(function(){}); player.classList.add('playing'); }
+        else { video.pause(); player.classList.remove('playing'); }
+      });
+      video.addEventListener('ended', function() { player.classList.remove('playing'); bar.style.width = '100%'; });
+      video.addEventListener('timeupdate', function() {
+        if (!video.duration) return;
+        var shown = Math.pow(video.currentTime / video.duration, 0.575) * 100;
+        bar.style.width = shown + '%';
+        bar.parentElement.style.opacity = Math.max(0, 1 - shown / 70);
+      });
+    })();
   </script>
 </body>
 </html>
