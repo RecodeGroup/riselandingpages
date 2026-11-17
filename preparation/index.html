@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE &mdash; Before your call</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* ════════════════════════════════════════════════
+       Rise Core Academy — coursevsl-b design system
+       ════════════════════════════════════════════════ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Site Header ─────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.72);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 7px; }
+    .nav-logo span {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 8px 40px 8px 16px; transition: transform 0.3s;
+    }
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
+    }
+    .urgency-text {
+      display: inline;
+      animation: urgency-pulse 3s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    body.has-urgency-bar .site-header { top: 36px; }
+    body.has-urgency-bar .hero { margin-top: -61px; padding-top: 181px; }
+    .header-cta {
+      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s; text-decoration: none;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.55) 40%, rgba(15,15,15,0.92) 100%),
+        url('../assets/photos/photo-11.jpg') center 30% / cover no-repeat;
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── Buttons ──────────────────────────────────── */
+    .hero-cta,
+    .btn-primary {
+      display: inline-block;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+    .hero-cta:hover,
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .hero-cta svg,
+    .btn-primary svg { width: 18px; height: 18px; }
+    .btn-ghost {
+      display: inline-block;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--fg);
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── Photo strip ─────────────────────────────── */
+    .photo-strip {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .photo-strip-track {
+      display: flex;
+      gap: 4px;
+      width: max-content;
+      animation: scroll-strip 40s linear infinite;
+    }
+    .photo-strip-track img {
+      height: 180px;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+    @keyframes scroll-strip {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Section defaults ────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 55ch;
+    }
+
+    /* ── Who Core Is For ─────────────────────────── */
+    .who-core { background: var(--bg); }
+
+    /* ── What You Get ────────────────────────────── */
+    .what-you-get { background: var(--bg); }
+    .what-you-get .section-body { margin-bottom: 2.5rem; }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(24px, 3vw, 32px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .feature-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Social Proof ────────────────────────────── */
+    .social-proof { background: var(--bg); }
+    .proof-placeholder {
+      margin-top: 32px;
+      padding: 40px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Testimonial Screenshots ────────────────── */
+    .testimonial-screenshots { padding: 2rem 2rem 4rem; max-width: var(--maxw); margin: 0 auto; }
+    .testimonial-screenshots .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; text-align: center; margin-bottom: 2rem; }
+    .screenshot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .screenshot-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+    .screenshot-card img { width: 100%; height: auto; display: block; }
+
+    /* ── Coach ────────────────────────────────────── */
+    .coach-section { background: var(--bg); }
+    .coach-large-card {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 44px);
+      transition: border-color 0.3s;
+    }
+    .coach-large-card:hover {
+      border-color: rgba(255,104,62,0.2);
+    }
+    .coach-large-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,104,62,0.15);
+    }
+    .coach-large-info { flex: 1; }
+    .coach-large-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .coach-label {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255,104,62,0.10);
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .coach-large-bio {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Closing ──────────────────────────────────── */
+    .closing {
+      background: var(--bg);
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .closing-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .closing p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq { background: var(--bg); }
+    .faq .section-eyebrow { text-align: center; }
+    .faq .section-heading { text-align: center; }
+    .faq-list {
+      margin: 32px auto 0;
+      max-width: 720px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; padding: 1.25rem 0;
+      font-size: 1rem; font-weight: 600; color: var(--fg);
+      background: none; border: none; cursor: pointer;
+      text-align: left; gap: 1rem; font-family: inherit;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      position: relative; transition: transform 0.3s ease;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute;
+      background: var(--muted); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .faq-icon::before { width: 14px; height: 2px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-icon::after { width: 2px; height: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-item.open .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+    .faq-a {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
+                  padding 0.35s cubic-bezier(0.4,0,0.2,1);
+      padding: 0;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 0 20px;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem; text-align: center;
+      color: var(--muted); font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links { display: flex; justify-content: center; gap: 24px; margin-top: 10px; }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Section Images ──────────────────────────── */
+    .section-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 12px; margin: 2rem auto; display: block; }
+    .image-break { padding: 0 2rem; max-width: var(--maxw); margin: 0 auto; }
+
+    /* ── Video Testimonials ──────────────────────── */
+    /* ── VSL Player (click play/pause, no controls) ── */
+    .vsl-player {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .vsl-player video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    .vsl-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .vsl-play-overlay svg {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      transition: transform 0.2s ease;
+    }
+    .vsl-player:hover .vsl-play-overlay svg { transform: scale(1.08); }
+    .vsl-player.playing .vsl-play-overlay { opacity: 0; }
+    .vsl-progress-wrap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      transition: opacity 0.3s linear;
+    }
+    .vsl-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s linear, opacity 0.3s linear;
+    }
+
+    .video-testimonials { padding: 5rem 0; text-align: center; }
+    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; padding: 0 2rem; }
+    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; padding: 0 2rem; }
+    .video-strip { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 2rem; }
+    .video-strip::-webkit-scrollbar { display: none; }
+    .video-strip-track { display: flex; gap: 16px; width: max-content; margin: 0 auto; }
+    .video-card {
+      position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
+      width: 240px; height: 420px; cursor: pointer;
+      background: #000; flex-shrink: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; }
+    .video-card video { pointer-events: none; }
+    .video-card .play-btn { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+    .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
+
+    /* ── Questionnaire Modal ─────────────────────── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: stretch; justify-content: stretch; animation: fadeIn 0.25s ease; }
+    .modal-overlay.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    .modal { width: 100%; display: flex; flex-direction: column; padding: 32px; position: relative; animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes slideUp { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+    .modal-top { max-width: 720px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .modal-back { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; padding: 8px 0; transition: color 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-back:hover { color: var(--fg); }
+    .modal-back.hidden { visibility: hidden; }
+    .modal-close { font-size: 22px; color: var(--muted); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-close:hover { color: var(--fg); background: var(--line); }
+    .modal-body { max-width: 720px; width: 100%; margin: 60px auto 0; flex: 1; }
+    .progress { display: flex; gap: 8px; margin-bottom: 28px; }
+    .progress span { flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+    .progress span.done { background: var(--accent); }
+    .step-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; max-width: 18ch; margin-bottom: 36px; }
+    .options { display: grid; gap: 12px; }
+    .option { display: flex; gap: 18px; align-items: flex-start; padding: 18px 22px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; width: 100%; transition: all 0.2s; font-family: inherit; color: inherit; }
+    .option:hover { background: rgba(255,255,255,0.06); border-color: var(--line-strong); }
+    .option.selected { border-color: var(--accent); background: rgba(255,104,62,0.08); }
+    .option .letter { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0; width: 14px; }
+    .option .text { font-size: 0.92rem; line-height: 1.4; }
+    .slider-step { text-align: center; padding-top: 20px; }
+    .slider-value { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+    .slider-label { margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
+    .slider-wrap { margin-top: 50px; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .slider-wrap input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--line); border-radius: 4px; outline: none; }
+    .slider-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--fg); border-radius: 50%; cursor: pointer; border: 4px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+    .slider-bounds { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; }
+    .btn-continue { background: var(--accent); color: #0a0a0a; width: 100%; max-width: 420px; margin: 36px auto 0; display: block; padding: 18px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; border: none; cursor: pointer; font-family: inherit; }
+    .btn-continue:hover { background: var(--accent-hover); }
+    .form-step .form-row { display: grid; gap: 14px; max-width: 480px; margin: 0 auto; }
+    .form-step input { background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--fg); padding: 16px 18px; border-radius: 8px; font-family: inherit; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+    .form-step input:focus { border-color: var(--accent); }
+
+    /* ── Scrolling Reviews ────────────────────────── */
+    .reviews-scroll { padding: 60px 0; overflow: hidden; }
+    .reviews-scroll-header { text-align: center; margin-bottom: 32px; }
+    .reviews-scroll-eyebrow {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .reviews-scroll-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em;
+    }
+    .reviews-scroll-rows { display: flex; flex-direction: column; gap: 12px; }
+    .reviews-scroll-row {
+      display: flex; width: max-content; gap: 12px;
+    }
+    .reviews-scroll-row--left {
+      animation: scroll-reviews 35s linear infinite;
+    }
+    .reviews-scroll-row--right {
+      animation: scroll-reviews-reverse 40s linear infinite;
+    }
+    .review-pill {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 8px 20px 8px 8px; background: #f5f5f5;
+      border-radius: 40px; white-space: nowrap; flex-shrink: 0;
+    }
+    .review-pill img {
+      width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    }
+    .review-pill span {
+      font-size: 0.85rem; font-weight: 500; color: #1a1a1a;
+    }
+    @keyframes scroll-reviews {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scroll-reviews-reverse {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* ── Limited spots indicator ── */
+    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); text-align:center; margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
+    @keyframes spots-breathe { 0%,100%{ color:rgba(255,255,255,0.45); } 50%{ color:rgba(255,255,255,0.85); } }
+
+    /* ── Step labels ── */
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; justify-content:center; width:100%; }
+
+    /* ── Inline CTA banner (repeated) ── */
+    .inline-cta { text-align:center; padding:3rem 2rem; }
+    .inline-cta .hero-cta { margin:0 auto; }
+    .inline-cta-sub { font-size:0.85rem; color:rgba(255,255,255,0.5); margin-top:0.8rem; }
+
+    /* ── Come Prepared / Walk Away ── */
+    .prep-section { padding:5rem 2rem; background:#111; }
+    .prep-section .section-inner { max-width:var(--maxw); margin:0 auto; }
+    .prep-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:2.5rem; }
+    @media(max-width:700px){ .prep-grid { grid-template-columns:1fr; } }
+    .prep-col h3 { font-size:1.3rem; margin-bottom:1.2rem; color:#fff; }
+    .prep-col ul { list-style:none; padding:0; }
+    .prep-col li { position:relative; padding-left:28px; margin-bottom:1rem; color:rgba(255,255,255,0.75); font-size:0.95rem; line-height:1.6; }
+    .prep-col li::before { content:''; position:absolute; left:0; top:8px; width:8px; height:8px; border-radius:50%; }
+    .prep-col.prepare li::before { background:var(--accent); }
+    .prep-col.walkaway li::before { background:#4ade80; }
+
+    /* ── Accessibility ───────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 900px) {
+      .entry-grid,
+      .feature-grid { grid-template-columns: 1fr; }
+      .coach-large-card {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+      .section-heading,
+      .closing h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+      .site-header-inner { padding: 0.75rem 1.25rem; }
+    }
+    @media (max-width: 520px) {
+      .section { padding: 3.5rem 1.25rem; }
+      .closing { padding: 3.5rem 1.25rem; }
+      .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 5rem); }
+      .site-header-inner { padding: 0.75rem 1rem; }
+      .footer { padding: 2rem 1.25rem; }
+    }
+
+    /* ════════════════════════════════════════════════
+       Preparation page additions
+       ════════════════════════════════════════════════ */
+    .prep-hero { min-height: auto; padding-top: clamp(8rem, 14vw, 11rem); padding-bottom: clamp(4rem, 8vw, 6rem); }
+    .prep-hero .hero-bg { background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        linear-gradient(180deg, rgba(15,15,15,0.90) 0%, rgba(15,15,15,0.65) 45%, rgba(15,15,15,0.96) 100%),
+        url('../assets/photos/photo-11.jpg') center 30% / cover no-repeat; }
+    .prep-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 auto 2rem; max-width: 720px; }
+    .prep-step { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(15,15,15,0.55); font-size: 0.85rem; color: rgba(255,255,255,0.85); }
+    .prep-step b { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.72rem; }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; }
+    .narrow { max-width: 820px; margin: 0 auto; }
+    .center { text-align: center; }
+    .center .section-body { margin-left: auto; margin-right: auto; }
+    .sec { padding: 5rem 2rem; border-top: 1px solid var(--line); }
+
+    /* Video placeholder */
+    .video-placeholder { position: relative; max-width: 800px; margin: 0 auto; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--line-strong);
+      background: linear-gradient(180deg, rgba(15,15,15,0.55), rgba(15,15,15,0.85)), url('../assets/photos/photo-4.jpg') center / cover no-repeat;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+    .video-placeholder svg { width: 76px; height: 76px; }
+    .video-placeholder span { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+    .video-note { margin-top: 1rem; font-size: 0.85rem; color: var(--muted); }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .stat-num { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+    .stat-num span { font-size: 0.5em; color: var(--muted); margin-left: 2px; }
+    .stat-label { margin-top: 0.6rem; font-size: 0.85rem; color: rgba(255,255,255,0.8); }
+    .stats-note { margin-top: 1.75rem; font-size: 0.78rem; color: var(--muted); }
+
+    /* Route: develop → release → play */
+    .route-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 2.5rem; text-align: left; }
+    .route-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; }
+    .route-step { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .route-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+    .route-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    .camp-card { margin-top: 14px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; text-align: left; display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; align-items: center; }
+    .camp-card h3 { font-size: 1.15rem; }
+    .camp-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+    /* Paths */
+    .paths-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 2.5rem; text-align: left; }
+    .path-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; }
+    .path-card.featured { border-color: rgba(255,104,62,0.45); }
+    .path-meta { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+    .path-card h3 { font-size: 1.6rem; margin: 0.4rem 0 0.25rem; letter-spacing: -0.01em; }
+    .path-tag { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
+    .path-price { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+    .path-price small { font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-left: 6px; }
+    .path-list { list-style: none; margin: 1.25rem 0; padding: 0; }
+    .path-list li { position: relative; padding-left: 22px; margin-bottom: 0.55rem; font-size: 0.92rem; color: rgba(255,255,255,0.85); }
+    .path-list li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 10px; height: 2px; background: var(--accent); }
+    .pay-box { margin-top: auto; border-top: 1px solid var(--line); padding-top: 1.1rem; }
+    .pay-box-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+    .pay-row { display: flex; justify-content: space-between; gap: 12px; font-size: 0.86rem; padding: 6px 0; border-bottom: 1px solid var(--line); }
+    .pay-row:last-child { border-bottom: none; }
+    .pay-row span:first-child { color: rgba(255,255,255,0.85); }
+    .pay-row span:last-child { color: var(--muted); text-align: right; }
+    .paths-note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--muted); }
+
+    /* Curriculum */
+    .curr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 2.5rem; text-align: left; }
+    .curr-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
+    .curr-card.ad { border-color: rgba(255,104,62,0.35); }
+    .curr-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 0.75rem; }
+    .curr-head h3 { font-size: 1.02rem; }
+    .curr-head span { font-size: 0.72rem; color: var(--accent); font-weight: 700; letter-spacing: 0.08em; white-space: nowrap; }
+    .curr-card ul { list-style: none; padding: 0; margin: 0; }
+    .curr-card li { font-size: 0.86rem; color: rgba(255,255,255,0.78); padding: 4px 0; }
+    .projects-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+    .project-pill { border: 1px dashed var(--line-strong); border-radius: 12px; padding: 1rem 1.2rem; text-align: left; }
+    .project-pill b { display: block; font-size: 0.95rem; margin-bottom: 2px; }
+    .project-pill span { font-size: 0.82rem; color: var(--muted); }
+
+    /* Core list + community */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 2.5rem; text-align: left; }
+    .two-col img { width: 100%; border-radius: 14px; object-fit: cover; max-height: 420px; }
+    .check-list { list-style: none; padding: 0; margin: 0; }
+    .check-list li { position: relative; padding-left: 28px; margin-bottom: 0.9rem; color: rgba(255,255,255,0.85); }
+    .check-list li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 700; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 1.75rem; }
+    .chip { padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 0.86rem; color: rgba(255,255,255,0.85); }
+
+    /* Case study */
+    .case-table { margin-top: 2.5rem; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; text-align: left; }
+    .case-row { display: grid; grid-template-columns: 140px 1fr 1fr; border-bottom: 1px solid var(--line); }
+    .case-row:last-child { border-bottom: none; }
+    .case-row > div { padding: 1.1rem 1.3rem; font-size: 0.9rem; }
+    .case-row .k { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .case-row .before { color: rgba(255,255,255,0.6); }
+    .case-row .after { color: #fff; background: rgba(255,104,62,0.05); }
+    .case-row.head > div { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); background: var(--bg-2); }
+    .case-quote { margin-top: 2rem; font-size: clamp(1.1rem, 2.2vw, 1.4rem); font-weight: 600; line-height: 1.45; }
+    .case-quote em { color: var(--accent); font-style: normal; }
+
+    /* People */
+    .people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 2.5rem; text-align: left; }
+    .person { display: flex; gap: 14px; align-items: center; background: var(--bg-2); border: 1px solid var(--line); border-radius: 14px; padding: 1rem; }
+    .person img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .person b { display: block; font-size: 1rem; }
+    .person .role { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 2px 0 4px; }
+    .person p { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+
+    /* Prepare */
+    .q-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 2.5rem; text-align: left; }
+    .q-item { display: flex; gap: 16px; align-items: center; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.25rem; }
+    .q-item b { font-size: 0.85rem; color: var(--accent); font-weight: 800; min-width: 24px; }
+    .q-item span { font-size: 0.98rem; }
+    .free-box { margin-top: 2.5rem; border: 1px solid rgba(255,104,62,0.35); border-radius: 16px; padding: 1.75rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; text-align: left; background: rgba(255,104,62,0.04); }
+    .free-box h3 { font-size: 1.15rem; margin-bottom: 4px; }
+    .free-box p { font-size: 0.9rem; color: var(--muted); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px; border: 1px solid var(--accent); color: var(--accent); font-weight: 600; font-size: 0.9rem; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+    .btn-ghost:hover { background: var(--accent); color: #fff; }
+
+    @media (max-width: 900px) {
+      .route-grid, .curr-grid, .people-grid { grid-template-columns: 1fr 1fr; }
+      .camp-card { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+    @media (max-width: 700px) {
+      .sec { padding: 3.5rem 1.25rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+      .route-grid, .paths-grid, .curr-grid, .projects-row, .people-grid, .q-grid, .two-col { grid-template-columns: 1fr; }
+      .two-col { gap: 1.5rem; }
+      .case-row { grid-template-columns: 1fr; }
+      .case-row .k { padding-bottom: 0; }
+      .case-row.head { display: none; }
+      .case-row .before::before { content: "Before: "; color: var(--muted); }
+      .case-row .after::before { content: "After: "; color: var(--accent); }
+      .free-box { flex-direction: column; align-items: flex-start; }
+      .path-card { padding: 1.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a class="header-logo" href="/homepage-v3/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"></a>
+      <a class="header-cta" href="#video">Watch the video</a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       Hero
+       ══════════════════════════════════════════════ -->
+  <section class="hero prep-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Before your call</div>
+      <h1 id="hero-h">Here's what you're walking&nbsp;into.</h1>
+      <p class="hero-sub">Rise is the artist academy of Recode Group, run by artists who release and play internationally. We work with producers who are serious about a career in music. Your call is where we find out if that's you. This page helps you get the most out of it.</p>
+      <div class="prep-steps">
+        <div class="prep-step"><b>1</b> Watch the video</div>
+        <div class="prep-step"><b>2</b> Read how we work</div>
+        <div class="prep-step"><b>3</b> Prepare your answers</div>
+      </div>
+      <a href="#video" class="hero-cta">
+        Start with the video
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Video (placeholder)
+       ══════════════════════════════════════════════ -->
+  <section class="sec center" id="video">
+    <div class="wrap">
+      <div class="step-label">Step 1 &middot; Watch this first</div>
+      <h2 class="section-heading" style="margin-bottom:2rem;">A few minutes that make your call twice as&nbsp;useful.</h2>
+      <!-- VIDEO PLACEHOLDER: replace this block with the vsl-player markup once the video is ready -->
+      <div class="video-placeholder" role="img" aria-label="Video coming soon">
+        <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
+        <span>Video coming soon</span>
+      </div>
+      <p class="video-note">Watch it before your call. We'll assume you have.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Network in numbers
+       ══════════════════════════════════════════════ -->
+  <section class="sec center">
+    <div class="narrow">
+      <div class="section-eyebrow">The network</div>
+      <h2 class="section-heading">The network behind Rise, in&nbsp;numbers.</h2>
+      <div class="stats-grid">
+        <div><div class="stat-num">7.9<span>M</span></div><div class="stat-label">registered streams</div></div>
+        <div><div class="stat-num">88<span>+</span></div><div class="stat-label">unique tracks released</div></div>
+        <div><div class="stat-num">49</div><div class="stat-label">bookings</div></div>
+        <div><div class="stat-num">100<span>+</span></div><div class="stat-label">artists supported since 2023</div></div>
+      </div>
+      <p class="stats-note">Across Overhoff, VANNOOD, the Recode labels and the bookings through Amplify. Plus 1,278 registered digital sales, 4 labels and imprints, 5 events and 4 writing camps.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       What we do
+       ══════════════════════════════════════════════ -->
+  <section class="sec center">
+    <div class="wrap">
+      <div class="step-label">Step 2 &middot; How we work</div>
+      <h2 class="section-heading">One route, from the studio to the&nbsp;stage.</h2>
+      <div class="section-body"><p>Rise doesn't stand on its own. It's part of Recode Group: an academy, record labels and an agency. Artists who develop inside Rise have a direct line to labels and bookers when they're ready for that step.</p></div>
+      <div class="route-grid">
+        <div class="route-card">
+          <div class="route-step">01 &middot; Develop</div>
+          <h3>Rise</h3>
+          <p>Base and Core. Weekly accountability, feedback on your music, and coaches who release and play out themselves.</p>
+        </div>
+        <div class="route-card">
+          <div class="route-step">02 &middot; Release</div>
+          <h3>Recode labels</h3>
+          <p>The Recode labels and imprints. 88+ unique tracks released and 1,278 registered digital sales so far.</p>
+        </div>
+        <div class="route-card">
+          <div class="route-step">03 &middot; Play</div>
+          <h3>Amplify</h3>
+          <p>The agency side of the network. Together with the artists behind Rise, good for 49 bookings.</p>
+        </div>
+      </div>
+      <div class="camp-card">
+        <div><div class="route-step">Writing camps &middot; The Lab</div><h3>Five days, one villa.</h3></div>
+        <p>Four camps so far, two of them on Ibiza as The Lab. Small groups put together by A&amp;Rs, a listening session every evening, and a compilation on Recode Deep.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Two paths + pricing
+       ══════════════════════════════════════════════ -->
+  <section class="sec center" id="paths">
+    <div class="wrap">
+      <div class="section-eyebrow">Two paths</div>
+      <h2 class="section-heading">What it costs, and what you&nbsp;get.</h2>
+      <div class="section-body"><p>No surprises on the call. Here's what both programs cost. Which one fits you, we decide together.</p></div>
+      <div class="paths-grid">
+        <div class="path-card">
+          <div class="path-meta">Base &middot; 6 months</div>
+          <h3>From a loop to a finished track.</h3>
+          <div class="path-tag">For producers who want their production on a professional level.</div>
+          <div class="path-price">&euro; 1.500,-<small>ex. VAT</small></div>
+          <ul class="path-list">
+            <li>30 live lessons: 25 on production, 5 on artist development</li>
+            <li>Weekly 3-hour live class in a small group, Tuesday evening</li>
+            <li>You finish three full, release-ready tracks</li>
+            <li>Video modules on production</li>
+          </ul>
+          <div class="pay-box">
+            <div class="pay-box-title">Payment options</div>
+            <div class="pay-row"><span>Pay in full</span><span>&euro; 1.500,-</span></div>
+            <div class="pay-row"><span>2 payments</span><span>&euro; 375,- + &euro; 1.125,-</span></div>
+            <div class="pay-row"><span>3 payments</span><span>&euro; 375,- + 2 &times; &euro; 562,50</span></div>
+            <div class="pay-row"><span>4 payments</span><span>&euro; 375,- + 3 &times; &euro; 375,-</span></div>
+          </div>
+        </div>
+        <div class="path-card featured">
+          <div class="path-meta">Core &middot; 12 months</div>
+          <h3>From producer to artist.</h3>
+          <div class="path-tag">A year of branding, releasing and networking.</div>
+          <div class="path-price">&euro; 2.650,-<small>ex. VAT</small></div>
+          <ul class="path-list">
+            <li>Your branding, goals and the concrete steps to get there</li>
+            <li>Group check-ins twice a week, Monday &amp; Thursday</li>
+            <li>Video modules on artist development, plus tools and Ableton sample packs</li>
+            <li>Writing camps, masterclasses and community meetups</li>
+          </ul>
+          <div class="pay-box">
+            <div class="pay-box-title">Payment options</div>
+            <div class="pay-row"><span>Pay in full</span><span>&euro; 2.650,-</span></div>
+            <div class="pay-row"><span>4 payments</span><span>&euro; 375,- + 3 &times; &euro; 758,33 &middot; &euro; 2.650,-</span></div>
+            <div class="pay-row"><span>6 payments</span><span>&euro; 375,- + 5 &times; &euro; 485,- &middot; &euro; 2.800,-</span></div>
+            <div class="pay-row"><span>12 payments</span><span>&euro; 375,- + 11 &times; &euro; 243,18 &middot; &euro; 3.050,-</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="paths-note">All prices ex. VAT. Monthly payments start one month after your &euro; 375,- deposit.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Base curriculum
+       ══════════════════════════════════════════════ -->
+  <section class="sec center">
+    <div class="wrap">
+      <div class="section-eyebrow">Inside Base</div>
+      <h2 class="section-heading">30 lessons. Three finished&nbsp;tracks.</h2>
+      <div class="section-body"><p>25 live production lessons of three hours each, built around three projects, plus five lessons on artist development. Every lesson moves one of your own tracks forward.</p></div>
+      <div class="curr-grid">
+        <div class="curr-card">
+          <div class="curr-head"><h3>Foundations</h3><span>Lessons 1&ndash;5</span></div>
+          <ul><li>Your first production</li><li>Drums and groove</li><li>Notes, scales and basslines</li><li>Chords and harmony</li><li>Melody, hooks and riffs</li></ul>
+        </div>
+        <div class="curr-card">
+          <div class="curr-head"><h3>Sound</h3><span>Lessons 6&ndash;10</span></div>
+          <ul><li>Sample selection and sound palette</li><li>Synthesis made simple</li><li>Sampling and audio manipulation</li><li>Creative effects and processing</li><li>Building a strong loop</li></ul>
+        </div>
+        <div class="curr-card">
+          <div class="curr-head"><h3>Arrangement</h3><span>Lessons 11&ndash;13</span></div>
+          <ul><li>Arrangement fundamentals</li><li>Transitions, tension and energy</li><li>Automation, variation and ear candy</li></ul>
+        </div>
+        <div class="curr-card">
+          <div class="curr-head"><h3>Mixing</h3><span>Lessons 14&ndash;18</span></div>
+          <ul><li>EQ and frequency balance</li><li>Compression, dynamics and sidechain</li><li>Reverb, delay and depth</li><li>Kick, bass and low end</li><li>Mixing a full track</li></ul>
+        </div>
+        <div class="curr-card">
+          <div class="curr-head"><h3>Advanced</h3><span>Lessons 19&ndash;25</span></div>
+          <ul><li>Vocals and vocal production</li><li>Advanced groove and drums</li><li>Advanced sound design and resampling</li><li>Reference tracks</li><li>Workflow and finishing tracks</li><li>Full production session</li><li>Final mix, master review and next steps</li></ul>
+        </div>
+        <div class="curr-card ad">
+          <div class="curr-head"><h3>Artist development</h3><span>5 lessons</span></div>
+          <ul><li>Who you are as an artist, and what you want to say with your music. The step from producer to artist starts here.</li></ul>
+        </div>
+      </div>
+      <div class="projects-row">
+        <div class="project-pill"><b>Project 1 &middot; Fundamentals Track</b><span>Lessons 1&ndash;16</span></div>
+        <div class="project-pill"><b>Project 2 &middot; Development Track</b><span>Lessons 17&ndash;22</span></div>
+        <div class="project-pill"><b>Project 3 &middot; Final Track</b><span>Lessons 23&ndash;25</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Inside Core
+       ══════════════════════════════════════════════ -->
+  <section class="sec center">
+    <div class="wrap">
+      <div class="section-eyebrow">Inside Core</div>
+      <h2 class="section-heading">A year of building you as an&nbsp;artist.</h2>
+      <div class="two-col">
+        <div>
+          <ul class="check-list">
+            <li>Your branding, goals and the concrete steps to get there</li>
+            <li>Group check-ins twice a week to keep you on track</li>
+            <li>Feedback on the work itself, from coaches who are active artists</li>
+            <li>Video modules on artist development, plus tools and sample packs</li>
+            <li>Writing camps, masterclasses and community meetups</li>
+          </ul>
+        </div>
+        <img src="../assets/Pages/Core/DSC07188.JPG" alt="Rise artist performing live" loading="lazy">
+      </div>
+      <div style="margin-top:3.5rem;">
+        <div class="section-eyebrow">Base + Core</div>
+        <h3 style="font-size:1.4rem;">One community.</h3>
+        <div class="chips">
+          <span class="chip">Masterclasses</span>
+          <span class="chip">Dinners at ADE</span>
+          <span class="chip">Gigs for each other</span>
+          <span class="chip">Release support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Case study: Artcode
+       ══════════════════════════════════════════════ -->
+  <section class="sec center">
+    <div class="narrow">
+      <div class="section-eyebrow">Case study</div>
+      <h2 class="section-heading">Artcode: six months in&nbsp;Core.</h2>
+      <div class="section-body"><p>From producing tracks to working as an artist. He went through Core as a member. Today he coaches inside Rise himself.</p></div>
+      <div class="case-table">
+        <div class="case-row head"><div></div><div>Before</div><div>After six months</div></div>
+        <div class="case-row"><div class="k">Identity</div><div class="before">Could make tracks, but didn't know what he wanted to say with them.</div><div class="after">Knows what he stands for, and makes his music from there.</div></div>
+        <div class="case-row"><div class="k">On stage</div><div class="before">Working as a producer in the studio.</div><div class="after">Plays club gigs, booked for a festival.</div></div>
+        <div class="case-row"><div class="k">Time</div><div class="before">Office job five days a week.</div><div class="after">Office job down to three days. Most of his week goes to his artist projects.</div></div>
+        <div class="case-row"><div class="k">Release</div><div class="before">Working on his own, no one holding him to a deadline.</div><div class="after">Free Your Mind with VANNOOD on Recode Records.</div></div>
+      </div>
+      <p class="case-quote">Skills made him a producer. Intention made him an artist. <em>Accountability turned one into the other.</em></p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Members in numbers
+       ══════════════════════════════════════════════ -->
+  <section class="sec center">
+    <div class="narrow">
+      <div class="section-eyebrow">The members</div>
+      <h2 class="section-heading">What the first group&nbsp;achieved.</h2>
+      <div class="stats-grid">
+        <div><div class="stat-num">59</div><div class="stat-label">gigs played</div></div>
+        <div><div class="stat-num">61</div><div class="stat-label">tracks finished</div></div>
+        <div><div class="stat-num">5</div><div class="stat-label">record deals signed</div></div>
+        <div><div class="stat-num">12</div><div class="stat-label">members in the first group</div></div>
+      </div>
+      <p class="stats-note">Gigs and tracks since May 2026, as reported by six members of the first group.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Video testimonials (reused)
+       ══════════════════════════════════════════════ -->
+  <section class="video-testimonials" style="border-top:1px solid var(--line);">
+    <h2 class="section-title">In the words of our members</h2>
+    <p class="section-sub">Stories from producers who joined Rise.</p>
+    <div class="video-strip">
+      <div class="video-strip-track">
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B_v2.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews-scroll">
+    <div class="reviews-scroll-rows">
+      <div class="reviews-scroll-row reviews-scroll-row--left">
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi" loading="lazy"><span>"You get structure and people who push you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth" loading="lazy"><span>"Working toward the same goal, helping each other."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max" loading="lazy"><span>"Go beyond just music production."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo" loading="lazy"><span>"Meeting these people is so important to me."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi.png" alt="Levi" loading="lazy"><span>"You get structure and people who push you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth" loading="lazy"><span>"Working toward the same goal, helping each other."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max.png" alt="Max" loading="lazy"><span>"Go beyond just music production."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Leo2.png" alt="Leo" loading="lazy"><span>"Meeting these people is so important to me."</span></div>
+      </div>
+      <div class="reviews-scroll-row reviews-scroll-row--right">
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy" loading="lazy"><span>"Motivational to talk with like-minded people."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi2.png" alt="Levi" loading="lazy"><span>"When you drift off track, people help you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max2.jpg" alt="Max" loading="lazy"><span>"They challenge you to make specific goals."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Andy.png" alt="Andy" loading="lazy"><span>"Motivational to talk with like-minded people."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Levi2.png" alt="Levi" loading="lazy"><span>"When you drift off track, people help you."</span></div>
+        <div class="review-pill"><img src="../assets/Testimonials/Screenshots/Max2.jpg" alt="Max" loading="lazy"><span>"They challenge you to make specific goals."</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       The people
+       ══════════════════════════════════════════════ -->
+  <section class="sec center">
+    <div class="wrap">
+      <div class="section-eyebrow">The people</div>
+      <h2 class="section-heading">Learn from artists doing it right&nbsp;now.</h2>
+      <div class="people-grid">
+        <div class="person"><img src="../assets/Pages/Coaches/Jim.png" alt="VANNOOD" loading="lazy"><div><b>Jim &middot; VANNOOD</b><div class="role">Owner of Recode</div><p>Techno artist with 3.3M streams. Played the Netherlands, Germany, Spain, the US and Asia.</p></div></div>
+        <div class="person"><img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" loading="lazy"><div><b>Yvo &middot; Overhoff</b><div class="role">Co-leads Rise</div><p>House artist with 725K+ streams. Builds the Rise products.</p></div></div>
+        <div class="person"><img src="../assets/photos/Aug/Mauv5.png" alt="Maurits" loading="lazy"><div><b>Maurits</b><div class="role">Co-leads Rise &middot; Core</div><p>Runs Core: music business, strategy and accountability.</p></div></div>
+        <div class="person"><img src="../assets/Pages/Coaches/Hen.png" alt="Hendrik" loading="lazy"><div><b>Hendrik</b><div class="role">Partnerships</div><p>Builds the partnerships with labels, agencies and platforms.</p></div></div>
+        <div class="person"><img src="../assets/Pages/Coaches/Artcode.png" alt="Artcode" loading="lazy"><div><b>Jurriaan &middot; Artcode</b><div class="role">Member turned coach</div><p>Went through Core as a member. Now coaches inside Rise himself.</p></div></div>
+        <div class="person"><img src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" loading="lazy"><div><b>Milan Fernandes</b><div class="role">Base coach</div><p>House producer. Teaches the Base lessons.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Prepare your call
+       ══════════════════════════════════════════════ -->
+  <section class="sec center" id="prepare">
+    <div class="narrow">
+      <div class="step-label">Step 3 &middot; Prepare your call</div>
+      <h2 class="section-heading">Come prepared. We will&nbsp;ask.</h2>
+      <div class="section-body"><p>Take ten minutes before your call to think these through. The clearer your answers, the more useful the call is for you.</p></div>
+      <div class="q-grid">
+        <div class="q-item"><b>01</b><span>What are your goals for the next year?</span></div>
+        <div class="q-item"><b>02</b><span>What's your dream?</span></div>
+        <div class="q-item"><b>03</b><span>Why do you want to be an artist?</span></div>
+        <div class="q-item"><b>04</b><span>Where do you want to be in five years?</span></div>
+        <div class="q-item"><b>05</b><span>Where do you stand right now?</span></div>
+        <div class="q-item"><b>06</b><span>Are you ready to invest the time?</span></div>
+      </div>
+      <div class="free-box">
+        <div>
+          <div class="step-label" style="margin-bottom:6px;">Free before your call</div>
+          <h3>11 video modules, a sample pack and two Ableton tools.</h3>
+          <p>Get a feel for how we teach before we speak.</p>
+        </div>
+        <a class="btn-ghost" href="https://giveaway.riseartistcoaching.com/" target="_blank" rel="noopener">Get free access &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FAQ
+       ══════════════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Before you ask</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Do I need to choose between Base and Core before the call?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">No. Which one fits you, we decide together on the call, based on where you stand and where you want to go.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Can I pay in installments?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Yes. Base can be paid in full or in up to 4 payments. Core can be paid in full or in 4, 6 or 12 payments. All payment plans start with a &euro; 375,- deposit; the full schedule is listed above.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What do I need for Base?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">A laptop with Ableton Live. Everything we teach works in any modern DAW, but we demonstrate in Ableton.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>Who are the coaches?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Everyone behind Rise releases music, plays shows or works with the labels and agencies that decide who gets signed and booked. Milan teaches Base, Maurits runs Core.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')"><span>What if it turns out Rise isn't right for me?</span><span class="faq-icon"></span></button>
+          <div class="faq-a">Then we'll tell you on the call. Rise isn't for everyone, and we'd rather be honest about that than sell you a spot that doesn't fit.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Closing
+       ══════════════════════════════════════════════ -->
+  <section class="closing">
+    <div class="closing-inner">
+      <div class="step-label">See you on the call</div>
+      <h2>If you've been producing for a while, the skills are rarely what's&nbsp;missing.</h2>
+      <p>Direction, a weekly standard and a network are. That's the work we do in Rise. Watch the video, think through your answers, and we'll take it from there.</p>
+      <a href="#video" class="hero-cta">
+        Watch the video
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+    <div class="links">
+      <a href="mailto:contact@riseartistacademy.com">Contact</a>
+      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky header
+    (function() {
+      var header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 60);
+      }, { passive: true });
+    })();
+
+    // Personalise hero with ?name=
+    (function() {
+      try {
+        var n = new URLSearchParams(location.search).get('name');
+        if (n) {
+          var first = n.trim().split(/\s+/)[0];
+          document.getElementById('hero-h').innerHTML = first.charAt(0).toUpperCase() + first.slice(1).replace(/[<>&"]/g,'') + ', here\u2019s what you\u2019re walking&nbsp;into.';
+        }
+      } catch (e) {}
+    })();
+
+    // Video testimonials: click to play/pause, one at a time
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('.video-card');
+      if (!card) return;
+      var v = card.querySelector('video');
+      if (!v) return;
+      e.preventDefault();
+      if (card.classList.contains('playing')) {
+        v.pause(); card.classList.remove('playing');
+      } else {
+        document.querySelectorAll('.video-card.playing').forEach(function(c) {
+          var cv = c.querySelector('video'); if (cv) cv.pause(); c.classList.remove('playing');
+        });
+        v.currentTime = 0;
+        var p = v.play();
+        if (p && typeof p.then === 'function') { p.then(function() { card.classList.add('playing'); }).catch(function() {}); }
+        else { card.classList.add('playing'); }
+      }
+      v.onended = function() { card.classList.remove('playing'); };
+    });
+  </script>
+</body>
+</html>
