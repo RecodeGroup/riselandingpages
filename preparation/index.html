@@ -852,8 +852,8 @@
     .hero-watch { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 1rem; }
     .prep-hero .vsl-player { box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
     .vsl-controls { position: absolute; right: 12px; bottom: 14px; display: flex; gap: 8px; opacity: 0; transition: opacity 0.25s ease; }
-    .vsl-player.playing .vsl-controls { opacity: 0; }
-    .vsl-player.started:hover .vsl-controls, .vsl-player.started:not(.playing) .vsl-controls, .vsl-player.show-ctrl .vsl-controls { opacity: 1; }
+    .vsl-controls { pointer-events: none; }
+    .vsl-player.started:not(.playing) .vsl-controls, .vsl-player.show-ctrl .vsl-controls { opacity: 1; pointer-events: auto; }
     .vsl-ctrl { display: inline-flex; align-items: center; gap: 3px; height: 36px; min-width: 36px; padding: 0 10px; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; background: rgba(10,10,10,0.65); color: #fff; font: 600 12px/1 inherit; font-family: inherit; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 0.2s ease, border-color 0.2s ease; }
     .vsl-ctrl:hover { background: rgba(255,104,62,0.9); border-color: transparent; color: #0a0a0a; }
     .vsl-ctrl:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -861,13 +861,23 @@
     .vsl-back { width: 44px; height: 44px; min-width: 44px; padding: 0; justify-content: center; border-radius: 50%; border-color: rgba(255,255,255,0.12); background: rgba(15,15,15,0.72); }
     .vsl-back svg { width: 24px; height: 24px; }
     .vsl-controls { align-items: center; }
+    .vsl-sound-badge { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: none; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 999px; background: rgba(255,104,62,0.95); color: #0a0a0a; font-weight: 700; font-size: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.45); pointer-events: none; animation: sound-pulse 1.8s ease-in-out infinite; }
+    .vsl-sound-badge svg { width: 20px; height: 20px; }
+    .vsl-player.preview .vsl-sound-badge { display: inline-flex; }
+    .vsl-player.preview .vsl-play-overlay, .vsl-player.preview .vsl-controls { opacity: 0 !important; pointer-events: none !important; }
+    @keyframes sound-pulse { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.06); } }
+    @media (prefers-reduced-motion: reduce) { .vsl-sound-badge { animation: none; } }
+    .prep-strip { padding: 1.5rem 0; }
+    .prep-strip .photo-strip-track { gap: 0; animation-duration: 60s; }
+    .prep-strip .photo-strip-track img { height: 150px; margin-right: 4px; border-radius: 6px; }
+    @media (max-width:700px) { .prep-strip .photo-strip-track img { height: 110px; } }
+    @media (prefers-reduced-motion: reduce) { .prep-strip .photo-strip-track { animation: none; } }
     .vsl-vol { cursor: default; gap: 8px; padding: 0 14px 0 10px; }
     .vsl-vol:hover { background: rgba(10,10,10,0.8); border-color: rgba(255,255,255,0.3); color: #fff; }
     .vsl-vol input[type=range] { -webkit-appearance: none; appearance: none; width: 90px; height: 4px; border-radius: 4px; background: linear-gradient(to right, var(--accent) var(--v,100%), rgba(255,255,255,0.25) var(--v,100%)); cursor: pointer; margin: 0; }
     .vsl-vol input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: none; }
     .vsl-vol input[type=range]::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: #fff; border: none; }
     .vsl-vol input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-    @media (hover: none) { .vsl-player.started .vsl-controls { opacity: 1; } }
     @media (max-width: 600px) {
       .prep-hero { padding: 1rem 1rem 3rem; }
       .prep-hero .booked-badge { padding: 5px 11px; font-size: 0.7rem; margin-bottom: 0.5rem; }
@@ -911,6 +921,7 @@
           <source src="../assets/Pages/Preparation/precall.mp4?v=8" type="video/mp4">
         </video>
         <div class="vsl-play-overlay"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></div>
+        <div class="vsl-sound-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg><span>Tap for sound</span></div>
         <div class="vsl-progress-wrap"><div class="vsl-progress-bar" id="prep-vsl-progress"></div></div>
         <div class="vsl-controls" id="prep-vsl-controls">
           <button type="button" class="vsl-ctrl vsl-back" data-act="back" aria-label="Rewind 10 seconds"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4.5a7.5 7.5 0 1 1-7.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 1.5 8.5 4.5 12 7.5z" fill="currentColor"/><text x="12" y="15.4" text-anchor="middle" font-size="8.5" font-weight="700" font-family="inherit" fill="currentColor">10</text></svg></button>
@@ -982,6 +993,39 @@
       <p class="stats-note">Figures based on our statistics up to and including October 2026.</p>
     </div>
   </section>
+
+  <!-- Photo carousel: mix of Base + Core page photos -->
+  <div class="photo-strip prep-strip" aria-hidden="true">
+    <div class="photo-strip-track">
+      <img src="../assets/Pages/Preparation/strip/01.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/02.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/03.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/04.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/05.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/06.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/07.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/08.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/09.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/10.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/11.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/12.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/13.jpg" alt="Rise artists" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <img src="../assets/Pages/Preparation/strip/01.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/02.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/03.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/04.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/05.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/06.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/07.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/08.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/09.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/10.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/11.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/12.jpg" alt="Rise artists" loading="lazy">
+      <img src="../assets/Pages/Preparation/strip/13.jpg" alt="Rise artists" loading="lazy">
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════════════════
        5 · How Rise works
@@ -1166,7 +1210,18 @@
         var b = e.target.closest('.vsl-ctrl'); if (!b) return;
         var act = b.getAttribute('data-act');
         if (act === 'back') video.currentTime = Math.max(0, video.currentTime - 10);
+        showCtrl();
       });
+      // Controls fade out 1.5s after play / last interaction; tap or mouse move brings them back
+      var hideT, lastPointer = 'mouse';
+      function showCtrl() {
+        player.classList.add('show-ctrl');
+        clearTimeout(hideT);
+        hideT = setTimeout(function() { if (!video.paused) player.classList.remove('show-ctrl'); }, 1500);
+      }
+      player.addEventListener('pointerdown', function(e) { lastPointer = e.pointerType || 'mouse'; });
+      player.addEventListener('mousemove', function() { if (lastPointer === 'mouse' && player.classList.contains('started')) showCtrl(); });
+      player.addEventListener('mouseleave', function() { if (!video.paused) { clearTimeout(hideT); player.classList.remove('show-ctrl'); } });
       var vol = document.getElementById('prep-vsl-vol');
       // iOS ignores video.volume (hardware buttons only): hide the slider there
       if (vol) { var t = document.createElement('video'); t.volume = 0.5; if (t.volume !== 0.5) { vol.parentElement.style.display = 'none'; vol = null; } }
@@ -1175,11 +1230,34 @@
         vol.addEventListener('input', function() {
           var v = parseFloat(vol.value); video.volume = v; video.muted = v === 0;
           vol.style.setProperty('--v', (v * 100) + '%');
+          showCtrl();
         });
       }
-      player.addEventListener('click', function() {
+      // Muted autoplay after 1s if the visitor hasn't clicked yet; first click = sound on + restart
+      var previewing = false;
+      setTimeout(function() {
+        if (player.classList.contains('started')) return;
+        video.muted = true; video.setAttribute('muted', '');
+        var pr = video.play();
+        if (pr && pr.then) pr.then(function() { previewing = true; player.classList.add('preview', 'playing'); }).catch(function(){});
+      }, 1000);
+      player.addEventListener('click', function(e) {
+        if (previewing) {
+          e.stopImmediatePropagation();
+          previewing = false;
+          player.classList.remove('preview');
+          player.classList.add('started', 'playing');
+          video.muted = false; video.removeAttribute('muted');
+          if (vol) { video.volume = parseFloat(vol.value) || 1; }
+          video.currentTime = 0;
+          video.play().catch(function(){});
+          showCtrl();
+          return;
+        }
         player.classList.add('started');
-        if (video.paused || video.ended) { video.play().catch(function(){}); player.classList.add('playing'); }
+        // On touch: first tap while playing only reveals the controls, second tap pauses
+        if (!video.paused && lastPointer !== 'mouse' && !player.classList.contains('show-ctrl')) { showCtrl(); return; }
+        if (video.paused || video.ended) { video.play().catch(function(){}); player.classList.add('playing'); showCtrl(); }
         else { video.pause(); player.classList.remove('playing'); }
       });
       video.addEventListener('ended', function() { player.classList.remove('playing'); bar.style.width = '100%'; });
