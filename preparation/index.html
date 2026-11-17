@@ -857,6 +857,20 @@
       .prep-hero h1 { font-size: 1.65rem; }
       .hero-watch { font-size: 0.88rem; margin-bottom: 0.75rem; }
     }
+
+    .prep-hero { padding-top: 7rem; }
+    @media (max-width: 700px) {
+      .prep-hero { padding-top: 2.5rem; }
+      .route-grid, .quote-grid {
+        display: flex; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 12px;
+        margin-left: -1.25rem; margin-right: -1.25rem; padding: 0 1.25rem 4px;
+      }
+      .route-grid::-webkit-scrollbar, .quote-grid::-webkit-scrollbar { display: none; }
+      .route-grid > .route-card, .quote-grid > .quote-card { flex: 0 0 78%; scroll-snap-align: start; }
+      .quote-grid.in-wrap { padding: 0 1.25rem 4px; }
+    }
+    @media (min-width: 701px) { .quote-grid.in-wrap { padding: 0; } }
   </style>
 </head>
 <body>
@@ -922,7 +936,7 @@
           <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         </div>
       </div>
-      <div class="quote-grid" style="margin-top:2rem;padding:0;">
+      <div class="quote-grid in-wrap" style="margin-top:2rem;">
         <div class="quote-card"><p>"The biggest change has been the way I approach my music career. I've become proactive."</p><span>Jip &middot; Rise member</span></div>
         <div class="quote-card"><p>"For my album I asked other Rise members to be part of it. They didn't hesitate."</p><span>Vendenti &middot; Rise member</span></div>
         <div class="quote-card"><p>"We did some big steps as an artist the past months. A lot of momentum, created with Rise."</p><span>Thalia &middot; Rise member</span></div>
