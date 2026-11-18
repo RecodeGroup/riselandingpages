@@ -918,7 +918,7 @@
       <p class="hero-watch">Watch this short video before your call.</p>
       <div class="vsl-player" id="prep-vsl-player">
         <video id="prep-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Preparation/precall-poster.jpg?v=2">
-          <source src="../assets/Pages/Preparation/precall.mp4?v=10" type="video/mp4">
+          <source src="../assets/Pages/Preparation/precall.mp4?v=11" type="video/mp4">
         </video>
         <div class="vsl-play-overlay"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></div>
         <div class="vsl-sound-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg><span>Tap for sound</span></div>
@@ -1105,7 +1105,7 @@
       <div class="section-eyebrow">Prepare for your call</div>
       <h2 class="section-heading">Three things before we&nbsp;speak.</h2>
       <div class="prep-list">
-        <div class="q-item"><b>01</b><span>Block 45 minutes and sit somewhere quiet, with a working camera and microphone.</span></div>
+        <div class="q-item"><b>01</b><span>The call takes 20 to 30 minutes. Keep 30 minutes free and sit somewhere quiet, with a working camera and microphone.</span></div>
         <div class="q-item"><b>02</b><span>Write down your main goals for the next year, and what's holding you back right now.</span></div>
         <div class="q-item"><b>03</b><span>Have your Spotify or SoundCloud ready, so we can listen to where you are.</span></div>
       </div>
@@ -1158,13 +1158,13 @@
         label = clean(q.get('date')) + (q.get('time') ? ' at ' + clean(q.get('time')) : '');
       }
       if (label) {
-        document.getElementById('appt-when').textContent = label + ' \u00b7 45 min'; document.getElementById('appt-when-wrap').hidden = false;
+        document.getElementById('appt-when').textContent = label + ' \u00b7 20\u201330 min'; document.getElementById('appt-when-wrap').hidden = false;
         document.getElementById('closing-when').textContent = 'See you ' + label + '.';
       }
 
       var gcal = document.getElementById('gcal-btn'), ics = document.getElementById('ics-btn');
       if (start) {
-        var end = new Date(start.getTime() + 45 * 60000);
+        var end = new Date(start.getTime() + 30 * 60000);
         var fmt = function(x) { return x.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); };
         var title = 'Rise Artist Academy - introduction call';
         var details = 'Your Rise introduction call. Prepare: ' + location.origin + location.pathname;
