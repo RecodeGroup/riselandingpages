@@ -1035,7 +1035,7 @@
     }
     /* rotating hero quotes: stacked in one grid cell so the height never jumps */
     .v6-quote { display:grid; }
-    .v6-quote span { grid-area:1/1; opacity:0; transition:opacity .6s ease; }
+    .v6-quote span { grid-area:1/1; opacity:0; transition:opacity .4s ease; }
     .v6-quote span.on { opacity:1; }
     /* ══════════ v7: v5 order on mobile (headline, video, lead, form) + v6 proof/quotes + scrollable genres ══════════ */
     @media (max-width:900px) {
@@ -1053,6 +1053,23 @@
       .v7-hint { display:block; font-size:.75rem; color:var(--muted); text-align:center; margin-top:6px; }
     }
     .v7-hint { display:none; }
+    /* v7 fb1: clear scroll affordance on the genre list */
+    @media (max-width:900px) {
+      .v7-scrollwrap { position:relative; }
+      .apply-card .options.v7-scroll { max-height:258px; -webkit-mask-image:none; mask-image:none; scrollbar-width:thin; scrollbar-color:var(--accent) rgba(255,255,255,.08); padding-bottom:40px; }
+      .apply-card .options.v7-scroll::-webkit-scrollbar { width:4px; }
+      .apply-card .options.v7-scroll::-webkit-scrollbar-track { background:rgba(255,255,255,.08); border-radius:4px; }
+      .apply-card .options.v7-scroll::-webkit-scrollbar-thumb { background:var(--accent); border-radius:4px; }
+      .v7-scrollwrap::after { content:""; position:absolute; left:0; right:0; bottom:0; height:70px; pointer-events:none; border-radius:0 0 10px 10px;
+          background:linear-gradient(180deg, rgba(15,15,15,0), rgba(15,15,15,.96) 75%); transition:opacity .3s; }
+      .v7-hint { display:inline-flex !important; align-items:center; gap:6px; position:absolute; left:50%; bottom:8px; transform:translateX(-50%); z-index:2;
+          padding:7px 14px; border-radius:99px; border:1px solid rgba(255,104,62,.5); background:rgba(20,20,20,.95); color:var(--accent);
+          font:600 .78rem inherit; font-family:inherit; white-space:nowrap; cursor:pointer; margin:0; transition:opacity .3s; }
+      .v7-hint svg { animation:v7bob 1.4s ease-in-out infinite; }
+      @keyframes v7bob { 50% { transform:translateY(3px); } }
+      .v7-scrollwrap.end::after, .v7-scrollwrap.end .v7-hint { opacity:0; pointer-events:none; }
+    }
+    @media (prefers-reduced-motion:reduce) { .v7-hint svg { animation:none; } }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1102,7 +1119,7 @@
               <div class="vsl-progress-wrap"><div class="vsl-progress-bar" id="core-vsl-progress"></div></div>
             </div>
           </div>
-          <div class="v5-video-cap"><span class="v5-live"><b class="v5-glow">Watch first:</b>&nbsp;How Core works</span><span class="v6-len">3 min</span></div>
+          <div class="v5-video-cap"><span class="v5-live"><b class="v5-glow">Watch first:</b>&nbsp;How Core works</span></div>
         </div>
       </div>
 
@@ -1483,8 +1500,19 @@
           body.innerHTML = choice("What is your main music genre?", "Select the genre you primarily produce or want to produce.", GENRES, "genre");
           // mobile: genre list scrolls inside the card so the form stays compact
           var ol = body.querySelector(".options"); ol.classList.add("v7-scroll");
-          var hint = document.createElement("span"); hint.className = "v7-hint"; hint.textContent = "Scroll for more genres"; ol.after(hint);
-          ol.addEventListener("scroll", function () { var end = ol.scrollTop + ol.clientHeight >= ol.scrollHeight - 4; ol.classList.toggle("end", end); if (end) hint.style.visibility = "hidden"; }, { passive: true });
+          var wrap = document.createElement("div"); wrap.className = "v7-scrollwrap"; ol.parentNode.insertBefore(wrap, ol); wrap.appendChild(ol);
+          var hint = document.createElement("button"); hint.type = "button"; hint.className = "v7-hint";
+          hint.innerHTML = "Scroll for more genres <svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m6 9 6 6 6-6\"/></svg>";
+          hint.addEventListener("click", function () { ol.scrollBy({ top: 120, behavior: "smooth" }); });
+          wrap.appendChild(hint);
+          ol.addEventListener("scroll", function () { var end = ol.scrollTop + ol.clientHeight >= ol.scrollHeight - 4; wrap.classList.toggle("end", end); }, { passive: true });
+          // small nudge so people see the list moves
+          if (matchMedia("(max-width:900px)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches && !window._v7nudged) {
+            window._v7nudged = true;
+            var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect();
+              setTimeout(function () { ol.scrollTo({ top: 46, behavior: "smooth" }); setTimeout(function () { ol.scrollTo({ top: 0, behavior: "smooth" }); }, 650); }, 600); } }, { threshold: .6 });
+            io.observe(ol);
+          }
         } else if (st.step === 1) {
           body.innerHTML = choice(COMMIT_T, COMMIT_Q, COMMITS, "commit");
         } else {
@@ -1724,7 +1752,7 @@
 (function () {
   var q = document.querySelectorAll('#v6-quote span'), i = 0;
   if (q.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  setInterval(function () { q[i].classList.remove('on'); i = (i + 1) % q.length; q[i].classList.add('on'); }, 5500);
+  setInterval(function () { q[i].classList.remove('on'); i = (i + 1) % q.length; var n = q[i]; setTimeout(function () { n.classList.add('on'); }, 450); }, 5500);
 })();
 </script>
 </body>
