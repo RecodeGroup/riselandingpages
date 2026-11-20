@@ -1115,6 +1115,15 @@
       .v5-hero .v5-stat-note { order:8; }
     }
     @media (max-width:360px) { .v5-hero .v5-checks { flex-wrap:wrap; } .v5-hero .v5-checks li { font-size:12px; padding:5px 8px; } }
+    /* v8 fb1: logo strip as its own section (line above + below), lead between video and form */
+    .v5-logos { border-top:1px solid var(--line); padding-top:32px; }
+    .v5-hero { padding-bottom:40px; }
+    @media (max-width:900px) {
+      .v5-hero { padding-bottom:28px; }
+      .v5-logos { padding:24px 0 22px; }
+      .v5-hero .v5-lead { order:5; margin:14px 0 0; font-size:.95rem; }
+      .v5-hero .v5-apply-wrap { order:6; margin:14px 0 0; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
