@@ -1033,6 +1033,10 @@
       .v6-more { display:block; width:100%; margin-top:8px; padding:11px; border:1px dashed var(--line-strong); border-radius:10px; background:none; color:rgba(255,255,255,.8); font:600 .88rem inherit; font-family:inherit; cursor:pointer; }
       .v6-more:hover { border-color:var(--accent); color:var(--accent); }
     }
+    /* rotating hero quotes: stacked in one grid cell so the height never jumps */
+    .v6-quote { display:grid; }
+    .v6-quote span { grid-area:1/1; opacity:0; transition:opacity .6s ease; }
+    .v6-quote span.on { opacity:1; }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1064,7 +1068,7 @@
               <div class="v5-stack"><img src="../assets/Testimonials/Screenshots/Leo.png" alt=""><img src="../assets/Testimonials/Screenshots/Seth2.png" alt=""><img src="../assets/Testimonials/Screenshots/appa.png" alt=""></div>
               <div><span class="v5-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <b>38 artists</b> helped since 2023</div>
             </div>
-            <p class="v6-quote">&ldquo;The biggest change has been the way I approach my music career. I've become proactive.&rdquo;</p>
+            <p class="v6-quote" id="v6-quote"><span class="on">&ldquo;We've taken big steps as artists these past few months. Rise gave us so much momentum.&rdquo;</span><span>&ldquo;The community of dedicated musicians is inspiring.&rdquo;</span><span>&ldquo;The biggest change has been the way I approach my music career.&rdquo;</span></p>
           </div>
           <div class="v5-cta-row">
             <a class="v5-btn" href="#apply" onclick="return goApply()">Apply for Core <span aria-hidden="true">&rarr;</span></a>
@@ -1703,6 +1707,13 @@
   }
   window.addEventListener('load', sync);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) setTimeout(sync, 50); });
+})();
+</script>
+<script>
+(function () {
+  var q = document.querySelectorAll('#v6-quote span'), i = 0;
+  if (q.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(function () { q[i].classList.remove('on'); i = (i + 1) % q.length; q[i].classList.add('on'); }, 5500);
 })();
 </script>
 </body>
