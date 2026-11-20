@@ -953,6 +953,20 @@
       .v5-who img { width:26px; height:26px; }
     }
     @media (max-width:900px) { .v5-lead { font-size:1rem; line-height:1.55; } }
+    /* ── v5 testimonial cards: restore card + name row styling, lock heights ── */
+    .v5-t { flex:none; box-sizing:border-box; overflow:hidden; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.035); border-radius:14px; text-align:left; }
+    .v5-t p { margin:0; color:#fff; flex:none; }
+    .v5-who { display:flex; align-items:center; gap:10px; flex:none; font-size:.82rem; line-height:1.3; color:rgba(255,255,255,.55); }
+    .v5-who img { width:32px; height:32px; border-radius:50%; object-fit:cover; flex:none; }
+    .v5-who b { display:block; color:#fff; font-weight:600; }
+    .v5-t .video-card { position:relative; flex:1 1 0; min-height:0; height:auto !important; width:100% !important; aspect-ratio:auto !important; }
+    .v5-t .video-card video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .v5-photo-media { flex:1 1 0; min-height:0; }
+    .v5-wall > .v5-row > .video-card, .v5-t { height:400px !important; }
+    @media (max-width:900px) {
+      .v5-wall > .v5-row > .video-card, .v5-t { height:330px !important; }
+      .v5-who img { width:26px; height:26px; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1506,12 +1520,12 @@
   // Every block has the same height. Plain blocks are a video; quote blocks have the quote on top
   // and a smaller video (or a photo when there is no video) filling the rest.
   var R = [
-    { q: "The biggest change has been the way I approach my music career. I've become proactive.", n: 'Jip', img: TH + 'yip_proactive.jpg', v: C + 'Prep/yip_proactive.mp4', p: TH + 'yip_proactive.jpg' },
+    { q: "The biggest change has been the way I approach my music career. I've become proactive.", n: 'Jip', img: TH + 'av_jip.jpg', v: C + 'Prep/yip_proactive.mp4', p: TH + 'yip_proactive.jpg' },
     { v: C + 'Prep/ad_testimonials.mp4', p: TH + 'ad_testimonials.jpg' },
-    { q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", n: 'Vendenti', img: TH + 'vendenti_album.jpg', v: C + 'Prep/vendenti_album.mp4', p: TH + 'vendenti_album.jpg' },
+    { q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", n: 'Vendenti', img: TH + 'av_vendenti.jpg', v: C + 'Prep/vendenti_album.mp4', p: TH + 'vendenti_album.jpg' },
     { q: "The community was an eye-opener for me.", n: 'Max', img: S + 'Max.png', photo: S + 'Max2.jpg' },
     { v: C + 'Final/8_mcy_B.mp4', p: C + 'Final/thumbs/8.png' },
-    { q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", n: 'Thalia', img: TH + 'thalia_momentum.jpg', v: C + 'Prep/thalia_momentum.mp4', p: TH + 'thalia_momentum.jpg' },
+    { q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", n: 'Thalia', img: TH + 'av_thalia.jpg', v: C + 'Prep/thalia_momentum.mp4', p: TH + 'thalia_momentum.jpg' },
     { q: "When you drift off track, people help you.", n: 'Levi', img: S + 'Levi.png', photo: S + 'Levi2.png' }
   ];
   function vid(r) {
