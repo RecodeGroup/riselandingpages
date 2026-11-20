@@ -981,7 +981,8 @@
     .v5-wall.dragging { cursor:grabbing; }
     .v5-row { animation:none !important; padding:0 20px; }
     .v5-item { flex:none; display:flex; flex-direction:column; align-items:center; gap:6px; }
-    .v5-num { font-size:.72rem; color:rgba(255,255,255,.55); font-variant-numeric:tabular-nums; } /* TEMP: numbers for review */
+    .v5-t.below { flex-direction:column-reverse; }
+    .v5-t.below p { margin:12px 0 0 !important; }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1537,47 +1538,44 @@
   function root(name) { return T0 + encodeURIComponent(name); } // these filenames literally contain %20 etc.
   // TEMPORARY review list: every testimonial we have, numbered, so Jim can pick which to keep.
   var PO = RA + 'posters/';
-  // TEMPORARY review list: all testimonials, numbered. Ordered so the same person never sits next to themselves
-  // and full videos, quote + video and quote + photo blocks are mixed.
+  // Final selection. Same person is always spread out (also across the loop point); full videos and quote blocks mixed.
   var R = [
     { v: P + 'yip_proactive.mp4', p: PO + 'yip_proactive_mp4.jpg', q: "The biggest change has been the way I approach my music career. I've become proactive.", num: 22 },
     { v: P + 'thalia_warmth.mp4', p: PO + 'thalia_warmth_mp4.jpg', num: 19 },
     { v: P + 'ad_testimonials.mp4', p: PO + 'ad_first.jpg', num: 27 },
     { q: "The community was an eye-opener for me.", photo: S + 'Max2.jpg', num: 1 },
     { v: F + '4_my-C.mp4', p: PO + '4_my_c_mp4.jpg', num: 17 },
-    { q: "When you drift off track, people help you.", photo: S + 'Levi2.png', num: 26 },
-    { v: F + '3_c_E.mp4', p: PO + '3_c_e_mp4.jpg', num: 28 },
-    { v: P + 'vendenti_goals.mp4', p: PO + 'vendenti_goals_mp4.jpg', num: 4 },
-    { v: F + '14_c_F.mp4', p: PO + '14_c_f_mp4.jpg', num: 3 },
-    { q: "I find the community really motivating.", photo: S + 'Seth3.jpg', num: 34 },
     { v: F + '9_my_B_v2.mp4', p: PO + '9_my_b_v2_mp4.jpg', q: "Rise is a good opportunity to connect and to broaden your scope out of music production.", num: 5 },
+    { q: "When you drift off track, people help you.", photo: S + 'Levi2.png', num: 26 },
+    { v: root('From%20struggling%20with%20identity%20to%20clear%20artistic%20direction.mp4'), p: PO + 'from_20struggling_20with_20identity_20to.jpg', num: 42 },
+    { v: F + '14_c_F.mp4', p: PO + '14_c_f_mp4.jpg', num: 3 },
+    { v: P + 'thalia_momentum.mp4', p: PO + 'thalia_momentum_mp4.jpg', q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", num: 30 },
+    { v: RA + 'vendenti2.mp4', p: PO + 'vendenti2_mp4.jpg', num: 36 },
+    { v: F + '3_c_E.mp4', p: PO + '3_c_e_mp4.jpg', num: 28 },
+    { q: "I find the community really motivating.", photo: S + 'Seth3.jpg', num: 34 },
+    { v: RA + 'yip1.mp4', p: PO + 'yip1_mp4.jpg', num: 50 },
     { v: F + '8_mcy_B.mp4', p: PO + '8_mcy_b_mp4.jpg', num: 11 },
     { q: "The community of dedicated musicians is inspiring.", photo: S + 'Leo3.jpg', num: 38 },
-    { v: RA + 'vendenti1.mp4', p: PO + 'vendenti1_mp4.jpg', num: 10 },
-    { v: P + 'thalia_momentum.mp4', p: PO + 'thalia_momentum_mp4.jpg', q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", num: 30 },
-    { v: root('From%20struggling%20with%20identity%20to%20clear%20artistic%20direction.mp4'), p: PO + 'from_20struggling_20with_20identity_20to.jpg', num: 42 },
-    { q: "They challenge you to make specific goals.", photo: S + 'Max.png', num: 18 },
-    { v: RA + 'cap1.mp4', p: PO + 'cap1_mp4.jpg', num: 24 },
     { v: P + 'vendenti_album.mp4', p: PO + 'vendenti_album_mp4.jpg', q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", num: 13 },
-    { v: F + '5_c_E.mp4', p: PO + '5_c_e_mp4.jpg', num: 40 },
-    { q: "You get structure and people who push you.", photo: S + 'Levi.png', num: 47 },
-    { v: RA + 'vendenti2.mp4', p: PO + 'vendenti2_mp4.jpg', num: 36 },
-    { q: "Meeting these people is so important to me.", photo: S + 'Leo2.png', num: 43 },
+    { v: RA + 'cap1.mp4', p: PO + 'cap1_mp4.jpg', num: 24 },
     { v: RA + 'thalia1.mp4', p: PO + 'thalia1_mp4.jpg', num: 49 },
     { v: RA + 'justdoit.mp4', p: PO + 'justdoit.jpg', num: 44 },
+    { q: "You get structure and people who push you.", photo: S + 'Levi.png', num: 47 },
+    { v: F + '5_c_E.mp4', p: PO + '5_c_e_mp4.jpg', num: 40 },
+    { v: P + 'vendenti_goals.mp4', p: PO + 'vendenti_goals_mp4.jpg', num: 4 },
+    { q: "Meeting these people is so important to me.", photo: S + 'Leo2.png', num: 43 },
     { q: "Working towards the same goal, helping each other.", photo: S + 'Seth2.png', num: 51 },
-    { v: RA + 'vendenti3.mp4', p: PO + 'vendenti3_mp4.jpg', num: 48 },
-    { v: RA + 'yip1.mp4', p: PO + 'yip1_mp4.jpg', num: 50 },
     { v: F + '11v2_cm_B.mp4', p: PO + '11v2_cm_b_mp4.jpg', num: 2 }
   ];
   function vid(r) {
     return '<div class="video-card"><video poster="' + r.p + '" preload="none" playsinline webkit-playsinline><source src="' + r.v + '" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>';
   }
+  var qi = 0; // quote blocks alternate: text above, then text below the media
   function card(r, n) {
     var inner;
     if (!r.q) inner = vid(r);
-    else inner = '<div class="v5-t"><p>&ldquo;' + r.q + '&rdquo;</p>' + (r.v ? vid(r) : '<div class="v5-photo-media"><img src="' + r.photo + '" alt="" loading="lazy"></div>') + '</div>';
-    return '<div class="v5-item">' + inner + '<span class="v5-num">' + (r.num || n) + '</span></div>';
+    else inner = '<div class="v5-t' + ((qi++ % 2) ? ' below' : '') + '"><p>&ldquo;' + r.q + '&rdquo;</p>' + (r.v ? vid(r) : '<div class="v5-photo-media"><img src="' + r.photo + '" alt="" loading="lazy"></div>') + '</div>';
+    return '<div class="v5-item">' + inner + '</div>';
   }
   var wall = document.getElementById('v5-wall');
   if (wall) {
