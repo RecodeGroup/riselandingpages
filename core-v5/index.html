@@ -828,7 +828,7 @@
     @keyframes v5shine { to { background-position:200% center; } }
     .v5-lead { font-size:1.1rem; color:rgba(255,255,255,.68); max-width:520px; line-height:1.6; }
     .v5-rotate { display:inline-block; position:relative; vertical-align:top; height:1.6em; line-height:1.6; overflow:hidden; color:#fff; font-weight:700; }
-    .v5-rotate::before { content:"bookings"; display:block; height:0; visibility:hidden; }
+    .v5-rotate::before { content:"bookings."; display:block; height:0; visibility:hidden; }
     .v5-rotate span { position:absolute; left:0; top:0; white-space:nowrap; line-height:1.6; transform:translateY(110%); opacity:0; transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .55s; }
     .v5-rotate span.on { transform:none; opacity:1; }
     .v5-rotate span.out { transform:translateY(-110%); opacity:0; }
@@ -998,6 +998,10 @@
       .v5-hero .v5-stats { order:7; margin-top:28px; }
       .v5-hero .v5-stat-note { order:8; }
     }
+    .promise-mini .g-cond { display:block; margin-top:6px; opacity:.9; }
+    @media (max-width:900px) {
+      .v5-hero .v5-cta-row { order:9; margin-top:26px; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1018,7 +1022,7 @@
       <div class="v5-split">
         <div class="v5-copy">
           <h1>Your first <span class="v5-grad">festival booking</span> in 90&nbsp;days.</h1>
-          <p class="v5-lead">We help you build the <span class="v5-rotate"><span class="on">sound</span><span>story</span><span>network</span><span>bookings</span></span> that turns your music into a career.</p>
+          <p class="v5-lead">We help you turn your music into a career, starting with your <span class="v5-rotate"><span class="on">sound.</span><span>story.</span><span>network.</span><span>bookings.</span></span></p>
           <ul class="v5-checks">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Two group check-ins a week that hold you to your goals</li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Feedback on your releases, outreach and bookings</li>
@@ -1138,7 +1142,7 @@
 
   <section class="section guarantee-sec">
     <div class="section-eyebrow" style="text-align:center;">Our guarantee</div>
-    <div class="promise-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><div><b>The Industry Code Guarantee: no festival booking or three gigs within 90 days? We coach you 1-on-1 until you do.</b><p>Extra 1-on-1 sessions with the Rise team, plus opportunities from our own network. Full conditions on your call.</p></div></div>
+    <div class="promise-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><div><b>The Industry Code Guarantee: no festival booking or three gigs within 90 days? We coach you 1-on-1 until you do.</b><p>Extra 1-on-1 sessions with the Rise team, plus opportunities from our own network.<span class="g-cond">Full conditions on your call.</span></p></div></div>
   </section>
 
 
