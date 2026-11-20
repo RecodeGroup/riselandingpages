@@ -860,19 +860,19 @@
     .v5-logos { padding:40px 0 30px; border-bottom:1px solid var(--line); }
     .v5-eyebrow { text-align:center; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin:0 0 22px; font-weight:700; }
     .v5-marquee { overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); }
-    .v5-track { display:flex; gap:64px; width:max-content; align-items:center; animation:v5scroll 32s linear infinite; }
+    .v5-track { --lg-gap:64px; display:flex; gap:var(--lg-gap); will-change:transform; backface-visibility:hidden; width:max-content; align-items:center; animation:v5scroll 32s linear infinite; }
     .v5-track img { width:auto; opacity:.7; filter:grayscale(1) brightness(1.6); transition:opacity .3s,filter .3s; }
     .v5-track img:hover { opacity:1; filter:none; }
-    @keyframes v5scroll { to { transform:translateX(-50%); } }
+    @keyframes v5scroll { from { transform:translate3d(0,0,0); } to { transform:translate3d(calc(-50% - var(--lg-gap) / 2),0,0); } }
     .v5-sub { color:var(--muted); max-width:520px; margin:10px auto 0; font-size:.95rem; }
     .v5-stories { overflow:hidden; }
     .v5-wall { margin:2.5rem calc(50% - 50vw) 0; display:grid; gap:16px; text-align:left; overflow:hidden;
         -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
-    .v5-row { display:flex; gap:16px; width:max-content; align-items:stretch; animation:v5left 60s linear infinite; }
+    .v5-row { display:flex; gap:16px; width:max-content; align-items:center; will-change:transform; animation:v5left 55s linear infinite; }
     .v5-row.rev { animation-direction:reverse; animation-duration:70s; }
     .v5-wall.paused .v5-row { animation-play-state:paused; }
-    @keyframes v5left { to { transform:translateX(calc(-50% - 8px)); } }
-    .v5-t { width:320px; flex:none; display:flex; flex-direction:column; justify-content:space-between; }
+    @keyframes v5left { from { transform:translate3d(0,0,0); } to { transform:translate3d(calc(-50% - 8px),0,0); } }
+    .v5-t { width:260px; flex:none; }
     .v5-wall .video-card { width:200px; height:356px; flex:none; border-radius:14px; }
     @media (max-width:900px) {
       .v5-hero { padding:120px 0 48px; }
@@ -889,13 +889,33 @@
       .v5-video-cap span:last-child { display:none; }
       .v5-apply-wrap { margin-top:2.5rem; }
       .v5-wall .video-card { width:160px; height:284px; }
-      .v5-t { width:260px; }
-      .v5-track { gap:44px; }
+      .v5-t { width:220px; padding:16px; } .v5-t p { font-size:.88rem; }
+      .v5-track { --lg-gap:44px; animation-duration:24s; }
     }
     @media (prefers-reduced-motion:reduce) {
       .v5-spot,.v5-grad,.v5-btn::after,.v5-video-shell::before,.v5-live i,.v5-track,.v5-row { animation:none !important; }
     }
 
+    /* ── v5 round 2 ── */
+    .feature-grid { grid-template-columns:repeat(3,1fr); }
+    .v5-mid-cta { text-align:center; margin-top:2.25rem; }
+    .v5-mid-cta p { font-size:.8rem; color:var(--muted); margin-top:10px; }
+    @media (max-width:900px) {
+      .v5-hero, body.has-urgency-bar .v5-hero { padding-top:84px; }
+      .v5-hero h1 { margin-top:14px; }
+      .v5-cta-row { flex-wrap:nowrap; gap:14px; }
+      .v5-btn { padding:14px 18px; white-space:nowrap; flex:none; }
+      .v5-stack { display:none; }
+      .v5-avatars { font-size:.78rem; }
+      /* horizontal swipe rows on mobile */
+      .feature-grid, .lp-grid, .v5-coaches { display:flex; flex-direction:row; align-items:stretch; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory;
+          -webkit-overflow-scrolling:touch; scrollbar-width:none; margin:0 -20px; padding:0 20px 6px; }
+      .feature-grid::-webkit-scrollbar, .lp-grid::-webkit-scrollbar, .v5-coaches::-webkit-scrollbar { display:none; }
+      .feature-grid > .feature-card, .lp-step, .v5-coaches > .coach-large-card { flex:0 0 80%; max-width:none; width:auto; scroll-snap-align:center; margin-top:0; }
+      .lp-connector { display:none; }
+      .v5-coaches { margin-top:28px; }
+      .v5-coaches > .coach-large-card { gap:16px; padding:24px 20px; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -915,7 +935,7 @@
     <div class="v5-wrap">
       <div class="v5-split">
         <div class="v5-copy">
-          <span class="v5-pill"><b>CORE</b> 12-month artist program &middot; selection only</span>
+          <span class="v5-pill"><b>CORE</b> 12-month artist program</span>
           <h1>Work toward your first <span class="v5-grad">festival booking</span> in 90&nbsp;days.</h1>
           <p class="v5-lead">For producers who already finish tracks. We help you build the
             <span class="v5-rotate"><span class="on">sound</span><span>story</span><span>network</span><span>bookings</span></span><br>that turn your music into a career.</p>
@@ -1024,12 +1044,8 @@
           <p>Targeted feedback on your tracks, your release route and your outreach. Rise teaches you how to get booked; we are not a booking agency and we don't book you.</p>
         </div>
         <div class="feature-card">
-          <h3>Writing camps</h3>
-          <p>5 writing camps so far, including Remote Sessions with our labels.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Lessons, masterclasses and community</h3>
-          <p>The Industry Code lessons on the platform, masterclasses, and members who end up on each other's line-ups.</p>
+          <h3>Community, masterclasses and writing camps</h3>
+          <p>The Industry Code lessons on the platform, masterclasses, 5 writing camps so far (including Remote Sessions with our labels) and members who end up on each other's line-ups.</p>
         </div>
       </div>
     </div>
@@ -1071,6 +1087,10 @@
       </div>
     </div>
     <p style="text-align:center;color:var(--muted);max-width:60ch;margin:2rem auto 0;font-size:0.88rem;line-height:1.6;">You work on your personal artist development plan every week. After the first 90 days you keep going for the rest of the year: releasing, playing and building your network on a steady rhythm.</p>
+    <div class="v5-mid-cta">
+      <a class="v5-btn" href="#apply" onclick="return goApply()">Apply for Core <span aria-hidden="true">&rarr;</span></a>
+      <p>Takes 60 seconds &middot; No payment required</p>
+    </div>
   </div>
 </section>
 
@@ -1078,6 +1098,7 @@
     <div class="section-inner">
       <div class="section-eyebrow">Your coaches</div>
       <h2 class="section-heading">The people who guide your year, live, every&nbsp;week.</h2>
+      <div class="v5-coaches">
 
       <div class="coach-large-card">
         <img src="../assets/photos/Aug/Mauv5.png" alt="Maurits" class="coach-large-avatar">
@@ -1122,6 +1143,7 @@
           <div class="coach-label">Music Producer &middot; Advanced Modules</div>
           <p class="coach-large-bio">Coaches artists on sound design, mixing and creative direction. Yvo pushes you to develop a sound that's yours and holds you to the standard it takes to release professionally.</p>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -1464,10 +1486,8 @@
   }
   var wall = document.getElementById('v5-wall');
   if (wall) {
-    var vids = R.filter(function (r) { return r.v; }).map(card).join('');
-    var quotes = R.filter(function (r) { return !r.v; }).map(card).join('');
-    quotes = quotes + quotes; // enough width for a smooth loop
-    wall.innerHTML = '<div class="v5-row">' + vids + vids + '</div><div class="v5-row rev">' + quotes + quotes + '</div>';
+    var row = R.map(card).join(''); // videos with quote cards in between, as in the wall
+    wall.innerHTML = '<div class="v5-row">' + row + row + '</div>';
     // Carousel stops while a review video plays; tap again (pause) or video end and it scrolls on
     function sync() { wall.classList.toggle('paused', [].some.call(wall.querySelectorAll('video'), function (v) { return !v.paused && !v.ended; })); }
     ['play', 'playing', 'pause', 'ended'].forEach(function (ev) { wall.addEventListener(ev, sync, true); });
