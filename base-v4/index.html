@@ -807,6 +807,31 @@
       .partners-logos img, .partners-logos img.dup { display:block; margin-right:34px; transform:none; max-width:130px; }
     }
     @media (prefers-reduced-motion: reduce) { .partners-logos { animation:none; } }
+  
+    /* success stories (same as preparation page) */
+    .video-card { position:relative; border-radius:12px; overflow:hidden; aspect-ratio:9/16; cursor:pointer; background:#000; flex-shrink:0; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+    .video-card video { width:100%; height:100%; object-fit:cover; pointer-events:none; }
+    .video-card .play-btn { position:absolute; inset:0; z-index:2; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25); transition:opacity 0.2s; }
+    .video-card .play-btn svg { width:56px; height:56px; fill:#fff; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .video-card.playing .play-btn { opacity:0; pointer-events:none; }
+    .tile-strip { overflow-x:auto; scrollbar-width:none; margin-top:2.5rem; }
+    .tile-strip::-webkit-scrollbar { display:none; }
+    .tile-track { display:flex; gap:12px; width:max-content; margin:0 auto; }
+    .tile-track .video-card { width:190px; height:338px; }
+    .quote-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:var(--maxw); margin:0 auto; text-align:left; }
+    .quote-card { background:var(--bg-2, #1a1a1a); border:1px solid var(--line); border-radius:14px; padding:1.4rem; display:flex; flex-direction:column; justify-content:space-between; gap:1rem; }
+    .quote-card p { font-size:0.98rem; line-height:1.55; color:rgba(255,255,255,0.9); }
+    .quote-card span { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); }
+    @media (max-width:700px) {
+      .tile-track .video-card { width:150px; height:267px; }
+      .tile-track { padding:0 20px; }
+      .stories .tile-strip { margin-left:-20px; margin-right:-20px; }
+      .quote-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; gap:12px; margin:0 -20px; padding:0 20px 4px; }
+      .quote-grid::-webkit-scrollbar { display:none; }
+      .quote-grid > .quote-card { flex:0 0 78%; scroll-snap-align:start; }
+    }
+    /* line between results and partners, more air below partners */
+    .partners-row { border-top:1px solid var(--line); padding-bottom:4rem !important; }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1080,6 +1105,27 @@
     </div>
   </section>
 
+  <section class="section stories" style="text-align:center;">
+    <div class="section-inner">
+      <div class="section-eyebrow">Student success stories</div>
+      <h2 class="section-heading">What our artists have to&nbsp;say.</h2>
+      <div class="tile-strip">
+        <div class="tile-track">
+          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/yip_proactive.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/yip_proactive.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/vendenti_album.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/vendenti_album.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/ad_testimonials.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/ad_testimonials.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/thalia_momentum.jpg" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Prep/thalia_momentum.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/8.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/8_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </div>
+      </div>
+      <div class="quote-grid in-wrap" style="margin-top:2rem;">
+        <div class="quote-card"><p>"The biggest change has been the way I approach my music career. I've become proactive."</p><span>Jip &middot; Rise member</span></div>
+        <div class="quote-card"><p>"For my album I asked other Rise members to be part of it. They didn't hesitate."</p><span>Vendenti &middot; Rise member</span></div>
+        <div class="quote-card"><p>"We did some big steps as an artist the past months. A lot of momentum, created with Rise."</p><span>Thalia &middot; Rise member</span></div>
+      </div>
+    </div>
+  </section>
+
 
 
   <section class="section faq" id="faq">
@@ -1242,6 +1288,18 @@
       document.querySelectorAll('.js-next-date').forEach(function(e) { e.textContent = label; });
       document.querySelectorAll('.js-next-start, .js-next-start-short').forEach(function(e) { e.textContent = 'Next group starts ' + label; });
     })();
+
+    // ── Success story videos: tap to play/pause, one at a time ──
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('.video-card'); if (!card) return;
+      var v = card.querySelector('video'); if (!v) return;
+      e.preventDefault();
+      if (card.classList.contains('playing')) { v.pause(); card.classList.remove('playing'); return; }
+      document.querySelectorAll('.video-card.playing').forEach(function(c) { var cv = c.querySelector('video'); if (cv) cv.pause(); c.classList.remove('playing'); });
+      v.currentTime = 0;
+      var pr = v.play(); if (pr && pr.then) pr.then(function() { card.classList.add('playing'); }).catch(function(){}); else card.classList.add('playing');
+      v.onended = function() { card.classList.remove('playing'); };
+    });
   </script>
 
   <!-- VSL Player Script -->
