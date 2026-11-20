@@ -1070,6 +1070,17 @@
       .v7-scrollwrap.end::after, .v7-scrollwrap.end .v7-hint { opacity:0; pointer-events:none; }
     }
     @media (prefers-reduced-motion:reduce) { .v7-hint svg { animation:none; } }
+    /* v7 fb3: review sits right above the video on mobile */
+    @media (max-width:900px) {
+      .v5-hero h1 { order:1; }
+      .v5-hero .v6-proof { order:2; margin:16px 0 0; }
+      .v5-hero .v5-media { order:3; margin:16px 0 0; }
+      .v5-hero .v5-lead { order:4; }
+      .v5-hero .v5-apply-wrap { order:5; }
+      .v5-hero .v5-checks { order:6; margin:28px 0 0; }
+      .v5-hero .v5-stats { order:7; }
+      .v5-hero .v5-stat-note { order:8; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
