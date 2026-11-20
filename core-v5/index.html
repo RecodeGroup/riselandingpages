@@ -1002,6 +1002,10 @@
     @media (max-width:900px) {
       .v5-hero .v5-cta-row { order:9; margin-top:26px; }
     }
+    /* "Watch first" softly glows orange and back to white */
+    .v5-glow { animation:v5glow 2.4s ease-in-out infinite; }
+    @keyframes v5glow { 0%,100% { color:#fff; } 50% { color:var(--accent); } }
+    @media (prefers-reduced-motion:reduce) { .v5-glow { animation:none; } }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1048,7 +1052,7 @@
               <div class="vsl-progress-wrap"><div class="vsl-progress-bar" id="core-vsl-progress"></div></div>
             </div>
           </div>
-          <div class="v5-video-cap"><span class="v5-live"><i></i><b>Watch first:</b>&nbsp;How Core works</span></div>
+          <div class="v5-video-cap"><span class="v5-live"><b class="v5-glow">Watch first:</b>&nbsp;How Core works</span></div>
         </div>
       </div>
 

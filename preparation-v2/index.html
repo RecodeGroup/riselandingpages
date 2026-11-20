@@ -1145,6 +1145,10 @@
       .route-grid::-webkit-scrollbar { display:none; }
       .route-grid > .route-card { flex:0 0 80%; scroll-snap-align:center; }
     }
+    /* "Watch first" softly glows orange and back to white */
+    .v5-glow { animation:v5glow 2.4s ease-in-out infinite; }
+    @keyframes v5glow { 0%,100% { color:#fff; } 50% { color:var(--accent); } }
+    @media (prefers-reduced-motion:reduce) { .v5-glow { animation:none; } }
   </style>
 </head>
 <body>
@@ -1202,7 +1206,7 @@
               </div>
             </div>
           </div>
-          <div class="v5-video-cap"><span class="v5-live"><i></i><b>Watch first:</b>&nbsp;Before your call</span></div>
+          <div class="v5-video-cap"><span class="v5-live"><b class="v5-glow">Watch first:</b>&nbsp;Before your call</span></div>
         </div>
       </div>
 
