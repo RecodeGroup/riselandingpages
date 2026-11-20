@@ -812,7 +812,7 @@
     .v5-spot { position:absolute; z-index:-1; width:900px; height:900px; left:-260px; top:-420px; pointer-events:none;
         background:radial-gradient(closest-side, rgba(255,104,62,.26), transparent 70%); animation:v5spot 9s ease-in-out infinite alternate; }
     @keyframes v5spot { to { transform:translate(160px,60px); } }
-    .v5-grid-bg { position:absolute; inset:0; z-index:-1; opacity:.3; pointer-events:none;
+    .v5-grid-bg { position:absolute; inset:0; z-index:-1; opacity:.14; pointer-events:none;
         background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
         background-size:56px 56px; -webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000 10%,transparent 65%); mask-image:radial-gradient(ellipse at 30% 20%,#000 10%,transparent 65%); }
     .v5-wrap { max-width:1180px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
@@ -865,22 +865,22 @@
     .v5-track img:hover { opacity:1; filter:none; }
     @keyframes v5scroll { to { transform:translateX(-50%); } }
     .v5-sub { color:var(--muted); max-width:520px; margin:10px auto 0; font-size:.95rem; }
-    .v5-wall { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; height:620px; overflow:hidden; margin:2.5rem auto 0; max-width:1000px; text-align:left;
-        -webkit-mask-image:linear-gradient(transparent,#000 10%,#000 90%,transparent); mask-image:linear-gradient(transparent,#000 10%,#000 90%,transparent); }
-    .v5-col { display:flex; flex-direction:column; gap:16px; animation:v5up 40s linear infinite; }
-    .v5-col.rev { animation-direction:reverse; animation-duration:50s; }
-    .v5-wall:hover .v5-col, .v5-wall.paused .v5-col { animation-play-state:paused; }
-    @keyframes v5up { to { transform:translateY(calc(-50% - 8px)); } }
-    .v5-t { border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.035); border-radius:14px; padding:20px; }
-    .v5-t p { font-size:.95rem; line-height:1.55; margin:0; }
-    .v5-who { display:flex; align-items:center; gap:10px; margin-top:14px; font-size:.82rem; color:rgba(255,255,255,.55); }
-    .v5-who img { width:32px; height:32px; border-radius:50%; object-fit:cover; }
-    .v5-who b { display:block; color:#fff; font-weight:600; }
-    .v5-wall .video-card { width:100%; aspect-ratio:9/14; height:auto; border-radius:14px; }
+    .v5-stories { overflow:hidden; }
+    .v5-wall { margin:2.5rem calc(50% - 50vw) 0; display:grid; gap:16px; text-align:left; overflow:hidden;
+        -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+    .v5-row { display:flex; gap:16px; width:max-content; align-items:stretch; animation:v5left 60s linear infinite; }
+    .v5-row.rev { animation-direction:reverse; animation-duration:70s; }
+    .v5-wall.paused .v5-row { animation-play-state:paused; }
+    @keyframes v5left { to { transform:translateX(calc(-50% - 8px)); } }
+    .v5-t { width:320px; flex:none; display:flex; flex-direction:column; justify-content:space-between; }
+    .v5-wall .video-card { width:200px; height:356px; flex:none; border-radius:14px; }
     @media (max-width:900px) {
       .v5-hero { padding:120px 0 48px; }
       body.has-urgency-bar .v5-hero { padding-top:150px; }
-      .v5-split { grid-template-columns:1fr; gap:28px; }
+      .v5-split { display:flex; flex-direction:column; gap:0; }
+      .v5-copy { display:contents; }
+      .v5-pill { order:1; align-self:flex-start; } .v5-hero h1 { order:2; } .v5-lead { order:3; }
+      .v5-media { order:4; margin-top:22px; } .v5-checks { order:5; } .v5-cta-row { order:6; }
       .v5-hero::before { background:linear-gradient(180deg,rgba(15,15,15,.78),rgba(15,15,15,.95) 55%,var(--bg)); }
       .v5-checks { margin:18px 0 22px; }
       .v5-stats { margin-top:32px; }
@@ -888,12 +888,12 @@
       .v5-stat .n { font-size:1.35rem; } .v5-stat .l { font-size:.72rem; }
       .v5-video-cap span:last-child { display:none; }
       .v5-apply-wrap { margin-top:2.5rem; }
-      .v5-wall { grid-template-columns:1fr 1fr; height:540px; }
-      .v5-wall .v5-col:nth-child(3) { display:none; }
+      .v5-wall .video-card { width:160px; height:284px; }
+      .v5-t { width:260px; }
       .v5-track { gap:44px; }
     }
     @media (prefers-reduced-motion:reduce) {
-      .v5-spot,.v5-grad,.v5-btn::after,.v5-video-shell::before,.v5-live i,.v5-track,.v5-col { animation:none !important; }
+      .v5-spot,.v5-grad,.v5-btn::after,.v5-video-shell::before,.v5-live i,.v5-track,.v5-row { animation:none !important; }
     }
 
   </style>
@@ -944,7 +944,7 @@
               <div class="vsl-progress-wrap"><div class="vsl-progress-bar" id="core-vsl-progress"></div></div>
             </div>
           </div>
-          <div class="v5-video-cap"><span class="v5-live"><i></i><b>Watch first:</b>&nbsp;how Core works</span><span>Maurits &middot; Artist Development Coach</span></div>
+          <div class="v5-video-cap"><span class="v5-live"><i></i><b>Watch first:</b>&nbsp;How Core works</span></div>
         </div>
       </div>
 
@@ -1130,7 +1130,7 @@
     <div class="section-inner">
       <div class="section-eyebrow">Student success stories</div>
       <h2 class="section-heading">What our artists have to&nbsp;say.</h2>
-      <p class="v5-sub">Every review in one place. Tap a video to play, hover to pause the wall.</p>
+      <p class="v5-sub">Every review in one place. Tap a video to play it, tap again to keep scrolling.</p>
       <div class="v5-wall" id="v5-wall"></div>
     </div>
   </section>
@@ -1464,10 +1464,13 @@
   }
   var wall = document.getElementById('v5-wall');
   if (wall) {
-    var cols = [[], [], []]; R.forEach(function (r, k) { cols[k % 3].push(card(r)); });
-    wall.innerHTML = cols.map(function (c, k) { var h = c.join(''); return '<div class="v5-col' + (k === 1 ? ' rev' : '') + '">' + h + h + '</div>'; }).join('');
-    // Freeze the wall while a video in it plays
-    wall.addEventListener('click', function () { setTimeout(function () { wall.classList.toggle('paused', !!wall.querySelector('.video-card.playing')); }, 50); });
+    var vids = R.filter(function (r) { return r.v; }).map(card).join('');
+    var quotes = R.filter(function (r) { return !r.v; }).map(card).join('');
+    quotes = quotes + quotes; // enough width for a smooth loop
+    wall.innerHTML = '<div class="v5-row">' + vids + vids + '</div><div class="v5-row rev">' + quotes + quotes + '</div>';
+    // Carousel stops while a review video plays; tap again (pause) or video end and it scrolls on
+    function sync() { wall.classList.toggle('paused', [].some.call(wall.querySelectorAll('video'), function (v) { return !v.paused && !v.ended; })); }
+    ['play', 'playing', 'pause', 'ended'].forEach(function (ev) { wall.addEventListener(ev, sync, true); });
   }
 })();
 
