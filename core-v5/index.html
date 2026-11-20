@@ -803,9 +803,13 @@
     .guarantee-sec { border-top:1px solid var(--line); padding-top:3.5rem !important; padding-bottom:3.5rem !important; }
     .guarantee-sec .promise-mini { padding:20px 22px; }
       /* ══════════ v5: split hero + polished blocks (only additions, rest of page = v4) ══════════ */
-    .v5-hero { display:block; min-height:auto; text-align:left; padding:150px 0 64px; isolation:isolate; }
+    .v5-hero { display:block; min-height:auto; text-align:left; padding:150px 0 64px; isolation:isolate; overflow:hidden; }
     body.has-urgency-bar .v5-hero { padding-top:170px; }
-    .v5-photo { position:absolute; inset:0; z-index:-3; background:url('../assets/Pages/Core/ADE2025-007.jpg') center 30%/cover; filter:grayscale(.35); transform:scale(1.04); }
+    .v5-photo { position:absolute; inset:0; z-index:-3; background:
+        linear-gradient(90deg, rgba(15,15,15,.97) 0%, rgba(15,15,15,.86) 45%, rgba(15,15,15,.6) 100%),
+        linear-gradient(0deg, var(--bg) 0%, rgba(15,15,15,0) 40%),
+        url('../assets/Pages/Core/ADE2025-007.jpg') center 30%/cover no-repeat; background-color:var(--bg); }
+    .v5-hero::after { content:""; position:absolute; left:0; right:0; bottom:0; height:120px; z-index:-1; pointer-events:none; background:linear-gradient(0deg, var(--bg), rgba(15,15,15,0)); }
     .v5-hero::before { content:""; position:absolute; inset:0; z-index:-2; background:
         linear-gradient(90deg, rgba(15,15,15,.97) 0%, rgba(15,15,15,.86) 45%, rgba(15,15,15,.6) 100%),
         linear-gradient(0deg, var(--bg) 0%, transparent 40%); }
@@ -882,6 +886,7 @@
       .v5-pill { order:1; align-self:flex-start; } .v5-hero h1 { order:2; } .v5-lead { order:3; }
       .v5-media { order:4; margin-top:22px; } .v5-checks { order:5; } .v5-cta-row { order:6; }
       .v5-hero::before { background:linear-gradient(180deg,rgba(15,15,15,.78),rgba(15,15,15,.95) 55%,var(--bg)); }
+      .v5-photo { background:linear-gradient(180deg,rgba(15,15,15,.78),rgba(15,15,15,.95) 55%,var(--bg)), url('../assets/Pages/Core/ADE2025-007.jpg') center 30%/cover no-repeat; }
       .v5-checks { margin:18px 0 22px; }
       .v5-stats { margin-top:32px; }
       .v5-stat { padding:14px 10px; text-align:center; }
@@ -916,6 +921,17 @@
       .v5-coaches { margin-top:28px; }
       .v5-coaches > .coach-large-card { gap:16px; padding:24px 20px; }
     }
+    .v5-hero::before { display:none; } /* overlay now lives on .v5-photo itself */
+    /* ── v5 round 4 ── */
+    .v5-pill { padding:0 14px 0 0; align-items:center; overflow:hidden; min-height:30px; }
+    .v5-pill b { align-self:stretch; display:flex; align-items:center; padding:0 12px; font-size:.7rem; }
+    @media (max-width:900px) {
+      .v5-cta-row { justify-content:flex-start; gap:12px; }
+      .v5-btn { padding:12px 16px; font-size:.92rem; gap:6px; }
+      .v5-stack { display:flex; }
+      .v5-stack img { width:26px; height:26px; margin-left:-7px; }
+      .v5-avatars { gap:8px; font-size:.74rem; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -942,12 +958,12 @@
           <ul class="v5-checks">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Two group check-ins a week that hold you to your goals</li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Feedback on your releases, outreach and bookings</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Access to our labels, promoters and agency</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Access to our labels, agency and events</li>
           </ul>
           <div class="v5-cta-row">
             <a class="v5-btn" href="#apply" onclick="return goApply()">Apply for Core <span aria-hidden="true">&rarr;</span></a>
             <div class="v5-avatars">
-              <div class="v5-stack"><img src="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/yip_proactive.jpg" alt=""><img src="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/vendenti_album.jpg" alt=""><img src="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/thalia_momentum.jpg" alt=""></div>
+              <div class="v5-stack"><img src="../assets/Pages/Core/avatars/a1.jpg" alt=""><img src="../assets/Pages/Core/avatars/a2.jpg" alt=""><img src="../assets/Pages/Core/avatars/a3.jpg" alt=""></div>
               <div><span class="v5-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br>38 artists since 2023</div>
             </div>
           </div>
@@ -1052,7 +1068,7 @@
   </section>
 
   <section class="section guarantee-sec">
-    <div class="promise-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><div><b>The Industry Code Guarantee: no festival booking or three gigs within 90 days? We personally coach you 1-on-1 until you do.</b><p>On top of your regular Core program, you get intensive 1-on-1 sessions with someone from the Rise team until you reach your goal, and we actively look at opportunities within our own network of labels, promoters and our agency. Full conditions on your call.</p></div></div>
+    <div class="promise-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><div><b>The Industry Code Guarantee: no festival booking or three gigs within 90 days? We coach you 1-on-1 until you do.</b><p>Extra 1-on-1 sessions with the Rise team, plus opportunities from our own network. Full conditions on your call.</p></div></div>
   </section>
 
 
@@ -1118,14 +1134,6 @@
         </div>
       </div>
 
-      <div class="coach-large-card">
-        <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" class="coach-large-avatar">
-        <div class="coach-large-info">
-          <div class="coach-large-name">Jurrian</div>
-          <div class="coach-label">Production Coach &middot; Techno Artist</div>
-          <p class="coach-large-bio">15+ years across electronic genres. Jurrian (Artcode) brings deep experience from production to live performance. Runs the production curriculum and gives direct, technical feedback on your tracks.</p>
-        </div>
-      </div>
 
       <div class="coach-large-card">
         <img src="../assets/Pages/Coaches/Milan.png" alt="Milan" class="coach-large-avatar">
@@ -1227,7 +1235,7 @@
             <span>Who coaches Core?</span>
             <span class="faq-icon"></span>
           </button>
-          <div class="faq-a">Maurits leads the group check-ins as artist development coach: accountability and hitting your goals. Jurrian and Milan give production feedback on your tracks.</div>
+          <div class="faq-a">Maurits leads the group check-ins as artist development coach: accountability and hitting your goals. Production feedback on your tracks comes from our production coaches; who that is depends on your group.</div>
         </div>
 
       </div>
@@ -1470,15 +1478,18 @@
   }
 
   var C = '../assets/Testimonials/Voor%20site/Clips/', TH = C + 'Prep/thumbs/';
-  var R = [
-    { q: "The biggest change has been the way I approach my music career. I've become proactive.", n: 'Jip', img: TH + 'yip_proactive.jpg' },
+  var S = '../assets/Testimonials/Screenshots/';
+  var R = [ // video, quote, video, quote ... so text and video always alternate
     { v: C + 'Prep/vendenti_album.mp4', p: TH + 'vendenti_album.jpg' },
-    { q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", n: 'Vendenti', img: TH + 'vendenti_album.jpg' },
+    { q: "The biggest change has been the way I approach my music career. I've become proactive.", n: 'Jip', img: TH + 'yip_proactive.jpg' },
     { v: C + 'Prep/yip_proactive.mp4', p: TH + 'yip_proactive.jpg' },
-    { q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", n: 'Thalia', img: TH + 'thalia_momentum.jpg' },
+    { q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", n: 'Vendenti', img: TH + 'vendenti_album.jpg' },
     { v: C + 'Prep/thalia_momentum.mp4', p: TH + 'thalia_momentum.jpg' },
+    { q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", n: 'Thalia', img: TH + 'thalia_momentum.jpg' },
     { v: C + 'Prep/ad_testimonials.mp4', p: TH + 'ad_testimonials.jpg' },
-    { v: C + 'Final/8_mcy_B.mp4', p: C + 'Final/thumbs/8.png' }
+    { q: "The community was an eye-opener for me.", n: 'Max', img: S + 'Max.png' },
+    { v: C + 'Final/8_mcy_B.mp4', p: C + 'Final/thumbs/8.png' },
+    { q: "When you drift off track, people help you.", n: 'Levi', img: S + 'Levi.png' }
   ];
   function card(r) {
     if (r.v) return '<div class="video-card"><video poster="' + r.p + '" preload="none" playsinline webkit-playsinline><source src="' + r.v + '" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>';
