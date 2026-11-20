@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISE Core Academy &mdash; For producers ready to fight for their career.</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* ════════════════════════════════════════════════
+       Rise Core Academy — coursevsl-b design system
+       ════════════════════════════════════════════════ */
+    :root {
+      --bg: #0f0f0f;
+      --bg-2: #1a1a1a;
+      --fg: #ffffff;
+      --muted: #999;
+      --accent: #ff683e;
+      --accent-hover: #e55a33;
+      --line: rgba(255,255,255,0.06);
+      --line-strong: rgba(255,255,255,0.14);
+      --maxw: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Site Header ─────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 110;
+      background: transparent;
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  border-bottom-color 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(15,15,15,0.72);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,104,62,0.12);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .site-header-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 7px; }
+    .nav-logo span {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .urgency-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 120;
+      background: var(--accent); color: #fff; text-align: center;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 8px 40px 8px 16px; transition: transform 0.3s;
+    }
+    .urgency-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .urgency-bar-close {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.1rem; opacity: 0.8; cursor: pointer; background: none; border: none; color: #fff;
+    }
+    .urgency-text {
+      display: inline;
+      animation: urgency-pulse 3s ease-in-out infinite;
+    }
+    @keyframes urgency-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    body.has-urgency-bar .site-header { top: 36px; }
+    body.has-urgency-bar .hero { margin-top: -61px; padding-top: 181px; }
+    .header-cta {
+      display: inline-flex; align-items: center; background: var(--accent); color: #fff;
+      font-size: 0.82rem; font-weight: 600; padding: 8px 18px; border-radius: 8px;
+      transition: background 0.2s; text-decoration: none;
+    }
+    .header-cta:hover { background: var(--accent-hover); }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(6rem, 12vw, 10rem) 2rem clamp(4rem, 8vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(255,104,62,0.10), transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(255,104,62,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,0.88) 0%, rgba(15,15,15,0.55) 40%, rgba(15,15,15,0.92) 100%),
+        url('../assets/photos/photo-11.jpg') center 30% / cover no-repeat;
+    }
+    .hero-content { max-width: 720px; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── Buttons ──────────────────────────────────── */
+    .hero-cta,
+    .btn-primary {
+      display: inline-block;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0a0a0a;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      border: none;
+      cursor: pointer;
+    }
+    .hero-cta:hover,
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,104,62,0.3);
+    }
+    .hero-cta svg,
+    .btn-primary svg { width: 18px; height: 18px; }
+    .btn-ghost {
+      display: inline-block;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--fg);
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--line-strong);
+      cursor: pointer;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── Photo strip ─────────────────────────────── */
+    .photo-strip {
+      overflow: hidden;
+      padding: 2rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .photo-strip-track {
+      display: flex;
+      gap: 4px;
+      width: max-content;
+      animation: scroll-strip 40s linear infinite;
+    }
+    .photo-strip-track img {
+      height: 180px;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+      border-radius: 0;
+      flex-shrink: 0;
+    }
+    @keyframes scroll-strip {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Section defaults ────────────────────────── */
+    .section {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 55ch;
+    }
+
+    /* ── Who Core Is For ─────────────────────────── */
+    .who-core { background: var(--bg); }
+
+    /* ── What You Get ────────────────────────────── */
+    .what-you-get { background: var(--bg); }
+    .what-you-get .section-body { margin-bottom: 2.5rem; }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(24px, 3vw, 32px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .feature-card:hover {
+      border-color: rgba(255,104,62,0.2);
+      transform: translateY(-4px);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Social Proof ────────────────────────────── */
+    .social-proof { background: var(--bg); }
+    .proof-placeholder {
+      margin-top: 32px;
+      padding: 40px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ── Testimonial Screenshots ────────────────── */
+    .testimonial-screenshots { padding: 2rem 2rem 4rem; max-width: var(--maxw); margin: 0 auto; }
+    .testimonial-screenshots .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; text-align: center; margin-bottom: 2rem; }
+    .screenshot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .screenshot-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+    .screenshot-card img { width: 100%; height: auto; display: block; }
+
+    /* ── Coach ────────────────────────────────────── */
+    .coach-section { background: var(--bg); }
+    .coach-large-card {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: clamp(28px, 4vw, 44px);
+      transition: border-color 0.3s;
+    }
+    .coach-large-card:hover {
+      border-color: rgba(255,104,62,0.2);
+    }
+    .coach-large-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,104,62,0.15);
+    }
+    .coach-large-info { flex: 1; }
+    .coach-large-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .coach-label {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255,104,62,0.10);
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .coach-large-bio {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── Closing ──────────────────────────────────── */
+    .closing {
+      background: var(--bg);
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--line);
+    }
+    .closing-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .closing p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq { background: var(--bg); }
+    .faq .section-eyebrow { text-align: center; }
+    .faq .section-heading { text-align: center; }
+    .faq-list {
+      margin: 32px auto 0;
+      max-width: 720px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-question {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; padding: 1.25rem 0;
+      font-size: 1rem; font-weight: 600; color: var(--fg);
+      background: none; border: none; cursor: pointer;
+      text-align: left; gap: 1rem; font-family: inherit;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      width: 24px; height: 24px; flex-shrink: 0;
+      position: relative; transition: transform 0.3s ease;
+    }
+    .faq-icon::before, .faq-icon::after {
+      content: ''; position: absolute;
+      background: var(--muted); border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .faq-icon::before { width: 14px; height: 2px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-icon::after { width: 2px; height: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .faq-item.open .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+    .faq-a {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1),
+                  padding 0.35s cubic-bezier(0.4,0,0.2,1);
+      padding: 0;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 0 20px;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 2rem; text-align: center;
+      color: var(--muted); font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+    .footer .links { display: flex; justify-content: center; gap: 24px; margin-top: 10px; }
+    .footer .links a { transition: color 0.2s; }
+    .footer .links a:hover { color: var(--accent); }
+
+    /* ── Section Images ──────────────────────────── */
+    .section-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 12px; margin: 2rem auto; display: block; }
+    .image-break { padding: 0 2rem; max-width: var(--maxw); margin: 0 auto; }
+
+    /* ── Video Testimonials ──────────────────────── */
+    /* ── VSL Player (click play/pause, no controls) ── */
+    .vsl-player {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #000;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .vsl-player video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    .vsl-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .vsl-play-overlay svg {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      transition: transform 0.2s ease;
+    }
+    .vsl-player:hover .vsl-play-overlay svg { transform: scale(1.08); }
+    .vsl-player.playing .vsl-play-overlay { opacity: 0; }
+    .vsl-progress-wrap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      transition: opacity 0.3s linear;
+    }
+    .vsl-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s linear, opacity 0.3s linear;
+    }
+
+    .video-testimonials { padding: 5rem 0; text-align: center; }
+    .video-testimonials .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; padding: 0 2rem; }
+    .video-testimonials .section-sub { color: var(--muted); max-width: 520px; margin: 0 auto 3rem; font-size: 0.95rem; padding: 0 2rem; }
+    .video-strip { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 2rem; }
+    .video-strip::-webkit-scrollbar { display: none; }
+    .video-strip-track { display: flex; gap: 16px; width: max-content; margin: 0 auto; }
+    .video-card {
+      position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 9/16;
+      width: 240px; height: 420px; cursor: pointer;
+      background: #000; flex-shrink: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .video-card video { width: 100%; height: 100%; object-fit: cover; }
+    .video-card video { pointer-events: none; }
+    .video-card .play-btn { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); transition: background 0.3s; }
+    .video-card .play-btn svg { width: 56px; height: 56px; fill: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    .video-card.playing .play-btn { opacity: 0; pointer-events: none; }
+
+    /* ── Questionnaire Modal ─────────────────────── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); z-index: 200; display: none; align-items: stretch; justify-content: stretch; animation: fadeIn 0.25s ease; }
+    .modal-overlay.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+    .modal { width: 100%; display: flex; flex-direction: column; padding: 32px; position: relative; animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes slideUp { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+    .modal-top { max-width: 720px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .modal-back { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; padding: 8px 0; transition: color 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-back:hover { color: var(--fg); }
+    .modal-back.hidden { visibility: hidden; }
+    .modal-close { font-size: 22px; color: var(--muted); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; background: none; border: none; cursor: pointer; }
+    .modal-close:hover { color: var(--fg); background: var(--line); }
+    .modal-body { max-width: 720px; width: 100%; margin: 60px auto 0; flex: 1; }
+    .progress { display: flex; gap: 8px; margin-bottom: 28px; }
+    .progress span { flex: 1; height: 2px; background: var(--line); border-radius: 2px; }
+    .progress span.done { background: var(--accent); }
+    .step-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; max-width: 18ch; margin-bottom: 36px; }
+    .options { display: grid; gap: 12px; }
+    .option { display: flex; gap: 18px; align-items: flex-start; padding: 18px 22px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,0.03); cursor: pointer; text-align: left; width: 100%; transition: all 0.2s; font-family: inherit; color: inherit; }
+    .option:hover { background: rgba(255,255,255,0.06); border-color: var(--line-strong); }
+    .option.selected { border-color: var(--accent); background: rgba(255,104,62,0.08); }
+    .option .letter { font-size: 0.68rem; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0; width: 14px; }
+    .option .text { font-size: 0.92rem; line-height: 1.4; }
+    .slider-step { text-align: center; padding-top: 20px; }
+    .slider-value { font-size: clamp(3rem, 7vw, 5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+    .slider-label { margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; }
+    .slider-wrap { margin-top: 50px; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .slider-wrap input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--line); border-radius: 4px; outline: none; }
+    .slider-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: var(--fg); border-radius: 50%; cursor: pointer; border: 4px solid var(--bg); box-shadow: 0 0 0 1px var(--accent); }
+    .slider-bounds { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; }
+    .btn-continue { background: var(--accent); color: #0a0a0a; width: 100%; max-width: 420px; margin: 36px auto 0; display: block; padding: 18px; border-radius: 6px; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; border: none; cursor: pointer; font-family: inherit; }
+    .btn-continue:hover { background: var(--accent-hover); }
+    .form-step .form-row { display: grid; gap: 14px; max-width: 480px; margin: 0 auto; }
+    .form-step input { background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--fg); padding: 16px 18px; border-radius: 8px; font-family: inherit; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+    .form-step input:focus { border-color: var(--accent); }
+
+    /* ── Scrolling Reviews ────────────────────────── */
+    .reviews-scroll { padding: 60px 0; overflow: hidden; }
+    .reviews-scroll-header { text-align: center; margin-bottom: 32px; }
+    .reviews-scroll-eyebrow {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .reviews-scroll-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.1; letter-spacing: -0.02em;
+    }
+    .reviews-scroll-rows { display: flex; flex-direction: column; gap: 12px; }
+    .reviews-scroll-row {
+      display: flex; width: max-content; gap: 12px;
+    }
+    .reviews-scroll-row--left {
+      animation: scroll-reviews 35s linear infinite;
+    }
+    .reviews-scroll-row--right {
+      animation: scroll-reviews-reverse 40s linear infinite;
+    }
+    .review-pill {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 8px 20px 8px 8px; background: #f5f5f5;
+      border-radius: 40px; white-space: nowrap; flex-shrink: 0;
+    }
+    .review-pill img {
+      width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    }
+    .review-pill span {
+      font-size: 0.85rem; font-weight: 500; color: #1a1a1a;
+    }
+    @keyframes scroll-reviews {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes scroll-reviews-reverse {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* ── Limited spots indicator ── */
+    .limited-spots { font-size:0.9rem; color:rgba(255,255,255,0.45); text-align:center; margin:1.2rem 0 0; animation:spots-breathe 5s ease-in-out infinite; }
+    @keyframes spots-breathe { 0%,100%{ color:rgba(255,255,255,0.45); } 50%{ color:rgba(255,255,255,0.85); } }
+
+    /* ── Step labels ── */
+    .step-label { display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem; justify-content:center; width:100%; }
+
+    /* ── Inline CTA banner (repeated) ── */
+    .inline-cta { text-align:center; padding:3rem 2rem; }
+    .inline-cta .hero-cta { margin:0 auto; }
+    .inline-cta-sub { font-size:0.85rem; color:rgba(255,255,255,0.5); margin-top:0.8rem; }
+
+    /* ── Come Prepared / Walk Away ── */
+    .prep-section { padding:5rem 2rem; background:#111; }
+    .prep-section .section-inner { max-width:var(--maxw); margin:0 auto; }
+    .prep-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:2.5rem; }
+    @media(max-width:700px){ .prep-grid { grid-template-columns:1fr; } }
+    .prep-col h3 { font-size:1.3rem; margin-bottom:1.2rem; color:#fff; }
+    .prep-col ul { list-style:none; padding:0; }
+    .prep-col li { position:relative; padding-left:28px; margin-bottom:1rem; color:rgba(255,255,255,0.75); font-size:0.95rem; line-height:1.6; }
+    .prep-col li::before { content:''; position:absolute; left:0; top:8px; width:8px; height:8px; border-radius:50%; }
+    .prep-col.prepare li::before { background:var(--accent); }
+    .prep-col.walkaway li::before { background:#4ade80; }
+
+    /* ── Accessibility ───────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 900px) {
+      .entry-grid,
+      .feature-grid { grid-template-columns: 1fr; }
+      .coach-large-card {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+      .section-heading,
+      .closing h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+      .site-header-inner { padding: 0.75rem 1.25rem; }
+    }
+    @media (max-width: 520px) {
+      .section { padding: 3.5rem 1.25rem; }
+      .closing { padding: 3.5rem 1.25rem; }
+      .hero { padding: clamp(5rem, 10vw, 8rem) 1.25rem clamp(3rem, 6vw, 5rem); }
+      .site-header-inner { padding: 0.75rem 1rem; }
+      .footer { padding: 2rem 1.25rem; }
+    }
+  
+    /* ── Embedded application form + new blocks ── */
+    .hero.hero-apply { min-height: auto; padding-bottom: 3.5rem; }
+    .hero-apply .hero-content { max-width: 760px; width: 100%; }
+    .hero-apply h1 { margin-bottom: 14px; }
+    .genre-pills { display:flex; flex-wrap:wrap; gap:6px 8px; justify-content:center; margin-bottom:14px; }
+    .genre-pills span { font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); border:1px solid rgba(255,104,62,0.3); border-radius:100px; padding:3px 12px; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:6px 16px; justify-content:center; font-size:0.82rem; color:var(--muted); margin-bottom:1.25rem; }
+    .vsl-promise { font-size:0.95rem; color:rgba(255,255,255,0.85); line-height:1.6; max-width:56ch; margin:0 auto 1.1rem; }
+    .vsl-promise b { color:var(--accent); font-weight:700; }
+    .apply-card { margin:1.75rem auto 0; max-width:620px; text-align:left; background:rgba(15,15,15,0.88); border:1px solid var(--line-strong); border-radius:16px; padding:1.75rem 1.75rem 1.5rem; scroll-margin-top:90px; box-shadow:0 20px 60px rgba(0,0,0,0.45); }
+    .apply-top { display:flex; justify-content:space-between; align-items:center; font-size:0.68rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+    .apply-back { background:none; border:none; color:var(--muted); font:inherit; letter-spacing:inherit; text-transform:inherit; cursor:pointer; padding:0; }
+    .apply-back:hover { color:var(--fg); }
+    .apply-back[hidden] { display:none; }
+    .apply-card .progress { margin-bottom:20px; }
+    .apply-q { font-size:clamp(1.2rem,2.6vw,1.5rem); font-weight:700; line-height:1.25; margin-bottom:6px; }
+    .apply-help { font-size:0.88rem; color:var(--muted); margin-bottom:16px; }
+    .apply-card .options { gap:8px; }
+    .apply-card .option { padding:13px 16px; width:100%; text-align:left; color:var(--fg); font-family:inherit; cursor:pointer; }
+    .apply-card .form-step .form-row { max-width:none; }
+    .apply-card .form-step input[type=text], .apply-card .form-step input[type=tel], .apply-card .form-step input[type=email] { width:100%; }
+    .apply-consent { display:flex; gap:10px; align-items:flex-start; font-size:0.82rem; color:rgba(255,255,255,0.7); line-height:1.5; cursor:pointer; margin-top:4px; }
+    .apply-consent input { margin-top:3px; accent-color:var(--accent); min-width:18px; min-height:18px; padding:0; }
+    .apply-card .btn-continue { margin:18px 0 0; max-width:none; width:100%; border:none; cursor:pointer; font-weight:700; font-family:inherit; }
+    .apply-card .btn-continue[disabled] { opacity:0.45; cursor:not-allowed; }
+    .apply-fine { font-size:0.75rem; color:var(--muted); text-align:center; margin-top:10px; }
+    .hero-apply .limited-spots { margin-top:1rem; }
+    .partners-row { padding:2.5rem 2rem; text-align:center; border-bottom:1px solid var(--line); }
+    .partners-label { font-size:0.7rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-bottom:1.25rem; }
+    .partners-logos { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:22px 36px; max-width:1000px; margin:0 auto; }
+    .partners-logos img { width:auto; max-width:170px; object-fit:contain; opacity:0.75; transition:opacity 0.2s; }
+    .partners-logos img:hover { opacity:1; }
+    .results-block { text-align:center; }
+    .res-grid { display:grid; grid-template-columns:repeat(4,1fr); max-width:760px; margin:2rem auto 0; }
+    .res-grid > div { padding:0 1rem; border-left:1px solid var(--line-strong); }
+    .res-grid > div:first-child { border-left:none; }
+    .res-num { font-size:clamp(1.8rem,3.5vw,2.5rem); font-weight:800; color:var(--accent); letter-spacing:-0.02em; }
+    .res-num span { font-size:0.6em; }
+    .res-label { margin-top:0.4rem; font-size:0.85rem; color:rgba(255,255,255,0.8); }
+    .res-note { margin-top:1.5rem; font-size:0.8rem; color:var(--muted); }
+    .program-points { list-style:none; padding:0; margin:0 0 2rem; display:grid; gap:8px; }
+    .program-points li { position:relative; padding-left:22px; color:rgba(255,255,255,0.82); font-size:0.95rem; line-height:1.55; }
+    .program-points li::before { content:''; position:absolute; left:0; top:0.6em; width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .next-start { display:inline-flex; align-items:center; gap:8px; margin:0 0 1.25rem; padding:6px 14px; border-radius:999px; background:rgba(255,104,62,0.1); border:1px solid rgba(255,104,62,0.35); color:var(--accent); font-size:0.85rem; font-weight:700; }
+    @media (max-width:700px) {
+      .apply-card { padding:1.25rem 1.1rem 1.1rem; }
+      .res-grid { grid-template-columns:1fr 1fr; row-gap:1.5rem; }
+      .res-grid > div:nth-child(3) { border-left:none; }
+      .partners-logos { gap:16px 24px; }
+      .partners-logos img { max-width:120px; transform:scale(0.85); }
+    }
+  
+    .lp-grid { display:flex; align-items:stretch; justify-content:center; gap:0; max-width:1000px; margin:0 auto; }
+    .lp-step { flex:1; border:1.5px solid var(--line); border-radius:12px; padding:24px 20px; background:rgba(255,255,255,0.02); text-align:center; transition:border-color 0.6s ease, box-shadow 0.6s ease; position:relative; }
+    .lp-connector { width:32px; flex-shrink:0; display:flex; align-items:center; justify-content:center; position:relative; }
+    .lp-connector::before { content:''; width:100%; border-top:2px dashed transparent; transition:border-color 0.6s ease; }
+    .lp-step.glow { border-color:var(--accent); box-shadow:0 0 14px 2px rgba(255,104,62,0.25); }
+    .lp-connector.glow::before { border-color:var(--accent); }
+    @media(max-width:768px){
+      .lp-grid { flex-direction:column; gap:0; align-items:center; }
+      .lp-step { width:100%; max-width:340px; }
+      .lp-connector { width:2px; height:28px; }
+      .lp-connector::before { width:0; height:100%; border-top:none; border-left:2px dashed transparent; }
+      .lp-connector.glow::before { border-top:none; border-left-color:var(--accent); }
+    }
+  
+    /* ══ v4: calmer, mobile-first hero ══ */
+    .header-brand { display:flex; align-items:center; gap:10px; color:var(--fg); font-weight:700; font-size:0.95rem; letter-spacing:0.01em; }
+    .header-brand span { color:rgba(255,255,255,0.85); }
+    .site-header .header-cta { opacity:0; pointer-events:none; transform:translateY(-4px); transition:opacity 0.25s, transform 0.25s, background 0.25s; }
+    body.show-header-cta .site-header .header-cta { opacity:1; pointer-events:auto; transform:none; }
+    .hero.hero-apply { min-height:auto; padding:130px 20px 2.5rem; }
+    body.has-urgency-bar .hero.hero-apply { margin-top:-61px; padding-top:150px; }
+    .hero-apply .hero-bg { background: linear-gradient(180deg, rgba(15,15,15,0.93) 0%, rgba(15,15,15,0.9) 55%, #0f0f0f 100%), url('../assets/photos/photo-11.jpg') center 30% / cover no-repeat; }
+    .hero-apply .hero-content { max-width:720px; width:100%; }
+    .hero-apply h1 { font-size:clamp(1.9rem, 4.6vw, 3rem); margin-bottom:10px; }
+    .video-line { font-size:0.95rem; color:rgba(255,255,255,0.75); margin:0 auto 1rem; }
+    .video-line b { color:#fff; font-weight:600; }
+    .hero-apply .apply-card { margin-top:1.25rem; }
+    .form-note { font-size:0.82rem; color:var(--muted); margin-top:0.9rem; }
+    .form-note strong { color:var(--accent); font-weight:700; }
+    .res-grid.res-3 { grid-template-columns:repeat(3,1fr); max-width:620px; }
+    .fit-list { list-style:none; padding:0; margin:1.5rem auto 0; max-width:560px; display:grid; gap:10px; text-align:left; }
+    .fit-list li { position:relative; padding:14px 16px 14px 44px; background:rgba(255,255,255,0.03); border:1px solid var(--line); border-radius:10px; font-size:0.95rem; line-height:1.5; }
+    .fit-list li::before { content:''; position:absolute; left:16px; top:50%; width:14px; height:8px; border-left:2px solid var(--accent); border-bottom:2px solid var(--accent); transform:translateY(-70%) rotate(-45deg); }
+    .closing-v4 { text-align:center; }
+    @media (max-width:700px) {
+      .urgency-bar { display:none !important; }
+      body.has-urgency-bar .site-header { top:0; }
+      .hero.hero-apply, body.has-urgency-bar .hero.hero-apply { margin-top:-61px; padding:80px 20px 2rem; text-align:left; }
+      .hero-apply .hero-bg { background:#0f0f0f; }
+      .hero-apply h1 { font-size:1.75rem; line-height:1.15; }
+      .video-line { margin-left:0; font-size:0.92rem; }
+      .hero-apply .apply-card { padding:1.1rem 1rem; border-radius:14px; }
+      .form-note { text-align:left; }
+      .section, .partners-row, .closing { padding-left:20px !important; padding-right:20px !important; }
+      .section-heading { font-size:1.55rem; }
+      .section-body, .section-body p { text-align:left; }
+      .photo-strip { overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory; scrollbar-width:none; padding:1.25rem 20px; }
+      .photo-strip::-webkit-scrollbar { display:none; }
+      .photo-strip-track { animation:none !important; gap:8px; }
+      .photo-strip-track img { height:150px; scroll-snap-align:start; border-radius:8px; }
+      .photo-strip-track img.dup { display:none; }
+      .site-header .header-cta { padding:8px 14px; font-size:0.72rem; }
+    }
+  </style>
+</head>
+<body class="has-urgency-bar">
+  <a href="#apply" onclick="return goApply()" class="urgency-bar" id="urgency-bar" style="display:block;cursor:pointer;">
+    <span class="urgency-text">Applications open</span> &middot; Apply for Core
+    <button class="urgency-bar-close" id="urgency-bar-close" aria-label="Dismiss">&times;</button>
+  </a>
+  <header class="site-header" id="site-header">
+    <div class="site-header-inner">
+      <a class="header-logo header-brand" href="/homepage-v3/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"><span>Rise Core</span></a>
+      <a class="header-cta" href="#apply" onclick="return goApply()">Apply Now</a>
+    </div>
+  </header>
+
+  <section class="hero hero-apply">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>Work toward your first festival booking in 90&nbsp;days.</h1>
+      <p class="video-line"><b>Watch first (3:15):</b> see how Core helps you build your artist career.</p>
+      <div class="vsl-player" id="core-vsl-player">
+        <video id="core-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Core/Thumbnail.png">
+          <source src="../assets/Pages/Core/Maurits%20VSL.mp4" type="video/mp4">
+        </video>
+        <div class="vsl-play-overlay" id="core-vsl-overlay">
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg>
+        </div>
+        <div class="vsl-progress-wrap">
+          <div class="vsl-progress-bar" id="core-vsl-progress"></div>
+        </div>
+      </div>
+      <div class="apply-card" id="apply">
+        <div class="apply-top"><span>Apply for your spot</span><button type="button" class="apply-back" id="apply-back" hidden>&larr; Back</button><span id="apply-stepnum">Step 1 of 3</span></div>
+        <div class="progress" id="apply-progress"><span class="done"></span><span></span><span></span></div>
+        <div id="apply-body"></div>
+      </div>
+      <p class="form-note">Takes 60 seconds &middot; No payment required</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Results
+       ══════════════════════════════════════════════ -->
+  <section class="section results-block">
+    <div class="section-inner">
+      <div class="section-eyebrow">The results</div>
+      <h2 class="section-heading">What our artists have&nbsp;achieved.</h2>
+      <div class="res-grid res-3">
+        <div><div class="res-num">7.9<span>M+</span></div><div class="res-label">streams</div></div>
+        <div><div class="res-num">108</div><div class="res-label">gigs &amp; bookings</div></div>
+        <div><div class="res-num">98<span>+</span></div><div class="res-label">tracks released</div></div>
+      </div>
+      <p class="res-note">Based on 38 artists we've worked with since 2023.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Who we work with (partners from the programme guide)
+       ══════════════════════════════════════════════ -->
+  <section class="partners-row" aria-label="Who we work with">
+    <div class="partners-label">Who we work with</div>
+    <div class="partners-logos">
+      <img src="../assets/partners/guide/clear.png" alt="Clear Agency" loading="lazy" style="height:26px;">
+      <img src="../assets/partners/guide/recode-records.png" alt="Recode Records" loading="lazy" style="height:30px;">
+      <img src="../assets/partners/guide/weraveyou.png" alt="We Rave You" loading="lazy" style="height:26px;">
+      <img src="../assets/partners/guide/recode-deep.png" alt="Recode Deep" loading="lazy" style="height:34px;">
+      <img src="../assets/partners/guide/revoke.png" alt="Revoke" loading="lazy" style="height:26px;">
+      <img src="../assets/partners/guide/tracks-to-the-max.png" alt="Tracks to the Max" loading="lazy" style="height:38px;">
+      <img src="../assets/partners/guide/bpm-europe.png" alt="BPM Europe" loading="lazy" style="height:40px;">
+      <img src="../assets/partners/guide/labelradar.png" alt="LabelRadar by The Beatport Group" loading="lazy" style="height:28px;">
+    </div>
+  </section>
+
+  <section class="section" id="who-core" style="text-align:center;">
+    <div class="section-inner">
+      <div class="section-eyebrow">Who this is for</div>
+      <h2 class="section-heading">Made for artists ready to take serious&nbsp;steps.</h2>
+      <ul class="fit-list">
+        <li>You finish full tracks on your own, at a level you could release.</li>
+        <li>Bookings, network or branding are what hold you back now.</li>
+        <li>You want direct feedback and someone who keeps you moving.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section what-you-get" id="program">
+    <div class="section-inner">
+      <div class="section-eyebrow">What you get</div>
+      <h2 class="section-heading">What a year in Core&nbsp;includes.</h2>
+      <p class="section-body" style="margin-bottom:2rem;">12 months &middot; weekly group sessions &middot; selection before you're in</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Weekly group sessions</h3>
+          <p>Live sessions on your plan: are you on track, what worked, what didn't, and what you do next.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Feedback on releases and bookings</h3>
+          <p>Targeted feedback on your tracks, your release route and your outreach to promoters and labels.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Writing camps</h3>
+          <p>5 writing camps so far, including <a href="https://writingcamps.netlify.app/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;">Remote Sessions</a> with our labels.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Lessons, masterclasses and community</h3>
+          <p>The Industry Code lessons on the platform, masterclasses, and members who end up on each other's line-ups.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Four areas (Core journey)
+       ══════════════════════════════════════════════ -->
+<section style="padding:5rem 2rem;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;text-align:center;">What you work on</div>
+    <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.02em;text-align:center;margin-bottom:1rem;">Four areas from producer to artist</h2>
+    <p style="text-align:center;color:var(--muted);max-width:56ch;margin:0 auto 3rem;font-size:0.95rem;">You set a 90-day goal, for example 3 gigs or a festival booking, and build your plan. Then you work on these four areas, every week.</p>
+    <div class="lp-grid">
+      <div class="lp-step" data-step="1">
+        <div style="width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M2 12.0001L11.6422 16.8212C11.7734 16.8868 11.839 16.9196 11.9078 16.9325C11.9687 16.9439 12.0313 16.9439 12.0922 16.9325C12.161 16.9196 12.2266 16.8868 12.3578 16.8212L22 12.0001M2 17.0001L11.6422 21.8212C11.7734 21.8868 11.839 21.9196 11.9078 21.9325C11.9687 21.9439 12.0313 21.9439 12.0922 21.9325C12.161 21.9196 12.2266 21.8868 12.3578 21.8212L22 17.0001M2 7.00006L11.6422 2.17895C11.7734 2.11336 11.839 2.08056 11.9078 2.06766C11.9687 2.05622 12.0313 2.05622 12.0922 2.06766C12.161 2.08056 12.2266 2.11336 12.3578 2.17895L22 7.00006L12.3578 11.8212C12.2266 11.8868 12.161 11.9196 12.0922 11.9325C12.0313 11.9439 11.9687 11.9439 11.9078 11.9325C11.839 11.9196 11.7734 11.8868 11.6422 11.8212L2 7.00006Z" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">AREA 1</span>
+        <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Direction &amp; Profile</span>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Where you stand, a realistic goal, and your positioning, story, visuals and press kit.</p>
+      </div>
+      <div class="lp-connector"></div>
+      <div class="lp-step" data-step="2">
+        <div style="width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 18V12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12V18M5.5 21C4.11929 21 3 19.8807 3 18.5V16.5C3 15.1193 4.11929 14 5.5 14C6.88071 14 8 15.1193 8 16.5V18.5C8 19.8807 6.88071 21 5.5 21ZM18.5 21C17.1193 21 16 19.8807 16 18.5V16.5C16 15.1193 17.1193 14 18.5 14C19.8807 14 21 15.1193 21 16.5V18.5C21 19.8807 19.8807 21 18.5 21Z" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">AREA 2</span>
+        <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Music &amp; Releases</span>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">A stock of finished tracks, the right labels or release route, and tracking what you send out.</p>
+      </div>
+      <div class="lp-connector"></div>
+      <div class="lp-step" data-step="3">
+        <div style="width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18V6.35537C9 5.87383 9 5.63306 9.0876 5.43778C9.16482 5.26565 9.28917 5.11887 9.44627 5.0144C9.62449 4.89588 9.86198 4.8563 10.337 4.77714L19.137 3.31047C19.7779 3.20364 20.0984 3.15023 20.3482 3.243C20.5674 3.32441 20.7511 3.48005 20.8674 3.68286C21 3.91398 21 4.23889 21 4.8887V16M9 18C9 19.6568 7.65685 21 6 21C4.34315 21 3 19.6568 3 18C3 16.3431 4.34315 15 6 15C7.65685 15 9 16.3431 9 18ZM21 16C21 17.6568 19.6569 19 18 19C16.3431 19 15 17.6568 15 16C15 14.3431 16.3431 13 18 13C19.6569 13 21 14.3431 21 16Z" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">AREA 3</span>
+        <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Visibility</span>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">A content plan, posting consistently, set recordings and contact with your audience.</p>
+      </div>
+      <div class="lp-connector"></div>
+      <div class="lp-step" data-step="4">
+        <div style="width:40px;height:40px;margin:0 auto 10px;border-radius:10px;background:rgba(255,104,62,0.1);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7.96668 14.7219L7 22L11.5884 19.247C11.7381 19.1572 11.8129 19.1123 11.8928 19.0947C11.9634 19.0792 12.0366 19.0792 12.1072 19.0947C12.1871 19.1123 12.2619 19.1572 12.4116 19.247L17 22L16.0343 14.7212M19 9C19 12.866 15.866 16 12 16C8.13401 16 5 12.866 5 9C5 5.13401 8.13401 2 12 2C15.866 2 19 5.13401 19 9Z" stroke="#ff683e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span style="font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;display:block;margin-bottom:8px;">AREA 4</span>
+        <span style="font-size:1rem;font-weight:700;display:block;margin-bottom:10px;">Network &amp; Gigs</span>
+        <p style="color:var(--muted);font-size:0.85rem;line-height:1.55;">Researching promoters and labels, personal outreach, following up and going to events.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="section coach-section" id="coach">
+    <div class="section-inner">
+      <div class="section-eyebrow">Your coaches</div>
+      <h2 class="section-heading">The people who guide your year, live, every&nbsp;week.</h2>
+
+      <div class="coach-large-card">
+        <img src="../assets/photos/Aug/Mauv5.png" alt="Maurits" class="coach-large-avatar">
+        <div class="coach-large-info">
+          <div class="coach-large-name">Maurits</div>
+          <div class="coach-label">Artist Development Coach</div>
+          <p class="coach-large-bio">Runs the operations and artist development side of Rise. Maurits holds you accountable every single week inside Core, making sure you hit the goals you set.</p>
+        </div>
+      </div>
+
+      <div class="coach-large-card">
+        <img src="../assets/Pages/Coaches/Artcode.png" alt="Jurrian" class="coach-large-avatar">
+        <div class="coach-large-info">
+          <div class="coach-large-name">Jurrian</div>
+          <div class="coach-label">Production Coach &middot; Techno Artist</div>
+          <p class="coach-large-bio">15+ years across electronic genres. Jurrian (Artcode) brings deep experience from production to live performance. Runs the production curriculum and gives direct, technical feedback on your tracks.</p>
+        </div>
+      </div>
+
+      <div class="coach-large-card">
+        <img src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" class="coach-large-avatar">
+        <div class="coach-large-info">
+          <div class="coach-large-name">Milan Fernandes</div>
+          <div class="coach-label">Production Coach &middot; House Artist</div>
+          <p class="coach-large-bio">Growing house artist in the Dutch scene, with a sharp ear for arrangement and sound design. Gives you concrete feedback on the tracks you release.</p>
+        </div>
+      </div>
+
+      <div class="coach-large-card">
+        <img src="../assets/Pages/Coaches/Yvo.png" alt="Yvo" class="coach-large-avatar">
+        <div class="coach-large-info">
+          <div class="coach-large-name">Yvo</div>
+          <div class="coach-label">Music Producer &middot; Advanced Modules</div>
+          <p class="coach-large-bio">Coaches artists on sound design, mixing and creative direction. Yvo pushes you to develop a sound that's yours and holds you to the standard it takes to release professionally.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="video-testimonials">
+    <h2 class="section-title">What our artists have to say</h2>
+    <p class="section-sub">Stories from producers who joined Rise.</p>
+    <div class="video-strip">
+      <div class="video-strip-track">
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/10.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/10_myc_A.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/2.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/2_mcy_B.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/4.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/4_my-C.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-card"><video poster="../assets/Testimonials/Voor%20site/Clips/Final/thumbs/9.png" preload="metadata" playsinline webkit-playsinline><source src="../assets/Testimonials/Voor%20site/Clips/Final/9_my_B_v2.mp4" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_03.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_04.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_7.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_11.2.png" alt="Rise" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <img class="dup" src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/photo-12.jpg" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_03.jpg" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_04.JPG" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/photo-18.jpg" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_7.JPG" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_11.2.png" alt="Rise" loading="lazy">
+    </div>
+  </div>
+
+  <section class="section faq" id="faq">
+    <div class="section-inner">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Frequently asked</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>What if I'm not sure Core is right for me?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">Core is for producers ready to fight for their career. It isn't a soft sell. If you're not there yet, Base or the subscription is the better starting point, and that's completely fine.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Can I pay in installments?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">Yes. Core can be paid in full or in 4, 6 or 12 instalments, starting with a &euro;375 deposit. We walk through the options together on your call.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>What happens after Core?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">Standard platform access ends when the year does. You can keep your access to the platform and community going through a subscription (&euro;&nbsp;50,- per month).</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Is Core the same as Base?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">No. Base is the foundation, Core is the main program. Some producers go straight into Core, others get there through Base first.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>How long does Core run?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">One year, with weekly group sessions, your 90-day plan, and lesson modules unlocking throughout.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Who coaches Core?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-a">Maurits leads the weekly group sessions as artist development coach: accountability and hitting your goals. Jurrian and Milan give production feedback on your tracks.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="closing-inner">
+      <div class="step-label">Apply for your spot</div>
+      <h2>Ready to take serious steps? This is where that&nbsp;starts.</h2>
+      <p>Core isn't for people testing the water. It's for producers who've decided this is the career they want, and are ready to be held to that decision, every week, for a year.</p>
+      <a href="#apply" onclick="return goApply()" class="hero-cta">
+        Apply Now
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    &copy; 2026 &middot; Rise Artist Academy &middot; Recode Operations B.V. &middot; All rights reserved.
+    <div class="links">
+      <a href="mailto:contact@riseartistacademy.com">Contact</a>
+      <a href="https://www.instagram.com/riseartistacademy/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../privacy/">Privacy</a>
+      <a href="../terms/">Terms</a>
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════════════════
+       Scripts
+       ══════════════════════════════════════════════ -->
+  <script>
+    // ── Sticky header scroll effect ──
+    (function() {
+      var header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 60) { header.classList.add('scrolled'); }
+        else { header.classList.remove('scrolled'); }
+      }, { passive: true });
+    })();
+
+    // ── Urgency bar dismiss ──
+    (function() {
+      var bar = document.getElementById('urgency-bar');
+      var closeBtn = document.getElementById('urgency-bar-close');
+      if (!bar || !closeBtn) return;
+      if (sessionStorage.getItem('rise_urgency_dismissed')) { bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); }
+      closeBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); bar.classList.add('hidden'); document.body.classList.remove('has-urgency-bar'); sessionStorage.setItem('rise_urgency_dismissed', '1'); });
+    })();
+
+    // ── Video testimonials ──
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('.video-card');
+      if (!card) return;
+      var v = card.querySelector('video');
+      if (!v) return;
+      e.preventDefault();
+      if (card.classList.contains('playing')) {
+        v.pause();
+        card.classList.remove('playing');
+      } else {
+        document.querySelectorAll('.video-card.playing').forEach(function(c) {
+          var cv = c.querySelector('video');
+          if (cv) cv.pause();
+          c.classList.remove('playing');
+        });
+        v.currentTime = 0;
+        var p = v.play();
+        if (p && typeof p.then === 'function') {
+          p.then(function() {
+            card.classList.add('playing');
+          }).catch(function() {});
+        } else {
+          card.classList.add('playing');
+        }
+      }
+      v.onended = function() { card.classList.remove('playing'); };
+    });
+
+    // ── Auto-detect country dial code from IP ──
+    var _dialCode = ""; window._dialCode = "";
+    (function() {
+      var codes = {NL:"+31",BE:"+32",DE:"+49",FR:"+33",GB:"+44",US:"+1",ES:"+34",IT:"+39",PT:"+351",AT:"+43",CH:"+41",SE:"+46",NO:"+47",DK:"+45",FI:"+358",PL:"+48",IE:"+353",CZ:"+420",HU:"+36",RO:"+40",BG:"+359",HR:"+385",SK:"+421",SI:"+386",LT:"+370",LV:"+371",EE:"+372",GR:"+30",TR:"+90",AU:"+61",NZ:"+64",CA:"+1",BR:"+55",MX:"+52",AR:"+54",CO:"+57",ZA:"+27",IN:"+91",JP:"+81",KR:"+82",ID:"+62",SG:"+65",AE:"+971",SA:"+966",RU:"+7",UA:"+380",IL:"+972"};
+      try {
+        fetch("https://ipapi.co/country_code/").then(function(r) { return r.text(); }).then(function(cc) {
+          cc = cc.trim().toUpperCase();
+          if (codes[cc]) { _dialCode = codes[cc] + " "; window._dialCode = _dialCode; }
+        }).catch(function() {});
+      } catch(e) {}
+    })();
+
+
+    // ── Embedded application form: genre → commitment → contact details ──
+    (function() {
+      var PROGRAM = "core", LABEL = "Core";
+      var GENRES = ["House / Afro House", "Techno", "Trance", "EDM", "Drum & Bass", "Hip-Hop / R&B / Afro Beats", "Pop / Singer-Songwriter / Other"];
+      var COMMIT_Q = "Core takes at least 10 hours a week and starts from \u20ac2,650 excl. VAT, with payment plans available. Is that something you can commit to right now?";
+      var COMMITS = ["Yes, I\u2019m ready to invest the time and money.", "Yes, but I\u2019d need a payment plan or to free up some time.", "It\u2019ll be a stretch, but I\u2019d like a call to explore my options.", "Not right now."];
+      var st = { step: 0, genre: "", commit: "", name: "", phone: "", email: "" };
+      var body = document.getElementById("apply-body"), back = document.getElementById("apply-back");
+      var stepnum = document.getElementById("apply-stepnum"), bars = document.querySelectorAll("#apply-progress span");
+      if (!body) return;
+      function esc(t) { return String(t).replace(/[&<>"]/g, function(c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+      function choice(title, help, opts, key) {
+        return '<h2 class="apply-q">' + title + '</h2>' + (help ? '<p class="apply-help">' + help + '</p>' : '<div style="height:12px"></div>') +
+          '<div class="options">' + opts.map(function(o, i) {
+            return '<button type="button" class="option' + (st[key] === o ? ' selected' : '') + '" data-v="' + esc(o) + '"><span class="letter">' + String.fromCharCode(65 + i) + '.</span><span class="text">' + esc(o) + '</span></button>';
+          }).join('') + '</div>';
+      }
+      function render() {
+        back.hidden = st.step === 0;
+        stepnum.textContent = "Step " + (st.step + 1) + " of 3";
+        bars.forEach(function(b, i) { b.classList.toggle("done", i <= st.step); });
+        if (st.step === 0) {
+          body.innerHTML = choice("What is your main music genre?", "Select the genre you primarily produce or want to produce.", GENRES, "genre");
+        } else if (st.step === 1) {
+          body.innerHTML = choice(COMMIT_Q, "", COMMITS, "commit");
+        } else {
+          body.innerHTML = '<h2 class="apply-q">Where can we reach you?</h2><p class="apply-help">Last step. The Rise team uses your details and answers to follow up on your application.</p>' +
+            '<form class="form-step" id="apply-form"><div class="form-row">' +
+            '<input type="text" name="name" placeholder="Your full name" autocomplete="name" required value="' + esc(st.name) + '">' +
+            '<input type="tel" name="phone" placeholder="WhatsApp number (incl. country code)" autocomplete="tel" required value="' + esc(st.phone || (window._dialCode || "")) + '">' +
+            '<input type="email" name="email" placeholder="you@example.com" autocomplete="email" required value="' + esc(st.email) + '">' +
+            '<label class="apply-consent"><input type="checkbox" name="consent" required><span>I agree that Rise Artist Academy may contact me by email, phone and WhatsApp using the information I provide.</span></label>' +
+            '</div><button type="submit" class="btn-continue">Apply for ' + LABEL + ' &rarr;</button></form>';
+          document.getElementById("apply-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            var fd = new FormData(e.target);
+            st.name = fd.get("name"); st.phone = fd.get("phone"); st.email = fd.get("email");
+            var p = new URLSearchParams();
+            p.set("name", st.name); p.set("email", st.email); p.set("phone", st.phone);
+            p.set("genre", st.genre); p.set("commitment", st.commit); p.set("program", PROGRAM);
+            window.location.href = "/academy-thankyou-v3/?" + p.toString();
+          });
+          return;
+        }
+        body.querySelectorAll(".option").forEach(function(b) {
+          b.addEventListener("click", function() {
+            st[st.step === 0 ? "genre" : "commit"] = b.getAttribute("data-v");
+            body.querySelectorAll(".option").forEach(function(x) { x.classList.remove("selected"); });
+            b.classList.add("selected");
+            setTimeout(function() { st.step++; render(); }, 200);
+          });
+        });
+      }
+      back.addEventListener("click", function() { if (st.step > 0) { st.step--; render(); } });
+      render();
+    })();
+
+    // All "Apply" buttons scroll back to the form
+    function goApply() {
+      var el = document.getElementById("apply");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return false;
+    }
+
+    // Show thumbnail from near end of video
+    document.querySelectorAll('.video-card video').forEach(function(v) {
+      v.addEventListener('loadedmetadata', function() {
+        if (v.duration > 3) v.currentTime = v.duration - 2;
+      });
+      // Reset to start when playing
+      v.addEventListener('play', function() {
+        if (!v._hasPlayed) { v.currentTime = 0; v._hasPlayed = true; }
+      });
+    });
+
+    // ── Core VSL Player: click play/pause + deceptive progress bar ──
+    (function() {
+      var player = document.getElementById('core-vsl-player');
+      var video = document.getElementById('core-vsl-video');
+      var progressBar = document.getElementById('core-vsl-progress');
+      if (!player || !video) return;
+
+      var CURVE = 0.575;
+
+      player.addEventListener('click', function() {
+        if (video.paused || video.ended) {
+          video.play().catch(function(){});
+          player.classList.add('playing');
+        } else {
+          video.pause();
+          player.classList.remove('playing');
+        }
+      });
+
+      video.addEventListener('ended', function() {
+        player.classList.remove('playing');
+        progressBar.style.width = '100%';
+      });
+
+      video.addEventListener('timeupdate', function() {
+        if (!video.duration) return;
+        var actual = video.currentTime / video.duration;
+        var displayed = Math.pow(actual, CURVE) * 100;
+        progressBar.style.width = displayed + '%';
+        // Fade out: 100% opacity at 0%, invisible at 70% displayed
+        var opacity = Math.max(0, 1 - (displayed / 70));
+        progressBar.parentElement.style.opacity = opacity;
+      });
+    })();
+
+    // ── Four-areas glow animation ──
+    (function(){
+      var steps = document.querySelectorAll('.lp-step'), conns = document.querySelectorAll('.lp-connector');
+      if (!steps.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var SEQ = [];
+      steps.forEach(function(s, i) { SEQ.push(s); if (conns[i]) SEQ.push(conns[i]); });
+      function clearAll(){ SEQ.forEach(function(e){ e.classList.remove('glow'); }); }
+      function run(){
+        clearAll();
+        SEQ.forEach(function(e, i){ setTimeout(function(){ e.classList.add('glow'); }, i * 600); });
+        var lit = (SEQ.length - 1) * 600;
+        setTimeout(clearAll, lit + 1800);
+        setTimeout(run, lit + 1800 + 2000);
+      }
+      run();
+    })();
+
+    // ── v4: header "Apply Now" appears once the form has scrolled out of view ──
+    (function() {
+      var form = document.getElementById('apply');
+      if (!form || !('IntersectionObserver' in window)) { document.body.classList.add('show-header-cta'); return; }
+      new IntersectionObserver(function(entries) {
+        var e = entries[0];
+        document.body.classList.toggle('show-header-cta', !e.isIntersecting && e.boundingClientRect.top < 0);
+      }).observe(form);
+    })();
+  </script>
+
+</body>
+</html>
