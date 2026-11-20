@@ -922,6 +922,26 @@
       .quote-grid.in-wrap { padding: 0 1.25rem 4px; }
     }
     @media (min-width: 701px) { .quote-grid.in-wrap { padding: 0; } }
+  
+    /* ── v4 order: practical first ── */
+    .prep-hero .appt-when { margin:0.25rem auto 0; }
+    .cal-fallback { font-size:0.9rem; color:rgba(255,255,255,0.7); margin:0.75rem auto 0; }
+    .cal-fallback[hidden] { display:none; }
+    .resched-line { font-size:0.85rem; color:var(--muted); margin:0.75rem auto 1.75rem; }
+    .resched-line a { color:rgba(255,255,255,0.85); text-decoration:underline; text-underline-offset:3px; }
+    .prep-hero .cal-box { margin-top:1rem; }
+    .hero-watch { margin-top:0.5rem; }
+    .closing-resched { font-size:0.9rem; color:var(--muted); margin-top:0.5rem; }
+    .resched-btn[hidden] { display:none; }
+    .optional-head { text-align:center; padding:3.5rem 20px 0; border-top:1px solid var(--line); font-size:1.1rem; font-weight:700; }
+    .optional-head span { display:block; font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700; }
+    .kit-note { font-size:0.88rem; color:var(--muted); line-height:1.6; }
+    .kit-note a { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
+    @media (max-width:700px) {
+      .prep-strip .photo-strip-track { animation:none; }
+      .prep-strip { overflow-x:auto; scrollbar-width:none; }
+      .prep-strip .photo-strip-track img:nth-child(n+15) { display:none; }
+    }
   </style>
 </head>
 <body>
@@ -937,9 +957,19 @@
   <section class="hero prep-hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <div class="booked-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Confirmed</div>
       <h1 id="hero-h">Your call is booked!</h1>
-      <p class="hero-watch">Watch this short video before your call.</p>
+      <div class="appt-when" id="appt-when-wrap" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="appt-when"></span></div>
+      <div class="cal-box" id="cal-box" hidden>
+        <p class="cal-text">Add it to your calendar so you don't miss it.</p>
+        <div class="cal-btns">
+          <a class="cal-btn" id="gcal-btn" href="#" target="_blank" rel="noopener">Google Calendar</a>
+          <a class="cal-btn" id="ics-btn" href="#">Apple Calendar</a>
+          <a class="cal-btn" id="outlook-btn" href="#" target="_blank" rel="noopener">Outlook</a>
+        </div>
+      </div>
+      <p class="cal-fallback" id="cal-fallback">Your date, time and calendar links are in your confirmation email.</p>
+      <p class="resched-line" id="resched-line">Can't make it? <span id="resched-text"><a id="resched-link" href="#reschedule-link-placeholder" target="_blank" rel="noopener">Reschedule your call</a></span></p>
+      <p class="hero-watch">Watch this short video before your call (1:13). It explains what happens on the call and how Rise works.</p>
       <div class="vsl-player" id="prep-vsl-player">
         <video id="prep-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Preparation/precall-poster.jpg?v=2">
           <source src="../assets/Pages/Preparation/precall.mp4?v=12" type="video/mp4">
@@ -950,16 +980,6 @@
         <div class="vsl-controls" id="prep-vsl-controls">
           <button type="button" class="vsl-ctrl vsl-back" data-act="back" aria-label="Rewind 10 seconds"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4.5a7.5 7.5 0 1 1-7.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 1.5 8.5 4.5 12 7.5z" fill="currentColor"/><text x="12" y="15.4" text-anchor="middle" font-size="8.5" font-weight="700" font-family="inherit" fill="currentColor">10</text></svg></button>
           <div class="vsl-ctrl vsl-vol" aria-label="Volume"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><input type="range" id="prep-vsl-vol" min="0" max="1" step="0.05" value="1" aria-label="Volume"></div>
-        </div>
-      </div>
-      <p class="hero-sub" style="margin-top:1.75rem;">You're one step away from joining Rise. Your call is a short introduction and selection call: we get to know you, look at where you want to go, and see if Rise fits.</p>
-      <div class="appt-when" id="appt-when-wrap" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="appt-when"></span></div>
-      <div class="cal-box" id="cal-box" hidden>
-        <p class="cal-text">Your call is on <b id="cal-date"></b>. Add it to your calendar so you don't miss it.</p>
-        <div class="cal-btns">
-          <a class="cal-btn" id="gcal-btn" href="#" target="_blank" rel="noopener">Google Calendar</a>
-          <a class="cal-btn" id="ics-btn" href="#">Apple Calendar</a>
-          <a class="cal-btn" id="outlook-btn" href="#" target="_blank" rel="noopener">Outlook</a>
         </div>
       </div>
     </div>
@@ -976,6 +996,22 @@
         <div class="route-card"><div class="route-step">01</div><h3>Where you are now</h3><p>What genre you produce, how experienced you are, and whether you already finish tracks.</p></div>
         <div class="route-card"><div class="route-step">02</div><h3>Where you want to go</h3><p>Your goals for the next year, and the biggest bottleneck holding you back right now.</p></div>
         <div class="route-card"><div class="route-step">03</div><h3>Which program fits</h3><p>We walk you through Base and Core, pick the right one together, and check if now is the moment to invest the time and budget.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       8 · Prepare for your call
+       ══════════════════════════════════════════════ -->
+  <section class="sec center" id="prepare">
+    <div class="narrow">
+      <div class="section-eyebrow">Prepare for your call</div>
+      <h2 class="section-heading">Four things before we&nbsp;speak.</h2>
+      <div class="prep-list">
+        <div class="q-item"><b>01</b><span>The call takes 20 to 30 minutes. Keep 30 minutes free and sit somewhere quiet, with a working camera and microphone.</span></div>
+        <div class="q-item"><b>02</b><span>Write down your main goals for the next year, and what's holding you back right now.</span></div>
+        <div class="q-item"><b>03</b><span>Have your Spotify or SoundCloud ready, so we can listen to where you are.</span></div>
+        <div class="q-item"><b>04</b><span>Watch the video at the top and skim the <a href="https://guide.riseartistacademy.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">program guide</a>, so you know what we offer.</span></div>
       </div>
     </div>
   </section>
@@ -1022,6 +1058,106 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════════════════════════
+       5 · How Rise works
+       ══════════════════════════════════════════════ -->
+  <section class="sec center" id="how">
+    <div class="wrap">
+      <div class="section-eyebrow">How Rise works</div>
+      <h2 class="section-heading">Built by artists who release and play&nbsp;internationally.</h2>
+      <div class="section-body"><p>Rise is the artist academy of Recode Group. Next to Rise, we run four record labels and our own artist agency.</p></div>
+      <div class="brand-row" aria-label="Recode Group labels and agency">
+        <span class="brand-pill">Recode Records</span>
+        <span class="brand-pill">Recode Deep</span>
+        <span class="brand-pill">Revoke</span>
+        <span class="brand-pill">Rex</span>
+        <span class="brand-pill agency">Amplify Agency</span>
+      </div>
+
+      <div class="paths-grid">
+        <div class="path-card" data-program="base">
+          <div class="path-meta">Base &middot; 6 months</div>
+          <h3>From a loop to a finished track.</h3>
+          <div class="path-tag">Goal: three full, release-ready tracks within 6 months.</div>
+          <ul class="path-list">
+            <li>30 live lessons in a small group: 25 on production, 5 on artist development</li>
+            <li>A weekly 3-hour live class, plus homework on your own tracks</li>
+            <li>Direct feedback on your music from coaches who release and play out</li>
+            <li>Expect around 8 hours a week: the class plus homework</li>
+          </ul>
+          <div class="price-line">&euro;1,500 excl. VAT &middot; <span>Payment plans available</span></div>
+        </div>
+        <div class="path-card featured" data-program="core">
+          <div class="path-meta">Core &middot; 12 months</div>
+          <h3>From producer to artist.</h3>
+          <div class="path-tag">Goal: working toward 3 gigs or a festival booking within 90 days.</div>
+          <ul class="path-list">
+            <li>Your branding, goals and the concrete steps to get there</li>
+            <li>Weekly group sessions that hold you to your goals</li>
+            <li>Feedback on releases, bookings and your next steps</li>
+            <li><a href="https://writingcamps.netlify.app/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;">Remote Sessions</a> writing camps with our labels and agencies, plus masterclasses and the community</li>
+          </ul>
+          <div class="price-line">From &euro;2,650 excl. VAT &middot; <span>Payment plans available</span></div>
+        </div>
+      </div>
+      <p class="paths-note">Results are goals we work toward together, not guarantees. They depend on the time and energy you put in.</p>
+      <div style="margin-top:1.75rem;text-align:center;">
+        <a class="btn-ghost" href="https://guide.riseartistacademy.com/" target="_blank" rel="noopener">Read the full program guide &rarr;</a>
+        <p style="margin-top:10px;font-size:0.85rem;color:var(--muted);">Everything about our programs in one place.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       8b · FAQ
+       ══════════════════════════════════════════════ -->
+  <section class="sec faq" id="faq">
+    <div class="narrow">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-heading">Before your&nbsp;call.</h2>
+      <div class="faq-list">
+        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What will we talk about on the call?<span class="faq-icon"></span></button><div class="faq-a"><p>Your music and genre, how experienced you are and whether you finish tracks, your biggest bottleneck, and your goals. Then we explain how Rise works and which program fits you.</p></div></div>
+        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">Do I need to be able to finish tracks already?<span class="faq-icon"></span></button><div class="faq-a"><p>No. Base is built to take you from loops to finished, release-ready tracks. Core is for producers who already make music and want to grow as an artist: releases, branding and bookings.</p></div></div>
+        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What does Rise cost?<span class="faq-icon"></span></button><div class="faq-a"><p>Base is &euro;1,500 and Core starts from &euro;2,650 (both excl. VAT). Base can be split into up to 4 payments and Core into up to 12. We go through the options on the call.</p></div></div>
+        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">How much time does it take?<span class="faq-icon"></span></button><div class="faq-a"><p>Base takes around 8 hours a week: the weekly 3-hour live class plus homework on your own tracks. Core has weekly group sessions, plus the time you put into your releases and bookings.</p></div></div>
+        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What if I'm not sure Rise is right for me?<span class="faq-icon"></span></button><div class="faq-a"><p>That's what the call is for. We'll be straight with you about whether it fits, and if the timing isn't right, we'll tell you.</p></div></div>
+        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">Can I reschedule?<span class="faq-icon"></span></button><div class="faq-a"><p>Yes. Use the reschedule button on this page or the link in your confirmation email. Please reschedule instead of skipping, so your spot goes to the right moment.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       9 · Appointment details + reschedule
+       ══════════════════════════════════════════════ -->
+  <section class="closing">
+    <div class="closing-inner">
+      <div class="step-label">See you on the call</div>
+      <h2 id="closing-when">Your call is booked.</h2>
+      <p>Can't make it? Reschedule instead of skipping it, so your spot goes to the right moment.</p>
+            <a class="btn-ghost resched-btn" id="resched-btn" href="#reschedule-link-placeholder" target="_blank" rel="noopener">Reschedule your call &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       Optional: more about Rise
+       ══════════════════════════════════════════════ -->
+  <div class="optional-head"><span>Optional</span>More about Rise</div>
+  <!-- ══════════════════════════════════════════════
+       6 · Inside the academy
+       ══════════════════════════════════════════════ -->
+  <section class="sec center">
+    <div class="wrap">
+      <div class="section-eyebrow">Inside the academy</div>
+      <h2 class="section-heading">Your platform, lessons and&nbsp;tools.</h2>
+      <div class="shots" id="shots">
+        <img src="../assets/Platform/Pics/screenshot-1.png" alt="Rise platform: lessons, tools and sample packs" loading="lazy">
+        <img src="../assets/Platform/Pics/screenshot-3.png" alt="Rise platform: Ableton tool detail" loading="lazy">
+        <img class="shot-phone" src="../assets/photos/app-preview.jpg" alt="Rise app on mobile" loading="lazy">
+      </div>
+      <p class="shots-hint">Tap a screenshot to enlarge it.</p>
+    </div>
+  </section>
+
   <!-- Photo carousel: mix of Base + Core page photos -->
   <div class="photo-strip prep-strip" aria-hidden="true">
     <div class="photo-strip-track">
@@ -1055,133 +1191,9 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════
-       5 · How Rise works
-       ══════════════════════════════════════════════ -->
-  <section class="sec center" id="how">
-    <div class="wrap">
-      <div class="section-eyebrow">How Rise works</div>
-      <h2 class="section-heading">Built by artists who release and play&nbsp;internationally.</h2>
-      <div class="section-body"><p>Rise is the artist academy of Recode Group. Next to Rise, we run four record labels and our own artist agency.</p></div>
-      <div class="brand-row" aria-label="Recode Group labels and agency">
-        <span class="brand-pill">Recode Records</span>
-        <span class="brand-pill">Recode Deep</span>
-        <span class="brand-pill">Revoke</span>
-        <span class="brand-pill">Rex</span>
-        <span class="brand-pill agency">Amplify Agency</span>
-      </div>
-
-      <div class="paths-grid">
-        <div class="path-card" data-program="base">
-          <div class="path-meta">Base &middot; 6 months</div>
-          <h3>From a loop to a finished track.</h3>
-          <div class="path-tag">Goal: three full, release-ready tracks within 6 months.</div>
-          <ul class="path-list">
-            <li>30 live lessons in a small group: 25 on production, 5 on artist development</li>
-            <li>A weekly 3-hour live class, plus homework on your own tracks</li>
-            <li>Direct feedback on your music from coaches who release and play out</li>
-            <li>Expect around 8 hours a week: the class plus homework</li>
-          </ul>
-          <div class="price-line">From &euro;1,500 &middot; <span>Payment plans available</span></div>
-        </div>
-        <div class="path-card featured" data-program="core">
-          <div class="path-meta">Core &middot; 12 months</div>
-          <h3>From producer to artist.</h3>
-          <div class="path-tag">Goal: working toward 3 gigs or a festival booking within 90 days.</div>
-          <ul class="path-list">
-            <li>Your branding, goals and the concrete steps to get there</li>
-            <li>Weekly group sessions that hold you to your goals</li>
-            <li>Feedback on releases, bookings and your next steps</li>
-            <li><a href="https://writingcamps.netlify.app/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;">Remote Sessions</a> writing camps with our labels and agencies, plus masterclasses and the community</li>
-          </ul>
-          <div class="price-line">From &euro;2,650 &middot; <span>Payment plans available</span></div>
-        </div>
-      </div>
-      <p class="paths-note">Results are goals we work toward together, not guarantees. They depend on the time and energy you put in.</p>
-      <div style="margin-top:1.75rem;text-align:center;">
-        <a class="btn-ghost" href="https://guide.riseartistacademy.com/" target="_blank" rel="noopener">Read the full program guide &rarr;</a>
-        <p style="margin-top:10px;font-size:0.85rem;color:var(--muted);">Everything about our programs in one place.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       6 · Inside the academy
-       ══════════════════════════════════════════════ -->
-  <section class="sec center">
-    <div class="wrap">
-      <div class="section-eyebrow">Inside the academy</div>
-      <h2 class="section-heading">Your platform, lessons and&nbsp;tools.</h2>
-      <div class="shots" id="shots">
-        <img src="../assets/Platform/Pics/screenshot-1.png" alt="Rise platform: lessons, tools and sample packs" loading="lazy">
-        <img src="../assets/Platform/Pics/screenshot-3.png" alt="Rise platform: Ableton tool detail" loading="lazy">
-        <img class="shot-phone" src="../assets/photos/app-preview.jpg" alt="Rise app on mobile" loading="lazy">
-      </div>
-      <p class="shots-hint">Tap a screenshot to enlarge it.</p>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       7 · Free Artist Kit
-       ══════════════════════════════════════════════ -->
-  <section class="sec center">
-    <div class="narrow">
-      <div class="free-box">
-        <div>
-          <div class="step-label" style="margin-bottom:6px;">Free before your call</div>
-          <h3>Download your free Rise Artist Kit.</h3>
-          <p>11 video modules, a sample pack and two Ableton tools. Create your free account; if you join, it's already set up for onboarding.</p>
-        </div>
-        <a class="btn-ghost" href="https://riseartistacademy.com/store/bundles/rise-giveaway" target="_blank" rel="noopener">Get the kit &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       8 · Prepare for your call
-       ══════════════════════════════════════════════ -->
-  <section class="sec center" id="prepare">
-    <div class="narrow">
-      <div class="section-eyebrow">Prepare for your call</div>
-      <h2 class="section-heading">Four things before we&nbsp;speak.</h2>
-      <div class="prep-list">
-        <div class="q-item"><b>01</b><span>The call takes 20 to 30 minutes. Keep 30 minutes free and sit somewhere quiet, with a working camera and microphone.</span></div>
-        <div class="q-item"><b>02</b><span>Write down your main goals for the next year, and what's holding you back right now.</span></div>
-        <div class="q-item"><b>03</b><span>Have your Spotify or SoundCloud ready, so we can listen to where you are.</span></div>
-        <div class="q-item"><b>04</b><span>Watch the video at the top and skim the <a href="https://guide.riseartistacademy.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">program guide</a>, so you know what we offer.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       8b · FAQ
-       ══════════════════════════════════════════════ -->
-  <section class="sec faq" id="faq">
-    <div class="narrow">
-      <div class="section-eyebrow">Questions</div>
-      <h2 class="section-heading">Before your&nbsp;call.</h2>
-      <div class="faq-list">
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What will we talk about on the call?<span class="faq-icon"></span></button><div class="faq-a"><p>Your music and genre, how experienced you are and whether you finish tracks, your biggest bottleneck, and your goals. Then we explain how Rise works and which program fits you.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">Do I need to be able to finish tracks already?<span class="faq-icon"></span></button><div class="faq-a"><p>No. Base is built to take you from loops to finished, release-ready tracks. Core is for producers who already make music and want to grow as an artist: releases, branding and bookings.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What does Rise cost?<span class="faq-icon"></span></button><div class="faq-a"><p>Base starts from &euro;1,500 and Core from &euro;2,650. Base can be split into up to 4 payments and Core into up to 12. We go through the options on the call.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">How much time does it take?<span class="faq-icon"></span></button><div class="faq-a"><p>Base takes around 8 hours a week: the weekly 3-hour live class plus homework on your own tracks. Core has weekly group sessions, plus the time you put into your releases and bookings.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What if I'm not sure Rise is right for me?<span class="faq-icon"></span></button><div class="faq-a"><p>That's what the call is for. We'll be straight with you about whether it fits, and if the timing isn't right, we'll tell you.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">Can I reschedule?<span class="faq-icon"></span></button><div class="faq-a"><p>Yes. Use the reschedule link at the bottom of this page, or the link in your confirmation email. Please reschedule instead of skipping, so your spot goes to the right moment.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       9 · Appointment details + reschedule
-       ══════════════════════════════════════════════ -->
-  <section class="closing">
-    <div class="closing-inner">
-      <div class="step-label">See you on the call</div>
-      <h2 id="closing-when">Your call is booked.</h2>
-      <p>Can't make it? Reschedule instead of skipping it, so your spot goes to the right moment.</p>
-      <a class="btn-ghost resched-btn" id="resched-btn" href="#" target="_blank" rel="noopener">Reschedule your call &rarr;</a>
-    </div>
-  </section>
+  <div class="narrow" style="text-align:center;padding:0 20px 4rem;">
+    <p class="kit-note">Want a head start? The free <a href="https://riseartistacademy.com/store/bundles/rise-giveaway" target="_blank" rel="noopener">Rise Artist Kit</a> has 11 video modules, a sample pack and two Ableton tools. Optional, not needed for your call.</p>
+  </div>
 
   <div class="lightbox" id="lightbox" hidden aria-modal="true" role="dialog" aria-label="Screenshot">
     <button type="button" class="lb-close" aria-label="Close">&times;</button>
@@ -1219,12 +1231,13 @@
       var start = null, label = '';
       if (q.get('start')) { var d = new Date(q.get('start')); if (!isNaN(d)) start = d; }
       if (start) {
-        label = start.toLocaleString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+        label = start.toLocaleString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
       } else if (q.get('date')) {
         label = clean(q.get('date')) + (q.get('time') ? ' at ' + clean(q.get('time')) : '');
       }
       if (label) {
         document.getElementById('appt-when').textContent = label + ' \u00b7 20\u201330 min'; document.getElementById('appt-when-wrap').hidden = false;
+        if (!start) document.getElementById('cal-fallback').textContent = 'Calendar links are in your confirmation email.';
         document.getElementById('closing-when').textContent = 'See you ' + label + '.';
       }
 
@@ -1241,13 +1254,16 @@
         outlook.href = 'https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=' + encodeURIComponent(title) + '&startdt=' + encodeURIComponent(start.toISOString()) + '&enddt=' + encodeURIComponent(end.toISOString()) + '&body=' + encodeURIComponent(details);
         document.getElementById('cal-date').textContent = label;
         document.getElementById('cal-box').hidden = false;
+        document.getElementById('cal-fallback').hidden = true;
       }
 
       // Reschedule link. PLACEHOLDER: replace RESCHEDULE_URL with the real reschedule link.
-      // A per-lead link can also be passed in the page URL as ?reschedule=<https-url>.
+      // A per-lead link can also be passed in the page URL as ?reschedule=<https-url> (that one wins).
       var RESCHEDULE_URL = '#reschedule-link-placeholder';
       var rq = q.get('reschedule');
-      document.getElementById('resched-btn').href = (rq && /^https:\/\//.test(rq)) ? rq : RESCHEDULE_URL;
+      var rurl = (rq && /^https:\/\//.test(rq)) ? rq : RESCHEDULE_URL;
+      document.getElementById('resched-btn').href = rurl;
+      document.getElementById('resched-link').href = rurl;
 
 
       var p = (q.get('program') || '').toLowerCase();

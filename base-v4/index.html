@@ -770,7 +770,7 @@
     .hero-apply h1 { font-size:clamp(1.9rem, 4.6vw, 3rem); margin-bottom:10px; }
     .video-line { font-size:0.95rem; color:rgba(255,255,255,0.75); margin:0 auto 1rem; }
     .video-line b { color:#fff; font-weight:600; }
-    .hero-apply .apply-card { margin-top:1.25rem; }
+    .hero-apply .apply-card { margin-top:2.5rem; }
     .form-note { font-size:0.82rem; color:var(--muted); margin-top:0.9rem; }
     .form-note strong { color:var(--accent); font-weight:700; }
     .res-grid.res-3 { grid-template-columns:repeat(3,1fr); max-width:620px; }
@@ -797,6 +797,16 @@
       .photo-strip-track img.dup { display:none; }
       .site-header .header-cta { padding:8px 14px; font-size:0.72rem; }
     }
+  
+    /* partners: static wrap on desktop, rotating carousel on mobile */
+    .partners-logos img.dup { display:none; }
+    @keyframes partners-scroll { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    @media (max-width:700px) {
+      .partners-row { overflow:hidden; padding-left:0 !important; padding-right:0 !important; }
+      .partners-logos { flex-wrap:nowrap; justify-content:flex-start; width:max-content; max-width:none; gap:0; animation:partners-scroll 28s linear infinite; }
+      .partners-logos img, .partners-logos img.dup { display:block; margin-right:34px; transform:none; max-width:130px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .partners-logos { animation:none; } }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -806,7 +816,7 @@
   </a>
   <header class="site-header" id="site-header">
     <div class="site-header-inner">
-      <a class="header-logo header-brand" href="/homepage-v3/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"><span>Rise Base</span></a>
+      <a class="header-logo header-brand" href="/homepage-v3/" title="Rise"><img src="../assets/logo.png" alt="Rise" style="width:36px;height:36px;border-radius:7px;"><span>Rise</span></a>
       <a class="header-cta" href="#apply" onclick="return goApply()">Apply Now</a>
     </div>
   </header>
@@ -815,7 +825,7 @@
     <div class="hero-bg"></div>
     <div class="hero-content">
       <h1>Finish 3 release-ready tracks in 6&nbsp;months.</h1>
-      <p class="video-line"><b>Watch first (1:37):</b> see how Base helps you finish your tracks.</p>
+      <p class="video-line"><b>Watch first:</b> see how Base helps you finish your tracks.</p>
       <div class="vsl-video-wrap" id="base-vsl-player">
         <video id="base-vsl-video" playsinline preload="metadata" poster="../assets/vsl/Base.png">
           <source src="../assets/vsl/Base%20Forefront%20VSL_Tessel_V2.mp4" type="video/mp4">
@@ -866,8 +876,40 @@
       <img src="../assets/partners/guide/tracks-to-the-max.png" alt="Tracks to the Max" loading="lazy" style="height:38px;">
       <img src="../assets/partners/guide/bpm-europe.png" alt="BPM Europe" loading="lazy" style="height:40px;">
       <img src="../assets/partners/guide/labelradar.png" alt="LabelRadar by The Beatport Group" loading="lazy" style="height:28px;">
+      <img class="dup" aria-hidden="true" src="../assets/partners/guide/clear.png" alt="Clear Agency" loading="lazy" style="height:26px;">
+      <img class="dup" aria-hidden="true" src="../assets/partners/guide/recode-records.png" alt="Recode Records" loading="lazy" style="height:30px;">
+      <img class="dup" aria-hidden="true" src="../assets/partners/guide/weraveyou.png" alt="We Rave You" loading="lazy" style="height:26px;">
+      <img class="dup" aria-hidden="true" src="../assets/partners/guide/recode-deep.png" alt="Recode Deep" loading="lazy" style="height:34px;">
+      <img class="dup" aria-hidden="true" src="../assets/partners/guide/revoke.png" alt="Revoke" loading="lazy" style="height:26px;">
+      <img class="dup" aria-hidden="true" src="../assets/partners/guide/tracks-to-the-max.png" alt="Tracks to the Max" loading="lazy" style="height:38px;">
+      <img class="dup" aria-hidden="true" src="../assets/partners/guide/bpm-europe.png" alt="BPM Europe" loading="lazy" style="height:40px;">
+      <img class="dup" aria-hidden="true" src="../assets/partners/guide/labelradar.png" alt="LabelRadar by The Beatport Group" loading="lazy" style="height:28px;">
     </div>
   </section>
+
+  <div class="photo-strip">
+    <div class="photo-strip-track">
+      <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_6.png" alt="Rise" loading="lazy">
+      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_8.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_9.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_10.JPG" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img src="../assets/photos/Aug/aug_6.png" alt="Rise" loading="lazy">
+      <!-- Duplicate for seamless loop -->
+      <img class="dup" src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_8.JPG" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_9.JPG" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_10.JPG" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_6.png" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
+      <img class="dup" src="../assets/photos/Aug/aug_8.JPG" alt="Rise" loading="lazy">
+    </div>
+  </div>
 
   <section class="section" id="who-base" style="text-align:center;">
     <div class="section-inner">
@@ -1028,8 +1070,8 @@
         </div>
 
         <div class="coach-card">
-          <img src="../assets/Pages/Coaches/Milan.png" alt="Milan Fernandes" class="coach-avatar">
-          <div class="coach-name">Milan Fernandes</div>
+          <img src="../assets/Pages/Coaches/Milan.png" alt="Milan" class="coach-avatar">
+          <div class="coach-name">Milan</div>
           <div class="coach-role">Production Coach &middot; House Artist</div>
           <p class="coach-bio">Growing house artist in the Dutch scene, with a sharp ear for arrangement and sound design. Coaches the Base production lessons alongside Jurrian.</p>
         </div>
@@ -1038,29 +1080,7 @@
     </div>
   </section>
 
-  <div class="photo-strip">
-    <div class="photo-strip-track">
-      <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/Aug/aug_6.png" alt="Rise" loading="lazy">
-      <img src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/Aug/aug_8.JPG" alt="Rise" loading="lazy">
-      <img src="../assets/photos/Aug/aug_9.JPG" alt="Rise" loading="lazy">
-      <img src="../assets/photos/Aug/aug_10.JPG" alt="Rise" loading="lazy">
-      <img src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
-      <img src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
-      <img src="../assets/photos/Aug/aug_6.png" alt="Rise" loading="lazy">
-      <!-- Duplicate for seamless loop -->
-      <img class="dup" src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
-      <img class="dup" src="../assets/photos/Aug/aug_8.JPG" alt="Rise" loading="lazy">
-      <img class="dup" src="../assets/photos/Aug/aug_9.JPG" alt="Rise" loading="lazy">
-      <img class="dup" src="../assets/photos/Aug/aug_10.JPG" alt="Rise" loading="lazy">
-      <img class="dup" src="../assets/photos/Aug/aug_23.png" alt="Rise" loading="lazy">
-      <img class="dup" src="../assets/photos/Aug/aug_01.jpeg" alt="Rise" loading="lazy">
-      <img class="dup" src="../assets/photos/Aug/aug_6.png" alt="Rise" loading="lazy">
-      <img class="dup" src="../assets/photos/photo-8.jpg" alt="Rise" loading="lazy">
-      <img class="dup" src="../assets/photos/Aug/aug_8.JPG" alt="Rise" loading="lazy">
-    </div>
-  </div>
+
 
   <section class="section faq" id="faq">
     <div class="section-inner">
