@@ -865,9 +865,9 @@
     .v5-eyebrow { text-align:center; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin:0 0 22px; font-weight:700; }
     .v5-marquee { overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); }
     .v5-track { --lg-gap:64px; display:flex; gap:var(--lg-gap); will-change:transform; backface-visibility:hidden; width:max-content; align-items:center; animation:v5scroll 32s linear infinite; }
-    .v5-track img { width:auto; opacity:.7; filter:grayscale(1) brightness(1.6); transition:opacity .3s,filter .3s; }
-    .v5-track img:hover { opacity:1; filter:none; }
-    @keyframes v5scroll { from { transform:translate3d(0,0,0); } to { transform:translate3d(calc(-50% - var(--lg-gap) / 2),0,0); } }
+    .v5-track img { flex:none; opacity:.7; transition:opacity .3s; }
+    .v5-track img:hover { opacity:1; }
+    @keyframes v5scroll { from { transform:translate3d(0,0,0); } to { transform:translate3d(var(--lg-shift, calc(-50% - var(--lg-gap) / 2)),0,0); } }
     .v5-sub { color:var(--muted); max-width:520px; margin:10px auto 0; font-size:.95rem; }
     .v5-stories { overflow:hidden; }
     .v5-wall { margin:2.5rem calc(50% - 50vw) 0; display:grid; gap:16px; text-align:left; overflow:hidden;
@@ -902,7 +902,8 @@
     }
 
     /* ── v5 round 2 ── */
-    .feature-grid { grid-template-columns:repeat(3,1fr); }
+    .feature-grid { grid-template-columns:repeat(4,1fr); gap:16px; }
+    .feature-card p { font-size:.9rem; line-height:1.5; }
     .v5-mid-cta { text-align:center; margin-top:2.25rem; }
     .v5-mid-cta p { font-size:.8rem; color:var(--muted); margin-top:10px; }
     @media (max-width:900px) {
@@ -932,6 +933,26 @@
       .v5-stack img { width:26px; height:26px; margin-left:-7px; }
       .v5-avatars { gap:8px; font-size:.74rem; }
     }
+    /* ── v5 round 5: equal-height testimonial blocks ── */
+    .v5-row { align-items:stretch; }
+    .v5-wall .video-card, .v5-t { height:400px; }
+    .v5-wall > .v5-row > .video-card { width:225px; }
+    .v5-t { width:280px; display:flex; flex-direction:column; padding:16px; }
+    .v5-t p { font-size:.9rem; line-height:1.45; }
+    .v5-who { margin:12px 0; }
+    .v5-t .video-card, .v5-photo-media { flex:1 1 auto; min-height:0; width:100%; height:auto; aspect-ratio:auto; border-radius:10px; overflow:hidden; }
+    .v5-photo-media img { width:100%; height:100%; object-fit:cover; display:block; }
+    .v5-t .video-card .play-btn svg { width:40px; height:40px; }
+    @media (max-width:900px) {
+      .v5-wall .video-card, .v5-t { height:330px; }
+      .v5-wall > .v5-row > .video-card { width:186px; }
+      .v5-t .video-card { height:auto; width:100%; }
+      .v5-t { width:230px; padding:14px; }
+      .v5-t p { font-size:.8rem; }
+      .v5-who { margin:10px 0; font-size:.76rem; }
+      .v5-who img { width:26px; height:26px; }
+    }
+    @media (max-width:900px) { .v5-lead { font-size:1rem; line-height:1.55; } }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -953,8 +974,7 @@
         <div class="v5-copy">
           <span class="v5-pill"><b>CORE</b> 12-month artist program</span>
           <h1>Work toward your first <span class="v5-grad">festival booking</span> in 90&nbsp;days.</h1>
-          <p class="v5-lead">For producers who already finish tracks. We help you build the
-            <span class="v5-rotate"><span class="on">sound</span><span>story</span><span>network</span><span>bookings</span></span><br>that turn your music into a career.</p>
+          <p class="v5-lead">We help you build the <span class="v5-rotate"><span class="on">sound</span><span>story</span><span>network</span><span>bookings</span></span> that turns your music into a career.</p>
           <ul class="v5-checks">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Two group check-ins a week that hold you to your goals</li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Feedback on your releases, outreach and bookings</li>
@@ -1004,7 +1024,7 @@
 
   <section class="v5-logos" aria-label="Who we work with">
     <p class="v5-eyebrow">Who we work with</p>
-    <div class="v5-marquee"><div class="v5-track"><img src="../assets/partners/guide/clear.png" alt="Clear Agency" style="height:26px"><img src="../assets/partners/guide/recode-records.png" alt="Recode Records" style="height:30px"><img src="../assets/partners/guide/tracks-to-the-max.png" alt="Tracks to the Max" style="height:38px"><img src="../assets/partners/guide/recode-deep.png" alt="Recode Deep" style="height:34px"><img src="../assets/partners/guide/revoke.png" alt="Revoke" style="height:26px"><img src="../assets/partners/guide/bpm-europe.png" alt="BPM Europe" style="height:40px"><img src="../assets/partners/guide/labelradar.png" alt="LabelRadar" style="height:28px"><img src="../assets/partners/guide/clear.png" alt="" aria-hidden="true" style="height:26px"><img src="../assets/partners/guide/recode-records.png" alt="" aria-hidden="true" style="height:30px"><img src="../assets/partners/guide/tracks-to-the-max.png" alt="" aria-hidden="true" style="height:38px"><img src="../assets/partners/guide/recode-deep.png" alt="" aria-hidden="true" style="height:34px"><img src="../assets/partners/guide/revoke.png" alt="" aria-hidden="true" style="height:26px"><img src="../assets/partners/guide/bpm-europe.png" alt="" aria-hidden="true" style="height:40px"><img src="../assets/partners/guide/labelradar.png" alt="" aria-hidden="true" style="height:28px"></div></div>
+    <div class="v5-marquee"><div class="v5-track"><img src="../assets/partners/guide/mono/clear.png" alt="Clear Agency" width="116" height="26" style="height:26px;width:116px" decoding="async"><img src="../assets/partners/guide/mono/recode-records.png" alt="Recode Records" width="105" height="30" style="height:30px;width:105px" decoding="async"><img src="../assets/partners/guide/mono/tracks-to-the-max.png" alt="Tracks to the Max" width="84" height="38" style="height:38px;width:84px" decoding="async"><img src="../assets/partners/guide/mono/recode-deep.png" alt="Recode Deep" width="40" height="34" style="height:34px;width:40px" decoding="async"><img src="../assets/partners/guide/mono/revoke.png" alt="Revoke" width="109" height="26" style="height:26px;width:109px" decoding="async"><img src="../assets/partners/guide/mono/bpm-europe.png" alt="BPM Europe" width="28" height="40" style="height:40px;width:28px" decoding="async"><img src="../assets/partners/guide/mono/labelradar.png" alt="LabelRadar" width="132" height="28" style="height:28px;width:132px" decoding="async"><img src="../assets/partners/guide/mono/clear.png" alt="" aria-hidden="true" width="116" height="26" style="height:26px;width:116px" decoding="async"><img src="../assets/partners/guide/mono/recode-records.png" alt="" aria-hidden="true" width="105" height="30" style="height:30px;width:105px" decoding="async"><img src="../assets/partners/guide/mono/tracks-to-the-max.png" alt="" aria-hidden="true" width="84" height="38" style="height:38px;width:84px" decoding="async"><img src="../assets/partners/guide/mono/recode-deep.png" alt="" aria-hidden="true" width="40" height="34" style="height:34px;width:40px" decoding="async"><img src="../assets/partners/guide/mono/revoke.png" alt="" aria-hidden="true" width="109" height="26" style="height:26px;width:109px" decoding="async"><img src="../assets/partners/guide/mono/bpm-europe.png" alt="" aria-hidden="true" width="28" height="40" style="height:40px;width:28px" decoding="async"><img src="../assets/partners/guide/mono/labelradar.png" alt="" aria-hidden="true" width="132" height="28" style="height:28px;width:132px" decoding="async"></div></div>
   </section>
 
   
@@ -1053,15 +1073,19 @@
       <div class="feature-grid">
         <div class="feature-card">
           <h3>Two check-ins a week</h3>
-          <p>Group check-ins on your plan: are you on track, what worked, what didn't, and what you do next.</p>
+          <p>Group check-ins on your plan: are you on track, what worked, and what you do next.</p>
         </div>
         <div class="feature-card">
-          <h3>Feedback on releases and bookings</h3>
-          <p>Targeted feedback on your tracks, your release route and your outreach. Rise teaches you how to get booked; we are not a booking agency and we don't book you.</p>
+          <h3>Feedback on your career</h3>
+          <p>Direct feedback on your tracks, releases and outreach, so you learn how to get booked.</p>
         </div>
         <div class="feature-card">
-          <h3>Community, masterclasses and writing camps</h3>
-          <p>The Industry Code lessons on the platform, masterclasses, 5 writing camps so far (including Remote Sessions with our labels) and members who end up on each other's line-ups.</p>
+          <h3>Community</h3>
+          <p>Artists working toward the same goal, who push each other and end up on each other's line-ups.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Masterclasses, events and writing camps</h3>
+          <p>Masterclasses, events and 5 writing camps so far, including Remote Sessions with our labels.</p>
         </div>
       </div>
     </div>
@@ -1479,21 +1503,24 @@
 
   var C = '../assets/Testimonials/Voor%20site/Clips/', TH = C + 'Prep/thumbs/';
   var S = '../assets/Testimonials/Screenshots/';
-  var R = [ // video, quote, video, quote ... so text and video always alternate
-    { v: C + 'Prep/vendenti_album.mp4', p: TH + 'vendenti_album.jpg' },
-    { q: "The biggest change has been the way I approach my music career. I've become proactive.", n: 'Jip', img: TH + 'yip_proactive.jpg' },
-    { v: C + 'Prep/yip_proactive.mp4', p: TH + 'yip_proactive.jpg' },
-    { q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", n: 'Vendenti', img: TH + 'vendenti_album.jpg' },
-    { v: C + 'Prep/thalia_momentum.mp4', p: TH + 'thalia_momentum.jpg' },
-    { q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", n: 'Thalia', img: TH + 'thalia_momentum.jpg' },
+  // Every block has the same height. Plain blocks are a video; quote blocks have the quote on top
+  // and a smaller video (or a photo when there is no video) filling the rest.
+  var R = [
+    { q: "The biggest change has been the way I approach my music career. I've become proactive.", n: 'Jip', img: TH + 'yip_proactive.jpg', v: C + 'Prep/yip_proactive.mp4', p: TH + 'yip_proactive.jpg' },
     { v: C + 'Prep/ad_testimonials.mp4', p: TH + 'ad_testimonials.jpg' },
-    { q: "The community was an eye-opener for me.", n: 'Max', img: S + 'Max.png' },
+    { q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", n: 'Vendenti', img: TH + 'vendenti_album.jpg', v: C + 'Prep/vendenti_album.mp4', p: TH + 'vendenti_album.jpg' },
+    { q: "The community was an eye-opener for me.", n: 'Max', img: S + 'Max.png', photo: S + 'Max2.jpg' },
     { v: C + 'Final/8_mcy_B.mp4', p: C + 'Final/thumbs/8.png' },
-    { q: "When you drift off track, people help you.", n: 'Levi', img: S + 'Levi.png' }
+    { q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", n: 'Thalia', img: TH + 'thalia_momentum.jpg', v: C + 'Prep/thalia_momentum.mp4', p: TH + 'thalia_momentum.jpg' },
+    { q: "When you drift off track, people help you.", n: 'Levi', img: S + 'Levi.png', photo: S + 'Levi2.png' }
   ];
+  function vid(r) {
+    return '<div class="video-card"><video poster="' + r.p + '" preload="none" playsinline webkit-playsinline><source src="' + r.v + '" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>';
+  }
   function card(r) {
-    if (r.v) return '<div class="video-card"><video poster="' + r.p + '" preload="none" playsinline webkit-playsinline><source src="' + r.v + '" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>';
-    return '<div class="v5-t"><p>&ldquo;' + r.q + '&rdquo;</p><div class="v5-who"><img src="' + r.img + '" alt=""><span><b>' + r.n + '</b>Rise member</span></div></div>';
+    if (!r.q) return vid(r);
+    var media = r.v ? vid(r) : '<div class="v5-photo-media"><img src="' + r.photo + '" alt="' + r.n + '" loading="lazy"></div>';
+    return '<div class="v5-t"><p>&ldquo;' + r.q + '&rdquo;</p><div class="v5-who"><img src="' + r.img + '" alt=""><span><b>' + r.n + '</b>Rise member</span></div>' + media + '</div>';
   }
   var wall = document.getElementById('v5-wall');
   if (wall) {
@@ -1505,6 +1532,21 @@
   }
 })();
 
+</script>
+
+<script>
+// Logo marquee: measure the exact width of one logo set once images are loaded, so the loop never jumps
+(function () {
+  var t = document.querySelector('.v5-track'); if (!t) return;
+  var imgs = [].slice.call(t.querySelectorAll('img'));
+  function set() {
+    var half = imgs.length / 2, first = imgs[0], mirror = imgs[half];
+    if (!first || !mirror) return;
+    t.style.setProperty('--lg-shift', -(mirror.offsetLeft - first.offsetLeft) + 'px');
+  }
+  Promise.all(imgs.map(function (i) { return i.decode ? i.decode().catch(function () {}) : Promise.resolve(); })).then(set);
+  window.addEventListener('resize', set);
+})();
 </script>
 </body>
 </html>
