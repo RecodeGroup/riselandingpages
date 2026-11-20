@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Rise – style preview (not live)</title>
+<style>
+  /* ── Rise design tokens (one place, later → Tailwind theme) ── */
+  :root{
+    --bg:#0a0a0a; --bg-2:#141414; --card:rgba(255,255,255,.035); --line:rgba(255,255,255,.09);
+    --text:#fff; --muted:rgba(255,255,255,.62); --accent:#ff683e; --accent-2:#ffb199;
+    --radius:18px; --font:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.5}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .preview-flag{position:fixed;bottom:14px;left:14px;z-index:99;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:#222;border:1px solid var(--line);color:var(--muted);padding:6px 10px;border-radius:99px}
+
+  /* ── Header ── */
+  header{position:absolute;top:0;left:0;right:0;z-index:5}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;color:#fff;text-decoration:none}
+  .brand img{width:34px;height:34px;border-radius:8px}
+
+  /* ── HERO: background photo + spotlight (Aceternity "Spotlight" pattern) ── */
+  .hero{position:relative;overflow:hidden;padding:128px 0 72px;isolation:isolate}
+  .hero-photo{position:absolute;inset:0;z-index:-3;background:url('../assets/Pages/Core/ADE2025-007.jpg') center 30%/cover;filter:grayscale(.35);transform:scale(1.05)}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-2;background:
+      linear-gradient(90deg,rgba(10,10,10,.96) 0%,rgba(10,10,10,.85) 45%,rgba(10,10,10,.6) 100%),
+      linear-gradient(0deg,var(--bg) 0%,transparent 35%)}
+  .spot{position:absolute;z-index:-1;width:900px;height:900px;left:-250px;top:-420px;pointer-events:none;
+      background:radial-gradient(closest-side,rgba(255,104,62,.28),transparent 70%);animation:spot 9s ease-in-out infinite alternate}
+  @keyframes spot{to{transform:translate(160px,60px)}}
+  .grid-bg{position:absolute;inset:0;z-index:-1;opacity:.35;pointer-events:none;
+      background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+      background-size:56px 56px;mask-image:radial-gradient(ellipse at 30% 20%,#000 10%,transparent 65%)}
+
+  .hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:56px;align-items:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border:1px solid var(--line);border-radius:99px;background:rgba(255,255,255,.04);font-size:.82rem;color:var(--muted);backdrop-filter:blur(6px)}
+  .pill b{background:var(--accent);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:99px;letter-spacing:.04em}
+  h1{font-size:clamp(2.3rem,5vw,3.6rem);line-height:1.04;letter-spacing:-.035em;margin:20px 0 18px;font-weight:800}
+  /* Magic UI "Animated gradient text" pattern */
+  .grad{background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+  @keyframes shine{to{background-position:200% center}}
+  /* React Bits "Rotating text" pattern */
+  .rotate{display:inline-grid;vertical-align:bottom;height:1.25em;overflow:hidden}
+  .rotate span{grid-area:1/1;transform:translateY(110%);opacity:0;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .55s}
+  .rotate span.on{transform:none;opacity:1}
+  .rotate span.out{transform:translateY(-110%);opacity:0}
+  .lead{font-size:1.12rem;color:var(--muted);max-width:520px}
+  .lead strong{color:#fff;font-weight:600}
+  .checks{list-style:none;margin:26px 0 30px;display:grid;gap:10px}
+  .checks li{display:flex;gap:10px;align-items:flex-start;font-size:.98rem}
+  .checks svg{flex:none;margin-top:3px}
+  .cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+  /* Magic UI "Shimmer button" pattern */
+  .btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:12px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none;overflow:hidden;box-shadow:0 10px 40px -10px rgba(255,104,62,.7)}
+  .btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-100%);animation:sweep 3.2s ease-in-out infinite}
+  @keyframes sweep{60%,100%{transform:translateX(100%)}}
+  .avatars{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted)}
+  .avatars .stack{display:flex}
+  .avatars img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--bg);margin-left:-8px}
+  .avatars img:first-child{margin-left:0}
+  .stars{color:#ffc24b;letter-spacing:1px}
+
+  /* Video card with moving border (Aceternity "Moving border" / Magic UI "Border beam") */
+  .video-shell{position:relative;border-radius:var(--radius);padding:1px;background:var(--line);overflow:hidden}
+  .video-shell::before{content:"";position:absolute;inset:-60%;background:conic-gradient(from 0deg,transparent 0 75%,var(--accent) 88%,transparent 100%);animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .video-inner{position:relative;border-radius:calc(var(--radius) - 1px);overflow:hidden;background:#000;aspect-ratio:16/9}
+  .video-inner video{width:100%;height:100%;object-fit:cover;display:block}
+  .video-cap{display:flex;justify-content:space-between;gap:12px;margin-top:14px;font-size:.85rem;color:var(--muted)}
+  .live{display:inline-flex;align-items:center;gap:8px}
+  .live i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(255,104,62,.6);animation:ping 1.8s infinite}
+  @keyframes ping{to{box-shadow:0 0 0 10px rgba(255,104,62,0)}}
+
+  /* ── Stats (Magic UI "Number ticker") ── */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);backdrop-filter:blur(8px)}
+  .stat{padding:22px 24px}
+  .stat+.stat{border-left:1px solid var(--line)}
+  .stat .n{font-size:2rem;font-weight:800;letter-spacing:-.03em}
+  .stat .n em{font-style:normal;color:var(--accent)}
+  .stat .l{font-size:.85rem;color:var(--muted)}
+
+  /* ── Logo cloud (Tailark "Logo cloud" + Magic UI "Marquee") ── */
+  .logos{padding:42px 0 18px}
+  .eyebrow{text-align:center;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+  .marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .track{display:flex;gap:64px;width:max-content;animation:scroll 32s linear infinite;align-items:center}
+  .track img{height:34px;width:auto;opacity:.7;filter:grayscale(1) brightness(1.6);transition:.3s}
+  .track img:hover{opacity:1;filter:none}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ── Testimonial wall (all reviews visible, 2 counter-scrolling columns per side) ── */
+  .section{padding:96px 0}
+  .h2{font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.03em;line-height:1.1;text-align:center;font-weight:800}
+  .sub{color:var(--muted);text-align:center;max-width:560px;margin:12px auto 0}
+  .wall{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;height:560px;overflow:hidden;margin-top:48px;
+      mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent)}
+  .col{display:flex;flex-direction:column;gap:18px;animation:up 38s linear infinite}
+  .col.slow{animation-duration:48s}
+  .col.rev{animation-direction:reverse}
+  .wall:hover .col{animation-play-state:paused}
+  @keyframes up{to{transform:translateY(-50%)}}
+  .t{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:20px}
+  .t p{font-size:.95rem}
+  .t .who{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:.84rem;color:var(--muted)}
+  .t .who img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+  .t .who b{color:#fff;font-weight:600;display:block}
+  .t.video{padding:0;overflow:hidden}
+  .t.video img{aspect-ratio:9/12;object-fit:cover;width:100%}
+  .t.video div{padding:14px 18px;font-size:.84rem;color:var(--muted)}
+
+  @media (max-width:880px){
+    .hero{padding:104px 0 48px}
+    .hero-grid{grid-template-columns:1fr;gap:32px}
+    .hero::before{background:linear-gradient(180deg,rgba(10,10,10,.75),rgba(10,10,10,.95) 60%,var(--bg))}
+    .stats{grid-template-columns:1fr 1fr 1fr}.stat{padding:16px 12px}.stat .n{font-size:1.4rem}.stat .l{font-size:.75rem}
+    .wall{grid-template-columns:1fr 1fr;height:520px}.wall .col:nth-child(3){display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="preview-flag">Style preview · not live</div>
+
+<header><div class="wrap">
+  <a class="brand" href="#"><img src="../assets/logo.png" alt="">Rise</a>
+</div></header>
+
+<!-- ═════════ HERO (the only part that changes per A/B test) ═════════ -->
+<section class="hero">
+  <div class="hero-photo"></div><div class="grid-bg"></div><div class="spot"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="pill"><b>CORE</b> 12-month artist program · selection only</span>
+        <h1>Work toward your first <span class="grad">festival booking</span> in 90&nbsp;days.</h1>
+        <p class="lead">For producers who already finish tracks. We help you build the
+          <span class="rotate"><span class="on"><strong>sound</strong></span><span><strong>story</strong></span><span><strong>network</strong></span><span><strong>bookings</strong></span></span>
+          that turn music into a career.</p>
+        <ul class="checks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Two group check-ins a week that hold you to your goals</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Feedback on releases, outreach and bookings</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Direct line to our labels, promoters and agency</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn" href="#">Apply for Core <span aria-hidden="true">→</span></a>
+          <div class="avatars">
+            <div class="stack">
+              <img src="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/yip_proactive.jpg" alt="">
+              <img src="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/vendenti_album.jpg" alt="">
+              <img src="../assets/Testimonials/Voor%20site/Clips/Prep/thumbs/thalia_momentum.jpg" alt="">
+            </div>
+            <div><span class="stars">★★★★★</span><br>38 artists since 2023</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="video-shell"><div class="video-inner">
+          <video controls playsinline preload="metadata" poster="../assets/Pages/Core/Thumbnail.png">
+            <source src="../assets/Pages/Core/Maurits%20VSL.mp4" type="video/mp4">
+          </video>
+        </div></div>
+        <div class="video-cap"><span class="live"><i></i>Watch first: how Core works</span><span>Maurits · Artist Development Coach</span></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n"><span class="tick" data-to="7.9" data-dec="1">0</span><em>M+</em></div><div class="l">streams</div></div>
+      <div class="stat"><div class="n"><span class="tick" data-to="108">0</span></div><div class="l">gigs &amp; bookings</div></div>
+      <div class="stat"><div class="n"><span class="tick" data-to="98">0</span><em>+</em></div><div class="l">tracks released</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FIXED BLOCKS (same on every variant) ═════════ -->
+<section class="logos">
+  <p class="eyebrow">Who we work with</p>
+  <div class="marquee"><div class="track">
+    <img src="../assets/partners/guide/clear.png" alt="Clear"><img src="../assets/partners/guide/recode-records.png" alt="Recode Records"><img src="../assets/partners/guide/tracks-to-the-max.png" alt="Tracks to the Max"><img src="../assets/partners/guide/recode-deep.png" alt="Recode Deep"><img src="../assets/partners/guide/revoke.png" alt="Revoke"><img src="../assets/partners/guide/bpm-europe.png" alt="BPM Europe"><img src="../assets/partners/guide/labelradar.png" alt="LabelRadar">
+    <img src="../assets/partners/guide/clear.png" alt="" aria-hidden="true"><img src="../assets/partners/guide/recode-records.png" alt="" aria-hidden="true"><img src="../assets/partners/guide/tracks-to-the-max.png" alt="" aria-hidden="true"><img src="../assets/partners/guide/recode-deep.png" alt="" aria-hidden="true"><img src="../assets/partners/guide/revoke.png" alt="" aria-hidden="true"><img src="../assets/partners/guide/bpm-europe.png" alt="" aria-hidden="true"><img src="../assets/partners/guide/labelradar.png" alt="" aria-hidden="true">
+  </div></div>
+</section>
+
+<section class="section"><div class="wrap">
+  <h2 class="h2">Artists who already made the step</h2>
+  <p class="sub">Every review in one wall. Hover to pause.</p>
+  <div class="wall" id="wall"></div>
+</div></section>
+
+<script>
+  // Rotating word
+  (function(){var s=document.querySelectorAll('.rotate span'),i=0;setInterval(function(){s[i].className='out';var p=i;setTimeout(function(){s[p].className=''},560);i=(i+1)%s.length;s[i].className='on'},2200)})();
+
+  // Number ticker (when visible)
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);
+    var el=e.target,to=+el.dataset.to,d=+(el.dataset.dec||0),t0=performance.now();
+    (function f(t){var k=Math.min(1,(t-t0)/1400),v=to*(1-Math.pow(1-k,3));el.textContent=v.toFixed(d);if(k<1)requestAnimationFrame(f)})(t0)})},{threshold:.4});
+  document.querySelectorAll('.tick').forEach(function(el){io.observe(el)});
+
+  // Testimonial wall: content in one array, rendered into 3 looping columns
+  var T='../assets/Testimonials/Voor%20site/Clips/';
+  var R=[
+    {q:"The biggest change has been the way I approach my music career. I've become proactive.",n:'Jip',img:T+'Prep/thumbs/yip_proactive.jpg'},
+    {v:T+'Prep/thumbs/vendenti_album.jpg',c:'▶ Vendenti on his album release'},
+    {q:"I learnt a lot more about the production, about the mastering, about the mixing of my tracks.",n:'Vendenti',img:T+'Prep/thumbs/vendenti_album.jpg'},
+    {q:"We did some big steps as an artist the past months. A lot of momentum, created with Rise.",n:'Thalia',img:T+'Prep/thumbs/thalia_momentum.jpg'},
+    {v:T+'Prep/thumbs/thalia_momentum.jpg',c:'▶ Thalia on her momentum'},
+    {v:T+'Prep/thumbs/yip_proactive.jpg',c:'▶ Jip on becoming proactive'},
+    {v:T+'Prep/thumbs/ad_testimonials.jpg',c:'▶ Members on the program'},
+    {v:T+'Final/thumbs/8.png',c:'▶ Member story'},
+    {q:"[Placeholder: extra review from the GHL / Google reviews export]",n:'Rise member',img:'../assets/logo.png'}
+  ];
+  function card(r){return r.v?'<div class="t video"><img src="'+r.v+'" alt=""><div>'+r.c+'</div></div>'
+    :'<div class="t"><p>"'+r.q+'"</p><div class="who"><img src="'+r.img+'" alt=""><span><b>'+r.n+'</b>Rise member</span></div></div>'}
+  var cols=[[],[],[]];R.forEach(function(r,i){cols[i%3].push(card(r))});
+  document.getElementById('wall').innerHTML=cols.map(function(c,i){var h=c.join('');return '<div class="col'+(i===1?' rev slow':'')+'">'+h+h+'</div>'}).join('');
+</script>
+</body>
+</html>
