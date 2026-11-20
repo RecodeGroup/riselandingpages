@@ -1003,8 +1003,10 @@
       .v5-hero .v5-cta-row { order:9; margin-top:26px; }
     }
     /* "Watch first" softly glows orange and back to white */
-    .v5-glow { animation:v5glow 2.4s ease-in-out infinite; }
-    @keyframes v5glow { 0%,100% { color:#fff; } 50% { color:var(--accent); } }
+    /* "Watch first" lights up exactly when the orange line around the video passes the bottom-left corner.
+       Same 6s cycle as the border; the line reaches that corner at ~79% of each turn (16:9 video). */
+    .v5-glow { animation:v5glow 6s linear infinite; }
+    @keyframes v5glow { 0%,70% { color:#fff; } 78.8% { color:var(--accent); } 88%,100% { color:#fff; } }
     @media (prefers-reduced-motion:reduce) { .v5-glow { animation:none; } }
   </style>
 </head>
@@ -1624,6 +1626,23 @@
       document.querySelectorAll('.js-next-date').forEach(function(e) { e.textContent = label; });
       document.querySelectorAll('.js-next-start, .js-next-start-short').forEach(function(e) { e.textContent = 'Next group starts ' + label; });
     })();
+</script>
+
+<script>
+// Keep "Watch first" in lockstep with the rotating border line (both 6s; align their start times)
+(function () {
+  if (!document.getAnimations) return;
+  function sync() {
+    var all = document.getAnimations(), spin = null, glow = null;
+    all.forEach(function (a) {
+      if (a.animationName === 'v5spin') spin = a;
+      if (a.animationName === 'v5glow') glow = a;
+    });
+    if (spin && glow && spin.startTime != null) glow.startTime = spin.startTime;
+  }
+  window.addEventListener('load', sync);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) setTimeout(sync, 50); });
+})();
 </script>
 </body>
 </html>
