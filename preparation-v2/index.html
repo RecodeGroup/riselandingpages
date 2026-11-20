@@ -1151,6 +1151,50 @@
     .v5-glow { animation:v5glow 6s linear infinite; }
     @keyframes v5glow { 0%,70% { color:#fff; } 78.8% { color:var(--accent); } 88%,100% { color:#fff; } }
     @media (prefers-reduced-motion:reduce) { .v5-glow { animation:none; } }
+    /* ── preparation v2 · Loom restructure: one title, video, next step ── */
+    .pv2-hero { text-align:center; }
+    body .pv2-hero { padding-bottom:56px; }
+    .pv2-inner { max-width:860px; margin:0 auto; text-align:center; }
+    .pv2-hero h1 { text-align:center; margin:0 0 18px; }
+    .pv2-hero .appt-when { margin:0 auto 22px; }
+    .pv2-video { text-align:left; }
+    .pv2-video .v5-video-cap { justify-content:center; }
+    .pv2-next { max-width:560px; margin:36px auto 0; padding:24px 24px 20px; border:1px solid rgba(255,104,62,.35); border-radius:16px; background:rgba(255,104,62,.07); backdrop-filter:blur(8px); }
+    .pv2-next-label { font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); font-weight:700; }
+    .pv2-next h2 { font-size:1.5rem; margin:6px 0 14px; letter-spacing:-.02em; }
+    .pv2-steps { list-style:none; margin:0 auto 16px; padding:0; display:grid; gap:10px; max-width:420px; text-align:left; }
+    .pv2-steps li { display:flex; gap:12px; align-items:center; font-size:.98rem; }
+    .pv2-steps span { flex:none; width:26px; height:26px; border-radius:50%; background:var(--accent); color:#0a0a0a; font-weight:800; font-size:.8rem; display:flex; align-items:center; justify-content:center; }
+    .pv2-hero .cal-box { margin:0 auto; max-width:none; padding:0; background:none; border:0; }
+    .pv2-hero .cal-fallback { margin:4px 0 0; text-align:center; font-size:.88rem; }
+    .pv2-calm { margin-top:1.5rem; font-size:.95rem; color:rgba(255,255,255,.75); }
+    /* video placeholders */
+    .ph-video { position:relative; aspect-ratio:16/9; border-radius:12px; border:1.5px dashed rgba(255,104,62,.5); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:16px; text-align:center;
+        background:repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 12px, rgba(255,255,255,.05) 12px 24px), #141414; }
+    .ph-video.vert { aspect-ratio:9/16; }
+    .ph-play { width:48px; height:48px; border-radius:50%; background:rgba(255,104,62,.9); color:#0a0a0a; display:flex; align-items:center; justify-content:center; }
+    .ph-play svg { width:22px; height:22px; margin-left:3px; }
+    .ph-label { font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; font-weight:700; color:var(--accent); }
+    .ph-what { font-size:.82rem; color:rgba(255,255,255,.7); max-width:260px; line-height:1.4; }
+    .team-note { margin-top:12px; padding:10px 12px; border:1px dashed rgba(255,194,75,.5); border-radius:10px; background:rgba(255,194,75,.06); font-size:.78rem; line-height:1.5; color:rgba(255,255,255,.75); text-align:left; }
+    .team-note b { display:block; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:#ffc24b; margin-bottom:4px; }
+    body.no-notes .team-note { display:none; }
+    .vfaq-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:2.5rem; text-align:left; }
+    .vfaq-card { background:var(--bg-2); border:1px solid var(--line); border-radius:16px; padding:12px 12px 16px; display:flex; flex-direction:column; }
+    .vfaq-card h3 { font-size:1.05rem; margin:14px 4px 6px; line-height:1.3; }
+    .vfaq-card > p { font-size:.88rem; color:var(--muted); line-height:1.55; margin:0 4px; }
+    .vfaq-card .team-note { margin-top:auto; }
+    .vfaq-card > p { margin-bottom:12px; }
+    .story-grid { display:grid; grid-template-columns:repeat(3,minmax(0,250px)); justify-content:center; gap:18px; margin-top:2.5rem; text-align:left; }
+    .story-card h3 { font-size:1rem; margin:12px 2px 0; }
+    @media (max-width:900px) {
+      .pv2-next { margin-top:28px; padding:20px 16px 16px; }
+      .pv2-next h2 { font-size:1.3rem; }
+      .vfaq-grid, .story-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; gap:14px; margin-left:-20px; margin-right:-20px; padding:0 20px 6px; }
+      .vfaq-grid::-webkit-scrollbar, .story-grid::-webkit-scrollbar { display:none; }
+      .vfaq-card { flex:0 0 82%; scroll-snap-align:center; }
+      .story-card { flex:0 0 62%; scroll-snap-align:center; }
+    }
   </style>
 </head>
 <body>
@@ -1163,37 +1207,13 @@
   <!-- ══════════════════════════════════════════════
        1 · Booking confirmation
        ══════════════════════════════════════════════ -->
-  <section class="hero v5-hero">
+  <section class="hero v5-hero pv2-hero">
     <div class="v5-photo"></div><div class="v5-grid-bg"></div><div class="v5-spot"></div>
     <div class="v5-wrap">
-      <div class="v5-split">
-        <div class="v5-copy">
-          <span class="v5-pill"><b>BOOKED</b> Your introduction call</span>
-          <h1 id="hero-h">Your call is <span class="v5-grad">booked!</span></h1>
-      <div class="appt-when" id="appt-when-wrap" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="appt-when"></span></div>
-          <p class="v5-lead">Watch the short video first. It explains what happens on the call and how Rise works.</p>
-          <ul class="v5-checks">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>20 to 30 minutes on video, with someone from the Rise team</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>We look at where you are now and where you want to go</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>You leave knowing which program fits, if any</li>
-          </ul>
-        <div class="cal-box" id="cal-box" hidden>
-        <p class="cal-text">Add it to your calendar so you don't miss it.</p>
-        <div class="cal-btns">
-          <a class="cal-btn" id="gcal-btn" href="#" target="_blank" rel="noopener">Google Calendar</a>
-          <a class="cal-btn" id="ics-btn" href="#">Apple Calendar</a>
-          <a class="cal-btn" id="outlook-btn" href="#" target="_blank" rel="noopener">Outlook</a>
-        </div>
-      </div>
-      <p class="cal-fallback" id="cal-fallback">Your date, time and calendar links are in your confirmation email.</p>
-          <div class="v5-cta-row">
-            <div class="v5-avatars">
-              <div class="v5-stack"><img src="../assets/Testimonials/Screenshots/Leo.png" alt="Leo"><img src="../assets/Testimonials/Screenshots/Seth2.png" alt="Seth"><img src="../assets/Testimonials/Screenshots/appa.png" alt="Appa"></div>
-              <div><span class="v5-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br>38 artists since 2023</div>
-            </div>
-          </div>
-        </div>
-        <div class="v5-media">
+      <div class="pv2-inner">
+        <h1 id="hero-h">Your call is <span class="v5-grad">booked!</span></h1>
+        <div class="appt-when" id="appt-when-wrap" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="appt-when"></span></div>
+        <div class="pv2-video">
           <div class="v5-video-shell">
             <div class="vsl-player" id="prep-vsl-player">
               <video id="prep-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Preparation/precall-poster.jpg?v=2">
@@ -1209,16 +1229,26 @@
             </div>
           </div>
           <div class="v5-video-cap"><span class="v5-live"><b class="v5-glow">Watch first:</b>&nbsp;Before your call</span></div>
+          <div class="team-note"><b>TEAM &middot; video opnieuw opnemen</b>Maurits, 60&ndash;90 sec, veel energie (ze hebben net geboekt, de dopamine is hoog). 1) Feliciteer ze: dit was een goede stap. 2) Wat er op de call gebeurt: we leren je doelen en smaak kennen en geven onze kijk op je volgende stap. 3) Geen druk: of je nu bij Rise komt of niet, je gaat weg met richting. 4) Noem 1&ndash;2 members en hun transformatie (waar ze begonnen, waar ze nu zijn). 5) Wat je mist als je niet komt opdagen. 6) Actie: reageer op WhatsApp en accepteer de agenda-uitnodiging. <i>Niet zeggen:</i> &ldquo;dit is geen gratis coaching&rdquo;. De voorbereidingsvragen gaan via WhatsApp, niet in de video.</div>
+        </div>
+
+        <div class="pv2-next">
+          <div class="pv2-next-label">Next step</div>
+          <h2>Confirm your spot.</h2>
+          <ol class="pv2-steps">
+            <li><span>1</span>Reply to the WhatsApp message we just sent you.</li>
+            <li><span>2</span>Add the call to your calendar.</li>
+          </ol>
+          <div class="cal-box" id="cal-box" hidden>
+            <div class="cal-btns">
+              <a class="cal-btn" id="gcal-btn" href="#" target="_blank" rel="noopener">Google Calendar</a>
+              <a class="cal-btn" id="ics-btn" href="#">Apple Calendar</a>
+              <a class="cal-btn" id="outlook-btn" href="#" target="_blank" rel="noopener">Outlook</a>
+            </div>
+          </div>
+          <p class="cal-fallback" id="cal-fallback">Your calendar invite is in your confirmation email.</p>
         </div>
       </div>
-
-      <div class="v5-stats v5-stats-4">
-        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="7.9" data-dec="1">7.9</span><em>M+</em></div><div class="l">streams</div></div>
-        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="108">108</span></div><div class="l">gigs &amp; bookings</div></div>
-        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="98">98</span><em>+</em></div><div class="l">tracks released</div></div>
-        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="5">5</span></div><div class="l">writing camps</div></div>
-      </div>
-      <p class="v5-stat-note">Based on 38 artists we've worked with since 2023.</p>
     </div>
   </section>
 
@@ -1228,32 +1258,92 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
-       3 · What to expect on your call
+       3 · What you get from the call
        ══════════════════════════════════════════════ -->
   <section class="sec center">
     <div class="narrow">
-      <div class="section-eyebrow">What to expect</div>
-      <h2 class="section-heading">Here's what we'll cover on your&nbsp;call.</h2>
+      <div class="section-eyebrow">On your call</div>
+      <h2 class="section-heading">What you'll get from your&nbsp;call.</h2>
       <div class="route-grid">
-        <div class="route-card"><div class="route-step">01</div><h3>Where you are now</h3><p>What genre you produce, how experienced you are, and whether you already finish tracks.</p></div>
-        <div class="route-card"><div class="route-step">02</div><h3>Where you want to go</h3><p>Your goals for the next year, and the biggest bottleneck holding you back right now.</p></div>
-        <div class="route-card"><div class="route-step">03</div><h3>Which program fits</h3><p>We walk you through Base and Core, pick the right one together, and check if now is the moment to invest the time and budget.</p></div>
+        <div class="route-card"><div class="route-step">01</div><h3>We get to know you</h3><p>Your music, your taste and where you are right now.</p></div>
+        <div class="route-card"><div class="route-step">02</div><h3>Your next step</h3><p>Our honest view on how to reach your goals, from artists who release and play out.</p></div>
+        <div class="route-card"><div class="route-step">03</div><h3>See if Rise fits</h3><p>If a program fits, we'll show you how it works. If not, we'll tell you what we'd do instead.</p></div>
+      </div>
+      <p class="pv2-calm">No pressure, no obligations. Whether you join or not, you leave with direction.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       3b · Video FAQ (breakout videos, objection handling)
+       ══════════════════════════════════════════════ -->
+  <section class="sec center" id="questions">
+    <div class="wrap">
+      <div class="section-eyebrow">Your questions</div>
+      <h2 class="section-heading">Short answers before your&nbsp;call.</h2>
+      <div class="vfaq-grid">
+        <div class="vfaq-card">
+          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about wie is rise / is dit betrouwbaar.</span></div>
+          <h3>Can I trust Rise?</h3>
+          <p>Rise is the artist academy of Recode Group. Next to Rise we run four record labels and our own artist agency, and we've worked with 38 artists since 2023.</p>
+          <div class="team-note"><b>TEAM &middot; Wie is Rise / is dit betrouwbaar</b>Maurits of Jim, 45 sec. Benoem de twijfel gewoon (&ldquo;is dit te mooi om waar te zijn?&rdquo;). Laat zien wie we zijn: Recode-labels, agency, echte artiesten en releases. Rustig, niet verkopend.</div>
+        </div>
+        <div class="vfaq-card">
+          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about geen druk, wat er op de call gebeurt.</span></div>
+          <h3>Is this a sales call?</h3>
+          <p>It's a conversation. We get to know your goals and give you our honest view on your next step. If a program fits, we'll show you how it works. If not, we'll tell you what we'd do instead.</p>
+          <div class="team-note"><b>TEAM &middot; Geen druk, wat er op de call gebeurt</b>Teamlid dat de calls doet, 45 sec. Kern: geen harde verkoop, geen verplichtingen. Je krijgt hoe dan ook richting van iemand die de industrie kent. Leg de opbouw van de call uit in 3 stappen.</div>
+        </div>
+        <div class="vfaq-card">
+          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about base vs core, voor wie welk programma is.</span></div>
+          <h3>Do I need to finish tracks already?</h3>
+          <p>No. Base takes you from loops to finished, release-ready tracks. Core is for producers who already finish tracks and want to grow as an artist.</p>
+          <div class="team-note"><b>TEAM &middot; Base vs Core, voor wie welk programma is</b>Coach, 45&ndash;60 sec. Beschrijf de twee startpunten (alleen loops vs. al hele tracks) en welk programma daarbij past. Eventueel kort scherm met een track van een member.</div>
+        </div>
+        <div class="vfaq-card">
+          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about investering en tijd per week.</span></div>
+          <h3>What does it cost, and how much time does it take?</h3>
+          <p>Base is &euro;1,500 and Core starts from &euro;2,650 (excl. VAT), both with payment plans. We go through time and budget together on the call.</p>
+          <div class="team-note"><b>TEAM &middot; Investering en tijd per week</b>Maurits, 45 sec. Wees open over prijs en tijd, zodat er geen verrassingen zijn op de call. Benoem betalingsplannen. Frame het als investering in je carri&egrave;re, zonder druk.</div>
+        </div>
+        <div class="vfaq-card">
+          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about wat als het niet werkt / garantie.</span></div>
+          <h3>What if it doesn't work for me?</h3>
+          <p>Fair question, especially if you've tried courses before. Both programs come with a guarantee. We go through the full conditions on your call.</p>
+          <div class="team-note"><b>TEAM &middot; Wat als het niet werkt / garantie</b>Maurits, 45&ndash;60 sec. Erken dat veel artiesten al cursussen hebben geprobeerd. Leg uit waarom Rise anders is (feedback, community, labels) en noem de garanties van Base en Core.</div>
+        </div>
+        <div class="vfaq-card">
+          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about worst case scenario.</span></div>
+          <h3>What's the worst that can happen?</h3>
+          <p>You spend 30 minutes with someone who knows the industry, and you leave with a clear view on your next step. Whether you join or not.</p>
+          <div class="team-note"><b>TEAM &middot; Worst case scenario</b>Kort en luchtig, 30 sec. &ldquo;Het ergste wat er kan gebeuren: je bent 30 minuten kwijt en weet daarna precies wat je volgende stap is.&rdquo; Neemt angst weg om op te komen dagen.</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════════════
-       8 · Prepare for your call
+       3c · Transformation stories
        ══════════════════════════════════════════════ -->
-  <section class="sec center" id="prepare">
-    <div class="narrow">
-      <div class="section-eyebrow">Prepare for your call</div>
-      <h2 class="section-heading">Four things before we&nbsp;speak.</h2>
-      <div class="prep-list">
-        <div class="q-item"><b>01</b><span>The call takes 20 to 30 minutes. Keep 30 minutes free and sit somewhere quiet, with a working camera and microphone.</span></div>
-        <div class="q-item"><b>02</b><span>Write down your main goals for the next year, and what's holding you back right now.</span></div>
-        <div class="q-item"><b>03</b><span>Have your Spotify or SoundCloud ready, so we can listen to where you are.</span></div>
-        <div class="q-item"><b>04</b><span>Watch the video at the top and read through the <a href="https://guide.riseartistacademy.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">program guide</a>, so you know what we offer.</span></div>
+  <section class="sec center" id="stories">
+    <div class="wrap">
+      <div class="section-eyebrow">Where they started</div>
+      <h2 class="section-heading">From where you are to where they are&nbsp;now.</h2>
+      <div class="story-grid">
+        <div class="story-card">
+          <div class="ph-video vert" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a member story, from loops to a first release.</span></div>
+          <h3>[Name] &middot; From loops to a first release</h3>
+          <div class="team-note"><b>TEAM &middot; transformatieverhaal</b>Member die als beginner binnenkwam (alleen loops) en nu tracks uitbrengt. Waar stond je, wat was lastig, wat is er veranderd, wat is het resultaat (release, streams)? 45&ndash;75 sec, verticaal 9:16.</div>
+        </div>
+        <div class="story-card">
+          <div class="ph-video vert" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a member story, from bedroom producer to first gigs.</span></div>
+          <h3>[Name] &middot; From bedroom producer to first gigs</h3>
+          <div class="team-note"><b>TEAM &middot; transformatieverhaal</b>Member uit Core die eerst alleen thuis produceerde en nu boekingen heeft. Laat het moment zien waarop het kantelde. Echte cijfers als ze er zijn. 45&ndash;75 sec, verticaal 9:16.</div>
+        </div>
+        <div class="story-card">
+          <div class="ph-video vert" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a member story, from stuck to a clear plan.</span></div>
+          <h3>[Name] &middot; From stuck to a clear plan</h3>
+          <div class="team-note"><b>TEAM &middot; transformatieverhaal</b>Member die vastliep (geen focus, geen netwerk) en nu een vast plan en ritme heeft. Nadruk op gevoel voor en na, niet op features van Rise. 45&ndash;75 sec, verticaal 9:16.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1318,24 +1408,6 @@
       <div style="margin-top:1.75rem;text-align:center;">
         <a class="btn-ghost" href="https://guide.riseartistacademy.com/" target="_blank" rel="noopener">Read the full program guide &rarr;</a>
         <p style="margin-top:10px;font-size:0.85rem;color:var(--muted);">Everything about our programs in one place.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       8b · FAQ
-       ══════════════════════════════════════════════ -->
-  <section class="sec faq" id="faq">
-    <div class="narrow">
-      <div class="section-eyebrow">Questions</div>
-      <h2 class="section-heading">Before your&nbsp;call.</h2>
-      <div class="faq-list">
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What will we talk about on the call?<span class="faq-icon"></span></button><div class="faq-a"><p>Your music and genre, how experienced you are and whether you finish tracks, your biggest bottleneck, and your goals. Then we explain how Rise works and which program fits you.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">Do I need to be able to finish tracks already?<span class="faq-icon"></span></button><div class="faq-a"><p>No. Base is built to take you from loops to finished, release-ready tracks. Core is for producers who already make music and want to grow as an artist: releases, branding and bookings.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What does Rise cost?<span class="faq-icon"></span></button><div class="faq-a"><p>Base is &euro;1,500 and Core starts from &euro;2,650 (both excl. VAT). Base can be split into up to 4 payments and Core into up to 12. We go through the options on the call.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">How much time does it take?<span class="faq-icon"></span></button><div class="faq-a"><p>Base takes around 8 hours a week: the weekly 3-hour live class plus homework on your own tracks. Core has two group check-ins a week and asks at least 10 hours a week, plus the time you put into your releases and bookings.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">What if I'm not sure Rise is right for me?<span class="faq-icon"></span></button><div class="faq-a"><p>That's what the call is for. We'll be straight with you about whether it fits, and if the timing isn't right, we'll tell you.</p></div></div>
-        <div class="faq-item"><button type="button" class="faq-question" aria-expanded="false">Can I reschedule?<span class="faq-icon"></span></button><div class="faq-a"><p>Yes. Use the reschedule button on this page or the link in your confirmation email. Please reschedule instead of skipping, so your spot goes to the right moment.</p></div></div>
       </div>
     </div>
   </section>
@@ -1427,6 +1499,8 @@
   </footer>
 
   <script>
+    // Team notes: add ?notes=0 to preview the page without them
+    if (/[?&]notes=0/.test(location.search)) document.body.classList.add('no-notes');
     // Sticky header
     (function() {
       var header = document.getElementById('site-header');
@@ -1566,7 +1640,7 @@
       video.addEventListener('ended', function() { player.classList.remove('playing'); bar.style.width = '100%'; });
       video.addEventListener('timeupdate', function() {
         if (!video.duration) return;
-        var shown = Math.pow(video.currentTime / video.duration, 0.575) * 100;
+        var x = Math.min(1, video.currentTime / video.duration); var shown = (x + 0.7 * x * (1 - x)) * 100; // ahead of the video, eases off gently (1/3 watched shows ~half)
         bar.style.width = shown + '%';
         bar.parentElement.style.opacity = Math.max(0, 1 - shown / 70);
       });

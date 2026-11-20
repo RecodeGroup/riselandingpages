@@ -1351,7 +1351,7 @@
       video.addEventListener('ended', function() { player.classList.remove('playing'); bar.style.width = '100%'; });
       video.addEventListener('timeupdate', function() {
         if (!video.duration) return;
-        var shown = Math.pow(video.currentTime / video.duration, 0.575) * 100;
+        var x = Math.min(1, video.currentTime / video.duration); var shown = (x + 0.7 * x * (1 - x)) * 100; // ahead of the video, eases off gently (1/3 watched shows ~half)
         bar.style.width = shown + '%';
         bar.parentElement.style.opacity = Math.max(0, 1 - shown / 70);
       });
