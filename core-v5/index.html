@@ -967,6 +967,10 @@
       .v5-wall > .v5-row > .video-card, .v5-t { height:330px !important; }
       .v5-who img { width:26px; height:26px; }
     }
+    /* testimonials: no box around quote blocks, quote sits straight above its media */
+    .v5-t { border:0 !important; background:transparent !important; padding:0 !important; border-radius:0 !important; }
+    .v5-t p { margin:0 0 12px !important; }
+    .v5-t .video-card, .v5-photo-media { border-radius:14px; }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1196,7 +1200,7 @@
 
   <section class="section stories v5-stories" style="text-align:center;">
     <div class="section-inner">
-      <div class="section-eyebrow">Student success stories</div>
+      <div class="section-eyebrow">Success stories</div>
       <h2 class="section-heading">What our artists have to&nbsp;say.</h2>
       <p class="v5-sub">Every review in one place. Tap a video to play it, tap again to keep scrolling.</p>
       <div class="v5-wall" id="v5-wall"></div>
@@ -1519,14 +1523,22 @@
   var S = '../assets/Testimonials/Screenshots/';
   // Every block has the same height. Plain blocks are a video; quote blocks have the quote on top
   // and a smaller video (or a photo when there is no video) filling the rest.
-  var R = [
+  var F = C + 'Final/', FT = C + 'Final/thumbs/';
+  var R = [ // plain video and quote block alternate; every block has the same height
     { q: "The biggest change has been the way I approach my music career. I've become proactive.", n: 'Jip', img: TH + 'av_jip.jpg', v: C + 'Prep/yip_proactive.mp4', p: TH + 'yip_proactive.jpg' },
-    { v: C + 'Prep/ad_testimonials.mp4', p: TH + 'ad_testimonials.jpg' },
+    { v: F + '1_mc_E.mp4', p: FT + '1.png' },
     { q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", n: 'Vendenti', img: TH + 'av_vendenti.jpg', v: C + 'Prep/vendenti_album.mp4', p: TH + 'vendenti_album.jpg' },
+    { v: F + '11v2_cm_B.mp4', p: FT + '11.png' },
     { q: "The community was an eye-opener for me.", n: 'Max', img: S + 'Max.png', photo: S + 'Max2.jpg' },
-    { v: C + 'Final/8_mcy_B.mp4', p: C + 'Final/thumbs/8.png' },
+    { v: F + '4_my-C.mp4', p: FT + '4.png' },
+    { q: "A good opportunity to connect and to broaden your network.", n: 'Andy', img: S + 'Andy.png', v: F + '9_my_B_v2.mp4', p: FT + '9.png' },
+    { v: C + 'Prep/ad_testimonials.mp4', p: TH + 'ad_testimonials.jpg' },
     { q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", n: 'Thalia', img: TH + 'av_thalia.jpg', v: C + 'Prep/thalia_momentum.mp4', p: TH + 'thalia_momentum.jpg' },
-    { q: "When you drift off track, people help you.", n: 'Levi', img: S + 'Levi.png', photo: S + 'Levi2.png' }
+    { v: F + '14_c_F.mp4', p: FT + '14 thumb.png' },
+    { q: "When you drift off track, people help you.", n: 'Levi', img: S + 'Levi.png', photo: S + 'Levi2.png' },
+    { v: F + '8_mcy_B.mp4', p: FT + '8.png' },
+    { q: "I find the community really motivating.", n: 'Seth', img: S + 'Seth.png', photo: S + 'Seth3.jpg' },
+    { v: F + '12_mc_D.mp4', p: FT + '12.png' }
   ];
   function vid(r) {
     return '<div class="video-card"><video poster="' + r.p + '" preload="none" playsinline webkit-playsinline><source src="' + r.v + '" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>';
@@ -1534,7 +1546,7 @@
   function card(r) {
     if (!r.q) return vid(r);
     var media = r.v ? vid(r) : '<div class="v5-photo-media"><img src="' + r.photo + '" alt="' + r.n + '" loading="lazy"></div>';
-    return '<div class="v5-t"><p>&ldquo;' + r.q + '&rdquo;</p><div class="v5-who"><img src="' + r.img + '" alt=""><span><b>' + r.n + '</b>Rise member</span></div>' + media + '</div>';
+    return '<div class="v5-t"><p>&ldquo;' + r.q + '&rdquo;</p>' + media + '</div>';
   }
   var wall = document.getElementById('v5-wall');
   if (wall) {
