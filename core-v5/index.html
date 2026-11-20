@@ -827,8 +827,9 @@
     .v5-grad { background:linear-gradient(90deg,var(--accent),#ffb199,var(--accent)); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:v5shine 5s linear infinite; }
     @keyframes v5shine { to { background-position:200% center; } }
     .v5-lead { font-size:1.1rem; color:rgba(255,255,255,.68); max-width:520px; line-height:1.6; }
-    .v5-rotate { display:inline-grid; vertical-align:bottom; height:1.6em; overflow:hidden; color:#fff; font-weight:700; }
-    .v5-rotate span { grid-area:1/1; transform:translateY(110%); opacity:0; transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .55s; }
+    .v5-rotate { display:inline-block; position:relative; vertical-align:top; height:1.6em; line-height:1.6; overflow:hidden; color:#fff; font-weight:700; }
+    .v5-rotate::before { content:"bookings"; display:block; height:0; visibility:hidden; }
+    .v5-rotate span { position:absolute; left:0; top:0; white-space:nowrap; line-height:1.6; transform:translateY(110%); opacity:0; transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .55s; }
     .v5-rotate span.on { transform:none; opacity:1; }
     .v5-rotate span.out { transform:translateY(-110%); opacity:0; }
     .v5-checks { list-style:none; margin:24px 0 30px; padding:0; display:grid; gap:10px; }
@@ -936,7 +937,7 @@
     /* ── v5 round 5: equal-height testimonial blocks ── */
     .v5-row { align-items:stretch; }
     .v5-wall .video-card, .v5-t { height:400px; }
-    .v5-wall > .v5-row > .video-card { width:225px; }
+    .v5-item > .video-card { width:225px; }
     .v5-t { width:280px; display:flex; flex-direction:column; padding:16px; }
     .v5-t p { font-size:.9rem; line-height:1.45; }
     .v5-who { margin:12px 0; }
@@ -945,14 +946,14 @@
     .v5-t .video-card .play-btn svg { width:40px; height:40px; }
     @media (max-width:900px) {
       .v5-wall .video-card, .v5-t { height:330px; }
-      .v5-wall > .v5-row > .video-card { width:186px; }
+      .v5-item > .video-card { width:186px; }
       .v5-t .video-card { height:auto; width:100%; }
       .v5-t { width:230px; padding:14px; }
       .v5-t p { font-size:.8rem; }
       .v5-who { margin:10px 0; font-size:.76rem; }
       .v5-who img { width:26px; height:26px; }
     }
-    @media (max-width:900px) { .v5-lead { font-size:1rem; line-height:1.55; } }
+    @media (max-width:900px) { .v5-lead { font-size:1rem; line-height:1.6; } }
     /* ── v5 testimonial cards: restore card + name row styling, lock heights ── */
     .v5-t { flex:none; box-sizing:border-box; overflow:hidden; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.035); border-radius:14px; text-align:left; }
     .v5-t p { margin:0; color:#fff; flex:none; }
@@ -962,15 +963,25 @@
     .v5-t .video-card { position:relative; flex:1 1 0; min-height:0; height:auto !important; width:100% !important; aspect-ratio:auto !important; }
     .v5-t .video-card video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
     .v5-photo-media { flex:1 1 0; min-height:0; }
-    .v5-wall > .v5-row > .video-card, .v5-t { height:400px !important; }
+    .v5-item > .video-card, .v5-t { height:400px !important; }
     @media (max-width:900px) {
-      .v5-wall > .v5-row > .video-card, .v5-t { height:330px !important; }
+      .v5-item > .video-card, .v5-t { height:330px !important; }
       .v5-who img { width:26px; height:26px; }
     }
     /* testimonials: no box around quote blocks, quote sits straight above its media */
     .v5-t { border:0 !important; background:transparent !important; padding:0 !important; border-radius:0 !important; }
     .v5-t p { margin:0 0 12px !important; }
     .v5-t .video-card, .v5-photo-media { border-radius:14px; }
+    /* guarantee: own section, divider above and below, equal spacing */
+    .guarantee-sec { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-top:3.5rem !important; padding-bottom:3.5rem !important; }
+    .guarantee-sec .section-eyebrow { margin-bottom:1.25rem; }
+    /* success stories: swipe/drag + auto-scroll */
+    .v5-wall { overflow-x:auto !important; overflow-y:hidden; scrollbar-width:none; -webkit-overflow-scrolling:touch; cursor:grab; }
+    .v5-wall::-webkit-scrollbar { display:none; }
+    .v5-wall.dragging { cursor:grabbing; }
+    .v5-row { animation:none !important; padding:0 20px; }
+    .v5-item { flex:none; display:flex; flex-direction:column; align-items:center; gap:6px; }
+    .v5-num { font-size:.72rem; color:rgba(255,255,255,.55); font-variant-numeric:tabular-nums; } /* TEMP: numbers for review */
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1110,6 +1121,7 @@
   </section>
 
   <section class="section guarantee-sec">
+    <div class="section-eyebrow" style="text-align:center;">Our guarantee</div>
     <div class="promise-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><div><b>The Industry Code Guarantee: no festival booking or three gigs within 90 days? We coach you 1-on-1 until you do.</b><p>Extra 1-on-1 sessions with the Rise team, plus opportunities from our own network. Full conditions on your call.</p></div></div>
   </section>
 
@@ -1521,40 +1533,106 @@
 
   var C = '../assets/Testimonials/Voor%20site/Clips/', TH = C + 'Prep/thumbs/';
   var S = '../assets/Testimonials/Screenshots/';
-  // Every block has the same height. Plain blocks are a video; quote blocks have the quote on top
-  // and a smaller video (or a photo when there is no video) filling the rest.
-  var F = C + 'Final/', FT = C + 'Final/thumbs/';
-  var R = [ // plain video and quote block alternate; every block has the same height
-    { q: "The biggest change has been the way I approach my music career. I've become proactive.", n: 'Jip', img: TH + 'av_jip.jpg', v: C + 'Prep/yip_proactive.mp4', p: TH + 'yip_proactive.jpg' },
-    { v: F + '1_mc_E.mp4', p: FT + '1.png' },
-    { q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks.", n: 'Vendenti', img: TH + 'av_vendenti.jpg', v: C + 'Prep/vendenti_album.mp4', p: TH + 'vendenti_album.jpg' },
-    { v: F + '11v2_cm_B.mp4', p: FT + '11.png' },
-    { q: "The community was an eye-opener for me.", n: 'Max', img: S + 'Max.png', photo: S + 'Max2.jpg' },
-    { v: F + '4_my-C.mp4', p: FT + '4.png' },
-    { q: "A good opportunity to connect and to broaden your network.", n: 'Andy', img: S + 'Andy.png', v: F + '9_my_B_v2.mp4', p: FT + '9.png' },
-    { v: C + 'Prep/ad_testimonials.mp4', p: TH + 'ad_testimonials.jpg' },
-    { q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise.", n: 'Thalia', img: TH + 'av_thalia.jpg', v: C + 'Prep/thalia_momentum.mp4', p: TH + 'thalia_momentum.jpg' },
-    { v: F + '14_c_F.mp4', p: FT + '14 thumb.png' },
-    { q: "When you drift off track, people help you.", n: 'Levi', img: S + 'Levi.png', photo: S + 'Levi2.png' },
-    { v: F + '8_mcy_B.mp4', p: FT + '8.png' },
-    { q: "I find the community really motivating.", n: 'Seth', img: S + 'Seth.png', photo: S + 'Seth3.jpg' },
-    { v: F + '12_mc_D.mp4', p: FT + '12.png' }
+  var F = C + 'Final/', FT = C + 'Final/thumbs/', P = C + 'Prep/', RA = '../assets/Testimonials/review-all/', T0 = '../assets/Testimonials/';
+  function root(name) { return T0 + encodeURIComponent(name); } // these filenames literally contain %20 etc.
+  // TEMPORARY review list: every testimonial we have, numbered, so Jim can pick which to keep.
+  var PO = RA + 'posters/';
+  // TEMPORARY review list: all testimonials, numbered. Ordered so the same person never sits next to themselves
+  // and full videos, quote + video and quote + photo blocks are mixed.
+  var R = [
+    { q: "The community was an eye-opener for me.", photo: S + 'Max2.jpg' },
+    { v: F + '11v2_cm_B.mp4', p: PO + '11v2_cm_b_mp4.jpg' },
+    { v: F + '14_c_F.mp4', p: PO + '14_c_f_mp4.jpg' },
+    { v: P + 'vendenti_goals.mp4', p: PO + 'vendenti_goals_mp4.jpg' },
+    { v: F + '9_my_B_v2.mp4', p: PO + '9_my_b_v2_mp4.jpg', q: "A good opportunity to connect and to broaden your network." },
+    { v: F + '12_mc_D.mp4', p: PO + '12_mc_d_mp4.jpg' },
+    { v: P + 'vendenti_vision.mp4', p: PO + 'vendenti_vision_mp4.jpg' },
+    { v: F + '10_myc_A.mp4', p: PO + '10_myc_a_mp4.jpg' },
+    { q: "Go beyond just music production.", photo: S + 'Andy3.png' },
+    { v: RA + 'vendenti1.mp4', p: PO + 'vendenti1_mp4.jpg' },
+    { v: F + '8_mcy_B.mp4', p: PO + '8_mcy_b_mp4.jpg' },
+    { v: F + '15_c_F.mp4', p: PO + '15_c_f_mp4.jpg' },
+    { v: P + 'vendenti_album.mp4', p: PO + 'vendenti_album_mp4.jpg', q: "I learnt a lot more about the production, about the mastering, about the mixing of my tracks." },
+    { v: root('Comprehensive%20course%20that%20covers%20everything%20to%20become%20a%20full-time%20artist.mp4'), p: PO + 'comprehensive_20course_20that_20covers_2.jpg' },
+    { v: root('How%20Rise%20changed%20my%20consistency%2C%20production%2C%20and%20branding.mp4'), p: PO + 'how_20rise_20changed_20my_20consistency_.jpg' },
+    { v: F + '1_mc_E.mp4', p: PO + '1_mc_e_mp4.jpg' },
+    { v: F + '4_my-C.mp4', p: PO + '4_my_c_mp4.jpg' },
+    { q: "They challenge you to make specific goals.", photo: S + 'Max.png' },
+    { v: P + 'thalia_warmth.mp4', p: PO + 'thalia_warmth_mp4.jpg' },
+    { v: F + '2_mcy_B.mp4', p: PO + '2_mcy_b_mp4.jpg' },
+    { v: F + '6_c_B.mp4', p: PO + '6_c_b_mp4.jpg' },
+    { v: P + 'yip_proactive.mp4', p: PO + 'yip_proactive_mp4.jpg', q: "The biggest change has been the way I approach my music career. I've become proactive." },
+    { v: root('Rise%20broadens%20your%20scope%20beyond%20just%20music%20production.mp4'), p: PO + 'rise_20broadens_20your_20scope_20beyond_.jpg' },
+    { v: RA + 'cap1.mp4', p: PO + 'cap1_mp4.jpg' },
+    { v: RA + 'thanks1.mp4', p: PO + 'thanks1_mp4.jpg' },
+    { q: "When you drift off track, people help you.", photo: S + 'Levi2.png' },
+    { v: P + 'ad_testimonials.mp4', p: PO + 'ad_testimonials_mp4.jpg' },
+    { v: F + '3_c_E.mp4', p: PO + '3_c_e_mp4.jpg' },
+    { v: F + '7_my_C.mp4', p: PO + '7_my_c_mp4.jpg' },
+    { v: P + 'thalia_momentum.mp4', p: PO + 'thalia_momentum_mp4.jpg', q: "We did some big steps as an artist the past months. A lot of momentum, created with Rise." },
+    { v: F + '9_my_B.mp4', p: PO + '9_my_b_mp4.jpg' },
+    { v: F + '11_cm_B.mp4', p: PO + '11_cm_b_mp4.jpg' },
+    { v: F + '13_y_A.mp4', p: PO + '13_y_a_mp4.jpg' },
+    { q: "I find the community really motivating.", photo: S + 'Seth3.jpg' },
+    { v: root('Rise%20focuses%20on%20creating%20an%20artist%2C%20not%20just%20production.mp4'), p: PO + 'rise_20focuses_20on_20creating_20an_20ar.jpg' },
+    { v: RA + 'vendenti2.mp4', p: PO + 'vendenti2_mp4.jpg' },
+    { v: RA + 'cap2.mp4', p: PO + 'cap2_mp4.jpg' },
+    { q: "The community of dedicated musicians is inspiring.", photo: S + 'Leo3.jpg' },
+    { v: RA + 'thanks2.mp4', p: PO + 'thanks2_mp4.jpg' },
+    { v: F + '5_c_E.mp4', p: PO + '5_c_e_mp4.jpg' },
+    { v: root('Be%20open-minded%2C%20make%20time%20%E2%80%93%20it%E2%80%99s%20a%20new%20profession%20you%E2%80%99re%20learning.mp4'), p: PO + 'be_20open_minded_2c_20make_20time_20_e2_.jpg' },
+    { v: root('From%20struggling%20with%20identity%20to%20clear%20artistic%20direction.mp4'), p: PO + 'from_20struggling_20with_20identity_20to.jpg' },
+    { q: "Meeting these people is so important to me.", photo: S + 'Leo2.png' },
+    { v: root('To%20anyone%20considering%20Rise_%20just%20do%20it%2C%20don%E2%80%99t%20doubt.mp4'), p: PO + 'to_20anyone_20considering_20rise_20just_.jpg' },
+    { v: root('Why%20you%20should%20just%20do%20it%20and%20invest%20in%20yourself.mp4'), p: PO + 'why_20you_20should_20just_20do_20it_20an.jpg' },
+    { v: T0 + 'Videos/ad-testimonial.mp4', p: PO + 'ad_testimonial_mp4.jpg' },
+    { q: "You get structure and people who push you.", photo: S + 'Levi.png' },
+    { v: RA + 'vendenti3.mp4', p: PO + 'vendenti3_mp4.jpg' },
+    { v: RA + 'thalia1.mp4', p: PO + 'thalia1_mp4.jpg' },
+    { v: RA + 'yip1.mp4', p: PO + 'yip1_mp4.jpg' },
+    { q: "Working toward the same goal, helping each other.", photo: S + 'Seth2.png' },
+    { v: RA + 'cap3.mp4', p: PO + 'cap3_mp4.jpg' },
+    { v: RA + 'thanks3.mp4', p: PO + 'thanks3_mp4.jpg' },
+    { v: RA + 'whatsapp1.mp4', p: PO + 'whatsapp1_mp4.jpg' }
   ];
   function vid(r) {
     return '<div class="video-card"><video poster="' + r.p + '" preload="none" playsinline webkit-playsinline><source src="' + r.v + '" type="video/mp4"></video><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>';
   }
-  function card(r) {
-    if (!r.q) return vid(r);
-    var media = r.v ? vid(r) : '<div class="v5-photo-media"><img src="' + r.photo + '" alt="' + r.n + '" loading="lazy"></div>';
-    return '<div class="v5-t"><p>&ldquo;' + r.q + '&rdquo;</p>' + media + '</div>';
+  function card(r, n) {
+    var inner;
+    if (!r.q) inner = vid(r);
+    else inner = '<div class="v5-t"><p>&ldquo;' + r.q + '&rdquo;</p>' + (r.v ? vid(r) : '<div class="v5-photo-media"><img src="' + r.photo + '" alt="" loading="lazy"></div>') + '</div>';
+    return '<div class="v5-item">' + inner + '<span class="v5-num">' + n + '</span></div>';
   }
   var wall = document.getElementById('v5-wall');
   if (wall) {
-    var row = R.map(card).join(''); // videos with quote cards in between, as in the wall
+    var row = R.map(function (r, i) { return card(r, i + 1); }).join('');
     wall.innerHTML = '<div class="v5-row">' + row + row + '</div>';
-    // Carousel stops while a review video plays; tap again (pause) or video end and it scrolls on
-    function sync() { wall.classList.toggle('paused', [].some.call(wall.querySelectorAll('video'), function (v) { return !v.paused && !v.ended; })); }
-    ['play', 'playing', 'pause', 'ended'].forEach(function (ev) { wall.addEventListener(ev, sync, true); });
+    var track = wall.firstChild, half = 0, pos = 0, last = 0, hold = 0, busy = false, down = false, sx = 0, sl = 0, moved = false;
+    function measure() { half = track.scrollWidth / 2; }
+    function playing() { return [].some.call(wall.querySelectorAll('video'), function (v) { return !v.paused && !v.ended; }); }
+    function tick(t) {
+      var dt = last ? Math.min(t - last, 64) : 16; last = t;
+      if (!half) measure();
+      if (!busy && !down && t > hold && !playing()) {
+        pos = wall.scrollLeft + dt * 0.04; // ~40px per second
+        if (half && pos >= half) pos -= half;
+        wall.scrollLeft = pos;
+      } else if (half && wall.scrollLeft >= half) { wall.scrollLeft -= half; }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    window.addEventListener('resize', measure);
+    // touch / trackpad: pause auto-scroll briefly while the user scrolls themselves
+    ['touchstart', 'wheel'].forEach(function (ev) { wall.addEventListener(ev, function () { hold = performance.now() + 2500; }, { passive: true }); });
+    wall.addEventListener('touchend', function () { hold = performance.now() + 2500; }, { passive: true });
+    wall.addEventListener('scroll', function () { if (half && wall.scrollLeft < 2 && hold > performance.now()) wall.scrollLeft += half; }, { passive: true });
+    // mouse drag on desktop
+    wall.addEventListener('mousedown', function (e) { down = true; moved = false; sx = e.pageX; sl = wall.scrollLeft; wall.classList.add('dragging'); });
+    window.addEventListener('mousemove', function (e) { if (!down) return; var d = e.pageX - sx; if (Math.abs(d) > 4) moved = true; wall.scrollLeft = sl - d; });
+    window.addEventListener('mouseup', function () { if (!down) return; down = false; hold = performance.now() + 1500; wall.classList.remove('dragging'); });
+    // a drag must not count as a tap on a video
+    wall.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
   }
 })();
 
