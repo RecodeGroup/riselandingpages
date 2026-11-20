@@ -1251,7 +1251,7 @@
         ics.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsText);
         ics.setAttribute('download', 'rise-call.ics');
         outlook.href = 'https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=' + encodeURIComponent(title) + '&startdt=' + encodeURIComponent(start.toISOString()) + '&enddt=' + encodeURIComponent(end.toISOString()) + '&body=' + encodeURIComponent(details);
-        document.getElementById('cal-date').textContent = label;
+        var cd = document.getElementById('cal-date'); if (cd) cd.textContent = label;
         document.getElementById('cal-box').hidden = false;
         document.getElementById('cal-fallback').hidden = true;
       }
