@@ -828,7 +828,7 @@
     @keyframes v5shine { to { background-position:200% center; } }
     .v5-lead { font-size:1.1rem; color:rgba(255,255,255,.68); max-width:520px; line-height:1.6; }
     .v5-rotate { display:inline-block; position:relative; vertical-align:top; height:1.6em; line-height:1.6; overflow:hidden; color:#fff; font-weight:700; }
-    .v5-rotate::before { content:"bookings."; display:block; height:0; visibility:hidden; }
+    .v5-rotate::before { content:"storytelling."; display:block; height:0; visibility:hidden; }
     .v5-rotate span { position:absolute; left:0; top:0; white-space:nowrap; line-height:1.6; transform:translateY(110%); opacity:0; transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .55s; }
     .v5-rotate span.on { transform:none; opacity:1; }
     .v5-rotate span.out { transform:translateY(-110%); opacity:0; }
@@ -1081,6 +1081,18 @@
       .v5-hero .v5-stats { order:7; }
       .v5-hero .v5-stat-note { order:8; }
     }
+    /* v7 fb5: orange rotating word, checks right under the headline on mobile */
+    .v5-rotate, .v5-rotate span { color:var(--accent); }
+    @media (max-width:900px) {
+      .v5-hero h1 { order:1; }
+      .v5-hero .v5-checks { order:2; margin:16px 0 0; gap:8px; }
+      .v5-hero .v6-proof { order:3; margin:16px 0 0; }
+      .v5-hero .v5-media { order:4; margin:16px 0 0; }
+      .v5-hero .v5-lead { order:5; }
+      .v5-hero .v5-apply-wrap { order:6; }
+      .v5-hero .v5-stats { order:7; }
+      .v5-hero .v5-stat-note { order:8; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1101,16 +1113,16 @@
       <div class="v5-split">
         <div class="v5-copy">
           <h1>Your first <span class="v5-grad">festival booking</span> in 90&nbsp;days.</h1>
-          <p class="v5-lead">We help you turn your music into a career, starting with your <span class="v5-rotate"><span class="on">sound.</span><span>story.</span><span>network.</span><span>bookings.</span></span></p>
+          <p class="v5-lead">We help you turn your music into a career, starting with your <span class="v5-rotate"><span class="on">sound.</span><span>storytelling.</span><span>branding.</span><span>socials.</span><span>network.</span><span>bookings.</span></span></p>
           <ul class="v5-checks">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Weekly live sessions</li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Feedback on your artist career</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Label + agency access</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Community + industry access</li>
           </ul>
           <div class="v6-proof">
             <div class="v6-proof-top">
               <div class="v5-stack"><img src="../assets/Testimonials/Screenshots/Leo.png" alt=""><img src="../assets/Testimonials/Screenshots/Seth2.png" alt=""><img src="../assets/Testimonials/Screenshots/appa.png" alt=""></div>
-              <div><span class="v5-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <b>38 artists</b> helped since 2023</div>
+              <div><span class="v5-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <b>74 artists</b> helped since 2023</div>
             </div>
             <p class="v6-quote" id="v6-quote"><span class="on">&ldquo;We've taken big steps as artists these past few months. Rise gave us so much momentum.&rdquo;</span><span>&ldquo;The community of dedicated musicians is inspiring. You get structure and people who push you.&rdquo;</span><span>&ldquo;The biggest change has been the way I approach my music career.&rdquo;</span></p>
           </div>
