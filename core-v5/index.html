@@ -983,6 +983,21 @@
     .v5-item { flex:none; display:flex; flex-direction:column; align-items:center; gap:6px; }
     .v5-t.below { flex-direction:column-reverse; }
     .v5-t.below p { margin:12px 0 0 !important; }
+    /* hero order on mobile: headline, video, lead, application form, checks, CTA, numbers */
+    .v5-apply-wrap { margin:3rem auto 0; }
+    .v5-apply-wrap + .v5-stats { margin-top:3rem; }
+    @media (max-width:900px) {
+      .v5-hero .v5-wrap { display:flex; flex-direction:column; }
+      .v5-hero .v5-split { display:contents; }
+      .v5-hero h1 { order:1; margin-top:0; }
+      .v5-hero .v5-media { order:2; margin:4px 0 0; }
+      .v5-hero .v5-lead { order:3; margin-top:18px; }
+      .v5-hero .v5-apply-wrap { order:4; margin:20px 0 0; width:100%; }
+      .v5-hero .v5-checks { order:5; margin:28px 0 20px; }
+      .v5-hero .v5-cta-row { order:6; }
+      .v5-hero .v5-stats { order:7; margin-top:28px; }
+      .v5-hero .v5-stat-note { order:8; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
@@ -1002,8 +1017,7 @@
     <div class="v5-wrap">
       <div class="v5-split">
         <div class="v5-copy">
-          <span class="v5-pill"><b>CORE</b> 12-month artist program</span>
-          <h1>Work towards your first <span class="v5-grad">festival booking</span> in 90&nbsp;days.</h1>
+          <h1>Your first <span class="v5-grad">festival booking</span> in 90&nbsp;days.</h1>
           <p class="v5-lead">We help you build the <span class="v5-rotate"><span class="on">sound</span><span>story</span><span>network</span><span>bookings</span></span> that turns your music into a career.</p>
           <ul class="v5-checks">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff683e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Two group check-ins a week that hold you to your goals</li>
@@ -1034,13 +1048,6 @@
         </div>
       </div>
 
-      <div class="v5-stats">
-        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="7.9" data-dec="1">7.9</span><em>M+</em></div><div class="l">streams</div></div>
-        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="108">108</span></div><div class="l">gigs &amp; bookings</div></div>
-        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="98">98</span><em>+</em></div><div class="l">tracks released</div></div>
-      </div>
-      <p class="v5-stat-note">Based on 38 artists we've worked with since 2023.</p>
-
       <div class="v5-apply-wrap">
         <div class="apply-card" id="apply">
           <div class="apply-top"><span>Apply for your spot</span><button type="button" class="apply-back" id="apply-back" hidden>&larr; Back</button><span id="apply-stepnum">Step 1 of 3</span></div>
@@ -1049,6 +1056,14 @@
         </div>
         <p class="form-note">Takes 60 seconds &middot; No payment required</p>
       </div>
+
+      <div class="v5-stats">
+        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="7.9" data-dec="1">7.9</span><em>M+</em></div><div class="l">streams</div></div>
+        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="108">108</span></div><div class="l">gigs &amp; bookings</div></div>
+        <div class="v5-stat"><div class="n"><span class="v5-tick" data-to="98">98</span><em>+</em></div><div class="l">tracks released</div></div>
+      </div>
+      <p class="v5-stat-note">Based on 38 artists we've worked with since 2023.</p>
+
     </div>
   </section>
 
@@ -1388,8 +1403,9 @@
     (function() {
       var PROGRAM = "core", LABEL = "Core";
       var GENRES = ["House / Afro House", "Techno", "Trance", "EDM", "Drum & Bass", "Hip-Hop / R&B / Afro Beats", "Pop / Singer-Songwriter / Other"];
-      var COMMIT_Q = "Core takes at least 10 hours a week and starts from \u20ac2,650 excl. VAT, with payment plans available. Is that something you can commit to right now?";
-      var COMMITS = ["Yes, I\u2019m ready to invest the time and money.", "Yes, but I\u2019d need a payment plan or to free up some time.", "It\u2019ll be a stretch, but I\u2019d like a call to explore my options.", "Not right now."];
+      var COMMIT_T = "Can you commit to this right now?";
+      var COMMIT_Q = "Rise programs take about 5 hours a week and start from \u20ac1,500.";
+      var COMMITS = ["Yes, I\u2019m ready.", "Yes, with a payment plan or a bit more time.", "Not sure yet, I\u2019d like to talk it through.", "Not right now."];
       var st = { step: 0, genre: "", commit: "", name: "", phone: "", email: "" };
       var body = document.getElementById("apply-body"), back = document.getElementById("apply-back");
       var stepnum = document.getElementById("apply-stepnum"), bars = document.querySelectorAll("#apply-progress span");
@@ -1408,7 +1424,7 @@
         if (st.step === 0) {
           body.innerHTML = choice("What is your main music genre?", "Select the genre you primarily produce or want to produce.", GENRES, "genre");
         } else if (st.step === 1) {
-          body.innerHTML = choice(COMMIT_Q, "", COMMITS, "commit");
+          body.innerHTML = choice(COMMIT_T, COMMIT_Q, COMMITS, "commit");
         } else {
           body.innerHTML = '<h2 class="apply-q">Where can we reach you?</h2><p class="apply-help">Last step. The Rise team uses your details and answers to follow up on your application.</p>' +
             '<form class="form-step" id="apply-form"><div class="form-row">' +
