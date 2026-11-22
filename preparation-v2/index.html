@@ -1195,6 +1195,16 @@
       .vfaq-card { flex:0 0 82%; scroll-snap-align:center; }
       .story-card { flex:0 0 62%; scroll-snap-align:center; }
     }
+    /* booked date + small calendar buttons right under the title */
+    .pv-when { margin:-4px auto 22px; max-width:560px; text-align:center; }
+    .pv-when-line { font-size:1rem; color:rgba(255,255,255,.85); margin:0; }
+    .pv-when-line b { color:#fff; }
+    .pv-when-sub { font-size:.85rem; color:rgba(255,255,255,.6); margin:4px 0 10px; }
+    .pv-cal { display:flex; justify-content:center; flex-wrap:wrap; gap:6px; }
+    .pv-cal[hidden] { display:flex; }
+    .pv-cal-btn { font-size:.78rem; font-weight:600; padding:6px 11px; border-radius:99px; border:1px solid rgba(255,104,62,.45); color:#fff; background:rgba(255,104,62,.1); text-decoration:none; transition:background .2s, border-color .2s; }
+    .pv-cal-btn:hover { background:var(--accent); border-color:var(--accent); color:#0a0a0a; }
+    @media (max-width:900px) { .pv-when { margin-bottom:16px; } .pv-when-line { font-size:.92rem; } .pv-cal-btn { font-size:.74rem; padding:5px 9px; } }
   </style>
 </head>
 <body>
@@ -1212,7 +1222,16 @@
     <div class="v5-wrap">
       <div class="pv2-inner">
         <h1 id="hero-h">Your call is <span class="v5-grad">booked!</span></h1>
-        <div class="appt-when" id="appt-when-wrap" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="appt-when"></span></div>
+        <div class="pv-when" id="appt-when-wrap">
+          <p class="pv-when-line">You've booked your call for <b id="appt-when">[date] at [time]</b>.</p>
+          <p class="pv-when-sub">Add it to your calendar so you don't miss it.</p>
+          <div class="pv-cal" id="cal-box">
+            <a class="pv-cal-btn" id="gcal-btn" href="#" target="_blank" rel="noopener">Google Calendar</a>
+            <a class="pv-cal-btn" id="outlook-btn" href="#" target="_blank" rel="noopener">Outlook</a>
+            <a class="pv-cal-btn" id="ics-btn" href="#">iCloud / Apple</a>
+          </div>
+          <p class="cal-fallback" id="cal-fallback" hidden></p>
+        </div>
         <div class="pv2-video">
           <div class="v5-video-shell">
             <div class="vsl-player" id="prep-vsl-player">
@@ -1237,16 +1256,8 @@
           <h2>Confirm your spot.</h2>
           <ol class="pv2-steps">
             <li><span>1</span>Reply to the WhatsApp message we just sent you.</li>
-            <li><span>2</span>Add the call to your calendar.</li>
+            <li><span>2</span>Watch the short video above before your call.</li>
           </ol>
-          <div class="cal-box" id="cal-box" hidden>
-            <div class="cal-btns">
-              <a class="cal-btn" id="gcal-btn" href="#" target="_blank" rel="noopener">Google Calendar</a>
-              <a class="cal-btn" id="ics-btn" href="#">Apple Calendar</a>
-              <a class="cal-btn" id="outlook-btn" href="#" target="_blank" rel="noopener">Outlook</a>
-            </div>
-          </div>
-          <p class="cal-fallback" id="cal-fallback">Your calendar invite is in your confirmation email.</p>
         </div>
       </div>
     </div>
@@ -1524,7 +1535,7 @@
         label = clean(q.get('date')) + (q.get('time') ? ' at ' + clean(q.get('time')) : '');
       }
       if (label) {
-        document.getElementById('appt-when').textContent = label + ' \u00b7 20\u201330 min'; document.getElementById('appt-when-wrap').hidden = false;
+        document.getElementById('appt-when').textContent = label; document.getElementById('appt-when-wrap').hidden = false;
         if (!start) document.getElementById('cal-fallback').textContent = 'Calendar links are in your confirmation email.';
         document.getElementById('closing-when').textContent = 'See you ' + label + '.';
       }
