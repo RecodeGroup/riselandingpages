@@ -1149,6 +1149,12 @@
       .v7-scrollwrap.end::after, .v7-scrollwrap.end .v7-hint { opacity:0; pointer-events:none; }
     }
     @keyframes v7bob { 50% { transform:translateY(3px); } }
+    /* desktop: roughly half the space between header and headline */
+    @media (min-width:901px) {
+      .v5-hero { padding-top:96px; }
+      body.has-urgency-bar .v5-hero { padding-top:112px; }
+      .v5-hero h1 { margin-top:8px; }
+    }
   </style>
 </head>
 <body class="has-urgency-bar">
