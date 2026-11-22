@@ -1836,7 +1836,14 @@
 (function () {
   var q = document.querySelectorAll('#v6-quote span'), i = 0;
   if (q.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  setInterval(function () { q[i].classList.remove('on'); i = (i + 1) % q.length; var n = q[i]; setTimeout(function () { n.classList.add('on'); }, 450); }, 5500);
+  // one quote at a time: fade all out, then show only the current one (safe when timers get throttled)
+  var t = null;
+  function clear() { for (var k = 0; k < q.length; k++) q[k].classList.remove('on'); }
+  setInterval(function () {
+    if (document.hidden) return;
+    clear(); i = (i + 1) % q.length; clearTimeout(t);
+    t = setTimeout(function () { clear(); q[i].classList.add('on'); }, 450);
+  }, 5500);
 })();
 </script>
 </body>

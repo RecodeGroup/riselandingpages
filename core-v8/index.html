@@ -1165,9 +1165,6 @@
             </div>
             <p class="v6-quote" id="v6-quote"><span class="on">&ldquo;We've taken big steps as artists these past few months. Rise gave us so much momentum.&rdquo;</span><span>&ldquo;The community of dedicated musicians is inspiring. You get structure and people who push you.&rdquo;</span><span>&ldquo;The biggest change has been the way I approach my music career.&rdquo;</span></p>
           </div>
-          <div class="v5-cta-row">
-            <a class="v5-btn" href="#apply" onclick="return goApply()">Apply for Core <span aria-hidden="true">&rarr;</span></a>
-          </div>
         </div>
         <div class="v5-media">
           <div class="v5-video-shell">
@@ -1814,7 +1811,14 @@
 (function () {
   var q = document.querySelectorAll('#v6-quote span'), i = 0;
   if (q.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  setInterval(function () { q[i].classList.remove('on'); i = (i + 1) % q.length; var n = q[i]; setTimeout(function () { n.classList.add('on'); }, 450); }, 5500);
+  // one quote at a time: fade all out, then show only the current one (safe when timers get throttled)
+  var t = null;
+  function clear() { for (var k = 0; k < q.length; k++) q[k].classList.remove('on'); }
+  setInterval(function () {
+    if (document.hidden) return;
+    clear(); i = (i + 1) % q.length; clearTimeout(t);
+    t = setTimeout(function () { clear(); q[i].classList.add('on'); }, 450);
+  }, 5500);
 })();
 </script>
 </body>
