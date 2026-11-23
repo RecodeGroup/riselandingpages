@@ -1172,6 +1172,7 @@
     .ph-video { position:relative; aspect-ratio:16/9; border-radius:12px; border:1.5px dashed rgba(255,104,62,.5); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:16px; text-align:center;
         background:repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 12px, rgba(255,255,255,.05) 12px 24px), #141414; }
     .ph-video.vert { aspect-ratio:9/16; }
+    .vfaq-video { display:block; width:100%; aspect-ratio:16/9; border-radius:12px; background:#000; object-fit:cover; }
     .ph-play { width:48px; height:48px; border-radius:50%; background:rgba(255,104,62,.9); color:#0a0a0a; display:flex; align-items:center; justify-content:center; }
     .ph-play svg { width:22px; height:22px; margin-left:3px; }
     .ph-label { font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; font-weight:700; color:var(--accent); }
@@ -1251,8 +1252,8 @@
         <div class="pv2-video">
           <div class="v5-video-shell">
             <div class="vsl-player" id="prep-vsl-player">
-              <video id="prep-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Preparation/precall-poster.jpg?v=2">
-                <source src="../assets/Pages/Preparation/precall.mp4?v=12" type="video/mp4">
+              <video id="prep-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Preparation/faq/faq1.jpg?v=1">
+                <source src="../assets/Pages/Preparation/faq/faq1.mp4?v=1" type="video/mp4">
               </video>
               <div class="vsl-play-overlay"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></div>
               <div class="vsl-sound-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg><span>Tap for sound</span></div>
@@ -1264,7 +1265,6 @@
             </div>
           </div>
           <div class="v5-video-cap"><span class="v5-live"><b class="v5-glow">Watch first:</b>&nbsp;Before your call</span></div>
-          <div class="team-note"><b>TEAM &middot; video opnieuw opnemen</b>Maurits, 60&ndash;90 sec, veel energie (ze hebben net geboekt, de dopamine is hoog). 1) Feliciteer ze: dit was een goede stap. 2) Wat er op de call gebeurt: we leren je doelen en smaak kennen en geven onze kijk op je volgende stap. 3) Geen druk: of je nu bij Rise komt of niet, je gaat weg met richting. 4) Noem 1&ndash;2 members en hun transformatie (waar ze begonnen, waar ze nu zijn). 5) Wat je mist als je niet komt opdagen. 6) Actie: reageer op WhatsApp en accepteer de agenda-uitnodiging. <i>Niet zeggen:</i> &ldquo;dit is geen gratis coaching&rdquo;. De voorbereidingsvragen gaan via WhatsApp, niet in de video.</div>
         </div>
 
         <div class="pv2-next">
@@ -1309,40 +1309,34 @@
       <h2 class="section-heading">Short answers before your&nbsp;call.</h2>
       <div class="vfaq-grid">
         <div class="vfaq-card">
-          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about wie is rise / is dit betrouwbaar.</span></div>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq6.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq6.mp4?v=1" type="video/mp4"></video>
           <h3>Can I trust Rise?</h3>
           <p>Rise is the artist academy of Recode Group. Next to Rise we run four record labels and our own artist agency, and we've worked with 38 artists since 2023.</p>
-          <div class="team-note"><b>TEAM &middot; Wie is Rise / is dit betrouwbaar</b>Maurits of Jim, 45 sec. Benoem de twijfel gewoon (&ldquo;is dit te mooi om waar te zijn?&rdquo;). Laat zien wie we zijn: Recode-labels, agency, echte artiesten en releases. Rustig, niet verkopend.</div>
         </div>
         <div class="vfaq-card">
-          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about geen druk, wat er op de call gebeurt.</span></div>
-          <h3>Is this a sales call?</h3>
-          <p>It's a conversation. We get to know your goals and give you our honest view on your next step. If a program fits, we'll show you how it works. If not, we'll tell you what we'd do instead.</p>
-          <div class="team-note"><b>TEAM &middot; Geen druk, wat er op de call gebeurt</b>Teamlid dat de calls doet, 45 sec. Kern: geen harde verkoop, geen verplichtingen. Je krijgt hoe dan ook richting van iemand die de industrie kent. Leg de opbouw van de call uit in 3 stappen.</div>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq4.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq4.mp4?v=1" type="video/mp4"></video>
+          <h3>What happens on the call?</h3>
+          <p>A conversation of about 30 minutes. We look at where you are now, where you want to go, and whether we can close that gap together. Either way, you leave knowing your next step.</p>
         </div>
         <div class="vfaq-card">
-          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about base vs core, voor wie welk programma is.</span></div>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq2.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq2.mp4?v=1" type="video/mp4"></video>
           <h3>Do I need to finish tracks already?</h3>
           <p>No. Base takes you from loops to finished, release-ready tracks. Core is for producers who already finish tracks and want to grow as an artist.</p>
-          <div class="team-note"><b>TEAM &middot; Base vs Core, voor wie welk programma is</b>Coach, 45&ndash;60 sec. Beschrijf de twee startpunten (alleen loops vs. al hele tracks) en welk programma daarbij past. Eventueel kort scherm met een track van een member.</div>
         </div>
         <div class="vfaq-card">
-          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about investering en tijd per week.</span></div>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq3.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq3.mp4?v=1" type="video/mp4"></video>
           <h3>What does it cost, and how much time does it take?</h3>
           <p>Base is &euro;1,500 and Core starts from &euro;2,650 (excl. VAT), both with payment plans. We go through time and budget together on the call.</p>
-          <div class="team-note"><b>TEAM &middot; Investering en tijd per week</b>Maurits, 45 sec. Wees open over prijs en tijd, zodat er geen verrassingen zijn op de call. Benoem betalingsplannen. Frame het als investering in je carri&egrave;re, zonder druk.</div>
         </div>
         <div class="vfaq-card">
-          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about wat als het niet werkt / garantie.</span></div>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq7.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq7.mp4?v=1" type="video/mp4"></video>
           <h3>What if it doesn't work for me?</h3>
           <p>Fair question, especially if you've tried courses before. Both programs come with a guarantee. We go through the full conditions on your call.</p>
-          <div class="team-note"><b>TEAM &middot; Wat als het niet werkt / garantie</b>Maurits, 45&ndash;60 sec. Erken dat veel artiesten al cursussen hebben geprobeerd. Leg uit waarom Rise anders is (feedback, community, labels) en noem de garanties van Base en Core.</div>
         </div>
         <div class="vfaq-card">
-          <div class="ph-video" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a short video about worst case scenario.</span></div>
-          <h3>What's the worst that can happen?</h3>
-          <p>You spend 30 minutes with someone who knows the industry, and you leave with a clear view on your next step. Whether you join or not.</p>
-          <div class="team-note"><b>TEAM &middot; Worst case scenario</b>Kort en luchtig, 30 sec. &ldquo;Het ergste wat er kan gebeuren: je bent 30 minuten kwijt en weet daarna precies wat je volgende stap is.&rdquo; Neemt angst weg om op te komen dagen.</div>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq5.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq5.mp4?v=1" type="video/mp4"></video>
+          <h3>How do I prepare for the call?</h3>
+          <p>Take 30 quiet minutes. Think about your commitment in time, money and energy, where you are in your production process, your biggest bottlenecks and where you want to go.</p>
         </div>
       </div>
     </div>
