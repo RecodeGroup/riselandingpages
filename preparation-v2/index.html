@@ -1206,6 +1206,21 @@
     .pv-cal-btn:hover { background:var(--accent); border-color:var(--accent); color:#0a0a0a; }
     @media (max-width:900px) { .pv-when { margin-bottom:16px; } .pv-when-line { font-size:.92rem; } .pv-cal-btn { font-size:.74rem; padding:5px 9px; } }
     @media (max-width:900px) { .pv-when { display:none; } }
+    /* Rise app: screen recording + App Store link */
+    .app-block { display:grid; grid-template-columns:240px 1fr; gap:48px; align-items:center; max-width:760px; margin:3rem auto 0; text-align:left; }
+    .app-phone { border-radius:28px; padding:6px; background:#1b1b1b; border:1px solid rgba(255,255,255,.12); box-shadow:0 24px 60px rgba(0,0,0,.5); }
+    .app-phone video { display:block; width:100%; aspect-ratio:540/1100; object-fit:cover; border-radius:22px; background:#0f0f0f; }
+    .app-copy h3 { font-size:1.5rem; letter-spacing:-.02em; margin:6px 0 10px; }
+    .app-copy p { color:var(--muted); line-height:1.6; margin:0 0 20px; }
+    .app-store-btn { display:inline-flex; align-items:center; gap:10px; padding:10px 18px; border-radius:12px; background:#fff; color:#0a0a0a; text-decoration:none; font-weight:700; font-size:1.05rem; line-height:1.1; transition:transform .2s, background .2s; }
+    .app-store-btn small { display:block; font-size:.68rem; font-weight:500; }
+    .app-store-btn:hover { background:var(--accent); transform:translateY(-1px); }
+    @media (max-width:700px) {
+      .app-block { grid-template-columns:1fr; gap:24px; text-align:center; margin-top:2.25rem; }
+      .app-phone { width:200px; margin:0 auto; }
+      .app-copy .section-eyebrow { text-align:center !important; }
+      .app-copy h3 { font-size:1.3rem; }
+    }
   </style>
 </head>
 <body>
@@ -1485,6 +1500,20 @@
         <img class="shot-phone" src="../assets/photos/app-preview.jpg" alt="Rise app on mobile" loading="lazy">
       </div>
       <p class="shots-hint">Tap a screenshot to enlarge it.</p>
+      <div class="app-block">
+        <div class="app-phone">
+          <video src="../assets/Platform/app/app-preview.mp4" poster="../assets/Platform/app/app-preview.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Rise app: academy, sessions, pods and chat"></video>
+        </div>
+        <div class="app-copy">
+          <div class="section-eyebrow" style="text-align:left;">The Rise app</div>
+          <h3>Get ready for Rise on your phone.</h3>
+          <p>Download the app before your call. You'll find your sessions, your circle, the library and the chat with your coaches in one place.</p>
+          <a class="app-store-btn" href="https://apps.apple.com/app/id6759258446" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            <span><small>Download on the</small>App Store</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
