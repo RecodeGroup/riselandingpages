@@ -1279,8 +1279,10 @@
     .pv-cal-btn:hover { background:rgba(255,255,255,.08) !important; color:#fff !important; }
     .pv-when-sub { margin-bottom:12px; }
     /* tighter space between header and title, same feel as core/base */
-    @media (min-width:901px) { .v5-hero, body .v5-hero, .pv2-hero, body .pv2-hero { padding-top:76px; } .pv2-hero h1 { margin-top:0; } }
-    @media (max-width:900px) { .v5-hero, body .v5-hero, .pv2-hero, body .pv2-hero { padding-top:72px; } }
+    @media (min-width:901px) { .v5-hero, body .v5-hero, .pv2-hero, body .pv2-hero { padding-top:40px; } .pv2-hero h1 { margin-top:0; } }
+    @media (max-width:900px) { .v5-hero, body .v5-hero, .pv2-hero, body .pv2-hero { padding-top:36px; } }
+    .closing p { margin-bottom:1rem; }
+    .closing .resched-btn { margin-top:0; }
   </style>
 </head>
 <body>
@@ -1555,7 +1557,7 @@
 
 
   <div class="narrow" style="text-align:center;padding:0 20px 4rem;">
-    <p class="kit-note">Want a head start? The free <a href="https://riseartistacademy.com/store/bundles/rise-giveaway" target="_blank" rel="noopener">Rise Artist Kit</a> has 11 video modules, a sample pack and two Ableton tools. Optional, not needed for your call.</p>
+    <p class="kit-note">Want a head start? The free <a href="https://riseartistacademy.com/store/bundles/rise-giveaway" target="_blank" rel="noopener">Rise Artist Kit</a> has 11 video previews, a sample pack and some Ableton tools.</p>
   </div>
 
   <div class="lightbox" id="lightbox" hidden aria-modal="true" role="dialog" aria-label="Screenshot">
@@ -1870,10 +1872,18 @@
 (function () {
   var t = document.querySelector('.v5-track'); if (!t) return;
   var imgs = [].slice.call(t.querySelectorAll('img'));
+  var setLen = imgs.length / 2, base = imgs.slice(0, setLen);
   function set() {
-    var half = imgs.length / 2, first = imgs[0], mirror = imgs[half];
+    var first = imgs[0], mirror = imgs[setLen];
     if (!first || !mirror) return;
-    t.style.setProperty('--lg-shift', -(mirror.offsetLeft - first.offsetLeft) + 'px');
+    var shift = mirror.offsetLeft - first.offsetLeft;
+    // keep adding copies of the logo set until the strip always covers the screen (no gap on wide screens)
+    var guard = 0;
+    while (t.scrollWidth < window.innerWidth + shift + 50 && guard++ < 10) {
+      base.forEach(function (im) { var c = im.cloneNode(true); c.alt = ''; c.setAttribute('aria-hidden', 'true'); t.appendChild(c); });
+    }
+    t.style.setProperty('--lg-shift', -shift + 'px');
+    t.style.animationDuration = Math.max(20, shift / 28) + 's';
   }
   Promise.all(imgs.map(function (i) { return i.decode ? i.decode().catch(function () {}) : Promise.resolve(); })).then(set);
   window.addEventListener('resize', set);

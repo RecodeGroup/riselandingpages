@@ -1804,10 +1804,18 @@
 (function () {
   var t = document.querySelector('.v5-track'); if (!t) return;
   var imgs = [].slice.call(t.querySelectorAll('img'));
+  var setLen = imgs.length / 2, base = imgs.slice(0, setLen);
   function set() {
-    var half = imgs.length / 2, first = imgs[0], mirror = imgs[half];
+    var first = imgs[0], mirror = imgs[setLen];
     if (!first || !mirror) return;
-    t.style.setProperty('--lg-shift', -(mirror.offsetLeft - first.offsetLeft) + 'px');
+    var shift = mirror.offsetLeft - first.offsetLeft;
+    // keep adding copies of the logo set until the strip always covers the screen (no gap on wide screens)
+    var guard = 0;
+    while (t.scrollWidth < window.innerWidth + shift + 50 && guard++ < 10) {
+      base.forEach(function (im) { var c = im.cloneNode(true); c.alt = ''; c.setAttribute('aria-hidden', 'true'); t.appendChild(c); });
+    }
+    t.style.setProperty('--lg-shift', -shift + 'px');
+    t.style.animationDuration = Math.max(20, shift / 28) + 's';
   }
   Promise.all(imgs.map(function (i) { return i.decode ? i.decode().catch(function () {}) : Promise.resolve(); })).then(set);
   window.addEventListener('resize', set);
