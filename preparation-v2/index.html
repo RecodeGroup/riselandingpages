@@ -1234,6 +1234,43 @@
       body.has-urgency-bar .v5-hero, body.has-urgency-bar .pv2-hero { padding-top:112px; }
       .pv2-hero h1 { margin-top:8px; }
     }
+    /* FAQ thumbnails + pop-up player (no fullscreen; 10s back + mute only) */
+    .vfaq-thumb { position:relative; display:block; width:100%; aspect-ratio:16/9; padding:0; border:0; border-radius:12px; overflow:hidden; background:#000; cursor:pointer; }
+    .vfaq-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+    .vfaq-thumb:hover img { transform:scale(1.03); }
+    .vfaq-play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.25); }
+    .vfaq-play svg { width:58px; height:58px; }
+    .vmodal { position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,.82); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:20px; }
+    .vmodal[hidden] { display:none; }
+    .vmodal-box { position:relative; width:min(960px,100%); }
+    .vmodal-close { position:absolute; top:-46px; right:0; width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.2); background:rgba(15,15,15,.8); color:#fff; font-size:24px; line-height:1; cursor:pointer; }
+    .vmodal-player { position:relative; border-radius:14px; overflow:hidden; background:#000; box-shadow:0 30px 80px rgba(0,0,0,.6); cursor:pointer; max-width:none; margin:0; }
+    .vmodal-player video { display:block; width:100%; max-height:80vh; background:#000; }
+    .vmodal-player video::-webkit-media-controls { display:none !important; }
+    .vm-mute .i-off { display:none; } .vm-mute.muted .i-on { display:none; } .vm-mute.muted .i-off { display:block; }
+    .vm-mute { width:44px; height:44px; padding:0; justify-content:center; border-radius:50%; }
+    .vm-mute svg { width:20px; height:20px; }
+    /* program guide as a PDF card */
+    .guide-card { display:inline-flex; align-items:center; gap:16px; text-align:left; padding:12px 18px 12px 12px; border:1px solid var(--line-strong); border-radius:14px; background:rgba(255,255,255,.03); text-decoration:none; color:#fff; transition:border-color .2s, background .2s; max-width:440px; }
+    .guide-card:hover { border-color:var(--accent); background:rgba(255,104,62,.06); }
+    .guide-card img { width:84px; height:auto; border-radius:6px; box-shadow:0 8px 20px rgba(0,0,0,.5); flex:none; }
+    .guide-txt { display:flex; flex-direction:column; gap:3px; font-size:.85rem; color:var(--muted); }
+    .guide-txt b { color:#fff; font-size:1rem; }
+    .guide-tag { font-size:.66rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+    .guide-go { color:var(--accent); font-weight:600; margin-top:4px; }
+    /* iPhone frame */
+    .app-phone.iphone { position:relative; padding:9px; border-radius:46px; background:linear-gradient(145deg,#3a3a3c,#1c1c1e 40%,#2c2c2e); border:1px solid #4a4a4c; box-shadow:0 0 0 2px #0b0b0c inset, 0 30px 70px rgba(0,0,0,.6); }
+    .iph-screen { position:relative; border-radius:38px; overflow:hidden; background:#000; }
+    .iph-screen video { display:block; width:100%; aspect-ratio:590/1278; object-fit:cover; border-radius:0; }
+    .iph-island { position:absolute; top:1.35%; left:50%; transform:translateX(-50%); width:32%; height:4.1%; border-radius:999px; background:#000; }
+    .iph-btn { position:absolute; width:3px; background:#2c2c2e; border-radius:2px; }
+    .iph-act { left:-3px; top:16%; height:5%; } .iph-vu { left:-3px; top:24%; height:9%; } .iph-vd { left:-3px; top:35%; height:9%; }
+    .iph-pwr { right:-3px; top:27%; height:14%; }
+    .app-store-badge { display:inline-block; line-height:0; transition:transform .2s, opacity .2s; }
+    .app-store-badge:hover { transform:translateY(-1px); opacity:.9; }
+    @media (max-width:700px) { .app-phone.iphone { width:210px; padding:7px; border-radius:38px; } .iph-screen { border-radius:31px; } .guide-card { max-width:100%; } }
+    .vmodal-player .vsl-controls { opacity:1; pointer-events:auto; }
+    .vmodal-player .vsl-play-overlay { pointer-events:none; }
   </style>
 </head>
 <body>
@@ -1321,32 +1358,32 @@
       <h2 class="section-heading">Short answers before your&nbsp;call.</h2>
       <div class="vfaq-grid">
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq6.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq6.mp4?v=2" type="video/mp4"></video>
-          <h3>Can I trust Rise?</h3>
+          <button type="button" class="vfaq-thumb" data-src="../assets/Pages/Preparation/faq/faq6.mp4?v=2" data-poster="../assets/Pages/Preparation/faq/faq6.jpg?v=1" aria-label="Play video"><img src="../assets/Pages/Preparation/faq/faq6.jpg?v=1" alt="" loading="lazy"><span class="vfaq-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.92)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></span></button>
+          <h3>Is this legit?</h3>
           <p>Rise is the artist academy of Recode Group. Next to Rise we run four record labels and our own artist agency, and we've worked with 38 artists since 2023.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq4.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq4.mp4?v=2" type="video/mp4"></video>
+          <button type="button" class="vfaq-thumb" data-src="../assets/Pages/Preparation/faq/faq4.mp4?v=2" data-poster="../assets/Pages/Preparation/faq/faq4.jpg?v=1" aria-label="Play video"><img src="../assets/Pages/Preparation/faq/faq4.jpg?v=1" alt="" loading="lazy"><span class="vfaq-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.92)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></span></button>
           <h3>What happens on the call?</h3>
           <p>A conversation of about 30 minutes. We look at where you are now, where you want to go, and whether we can close that gap together. Either way, you leave knowing your next step.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq2.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq2.mp4?v=2" type="video/mp4"></video>
+          <button type="button" class="vfaq-thumb" data-src="../assets/Pages/Preparation/faq/faq2.mp4?v=2" data-poster="../assets/Pages/Preparation/faq/faq2.jpg?v=1" aria-label="Play video"><img src="../assets/Pages/Preparation/faq/faq2.jpg?v=1" alt="" loading="lazy"><span class="vfaq-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.92)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></span></button>
           <h3>Do I need to finish tracks already?</h3>
           <p>No. Base takes you from loops to finished, release-ready tracks. Core is for producers who already finish tracks and want to grow as an artist.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq3.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq3.mp4?v=2" type="video/mp4"></video>
+          <button type="button" class="vfaq-thumb" data-src="../assets/Pages/Preparation/faq/faq3.mp4?v=2" data-poster="../assets/Pages/Preparation/faq/faq3.jpg?v=1" aria-label="Play video"><img src="../assets/Pages/Preparation/faq/faq3.jpg?v=1" alt="" loading="lazy"><span class="vfaq-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.92)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></span></button>
           <h3>What does it cost, and how much time does it take?</h3>
           <p>Base is &euro;1,500 and Core starts from &euro;2,650 (excl. VAT), both with payment plans. We go through time and budget together on the call.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq7.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq7.mp4?v=2" type="video/mp4"></video>
+          <button type="button" class="vfaq-thumb" data-src="../assets/Pages/Preparation/faq/faq7.mp4?v=2" data-poster="../assets/Pages/Preparation/faq/faq7.jpg?v=1" aria-label="Play video"><img src="../assets/Pages/Preparation/faq/faq7.jpg?v=1" alt="" loading="lazy"><span class="vfaq-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.92)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></span></button>
           <h3>What if it doesn't work for me?</h3>
           <p>Fair question, especially if you've tried courses before. Both programs come with a guarantee. We go through the full conditions on your call.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq5.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq5.mp4?v=2" type="video/mp4"></video>
+          <button type="button" class="vfaq-thumb" data-src="../assets/Pages/Preparation/faq/faq5.mp4?v=2" data-poster="../assets/Pages/Preparation/faq/faq5.jpg?v=1" aria-label="Play video"><img src="../assets/Pages/Preparation/faq/faq5.jpg?v=1" alt="" loading="lazy"><span class="vfaq-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.92)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></span></button>
           <h3>How do I prepare for the call?</h3>
           <p>Take 30 quiet minutes. Think about your commitment in time, money and energy, where you are in your production process, your biggest bottlenecks and where you want to go.</p>
         </div>
@@ -1355,37 +1392,12 @@
   </section>
 
   <!-- ══════════════════════════════════════════════
-       3c · Transformation stories
+       4 · Student success stories
        ══════════════════════════════════════════════ -->
-  <section class="sec center" id="stories">
+  <section class="sec center v5-stories">
     <div class="wrap">
       <div class="section-eyebrow">Student stories</div>
       <h2 class="section-heading">Hear from our&nbsp;students.</h2>
-      <div class="story-grid">
-        <div class="story-card">
-          <div class="ph-video vert" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a member story, from loops to a first release.</span></div>
-          <h3>[Name] &middot; From loops to a first release</h3>
-          <div class="team-note"><b>TEAM &middot; transformatieverhaal</b>Member die als beginner binnenkwam (alleen loops) en nu tracks uitbrengt. Waar stond je, wat was lastig, wat is er veranderd, wat is het resultaat (release, streams)? 45&ndash;75 sec, verticaal 9:16.</div>
-        </div>
-        <div class="story-card">
-          <div class="ph-video vert" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a member story, from bedroom producer to first gigs.</span></div>
-          <h3>[Name] &middot; From bedroom producer to first gigs</h3>
-          <div class="team-note"><b>TEAM &middot; transformatieverhaal</b>Member uit Core die eerst alleen thuis produceerde en nu boekingen heeft. Laat het moment zien waarop het kantelde. Echte cijfers als ze er zijn. 45&ndash;75 sec, verticaal 9:16.</div>
-        </div>
-        <div class="story-card">
-          <div class="ph-video vert" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a member story, from stuck to a clear plan.</span></div>
-          <h3>[Name] &middot; From stuck to a clear plan</h3>
-          <div class="team-note"><b>TEAM &middot; transformatieverhaal</b>Member die vastliep (geen focus, geen netwerk) en nu een vast plan en ritme heeft. Nadruk op gevoel voor en na, niet op features van Rise. 45&ndash;75 sec, verticaal 9:16.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════
-       4 · Student success stories
-       ══════════════════════════════════════════════ -->
-  <section class="sec center v5-stories pv-stories-cont">
-    <div class="wrap">
       <p class="v5-sub">Every review in one place. Tap a video to play it, tap again to keep scrolling.</p>
       <div class="v5-wall" id="v5-wall"></div>
     </div>
@@ -1437,8 +1449,10 @@
       </div>
       <p class="paths-note">Results are goals we work towards together, not guarantees. They depend on the time and energy you put in.</p>
       <div style="margin-top:1.75rem;text-align:center;">
-        <a class="btn-ghost" href="https://guide.riseartistacademy.com/" target="_blank" rel="noopener">Read the full program guide &rarr;</a>
-        <p style="margin-top:10px;font-size:0.85rem;color:var(--muted);">Everything about our programs in one place.</p>
+        <a class="guide-card" href="https://guide.riseartistacademy.com/Rise_Programmes.pdf" target="_blank" rel="noopener">
+          <img src="../assets/Pages/Preparation/guide-cover-01.jpg" alt="Cover of the Rise programme guide" width="84" height="119" loading="lazy">
+          <span class="guide-txt"><span class="guide-tag">PDF &middot; 12 pages</span><b>Read the full program guide</b><span>Everything about Base and Core in one place.</span><span class="guide-go">Open the PDF &rarr;</span></span>
+        </a>
       </div>
     </div>
   </section>
@@ -1505,16 +1519,24 @@
       </div>
       <p class="shots-hint">Tap a screenshot to enlarge it.</p>
       <div class="app-block">
-        <div class="app-phone">
-          <video src="../assets/Platform/app/app-preview.mp4" poster="../assets/Platform/app/app-preview.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Rise app: academy, sessions, pods and chat"></video>
+        <div class="app-phone iphone">
+          <span class="iph-btn iph-act"></span><span class="iph-btn iph-vu"></span><span class="iph-btn iph-vd"></span><span class="iph-btn iph-pwr"></span>
+          <div class="iph-screen">
+            <video src="../assets/Platform/app/app-preview-v2.mp4" poster="../assets/Platform/app/app-preview-v2.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Rise app on iPhone: academy, sessions, pods and chat"></video>
+            <span class="iph-island"></span>
+          </div>
         </div>
         <div class="app-copy">
           <div class="section-eyebrow" style="text-align:left;">The Rise app</div>
           <h3>Get ready for Rise on your phone.</h3>
           <p>Download the app before your call. You'll find your sessions, your circle, the library and the chat with your coaches in one place.</p>
-          <a class="app-store-btn" href="https://apps.apple.com/app/id6759258446" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-            <span><small>Download on the</small>App Store</span>
+          <a class="app-store-badge" href="https://apps.apple.com/app/id6759258446" target="_blank" rel="noopener" aria-label="Download on the App Store">
+            <svg viewBox="0 0 150 50" width="165" height="55" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x=".5" y=".5" width="149" height="49" rx="10" fill="#000" stroke="#a6a6a6"/>
+              <g transform="translate(13 11) scale(1.17)" fill="#fff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></g>
+              <text x="48" y="21" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif" font-size="9.5">Download on the</text>
+              <text x="47" y="38" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif" font-size="19" font-weight="600" letter-spacing="-.3">App Store</text>
+            </svg>
           </a>
         </div>
       </div>
@@ -1531,6 +1553,21 @@
     <button type="button" class="lb-nav lb-prev" aria-label="Previous">&lsaquo;</button>
     <img id="lb-img" alt="">
     <button type="button" class="lb-nav lb-next" aria-label="Next">&rsaquo;</button>
+  </div>
+
+  <div class="vmodal" id="vmodal" hidden role="dialog" aria-modal="true" aria-label="Video">
+    <div class="vmodal-box">
+      <button type="button" class="vmodal-close" aria-label="Close video">&times;</button>
+      <div class="vsl-player vmodal-player" id="vm-player">
+        <video id="vm-video" playsinline webkit-playsinline disablepictureinpicture controlslist="nofullscreen nodownload noremoteplayback" preload="metadata"></video>
+        <div class="vsl-play-overlay"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></div>
+        <div class="vsl-progress-wrap"><div class="vsl-progress-bar" id="vm-progress"></div></div>
+        <div class="vsl-controls vm-controls">
+          <button type="button" class="vsl-ctrl vsl-back" id="vm-back" aria-label="Rewind 10 seconds"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4.5a7.5 7.5 0 1 1-7.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M12 1.5 8.5 4.5 12 7.5z" fill="currentColor"/><text x="12" y="15.4" text-anchor="middle" font-size="8.5" font-weight="700" font-family="inherit" fill="currentColor">10</text></svg></button>
+          <button type="button" class="vsl-ctrl vm-mute" id="vm-mute" aria-label="Mute"><svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer class="footer">
@@ -1847,6 +1884,30 @@
   }
   window.addEventListener('load', sync);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) setTimeout(sync, 50); });
+})();
+</script>
+<script>
+// FAQ pop-up player: centered, no fullscreen, 10s back + mute
+(function () {
+  var m = document.getElementById('vmodal'); if (!m) return;
+  var v = document.getElementById('vm-video'), pl = document.getElementById('vm-player'), bar = document.getElementById('vm-progress'), mute = document.getElementById('vm-mute');
+  function open(src, poster) {
+    v.poster = poster || ''; v.src = src; v.currentTime = 0; v.muted = false; mute.classList.remove('muted');
+    m.hidden = false; document.body.style.overflow = 'hidden';
+    var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+  }
+  function close() { v.pause(); v.removeAttribute('src'); v.load(); m.hidden = true; document.body.style.overflow = ''; pl.classList.remove('playing', 'started'); bar.style.width = '0'; }
+  document.addEventListener('click', function (e) { var t = e.target.closest('.vfaq-thumb'); if (!t) return; e.preventDefault(); open(t.getAttribute('data-src'), t.getAttribute('data-poster')); });
+  m.addEventListener('click', function (e) { if (e.target === m || e.target.closest('.vmodal-close')) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !m.hidden) close(); });
+  pl.addEventListener('click', function (e) { if (e.target.closest('.vsl-ctrl')) return; if (v.paused) v.play(); else v.pause(); });
+  v.addEventListener('play', function () { pl.classList.add('playing', 'started'); });
+  v.addEventListener('pause', function () { pl.classList.remove('playing'); });
+  v.addEventListener('ended', function () { pl.classList.remove('playing'); bar.style.width = '100%'; });
+  v.addEventListener('timeupdate', function () { if (!v.duration) return; var x = Math.min(1, v.currentTime / v.duration); bar.style.width = ((x + 0.7 * x * (1 - x)) * 100) + '%'; });
+  v.addEventListener('dblclick', function (e) { e.preventDefault(); });
+  document.getElementById('vm-back').addEventListener('click', function (e) { e.stopPropagation(); v.currentTime = Math.max(0, v.currentTime - 10); });
+  mute.addEventListener('click', function (e) { e.stopPropagation(); v.muted = !v.muted; mute.classList.toggle('muted', v.muted); mute.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute'); });
 })();
 </script>
 </body>
