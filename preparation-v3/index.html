@@ -1248,6 +1248,12 @@
     .brand-row { gap:0; }
     .brand-pill, .brand-pill.agency { border:0; padding:0; border-radius:0; color:rgba(255,255,255,.75); font-weight:600; cursor:default; }
     .brand-pill + .brand-pill::before { content:"\00b7"; margin:0 10px; color:rgba(255,255,255,.35); }
+    /* desktop: same header-to-title spacing as core-v8 / base-v8 */
+    @media (min-width:901px) {
+      .v5-hero, body .v5-hero, .pv2-hero, body .pv2-hero { padding-top:96px; }
+      body.has-urgency-bar .v5-hero, body.has-urgency-bar .pv2-hero { padding-top:112px; }
+      .pv2-hero h1 { margin-top:8px; }
+    }
   </style>
 </head>
 <body>
