@@ -1222,6 +1222,12 @@
       .app-copy .section-eyebrow { text-align:center !important; }
       .app-copy h3 { font-size:1.3rem; }
     }
+    /* one stories block instead of two; labels/agency as plain text, not button-like pills */
+    .pv-stories-cont { border-top:0 !important; padding-top:0 !important; }
+    .pv-stories-cont .v5-sub { margin-top:0; }
+    .brand-row { gap:0; }
+    .brand-pill, .brand-pill.agency { border:0; padding:0; border-radius:0; color:rgba(255,255,255,.75); font-weight:600; cursor:default; }
+    .brand-pill + .brand-pill::before { content:"\00b7"; margin:0 10px; color:rgba(255,255,255,.35); }
   </style>
 </head>
 <body>
@@ -1253,7 +1259,7 @@
           <div class="v5-video-shell">
             <div class="vsl-player" id="prep-vsl-player">
               <video id="prep-vsl-video" playsinline preload="metadata" poster="../assets/Pages/Preparation/faq/faq1.jpg?v=1">
-                <source src="../assets/Pages/Preparation/faq/faq1.mp4?v=1" type="video/mp4">
+                <source src="../assets/Pages/Preparation/faq/faq1.mp4?v=2" type="video/mp4">
               </video>
               <div class="vsl-play-overlay"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" fill="rgba(255,104,62,0.9)"/><polygon points="32,24 60,40 32,56" fill="#0a0a0a"/></svg></div>
               <div class="vsl-sound-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m22 9-6 6"/><path d="m16 9 6 6"/></svg><span>Tap for sound</span></div>
@@ -1309,32 +1315,32 @@
       <h2 class="section-heading">Short answers before your&nbsp;call.</h2>
       <div class="vfaq-grid">
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq6.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq6.mp4?v=1" type="video/mp4"></video>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq6.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq6.mp4?v=2" type="video/mp4"></video>
           <h3>Can I trust Rise?</h3>
           <p>Rise is the artist academy of Recode Group. Next to Rise we run four record labels and our own artist agency, and we've worked with 38 artists since 2023.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq4.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq4.mp4?v=1" type="video/mp4"></video>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq4.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq4.mp4?v=2" type="video/mp4"></video>
           <h3>What happens on the call?</h3>
           <p>A conversation of about 30 minutes. We look at where you are now, where you want to go, and whether we can close that gap together. Either way, you leave knowing your next step.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq2.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq2.mp4?v=1" type="video/mp4"></video>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq2.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq2.mp4?v=2" type="video/mp4"></video>
           <h3>Do I need to finish tracks already?</h3>
           <p>No. Base takes you from loops to finished, release-ready tracks. Core is for producers who already finish tracks and want to grow as an artist.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq3.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq3.mp4?v=1" type="video/mp4"></video>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq3.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq3.mp4?v=2" type="video/mp4"></video>
           <h3>What does it cost, and how much time does it take?</h3>
           <p>Base is &euro;1,500 and Core starts from &euro;2,650 (excl. VAT), both with payment plans. We go through time and budget together on the call.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq7.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq7.mp4?v=1" type="video/mp4"></video>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq7.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq7.mp4?v=2" type="video/mp4"></video>
           <h3>What if it doesn't work for me?</h3>
           <p>Fair question, especially if you've tried courses before. Both programs come with a guarantee. We go through the full conditions on your call.</p>
         </div>
         <div class="vfaq-card">
-          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq5.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq5.mp4?v=1" type="video/mp4"></video>
+          <video class="vfaq-video" controls playsinline preload="none" poster="../assets/Pages/Preparation/faq/faq5.jpg?v=1"><source src="../assets/Pages/Preparation/faq/faq5.mp4?v=2" type="video/mp4"></video>
           <h3>How do I prepare for the call?</h3>
           <p>Take 30 quiet minutes. Think about your commitment in time, money and energy, where you are in your production process, your biggest bottlenecks and where you want to go.</p>
         </div>
@@ -1347,8 +1353,8 @@
        ══════════════════════════════════════════════ -->
   <section class="sec center" id="stories">
     <div class="wrap">
-      <div class="section-eyebrow">Where they started</div>
-      <h2 class="section-heading">From where you are to where they are&nbsp;now.</h2>
+      <div class="section-eyebrow">Student stories</div>
+      <h2 class="section-heading">Hear from our&nbsp;students.</h2>
       <div class="story-grid">
         <div class="story-card">
           <div class="ph-video vert" role="img" aria-label="Video coming soon"><span class="ph-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="ph-label">Video placeholder</span><span class="ph-what">Here: a member story, from loops to a first release.</span></div>
@@ -1372,10 +1378,8 @@
   <!-- ══════════════════════════════════════════════
        4 · Student success stories
        ══════════════════════════════════════════════ -->
-  <section class="sec center v5-stories">
+  <section class="sec center v5-stories pv-stories-cont">
     <div class="wrap">
-      <div class="section-eyebrow">Success stories</div>
-      <h2 class="section-heading">What our artists have to&nbsp;say.</h2>
       <p class="v5-sub">Every review in one place. Tap a video to play it, tap again to keep scrolling.</p>
       <div class="v5-wall" id="v5-wall"></div>
     </div>
